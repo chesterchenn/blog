@@ -1,7 +1,6 @@
 ---
-title: DOM
-date: 2017-11-13 15:38:00
-tags:
+title: DOM Node
+date: 2017-11-13
 ---
 DOM(Document Object Model)文档对象模型。DOM描绘了一个层次化的节点树，允许开发人员添加，移除和修改页面的一部分。
 

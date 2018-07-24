@@ -1,7 +1,6 @@
 ---
 title: Javascript的继承方式
-date: 2017-11-09 13:19:55
-tags:
+date: 2017-11-09
 ---
 
 JavaScript主要有如下几种继承方式：

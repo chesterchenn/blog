@@ -1,7 +1,6 @@
 ---
 title: MarkDown语法
-date: 2017-9-28 14:38:01
-tags:
+date: 2017-9-28
 ---
 ### 前言
 此文用于收集平时使用的markdwon语法。
