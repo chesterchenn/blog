@@ -12,7 +12,7 @@ ECMAScript 6，也称为ECMAScript 2015，是ECMAScript最新版本(注: 已经�
 这里你可以查看[ES6 规范](http://www.ecma-international.org/ecma-262/6.0/)的全部标准。  
 
 ES6包含以下新功能：  
-  - arrows 箭头函数
+  - [arrows 箭头函数](#Arrows 箭头函数)
   - classes 类
   - enhanced object literals 增强对象字面量
   - template strings 字符串模版
