@@ -1,6 +1,6 @@
 # ECMAScript 6
 Created: 2018-07-24  
-Last Modified: 2018-07-25
+Last Modified: 2018-07-26
 
 By lukehoban ( [lukehoban](https://github.com/lukehoban) )  
 原文地址：[lukehoban/es6features](https://github.com/lukehoban/es6features)  
@@ -135,10 +135,82 @@ POST`http://foo.org/bar?a=${a}&b=${b}
 更多信息: [MDN Template Strings](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/template_strings)
 
 ### Destructuring 解构
+解构允许使用模式匹配，支持匹配数组和对象。解构未正确赋值时仍可运行。类似于标准对象的查找 `foo["bar"]`，当未找到时会提供一个 `undefined`
+```
+// 匹配数组
+var [a, , b] = [1,2,3];
+
+// 匹配对象
+var { op: a, lhs: { op: b }, rhs: c }
+       = getASTNode()
+
+// 匹配对象作用域的'op', 'lhs', 'rhs'
+var {op, lhs, rhs} = getASTNode()
+
+// 作为参数
+function g({name: x}) {
+  console.log(x);
+}
+g({name: 5})
+
+// 解构未正确赋值时
+var [a] = [];
+a === undefined;
+
+// 带默认值的的解构赋值
+var [a = 1] = [];
+a === 1;
+```
+更多信息：[MDN Destructuring assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
 
 ### Default + rest + spread 默认值/rest参数/扩展运算符
+调用计算默认参数值，将数组转换为函数调用中的连续参数，跟踪参数到一个数组里。rest取代了对`arguments`的需求，并更直接地解决了常见情况。
+```
+function f(x, y=12) {
+  // 如果y没有传值或者被传入undefined，那么y的值是12
+  return x + y;
+}
+f(3) == 15
+```
+```
+function f(x, ...y) {
+  // y是一个数组
+  return x * y.length;
+}
+f(3, "hello", true) == 6
+```
+```
+function f(x, y, z) {
+  return x + y + z;
+}
+// 传递数组里的每一个元素作为参数
+f(...[1,2,3]) == 6
+```
+更多信息：[Default parameters][default], [Rest parameters][rest], [Spread Operator][spread]
+
+[default]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters
+[rest]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters
+[spread]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax
 
 ### Let + const
+块作用域被创建。`let`是一个新的`var`,`const`只能赋值一次，在指定之前被静态约束以防止被使用
+```
+function f() {
+  {
+    let x;
+    {
+      // 正常，块作用域里的名称
+      const x = "sneaky";
+      // 错误，x是常量
+      x = "foo";
+    }
+    // 错误，在块里面已经被声明
+    let x = "inner";
+  }
+}
+```
+更多信息: [let statement](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let), 
+[const statment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const)
 
 ### Iterators + for..of 迭代器/for..of
 
