@@ -213,10 +213,76 @@ function f() {
 [const statment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const)
 
 ### Iterators + for..of 迭代器/for..of
+迭代器对象能够自定义迭代像CLR的IEnumerable或Java的Iterable。总结来说，`for..on`是在`for..in`上去定义了可迭代的数据。不需要实现数组，像LINQ启用了惰性设计模式
+```
+let fibonacci = {
+  [Symbol.iterator]() {
+    let pre = 0, cur = 1;
+    return {
+      next() {
+        [pre, cur] = [cur, pre + cur];
+        return { done: false, value: cur }
+      }
+    }
+  }
+}
+
+for (var n of fibonacci) {
+  // 缩减数列到1000
+  if (n > 1000)
+    break;
+  console.log(n);
+}
+```
+迭代是基于鸭子类型接口(仅使用TypeScript语法作为展示)
+```
+interface IteratorResult {
+  done: boolean;
+  value: any;
+}
+interface Iterator {
+  next(): IteratorResult;
+}
+interface Iterable {
+  [Symbol.iterator](): Iterator
+}
+```
+更多信息: [MDN for...of](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of)
 
 ### Generators 生成器
+生成器是一个使用了`function*`和`yield`简单的迭代器编写。一个函数声明作为function * 返回一个生成器实例。生成器是迭代器的一个子类型包含了额外的`next`和`throw`。这些启用值会流回生成器，所以`yield`是来自于返回值(或者throw)的一个表达式  
+注意：同时也能够用来启用'await'-异步的语法，请参考ES7 `await` 提议
+```
+var fibonacci = {
+  [Symbol.iterator]: function*() {
+    var pre = 0, cur = 1;
+    for (;;) {
+      var temp = pre;
+      pre = cur;
+      cur += temp;
+      yield cur;
+    }
+  }
+}
+
+for (var n of fibonacci) {
+  // 缩减数列到1000
+  if (n > 1000)
+    break;
+  console.log(n);
+}
+```
+生成器的接口是(仅使用TypeScript语法作为展示):
+```
+interface Generator extends Iterator {
+    next(value?: any): IteratorResult;
+    throw(exception: any);
+}
+```
+更多信息: [MDN iteration protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols)
 
 ### Unicode 统一码
+不间断的字符被增加支持统一码，包括了新的统一码字符字面量以及正则表达式`u`
 
 ### Modules 模块
 
