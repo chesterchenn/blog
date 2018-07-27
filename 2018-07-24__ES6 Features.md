@@ -23,7 +23,7 @@ ES6包含以下新功能：
   - [generators 生成器](#generators-生成器)
   - [Unicode 统一码](#Unicode-统一码)
   - [modules 模块](#modules-模块)
-  - [module loaders 模块加载](#module-loaders-模块加载)
+  - [module loaders 模块加载器](#module-loaders-模块加载器)
   - [map + set + weakmap + weakset](#map--set--weakmap--weakset)
   - [proxies 代理](#proxies-代理)
   - [symbols](#symbols)
@@ -282,11 +282,87 @@ interface Generator extends Iterator {
 更多信息: [MDN iteration protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols)
 
 ### Unicode 统一码
-不间断的字符被增加支持统一码，包括了新的统一码字符字面量以及正则表达式`u`
+不间断的字符被增加支持统一码，包括了新的统一码字符字面量以及正则表达式`u`，此外新的API也可以处理21位码的字符串。这些增加的东西可以建立全局app在JavaScript里面
+```
+// 等同于ES5.1
+"𠮷".length == 2
+
+// 新的正则表达式, opt-in ‘u’
+"𠮷".match(/./u)[0].length == 2
+
+// new form
+"\u{20BB7}"=="𠮷"=="\uD842\uDFB7"
+
+// new String ops
+"𠮷".codePointAt(0) == 0x20BB7
+
+// for-of iterates code points
+for(var c of "𠮷") {
+  console.log(c);
+}
+```
+更多信息: [MDN RegExp.prototype.unicode](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/unicode)
 
 ### Modules 模块
+语言级支持模块的组件定义。从流行的JavaScript模块加载器(AMD, CommonJS)编纂模式。运行时的定义是由主机加载器定义的。隐式异步模型——在被请求的模块可用并处理之前，不会执行任何代码
+```
+// lib/math.js
+export function sum(x, y) {
+  return x + y;
+}
+export var pi = 3.141593;
+```
+```
+// app.js
+import * as math from "lib/math";
+alert("2π = " + math.sum(math.pi, math.pi));
+```
+```
+// otherApp.js
+import {sum, pi} from "lib/math";
+alert("2π = " + sum(pi, pi));
+```
+有一些额外的功能，包括`export default`以及`export *`
+```
+// lib/mathplusplus.js
+export * from "lib/math";
+export var e = 2.71828182846;
+export default function(x) {
+    return Math.log(x);
+}
+```
+```
+// app.js
+import ln, {pi, e} from "lib/mathplusplus";
+alert("2π = " + ln(e)*pi*2);
+```
+更多信息: [import statement](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import), [export statement](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export)
 
-### Module loaders 模块加载
+### Module loaders 模块加载器
+模块加载器支持：
+  - 动态加载
+  - 状态隔离
+  - 全局命名空间隔离
+  - 编译挂钩
+  - 嵌套虚拟化
+
+默认的加载器能够被配置，同时新的加载器可以用来构建，载入隔离的代码或者约束上下文
+```
+// 动态加载 – ‘System’ 是默认的加载器
+System.import('lib/math').then(function(m) {
+  alert("2π = " + m.sum(m.pi, m.pi));
+});s
+
+// 创建一个执行沙盒 - 新的加载器
+var loader = new Loader({
+  global: fixup(window) // replace ‘console.log’
+});
+loader.eval("console.log('hello world!');");
+
+// 直接操作模块缓存
+System.get('jquery');
+System.set('jquery', Module({$: $})); // 警告: not yet finalized
+```
 
 ### Map + set + weakmap + weakset
 
