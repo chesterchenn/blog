@@ -361,7 +361,7 @@ loader.eval("console.log('hello world!');");
 
 // 直接操作模块缓存
 System.get('jquery');
-System.set('jquery', Module({$: $})); // 警告: not yet finalized
+System.set('jquery', Module({$: $})); // 警告: 尚未定稿
 ```
 
 ### Map + set + weakmap + weakset
