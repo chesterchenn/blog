@@ -365,6 +365,7 @@ System.set('jquery', Module({$: $})); // 警告: 尚未定稿
 ```
 
 ### Map + set + weakmap + weakset
+常见的算法的有效的数据结构。
 
 ### Proxies 代理
 
