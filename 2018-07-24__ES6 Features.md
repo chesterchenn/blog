@@ -365,9 +365,42 @@ System.set('jquery', Module({$: $})); // 警告: 尚未定稿
 ```
 
 ### Map + set + weakmap + weakset
-常见的算法的有效的数据结构。
+常见的算法的有效的数据结构。WeakMap提供了不会内存泄漏的对象键值的侧表。
+```
+// Sets
+var s = new Set();
+s.add("hello").add("goodbye").add("hello");
+s.size === 2;
+s.has("hello") === true;
+```
+```
+// Maps
+var m = new Map();
+m.set("hello", 42);
+m.set(s, 34);
+m.get(s) == 34;
+```
+```
+// Weak Maps
+var wm = new WeakMap();
+wm.set(s, { extra: 42 });
+wm.size === undefined
+```
+```
+// Weak Sets
+var ws = new WeakSet();
+ws.add({ data: 42 });
+// 因为增加的对象没有其他的参值，所以在set不会被持有
+```
+更多信息：[Map][mapUrl], [Set][setUrl], [WeakMap][weakmapUrl], [WeakSet][weaksetUrl]
+
+[mapUrl]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map
+[setUrl]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set
+[weakmapUrl]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap
+[weaksetUrl]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet
 
 ### Proxies 代理
+
 
 ### Symbols
 
