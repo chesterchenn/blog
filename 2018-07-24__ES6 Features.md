@@ -400,6 +400,52 @@ ws.add({ data: 42 });
 [weaksetUrl]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet
 
 ### Proxies 代理
+代理允许创建具有目标对象范围内所有行为的对象。可用于拦截，对象虚拟化，日志记录/分析等。
+```
+// 代理一个普通的对象
+var target = {};
+var handler = {
+  get: function (receiver, name) {
+    return `Hello, ${name}!`;
+  }
+};
+
+var p = new Proxy(target, handler);
+p.world === 'Hello, world!';
+```
+```
+// 代理一个函数对象
+var target = function () { return 'I am the target'; };
+var handler = {
+  apply: function (receiver, ...args) {
+    return 'I am the proxy';
+  }
+};
+
+var p = new Proxy(target, handler);
+p() === 'I am the proxy';
+```
+这里是所有运行级别时的元操作的`trap`:
+```
+var handler =
+{
+  get:...,
+  set:...,
+  has:...,
+  deleteProperty:...,
+  apply:...,
+  construct:...,
+  getOwnPropertyDescriptor:...,
+  defineProperty:...,
+  getPrototypeOf:...,
+  setPrototypeOf:...,
+  enumerate:...,
+  ownKeys:...,
+  preventExtensions:...,
+  isExtensible:...
+}
+```
+更多信息: [MDN Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy)
 
 ### Symbols
 
