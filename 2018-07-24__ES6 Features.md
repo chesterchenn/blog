@@ -26,8 +26,8 @@ ES6包含以下新功能：
   - [module loaders 模块加载器](#module-loaders-模块加载器)
   - [map + set + weakmap + weakset](#map--set--weakmap--weakset)
   - [proxies 代理](#proxies-代理)
-  - [symbols](#symbols)
-  - [subclassable built-ins 内建子类](#subclassable-built-ins-内建子类)
+  - [symbols 符号](#symbols-符号)
+  - [subclassable built-ins 内置子类](#subclassable-built-ins-内置子类)
   - [promises](#promises)
   - [math + number + string + array + object APIs](#math--number--string--array--object-APIs)
   - [binary and octal literals 二进制和八进制字面量](#binary-and-octal-literals-二进制和八进制字面量)
@@ -447,16 +447,123 @@ var handler =
 ```
 更多信息: [MDN Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy)
 
-### Symbols
+### Symbols 符号
+符号能够访问控制对象的状态，符号允许`string`或者`symbol`成为对象属性的键值。符号是一个新的基本变量，可选的`description`参数可以用于调试--但不是符号本身的一部分。符号是唯一的(像gensym)，但不是私有的，因为他们是通过反射特性导出来的，像`Object.getOwnPropertySymbols`
+```
+var MyClass = (function() {
 
-### Subclassable built-ins 内建子类
+  // 模块作用域符号
+  var key = Symbol("key");
+
+  function MyClass(privateData) {
+    this[key] = privateData;
+  }
+
+  MyClass.prototype = {
+    doStuff: function() {
+      ... this[key] ...
+    }
+  };
+
+  return MyClass;
+})();
+
+var c = new MyClass("hello")
+c["key"] === undefined
+```
+更多信息: [MDN Symbol](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol)
+
+### Subclassable built-ins 内置子类
+在ES6里面，内置的`Array`，`Date`和DOM`Element`对象能够创建子类  
+对于一个函数的对象构造，我们命名为`Ctor`，现在使用两个阶段（实际上都分派）
+- 调用`Ctor[@@create]`去分配一个对象，安装任意特殊行为
+- 在一个实例初始化时调用构造器
+已知`@@create`可通过`Symbol.create`创建。内置对象现在明确地暴露它们的`@@create`
+```
+// 数组的伪代码
+class Array {
+    constructor(...args) { /* ... */ }
+    static [Symbol.create]() {
+        // Install special [[DefineOwnProperty]]
+        // to magically update 'length'
+    }
+}
+
+// 数组子类的用户代码
+class MyArray extends Array {
+    constructor(...args) { super(...args); }
+}
+
+// Two-phase 'new':
+// 1) Call @@create to allocate object
+// 2) Invoke constructor on new instance
+var arr = new MyArray();
+arr[1] = 12;
+arr.length == 2
+```
 
 ### Promises
+Promise是一个异步项目的库，Promise是值的第一类表示，可在将来提供。Promise现在已经被许多库使用
+```
+function timeout(duration = 0) {
+    return new Promise((resolve, reject) => {
+        setTimeout(resolve, duration);
+    })
+}
 
-### Math + number + string + array + object APIs
+var p = timeout(1000).then(() => {
+    return timeout(2000);
+}).then(() => {
+    throw new Error("hmm");
+}).catch(err => {
+    return Promise.all([timeout(100), timeout(200)]);
+})
+```
+更多信息：[MDN Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
+
+### Math + number + string + array + object APIs\
+许多新的库被增加，包括核心的数学库，数组转换，字符串和用来拷贝的`Object.assign`方法
+```
+Number.EPSILON
+Number.isInteger(Infinity) // false
+Number.isNaN("NaN") // false
+
+Math.acosh(3) // 1.762747174039086
+Math.hypot(3, 4) // 5
+Math.imul(Math.pow(2, 32) - 1, Math.pow(2, 32) - 2) // 2
+
+"abcde".includes("cd") // true
+"abc".repeat(3) // "abcabcabc"
+
+Array.from(document.querySelectorAll('*')) // 返回一个数组
+Array.of(1, 2, 3) // 类似new Array(...), 但不用指明第一个参数
+[0, 0, 0].fill(7, 1) // [0,7,7]
+[1, 2, 3].find(x => x == 3) // 3
+[1, 2, 3].findIndex(x => x == 2) // 1
+[1, 2, 3, 4, 5].copyWithin(3, 0) // [1, 2, 3, 1, 2]
+["a", "b", "c"].entries() // iterator [0, "a"], [1,"b"], [2,"c"]
+["a", "b", "c"].keys() // iterator 0, 1, 2
+["a", "b", "c"].values() // iterator "a", "b", "c"
+
+Object.assign(Point, { origin: new Point(0,0) })
+```
+更多信息: [Number][number], [Math][math], [Array.from][arrayf], [Array.of][arrayo], [Array.prototype.copyWithin][arraypc], [Object.assign](object)
+
+[number]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number
+[math]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math
+[arrayf]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from
+[arrayo]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/of
+[arraypc]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/CopyWithin
+[object]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
 
 ### Binary and octal literals 二进制和八进制字面量
+两个新的数字字面量被增加的，二进制(b)和八进制(o)
+```
+0b111110111 === 503 // true
+0o767 === 503 // true
+```
 
 ### Reflect api
+
 
 ### Tail calls 尾调用
