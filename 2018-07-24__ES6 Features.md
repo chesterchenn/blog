@@ -564,6 +564,22 @@ Object.assign(Point, { origin: new Point(0,0) })
 ```
 
 ### Reflect api
-
+完整反射API是暴露在运行级别的元操作对象上。这实际上与代理API相反，并且允许进行与代理trap相同的元操作调用。特别适合实现代理
+```
+// 没有例子
+```
+更多信息: [MDN Reflect](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect)
 
 ### Tail calls 尾调用
+在尾部调用可以保证栈不会无限制地增长。当输入是无界的情况下可以确保递归算法的安全
+```
+function factorial(n, acc = 1) {
+    'use strict';
+    if (n <= 1) return acc;
+    return factorial(n - 1, n * acc);
+}
+
+// 在当今大部分堆栈会溢出,
+// 在ES6里，任意输入都是安全的
+factorial(100000)
+```
