@@ -1,6 +1,6 @@
 # ECMAScript 6
 Created: 2018-07-24  
-Last Modified: 2018-07-26
+Last Modified: 2018-08-14
 
 By lukehoban ( [lukehoban](https://github.com/lukehoban) )  
 原文地址：[lukehoban/es6features](https://github.com/lukehoban/es6features)  
