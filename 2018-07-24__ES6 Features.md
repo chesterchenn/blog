@@ -1,10 +1,9 @@
 # ECMAScript 6
 Created: 2018-07-24  
-Last Modified: 2018-08-14
+Last Modified: 2018-11-05
 
 By lukehoban ( [lukehoban](https://github.com/lukehoban) )  
 原文地址：[lukehoban/es6features](https://github.com/lukehoban/es6features)  
-首次翻译文章，不足或者错误的地方，欢迎指出
 
 ## 引言
 ECMAScript 6，也称为ECMAScript 2015，是ECMAScript最新版本(注: 已经不是最新版本)。ES6对于这门语言来说是一个很重要的更新，而且这是2009年后的ES5标准之后的第一次更新。现在主流的JavaScript引擎都已经实现这些功能——[查看详情](http://kangax.github.io/compat-table/es6/)。  
@@ -14,7 +13,7 @@ ECMAScript 6，也称为ECMAScript 2015，是ECMAScript最新版本(注: 已经�
 ES6包含以下新功能：  
   - [arrows 箭头函数](#arrows-箭头函数)
   - [classes 类](#classes-类)
-  - [enhanced object literals 增强对象字面量](#enhanced-object-literals-增强对象字面量)
+  - [enhanced object literals 对象字面量](#enhanced-object-literals-对象字面量)
   - [template strings 字符串模版](#template-strings-字符串模版)
   - [destructuring 解构](#destructuring-解构)
   - [default + rest + spread 默认值/rest参数/扩展运算符](#default--rest--spread-默认值/rest参数/扩展运算符)
@@ -37,7 +36,7 @@ ES6包含以下新功能：
 ## ECMAScript 6 功能
 
 ### Arrows 箭头函数
-箭头函数的简写符号是 `=>`。它的语法类似于C#，Java 8以及CoffeeScript，对于语句式体和表达式体(通过表达语句直接返回值)都有很好的支持。不同于普通函数，箭头函数不绑定 `this`, 从自己作用域上一层继承 `this`
+箭头函数是使用`=>`符号简写的函数。它们在语法上类似于C#，Java 8以及CoffeeScript中的功能。他们对于语句式体和表达式体(直接返回值)都有很好的支持。不同于普通函数，箭头函数不绑定 `this`, 从自己作用域上一层继承 `this`
 ```
 // 表达式体
 var odds = evens.map(v => v + 1);
@@ -57,14 +56,14 @@ var bob = {
   printFriends() {
     this._friend.forEach(f => 
       console.log(_this.name + " knows " + f)
-    )
+    );
   }
 }
 ```
 更多信息: [MDN Arrow Functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
 
 ### Classes 类
-ES6的类是一个基于原型继承的简单语法糖，这为了有一个更方便的类声明去使用以及鼓励协同工作。类支持基于原型继承，`super`调用，实例化，静态方法以及 `constructor`构造
+ES6的类是基于原型继承的面向对象简易语法糖，这使得有一个更方便的类声明去使用，并鼓励互操作性。类支持基于原型继承，`super`调用，实例化，静态方法以及 `constructor`构造。
 ```
 class SkinnedMesh extends THREE.Mesh {
   constructor(geometry, materials) {
@@ -92,15 +91,15 @@ class SkinnedMesh extends THREE.Mesh {
 ```
 更多信息: [MDN Classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
 
-### Enhanced object literals 增强对象字面量
-对象字面量被扩展，支持在构造时设置原型，简写 `foo: foo` 的赋值，定义方法，`super`调用以及通过表达式计算属性名。同时，也使对象字面值和类声明更加紧密地联系起来，让基于对象的设计从这些便利中更加受益。
+### Enhanced object literals 对象字面量
+对象字面量被扩展到支持在构造时设置原型，简写 `foo: foo` 的赋值，定义方法，`super`调用以及通过表达式计算属性名。同时，也使对象字面值和类声明更加紧密地联系起来，让基于对象的设计从中受益更加便利。
 ```
 var obj = {
-    // 设置原型
+    // __proto__
     __proto__: theProtoObj,
     // 简写赋值：‘handler: handler’
     handler,
-    // 定义方法
+    // 方法
     toString() {
      // Super调用
      return "d " + super.toString();
