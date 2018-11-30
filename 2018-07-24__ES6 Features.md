@@ -15,7 +15,7 @@ ES6包含以下新功能：
   - [classes 类](#classes-类)
   - [enhanced object literals 对象字面量](#enhanced-object-literals-对象字面量)
   - [template strings 字符串模版](#template-strings-字符串模版)
-  - [destructuring 解构](#destructuring-解构)
+  - [destructuring 解构赋值](#destructuring-解构赋值)
   - [default + rest + spread 默认值/rest参数/扩展运算符](#default--rest--spread-默认值/rest参数/扩展运算符)
   - [let + const](#let--const)
   - [iterators + for..of 迭代器/for..of](#iterators--for..of-迭代器/for..of)
@@ -104,14 +104,14 @@ var obj = {
      // Super调用
      return "d " + super.toString();
     },
-    // 动态计算属性名称
+    // （动态）计算属性名称
     [ 'prop_' + (() => 42)() ]: 42
 };
 ```
 更多信息: [MDN Grammar and types: Enhanced Object literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#Enhanced_Object_literals)
 
 ### Template strings 字符串模版
-字符串模版为构建字符串提供语法糖，这有点像Perl, Python等等的插值功能。可选择地，使用一个带标签的字符串模版可以被解析，避免注入攻击或者使用字符串构建更加高层次的数据结构
+字符串模版为构建字符串提供了语法糖，这有点像Perl, Python等字符串插值功能。可选的，允许添加标签来自定义字符串模版，避免注入攻击或者从字符串内容中构建更加高级别的数据结构。
 ```
 // 创建基本字符串面量
 `In JavaScript '\n' is a line-feed.`
@@ -124,7 +124,7 @@ var obj = {
 var name = "Bob", time = "today";
 `Hello ${name}, how are you ${time}?`
 
-// Construct an HTTP request prefix is used to interpret the replacements and construction
+// 构建一个HTTP请求前缀使用插值的替换和构造
 POST`http://foo.org/bar?a=${a}&b=${b}
      Content-Type: application/json
      X-Credentials: ${credentials}
@@ -133,8 +133,8 @@ POST`http://foo.org/bar?a=${a}&b=${b}
 ```
 更多信息: [MDN Template Strings](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/template_strings)
 
-### Destructuring 解构
-解构允许使用模式匹配，支持匹配数组和对象。解构未正确赋值时仍可运行。类似于标准对象的查找 `foo["bar"]`，当未找到时会提供一个 `undefined`
+### Destructuring 解构赋值
+解构赋值允许使用模式匹配进行绑定，并支持匹配数组和对象。解构未正确赋值时仍可运行，类似于查找标准对象 `foo["bar"]`，未找到时会提供 `undefined`
 ```
 // 匹配数组
 var [a, , b] = [1,2,3];
@@ -163,10 +163,10 @@ a === 1;
 更多信息：[MDN Destructuring assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
 
 ### Default + rest + spread 默认值/rest参数/扩展运算符
-调用计算默认参数值，将数组转换为函数调用中的连续参数，跟踪参数到一个数组里。rest取代了对`arguments`的需求，并更直接地解决了常见情况。
+在函数调用中可以指定默认参数值，将数组转换为连续参数，绑定尾部参数到数组中。rest替代了`arguments`的需求，并更直接地解决了问题。
 ```
 function f(x, y=12) {
-  // 如果y没有传值或者被传入undefined，那么y的值是12
+  // 如果y没有传值或者被传入undefined，那么y的值为12
   return x + y;
 }
 f(3) == 15
@@ -191,8 +191,8 @@ f(...[1,2,3]) == 6
 [rest]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters
 [spread]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax
 
-### Let + const
-块作用域被创建。`let`是一个新的`var`,`const`只能赋值一次，在指定之前被静态约束以防止被使用
+### Let + Const
+绑定并构造块作用域。`let`是一个新的`var`,`const`只能声明一次。静态限制，防止使用之前已经被声明。
 ```
 function f() {
   {
@@ -212,7 +212,7 @@ function f() {
 [const statment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const)
 
 ### Iterators + for..of 迭代器/for..of
-迭代器对象能够自定义迭代像CLR的IEnumerable或Java的Iterable。总结来说，`for..on`是在`for..in`上去定义了可迭代的数据。不需要实现数组，像LINQ启用了惰性设计模式
+迭代对象能够自定义迭代，像CLR的IEnumerable或Java的Iterable。总结来说，`for..of`是在`for..in`的基础上使用了自定义的迭代。不需要实现数组，启用了像LINQ惰性设计模式。
 ```
 let fibonacci = {
   [Symbol.iterator]() {
@@ -249,8 +249,9 @@ interface Iterable {
 更多信息: [MDN for...of](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of)
 
 ### Generators 生成器
-生成器是一个使用了`function*`和`yield`简单的迭代器编写。一个函数声明作为function * 返回一个生成器实例。生成器是迭代器的一个子类型包含了额外的`next`和`throw`。这些启用值会流回生成器，所以`yield`是来自于返回值(或者throw)的一个表达式  
-注意：同时也能够用来启用'await'-异步的语法，请参考ES7 `await` 提议
+生成器是一个使用了`function*`和`yield`简易化迭代器生成的。当一个函数作为function*声明时会返回一个生成器实例。生成器是迭代器的一个子类并且包含了额外的`next`和`throw`。这使得值能够流回生成器，所以`yield`是一个来自于返回(或者抛出)的值的表达式。
+
+注意：也可以用于启用'await'式的异步编程，请参考ES7 `await` 提案。
 ```
 var fibonacci = {
   [Symbol.iterator]: function*() {
@@ -281,21 +282,21 @@ interface Generator extends Iterator {
 更多信息: [MDN iteration protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols)
 
 ### Unicode 统一码
-不间断的字符被增加支持统一码，包括了新的统一码字符字面量以及正则表达式`u`，此外新的API也可以处理21位码的字符串。这些增加的东西可以建立全局app在JavaScript里面
+非破坏性地增加支持统一码，包括了新的字符字面量统一码以及新的正则表达式`u`处理位码，以及新的API也可以在21位位码处理字符串。这些增加的功能支持在在JavaScript里面建立全局应用。
 ```
 // 等同于ES5.1
 "𠮷".length == 2
 
-// 新的正则表达式, opt-in ‘u’
+// 新的正则表达式, 内置‘u’
 "𠮷".match(/./u)[0].length == 2
 
-// new form
+// 新形式
 "\u{20BB7}"=="𠮷"=="\uD842\uDFB7"
 
-// new String ops
+// 新的字符串操作
 "𠮷".codePointAt(0) == 0x20BB7
 
-// for-of iterates code points
+// for-of迭代位码
 for(var c of "𠮷") {
   console.log(c);
 }
@@ -303,7 +304,7 @@ for(var c of "𠮷") {
 更多信息: [MDN RegExp.prototype.unicode](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/unicode)
 
 ### Modules 模块
-语言级支持模块的组件定义。从流行的JavaScript模块加载器(AMD, CommonJS)编纂模式。运行时的定义是由主机加载器定义的。隐式异步模型——在被请求的模块可用并处理之前，不会执行任何代码
+言语级别支持定义组件的模块。借鉴于流行的JavaScript模块加载器(AMD, CommonJS)编码模式。运行期间的行为定义由主机默认加载器定义。隐式异步模型——被请求的模块在处理并可用之前，不会执行任何相关的代码。
 ```
 // lib/math.js
 export function sum(x, y) {
@@ -321,7 +322,7 @@ alert("2π = " + math.sum(math.pi, math.pi));
 import {sum, pi} from "lib/math";
 alert("2π = " + sum(pi, pi));
 ```
-有一些额外的功能，包括`export default`以及`export *`
+一些额外的新增功能，包括`export default`以及`export *`
 ```
 // lib/mathplusplus.js
 export * from "lib/math";
@@ -342,15 +343,15 @@ alert("2π = " + ln(e)*pi*2);
   - 动态加载
   - 状态隔离
   - 全局命名空间隔离
-  - 编译挂钩
+  - 编译钩子
   - 嵌套虚拟化
 
-默认的加载器能够被配置，同时新的加载器可以用来构建，载入隔离的代码或者约束上下文
+默认的加载器能够被配置，同时可以构造新的加载器鉴定和加载代码来隔离或者约束上下文
 ```
 // 动态加载 – ‘System’ 是默认的加载器
 System.import('lib/math').then(function(m) {
   alert("2π = " + m.sum(m.pi, m.pi));
-});s
+});
 
 // 创建一个执行沙盒 - 新的加载器
 var loader = new Loader({
@@ -360,11 +361,11 @@ loader.eval("console.log('hello world!');");
 
 // 直接操作模块缓存
 System.get('jquery');
-System.set('jquery', Module({$: $})); // 警告: 尚未定稿
+System.set('jquery', Module({$: $})); // 警告: 尚未最终确定
 ```
 
 ### Map + set + weakmap + weakset
-常见的算法的有效的数据结构。WeakMap提供了不会内存泄漏的对象键值的侧表。
+常见的算法中高效的数据结构。WeakMap提供了不会内存泄漏的对象键值的侧表。
 ```
 // Sets
 var s = new Set();
@@ -447,7 +448,7 @@ var handler =
 更多信息: [MDN Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy)
 
 ### Symbols 符号
-符号能够访问控制对象的状态，符号允许`string`或者`symbol`成为对象属性的键值。符号是一个新的基本变量，可选的`description`参数可以用于调试--但不是符号本身的一部分。符号是唯一的(像gensym)，但不是私有的，因为他们是通过反射特性导出来的，像`Object.getOwnPropertySymbols`
+符号能够访问控制对象的状态，符号允许对象属性的键值是`string`或者`symbol`。符号是一个新的原始类型，可选的参数`description`可以用于调试--但这不是符号本身的一部分。符号是唯一的(像gensym)，但不是私有的，因为它们能够通过`Object.getOwnPropertySymbols`反射特性公开的
 ```
 var MyClass = (function() {
 
@@ -473,18 +474,17 @@ c["key"] === undefined
 更多信息: [MDN Symbol](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol)
 
 ### Subclassable built-ins 内置子类
-在ES6里面，内置的`Array`，`Date`和DOM`Element`对象能够创建子类  
-对于一个函数的对象构造，我们命名为`Ctor`，现在使用两个阶段（实际上都分派）
-- 调用`Ctor[@@create]`去分配一个对象，安装任意特殊行为
-- 在一个实例初始化时调用构造器
-已知`@@create`可通过`Symbol.create`创建。内置对象现在明确地暴露它们的`@@create`
+在ES6里面，内置的`Array`，`Date`和DOM`Element`对象能够创建子类。  
+对于命名为`Ctor`函数的对象构造，现使用两个阶段（都是虚拟派遣）:
+- 调用`Ctor[@@create]`去申请对象，安装任意特殊行为
+- 在新实例中调用构造器进行初始化
+已知`@@create`符号可通过`Symbol.create`得到。内置对象现在明确地暴露它们的`@@create`
 ```
 // 数组的伪代码
 class Array {
     constructor(...args) { /* ... */ }
     static [Symbol.create]() {
-        // Install special [[DefineOwnProperty]]
-        // to magically update 'length'
+        // 设置指定的 [[DefineOwnProperty]] 来更新'length'
     }
 }
 
@@ -494,15 +494,15 @@ class MyArray extends Array {
 }
 
 // Two-phase 'new':
-// 1) Call @@create to allocate object
-// 2) Invoke constructor on new instance
+// 1) 调用 @@create 申请对象
+// 2) 在新实例上调用构造函数
 var arr = new MyArray();
 arr[1] = 12;
 arr.length == 2
 ```
 
 ### Promises
-Promise是一个异步项目的库，Promise是值的第一类表示，可在将来提供。Promise现在已经被许多库使用
+Promise是一个异步编码的库，Promise是可能在将来提供的值第一表示。Promise现已经在许多库使用中。
 ```
 function timeout(duration = 0) {
     return new Promise((resolve, reject) => {
@@ -520,7 +520,7 @@ var p = timeout(1000).then(() => {
 ```
 更多信息：[MDN Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
 
-### Math + number + string + array + object APIs\
+### Math + Number + String + Array + Object APIs
 许多新的库被增加，包括核心的数学库，数组转换，字符串和用来拷贝的`Object.assign`方法
 ```
 Number.EPSILON
