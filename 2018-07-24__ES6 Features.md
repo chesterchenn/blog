@@ -1,6 +1,6 @@
 # ECMAScript 6
 Created: 2018-07-24  
-Last Modified: 2018-11-05
+Last Modified: 2018-12-02
 
 By lukehoban ( [lukehoban](https://github.com/lukehoban) )  
 原文地址：[lukehoban/es6features](https://github.com/lukehoban/es6features)  
@@ -23,14 +23,14 @@ ES6包含以下新功能：
   - [Unicode 统一码](#Unicode-统一码)
   - [modules 模块](#modules-模块)
   - [module loaders 模块加载器](#module-loaders-模块加载器)
-  - [map + set + weakmap + weakset](#map--set--weakmap--weakset)
+  - [Map + Set + Weakmap + Weakset](#Map--Set--Weakmap--Weakset)
   - [proxies 代理](#proxies-代理)
   - [symbols 符号](#symbols-符号)
   - [subclassable built-ins 内置子类](#subclassable-built-ins-内置子类)
   - [promises](#promises)
-  - [math + number + string + array + object APIs](#math--number--string--array--object-APIs)
+  - [Math + Number + String + Array + Object APIs](#Math--Number--String--Array--Object-APIs)
   - [binary and octal literals 二进制和八进制字面量](#binary-and-octal-literals-二进制和八进制字面量)
-  - [Reflect api](#Reflect-api)
+  - [Reflect Api](#Reflect-Api)
   - [tail calls 尾调用](#tail-calls-尾调用)
 
 ## ECMAScript 6 功能
@@ -364,7 +364,7 @@ System.get('jquery');
 System.set('jquery', Module({$: $})); // 警告: 尚未最终确定
 ```
 
-### Map + set + weakmap + weakset
+### Map + Set + Weakmap + Weakset
 常见的算法中高效的数据结构。WeakMap提供了不会内存泄漏的对象键值的侧表。
 ```
 // Sets
@@ -562,15 +562,15 @@ Object.assign(Point, { origin: new Point(0,0) })
 0o767 === 503 // true
 ```
 
-### Reflect api
-完整反射API是暴露在运行级别的元操作对象上。这实际上与代理API相反，并且允许进行与代理trap相同的元操作调用。特别适合实现代理
+### Reflect Api
+完整反射API暴露对象在运行级别上的元操作。这实际上是代理API反转，并且允许进行与代理trap相同的元操作调用。特别适合用于实现代理。
 ```
 // 没有例子
 ```
 更多信息: [MDN Reflect](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect)
 
 ### Tail calls 尾调用
-在尾部调用可以保证栈不会无限制地增长。当输入是无界的情况下可以确保递归算法的安全
+保证在尾部位置的调用不会无限制地增加堆栈。当输入是无界的情况下可以确保递归算法的安全。
 ```
 function factorial(n, acc = 1) {
     'use strict';
