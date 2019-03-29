@@ -1,6 +1,6 @@
 # ECMAScript 6
 Created: 2018-07-24  
-Last Modified: 2018-12-02
+Last Modified: 2019-03-29  
 
 By lukehoban ( [lukehoban](https://github.com/lukehoban) )  
 原文地址：[lukehoban/es6features](https://github.com/lukehoban/es6features)  
@@ -63,7 +63,7 @@ var bob = {
 更多信息: [MDN Arrow Functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
 
 ### Classes 类
-ES6的类是基于原型继承的面向对象简易语法糖，这使得有一个更方便的类声明去使用，并鼓励互操作性。类支持基于原型继承，`super`调用，实例化，静态方法以及 `constructor`构造。
+ES6的类是基于原型继承的面向对象简易语法糖，这使得有一个更方便的类声明去使用，并鼓励互通性。类支持基于原型继承，`super`调用，实例化，静态方法以及 `constructor`构造。
 ```
 class SkinnedMesh extends THREE.Mesh {
   constructor(geometry, materials) {
@@ -92,7 +92,7 @@ class SkinnedMesh extends THREE.Mesh {
 更多信息: [MDN Classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
 
 ### Enhanced object literals 对象字面量
-对象字面量被扩展到支持在构造时设置原型，简写 `foo: foo` 的赋值，定义方法，`super`调用以及通过表达式计算属性名。同时，也使对象字面值和类声明更加紧密地联系起来，让基于对象的设计从中受益更加便利。
+对象字面量被扩展至支持在构造时设置原型，简写了 `foo: foo` 的赋值，定义方法，`super`调用以及通过表达式计算属性名。同时，这些使对象字面值和类声明更加紧密地联系起来，让基于对象的设计从中受益更加便利。
 ```
 var obj = {
     // __proto__
@@ -134,7 +134,7 @@ POST`http://foo.org/bar?a=${a}&b=${b}
 更多信息: [MDN Template Strings](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/template_strings)
 
 ### Destructuring 解构赋值
-解构赋值允许使用模式匹配进行绑定，并支持匹配数组和对象。解构未正确赋值时仍可运行，类似于查找标准对象 `foo["bar"]`，未找到时会提供 `undefined`
+解构赋值允许使用模式匹配进行绑定，并支持匹配数组和对象。解构能够故障弱化，在查找类似于标准对象 `foo["bar"]`，当未找到时会提供 `undefined`值。
 ```
 // 匹配数组
 var [a, , b] = [1,2,3];
@@ -152,18 +152,18 @@ function g({name: x}) {
 }
 g({name: 5})
 
-// 解构未正确赋值时
+// 解构故障弱化
 var [a] = [];
 a === undefined;
 
-// 带默认值的的解构赋值
+// 带默认值的的解构赋值故障弱化
 var [a = 1] = [];
 a === 1;
 ```
 更多信息：[MDN Destructuring assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
 
 ### Default + rest + spread 默认值/rest参数/扩展运算符
-在函数调用中可以指定默认参数值，将数组转换为连续参数，绑定尾部参数到数组中。rest替代了`arguments`的需求，并更直接地解决了问题。
+在函数调用中可以指定默认参数值，将数组转换成连续参数，绑定尾部参数到数组中。rest替代了`arguments`的需求，并更直接地解决了问题。
 ```
 function f(x, y=12) {
   // 如果y没有传值或者被传入undefined，那么y的值为12
@@ -212,7 +212,7 @@ function f() {
 [const statment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const)
 
 ### Iterators + for..of 迭代器/for..of
-迭代对象能够自定义迭代，像CLR的IEnumerable或Java的Iterable。总结来说，`for..of`是在`for..in`的基础上使用了自定义的迭代。不需要实现数组，启用了像LINQ惰性设计模式。
+迭代对象能够自定义迭代，像CLR的IEnumerable或Java的Iterable。总结来说，`for..of`是`for..in`的基础上自定义的迭代。不需要实现数组，启用了像LINQ惰性设计模式。
 ```
 let fibonacci = {
   [Symbol.iterator]() {
@@ -249,7 +249,7 @@ interface Iterable {
 更多信息: [MDN for...of](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of)
 
 ### Generators 生成器
-生成器是一个使用了`function*`和`yield`简易化迭代器生成的。当一个函数作为function*声明时会返回一个生成器实例。生成器是迭代器的一个子类并且包含了额外的`next`和`throw`。这使得值能够流回生成器，所以`yield`是一个来自于返回(或者抛出)的值的表达式。
+生成器是一个使用了`function*`和`yield`简易化迭代器生成的。一个函数作为`function*`声明时会返回一个生成器实例。生成器是迭代器的一个子类并且包含了额外的`next`和`throw`。这使得值能够流回生成器，所以`yield`是一个返回值(或者抛出)的表达式。
 
 注意：也可以用于启用'await'式的异步编程，请参考ES7 `await` 提案。
 ```
@@ -304,7 +304,7 @@ for(var c of "𠮷") {
 更多信息: [MDN RegExp.prototype.unicode](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/unicode)
 
 ### Modules 模块
-言语级别支持定义组件的模块。借鉴于流行的JavaScript模块加载器(AMD, CommonJS)编码模式。运行期间的行为定义由主机默认加载器定义。隐式异步模型——被请求的模块在处理并可用之前，不会执行任何相关的代码。
+语言级别地支持模块化的组件定义。借鉴于流行的JavaScript模块加载器(AMD, CommonJS)。运行期间的行为定义由主机默认加载器定义。隐式异步模型——在被请求的模块加载处理且可用之前，不会执行代码。
 ```
 // lib/math.js
 export function sum(x, y) {
@@ -344,9 +344,9 @@ alert("2π = " + ln(e)*pi*2);
   - 状态隔离
   - 全局命名空间隔离
   - 编译钩子
-  - 嵌套虚拟化
+  - 内嵌虚拟化
 
-默认的加载器能够被配置，同时可以构造新的加载器鉴定和加载代码来隔离或者约束上下文
+默认的加载器能够被配置，同时在隔离或者上下文可以构造新加载器执行和加载代码。
 ```
 // 动态加载 – ‘System’ 是默认的加载器
 System.import('lib/math').then(function(m) {
@@ -365,7 +365,7 @@ System.set('jquery', Module({$: $})); // 警告: 尚未最终确定
 ```
 
 ### Map + Set + Weakmap + Weakset
-常见的算法中高效的数据结构。WeakMap提供了不会内存泄漏的对象键值的侧表。
+常见算法中的高效数据结构。WeakMap提供了无泄漏的对象键值的侧表。
 ```
 // Sets
 var s = new Set();
@@ -425,7 +425,7 @@ var handler = {
 var p = new Proxy(target, handler);
 p() === 'I am the proxy';
 ```
-这里是所有运行级别时的元操作的`trap`:
+这里是所有在运行级别的元操作的`trap`(`trap`: 提供属性访问的方法)
 ```
 var handler =
 {
@@ -502,7 +502,7 @@ arr.length == 2
 ```
 
 ### Promises
-Promise是一个异步编码的库，Promise是可能在将来提供的值第一表示。Promise现已经在许多库使用中。
+Promise是一个异步编程的库，Promise是将来可能提供的值的最先表示。Promise现已经在许多库使用中。
 ```
 function timeout(duration = 0) {
     return new Promise((resolve, reject) => {
