@@ -18,7 +18,7 @@ ES6包含以下新功能：
   - [destructuring 解构赋值](#destructuring-解构赋值)
   - [default + rest + spread 默认值/rest参数/扩展运算符](#default--rest--spread-默认值rest参数扩展运算符)
   - [let + const](#let--const)
-  - [iterators + for..of 迭代器/for..of](#iterators--for..of-迭代器for..of)
+  - [iterators + for..of 迭代器/for..of](#iterators--forof-迭代器forof)
   - [generators 生成器](#generators-生成器)
   - [Unicode 统一码](#Unicode-统一码)
   - [modules 模块](#modules-模块)
