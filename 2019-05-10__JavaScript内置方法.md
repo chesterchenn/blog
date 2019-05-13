@@ -76,5 +76,53 @@ console.log(months.splice(3));
 console.log(months);
 ```
 
+## 字符串String
+```
+var sentence = 'The quick brown fox jumps over the lazy dog.';
+var index = 4;
+console.log(sentence.charAt(index));
+console.log(sentence.charCodeAt(index)); // 113
+```
+```
+var str1 = 'Hello';
+var str2 = 'World';
+console.log(str1.concat(str2));
+console.log(str2.concat(', ', str1, '!'));
+
+var greetList = ['Hello', ' ', 'Venkat', '!'];
+console.log("".concat(...greetList));
+console.log("".concat({}));
+console.log("".concat([])); 
+console.log("".concat(null)); 
+console.log("".concat(true)); 
+console.log("".concat(4, 5));
+```
+```
+var str = 'To be, or not to be, that is the question.';
+console.log(str.endsWith('question.'));
+console.log(str.endsWith('to be'));     
+console.log(str.endsWith('to be', 19));
+```
+```
+const str = 'To be, or not to be, that is the question.';
+console.log(str.includes('To be'));
+console.log(str.includes('question'));
+console.log(str.includes('nonexistent
+console.log(str.includes('To be', 1));
+console.log(str.includes('TO BE'));
+```
+```
+console.log('Blue Whale'.indexOf('Blue'));     
+console.log('Blue Whale'.indexOf('Blute'));    
+console.log('Blue Whale'.indexOf('Whale', 0)); 
+console.log('Blue Whale'.indexOf('Whale', 5)); 
+console.log('Blue Whale'.indexOf('Whale', 7)); 
+console.log('Blue Whale'.indexOf(''));         
+console.log('Blue Whale'.indexOf('', 9));      
+console.log('Blue Whale'.indexOf('', 10));
+console.log('Blue Whale'.indexOf('', 11));
+```
+
 #### 参考链接
-[MDN: Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
+- [MDN: Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
+- [MDN: String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)
