@@ -1,6 +1,6 @@
 # JavaScript内置方法
 Created: 2019-05-10  
-Last Modified: 2019-05-13  
+Last Modified: 2019-05-14  
 
 ## 数组Array
 判断下面数组的输出，并判断是否更改原数组。
@@ -122,7 +122,81 @@ console.log('Blue Whale'.indexOf('', 9));
 console.log('Blue Whale'.indexOf('', 10));
 console.log('Blue Whale'.indexOf('', 11));
 ```
-
+```
+var str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+var regexp = /[A-E]/gi;
+var matches_array = str.match(regexp);
+console.log(matches_array);
+```
+```
+let regexp = /t(e)(st(\d?))/g;
+let str = 'test1test2';
+let array = [...str.matchAll(regexp)];
+console.log(array[0]);
+console.log(array[1]);
+```
+```
+console.log('Breaded Mushrooms'.padEnd(25, '.'));
+console.log('200'.padEnd(5));
+console.log('abc'.padEnd(6, "123456"));
+console.log('5'.padStart(2, '0'));
+const fullNumber = '2034399002125581';
+const last4Digits = fullNumber.slice(-4);
+const maskedNumber = last4Digits.padStart(fullNumber.length, '*');
+console.log(maskedNumber);
+```
+```
+console.log('abc'.repeat(-1));
+console.log('abc'.repeat(0));
+console.log('abc'.repeat(1));    
+console.log('abc'.repeat(2));    
+console.log('abc'.repeat(3.5));
+console.log('abc'.repeat(1/0));
+```
+```
+var p = 'This is a lazy dog. That is another dog?';
+var regex = /dog/gi;
+console.log(p.replace(regex, 'ferret'));
+console.log(p.replace('dog', 'monkey'));
+```
+```
+var paragraph = 'The quick brown fox jumps over the lazy dog. If the dog barked, was it really lazy?';
+var regex = /[^\w\s]/g;
+console.log(paragraph.search(regex));
+console.log(paragraph[paragraph.search(regex)]);
+```
+```
+var str = 'The quick brown fox jumps over the lazy dog.';
+console.log(str.slice(31));
+console.log(str.slice(4, 19));
+console.log(str.slice(-4));
+console.log(str.slice(-9, -5));
+```
+```
+var str = 'The quick brown fox jumps over the lazy dog.';
+var words = str.split(' ');
+console.log(words[3]);
+var chars = str.split('');
+console.log(chars[8]);
+console.log(str.split());
+```
+```
+var str = 'To be, or not to be, that is the question.';
+console.log(str.startsWith('To be'));
+console.log(str.startsWith('not to be'));
+console.log(str.startsWith('not to be', 10));
+```
+```
+var str = 'Mozilla';
+console.log(str.substring(1, 3));
+console.log(str.substring(2));
+console.log(text.substring(5, 2));
+console.log(text.slice(5, 2));
+console.log(text.substring(-5, 2));
+console.log(text.substring(-5, -2));
+console.log(text.slice(-5, 2));
+console.log(text.slice(-5, -2));
+```
 #### 参考链接
 - [MDN: Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
 - [MDN: String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)
