@@ -477,8 +477,9 @@ c["key"] === undefined
 在ES6里面，内置的`Array`，`Date`和DOM`Element`对象能够创建子类。  
 对于命名为`Ctor`函数的对象构造，现使用两个阶段（都是虚拟派遣）:
 - 调用`Ctor[@@create]`去申请对象，安装任意特殊行为
-- 在新实例中调用构造器进行初始化
-已知`@@create`符号可通过`Symbol.create`得到。内置对象现在明确地暴露它们的`@@create`
+- 在新实例中调用构造器进行初始化  
+已知`@@create`符号可通过`Symbol.create`得到。内置对象现在明确地暴露它们的`@@create`  
+
 ```
 // 数组的伪代码
 class Array {
