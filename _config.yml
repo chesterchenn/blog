@@ -48,10 +48,12 @@ algolia:
   application_id: 5ZQ81PCM9O
   index_name: jekyll
   search_only_api_key: 70a82e1374a5385c61d3a54897bad598
+  files_to_exclude:
+    - about.md
 
 # pagination
 # paginate: 5
-# paginate_path: "/_layouts/home.html"
+# paginate_path: "/page:num/"
 
 # Exclude from processing.
 # The following items will not be processed, by default.
