@@ -41,6 +41,9 @@ minima:
  social_links:
   twitter: chesterchenn
   github:  chesterchenn
+
+paginate: 50
+
 # Exclude from processing.
 # The following items will not be processed, by default.
 # Any item listed under the `exclude:` key here will be automatically added to
