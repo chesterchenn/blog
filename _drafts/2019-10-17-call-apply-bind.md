@@ -1,0 +1,37 @@
+## Function.prototype.apply 和 Function.prototype.call
+*apply* 方法调用给定 this 值函数，并将参数作为数组或类数组。  
+语法：`function.apply(thisArg, [argsArray])`
+
+*call* 方法调用给定的 this 值函数，并分别地提供参数。  
+语法：`function.call(thisArg, arg1, arg2, ...)`
+
+## Apply 和 Call 比较：
+1. *Function.prototype.apply* 和 *Function.prototype.call* 的作用是一样的。
+2. 第一个参数都是，指向函数体内this的指向。
+3. 从第二参数，*apply* 接受的是一个参数数组，把它作为参数传给函数。*call* 接受的是参数列表（不固定长度），然后全部作为参数传给函数。
+4. call 比 apply 的性能好。
+
+关于 this，你可以调用现有的函数，然后分配给不同的对象。通过 *apply* 或 *call* 你可以继承别的对象的方法。
+```
+var array = ['a', 'b'];
+var elements = [0, 1, 2];
+[].push.apply(array, elements);  
+console.info(array);  // ['a', 'b', 0, 1, 2]
+// 等价于 array.push(elements); 相当于 array 继承了 [].push 方法
+//（虽然本来 array 就有 push 方法）
+```
+```
+var person = {
+  intro: function(name, company) {
+    console.log(`I am ${name}, use ${company}`)
+  }
+};
+var another = {};
+person.intro.call(another, 'ABC', 'javascript'); // I am ABC, use javascript
+// anthoer 本来没有 intro 方法，通过 call 继承了 person 的 intro 中的方法
+```
+
+## 参考链接
+- [Function.prototype.apply()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply)
+- [Function.prototype.call()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call)
+- [第 48 题：call 和 apply 的区别是什么，哪个性能更好一些](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/84)
