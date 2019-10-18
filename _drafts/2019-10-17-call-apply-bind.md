@@ -31,7 +31,12 @@ person.intro.call(another, 'ABC', 'javascript'); // I am ABC, use javascript
 // anthoer 本来没有 intro 方法，通过 call 继承了 person 的 intro 中的方法
 ```
 
+## Function.prototype.bind
+*bind* 创建一个新函数，该函数在被调用时将 this 指定到提供的值，并在调用新函数时提供其余的参数。 简单的说，就是将函数的 this 绑定到指定的对象中。  
+语法：`function.bind(thisArg[,arg1[,arg2[, ...]]])`  
+
 ## 参考链接
 - [Function.prototype.apply()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply)
 - [Function.prototype.call()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call)
 - [第 48 题：call 和 apply 的区别是什么，哪个性能更好一些](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/84)
+- [Function.prototype.bind()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind)
