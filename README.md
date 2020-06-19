@@ -1,14 +1,24 @@
 Use Jekyll.
 
-安装依赖：
+1. 安装Ruby  
+[Ruby](https://www.ruby-lang.org/en/downloads/)
+
+2. 安装命令
 ```
 gem install jekyll bundler
 ```
-运行服务：
+- linux下安装到/home/gem目录下，以[Ubuntu](https://jekyllrb.com/docs/installation/ubuntu/)为例
+
+3. 安装依赖
+```
+bundle install
+```
+
+4. 运行服务
 ```
 bundle exec jekyll server
 ```
-运行服务（草稿）：
+运行服务（草稿）
 ```
 bundle exec jekyll server --drafts
 ```
