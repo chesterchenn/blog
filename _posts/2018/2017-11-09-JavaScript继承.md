@@ -1,7 +1,4 @@
-# JavaSript的继承方式
-Created: 2017-11-09  
-Last Modified: 2018-07-24  
-
+## 继承方式
 JavaScript主要有如下几种继承方式：
 - 原型链
 - 借用构造函数
@@ -43,4 +40,5 @@ JavaScript主要有如下几种继承方式：
 ## 寄生式继承
 ## 寄生组合式继承（最理想）
 
-参考资料《JavaScript高级程序设计》
+## 参考资料
+- 《JavaScript高级程序设计》
