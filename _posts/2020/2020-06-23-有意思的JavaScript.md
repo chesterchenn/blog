@@ -2,6 +2,7 @@
 2. [形参的长度](#2形参的长度)
 3. [变量提升](#3变量提升)
 4. [数组forEach](#4数组foreach)
+5. [数组sort](#5数组sort)
 
 ## 问题
 ### 1.逗号表达式
@@ -48,6 +49,14 @@ console.log(i);
 ```
 [答案：数组forEach](#4答数组foreach)
 
+### 5.数组sort
+```
+[3, 1, 4, 2].sort(function(a, b) {
+  return a - b;
+})
+```
+[答案：数组sort](#5答数组sort)
+
 ## 答案
 ### 1.答：逗号表达式
 count = 10，逗号表达式只有最后一项是有效的
@@ -81,3 +90,11 @@ foo(); // 报错，foo已经不再是一个函数了
 
 ### 4.答：数组forEach
 `console.log(i); => 0` forEach 方法在数组元素为空时会跳过执行回调函数，相当于回调函数并未执行，所以输出0
+
+### 5.答：数组sort
+```
+[3, 1, 4, 2].sort(function(a, b) {
+  return a - b;
+});  // => [1, 2, 3, 4]
+```
+sort 默认会按照诸个字符的 Unicode 位点进行排序，对于a < b的情况，return a - b，返回小于0（false），ab不用调换位置，则是升序。而return b - a，返回大于0（true），ab调换位置，则是降序。反之同理
