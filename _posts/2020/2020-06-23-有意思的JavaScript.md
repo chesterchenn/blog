@@ -3,6 +3,7 @@
 3. [变量提升](#3变量提升)
 4. [数组forEach](#4数组foreach)
 5. [数组sort](#5数组sort)
+6. [引用类型参数](#6引用类型参数)
 
 ## 问题
 ### 1.逗号表达式
@@ -57,6 +58,22 @@ console.log(i);
 ```
 [答案：数组sort](#5答数组sort)
 
+### 6.引用类型参数
+```
+var foo={n:1};
+(function (foo) {
+    console.log(foo.n);
+    foo.n=3;
+    var foo={n:2};
+    console.log(foo.n);
+})(foo);
+console.log(foo.n);
+```
+[答案：引用类型参数](#6答引用类型参数)
+
+---
+---
+
 ## 答案
 ### 1.答：逗号表达式
 count = 10，逗号表达式只有最后一项是有效的
@@ -98,3 +115,16 @@ foo(); // 报错，foo已经不再是一个函数了
 });  // => [1, 2, 3, 4]
 ```
 sort 默认会按照诸个字符的 Unicode 位点进行排序，对于a < b的情况，return a - b，返回小于0（false），ab不用调换位置，则是升序。而return b - a，返回大于0（true），ab调换位置，则是降序。反之同理
+
+### 6.答：引用类型参数
+```
+var foo = {n:1};           //全局变量，此值为对象，属于引用类型
+(function(foo){            //形参foo同实参foo一样指向同一片内存空间
+    var foo;               
+    console.log(foo.n);    //输出1
+    foo.n = 3;             //形参与实参foo指向的内存空间里的n的值被改为3
+    foo = {n:2};           //形参foo指向了新的内存空间，里面n的值为2.
+    console.log(foo.n);    //输出新的内存空间的n的值
+})(foo);
+console.log(foo.n);        //实参foo的指向还是原来的内存空间，里面的n的值为3.
+```
