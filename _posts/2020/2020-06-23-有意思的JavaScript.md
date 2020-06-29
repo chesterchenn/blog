@@ -4,6 +4,7 @@
 4. [数组forEach](#4数组foreach)
 5. [数组sort](#5数组sort)
 6. [引用类型参数](#6引用类型参数)
+7. [变量声明](#7变量声明)
 
 ## 问题
 ### 1.逗号表达式
@@ -71,6 +72,18 @@ console.log(foo.n);
 ```
 [答案：引用类型参数](#6答引用类型参数)
 
+### 7.变量声明
+```
+(function() {
+  var a = b = 5;
+  console.log(b);
+  console.log(a);
+})();
+console.log(b);
+console.log(a);
+```
+[答案：变量声明](#7答变量声明)
+
 ---
 ---
 
@@ -128,3 +141,18 @@ var foo = {n:1};           //全局变量，此值为对象，属于引用类型
 })(foo);
 console.log(foo.n);        //实参foo的指向还是原来的内存空间，里面的n的值为3.
 ```
+
+### 7.答：变量声明
+```
+原式等价于：
+(function() {
+  b = 5;           // b声明成全局变量
+  var a = b;       // 赋值从右往左
+  console.log(b);
+  console.log(a);
+})();
+console.log(b);
+console.log(a);
+=> 5 5 5 ReferenceError: a is not defined
+```
+PS：当一个变量声明未赋值，调用时`undefined`，当一个变量未声明，调用报错`ReferenceError: xx is not defined`
