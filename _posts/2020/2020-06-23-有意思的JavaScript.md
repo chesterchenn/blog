@@ -5,6 +5,7 @@
 5. [数组sort](#5数组sort)
 6. [引用类型参数](#6引用类型参数)
 7. [变量声明](#7变量声明)
+8. [对象键名](#8对象键名)
 
 ## 问题
 ### 1.逗号表达式
@@ -84,6 +85,17 @@ console.log(a);
 ```
 [答案：变量声明](#7答变量声明)
 
+### 8.对象键名
+```
+var a={};
+b={key:'b'};
+c={key:'c'};
+a[b]=123;
+a[c]=456;
+console.log(a[b]);
+```
+[答案：对象键名](#8答对象键名)
+
 ---
 ---
 
@@ -156,3 +168,6 @@ console.log(a);
 => 5 5 5 ReferenceError: a is not defined
 ```
 PS：当一个变量声明未赋值，调用时`undefined`，当一个变量未声明，调用报错`ReferenceError: xx is not defined`
+
+### 8.答：对象键名
+456，因为键名只能为字符串，传入对象只会被转为字符串[object Object]，a[b],a[c]都等价于a[“[object Object]”]。
