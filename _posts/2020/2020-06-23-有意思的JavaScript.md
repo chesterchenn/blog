@@ -6,6 +6,7 @@
 6. [引用类型参数](#6引用类型参数)
 7. [变量声明](#7变量声明)
 8. [对象键名](#8对象键名)
+9. [setTimeout](#9settimeout)
 
 ## 问题
 ### 1.逗号表达式
@@ -96,6 +97,20 @@ console.log(a[b]);
 ```
 [答案：对象键名](#8答对象键名)
 
+### 9.setTimeout
+```
+console.log(1);
+let a = setTimeout(() => {console.log(2)}, 0);
+console.log(3);
+Promise.resolve(4).then(b => {
+  console.log(b);
+  clearTimeout(a);
+});
+console.log(5);
+```
+[答案：setTimeout](#9答settimeout)
+
+<hr >
 ---
 ---
 
@@ -170,4 +185,7 @@ console.log(a);
 PS：当一个变量声明未赋值，调用时`undefined`，当一个变量未声明，调用报错`ReferenceError: xx is not defined`
 
 ### 8.答：对象键名
-456，因为键名只能为字符串，传入对象只会被转为字符串[object Object]，a[b],a[c]都等价于a[“[object Object]”]。
+`=> 456`，因为键名只能为字符串，传入对象只会被转为字符串[object Object]，a[b],a[c]都等价于a[“[object Object]”]。
+
+### 9.答：setTimeout
+`=> 1 3 5 4`，在异步任务中分为宏任务和微任务，微任务优先级高于宏任务。而 Promise 是异步微任务，会在当前轮事件结束前执行。setTimeout 属于异步宏任务，会在下一轮事件循环执行。
