@@ -1,4 +1,7 @@
-这是采用了 jekyll 搭建起来的 blog，官网地址：[https://jekyllrb.com](https://jekyllrb.com)，github地址：[https://github.com/jekyll/jekyll](https://github.com/jekyll/jekyll)    
+这是采用了 jekyll 搭建起来的博客  
+jekyll：[https://jekyllrb.com](https://jekyllrb.com)  
+GitHub：[https://github.com/jekyll/jekyll](https://github.com/jekyll/jekyll)  
+主题 minima：[https://github.com/jekyll/minima](https://github.com/jekyll/minima)  
 
 1. 安装 Ruby  
 [Ruby](https://www.ruby-lang.org/en/downloads/)
