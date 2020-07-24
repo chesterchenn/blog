@@ -1,7 +1,7 @@
-这是采用了 jekyll 搭建起来的博客  
+这是基于 jekyll 和 minima 主题搭建起来的博客  
 jekyll：[https://jekyllrb.com](https://jekyllrb.com)  
 GitHub：[https://github.com/jekyll/jekyll](https://github.com/jekyll/jekyll)  
-主题 minima：[https://github.com/jekyll/minima](https://github.com/jekyll/minima)  
+minima：[https://github.com/jekyll/minima](https://github.com/jekyll/minima)  
 
 1. 安装 Ruby  
 [Ruby](https://www.ruby-lang.org/en/downloads/)
