@@ -28,5 +28,21 @@ foo(); // ReferenceError: a is not defined
 ```
 代码试图通过 this.bar() 来引用 bar() 函数，这样调用成功纯属意外，调用 bar() 最自然的办法是省略前面的 this，直接使用词法引用标识符。这段代码还试图使用 this 联通 foo() 和 bar() 的词法作用域，从而让 bar() 可以访问 foo() 作用域里的变量 a，这是不可能的。
 
+## 绑定规则
+### 1. 默认绑定
+在独立函数调用的时候，就会使用默认绑定，this 会指向全局对象。  
+
+如果使用严格模式，则不能讲全局对象用于默认绑定，因此 this 会绑定到 undefined
+```
+function foo() {
+  console.log(this.a);
+}
+var a = 2;
+foo(); // 2
+```
+
+## 隐式绑定
+
+
 ## 参考链接
 - 《你不知道的JavaScript（上卷）》
