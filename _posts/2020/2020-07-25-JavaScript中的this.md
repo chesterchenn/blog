@@ -58,5 +58,39 @@ obj.foo(); // 2
 ### 3. 显式绑定
 显示绑定主要是用到了 call(..) 和 apply(..) 方法。  
 
+### 4. new绑定
+在 JavaScript 中，构造函数只是一些使用 new 操作符时被调用的函数。它们并不会属于某个类，也不会实例化一个类。实际上，他们甚至都不能说是一种特殊的函数类型，它们只是被 new 操作符调用的普通函数而已。  
+
+使用 new 来调用函数，或者说发生构造函数调用时，会自动执行下面的操作：
+1. 创建（或者说构造）一个全新的对象。
+2. 这个新对象会被执行 [[Prototype]] 连接。
+3. 这个新对象会绑定到函数调用的 this。
+4. 如果函数没有返回其他对象，那么 new 表达式中的函数调用会自动返回这个新对象。
+
+```
+function foo(a) {
+  this.a = a;
+}
+var bar = new foo(2);
+console.log(bar.a);
+```
+
+## 优先级
+new 绑定 > 显式绑定 > 隐式绑定 > 默认绑定
+
+## 箭头函数
+箭头函数不会创建自己的 this ,它只会从自己的作用域链的上一层继承 this。所以箭头函数中的 this 是在定义函数的时候绑定，而不是在执行函数的时候绑定。
+```
+var foo = 'foo';
+var bar = { 
+  foo: 'bar',
+  log: () => {
+    console.log(this.foo);
+ }
+}
+bar.log(); // 'foo'
+```
+通过 [https://babeljs.io/repl](https://babeljs.io/repl) 编译过程，我们发现箭头函数会被转成 `console.log((void 0).foo)` 
+
 ## 参考链接
 - 《你不知道的JavaScript（上卷）》
