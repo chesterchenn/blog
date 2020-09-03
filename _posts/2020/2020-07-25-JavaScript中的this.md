@@ -15,7 +15,7 @@ console.log(foo.count); // => 0
 可以使用 call(..) 确保 this 指向函数对象 foo 本身，`foo.call(foo, i);`
 
 ### 2. 函数的作用域
-this 在任何情况下都布置想函数的词法作用域。
+this 在任何情况下都不指向函数的词法作用域。
 ```
 function foo() {
   var a = 2;
@@ -72,7 +72,7 @@ function foo(a) {
   this.a = a;
 }
 var bar = new foo(2);
-console.log(bar.a);
+console.log(bar.a);  // 2
 ```
 
 ## 优先级
