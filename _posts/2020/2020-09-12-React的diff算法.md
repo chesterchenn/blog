@@ -18,11 +18,11 @@ diff 会帮助我们计算出 Virtual DOM 中真正变化的部分，并只针�
 - 对于同一类型的组件，有可能其 Virtual DOM 没有任何变化，如果能够确切知道这点，那么就可以节省大量的 diff 运算时间。因此，React 允许用户通过 shouldComponentUpdate() 来判断该组件是否需要进行 diff 算法分析。
 
 ## element diff
-当节点处于同一层级时，diff 提供了  3  种节点操作，分别为INSERT_MARKUP（插入）   、MOVE_EXISTING（移动）和REMOVE_NODE（删除）。  
+当节点处于同一层级时，diff 提供了 3 种节点操作，分别为INSERT_MARKUP（插入）、MOVE_EXISTING（移动）和 REMOVE_NODE（删除）。  
 当相同的节点，由于位置发生变化，导致需要进行繁杂低效的删除、创建操作，其实只要对这些节点进行位置移动即可。针对这一现象，React 提出优化策略：允许开发者对同一层级的同组子节点，添加唯一 key 进行区分。   
 
 ## diff运作过程  
-首先，对新集合中的节点进行循环遍历for (name in nextChildren)，通过唯一的 key 判断新旧集合中是否存在相同的节点if (prevChild === nextChild)，如果存在相同节点，则进行移动操作，但在移动前需要将当前节点在旧集合中的位置与lastIndex进行比较if (child._mountIndex < lastIndex)，否则不执行该操作。这是一种顺序优化手段，lastIndex一直在更新，表示访问过的节点在旧集合中最右的位置（即最大的位置）。如果新集合中当前访问的节点比lastIndex大，说明当前访问节点在旧集合中就比上一个节点位置靠后，则该节点不会影响其他节点的位置，因此不用添加到差异队列中，即不执行移动操作。只有当访问的节点比lastIndex小时，才需要进行移动操作
+首先，对新集合中的节点进行循环遍历for (name in nextChildren)，通过唯一的 key 判断新旧集合中是否存在相同的节点if (prevChild === nextChild)，如果存在相同节点，则进行移动操作，但在移动前需要将当前节点在旧集合中的位置与 lastIndex 进行比较 if (child._mountIndex < lastIndex)，否则不执行该操作。这是一种顺序优化手段，lastIndex一直在更新，表示访问过的节点在旧集合中最右的位置（即最大的位置）。如果新集合中当前访问的节点比 lastIndex 大，说明当前访问节点在旧集合中就比上一个节点位置靠后，则该节点不会影响其他节点的位置，因此不用添加到差异队列中，即不执行移动操作。只有当访问的节点比 lastIndex 小时，才需要进行移动操作
 
 ### 参考链接
 - 《深入REACT技术栈》
