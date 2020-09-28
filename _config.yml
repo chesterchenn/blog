@@ -26,6 +26,8 @@ description: >- # this means to ignore newlines until "baseurl:"
 baseurl: "/blog" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 
+show_excerpts: false # set to true to show excerpts on the homepage
+
 # Build settings
 theme: minima
 plugins:
