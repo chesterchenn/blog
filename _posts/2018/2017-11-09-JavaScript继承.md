@@ -1,3 +1,5 @@
+JavaScriopt 的相关继承方式。
+
 ## 继承方式
 JavaScript主要有如下几种继承方式：
 - 原型链
