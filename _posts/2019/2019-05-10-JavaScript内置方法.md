@@ -1,6 +1,4 @@
-# JavaScript内置方法
-Created: 2019-05-10  
-Last Modified: 2019-05-14  
+数组 Array 和 字符串 String 的内置方法。
 
 ## 数组Array
 判断下面数组的输出，并判断是否更改原数组。
