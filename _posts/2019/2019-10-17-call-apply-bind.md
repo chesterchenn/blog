@@ -1,3 +1,5 @@
+call, apply 和 bind 都是 JavaScript 中用于函数绑定的方法。
+
 ## Function.prototype.apply 和 Function.prototype.call
 *apply* 方法调用给定 this 值函数，并将参数作为数组或类数组。  
 语法：`func.apply(thisArg, [argsArray])`

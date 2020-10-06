@@ -1,3 +1,5 @@
+客户端状态主要依靠追踪浏览器的用户身份及其相关数据。
+
 ## cookie
 1. cookie 的大小被限制在 4KB。
 2. cookie 会随着 HTTP 事务一起发送，因此会浪费一小部分带宽。
@@ -16,3 +18,4 @@ Web Storage 可以分为 sessionStorage 和 localStorage。
 
 ## 参考链接
 - [cookies、sessionStorage和localStorage解释及区别](https://www.cnblogs.com/pengc/p/8714475.html)
+- [彻底弄清楚session,cookie,sessionStorage,localStorage的区别及应用场景（面试向）](https://v3u.cn/a_id_94)
