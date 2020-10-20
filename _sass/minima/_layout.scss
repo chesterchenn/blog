@@ -306,3 +306,28 @@
     width:         calc(50% - (#{$spacing-unit} / 2));
   }
 }
+
+/**
+ * Pagination
+ */
+.pagination {
+  a {
+    padding: $spacing-unit / 10  $spacing-unit / 3;
+    text-decoration:none;
+
+    &:hover {
+      color: $background-color;
+     background-color: $klavier-gray;
+    }
+  }
+}
+ 
+.pagination_active {
+  color: $background-color;
+  background-color: $klavier-gray;
+  padding: $spacing-unit / 10  $spacing-unit / 3;
+
+  &:hover {
+    color: $background-color;
+  }
+}

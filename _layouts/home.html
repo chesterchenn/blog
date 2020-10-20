@@ -24,7 +24,7 @@ layout: default
         {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
           <span class="post-meta">{{ post.date | date: date_format }}</span>
         {%- if site.show_excerpts -%}
-          {{ post.excerpt | prepend: '<p>' | append: '</p>' }}
+          {{ post.excerpt }}
         {%- endif -%}
       </li>
       {% endfor %}
@@ -34,14 +34,12 @@ layout: default
   {% if paginator.total_pages > 1 %}
     <div class="pagination">
       {% if paginator.previous_page %}
-        <a href="{{ paginator.previous_page_path | relative_url }}">上一页</a>
-      {% else %}
-        <span>上一页</span>
+        <a href="{{ paginator.previous_page_path | relative_url }}"><</a>
       {% endif %}
 
       {% for page in (1..paginator.total_pages) %}
         {% if page == paginator.page %}
-          <em>{{ page }}</em>
+          <a class="pagination_active">{{ page }}</a>
         {% elsif page == 1 %}
           <a href="{{ paginator.previous_page_path | relative_url }}">{{ page }}</a>
         {% else %}
@@ -50,9 +48,7 @@ layout: default
       {% endfor %}
 
       {% if paginator.next_page %}
-        <a href="{{ paginator.next_page_path | relative_url }}">下一页</a>
-      {% else %}
-        <span>下一页</span>
+        <a href="{{ paginator.next_page_path | relative_url }}">></a>
       {% endif %}
     </div>
     {% endif %}
