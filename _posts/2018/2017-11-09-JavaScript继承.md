@@ -1,4 +1,5 @@
 ---
+title: JavaScript的继承
 tags: JavaScript
 ---
 JavaScriopt 的相关继承方式。

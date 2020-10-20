@@ -1,4 +1,5 @@
 ---
+title: Cookie和WebStorage
 tags: JavaScript
 ---
 客户端状态主要依靠追踪浏览器的用户身份及其相关数据。

@@ -1,4 +1,5 @@
 ---
+title: JavaScript题目
 tags: JavaScript
 ---
 一些遇到的 JavaScript 的题目。
