@@ -1,3 +1,6 @@
+---
+tags: JavaScript
+---
 数组 Array 和 字符串 String 的内置方法。
 
 ## 数组Array
