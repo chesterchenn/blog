@@ -1,3 +1,6 @@
+---
+tags: JavaScript
+---
 JavaScriopt 的相关继承方式。
 
 ## 继承方式
