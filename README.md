@@ -1,28 +1,21 @@
-这是基于 jekyll 和 minima 主题搭建起来的博客，详情请查看 about  
+这是基于 jekyll 和 minima 主题搭建起来的博客，详情请查看 about.md  
 
 1. 安装 Ruby  
-[Ruby](https://www.ruby-lang.org/en/downloads/)
+  [Download Ruby](https://www.ruby-lang.org/en/downloads/)  
+  - Linux 下 Ruby 的安装可以参考下面链接
 
-2. 安装命令
-```
-gem install jekyll bundler
-```
-- linux 下安装到 /home/gem 目录下，以 [Ubuntu](https://jekyllrb.com/docs/installation/ubuntu/) 为例
+2. 安装 jekyll 和 bundler  
+  `gem install jekyll bundler`
+  - Linux 下安装到 /home/gem 目录下，以 [Ubuntu](https://jekyllrb.com/docs/installation/ubuntu/) 为例
 
-3. 安装依赖
-```
-bundle install
-```
+3. 进入目录，安装相应的依赖  
+  `bundle install`
 
-4. 运行服务
-```
-bundle exec jekyll server
-```
+4. 运行服务  
+  `bundle exec jekyll server`
 
-5. 运行服务（草稿）
-```
-bundle exec jekyll server --drafts
-```
+5. 运行服务（草稿）  
+  `bundle exec jekyll server --drafts`
 
 ## 简单规范 
 1. 所有的正式文放在 _posts
