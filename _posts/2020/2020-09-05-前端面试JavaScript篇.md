@@ -1,3 +1,6 @@
+---
+tags: JavaScript
+---
 面试过程中遇到的 JavaScript 问题。
 
 ### 1. slice 和 splice 的区别

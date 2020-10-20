@@ -1,3 +1,6 @@
+---
+tags: JavaScript
+---
 一些遇到的 JavaScript 的题目。
 
 1. [逗号表达式](#1逗号表达式)
