@@ -209,6 +209,14 @@
 
   > li {
     margin-bottom: $spacing-unit;
+
+    > h3 {
+      margin-bottom: $spacing-unit / 4;
+    }
+
+    > p {
+      font-size: $small-font-size * 1.05;
+    }
   }
 }
 
