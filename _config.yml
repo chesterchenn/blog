@@ -45,7 +45,7 @@ minima:
   twitter: chesterchenn
   github:  chesterchenn
 
-paginate: 30
+paginate: 25
 
 # Exclude from processing.
 # The following items will not be processed, by default.
