@@ -1,6 +1,6 @@
 ---
 title: typeof和instanceof
-tags: JavaScript
+tags: javascript
 ---
 检测基本类型的值使用 typeof 操作符会比较合适，检测引用类型的值 instanceof 操作符会比较好用。
 

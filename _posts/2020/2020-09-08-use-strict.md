@@ -1,5 +1,5 @@
 ---
-tags: JavaScript
+tags: javascript
 ---
 “use strict” 是 ECMAscript 5 引入的一条指令。使用 use strict 指令的目的是说明后续的代码将会被解析为严格代码（strict code）。可以在顶层代码使用，也可以在函数体定义。
 

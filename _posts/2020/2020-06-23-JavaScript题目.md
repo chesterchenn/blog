@@ -1,6 +1,6 @@
 ---
 title: JavaScript题目
-tags: JavaScript
+tags: javascript
 ---
 一些遇到的 JavaScript 的题目。
 

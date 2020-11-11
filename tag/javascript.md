@@ -1,4 +1,4 @@
 ---
 layout: tagpage
-tag: JavaScript
+tag: javascript
 ---
