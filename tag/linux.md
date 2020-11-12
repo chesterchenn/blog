@@ -1,4 +1,4 @@
 ---
 layout: tagpage
-tag: Linux
+tag: linux
 ---
