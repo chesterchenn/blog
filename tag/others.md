@@ -1,4 +1,4 @@
 ---
 layout: tagpage
-tag: Others
+tag: others
 ---
