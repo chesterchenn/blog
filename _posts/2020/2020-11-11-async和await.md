@@ -1,6 +1,6 @@
 ---
 title: async和await
-tag: javascript
+tags: javascript
 ---
 async 和 await 是 ES2017 添加的特性。
 
