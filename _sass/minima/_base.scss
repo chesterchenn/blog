@@ -113,7 +113,9 @@ a {
 
   &:hover {
     color: $theme-color;
-    text-decoration: underline;
+    // text-decoration: underline;
+    text-decoration: none;
+    box-shadow: 0 1px 0 0 currentColor;
   }
 
   .social-media-list &:hover {
@@ -156,7 +158,7 @@ code {
 }
 
 code {
-  padding: 1px 5px;
+  padding: 2px 5px;
 }
 
 pre {
