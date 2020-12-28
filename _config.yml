@@ -47,7 +47,9 @@ minima:
 
 paginate: 25
 
-incremental: true
+# 目前还是处于试验阶段
+# https://jekyllrb.com/docs/configuration/incremental-regeneration/
+incremental: false
 
 # Exclude from processing.
 # The following items will not be processed, by default.
