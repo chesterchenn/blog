@@ -17,6 +17,10 @@
 5. 运行服务（草稿）  
   `bundle exec jekyll server --drafts`
 
+## 安装可能遇到的问题
+1. Q: 安装好 bundler 后，运行 `bundle install`，发现 `can't find gem bundler (>= 0.a) with executable bundle`  
+A: 安装的 bunlder 与 Gemfile.lock 版本不一致，在 Gemfile.lock 的 BUNDLED WITH 可以查看当前依赖的 bundler 版本，运行 `bundle --version` 可以查看当前安装的 bundler 版本。通过安装指定 bundler 版本 `gem install bundler -v x.y.z`，也可以通过修改 Gemfile.lock 中 BUNDLED WITH 的版本号使得一致。
+
 ## 简单规范 
 1. 所有的正式文放在 _posts
 2. 所有的草稿文放在 _drafts
