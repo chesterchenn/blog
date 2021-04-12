@@ -1,4 +1,5 @@
 ---
+layout: post
 title: JavaScript题目
 tags: javascript
 ---

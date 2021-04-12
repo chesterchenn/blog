@@ -1,4 +1,5 @@
 ---
+layout: post
 title: JavaScript的继承
 tags: javascript
 ---

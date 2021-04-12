@@ -1,4 +1,5 @@
 ---
+layout: post
 title: ES6 Features
 tags: javascript
 ---

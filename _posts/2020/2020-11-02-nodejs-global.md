@@ -1,4 +1,5 @@
 ---
+layout: post
 title: nodejs全局问题
 tags: nodejs
 ---

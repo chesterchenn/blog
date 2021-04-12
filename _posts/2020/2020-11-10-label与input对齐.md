@@ -1,4 +1,5 @@
 ---
+layout: post
 title: label与input对齐
 tags: css
 ---

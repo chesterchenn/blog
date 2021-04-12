@@ -1,4 +1,5 @@
 ---
+layout: post
 tags: javascript
 ---
 call, apply 和 bind 都是 JavaScript 中用于函数绑定的方法。

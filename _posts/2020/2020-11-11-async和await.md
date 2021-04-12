@@ -1,4 +1,5 @@
 ---
+layout: post
 title: async和await
 tags: javascript
 ---

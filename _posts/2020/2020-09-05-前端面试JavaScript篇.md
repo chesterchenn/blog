@@ -1,4 +1,5 @@
 ---
+layout: post
 title: 前端面试JavaScript篇
 tags: javascript
 ---

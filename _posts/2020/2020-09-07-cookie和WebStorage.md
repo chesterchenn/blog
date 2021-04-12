@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Cookie和WebStorage
 tags: javascript
 ---

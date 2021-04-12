@@ -1,4 +1,5 @@
 ---
+layout: post
 tags: javascript
 title: JS实现睡眠
 ---
