@@ -13,7 +13,7 @@
   `bundle install`
 
 4. 运行服务  
-  `bundle exec jekyll server`
+  `bundle exec jekyll server` 或者 `jekyll serve`
 
 5. 运行服务（草稿）  
   `bundle exec jekyll server --drafts`
