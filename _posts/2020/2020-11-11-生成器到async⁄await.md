@@ -10,7 +10,7 @@ tags: javascript
 
 ### 语法
 不同风格的声明方式：
-```
+```js
 function* func() {}
 function *func() {}
 ```
@@ -19,7 +19,7 @@ function *func() {}
 
 next() 方法返回一个对象，该对象包含两个属性：value 和 done。value 代表本次 yield 表达式的返回值。done 是布尔类型，表示生成器函数是否已经执行完毕并返回。
 
-```
+```js
 function* idMaker() {
   var index = 0;
   while (true)
@@ -32,9 +32,21 @@ gen.next().value; // 1
 gen.next().value; // 2
 ```
 
-### 斐波那契数列
-由于生成器可以多次返回，可以实现特定的功能。实现如下：
+消息是双向传递的-- yield 作为一个表达式可以发出消息相应 next(..) 调用，next(..) 也可以向暂停的 yield 表达式发送值。yield.. 和 next(..) 组合起来，在生成器的执行过程中构成了一个双向消息传递系统。
+```js
+function* foo(x) {
+  var y = x * (yield "Hello");
+  return y;   
+}
+
+var it = foo(6);
+var res = it.next();
+res.value;   // "Hello"
 ```
+规范和所有兼容浏览器都会默默丢弃传递给第一个 next() 的任何东西。启动生成器时一定要用不带参数的 next()。
+
+由于生成器可以多次返回，可以实现特定的功能。实现如下：
+```js
 function* fib(max) {
   var count = 0, a = 0, b = 1;
   while (count < max) {
@@ -70,3 +82,4 @@ func().then(console.log);
 
 ## 参考链接
 - [ MDN: function* ](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*)
+- 《你不知道的JavaScript》（中）第二部分第四章
