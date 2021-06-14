@@ -13,6 +13,7 @@ script: ./script/cibuild
 branches:
   only:
   - master
+  - gh-pages
 
 addons:
   apt:
@@ -28,7 +29,7 @@ notifications:
 deploy:
   provider: pages:git
   token: $PAGES_TOKEN
-  target_branch: master
+  target_branch: gh-pages
   local_dir: './site'
   on:
-    branch: gh-pages
+    branch: master
