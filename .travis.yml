@@ -12,7 +12,6 @@ script: ./script/cibuild
 # branch whitelist, only for GitHub Pages
 branches:
   only:
-  - master
   - gh-pages
 
 addons:
@@ -29,6 +28,7 @@ notifications:
 deploy:
   provider: pages:git
   token: $PAGES_TOKEN
+  edge: true
   target_branch: gh-pages
   local_dir: './site'
   on:
