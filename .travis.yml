@@ -28,7 +28,7 @@ notifications:
 
 deploy:
   provider: pages # 设置部署到 github pages
-  skip_clean: true
+  skip_cleanup: true
   token: $PAGES_TOKEN
   edge: true
   target_branch: gh-pages
