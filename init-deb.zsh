@@ -5,10 +5,14 @@
 sudo apt install ruby-full build-essential zlib1g-dev
 
 # 指定 gem 安装目录
-echo '# Install Ruby Gems to ~/gems' >> ~/.zshrc
-echo 'export GEM_HOME="$HOME/gems"' >> ~/.zshrc
-echo 'export PATH=$HOME/gems/bin:$PATH' >> ~/.zshrc
-source ~/.zshrc
+count=$(grep -c 'export GEM_HOME="$HOME/gems"' ~/.zshrc)
+if [ $count -eq 0 ]; then
+  echo '# Install Ruby Gems to ~/gems'
+  echo 'export GEM_HOME="$HOME/gems"' >> ~/.zshrc
+  echo 'export PATH=$HOME/gems/bin:$PATH' >> ~/.zshrc
+  echo '\n' >> ~/.zshrc
+  source ~/.zshrc
+fi
 
 # 安装 jekyll bundler
 gem install jekyll bundler
