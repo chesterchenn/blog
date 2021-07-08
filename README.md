@@ -26,6 +26,8 @@
 
     `bundle exec jekyll server --drafts`
 
+补充了脚本 `init-os.zsh`，运行脚本 `zsh init-os.zsh`
+
 ## 安装可能遇到的问题
 
 Q: 安装好 bundler 后，运行 `bundle install`，发现 `can't find gem bundler (>= 0.a) with executable bundle`
