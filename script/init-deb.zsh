@@ -15,7 +15,7 @@ if [ $count -eq 0 ]; then
 fi
 
 # 安装 jekyll bundler
-gem install jekyll bundler@2.2.22
+gem install jekyll bundler:2.2.22
 
 # 安装依赖
 bundle install
