@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>JS小记 | 主页</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="JS小记" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="一些记录 JavaScript 的东西。" />
+<meta property="og:description" content="一些记录 JavaScript 的东西。" />
+<link rel="canonical" href="/blog/2018/07/26/JS%E5%B0%8F%E8%AE%B0.html" />
+<meta property="og:url" content="/blog/2018/07/26/JS%E5%B0%8F%E8%AE%B0.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-07-26T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="JS小记" />
+<script type="application/ld+json">
+{"description":"一些记录 JavaScript 的东西。","url":"/blog/2018/07/26/JS%E5%B0%8F%E8%AE%B0.html","@type":"BlogPosting","headline":"JS小记","dateModified":"2018-07-26T00:00:00+00:00","datePublished":"2018-07-26T00:00:00+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2018/07/26/JS%E5%B0%8F%E8%AE%B0.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">JS小记</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2018-07-26T00:00:00+00:00" itemprop="datePublished">Jul 26, 2018
+      </time></p>
+    <span>
+      [
+        <!--  -->
+        <code class="highligher-rouge"><a href="/blog/tag/javascript"><nobr>javascript</nobr></a></code>
+      ]
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>一些记录 JavaScript 的东西。</p>
+
+<h3 id="取整小记">取整小记</h3>
+
+<p>因为JavaScript里面都是浮点数，所以有时候运算操作需要取整操作</p>
+
+<ul>
+  <li>四舍五入 <code class="language-plaintext highlighter-rouge">Math.round()</code></li>
+  <li>向上取整 <code class="language-plaintext highlighter-rouge">Math.ceil()</code></li>
+  <li>向下取整 <code class="language-plaintext highlighter-rouge">Math.floor()</code></li>
+  <li>向下取整 <code class="language-plaintext highlighter-rouge">~~</code> (参见常用位运算)</li>
+  <li>向下取整 <code class="language-plaintext highlighter-rouge">parseInt()</code> (可以用来取整，但定义是解析字符串，返回整数 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt">详见</a>)</li>
+</ul>
+
+<h3 id="变量存储方式">变量存储方式</h3>
+
+<ul>
+  <li>栈(stack)：自动分配内存空间，系统自动释放，里面存放的是基本类型的值和引用类型的地址</li>
+  <li>堆(heap)：动态分配内存，大小不定，不会自动释放，里面存放的引用类型的值
+<img src="../../../images/stack.png" alt="Image" /></li>
+</ul>
+
+<h3 id="arrayincludes-处理多重条件">Array.includes 处理多重条件</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">func</span><span class="p">(</span><span class="nx">arg</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">arg</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">A</span><span class="dl">'</span> <span class="o">||</span> <span class="nx">arg</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">B</span><span class="dl">'</span> <span class="o">||</span> <span class="nx">arg</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">C</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* do something */</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">func</span><span class="p">(</span><span class="nx">arg</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">A</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">B</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">C</span><span class="dl">'</span><span class="p">];</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">arr</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="nx">arg</span><span class="p">))</span> <span class="p">{</span> <span class="cm">/* do something */</span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="arrayevery-和-arraysome-处理条件">Array.every 和 Array.some 处理条件</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">AA</span><span class="dl">'</span><span class="p">,</span> <span class="na">age</span><span class="p">:</span> <span class="mi">10</span> <span class="p">},</span>
+  <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">BB</span><span class="dl">'</span><span class="p">,</span> <span class="na">age</span><span class="p">:</span> <span class="mi">20</span> <span class="p">},</span>
+  <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">CC</span><span class="dl">'</span><span class="p">,</span> <span class="na">age</span><span class="p">:</span> <span class="mi">30</span> <span class="p">}</span>
+<span class="p">]</span>
+
+<span class="c1">// 满足全部条件</span>
+<span class="kd">const</span> <span class="nx">bool</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">every</span><span class="p">(</span><span class="nx">item</span> <span class="o">=&gt;</span> <span class="nx">item</span><span class="p">.</span><span class="nx">name</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">AA</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="c1">// 满足部分条件</span>
+<span class="kd">const</span> <span class="nx">bool</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">some</span><span class="p">(</span><span class="nx">item</span> <span class="o">=&gt;</span> <span class="nx">item</span><span class="p">.</span><span class="nx">age</span> <span class="o">&lt;</span> <span class="mi">35</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="接收参数的方式">接收参数的方式</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">func</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">search</span><span class="p">,</span> <span class="nx">page</span><span class="p">,</span> <span class="nx">limit</span><span class="p">)</span> <span class="p">{}</span>   <span class="c1">// 需要记住参数顺序</span>
+<span class="kd">function</span> <span class="nx">func</span><span class="p">({</span><span class="nx">url</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">search</span><span class="p">,</span> <span class="nx">page</span><span class="p">,</span> <span class="nx">limit</span><span class="p">})</span> <span class="p">{}</span> <span class="c1">// 不需要记住参数顺序，记参数名称</span>
+</code></pre></div></div>
+
+<h3 id="对象转数组">对象转数组</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">nubmers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">one</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="na">two</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="kd">const</span> <span class="nx">key</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">numbers</span><span class="p">);</span>     <span class="c1">// ['one', 'two']</span>
+<span class="kd">const</span> <span class="nx">value</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">values</span><span class="p">(</span><span class="nx">numbers</span><span class="p">);</span> <span class="c1">// [1, 2]</span>
+<span class="kd">const</span> <span class="nx">entry</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">values</span><span class="p">(</span><span class="nx">numbers</span><span class="p">);</span> <span class="c1">// [['one': 1], ['two', 2]]</span>
+</code></pre></div></div>
+
+<h3 id="数组的判断">数组的判断</h3>
+
+<ul>
+  <li>判断是否为数组：<code class="language-plaintext highlighter-rouge">Array.isArray()</code></li>
+  <li>类数组转化数组：<code class="language-plaintext highlighter-rouge">Array.from()</code></li>
+</ul>
+
+<h3 id="检查是否为工作日">检查是否为工作日</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">isWeekday</span> <span class="o">=</span> <span class="nx">date</span> <span class="o">=&gt;</span> <span class="nx">date</span><span class="p">.</span><span class="nx">getDay</span><span class="p">()</span> <span class="o">%</span> <span class="mi">6</span> <span class="o">!==</span> <span class="mi">0</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isWeekday</span><span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="mi">2021</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">24</span><span class="p">)));</span> <span class="c1">// false (Sunday)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isWeekday</span><span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="mi">2021</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">25</span><span class="p">)));</span> <span class="c1">// true (Monday)</span>
+</code></pre></div></div>
+
+<h3 id="slice-和-splice-的区别">slice 和 splice 的区别</h3>
+
+<ul>
+  <li>slice 返回给定数组的浅拷贝数组，<code class="language-plaintext highlighter-rouge">arr.slice([begin[, end]])</code></li>
+  <li>splice 通过删除或者替换现有的元素，也可以在指定位置新增元素更改数组的元素。
+<code class="language-plaintext highlighter-rouge">let deletedItems = array.splice(start[, deleteCount[, item1[, ...]]])</code></li>
+  <li>slice 从数组中浅拷贝，不会更改原数组，返回浅拷贝的新数组。</li>
+  <li>splice 在原数组修改，返回被删除的项。</li>
+</ul>
+
+<h3 id="concat-和-push">concat 和 push</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">];</span>
+<span class="nx">arr</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>     <span class="c1">// arr: [1, 2, 3]</span>
+<span class="nx">arr</span><span class="p">.</span><span class="nx">push</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span> <span class="c1">// arr: [1, 2, 3, [4, 5]]</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">arrA</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>     <span class="c1">// arr: [1, 2]; arrA: [1, 2, 3];</span>
+<span class="kd">var</span> <span class="nx">arrB</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">concat</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]);</span> <span class="c1">// arr: [1, 2]; arrB: [1, 2, 4, 5];</span>
+</code></pre></div></div>
+
+<p>两个主要区别:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">push(..)</code> 原数组上操作，<code class="language-plaintext highlighter-rouge">concat(..)</code> 返回操作后的新数组</li>
+  <li>参数为数组的时候，<code class="language-plaintext highlighter-rouge">push(..)</code> 直接添加，<code class="language-plaintext highlighter-rouge">concat(..)</code> 会进行提取值再添加</li>
+</ul>
+
+<h3 id="可选链操作符">可选链操作符<code class="language-plaintext highlighter-rouge">?.</code></h3>
+
+<p>可选链操作符 <code class="language-plaintext highlighter-rouge">?.</code> 允许读取位于连接对象链深处的属性的值，而不必验证链中的每个引用是否有效。<code class="language-plaintext highlighter-rouge">?.</code> 操作符的功能类似于 <code class="language-plaintext highlighter-rouge">.</code> 链式操作符，不同在于，在引用 <code class="language-plaintext highlighter-rouge">null</code> 或 <code class="language-plaintext highlighter-rouge">undefined</code> 的情况下不会引起错误，该表达式短路返回 <code class="language-plaintext highlighter-rouge">undefined</code></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{};</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span> <span class="o">&amp;&amp;</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">a</span> <span class="o">&amp;&amp;</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nx">b</span> <span class="o">&amp;&amp;</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nx">b</span><span class="p">.</span><span class="nx">c</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">?.</span><span class="nx">a</span><span class="p">?.</span><span class="nx">b</span><span class="p">?.</span><span class="nx">c</span><span class="p">);</span> <span class="c1">// 不会报错，原因是?.遇到是空值的时候便会返回 undefined</span>
+</code></pre></div></div>
+
+<h3 id="空值合并操作符">空值合并操作符<code class="language-plaintext highlighter-rouge">??</code></h3>
+
+<p>空值合并操作符 <code class="language-plaintext highlighter-rouge">??</code> 是一个逻辑操作符，当左侧的操作数为 <code class="language-plaintext highlighter-rouge">null</code> 或者 <code class="language-plaintext highlighter-rouge">undefined</code> 时，返回右侧的操作数，否则返回左侧的操作数。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">leftExpr</span> <span class="p">??</span> <span class="nx">rightExpr</span>
+</code></pre></div></div>
+
+<p>空值合并操作符一般用来为常量提供默认值，保证常量不会为 <code class="language-plaintext highlighter-rouge">null</code> 或者 <code class="language-plaintext highlighter-rouge">nudefined</code>。</p>
+
+<p>以前经常使用逻辑或操作符 <code class="language-plaintext highlighter-rouge">||</code> 进行操作。但是 <code class="language-plaintext highlighter-rouge">||</code> 左侧的操作数会被转换成布尔值进行求值，常见的假值（0, ‘‘）会遇到意料之外的行为。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kc">false</span> <span class="o">||</span> <span class="dl">'</span><span class="s1">foo</span><span class="dl">'</span><span class="p">;</span> <span class="c1">// 'foo'</span>
+    <span class="mi">0</span> <span class="o">||</span> <span class="dl">'</span><span class="s1">foo</span><span class="dl">'</span><span class="p">;</span> <span class="c1">// 'foo'</span>
+   <span class="dl">''</span> <span class="o">||</span> <span class="dl">'</span><span class="s1">foo</span><span class="dl">'</span><span class="p">;</span> <span class="c1">// 'foo'</span>
+
+<span class="kc">false</span> <span class="p">??</span> <span class="dl">'</span><span class="s1">foo</span><span class="dl">'</span><span class="p">;</span> <span class="c1">// false</span>
+    <span class="mi">0</span> <span class="p">??</span> <span class="dl">'</span><span class="s1">foo</span><span class="dl">'</span><span class="p">;</span> <span class="c1">// 0</span>
+   <span class="dl">''</span> <span class="p">??</span> <span class="dl">'</span><span class="s1">foo</span><span class="dl">'</span><span class="p">;</span> <span class="c1">// ''</span>
+</code></pre></div></div>
+
+<h3 id="计算属性名">计算属性名</h3>
+
+<p>在对象里，<code class="language-plaintext highlighter-rouge">[..]: ..</code>的语法被称为计算属性名，指定一个表达式并用这个表达式的结果作为属性的名称。</p>
+
+  </div><a class="u-url" href="/blog/2018/07/26/JS%E5%B0%8F%E8%AE%B0.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

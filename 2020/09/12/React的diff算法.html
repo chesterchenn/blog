@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>React的diff算法 | 主页</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="React的diff算法" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="diff 会帮助我们计算出 Virtual DOM 中真正变化的部分，并只针对该部分进行原生 DOM 操作，而非重新渲染整个页面，从而保证了每次操作更新后页面的高效渲染。" />
+<meta property="og:description" content="diff 会帮助我们计算出 Virtual DOM 中真正变化的部分，并只针对该部分进行原生 DOM 操作，而非重新渲染整个页面，从而保证了每次操作更新后页面的高效渲染。" />
+<link rel="canonical" href="/blog/2020/09/12/React%E7%9A%84diff%E7%AE%97%E6%B3%95.html" />
+<meta property="og:url" content="/blog/2020/09/12/React%E7%9A%84diff%E7%AE%97%E6%B3%95.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-09-12T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="React的diff算法" />
+<script type="application/ld+json">
+{"description":"diff 会帮助我们计算出 Virtual DOM 中真正变化的部分，并只针对该部分进行原生 DOM 操作，而非重新渲染整个页面，从而保证了每次操作更新后页面的高效渲染。","url":"/blog/2020/09/12/React%E7%9A%84diff%E7%AE%97%E6%B3%95.html","@type":"BlogPosting","headline":"React的diff算法","dateModified":"2020-09-12T00:00:00+00:00","datePublished":"2020-09-12T00:00:00+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2020/09/12/React%E7%9A%84diff%E7%AE%97%E6%B3%95.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">React的diff算法</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2020-09-12T00:00:00+00:00" itemprop="datePublished">Sep 12, 2020
+      </time></p>
+    <span>
+      [
+        <!--  -->
+        <code class="highligher-rouge"><a href="/blog/tag/react"><nobr>react</nobr></a></code>
+      ]
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>diff 会帮助我们计算出 Virtual DOM 中真正变化的部分，并只针对该部分进行原生 DOM 操作，而非重新渲染整个页面，从而保证了每次操作更新后页面的高效渲染。</p>
+
+<p>传统 diff 算法通过循环递归对节点进行依次对比，效率低下，算法复杂度达到O(n^3)。</p>
+
+<h2 id="diff-策略">diff 策略</h2>
+<ol>
+  <li>Web UI 中 DOM 节点跨层级的操作特别少，可以忽略不计。</li>
+  <li>拥有相同类的两个组件将会生成相似的树形结构，拥有不同类的两个组件将会生成不同的树形结构。</li>
+  <li>对于同一层级的一组子节点，它们可以通过唯一 id 进行区分。</li>
+</ol>
+
+<p>基于以上策略，React 分别对 tree diff，component diff 以及 element diff 进行算法优化。</p>
+
+<h2 id="tree-diff">tree diff</h2>
+<p>基于策略一，React 对树的算法进行了简洁明了的优化，即对树进行分层比较，两棵树只会对同一层次的节点进行比较。React 通过updateDepth 对 Virtual DOM 树进行层级控制，只会对相同层级的 DOM 节点进行比较，即同一个父节点下的所有子节点。当发现节点已经不存在时，则该节点及其子节点会被完全删除掉，不会用于进一步的比较。</p>
+
+<h2 id="component-diff">component diff</h2>
+<ul>
+  <li>如果是同一类型的组件，按照原策略继续比较 Virtual DOM 树即可。</li>
+  <li>如果不是，则将该组件判断为 dirty component，从而替换整个组件下的所有子节点。</li>
+  <li>对于同一类型的组件，有可能其 Virtual DOM 没有任何变化，如果能够确切知道这点，那么就可以节省大量的 diff 运算时间。因此，React 允许用户通过 shouldComponentUpdate() 来判断该组件是否需要进行 diff 算法分析。</li>
+</ul>
+
+<h2 id="element-diff">element diff</h2>
+<p>当节点处于同一层级时，diff 提供了 3 种节点操作，分别为INSERT_MARKUP（插入）、MOVE_EXISTING（移动）和 REMOVE_NODE（删除）。<br />
+当相同的节点，由于位置发生变化，导致需要进行繁杂低效的删除、创建操作，其实只要对这些节点进行位置移动即可。针对这一现象，React 提出优化策略：允许开发者对同一层级的同组子节点，添加唯一 key 进行区分。</p>
+
+<h2 id="diff运作过程">diff运作过程</h2>
+<p>首先，对新集合中的节点进行循环遍历for (name in nextChildren)，通过唯一的 key 判断新旧集合中是否存在相同的节点if (prevChild === nextChild)，如果存在相同节点，则进行移动操作，但在移动前需要将当前节点在旧集合中的位置与 lastIndex 进行比较 if (child._mountIndex &lt; lastIndex)，否则不执行该操作。这是一种顺序优化手段，lastIndex一直在更新，表示访问过的节点在旧集合中最右的位置（即最大的位置）。如果新集合中当前访问的节点比 lastIndex 大，说明当前访问节点在旧集合中就比上一个节点位置靠后，则该节点不会影响其他节点的位置，因此不用添加到差异队列中，即不执行移动操作。只有当访问的节点比 lastIndex 小时，才需要进行移动操作</p>
+
+<h3 id="参考链接">参考链接</h3>
+<ul>
+  <li>《深入REACT技术栈》</li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2020/09/12/React%E7%9A%84diff%E7%AE%97%E6%B3%95.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

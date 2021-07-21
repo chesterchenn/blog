@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>JavaScript的继承 | 主页</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="JavaScript的继承" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="JavaScriopt 的相关继承方式。" />
+<meta property="og:description" content="JavaScriopt 的相关继承方式。" />
+<link rel="canonical" href="/blog/2017/11/09/JavaScript%E7%BB%A7%E6%89%BF.html" />
+<meta property="og:url" content="/blog/2017/11/09/JavaScript%E7%BB%A7%E6%89%BF.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2017-11-09T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="JavaScript的继承" />
+<script type="application/ld+json">
+{"description":"JavaScriopt 的相关继承方式。","url":"/blog/2017/11/09/JavaScript%E7%BB%A7%E6%89%BF.html","@type":"BlogPosting","headline":"JavaScript的继承","dateModified":"2017-11-09T00:00:00+00:00","datePublished":"2017-11-09T00:00:00+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2017/11/09/JavaScript%E7%BB%A7%E6%89%BF.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">JavaScript的继承</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2017-11-09T00:00:00+00:00" itemprop="datePublished">Nov 9, 2017
+      </time></p>
+    <span>
+      [
+        <!--  -->
+        <code class="highligher-rouge"><a href="/blog/tag/javascript"><nobr>javascript</nobr></a></code>
+      ]
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>JavaScriopt 的相关继承方式。</p>
+
+<h2 id="继承方式">继承方式</h2>
+<p>JavaScript主要有如下几种继承方式：</p>
+<ul>
+  <li>原型链</li>
+  <li>借用构造函数</li>
+  <li>组合继承</li>
+  <li>原型式继承</li>
+  <li>寄生式继承</li>
+  <li>寄生组合式继承</li>
+</ul>
+
+<h2 id="原型链">原型链</h2>
+<h3 id="原型-prototype">原型 prototype</h3>
+<p>我们创建的每个函数都有一个 prototype （原型）属性，这个属性是一个指针，指向一个对象，该对象包含了所有实例共享的属性和方法。</p>
+
+<p>使用原型链作为实现继承的基本思想就是利用原型让一个引用类型继承另一个引用类型的属性和方法。实现原型链继承的办法，就是让一个对象的原型对象指向另一个对象的实例，实现的本质就是重写原型对象，代之一个实例。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function Person() {
+  this.name = 'human';
+}
+
+function Student() {}
+
+Student.prototype = new Person();
+
+var instance = new Student();
+console.log(instance.name);
+</code></pre></div></div>
+
+<p>注意要点：</p>
+<ul>
+  <li>谨慎定义方法，重写原型链上的方法会屏蔽原来的方法</li>
+  <li>不能使用对象字面量创建原型方法，这样会重写原型链，即之前重写原型链会失效</li>
+</ul>
+
+<p>问题：</p>
+<ul>
+  <li>包含引用类型值的原型属性会被所有实例共享。即你修改了该属性，所有实例的属性也会改变</li>
+  <li>在创建子类型的实例时，不能向超类型的构造函数中传递参数</li>
+</ul>
+
+<h2 id="借用构造函数">借用构造函数</h2>
+<p>也叫伪造对象或经典继承
+基本思想是在子类型构造函数的内部调用超类型构造函数
+通过使用apply()和call()方法可以在新创建的对象上执行构造函数</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function Person() {
+  this.name = 'human';
+}
+
+function Student() {
+  Person.call(this);
+}
+
+var instance = new Student();
+console.log(instance.name);
+</code></pre></div></div>
+
+<p>优势：</p>
+<ul>
+  <li>传递参数
+  相对原型链，借用构造函数可以在子类型构造函数中向超类型构造函数传递参数</li>
+</ul>
+
+<p>问题：</p>
+<ul>
+  <li>方法在构造函数中定义，函数的复用无法实现</li>
+</ul>
+
+<h2 id="组合继承最常用">组合继承（最常用）</h2>
+<p>也叫伪经典继承，就是将原型链和借用构造函数组合一起
+基本思想是使用原型链实现对原型属性和方法的继承，通过借用构造函数来实现对实例属性的继承
+通过在原型上定义方法实现了函数复用，又保证每个实例都有自己的属性</p>
+
+<h2 id="原型式继承">原型式继承</h2>
+<h2 id="寄生式继承">寄生式继承</h2>
+<h2 id="寄生组合式继承最理想">寄生组合式继承（最理想）</h2>
+
+<h2 id="参考资料">参考资料</h2>
+<ul>
+  <li>《JavaScript高级程序设计》</li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2017/11/09/JavaScript%E7%BB%A7%E6%89%BF.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

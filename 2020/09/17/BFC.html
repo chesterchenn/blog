@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>BFC | 主页</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="BFC" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="BFC(Block Formatting Context) 块级格式化上下文。它是块级布局发生的区域，也是浮动与其他元素交互的区域。具有 BFC 特性的元素可以看作是隔离了的独立容器，容器里面的元素不会在布局上影响到外面的元素，并且 BFC 具有普通容器所没有的一些特性。" />
+<meta property="og:description" content="BFC(Block Formatting Context) 块级格式化上下文。它是块级布局发生的区域，也是浮动与其他元素交互的区域。具有 BFC 特性的元素可以看作是隔离了的独立容器，容器里面的元素不会在布局上影响到外面的元素，并且 BFC 具有普通容器所没有的一些特性。" />
+<link rel="canonical" href="/blog/2020/09/17/BFC.html" />
+<meta property="og:url" content="/blog/2020/09/17/BFC.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-09-17T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="BFC" />
+<script type="application/ld+json">
+{"description":"BFC(Block Formatting Context) 块级格式化上下文。它是块级布局发生的区域，也是浮动与其他元素交互的区域。具有 BFC 特性的元素可以看作是隔离了的独立容器，容器里面的元素不会在布局上影响到外面的元素，并且 BFC 具有普通容器所没有的一些特性。","url":"/blog/2020/09/17/BFC.html","@type":"BlogPosting","headline":"BFC","dateModified":"2020-09-17T00:00:00+00:00","datePublished":"2020-09-17T00:00:00+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2020/09/17/BFC.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">BFC</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2020-09-17T00:00:00+00:00" itemprop="datePublished">Sep 17, 2020
+      </time></p>
+    <span>
+      [
+        <!--  -->
+        <code class="highligher-rouge"><a href="/blog/tag/css"><nobr>css</nobr></a></code>
+      ]
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>BFC(Block Formatting Context) 块级格式化上下文。它是块级布局发生的区域，也是浮动与其他元素交互的区域。具有 BFC 特性的元素可以看作是隔离了的独立容器，容器里面的元素不会在布局上影响到外面的元素，并且 BFC 具有普通容器所没有的一些特性。</p>
+
+<h2 id="触发-bfc">触发 BFC</h2>
+<ul>
+  <li>文档根元素 <code class="language-plaintext highlighter-rouge">html</code></li>
+  <li>浮动（除 <code class="language-plaintext highlighter-rouge">float: none</code> 以外）</li>
+  <li>绝对定位元素（postion 是 <code class="language-plaintext highlighter-rouge">absolute</code> 或 <code class="language-plaintext highlighter-rouge">fixed</code>）</li>
+  <li>行内块元素（display 为 <code class="language-plaintext highlighter-rouge">inline-block</code>）</li>
+  <li>块级元素设置 overflow 除 <code class="language-plaintext highlighter-rouge">visible</code> 以外</li>
+  <li>Flex 项（display 为 <code class="language-plaintext highlighter-rouge">flex</code> 或 <code class="language-plaintext highlighter-rouge">inline-flex</code>）</li>
+  <li>栅格项（display 为 <code class="language-plaintext highlighter-rouge">grid</code> 或 <code class="language-plaintext highlighter-rouge">inline-grid</code>）</li>
+</ul>
+
+<h2 id="包含内部浮动">包含内部浮动</h2>
+<p>让浮动内容和旁边的内容高度相同。在下面例子中，浮动元素脱离文档流，所以容器不能撑起浮动元素的高度。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;section&gt;
+  &lt;div class="box"&gt;
+    &lt;div class="float"&gt;浮动元素&lt;/div&gt;
+    &lt;p&gt;容器内的文段&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+</code></pre></div></div>
+<section>
+  <div class="box">
+    <div class="float">浮动元素</div>
+    <p>容器内的文段</p>
+  </div>
+</section>
+
+<ol>
+  <li>使用 <code class="language-plaintext highlighter-rouge">overflow: auto</code><br />
+设置 <code class="language-plaintext highlighter-rouge">overflow: auto</code> 去新建一个包含浮动 BFC 的容器。</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;section&gt;
+  &lt;div class="box" style="overflow:auto"&gt;
+    &lt;div class="float"&gt;浮动元素&lt;/div&gt;
+    &lt;p&gt;容器设置了&lt;code&gt;overflow:auto&lt;/code&gt;的文段&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+</code></pre></div></div>
+<section>
+  <div class="box" style="overflow:auto">
+    <div class="float">浮动元素</div>
+    <p>容器设置了<code>overflow:auto</code>的文段</p>
+  </div>
+</section>
+
+<ol>
+  <li>使用 <code class="language-plaintext highlighter-rouge">display: flow-root</code><br />
+设置 <code class="language-plaintext highlighter-rouge">display: flow-root</code> 创建一个新的 BFC 且没有副作用。</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;section&gt;
+  &lt;div class="box" style="display:flow-root"&gt;
+    &lt;div class="float"&gt;浮动元素&lt;/div&gt;
+    &lt;p&gt;容器设置了&lt;code&gt;display:flow-root&lt;/code&gt;的文段&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+</code></pre></div></div>
+<section>
+  <div class="box" style="display:flow-root">
+    <div class="float">浮动元素</div>
+    <p>容器设置了<code>display:flow-root</code>的文段</p>
+  </div>
+</section>
+
+<p>样式代码如下：</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>section {
+  height:150px;
+}
+.box {
+  background-color: rgb(224, 206, 247);
+  border: 5px solid rebeccapurple;
+}
+.box[style] {
+  background-color: aliceblue;
+  border: 5px solid steelblue;  
+}
+.float {
+  float: left;
+  width: 200px;
+  height: 100px;
+  background-color: rgba(255, 255, 255, .5);
+  border:1px solid black;
+  padding: 10px;
+}
+</code></pre></div></div>
+<style>
+section {
+  height:150px;
+}
+.box {
+  background-color: rgb(224, 206, 247);
+  border: 5px solid rebeccapurple;
+}
+.box[style] {
+  background-color: aliceblue;
+  border: 5px solid steelblue;  
+}
+.float {
+  float: left;
+  width: 200px;
+  height: 100px;
+  background-color: rgba(255, 255, 255, .5);
+  border:1px solid black;
+  padding: 10px;
+}
+</style>
+
+<h2 id="边距重叠">边距重叠</h2>
+<p>同一个 BFC 下外边距会发生折叠，创建一个新的 BFC 以避免两个相邻 div 之间的边距崩溃。下面例子中，创建一个新的 div，并设置 <code class="language-plaintext highlighter-rouge">overflow: auto;</code> 使其成为一个新的 BFC。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;div style="border: 1px solid #888"&gt;
+  &lt;div style="height: 50px; margin: 10px; background: #DDA0DD;"&gt;&lt;/div&gt;
+  &lt;div style="height: 50px; margin: 10px; background: #14CC8D;"&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre></div></div>
+<div style="border: 1px solid #888">
+  <div style="height: 50px; margin: 10px; background: #DDA0DD;"></div>
+  <div style="height: 50px; margin: 10px; background: #14CC8D;"></div>
+</div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;div style="border: 1px solid #888"&gt;
+  &lt;div style="height: 50px; margin: 10px; background: #DDA0DD;"&gt;&lt;/div&gt;
+  &lt;div style="overflow: auto;"&gt;
+    &lt;div style="height: 50px; margin: 10px; background: #14CC8D;"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre></div></div>
+<div style="border: 1px solid #888">
+  <div style="height: 50px; margin: 10px; background: #DDA0DD;"></div>
+  <div style="overflow: auto;">
+    <div style="height: 50px; margin: 10px; background: #14CC8D;"></div>
+  </div>
+</div>
+
+<h2 id="参考链接">参考链接</h2>
+<ul>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Block_formatting_context">MDN: Block formatting context</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2020/09/17/BFC.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Git开发总结 | 主页</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Git开发总结" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="在 Ericsson 工作期间使用 Git 开发的大致总结。" />
+<meta property="og:description" content="在 Ericsson 工作期间使用 Git 开发的大致总结。" />
+<link rel="canonical" href="/blog/2019/12/11/Git%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93.html" />
+<meta property="og:url" content="/blog/2019/12/11/Git%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-12-11T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Git开发总结" />
+<script type="application/ld+json">
+{"description":"在 Ericsson 工作期间使用 Git 开发的大致总结。","url":"/blog/2019/12/11/Git%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93.html","@type":"BlogPosting","headline":"Git开发总结","dateModified":"2019-12-11T00:00:00+00:00","datePublished":"2019-12-11T00:00:00+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2019/12/11/Git%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Git开发总结</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2019-12-11T00:00:00+00:00" itemprop="datePublished">Dec 11, 2019
+      </time></p>
+    <span>
+      [
+        <!--  -->
+        <code class="highligher-rouge"><a href="/blog/tag/others"><nobr>others</nobr></a></code>
+      ]
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>在 Ericsson 工作期间使用 Git 开发的大致总结。</p>
+
+<p><code class="language-plaintext highlighter-rouge">&lt;dev&gt;</code> 代表开发分支, <code class="language-plaintext highlighter-rouge">&lt;branch&gt;</code> 代表个人分支</p>
+
+<ol>
+  <li>
+    <p>拉取代码<br />
+  <code class="language-plaintext highlighter-rouge">git clone https://example.com/xxx/repository.git</code></p>
+  </li>
+  <li>
+    <p>切出个人分支<br />
+  <code class="language-plaintext highlighter-rouge">git checkout -b &lt;branch&gt; &lt;remote&gt;/&lt;dev&gt;</code><br />
+  <code class="language-plaintext highlighter-rouge">-b</code> 可理解为 branch，<code class="language-plaintext highlighter-rouge">&lt;branch&gt;</code> 是你要命名的分支名称，切出分支基于 <code class="language-plaintext highlighter-rouge">&lt;remote&gt;/&lt;dev&gt;</code>，省略代表基于当前分支。</p>
+  </li>
+  <li>
+    <p>完成工作内容后使用以下命令<br />
+  <code class="language-plaintext highlighter-rouge">git status</code> – 用于查看当前分支状态<br />
+  <code class="language-plaintext highlighter-rouge">git log</code> – 用于查看提交记录<br />
+  <code class="language-plaintext highlighter-rouge">git checkout -- &lt;file&gt;/&lt;path&gt;/&lt;*.c&gt;</code> – 去掉不需要的文件，恢复修改<br />
+  <code class="language-plaintext highlighter-rouge">git add &lt;file&gt;/&lt;path&gt;/&lt;*.c&gt;</code> – 添加需要提交的文件 <br />
+  <code class="language-plaintext highlighter-rouge">git commit -m 'message'</code> – 填写备注信息<br />
+  <code class="language-plaintext highlighter-rouge">git commit -a -m 'message'</code> – 如果没有未跟踪的文件，即全部需要提交，可以用这条命令代替上面两条。-a=–all</p>
+  </li>
+  <li>
+    <p>切回原分支，更新远程代码（工作期间若有人更新了远程代码）<br />
+  <code class="language-plaintext highlighter-rouge">git checkout &lt;dev&gt;</code> – 切回原分支<br />
+  注：因为我们添加 git hook，在dev分支 merge 操作会带上参数<code class="language-plaintext highlighter-rouge">--squash</code>。这个参数在执行 merge 操作的时候会合并 commit，所以不能使用 <code class="language-plaintext highlighter-rouge">git pull</code> 的方式更新分支。<br />
+  <code class="language-plaintext highlighter-rouge">git fetch &lt;remote&gt; &lt;branch&gt;</code> – 拉取最新代码<br />
+  <code class="language-plaintext highlighter-rouge">git rebase &lt;remote&gt;/&lt;branch&gt;</code> – 合并远程分支到本地</p>
+  </li>
+  <li>
+    <p>切回个人分支<br />
+  <code class="language-plaintext highlighter-rouge">git checkout &lt;branch&gt;</code> – 切回个人分支<br />
+  <code class="language-plaintext highlighter-rouge">git merge &lt;dev&gt;</code> – 若有冲突，需要在此解决冲突。在个人分支合并 dev 分支，可以防止污染 dev 分支<br />
+  <code class="language-plaintext highlighter-rouge">git commit -m 'message'</code> – 若有冲突，添加备注信息</p>
+  </li>
+  <li>
+    <p>切回原分支<br />
+  <code class="language-plaintext highlighter-rouge">git checkout &lt;dev&gt;</code><br />
+  <code class="language-plaintext highlighter-rouge">git merge --squash &lt;branch&gt;</code> – squash 将个人分支所有的修改作为一次提交 merge 到原分支上<br />
+  <code class="language-plaintext highlighter-rouge">git commit -m 'message'</code> – 这个 message 作为原分支上的提交信息</p>
+  </li>
+  <li>
+    <p>推送到远程分支<br />
+  <code class="language-plaintext highlighter-rouge">git push &lt;remote&gt; &lt;dev&gt;</code></p>
+  </li>
+</ol>
+
+<p>以下是 git hook 的配置例子。在当前项目下，bin/inithook.sh 脚本，如下：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/bin/bash
+PROTECTED_BRANCH="dev"
+
+# Set default $PROTECTED_BRANCH mergeoptions to --squash
+`git config branch.$PROTECTED_BRANCH.mergeoptions --squash`
+`git config branch.$PROTECTED_BRANCH.rebase true`
+
+# Copy git hooks to $GIT_DIR/hooks and makes sure they are executable
+GIT_ROOT_DIR=$(git rev-parse --show-toplevel)
+GIT_HOOKS_DIR=$GIT_ROOT_DIR/.git/hooks
+BIN_DIR=$GIT_ROOT_DIR/bin
+
+test -e $GIT_HOOKS_DIR/pre-commit &amp;&amp; {
+  echo "Found pre-commit hook in your-repo - creating backup [$GIT_HOOKS_DIR/pre-commit.bkp] before overwriting"
+  mv $GIT_HOOKS_DIR/pre-commit $GIT_HOOKS_DIR/pre-commit.bkp
+}
+
+test -e $GIT_HOOKS_DIR/commit-msg &amp;&amp; {
+  echo "Found pre-commit hook in your-repo - creating backup [$GIT_HOOKS_DIR/commit-msg.bkp] before overwriting"
+  mv $GIT_HOOKS_DIR/commit-msg $GIT_HOOKS_DIR/commit-msg.bkp
+}
+
+test -e $GIT_HOOKS_DIR/pre-push &amp;&amp; {
+  echo "Found pre-commit hook in your-repo - creating backup [$GIT_HOOKS_DIR/pre-push.bkp] before overwriting"
+  mv $GIT_HOOKS_DIR/pre-push $GIT_HOOKS_DIR/pre-push.bkp
+}
+
+cp $BIN_DIR/hooks/* $GIT_HOOKS_DIR
+
+chmod +x $GIT_HOOKS_DIR/pre-commit
+chmod +x $GIT_HOOKS_DIR/commit-msg
+chmod +x $GIT_HOOKS_DIR/pre-push
+
+echo "Finished copy-ing - new hooks are now placed under $GIT_HOOKS_DIR"
+</code></pre></div></div>
+
+<p>bin/hooks/commit-msg文件，样例如下：</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/bin/sh
+#
+# This part checks if commit message on protected branch has needed template.
+# Needs to have 'stories #', 'features #' or 'bugs #' as a part of commit message
+
+PROTECTED_BRANCH="dev"
+
+current_branch=`git rev-parse --abbrev-ref HEAD`
+
+if [ "$current_branch" = "$PROTECTED_BRANCH" ]; then
+  test "" != "$(grep 'stories #' "$1" )" ||  
+  test "" != "$(grep 'features #' "$1" )" || 
+  test "" != "$(grep 'bugs #' "$1" )" || {
+    echo &gt;&amp;2 Git commit aborted, please update your commit message."
+    echo &gt;&amp;2 Please use 'stories #', 'features #' or 'bugs #' template on $PROTECTED_BRANCH branch."
+    exit 1
+  }
+fi
+</code></pre></div></div>
+
+<p>bin/hooks/pre-commit，样例如下：</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/bin/sh
+#
+# A hook script for project run before commit
+#
+# This hook:
+#  1. Checks default merge options of PROTECTED_BRANCH and sets them to --squash if not already set
+#  2. Prevents commit on PROTECTED_BRANCH if user.name is not set
+#  3. Prevents commit on PROTECTED_BRANCH if user.email is not set
+
+PROTECTED_BRANCH="dev"
+
+current_branch=`git rev-parse --abbrev-ref HEAD`
+user_name=`git config user.name`
+user_email=`git config user.email`
+protected_branch_merge_options=`git config branch.$PROTECTED_BRANCH.mergeoptions`
+
+#  1. Checks default merge options of PROTECTED_BRANCH and sets them to --squash if not already set
+test -n "$protected_branch_merge_options" &amp;&amp; test "$protected_branch_merge_options" = "--squash" || {
+  echo &gt;&amp;2 "Setting $PROTECTED_BRANCH branch mergeoptions to --squash"
+  `git config branch.$PROTECTED_BRANCH.mergeoptions --squash`
+}
+
+if [ "$current_branch" = "$PROTECTED_BRANCH" ]; then
+  test -n "$user_name" &amp;&amp; test -n "$user_email" || {
+    #  2. Prevents commit on PROTECTED_BRANCH if user.name is not set
+    #  3. Prevents commit on PROTECTED_BRANCH if user.email is not set
+    echo &gt;&amp;2 "Please set user.name and user.email properties before doing commit to $PROTECTED_BRANCH"
+    exit 1
+  }
+fi
+</code></pre></div></div>
+
+<p>/bin/hooks/pre-push，样例如下：</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/bin/sh
+#
+# A hook script for project which checks pushes of PROTECTED_BRANCH.  
+# Called by "git push" after it has checked the remote status, but before anything has been
+# pushed.  If this script exits with a non-zero status nothing will be pushed.
+#
+# This hook:
+#  1. Checks if default push strategy is set to simple, if not it is automatically set (done on every branch)
+#  2. Prevents push with --force option on PROTECTED_BRANCH
+#  3. Prevents delete of PROTECTED_BRANCH
+#  4. Prevents push if improper merge is found on $PROTECTED_BRANCH.
+
+remote="$1"
+url="$2"
+
+z40=0000000000000000000000000000000000000000
+
+PROTECTED_BRANCH="dev"
+
+current_branch=`git rev-parse --abbrev-ref HEAD`
+push_strategy=`git config push.default`
+
+
+#  1. Checks if default push strategy is set to simple, if not it is automatically set (done on every branch)
+test -n "$push_strategy" &amp;&amp; test "$push_strategy" = "simple" || {
+  echo &gt;&amp;2 "Setting push strategy to simple"
+  `git config push.default simple`
+}
+
+if [ "$current_branch" = "$PROTECTED_BRANCH" ]; then  
+
+  # works only on unix because cygwin version of ps tool doesn't support -o parameter
+  # push_command=$(ps -ocommand= -p $PPID)
+
+
+  # get exact command from /proc/$PID/cmdline
+  test -e /proc/$PPID/cmdline &amp;&amp; {
+    push_command=$(tr -d '\0' &lt;/proc/$PPID/cmdline)
+  }
+
+  case "$push_command" in
+      *gitpush*) ;;
+      *) :
+      # first find out git process pid
+      git_pid=$(ps -ef | grep 'git' | head -n 1 | awk '{print $2}')
+      # then read exact command issued from /prod/$PID/cmdline
+      test -e '/proc/$git_pid/cmdline' || {
+        push_command=$(tr -d '\0' &lt;/proc/$git_pid/cmdline)
+      }
+      ;;
+  esac
+
+  case "$push_command" in
+    *--force*|*-f*) :
+      #  2. Prevents push with --force option on PROTECTED_BRANCH
+      echo &gt;&amp;2 "Git push rejected - Force pushing $PROTECTED_BRANCH branch is forbidden"
+      exit 1
+      ;;
+    *) : ;;
+  esac
+
+  while read local_ref local_sha remote_ref remote_sha
+  do
+    if [ "$local_sha" = $z40 ]
+    then
+      #  3. Prevents delete of PROTECTED_BRANCH
+      echo &gt;&amp;2 "Git push rejected - Deleting $PROTECTED_BRANCH branch is forbidden"
+      exit 1
+      :
+    else
+      if [ "$remote_sha" != $z40 ]
+      then
+        # Update to existing branch, examine new commits
+        range="$remote_sha..$local_sha"
+
+        # Check for Merge|merge commit
+        merge_commit=$(git rev-list -n 1 --merges "$range")
+        if [ -n "$merge_commit" ]
+        then
+          #  4. Prevents push if improper merge is found on $PROTECTED_BRANCH.
+          echo &gt;&amp;2 "Git push rejected - Found merge commit in $local_ref, please use --squash option when merging to $PROTECTED_BRANCH branch"
+          exit 1
+        fi
+      fi
+
+    fi
+  done
+fi
+
+exit 0
+</code></pre></div></div>
+
+  </div><a class="u-url" href="/blog/2019/12/11/Git%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

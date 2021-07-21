@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>TSConfig参考 | 主页</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="TSConfig参考" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="TSConfig 文件位于项目的根目录下，TSConfig 文件可以是 tsconfig.json 或 jsconfig.json。" />
+<meta property="og:description" content="TSConfig 文件位于项目的根目录下，TSConfig 文件可以是 tsconfig.json 或 jsconfig.json。" />
+<link rel="canonical" href="/blog/2020/11/07/TSConfig%E5%8F%82%E8%80%83.html" />
+<meta property="og:url" content="/blog/2020/11/07/TSConfig%E5%8F%82%E8%80%83.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-11-07T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="TSConfig参考" />
+<script type="application/ld+json">
+{"description":"TSConfig 文件位于项目的根目录下，TSConfig 文件可以是 tsconfig.json 或 jsconfig.json。","url":"/blog/2020/11/07/TSConfig%E5%8F%82%E8%80%83.html","@type":"BlogPosting","headline":"TSConfig参考","dateModified":"2020-11-07T00:00:00+00:00","datePublished":"2020-11-07T00:00:00+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2020/11/07/TSConfig%E5%8F%82%E8%80%83.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">TSConfig参考</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2020-11-07T00:00:00+00:00" itemprop="datePublished">Nov 7, 2020
+      </time></p>
+    <span>
+      [
+        <!--  -->
+        <code class="highligher-rouge"><a href="/blog/tag/javascript"><nobr>javascript</nobr></a></code>
+      
+        <!--  -->
+        <code class="highligher-rouge"><a href="/blog/tag/typescript"><nobr>typescript</nobr></a></code>
+      ]
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>TSConfig 文件位于项目的根目录下，TSConfig 文件可以是 <code class="language-plaintext highlighter-rouge">tsconfig.json</code> 或 <code class="language-plaintext highlighter-rouge">jsconfig.json</code>。</p>
+
+<p>在安装好 <code class="language-plaintext highlighter-rouge">typescript</code> 后，输入指令 <code class="language-plaintext highlighter-rouge">tsc --init</code> 会自动生成一份 <code class="language-plaintext highlighter-rouge">tsconfig.json</code>。</p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">/*</span><span class="w"> </span><span class="err">默认生成的选项</span><span class="w"> </span><span class="mi">2020-11</span><span class="w"> </span><span class="err">*/</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"compilerOptions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"target"</span><span class="p">:</span><span class="w"> </span><span class="s2">"es5"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"module"</span><span class="p">:</span><span class="w"> </span><span class="s2">"commonjs"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"strict"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"esModuleInterop"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"skipLibCheck"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"forceConsistentCasingInFileNames"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> 
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="分类及常见的选项">分类及常见的选项</h2>
+<p>File Inclusion</p>
+<ul>
+  <li><a href="#exclude">exclude</a></li>
+  <li><a href="#files">files</a></li>
+  <li><a href="#include">include</a></li>
+</ul>
+
+<p>Project Options</p>
+<ul>
+  <li><a href="#module">module</a></li>
+  <li><a href="#target">target</a></li>
+</ul>
+
+<p>Strict Checks</p>
+<ul>
+  <li><a href="#noimplicitany">noImplicitAny</a></li>
+  <li><a href="#strict">strict</a></li>
+</ul>
+
+<p>Module Resolution</p>
+<ul>
+  <li><a href="#esModuleInterop">esModuleInterop</a></li>
+</ul>
+
+<p>Source Maps</p>
+
+<p>Linter Check</p>
+
+<p>Experimental</p>
+
+<p>Command Line</p>
+
+<p>Watch Option</p>
+
+<p>Advanced</p>
+
+<h2 id="具体选项">具体选项</h2>
+<h3 id="exclude">exclude</h3>
+<p>指定要跳过解析的文件或者正则表达式 。默认：<code class="language-plaintext highlighter-rouge">["node_modules", "bower_components", "jspm_packages"]</code></p>
+
+<h3 id="files">files</h3>
+<p>指定允许包含在程序中的文件列表。如果找不到任何文件，就会报错。</p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"compilerOptions"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="nl">"files"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"core.ts"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sys.ts"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"types.ts"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"scanner.ts"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"parser.ts"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"utilities.ts"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"binder.ts"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"checker.ts"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"tsc.ts"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="include">include</h3>
+<p>指定要包含在项目中的文件或正则匹配的数组，目录路径相对于 <code class="language-plaintext highlighter-rouge">tsconfig.json</code> 文件。默认: <code class="language-plaintext highlighter-rouge">[]</code></p>
+
+<h3 id="module">module</h3>
+<p>指定模块代码生成：<code class="language-plaintext highlighter-rouge">none</code>, <code class="language-plaintext highlighter-rouge">commonjs</code>(target 为 ES3 或 ES5时默认), <code class="language-plaintext highlighter-rouge">amd</code>, <code class="language-plaintext highlighter-rouge">system</code>, <code class="language-plaintext highlighter-rouge">umd</code>, <code class="language-plaintext highlighter-rouge">es6/es2015</code>(target 为 ES6 或更高时默认), <code class="language-plaintext highlighter-rouge">es2020</code> 或 <code class="language-plaintext highlighter-rouge">ESNext</code>。</p>
+
+<h3 id="target">target</h3>
+<p>指定 ECMAScript 目标版本：<code class="language-plaintext highlighter-rouge">ES3</code>(默认), <code class="language-plaintext highlighter-rouge">ES5</code>, <code class="language-plaintext highlighter-rouge">ES6/ES2015</code>, <code class="language-plaintext highlighter-rouge">ES7/ES2016</code>, <code class="language-plaintext highlighter-rouge">ES2017</code>, <code class="language-plaintext highlighter-rouge">ES2018</code>, <code class="language-plaintext highlighter-rouge">ES2019</code>, <code class="language-plaintext highlighter-rouge">ES2020</code> 或 <code class="language-plaintext highlighter-rouge">ESNEXT</code>。</p>
+
+<h3 id="noimplicitany">noImplicitAny</h3>
+<p>指定当源文件中存在隐式的 <code class="language-plaintext highlighter-rouge">any</code> 的时候是否报错。<code class="language-plaintext highlighter-rouge">true</code>(推荐), <code class="language-plaintext highlighter-rouge">false</code>(默认)</p>
+
+<h3 id="strict">strict</h3>
+<p>是否启用所有严格的类型检查选项: <code class="language-plaintext highlighter-rouge">true</code>(推荐), <code class="language-plaintext highlighter-rouge">false</code>(默认)。</p>
+
+<h3 id="esmoduleinterop">esModuleInterop</h3>
+<p>通过为所有的导入创建命名空间对象，实现 CommonJS 和 ES 模块之间的 emit 互操作性：<code class="language-plaintext highlighter-rouge">true</code>(推荐), <code class="language-plaintext highlighter-rouge">false</code>(默认)。<br />
+开启此选项会开启 <code class="language-plaintext highlighter-rouge">allowSyntheticDefaultImports</code>。</p>
+
+<h2 id="参考链接">参考链接</h2>
+<ul>
+  <li><a href="https://www.staging-typescript.org/tsconfig">TypeScript: TSConfig Reference - Docs on every TSConfig option</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2020/11/07/TSConfig%E5%8F%82%E8%80%83.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

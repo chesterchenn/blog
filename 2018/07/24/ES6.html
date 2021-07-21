@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>ES6 Features | 主页</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="ES6 Features" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="ECMAScript 6，也称为 ECMAScript 2015，是 ECMAScript 最新版本(注: 已经不是最新版本)。ES6 对于这门语言来说是一个很重要的更新，而且这是 2009 年后的 ES5 标准之后的第一次更新。现在主流的 JavaScript 引擎都已经实现这些功能——查看详情。" />
+<meta property="og:description" content="ECMAScript 6，也称为 ECMAScript 2015，是 ECMAScript 最新版本(注: 已经不是最新版本)。ES6 对于这门语言来说是一个很重要的更新，而且这是 2009 年后的 ES5 标准之后的第一次更新。现在主流的 JavaScript 引擎都已经实现这些功能——查看详情。" />
+<link rel="canonical" href="/blog/2018/07/24/ES6.html" />
+<meta property="og:url" content="/blog/2018/07/24/ES6.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-07-24T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="ES6 Features" />
+<script type="application/ld+json">
+{"description":"ECMAScript 6，也称为 ECMAScript 2015，是 ECMAScript 最新版本(注: 已经不是最新版本)。ES6 对于这门语言来说是一个很重要的更新，而且这是 2009 年后的 ES5 标准之后的第一次更新。现在主流的 JavaScript 引擎都已经实现这些功能——查看详情。","url":"/blog/2018/07/24/ES6.html","@type":"BlogPosting","headline":"ES6 Features","dateModified":"2018-07-24T00:00:00+00:00","datePublished":"2018-07-24T00:00:00+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2018/07/24/ES6.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">ES6 Features</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2018-07-24T00:00:00+00:00" itemprop="datePublished">Jul 24, 2018
+      </time></p>
+    <span>
+      [
+        <!--  -->
+        <code class="highligher-rouge"><a href="/blog/tag/javascript"><nobr>javascript</nobr></a></code>
+      ]
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>ECMAScript 6，也称为 ECMAScript 2015，是 ECMAScript 最新版本(注: 已经不是最新版本)。ES6 对于这门语言来说是一个很重要的更新，而且这是 2009 年后的 ES5 标准之后的第一次更新。现在主流的 JavaScript 引擎都已经实现这些功能——<a href="http://kangax.github.io/compat-table/es6/">查看详情</a>。</p>
+
+<p>By lukehoban ( <a href="https://github.com/lukehoban">lukehoban</a> )<br />
+原文地址：<a href="https://github.com/lukehoban/es6features">lukehoban/es6features</a></p>
+
+<p>这里你可以查看<a href="http://www.ecma-international.org/ecma-262/6.0/">ES6 规范</a>的全部标准。</p>
+
+<p>ES6包含以下新功能：</p>
+<ul>
+  <li><a href="#arrows-箭头函数">arrows 箭头函数</a></li>
+  <li><a href="#classes-类">classes 类</a></li>
+  <li><a href="#enhanced-object-literals-对象字面量">enhanced object literals 对象字面量</a></li>
+  <li><a href="#template-strings-字符串模版">template strings 字符串模版</a></li>
+  <li><a href="#destructuring-解构赋值">destructuring 解构赋值</a></li>
+  <li><a href="#default--rest--spread-默认值rest参数扩展运算符">default + rest + spread 默认值/rest参数/扩展运算符</a></li>
+  <li><a href="#let--const">let + const</a></li>
+  <li><a href="#iterators--forof-迭代器forof">iterators + for..of 迭代器/for..of</a></li>
+  <li><a href="#generators-生成器">generators 生成器</a></li>
+  <li><a href="#Unicode-统一码">Unicode 统一码</a></li>
+  <li><a href="#modules-模块">modules 模块</a></li>
+  <li><a href="#module-loaders-模块加载器">module loaders 模块加载器</a></li>
+  <li><a href="#Map--Set--Weakmap--Weakset">Map + Set + Weakmap + Weakset</a></li>
+  <li><a href="#proxies-代理">proxies 代理</a></li>
+  <li><a href="#symbols-符号">symbols 符号</a></li>
+  <li><a href="#subclassable-built-ins-内置子类">subclassable built-ins 内置子类</a></li>
+  <li><a href="#promises">promises</a></li>
+  <li><a href="#Math--Number--String--Array--Object-APIs">Math + Number + String + Array + Object APIs</a></li>
+  <li><a href="#binary-and-octal-literals-二进制和八进制字面量">binary and octal literals 二进制和八进制字面量</a></li>
+  <li><a href="#Reflect-Api">Reflect Api</a></li>
+  <li><a href="#tail-calls-尾调用">tail calls 尾调用</a></li>
+</ul>
+
+<h2 id="ecmascript-6-功能">ECMAScript 6 功能</h2>
+
+<h3 id="arrows-箭头函数">Arrows 箭头函数</h3>
+<p>箭头函数是使用<code class="language-plaintext highlighter-rouge">=&gt;</code>符号简写的函数。它们在语法上类似于C#，Java 8以及CoffeeScript中的功能。他们对于语句式体和表达式体(直接返回值)都有很好的支持。不同于普通函数，箭头函数不绑定 <code class="language-plaintext highlighter-rouge">this</code>, 从自己作用域上一层继承 <code class="language-plaintext highlighter-rouge">this</code></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 表达式体
+var odds = evens.map(v =&gt; v + 1);
+var nums = evens.map((v, i) =&gt; v + i);
+var pairs = evens.map(v =&gt; ({even: v, odd: v + 1}));
+
+// 语句式体
+nums.forEach(v =&gt; {
+  if (v % 5 === 0)
+    fives.push(v)
+});
+
+// 词法this
+var bob = {
+  _name: "Bob",
+  _friends: [],
+  printFriends() {
+    this._friend.forEach(f =&gt; 
+      console.log(_this.name + " knows " + f)
+    );
+  }
+}
+</code></pre></div></div>
+<p>更多信息: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions">MDN Arrow Functions</a></p>
+
+<h3 id="classes-类">Classes 类</h3>
+<p>ES6的类是基于原型继承的面向对象简易语法糖，这使得有一个更方便的类声明去使用，并鼓励互通性。类支持基于原型继承，<code class="language-plaintext highlighter-rouge">super</code>调用，实例化，静态方法以及 <code class="language-plaintext highlighter-rouge">constructor</code>构造。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class SkinnedMesh extends THREE.Mesh {
+  constructor(geometry, materials) {
+    super(geometry, materials);
+
+    this.idMatrix = SkinnedMesh.defaultMatrix();
+    this.bones = [];
+    this.boneMatrices = [];
+    //...
+  }
+  update(camera) {
+    //...
+    super.update();
+  }
+  get boneCount() {
+    return this.bones.length;
+  }
+  set matrixType(matrixType) {
+    this.idMatrix = SkinnedMesh[matrixType]();
+  }
+  static defaultMatrix() {
+    return new THREE.Matrix4();
+  }
+}
+</code></pre></div></div>
+<p>更多信息: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes">MDN Classes</a></p>
+
+<h3 id="enhanced-object-literals-对象字面量">Enhanced object literals 对象字面量</h3>
+<p>对象字面量被扩展至支持在构造时设置原型，简写了 <code class="language-plaintext highlighter-rouge">foo: foo</code> 的赋值，定义方法，<code class="language-plaintext highlighter-rouge">super</code>调用以及通过表达式计算属性名。同时，这些使对象字面值和类声明更加紧密地联系起来，让基于对象的设计从中受益更加便利。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var obj = {
+    // __proto__
+    __proto__: theProtoObj,
+    // 简写赋值：‘handler: handler’
+    handler,
+    // 方法
+    toString() {
+     // Super调用
+     return "d " + super.toString();
+    },
+    // （动态）计算属性名称
+    [ 'prop_' + (() =&gt; 42)() ]: 42
+};
+</code></pre></div></div>
+<p>更多信息: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#Enhanced_Object_literals">MDN Grammar and types: Enhanced Object literals</a></p>
+
+<h3 id="template-strings-字符串模版">Template strings 字符串模版</h3>
+<p>字符串模版为构建字符串提供了语法糖，这有点像Perl, Python等字符串插值功能。可选的，允许添加标签来自定义字符串模版，避免注入攻击或者从字符串内容中构建更加高级别的数据结构。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 创建基本字符串面量
+`In JavaScript '\n' is a line-feed.`
+
+// 多行字符串
+`In JavaScript this is
+ not legal.`
+
+// 字符串插值
+var name = "Bob", time = "today";
+`Hello ${name}, how are you ${time}?`
+
+// 构建一个HTTP请求前缀使用插值的替换和构造
+POST`http://foo.org/bar?a=${a}&amp;b=${b}
+     Content-Type: application/json
+     X-Credentials: ${credentials}
+     { "foo": ${foo},
+       "bar": ${bar}}`(myOnReadyStateChangeHandler);
+</code></pre></div></div>
+<p>更多信息: <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/template_strings">MDN Template Strings</a></p>
+
+<h3 id="destructuring-解构赋值">Destructuring 解构赋值</h3>
+<p>解构赋值允许使用模式匹配进行绑定，并支持匹配数组和对象。解构能够故障弱化，在查找类似于标准对象 <code class="language-plaintext highlighter-rouge">foo["bar"]</code>，当未找到时会提供 <code class="language-plaintext highlighter-rouge">undefined</code>值。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 匹配数组
+var [a, , b] = [1,2,3];
+
+// 匹配对象
+var { op: a, lhs: { op: b }, rhs: c }
+       = getASTNode()
+
+// 匹配对象作用域的'op', 'lhs', 'rhs'
+var {op, lhs, rhs} = getASTNode()
+
+// 作为参数
+function g({name: x}) {
+  console.log(x);
+}
+g({name: 5})
+
+// 解构故障弱化
+var [a] = [];
+a === undefined;
+
+// 带默认值的的解构赋值故障弱化
+var [a = 1] = [];
+a === 1;
+</code></pre></div></div>
+<p>更多信息：<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment">MDN Destructuring assignment</a></p>
+
+<h3 id="default--rest--spread-默认值rest参数扩展运算符">Default + rest + spread 默认值/rest参数/扩展运算符</h3>
+<p>在函数调用中可以指定默认参数值，将数组转换成连续参数，绑定尾部参数到数组中。rest替代了<code class="language-plaintext highlighter-rouge">arguments</code>的需求，并更直接地解决了问题。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function f(x, y=12) {
+  // 如果y没有传值或者被传入undefined，那么y的值为12
+  return x + y;
+}
+f(3) == 15
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function f(x, ...y) {
+  // y是一个数组
+  return x * y.length;
+}
+f(3, "hello", true) == 6
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function f(x, y, z) {
+  return x + y + z;
+}
+// 传递数组里的每一个元素作为参数
+f(...[1,2,3]) == 6
+</code></pre></div></div>
+<p>更多信息：<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters">Default parameters</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters">Rest parameters</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax">Spread Operator</a></p>
+
+<h3 id="let--const">Let + Const</h3>
+<p>绑定并构造块作用域。<code class="language-plaintext highlighter-rouge">let</code>是一个新的<code class="language-plaintext highlighter-rouge">var</code>,<code class="language-plaintext highlighter-rouge">const</code>只能声明一次。静态限制，防止使用之前已经被声明。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function f() {
+  {
+    let x;
+    {
+      // 正常，块作用域里的名称
+      const x = "sneaky";
+      // 错误，x是常量
+      x = "foo";
+    }
+    // 错误，在块里面已经被声明
+    let x = "inner";
+  }
+}
+</code></pre></div></div>
+<p>更多信息: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let">let statement</a>, 
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const">const statment</a></p>
+
+<h3 id="iterators--forof-迭代器forof">Iterators + for..of 迭代器/for..of</h3>
+<p>迭代对象能够自定义迭代，像CLR的IEnumerable或Java的Iterable。总结来说，<code class="language-plaintext highlighter-rouge">for..of</code>是<code class="language-plaintext highlighter-rouge">for..in</code>的基础上自定义的迭代。不需要实现数组，启用了像LINQ惰性设计模式。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let fibonacci = {
+  [Symbol.iterator]() {
+    let pre = 0, cur = 1;
+    return {
+      next() {
+        [pre, cur] = [cur, pre + cur];
+        return { done: false, value: cur }
+      }
+    }
+  }
+}
+
+for (var n of fibonacci) {
+  // 缩减数列到1000
+  if (n &gt; 1000)
+    break;
+  console.log(n);
+}
+</code></pre></div></div>
+<p>迭代是基于鸭子类型接口(仅使用TypeScript语法作为展示)</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface IteratorResult {
+  done: boolean;
+  value: any;
+}
+interface Iterator {
+  next(): IteratorResult;
+}
+interface Iterable {
+  [Symbol.iterator](): Iterator
+}
+</code></pre></div></div>
+<p>更多信息: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of">MDN for…of</a></p>
+
+<h3 id="generators-生成器">Generators 生成器</h3>
+<p>生成器是一个使用了<code class="language-plaintext highlighter-rouge">function*</code>和<code class="language-plaintext highlighter-rouge">yield</code>简易化迭代器生成的。一个函数作为<code class="language-plaintext highlighter-rouge">function*</code>声明时会返回一个生成器实例。生成器是迭代器的一个子类并且包含了额外的<code class="language-plaintext highlighter-rouge">next</code>和<code class="language-plaintext highlighter-rouge">throw</code>。这使得值能够流回生成器，所以<code class="language-plaintext highlighter-rouge">yield</code>是一个返回值(或者抛出)的表达式。</p>
+
+<p>注意：也可以用于启用’await’式的异步编程，请参考ES7 <code class="language-plaintext highlighter-rouge">await</code> 提案。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var fibonacci = {
+  [Symbol.iterator]: function*() {
+    var pre = 0, cur = 1;
+    for (;;) {
+      var temp = pre;
+      pre = cur;
+      cur += temp;
+      yield cur;
+    }
+  }
+}
+
+for (var n of fibonacci) {
+  // 缩减数列到1000
+  if (n &gt; 1000)
+    break;
+  console.log(n);
+}
+</code></pre></div></div>
+<p>生成器的接口是(仅使用TypeScript语法作为展示):</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface Generator extends Iterator {
+    next(value?: any): IteratorResult;
+    throw(exception: any);
+}
+</code></pre></div></div>
+<p>更多信息: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols">MDN iteration protocols</a></p>
+
+<h3 id="unicode-统一码">Unicode 统一码</h3>
+<p>非破坏性地增加支持统一码，包括了新的字符字面量统一码以及新的正则表达式<code class="language-plaintext highlighter-rouge">u</code>处理位码，以及新的API也可以在21位位码处理字符串。这些增加的功能支持在在JavaScript里面建立全局应用。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 等同于ES5.1
+"𠮷".length == 2
+
+// 新的正则表达式, 内置‘u’
+"𠮷".match(/./u)[0].length == 2
+
+// 新形式
+"\u{20BB7}"=="𠮷"=="\uD842\uDFB7"
+
+// 新的字符串操作
+"𠮷".codePointAt(0) == 0x20BB7
+
+// for-of迭代位码
+for(var c of "𠮷") {
+  console.log(c);
+}
+</code></pre></div></div>
+<p>更多信息: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/unicode">MDN RegExp.prototype.unicode</a></p>
+
+<h3 id="modules-模块">Modules 模块</h3>
+<p>语言级别地支持模块化的组件定义。借鉴于流行的JavaScript模块加载器(AMD, CommonJS)。运行期间的行为定义由主机默认加载器定义。隐式异步模型——在被请求的模块加载处理且可用之前，不会执行代码。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// lib/math.js
+export function sum(x, y) {
+  return x + y;
+}
+export var pi = 3.141593;
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// app.js
+import * as math from "lib/math";
+alert("2π = " + math.sum(math.pi, math.pi));
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// otherApp.js
+import {sum, pi} from "lib/math";
+alert("2π = " + sum(pi, pi));
+</code></pre></div></div>
+<p>一些额外的新增功能，包括<code class="language-plaintext highlighter-rouge">export default</code>以及<code class="language-plaintext highlighter-rouge">export *</code></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// lib/mathplusplus.js
+export * from "lib/math";
+export var e = 2.71828182846;
+export default function(x) {
+    return Math.log(x);
+}
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// app.js
+import ln, {pi, e} from "lib/mathplusplus";
+alert("2π = " + ln(e)*pi*2);
+</code></pre></div></div>
+<p>更多信息: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import">import statement</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export">export statement</a></p>
+
+<h3 id="module-loaders-模块加载器">Module loaders 模块加载器</h3>
+<p>模块加载器支持：</p>
+<ul>
+  <li>动态加载</li>
+  <li>状态隔离</li>
+  <li>全局命名空间隔离</li>
+  <li>编译钩子</li>
+  <li>内嵌虚拟化</li>
+</ul>
+
+<p>默认的加载器能够被配置，同时在隔离或者上下文可以构造新加载器执行和加载代码。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 动态加载 – ‘System’ 是默认的加载器
+System.import('lib/math').then(function(m) {
+  alert("2π = " + m.sum(m.pi, m.pi));
+});
+
+// 创建一个执行沙盒 - 新的加载器
+var loader = new Loader({
+  global: fixup(window) // replace ‘console.log’
+});
+loader.eval("console.log('hello world!');");
+
+// 直接操作模块缓存
+System.get('jquery');
+System.set('jquery', Module({$: $})); // 警告: 尚未最终确定
+</code></pre></div></div>
+
+<h3 id="map--set--weakmap--weakset">Map + Set + Weakmap + Weakset</h3>
+<p>常见算法中的高效数据结构。WeakMap提供了无泄漏的对象键值的侧表。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Sets
+var s = new Set();
+s.add("hello").add("goodbye").add("hello");
+s.size === 2;
+s.has("hello") === true;
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Maps
+var m = new Map();
+m.set("hello", 42);
+m.set(s, 34);
+m.get(s) == 34;
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Weak Maps
+var wm = new WeakMap();
+wm.set(s, { extra: 42 });
+wm.size === undefined
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Weak Sets
+var ws = new WeakSet();
+ws.add({ data: 42 });
+// 因为增加的对象没有其他的参值，所以在set不会被持有
+</code></pre></div></div>
+<p>更多信息：<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">Map</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set">Set</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap">WeakMap</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet">WeakSet</a></p>
+
+<h3 id="proxies-代理">Proxies 代理</h3>
+<p>代理允许创建具有目标对象范围内所有行为的对象。可用于拦截，对象虚拟化，日志记录/分析等。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 代理一个普通的对象
+var target = {};
+var handler = {
+  get: function (receiver, name) {
+    return `Hello, ${name}!`;
+  }
+};
+
+var p = new Proxy(target, handler);
+p.world === 'Hello, world!';
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 代理一个函数对象
+var target = function () { return 'I am the target'; };
+var handler = {
+  apply: function (receiver, ...args) {
+    return 'I am the proxy';
+  }
+};
+
+var p = new Proxy(target, handler);
+p() === 'I am the proxy';
+</code></pre></div></div>
+<p>这里是所有在运行级别的元操作的<code class="language-plaintext highlighter-rouge">trap</code>(<code class="language-plaintext highlighter-rouge">trap</code>: 提供属性访问的方法)</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var handler =
+{
+  get:...,
+  set:...,
+  has:...,
+  deleteProperty:...,
+  apply:...,
+  construct:...,
+  getOwnPropertyDescriptor:...,
+  defineProperty:...,
+  getPrototypeOf:...,
+  setPrototypeOf:...,
+  enumerate:...,
+  ownKeys:...,
+  preventExtensions:...,
+  isExtensible:...
+}
+</code></pre></div></div>
+<p>更多信息: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy">MDN Proxy</a></p>
+
+<h3 id="symbols-符号">Symbols 符号</h3>
+<p>符号能够访问控制对象的状态，符号允许对象属性的键值是<code class="language-plaintext highlighter-rouge">string</code>或者<code class="language-plaintext highlighter-rouge">symbol</code>。符号是一个新的原始类型，可选的参数<code class="language-plaintext highlighter-rouge">description</code>可以用于调试–但这不是符号本身的一部分。符号是唯一的(像gensym)，但不是私有的，因为它们能够通过<code class="language-plaintext highlighter-rouge">Object.getOwnPropertySymbols</code>反射特性公开的</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var MyClass = (function() {
+
+  // 模块作用域符号
+  var key = Symbol("key");
+
+  function MyClass(privateData) {
+    this[key] = privateData;
+  }
+
+  MyClass.prototype = {
+    doStuff: function() {
+      ... this[key] ...
+    }
+  };
+
+  return MyClass;
+})();
+
+var c = new MyClass("hello")
+c["key"] === undefined
+</code></pre></div></div>
+<p>更多信息: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol">MDN Symbol</a></p>
+
+<h3 id="subclassable-built-ins-内置子类">Subclassable built-ins 内置子类</h3>
+<p>在ES6里面，内置的<code class="language-plaintext highlighter-rouge">Array</code>，<code class="language-plaintext highlighter-rouge">Date</code>和DOM<code class="language-plaintext highlighter-rouge">Element</code>对象能够创建子类。<br />
+对于命名为<code class="language-plaintext highlighter-rouge">Ctor</code>函数的对象构造，现使用两个阶段（都是虚拟派遣）:</p>
+<ul>
+  <li>调用<code class="language-plaintext highlighter-rouge">Ctor[@@create]</code>去申请对象，安装任意特殊行为</li>
+  <li>在新实例中调用构造器进行初始化<br />
+已知<code class="language-plaintext highlighter-rouge">@@create</code>符号可通过<code class="language-plaintext highlighter-rouge">Symbol.create</code>得到。内置对象现在明确地暴露它们的<code class="language-plaintext highlighter-rouge">@@create</code></li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 数组的伪代码
+class Array {
+    constructor(...args) { /* ... */ }
+    static [Symbol.create]() {
+        // 设置指定的 [[DefineOwnProperty]] 来更新'length'
+    }
+}
+
+// 数组子类的用户代码
+class MyArray extends Array {
+    constructor(...args) { super(...args); }
+}
+
+// Two-phase 'new':
+// 1) 调用 @@create 申请对象
+// 2) 在新实例上调用构造函数
+var arr = new MyArray();
+arr[1] = 12;
+arr.length == 2
+</code></pre></div></div>
+
+<h3 id="promises">Promises</h3>
+<p>Promise是一个异步编程的库，Promise是将来可能提供的值的最先表示。Promise现已经在许多库使用中。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function timeout(duration = 0) {
+    return new Promise((resolve, reject) =&gt; {
+        setTimeout(resolve, duration);
+    })
+}
+
+var p = timeout(1000).then(() =&gt; {
+    return timeout(2000);
+}).then(() =&gt; {
+    throw new Error("hmm");
+}).catch(err =&gt; {
+    return Promise.all([timeout(100), timeout(200)]);
+})
+</code></pre></div></div>
+<p>更多信息：<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">MDN Promise</a></p>
+
+<h3 id="math--number--string--array--object-apis">Math + Number + String + Array + Object APIs</h3>
+<p>许多新的库被增加，包括核心的数学库，数组转换，字符串和用来拷贝的<code class="language-plaintext highlighter-rouge">Object.assign</code>方法</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Number.EPSILON
+Number.isInteger(Infinity) // false
+Number.isNaN("NaN") // false
+
+Math.acosh(3) // 1.762747174039086
+Math.hypot(3, 4) // 5
+Math.imul(Math.pow(2, 32) - 1, Math.pow(2, 32) - 2) // 2
+
+"abcde".includes("cd") // true
+"abc".repeat(3) // "abcabcabc"
+
+Array.from(document.querySelectorAll('*')) // 返回一个数组
+Array.of(1, 2, 3) // 类似new Array(...), 但不用指明第一个参数
+[0, 0, 0].fill(7, 1) // [0,7,7]
+[1, 2, 3].find(x =&gt; x == 3) // 3
+[1, 2, 3].findIndex(x =&gt; x == 2) // 1
+[1, 2, 3, 4, 5].copyWithin(3, 0) // [1, 2, 3, 1, 2]
+["a", "b", "c"].entries() // iterator [0, "a"], [1,"b"], [2,"c"]
+["a", "b", "c"].keys() // iterator 0, 1, 2
+["a", "b", "c"].values() // iterator "a", "b", "c"
+
+Object.assign(Point, { origin: new Point(0,0) })
+</code></pre></div></div>
+<p>更多信息: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math">Math</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from">Array.from</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/of">Array.of</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/CopyWithin">Array.prototype.copyWithin</a>, <a href="object">Object.assign</a></p>
+
+<h3 id="binary-and-octal-literals-二进制和八进制字面量">Binary and octal literals 二进制和八进制字面量</h3>
+<p>两个新的数字字面量被增加的，二进制(b)和八进制(o)</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0b111110111 === 503 // true
+0o767 === 503 // true
+</code></pre></div></div>
+
+<h3 id="reflect-api">Reflect Api</h3>
+<p>完整反射API暴露对象在运行级别上的元操作。这实际上是代理API反转，并且允许进行与代理trap相同的元操作调用。特别适合用于实现代理。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 没有例子
+</code></pre></div></div>
+<p>更多信息: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect">MDN Reflect</a></p>
+
+<h3 id="tail-calls-尾调用">Tail calls 尾调用</h3>
+<p>保证在尾部位置的调用不会无限制地增加堆栈。当输入是无界的情况下可以确保递归算法的安全。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function factorial(n, acc = 1) {
+    'use strict';
+    if (n &lt;= 1) return acc;
+    return factorial(n - 1, n * acc);
+}
+
+// 在当今大部分堆栈会溢出,
+// 在ES6里，任意输入都是安全的
+factorial(100000)
+</code></pre></div></div>
+
+  </div><a class="u-url" href="/blog/2018/07/24/ES6.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
