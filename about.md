@@ -4,6 +4,8 @@ title: 关于
 permalink: /about/
 ---
 
+当前博客的 GitHub：[chesterchenn/blog](https://github.com/chesterchenn/blog)
+
 Jekyll 网址：[jekyllrb.com](https://jekyllrb.com/)
 
 Minima 的 GitHub: [minima](https://github.com/jekyll/minima)
