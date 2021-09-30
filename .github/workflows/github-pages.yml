@@ -4,6 +4,12 @@ on:
   push:
     branches:
       - master
+    paths:
+      - '_posts/**'
+      - '_includes/**'
+      - '_layouts/**'
+      - '_sass/**'
+      - 'tag/**'
 
 jobs:
   github-pages:
