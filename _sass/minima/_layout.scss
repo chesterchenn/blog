@@ -54,7 +54,7 @@
     }
   }
 
-  label[for="nav-trigger"] {
+  label[for='nav-trigger'] {
     display: block;
     float: right;
     width: 36px;
@@ -92,7 +92,7 @@
     border: none;
     background-color: inherit;
 
-    label[for="nav-trigger"] {
+    label[for='nav-trigger'] {
       display: none;
     }
 
@@ -341,6 +341,14 @@
  * Archive
  */
 .highligher-rouge {
-  font: $base-font-weight #{$base-font-size}/#{$base-line-height}
-    $base-font-family;
+  font: $base-font-weight #{$base-font-size}/#{$base-line-height} $base-font-family;
+  border: 1px solid $grey-color-light;
+  border-radius: 3px;
+  background: $yellow-color;
+  padding: 1px 4px;
+
+  & > a {
+    color: #999;
+    box-shadow: none;
+  }
 }
