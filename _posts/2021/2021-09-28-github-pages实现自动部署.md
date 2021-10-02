@@ -6,8 +6,6 @@ title: github pages 实现自动部署
 
 记录一下如何利用 GitHub Pages 实现托管部署个人仓库代码，利用 Github Actions 实现自动部署。
 
-为了方便记录，我们将对应的用户名称为 user，对应的仓库称为 repo。
-
 ## GitHub Pages
 
 Pages 的开启还是比较简单的。
@@ -42,6 +40,32 @@ GitHub Actions 的工作流程位于仓库的 `.github/workflows`, 每个工作�
 
 - [actions/checkout@v2](https://github.com/marketplace/actions/checkout): 将代码下载到当前运行环境
 - [actions/setup-node@v2](https://github.com/marketplace/actions/setup-node-js-environment): 在当前运行环境安装指定版本的 nodejs
+
+本仓库使用的 `github-pages.yml` 如下：
+
+```plain
+name: 部署blog到github pages
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - '_posts/**'
+      - '_includes/**'
+      - '_layouts/**'
+      - '_sass/**'
+      - 'tag/**'
+
+jobs:
+  github-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: helaili/jekyll-action@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+```
 
 ## 自定义脚本
 
