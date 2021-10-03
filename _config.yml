@@ -3,7 +3,7 @@ footer_title: 结尾处
 email: chesterchenn@outlook.com
 description: >- # this means to ignore newlines until "baseurl:"
   看自己超过两周之前写的代码就跟之前没看过一样。
-# baseurl: "/blog" # the subpath of your site, e.g. /blog
+baseurl: "/blog" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 
 show_excerpts: true # set to true to show excerpts on the homepage
