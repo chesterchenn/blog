@@ -8,11 +8,13 @@
 
 2. 安装 jekyll 和 bundler
 
-    `gem install jekyll bundler`
+    `gem install jekyll:2.4.0 bundler:2.2.22`
 
     Linux 下安装到 /home/gem 目录下，以 [Ubuntu](https://jekyllrb.com/docs/installation/ubuntu/) 为例
 
     在 arch 时默认安装到 $HOME/.local/share/gem/ruby/x.y.z/bin 目录下面
+
+    指定安装目录 $HOME/.local/share/gem 下
 
 3. 进入目录，安装相应的依赖
 
