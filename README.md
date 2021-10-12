@@ -1,34 +1,34 @@
 这是基于 jekyll 和 minima 主题搭建起来的博客，详情请查看 about.md
 
+## 安装步骤
+
 1. 安装 Ruby
 
-    [Download Ruby](https://www.ruby-lang.org/en/downloads/)
+   [Download Ruby](https://www.ruby-lang.org/en/downloads/)
 
-    Linux 下 Ruby 的安装可以参考下面链接
+   Linux 下 Ruby 的安装可以参考下面链接
 
 2. 安装 jekyll 和 bundler
 
-    `gem install jekyll:2.4.0 bundler:2.2.22`
+   `gem install jekyll:2.4.0 bundler:2.2.22`
 
-    Linux 下安装到 /home/gem 目录下，以 [Ubuntu](https://jekyllrb.com/docs/installation/ubuntu/) 为例
+   Linux 下安装到 /home/gem 目录下，以 [Ubuntu](https://jekyllrb.com/docs/installation/ubuntu/) 为例
 
-    在 arch 时默认安装到 $HOME/.local/share/gem/ruby/x.y.z/bin 目录下面
+   在 arch 时默认安装到 $HOME/.local/share/gem/ruby/x.y.z/bin 目录下面
 
-    指定安装目录 $HOME/.local/share/gem 下
+   指定安装目录 $HOME/.local/share/gem 下
 
 3. 进入目录，安装相应的依赖
 
-    `bundle install`
+   `bundle install`
 
 4. 运行服务
 
-    `bundle exec jekyll server` 或者 `jekyll serve`
+   `bundle exec jekyll server` 或者 `jekyll serve`
 
 5. 运行服务（草稿）
 
-    `bundle exec jekyll server --drafts`
-
-补充了脚本 `init-os.zsh`，运行脚本 `zsh init-os.zsh`
+   `bundle exec jekyll server --drafts`
 
 ## 安装可能遇到的问题
 
@@ -42,8 +42,8 @@ A: 尝试运行 `bundle clean --force`, 会删除所有不在 bundle 中的系�
 
 ## 简单规范
 
-1. 所有的正式文放在 _posts
-2. 所有的草稿文放在 _drafts
+1. 所有的正式文放在 \_posts
+2. 所有的草稿文放在 \_drafts
 3. 标题命名规范 yyyy-MM-dd-Your-title.md
 4. 文章内二级标题作为最高级别标题
 5. 内容较多时添加导航链接
@@ -51,3 +51,7 @@ A: 尝试运行 `bundle clean --force`, 会删除所有不在 bundle 中的系�
 7. 英文书籍，文章以英文斜体表示，中文书籍，文章用书名号
 8. 注明参考链接
 9. 第一段是摘要或者简介
+
+## 补充说明
+
+安装脚本补充了 deb 系 `init-os.zsh`，运行脚本 `zsh init-os.zsh`。
