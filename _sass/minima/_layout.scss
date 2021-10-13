@@ -342,13 +342,12 @@
  */
 .highligher-rouge {
   font: $base-font-weight #{$base-font-size}/#{$base-line-height} $base-font-family;
-  border: 1px solid $grey-color-light;
-  border-radius: 3px;
-  background: $yellow-color;
-  padding: 1px 4px;
+  border-radius: 1px;
+  background: $tag-back-color;
+  padding: 2px 6px;
 
   & > a {
-    color: #999;
+    color: #fff;
     box-shadow: none;
   }
 }
