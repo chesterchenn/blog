@@ -14,7 +14,7 @@
 
    Linux 下安装到 /home/gem 目录下，以 [Ubuntu](https://jekyllrb.com/docs/installation/ubuntu/) 为例
 
-   在 arch 时默认安装到 $HOME/.local/share/gem/ruby/x.y.z/bin 目录下面
+   在 arch 时默认安装到 $HOME/.local/share/gem/ruby/x.y.z/bin 目录下面，使用 `--no-user-install` 可以安装至我们指定的目录，可以参考 [ArchWiki: Ruby](https://wiki.archlinux.org/title/Ruby#Installing_gems_system-wide)
 
    指定安装目录 $HOME/.local/share/gem 下
 
