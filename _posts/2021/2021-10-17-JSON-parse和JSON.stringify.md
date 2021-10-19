@@ -74,9 +74,54 @@ JSON.stringify(value, replacer, space);
 
 **replacer**：可选参数，改变字符串格式化过程的格式，或者一个字符串或者数字的数组。
 
+  1. 如果是一个函数，则 value 的每个属性都要经过函数的处理。
+  2. 如果是一个数组，则包含在数组内的属性才会被序列化。
+  3. 如果未提供或者 null，则 value 所有的属性都会被序列化。
+
 **space**：一个字符串或数字对象，用于在输出的 JSON 字符串中插入空白。
+
+  1. 如果是数字，代表有多少个空格，上限为10。小于1，代表没有空格。
+  2. 如果是字符串，空格替换成字符串，上限为10个字母。
+  3. 如果未提供或者 null，代表没有空格。
+
+### 异常
+
+- 当序列化循环对象值（cyclic object value）会抛出 `TypeError`。
+- 当序列化 BigInt 值会抛出 `TypeError`，BinInt 值不能在 JSON 里序列化。
+
+```javascript
+var circularRefer = { data: 123 };
+circularRefer.myself = circularRefer;
+
+JSON.stringify(circularRefer);  // TypeError: cyclic object value
+```
+
+```javascript
+const huge = BigInt(1234);
+
+JSON.stringify(huge); // TypeError: BigInt value can't be serialized in JSON
+```
+
+### 描述
+
+1. 如果序列化的值有 `toJSON()` 的方法，调用该方法进行序列化。
+
+    如我们之前的 BigInt 是无法被序列化的，我们可以通过自己实现 toJSON 方法
+
+    ```javascript
+    BigInt.prototype.toJSON = function() { return this.toString() }
+    JSON.stringify(BigInt(1)); // '"1"'
+    ```
+
+2. `Number`，`Boolean` 和 `String` 对象会被转换成对应的原始值。
+
+   ```javascript
+   JSON.stringify([new Number(3), new String('false'), new Boolean(false)]);
+   // '[3, "false", false]'
+   ```
 
 ## 参考连接
 
 - [JSON.parse](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse)
 - [JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify)
+- [就因为JSON.stringify，我的年终奖差点打水漂了](https://juejin.cn/post/7017588385615200270?share_token=a3d3ac9f-a9a6-4c0c-a930-d99440f8c367)
