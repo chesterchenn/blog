@@ -120,8 +120,57 @@ JSON.stringify(huge); // TypeError: BigInt value can't be serialized in JSON
    // '[3, "false", false]'
    ```
 
+3. `undefined`、`Function` 和 `Symbol` 不是有效的 JSON 值，在数组内被转换成 null，在对象内被忽略。当传入“纯”值时，返回 undefined。
+
+   ```javascript
+   JSON.stringify([undefined, function() {}, Symbol('')]);
+   // "[null,null,null]"
+
+   JSON.stringify({u: undefined, f: function() {}, s: Symbol('')});
+   // "{}"
+
+   JSON.stringify(function() {});
+   // undefined 注：这里不是序列化的 "undefined" 字符串
+
+   JSON.stringify(undefined, Symbol(''));
+   // undefined 注：这里不是序列化的 "undefined" 字符串
+   ```
+
+4. 所有用 Symbol 作为键值都会被忽略，即使在 replacer 函数内。
+
+   ```javascript
+   JSON.stringify({ [Symbol('foo')]: 'foo'  }); // '{}'
+   ```
+
+5. Date 类型通过实现 toJSON 函数返回一个字符串（该方法等同于 date.toISOString()）。
+
+   ```javascript
+   JSON.stringify(new Date(2006, 0, 2, 15, 4, 5)); // '"2006-01-02T15:04:05.000Z"'
+
+   new Date(2006, 0, 2, 15, 4, 5).toISOString(); // "2006-01-02T15:04:05.000Z"
+   ```
+
+6. 数字 `Infinity` 和 `NaN`，以及 `null` 值都被当成 null。
+
+   ```javascript
+   JSON.stringify([NaN, null, Infinity]); // '[null,null,null]'
+   ```
+
+7. 所有其他对象实例（包括 Map、Set、WeakMap 和 WeakSet）都只序列化它们的可枚举属性。
+
+   ```javascript
+   JSON.stringify([new Set([1]), new Map([[1, 2]])]);
+   // '[{},{}]'
+
+   JSON.stringify([new WeakSet([{a: 1}]), new WeakMap([[{a: 1}, 2]])]);
+   // '[{},{}]'
+
+   var o = Object.create(null, { x: { value: 'x', enumerable: false }, y: { value: 'y', enumerable: true }});
+   JSON.stringify(o);
+   // '{"y":"y"}'
+   ```
+
 ## 参考连接
 
 - [JSON.parse](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse)
 - [JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify)
-- [就因为JSON.stringify，我的年终奖差点打水漂了](https://juejin.cn/post/7017588385615200270?share_token=a3d3ac9f-a9a6-4c0c-a930-d99440f8c367)
