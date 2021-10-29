@@ -44,6 +44,29 @@ person.intro.call(another, 'ABC', 'javascript'); // I am ABC, use javascript
 
 _apply_ 可以传入类数组，所以经常与 _arugments_ 参数一起使用。
 
+### call 的实现
+
+```javascript
+Function.prototype._call = function (context, ...args) {
+  // 判断调用者是否为函数，this 就是调用的函数
+  if (typeof this !== 'function') {
+    throw new Error('need function');
+  }
+
+  // 生成唯一值用于挂载，后续删除
+  const fnKey = Symbol();
+
+  if (!context) {
+    context = window;
+  }
+
+  context[fnKey] = this;
+  const res = context[fnKey](...args);
+  delete context[fnKey];
+  return res;
+}
+```
+
 ## Function.prototype.bind
 
 _bind_ 创建一个新函数，该函数在被调用时将 this 指定到提供的值，并在调用新函数时提供其余的参数。 简单的说，**就是将函数的 this 绑定到指定的对象中**。
@@ -68,5 +91,6 @@ boundGetX(); => 81
 - [Function.prototype.apply()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply)
 - [Function.prototype.call()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call)
 - [Function.prototype.bind()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind)
+- [前端面试手写代码-bind](https://juejin.cn/post/6999893403395686413?share_token=ca6d97bf-4e7a-4833-a34e-b7a9858ebb9a)
 - [第 48 题：call 和 apply 的区别是什么，哪个性能更好一些](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/84)
 - 《JavaScript 权威指南》(第六版)
