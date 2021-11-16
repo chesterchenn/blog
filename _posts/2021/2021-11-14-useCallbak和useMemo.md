@@ -18,6 +18,54 @@ const memoizedCallback = useCallback(() => {
 
 useCallback(fn, deps) 相当于 useMemo(() => fn, deps)
 
+将回调函数传递给相等依赖子组件时，可以防止不必要的渲染。可以参考如下代码
+
+```ts
+import React, { useCallback, useState, memo } from 'react';
+
+interface IProps {
+  field: string;
+  foo?: () => void;
+}
+
+const Child = memo(function (props: IProps) {
+  console.log(`${props.field} render`);
+  return <button onClick={props.foo}>ChildWithMemo</button>;
+});
+
+export default function App() {
+  const [count, setCount] = useState(0);
+  const foo = () => {
+    console.log('foo');
+  };
+  const fooCallback = useCallback(() => {
+    console.log('foo');
+  }, []);
+
+  return (
+    <>
+      <div>
+        <button onClick={() => setCount(count + 1)}>Increase</button>
+        <span>count: {count}</span>
+      </div>
+      <div>
+        <Child field='child' foo={foo} />
+        <Child field='childUseCallback' foo={fooCallback} />
+        <Child field='childNoRef' />
+      </div>
+    </>
+  );
+}
+```
+
+![useCallback]({{ "images/useCallback.jpg" | relative_url }})
+
+当点击 Increase 按钮的时候，父组件 App 会进行刷新。使用 React.memo 优化了子组件，可以避免不必要的渲染。
+
+- childNoRef 没有引用的父组件函数可以避免刷新。
+- child 引用了父组件函数，当父组件刷新时，引用函数会进行刷新，因此子组件也会进行刷新。
+- childUseCallback 使用 useCallback 缓存了回调函数。当父组件刷新时，传递的函数被记忆了下来，不会触发刷新。
+
 ## useMemo
 
 ```js
