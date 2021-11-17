@@ -16,8 +16,6 @@ const memoizedCallback = useCallback(() => {
 
 将回调函数和数组作为参数，返回一个 memoized 的回调函数，仅当数组的某项改变时才会更新。
 
-useCallback(fn, deps) 相当于 useMemo(() => fn, deps)
-
 将回调函数传递给相等依赖子组件时，可以防止不必要的渲染。可以参考如下代码
 
 ```ts
@@ -72,9 +70,13 @@ export default function App() {
 const memoizedValue = useMemo(() => computedExpensiveValue(a, b), [a, b]);
 ```
 
+useCallback(fn, deps) 相当于 useMemo(() => fn, deps)
+
 将函数和数组作为参数，返回一个 memoized 值，仅当数组的某项改变时才会更新。
 
-传入的函数会在渲染期间执行，如果没有提供依赖数组，useMemo 在每次渲染时都会计算新的值。
+传入的函数会在渲染期间执行，如果没有提供依赖数组，useMemo 在每次渲染时都会计算新的值。useMemo 与 useCallback 相比，useCallback 缓存是函数，useMemo 缓存是函数返回值，所以可以在函数内计算一些复杂的操作。
+
+PS: useMemo 其实跟 useCallback 的用法类似，跟 React.memo 没有什么关系。
 
 ## 参考链接
 
