@@ -68,6 +68,10 @@ export default function App() {
 
 ```js
 const memoizedValue = useMemo(() => computedExpensiveValue(a, b), [a, b]);
+const [m, n] = useMemo(() => {
+  // doSomething
+  return [m, n];
+}, [a]);
 ```
 
 useCallback(fn, deps) 相当于 useMemo(() => fn, deps)
