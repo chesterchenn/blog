@@ -3,7 +3,11 @@
 
 # 查询 PID
 PID=$(pgrep jekyll)
-echo "jekyll $PID"
 
-# 杀死 PID
-$(kill -s 9 $PID)
+if [ $PID ]; then
+  echo "jekyll PID is $PID"
+  $(kill -s 9 $PID)
+  echo "killed $PID"
+else
+  echo "jekyll doesn't exist"
+fi
