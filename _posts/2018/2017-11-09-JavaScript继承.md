@@ -10,6 +10,65 @@ JavaScript 的原型链和相关继承方式。
 
 我们创建的每个函数都有一个 prototype （原型）属性，这个属性是一个指针，指向一个对象，该对象包含了所有实例共享的属性和方法。
 
+我们需要明白对象原型（Object.getPrototypeOf(obj)，或者通过已弃用的 `__proto__` 属性）和构造函数的 prototype 属性之间有区别。
+
+### constructor
+
+constructor 属性始终指向创建当前对象的构建函数。在默认情况下，所有原型对象都会自动获得一个 constructor 属性，这个属性包含一个指向 prototype 属性所在函数的指针。
+
+```js
+function Foo(name) {
+  this.name = name;
+}
+
+const f1 = new Foo('bar');
+const f2 = Object.create(f1);
+
+console.log(Object.getPrototypeOf(f1));
+// { constructor: function Foo(name) }
+
+console.log(Object.getPrototypeOf(f2));
+// { name: 'bar' }
+
+console.log(f1.constructor, f2.constructor);
+// function Foo(name), function Foo(name)
+```
+
+可以看出 f2.prototype 原型指向 f1，f2 的 constructor 指向的是构造函数。将构建函数的 prototype 进行扩展
+
+```js
+Foo.prototype.age = 11;
+Foo.prototype.dosomething = function() {
+  // ...
+}
+```
+
+```plain
+                ┌───────────────────────────────────────────────┐
+                ▼                                               │
+     ┌──────────────────────┐       ┌─────────────────────────┐ │
+     │         Foo          │   ┌──►│       Foo Prototype     │ │
+     ├──────────┬───────────┤   │   ├────────────┬────────────┤ │
+     │prototype │           ├───┤   │constructor │            ├─┘
+     ├──────────┼───────────┤   │   ├────────────┼────────────┤
+     │name      │(undefined)│   │   │age         │11          │
+     └──────────┴───────────┘   │   ├────────────┼────────────┤
+                                │   │dosomething │(function)  │
+  ┌─────────────────────────┐   │   └────────────┴────────────┘
+┌►│            f1           │   │
+│ ├─────────────────────────┤   │
+│ │Object.getPrototypeOf(f1)├───┘
+│ ├─────────────┬───────────┤
+│ │name         │'bar'      │
+│ └─────────────┴───────────┘
+│
+│ ┌─────────────────────────┐
+│ │            f2           │
+│ ├─────────────────────────┤
+└─┤Object.getPrototypeOf(f2)│
+  └─────────────────────────┘
+```
+
 ## 继承方式
 
 JavaScript 主要有如下几种继承方式：
