@@ -2,9 +2,8 @@
 
 // Define defaults for each variable.
 
-$base-font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI",
-  Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-  "Segoe UI Symbol" !default;
+$base-font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial,
+  sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' !default;
 $base-font-size: 16px !default;
 $base-font-weight: 400 !default;
 $small-font-size: $base-font-size * 0.875 !default;
@@ -57,4 +56,5 @@ $on-large: $on-laptop !default;
 }
 
 // Import partials.
-@import "minima/base", "minima/layout";
+@import 'minima/base', 'minima/layout';
+@import 'minima/syntax';

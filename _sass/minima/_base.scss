@@ -132,34 +132,6 @@ blockquote {
 }
 
 /**
- * Code formatting
- */
-pre,
-code {
-  @include relative-font-size(0.85);
-  line-height: $base-line-height * 0.95;
-  border: 1px solid $grey-color-light;
-  border-radius: 3px;
-  background-color: #efefef;
-  margin: $spacing-unit / 2 0;
-}
-
-code {
-  padding: 2px 5px;
-}
-
-pre {
-  padding: 8px 12px;
-  overflow-x: auto;
-
-  > code {
-    border: 0;
-    padding-right: 0;
-    padding-left: 0;
-  }
-}
-
-/**
  * Wrapper
  */
 .wrapper {
