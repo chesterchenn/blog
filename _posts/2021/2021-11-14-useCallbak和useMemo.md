@@ -8,7 +8,7 @@ useCallback 和 useMemo 是 react 里面 Hook 的一部分。
 
 ## useCallback
 
-```js
+```jsx
 const memoizedCallback = useCallback(() => {
   doSomething(a, b);
 }, [a, b]);
@@ -18,7 +18,7 @@ const memoizedCallback = useCallback(() => {
 
 将回调函数传递给相等依赖子组件时，可以防止不必要的渲染。可以参考如下代码
 
-```ts
+```tsx
 import React, { useCallback, useState, memo } from 'react';
 
 interface IProps {
@@ -66,7 +66,7 @@ export default function App() {
 
 ## useMemo
 
-```js
+```jsx
 const memoizedValue = useMemo(() => computedExpensiveValue(a, b), [a, b]);
 const [m, n] = useMemo(() => {
   // doSomething

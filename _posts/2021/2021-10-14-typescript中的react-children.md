@@ -11,7 +11,7 @@ title: TypeScript 中的 React Children
 
 我们可以在函数组件上使用一个标准的 React 类型，`FC`。`FC` 就是函数组件，是在 TypeScript 使用的一个泛型。`React.FC` 也可以写作 `React.FunctionComponent`。
 
-```ts
+```tsx
 type Props = {
   title: string;
 }
@@ -89,7 +89,7 @@ type Props = {
 
 跟函数组件 FC 一样，React.Component 类型一样会包含了 children 属性。
 
-```ts
+```tsx
 type Props = {
   title: string;
 };
