@@ -354,3 +354,32 @@
     box-shadow: none;
   }
 }
+
+/** Code Format */
+pre {
+  background: #263238;
+  color: #eeffff;
+  overflow-x: auto;
+  padding: 1em;
+
+  & > .language-plain {
+    @include relative-font-size(0.85);
+    line-height: $base-line-height * 0.85;
+    border: 1px solid $grey-color-light;
+    border-radius: 3px;
+    margin: $spacing-unit / 2 0;
+    border: 0;
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
+code.language-plaintext {
+  background: #263238;
+  color: #eeffff;
+  overflow-x: auto;
+  line-height: $base-line-height * 0.85;
+  @include relative-font-size(0.85);
+  border-radius: 3px;
+  padding: 2px 5px;
+}
