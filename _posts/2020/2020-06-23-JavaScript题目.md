@@ -1,7 +1,7 @@
 ---
 layout: post
 title: JavaScript题目
-tags: javascript
+tags: 2020 javascript
 ---
 一些遇到的 JavaScript 的题目。
 

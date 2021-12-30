@@ -2,9 +2,9 @@
 const fs = require('fs');
 const path = require('path');
 
-const dir = path.resolve(process.cwd(), '../_posts/2019');
+const dir = path.resolve(process.cwd(), '../_posts/2020');
 const reg = `tags: `;
-const stringU = `tags: 2019 `;
+const stringU = `tags: 2020 `;
 
 function func() {
   fs.readdirSync(dir).forEach((file) => {

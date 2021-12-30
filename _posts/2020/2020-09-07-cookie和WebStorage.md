@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Cookie和WebStorage
-tags: javascript
+tags: 2020 javascript
 ---
 客户端状态主要依靠追踪浏览器的用户身份及其相关数据。
 

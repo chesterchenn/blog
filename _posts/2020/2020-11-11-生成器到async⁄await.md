@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 生成器到async/await
-tags: javascript
+tags: 2020 javascript
 ---
 生成器 generator 是 ES6 引入的一个新的函数类型。而 async 和 await 是 ES7 添加的特性，用于异步编程。
 

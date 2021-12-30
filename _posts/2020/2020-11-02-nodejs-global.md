@@ -1,7 +1,7 @@
 ---
 layout: post
 title: nodejs全局问题
-tags: nodejs
+tags: 2020 nodejs
 ---
 
 在 Linux 经常会遇到 nodejs 全局的问题，记录官方提供的方案。

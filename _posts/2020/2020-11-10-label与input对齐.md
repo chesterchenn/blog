@@ -1,7 +1,7 @@
 ---
 layout: post
 title: label与input对齐
-tags: css
+tags: 2020 css
 ---
 在默认情况下，label 跟 input 是自适应的，经常会出现不对齐的情况。
 
