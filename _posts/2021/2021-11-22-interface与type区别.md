@@ -1,6 +1,6 @@
 ---
 layout: post
-tags: typescript
+tags: 2021 typescript
 title: interface与type的区别
 ---
 

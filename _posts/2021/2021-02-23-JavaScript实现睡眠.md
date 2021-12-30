@@ -1,6 +1,6 @@
 ---
 layout: post
-tags: javascript
+tags: 2021 javascript
 title: JS实现睡眠
 ---
 JavaScript 是单线程语法，没有语言内置的休眠（sleep or wait）函数，所谓的 sleep 只是实现一种延迟执行的效果，核心是应用 setTimeout 方法。

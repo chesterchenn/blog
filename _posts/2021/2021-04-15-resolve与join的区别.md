@@ -1,6 +1,6 @@
 ---
 layout: post
-tags: nodejs 
+tags: 2021 nodejs 
 title: resolve与join的区别 
 ---
 在 nodejs 里面，resolve 与 join 都是常用的路径方法。

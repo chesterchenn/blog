@@ -1,6 +1,6 @@
 ---
 layout: post
-tags: others
+tags: 2021 others
 title: github pages 实现自动部署
 ---
 

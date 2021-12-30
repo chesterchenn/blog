@@ -1,6 +1,6 @@
 ---
 layout: post
-tags: javascript
+tags: 2021 javascript
 title: JSON.parse和JSON.stringify
 ---
 JSON 包含了两个静态方法，分别是 `JSON.parse` 和`JSON.stringify`。
