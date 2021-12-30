@@ -1,6 +1,6 @@
 ---
 layout: post
-tags: javascript
+tags: 2019 javascript
 title: Call Apply Bind
 ---
 
