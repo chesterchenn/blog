@@ -1,7 +1,7 @@
 ---
 layout: post
 tags: 2021 typescript
-title: 泛型
+title: TypeScript中的泛型
 ---
 
 泛型（generics），在 C# 和 Java 这样的语言中，可以使用泛型来创建可重用的组件，一个组件可以支持多种类型的组件。
