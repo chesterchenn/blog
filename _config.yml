@@ -16,10 +16,10 @@ plugins:
 source: ./
 
 minima:
- # generate social links in footer
- social_links:
-  twitter: chesterchenn
-  github:  chesterchenn
+  # generate social links in footer
+  social_links:
+    twitter: chesterchenn
+    github:  chesterchenn
 
 paginate: 25
 
