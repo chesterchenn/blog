@@ -3,8 +3,8 @@ footer_title: 结尾处
 email: chesterchenn@outlook.com
 description: >- # this means to ignore newlines until "baseurl:"
   看自己超过两周之前写的代码就跟之前没看过一样。
-baseurl: "/blog" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: '/blog' # the subpath of your site, e.g. /blog
+url: '' # the base hostname & protocol for your site, e.g. http://example.com
 
 show_excerpts: true # set to true to show excerpts on the homepage
 
@@ -19,11 +19,16 @@ minima:
   # generate social links in footer
   social_links:
     twitter: chesterchenn
-    github:  chesterchenn
+    github: chesterchenn
+
+# gems: [jekyll-mermaid]
+
+# 配合jekyll-mermaid，当前使用的是 v9.0.1
+mermaid:
+  src: '/blog/assets/js/mermaid.min.js'
 
 paginate: 25
 
 # 目前还是处于试验阶段
 # https://jekyllrb.com/docs/configuration/incremental-regeneration/
 incremental: false
-
