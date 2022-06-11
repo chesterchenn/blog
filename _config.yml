@@ -27,6 +27,9 @@ minima:
 mermaid:
   src: '/blog/assets/js/mermaid.min.js'
 
+top:
+  src: '/blog/assets/js/top.js'
+
 paginate: 25
 
 # 目前还是处于试验阶段
