@@ -20,7 +20,10 @@ interface NumberDictionary {
 }
 ```
 
-数字签名总是让我想到了在声明对象的时候，在不清楚对象的 key 值。使用 `Record<string, any>` 来声明对象。
+数字签名总是让我想到了在声明对象的时候，在不清楚对象的 key 值。
+
+- 可以使用 `Record<string, unknown>` 来替代 any object 任意对象。
+- 可以使用 `Record<string, never>` 来替代 empty object 空对象。
 
 ## 泛型对象类型
 
