@@ -1,6 +1,6 @@
 ---
 layout: post
-tags: 2022 css
+tags: 2022 typescript css
 title: TypeScript中使用样式
 ---
 
