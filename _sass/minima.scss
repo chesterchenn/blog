@@ -55,6 +55,11 @@ $on-large: $on-laptop !default;
   font-size: $base-font-size * $ratio;
 }
 
+@mixin background-opacity($color, $opacity: 1) {
+  background: $color;
+  background: rgba($color, $opacity);
+}
+
 // Import partials.
 @import 'minima/base', 'minima/layout';
 @import 'minima/syntax';
