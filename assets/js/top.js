@@ -1,4 +1,4 @@
-var top = document.getElementsByClassName('top')[0];
+var topElement = document.getElementsByClassName('top')[0];
 
 function handleTop() {
   document.getElementsByClassName('site-header')[0].scrollIntoView({
@@ -6,4 +6,4 @@ function handleTop() {
   });
 }
 
-top.addEventListener('click', () => handleTop());
+topElement.addEventListener('click', handleTop);
