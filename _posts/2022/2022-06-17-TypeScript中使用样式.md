@@ -23,9 +23,13 @@ function Hello(props: Props) {
   return <div style={props.style}>Hello, World</div>;
 }
 
+const style = {
+  color: '#ffe411',
+}
+
 const App = () => (
   <div>
-    <Hello style={{ color: '#ffe411' }} />
+    <Hello style={style} />
   </div>
 );
 
