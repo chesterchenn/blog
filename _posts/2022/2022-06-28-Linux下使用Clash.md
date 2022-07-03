@@ -64,6 +64,45 @@ curl -H 'Cache-Control: no-cache, no-store' www.google.com
 curl -H 'Cache-Control: no-cache, no-store' --proxy http://127.0.0.1:7890 www.google.com
 ```
 
+## 自启动
+
+在服务器端，自启动服务的需求可能相对那么高，但是对于 PC 端的 Linux 服务，开机自启动服务的需求则是必不可少。
+
+创建文件 `/etc/systemd/system/clash.service`
+
+编辑文件，注释可以忽略
+
+```shell
+[Unit]
+Description=clash daemon # 服务名称
+After=network.target     # 网络服务启动之后启动
+
+[Service]
+Type=simple              # 默认值，这个 daemon 主要由 ExecStart 的命令来启动，启动后常驻于内存
+Restart=always
+ExecStart=/usr/local/bin/clash # Arch 下安装命令在 /usr/bin/clash
+
+[Install]
+WantedBy=multi-user.target
+```
+
+- 开机启动 clash：`sudo systemctl enable clash`
+- 立即启动 clash：`sudo systemctl start clash`
+
+## 其他
+
+配置默认代理，这样子可以不用特意指定代理。clash 默认提供了 http 7890 端口，socks 7891 端口。
+
+编辑 `/etc/profile` 文件，添加内容：
+
+```shell
+export http_proxy=http://127.0.0.1:7890
+export https_proxy=http://127.0.0.1:7890
+export all_socks=http://127.0.0.1:7890
+```
+
+然后重载一下 `source /etc/profile`
+
 ## 参考链接
 
 - [用 Clash 做代理](https://maintao.com/2021/use-clash-as-a-proxy/)
