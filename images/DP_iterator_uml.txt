@@ -1,0 +1,29 @@
+@startuml
+!theme plain
+title 迭代器模式
+
+class Client
+interface Aggregate {
+  createIterator()
+}
+class ConcreteAggregate {
+  createIterator()
+}
+interface Iterator {
+  hasNext()
+  next()
+  remove()
+}
+class ConcreateIterator {
+  hasNext()
+  next()
+  remove()
+}
+
+Client -L-> Aggregate
+Client -R-> Iterator
+Aggregate <|-- ConcreteAggregate
+Iterator <|-- ConcreateIterator
+ConcreteAggregate -R-> ConcreateIterator
+
+@enduml
