@@ -55,6 +55,16 @@ PS: ruby 2.7.0 就是个坑，请安装 2.7.5 或者以上的版本。Ubuntu 20 
 9. 第一段是摘要或者简介
 10. 图片链接方式 `![img]({{ "images/some_img.jpg" | relative_url }})`
 
+## 常用颜色
+
+<div>
+  <div style="width: 160px; height: 160px; background: #1ba784; color: #fff; text-align: center; line-height: 160px; display: inline-block; margin: 0 8px;">#1ba784 竹青</div>
+
+  <div style="width: 160px; height: 160px; background: #ce5777; color: #fff; text-align: center; line-height: 160px; display: inline-block; margin: 0 8px;">#ce5777 月季红</div>
+
+  <div style="width: 160px; height: 160px; background: #2b73af; color: #fff; text-align: center; line-height: 160px; display: inline-block; margin: 0 8px;">#2b73af 品蓝</div>
+</div>
+
 ## 补充说明
 
 安装脚本补充了 deb 系 `init-os.zsh`，运行脚本 `zsh init-os.zsh`。
