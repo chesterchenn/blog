@@ -57,13 +57,11 @@ PS: ruby 2.7.0 就是个坑，请安装 2.7.5 或者以上的版本。Ubuntu 20 
 
 ## 常用颜色
 
-<div>
-  <div style="width: 160px; height: 160px; background: #1ba784; color: #fff; text-align: center; line-height: 160px; display: inline-block; margin: 0 8px;">#1ba784 竹青</div>
+![1BA784](https://placehold.co/160x120/1ba784/fff?text=1BA784)
 
-  <div style="width: 160px; height: 160px; background: #ce5777; color: #fff; text-align: center; line-height: 160px; display: inline-block; margin: 0 8px;">#ce5777 月季红</div>
+![CE5777](https://placehold.co/160x120/ce5777/fff?text=CE5777)
 
-  <div style="width: 160px; height: 160px; background: #2b73af; color: #fff; text-align: center; line-height: 160px; display: inline-block; margin: 0 8px;">#2b73af 品蓝</div>
-</div>
+![2B73AF](https://placehold.co/160x120/2b73af/fff?text=2B73AF)
 
 ## 补充说明
 
