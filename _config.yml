@@ -32,6 +32,8 @@ top:
 
 paginate: 25
 
+embed: 'https://chesterchenn.github.io/embed'
+
 # 目前还是处于试验阶段
 # https://jekyllrb.com/docs/configuration/incremental-regeneration/
 incremental: false
