@@ -10,4 +10,4 @@ if [ -e $path/nohup.out ]; then
 fi
 
 # 启动服务
-$(nohup bundle exec jekyll serve --config $path/_config.yml -s $path/ -d $path/_site > $path/nohup.out &)
+$(nohup bundle exec jekyll serve --force_polling --config $path/_config.yml -s $path/ -d $path/_site > $path/nohup.out &)

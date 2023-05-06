@@ -9,8 +9,8 @@ tags: 2020 javascript
 1. [逗号表达式](#逗号表达式)
 2. [形参的长度](#形参的长度)
 3. [变量提升](#变量提升)
-4. [数组 forEach](#数组foreach)
-5. [数组 sort](#数组sort)
+4. [数组 forEach](#数组-foreach)
+5. [数组 sort](#数组-sort)
 6. [变量声明](#变量声明)
 7. [对象键名](#对象键名)
 8. [setTimeout](#settimeout)
@@ -67,7 +67,7 @@ new Array(10).forEach(() => {
 console.log(i);
 ```
 
-[答案：数组 forEach](#答数组foreach)
+[答案：数组 forEach](#答数组-foreach)
 
 ### 数组 sort
 
@@ -77,7 +77,7 @@ console.log(i);
 });
 ```
 
-[答案：数组 sort](#答数组sort)
+[答案：数组 sort](#答数组-sort)
 
 ### 变量声明
 
@@ -172,7 +172,7 @@ foo(); // 报错，foo已经不再是一个函数了
 
 `console.log(i); => 0` forEach 方法在数组元素为空时会跳过执行回调函数，相当于回调函数并未执行，所以输出 0
 
-[数组 forEach](#数组foreach)
+[数组 forEach](#数组-foreach)
 
 ### 答：数组 sort
 
@@ -184,7 +184,7 @@ foo(); // 报错，foo已经不再是一个函数了
 
 sort 默认会按照诸个字符的 Unicode 位点进行排序，对于 a < b 的情况，return a - b，返回小于 0（false），ab 不用调换位置，则是升序。而 return b - a，返回大于 0（true），ab 调换位置，则是降序。反之同理
 
-[数组 sort](#数组sort)
+[数组 sort](#数组-sort)
 
 ### 答：变量声明
 
