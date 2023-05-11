@@ -42,8 +42,44 @@ JS 占用主线程一直卡顿请参考：浏览器每一帧都需要完成哪�
 
 一个 fiber 既是一个工作单元，也是一种数据结构。
 
+从结构角度来看，Fiber 是对 React 协调算法的重写，
+
+从编码角度来看，Fiber 是 React 内部定义的一种数据结构，它是 Fiber 树结构的节点单位。
+
+将 Fiber 理解成工作单元，且一个工作单元必须一次完成，不能出现暂停。并且执行完成之后可以将控制权给浏览器响应用户，从而提升渲染效率。Fiber 将可中断的任务拆分成多个子任务，通过按照优先级来自由调度子任务，分段更新，从而将之前的同步渲染改为异步渲染。
+
+Fiber 是一个链表，每个 Virtual DOM 都可以表示为一个 fiber。
+
+```js
+type Fiber - {
+  ...
+
+  // 单链表
+  return: Fiber | null, // 指向 parent，处理完该节点向上返回
+  child: Fiber | null, 指向第一个子节点
+  sibling: Fiber | null, 指向兄弟节点
+
+  ...
+}
+```
+
+## Fiber 工作过程
+
+1. `ReactDOM.render()` 和 `setState` 的时候开始创建更新。
+2. 将创建的更新加入队列，等待调度。
+3. 在 `requestIdleCallback` 空闲时执行任务。
+4. 从根节点开始遍历 Fiber Node，并且构建 WorkInProgress Tree。
+5. 生成 EffectList
+6. 根据 EffectList 更新 DOM。
+
+React 的执行过程：
+
+1. 从 `ReactDOM.render()` 方法开始，把接收的 React Element 转换成 Fiber 节点，并为其设置优先级，创建 Update，加入更新队列，这部分主要是做一些初始数据的准备。
+2. 主要是三个函数：`scheduleWork`、`requestWork`、`performWork`，即安排工作、申请工作、正式工作三部曲，React 16 新增的异步调用的功能则在这部分实现，这部分就是 Schedule 阶段。
+3. 一个大循环，遍历所有的 Fiber 节点，通过 Diff 算法计算所有更新工作，产出 EffectList 给到 commit 阶段使用，这部分的核心是 beginWork 函数，这部分基本就是 Fiber Reconciler ，包括 reconciliation 和 commit 阶段。
+
 ## 参考链接
 
 - [浅谈对 React Fiber 的理解](https://juejin.cn/post/6926432527980691470)
 - [Deep In React 之浅谈 React Fiber 架构（一）](https://www.taoweng.site/posts/deep-in-react-%E4%B9%8B%E6%B5%85%E8%B0%88-react-fiber-%E6%9E%B6%E6%9E%84%E4%B8%80)
-- [React Fiber架构原理](https://segmentfault.com/a/1190000041965895)
+- [React Fiber 架构原理](https://segmentfault.com/a/1190000041965895)
