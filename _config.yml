@@ -21,12 +21,6 @@ minima:
     twitter: chesterchenn
     github: chesterchenn
 
-# gems: [jekyll-mermaid]
-
-# 配合jekyll-mermaid，当前使用的是 v9.0.1
-mermaid:
-  src: '/blog/assets/js/mermaid.min.js'
-
 top:
   src: '/blog/assets/js/top.js'
 
