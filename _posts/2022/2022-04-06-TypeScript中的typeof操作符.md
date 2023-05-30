@@ -1,7 +1,7 @@
 ---
 layout: post
 tags: 2022 typescript
-title: TypeScipt中的typeof类型操作符
+title: TypeScript中的typeof操作符
 ---
 
 typeof 可以引用一个变量或属性的类型。

@@ -1,7 +1,7 @@
 ---
 layout: post
 tags: 2022 typescript
-title: TypeScipt中的对象类型
+title: TypeScript中的对象类型
 ---
 
 在 TypeScipt 中我们通过对象类型传递对象。
