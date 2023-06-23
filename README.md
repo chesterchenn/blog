@@ -10,7 +10,7 @@
 
 2. 安装 jekyll 和 bundler
 
-   `gem install jekyll:4.2.0 bundler:2.2.22`
+   `gem install bundler:2.4.14`
 
    Linux 下安装到 /home/gem 目录下，以 [Ubuntu](https://jekyllrb.com/docs/installation/ubuntu/) 为例
 
