@@ -42,7 +42,7 @@ A: 尝试运行 `bundle clean --force`, 会删除所有不在 bundle 中的系�
 
 ## 注意事项
 
-- 请安装 2.7.5 或者以上的版本。Ubuntu 20 下的 ruby 默认为 2019 年的 2.7.0 版本。(Ubuntu 22 已安装3.0)。
+- 请安装 2.7.5 或者以上的版本。Ubuntu 20 下的 ruby 默认为 2019 年的 2.7.0 版本。
 - 更新依赖请运行 `bundle clean --force`，以避免不必要的错误。
 
 ## 简单规范
@@ -68,4 +68,4 @@ A: 尝试运行 `bundle clean --force`, 会删除所有不在 bundle 中的系�
 
 ## 补充说明
 
-安装脚本补充了 deb 系 `init-os.zsh`，运行脚本 `zsh init-os.zsh`。
+安装脚本补充了 deb 系 `install.zsh`，运行脚本 `zsh install.zsh`。
