@@ -40,7 +40,10 @@ Q: 启动项目的时候遇到报错：`You have already activated X, but your G
 
 A: 尝试运行 `bundle clean --force`, 会删除所有不在 bundle 中的系统 gem 文件。
 
-PS: ruby 2.7.0 就是个坑，请安装 2.7.5 或者以上的版本。Ubuntu 20 下的 ruby 默认为 2019 年的 2.7.0 版本。
+## 注意事项
+
+- 请安装 2.7.5 或者以上的版本。Ubuntu 20 下的 ruby 默认为 2019 年的 2.7.0 版本。(Ubuntu 22 已安装3.0)。
+- 更新依赖请运行 `bundle clean --force`，以避免不必要的错误。
 
 ## 简单规范
 
