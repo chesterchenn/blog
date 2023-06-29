@@ -5,7 +5,7 @@
 sudo apt install ruby-full build-essential zlib1g-dev
 
 # 安装 jekyll bundler
-gem install jekyll:2.4.0 bundler:2.2.22
+gem install bundler:2.4.14
 
 # 安装依赖
 bundle install
