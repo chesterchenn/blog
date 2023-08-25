@@ -124,9 +124,7 @@ Inter-Process Communication (IPC)，进程间通信，主要负责 Electron 中�
 
 ## 主进程到渲染进程
 
-当你从主进程发送消息到渲染进程时，需要指定哪个渲染进程接收（因为渲染进程可以很多个）。
-
-需要通过 `WebContents` 实例，该实例包含了一个 `send` 方法。
+当你从主进程发送消息到渲染进程时，不再使用 `ipcMain`，而是通过 `WebContents` 实例，该实例包含了一个 `send` 方法。
 
 以下是来自官网的一个例子:
 
@@ -174,6 +172,8 @@ Inter-Process Communication (IPC)，进程间通信，主要负责 Electron 中�
      //...
    });
    ```
+
+![]({{ "images/ipc-main-renderer.png" | relative_url }})
 
 ## 参考链接
 
