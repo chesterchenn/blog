@@ -9,9 +9,11 @@ Inter-Process Communication (IPC)，进程间通信，主要负责 Electron 中�
 <!-- vim-markdown-toc GFM -->
 
 - [ipcMain 和 ipcRenderer](#ipcmain-和-ipcrenderer)
-- [渲染进程到主进程 - 方式一](#渲染进程到主进程---方式一)
-- [渲染进程到主进程 - 方式二](#渲染进程到主进程---方式二)
+- [渲染进程到主进程（一）](#渲染进程到主进程一)
+- [渲染进程到主进程（二）](#渲染进程到主进程二)
 - [主进程到渲染进程](#主进程到渲染进程)
+- [渲染进程到渲染进程（一）](#渲染进程到渲染进程一)
+- [渲染进程到渲染进程（二）](#渲染进程到渲染进程二)
 - [参考链接](#参考链接)
 
 <!-- vim-markdown-toc -->
@@ -24,7 +26,7 @@ Inter-Process Communication (IPC)，进程间通信，主要负责 Electron 中�
 
 在 Electron 中，进程间通信是通过在 ipcMain 和 ipcRenderer 模块中定义的 "channels" 通道。
 
-## 渲染进程到主进程 - 方式一
+## 渲染进程到主进程（一）
 
 第一种从渲染进程到主进程的方式，是使用 `ipcRenderer.send` 发送消息和 `ipcMain.on` 接收消息。
 
@@ -71,7 +73,7 @@ Inter-Process Communication (IPC)，进程间通信，主要负责 Electron 中�
 
 ![]({{ "images/ipc-one.png" | relative_url }})
 
-## 渲染进程到主进程 - 方式二
+## 渲染进程到主进程（二）
 
 另一个更常见的方式是使用 `ipcRenderer.invoke` 发送消息和 `ipcMain.handle` 接收消息。
 
@@ -174,6 +176,36 @@ Inter-Process Communication (IPC)，进程间通信，主要负责 Electron 中�
    ```
 
 ![]({{ "images/ipc-main-renderer.png" | relative_url }})
+
+## 渲染进程到渲染进程（一）
+
+渲染进程到渲染进程可以通过主进程作为中间人进行消息通讯。
+
+![]({{ "images/renderer2renderer-1.png" | relative_url }})
+
+可以使用 Map 对象记录不同窗口的 webContents 对象。
+
+```js
+const map = new Map();
+
+const createWindow = () => {
+  const mainWindow = new BrowserWindow({
+    //...
+  });
+  const otherWindow = new BrowserWindow({
+    //...
+  });
+
+  map.set('main', mainWindow.webContents);
+  map.set('other', otherWindow.webContents);
+};
+```
+
+## 渲染进程到渲染进程（二）
+
+渲染进程到渲染进程可以通过 `ipcRenderer.sendTo(webContentsId, channel, ...args)` 来进行消息传递。
+
+另一个渲染进程使用 `ipcRenderer.on(channel, listener)` 监听发来的消息。
 
 ## 参考链接
 
