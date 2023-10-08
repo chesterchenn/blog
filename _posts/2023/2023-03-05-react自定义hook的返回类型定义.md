@@ -4,7 +4,7 @@ tags: 2023 react
 title: React 自定义 Hook 在 TypeScript 中的返回类型
 ---
 
-当我们创建一个自定义的钩子，并检查常规的 React 钩子命名惯例：在调用钩子时，返回一个数组可以解构。
+当我们在创建自定义的钩子，通常返回一个数组解构。
 
 使用数组的原因是因为数组没有名称属性，你可以自定义自己的名称。类似于：
 
@@ -46,13 +46,15 @@ export const App = () => {
 
 [https://codesandbox.io/s/hook-return-types-wrong-670zy5](https://codesandbox.io/s/hook-return-types-wrong-670zy5)
 
-看似平平无奇，但是不出意外的出意外了。 TypeScript 给了我们一个错误信息：_Type 'boolean \| (() => void)' is not assignable to type 'MouseEventHandler<HTMLButtonElement> | undefined'. Type 'boolean' is not assignable to type 'MouseEventHandler<HTMLButtonElement>'._
+看似平平无奇，但是不出意外的出意外了。 TypeScript 给了我们一个错误信息：
 
-在我们自定义的 hook 里， 我们返回了一个数组，而数组的类型是包含数组内所有元素类型的集合。该数组的类型包含了 '[boolean \| (() => void)]' 两种类型，当我们在使用的时候，TypeScript 会提示不符合的类型的警告。
+<em style="color: #ce5777">Type 'boolean | (() => void)' is not assignable to type 'MouseEventHandler\<HTMLButtonElement> | undefined'. Type 'boolean' is not assignable to type 'MouseEventHandler\<HTMLButtonElement>'.</em>
+
+在我们自定义的 hook 里， 我们返回了一个数组，而数组的类型是包含数组内所有元素类型的集合。该数组的类型包含了 `[boolean | (() => void)]` 两种类型，当我们在使用的时候，TypeScript 会提示不符合的类型的警告。
 
 ## Tuple
 
-'A tuple type is another sort of Array type that knows exactly how many elements it contains, and exactly which types it contains at specific positions'
+> A tuple type is another sort of Array type that knows exactly how many elements it contains, and exactly which types it contains at specific positions
 
 Tuple 类型就是一个固定顺序，固定大小的数组。用 Tuple 指定自定义 hook 的返回类型。
 
@@ -86,7 +88,7 @@ export const useToggle = (initialValue: boolean) => {
 
 [https://codesandbox.io/s/hook-return-types-as-const-9r88e6](https://codesandbox.io/s/hook-return-types-as-const-9r88e6)
 
-useToggle 返回的类型则为 'readonly [boolean, () => void]' 变为仅读的 tuple 类型。
+useToggle 返回的类型则为 `readonly [boolean, () => void]` 变为仅读的 tuple 类型。
 
 ## 参考链接
 
