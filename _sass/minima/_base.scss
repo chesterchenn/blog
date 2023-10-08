@@ -33,7 +33,7 @@ h3,
 h4,
 h5 {
   margin-top: $spacing-unit;
-  margin-bottom: math.div($spacing-unit,  3);
+  margin-bottom: math.div($spacing-unit, 3);
   font-weight: $base-font-weight;
 }
 
@@ -45,7 +45,7 @@ ol,
 dl,
 figure,
 %vertical-rhythm {
-  margin-bottom: math.div($spacing-unit,  4);
+  margin-bottom: math.div($spacing-unit, 4);
 }
 
 /**
@@ -121,7 +121,7 @@ a {
 blockquote {
   color: $grey-color;
   border-left: 4px solid $grey-color-light;
-  padding-left: math.div($spacing-unit,  2);
+  padding-left: math.div($spacing-unit, 2);
   @include relative-font-size(1.125);
   letter-spacing: -1px;
   font-style: italic;
@@ -139,8 +139,8 @@ blockquote {
   max-width: calc(#{$content-width} - (#{$spacing-unit}));
   margin-right: auto;
   margin-left: auto;
-  padding-right: math.div($spacing-unit,  2);
-  padding-left: math.div($spacing-unit,  2);
+  padding-right: math.div($spacing-unit, 2);
+  padding-left: math.div($spacing-unit, 2);
   @extend %clearfix;
 
   @media screen and (min-width: $on-large) {
@@ -197,7 +197,7 @@ table {
   }
   th,
   td {
-    padding: math.div($spacing-unit,  3) math.div($spacing-unit,  2);
+    padding: math.div($spacing-unit, 3) math.div($spacing-unit, 2);
   }
   th {
     background-color: lighten($grey-color-light, 3%);
