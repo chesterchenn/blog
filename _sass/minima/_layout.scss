@@ -31,7 +31,7 @@
 .site-nav {
   position: absolute;
   top: 9px;
-  right: math.div($spacing-unit,  2);
+  right: math.div($spacing-unit, 2);
   background-color: $background-color;
   border: 1px solid $grey-color-light;
   border-radius: 5px;
@@ -126,7 +126,7 @@
 
 .footer-heading {
   @include relative-font-size(1.125);
-  margin-bottom: math.div($spacing-unit,  2);
+  margin-bottom: math.div($spacing-unit, 2);
 }
 
 .contact-list,
@@ -138,15 +138,15 @@
 .footer-col-wrapper {
   @include relative-font-size(0.9375);
   color: $grey-color;
-  margin-left: math.div(-$spacing-unit,  2);
+  margin-left: math.div(-$spacing-unit, 2);
   @extend %clearfix;
 }
 
 .footer-col {
   width: -webkit-calc(100% - (#{$spacing-unit} / 2));
   width: calc(100% - (#{$spacing-unit} / 2));
-  margin-bottom: math.div($spacing-unit,  2);
-  padding-left: math.div($spacing-unit,  2);
+  margin-bottom: math.div($spacing-unit, 2);
+  padding-left: math.div($spacing-unit, 2);
 }
 
 .footer-col-1,
@@ -204,7 +204,7 @@
   list-style: none;
 
   > li {
-    margin-bottom: math.div($spacing-unit,  1.5);
+    margin-bottom: math.div($spacing-unit, 1.5);
 
     > h3 {
       margin: 0;
@@ -237,7 +237,7 @@
  * Posts
  */
 .post-header {
-  margin-bottom: math.div($spacing-unit,  2);
+  margin-bottom: math.div($spacing-unit, 2);
 }
 
 .post-title,
@@ -260,7 +260,7 @@
     // @include background-opacity($theme-color, 0.5);
     // background: darken($theme-color, 10%);
     background: lighten($theme-color, 30%);
-    padding: math.div($spacing-unit,  5);
+    padding: math.div($spacing-unit, 5);
 
     @media screen and (min-width: $on-large) {
       @include relative-font-size(1.75);
@@ -298,7 +298,7 @@
     }
     a {
       display: block;
-      padding: math.div($spacing-unit,  4);
+      padding: math.div($spacing-unit, 4);
       border: 1px solid $grey-color-light;
     }
     &:hover .svg-icon {
@@ -322,7 +322,7 @@
  */
 .pagination {
   a {
-    padding: math.div($spacing-unit,  10) math.div($spacing-unit,  3);
+    padding: math.div($spacing-unit, 10) math.div($spacing-unit, 3);
     text-decoration: none;
 
     &:hover {
@@ -335,7 +335,7 @@
 .pagination_active {
   color: $background-color;
   background-color: $klavier-gray;
-  padding: math.div($spacing-unit,  10) math.div($spacing-unit,  3);
+  padding: math.div($spacing-unit, 10) math.div($spacing-unit, 3);
 
   &:hover {
     color: $background-color;
@@ -359,7 +359,9 @@
   }
 }
 
-// 返回顶部
+/**
+ * 返回顶部
+ */
 .top {
   position: fixed;
   right: calc((100% - 960px) / 3);
@@ -379,5 +381,15 @@
     height: 0;
     border: 15px solid;
     border-color: transparent transparent $orange-color transparent;
+  }
+}
+
+/**
+ * 图片 Image
+ */
+.img {
+  &--center {
+    margin: 0 auto;
+    display: block;
   }
 }
