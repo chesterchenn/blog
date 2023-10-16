@@ -89,7 +89,7 @@ server {
 
 ### 部署
 
-运行命令生成镜像: `docker build -t web:v0.1`，生成之后运行 `docker images` 可以看到对应的镜像。
+运行命令生成镜像: `docker build -t web:v0.1 .`，生成之后运行 `docker images` 可以看到对应的镜像。
 
 启动容器 `docker run -d -p 8080:8080 web:v0.1`，启动成功之后运行 `docker ps` 可以看到运行的容器。
 
