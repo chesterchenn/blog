@@ -11,6 +11,7 @@ React Hooks 中的闭包，指函数式组件每次 render 都会产生一个新
 <!-- vim-markdown-toc GFM -->
 
 - [问题](#问题)
+- [解决方案](#解决方案)
 - [原因](#原因)
 - [其他例子](#其他例子)
 - [使用 useRef 解决闭包陷阱](#使用-useref-解决闭包陷阱)
@@ -23,12 +24,6 @@ React Hooks 中的闭包，指函数式组件每次 render 都会产生一个新
 以下是一个简化版本的代码示例：
 
 ```tsx
-import React, { useEffect, useState } from 'react';
-
-function Button({ action }: { action: () => void }) {
-  return <button onClick={action}>Click</button>;
-}
-
 const App = (): React.ReactElement | null => {
   const [count, setCount] = useState(0);
   const [handleCount, setHanleCount] = useState({
@@ -43,24 +38,22 @@ const App = (): React.ReactElement | null => {
 
   return (
     <div>
-      <Button {...handleCount}></Button>
+      <button onClick={handleCount.action}>Click</button>
       <div>{count}</div>
     </div>
   );
 };
-
-export default App;
 ```
 
 [https://codesandbox.io/s/capture-2l2vq5](https://codesandbox.io/s/capture-2l2vq5)
 
 上面例子中，Button 组件的 action 需要依赖父组件传递。当我们点击了一次按钮之后，count 变成 1，之后再点击不会增加。
 
+## 解决方案
+
 如果你安装 [eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks) 插件，会得到下面的警告提示，提示我们使用 `useEffect` 缺少 count 的依赖。
 
 `React Hook useEffect has a missing dependency: 'count'. Either include it or remove the dependency array. You can also do a functional update 'setCount(c => ...)' if you only need 'count' in the 'setCount' call. (react-hooks/exhaustive-deps)`
-
-## 原因
 
 从上面的 eslint 插件中，我们可以快速修复这个问题。
 
@@ -72,7 +65,7 @@ useEffect(() => {
 }, [count]);
 ```
 
-但是我们还需要更加进一步了解问题出现的原因，根据 [浅谈 hooks 原理，理解 useEffect 的 “闭包陷阱” 出现原因](https://juejin.cn/post/6844904193044512782#heading-1) 了解到原因。
+## 原因
 
 在 React Fiber 架构中，Fiber 节点就是一个组件，其 Hook 节点类型大致如下:
 
@@ -102,11 +95,13 @@ function App() {
 }
 ```
 
-![]({{"images/react-hook-chain.png" | relative_url}})
+![]({{"images/react-hook-chain.png" | relative_url}}){:class="img--center"}
 
 当我们每次渲染更新的时候，react 会对 `useEffect` 和 `useMemo` 的依赖项进行判断是否改变，有更新会执行回调函数，否则跳过。
 
-回到最初的问题上，react 进行组件渲染调用组件函数，函数执行创建了函数作用域。组件在初次渲染时，count 为 0，点击之后组件重新渲染，创建新的作用域，但是 `useEffect` 的依赖项未更新，其回调函数被跳过执行，里面的 count 变量引用的还是组件初始化的值。
+回到原先的问题上，react 进行组件渲染调用组件函数，函数执行创建了函数作用域。组件在初次渲染时，count 为 0，点击之后组件重新渲染，创建新的作用域，但是 `useEffect` 的依赖项未更新，其回调函数被跳过执行，里面的 count 变量引用的还是组件初始化的值。
+
+所以 hooks 产生闭包陷阱的原因是依赖项缺失，在渲染过程中 hooks 的依赖项未更新跳过，内部函数依赖也是未更新前的值。
 
 ## 其他例子
 
@@ -124,12 +119,8 @@ const FunctionComponent = () => {
 
   return (
     <div>
-      <p>FunctionComponent</p>
-
       <div>value: {value}</div>
-
       <button onClick={log}>alert</button>
-
       <button onClick={() => setValue(value + 1)}>add</button>
     </div>
   );
@@ -143,7 +134,7 @@ const FunctionComponent = () => {
 1. 初次渲染，生成一个 log 函数（value = 1）
 2. 点击 alert 按钮，执行 log 函数（value = 1）
 3. 点击 add 按钮，value 的值增加，组件重新渲染，生成一个新的 log 函数（value = 2）
-4. 计时器触发，log 函数（value = 1）弹出闭包内的 value(1)
+4. 计时器触发，log 函数（value = 1）弹出闭包内的 value
 
 ## 使用 useRef 解决闭包陷阱
 
@@ -167,12 +158,8 @@ const FunctionComponent = () => {
 
   return (
     <div>
-      <p>FunctionComponent</p>
-
       <div>value: {value}</div>
-
       <button onClick={log}>alert</button>
-
       <button onClick={() => setValue(value + 1)}>add</button>
     </div>
   );
