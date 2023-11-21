@@ -20,6 +20,7 @@ WebSocket 是一个持久化的协议，允许服务端主动向客户端推送�
   - [error](#error)
   - [message](#message)
   - [open](#open)
+- [心跳检测](#心跳检测)
 - [参考链接](#参考链接)
 
 <!-- vim-markdown-toc -->
@@ -112,6 +113,82 @@ addEventListener('open', (event) => {});
 onopen = (event) => {};
 ```
 
+## 心跳检测
+
+心跳检测是让浏览器或服务器定时发送消息，用于检测连接是否正常。可以在发现异常，进行对应的操作，如通知或重连。
+
+以下是一个简单的实现：
+
+```js
+/**
+ * 服务端，
+ * WebSocket 安装了 ws 库
+ */
+import { WebSocketServer } from 'ws';
+
+const wss = new WebSocketServer({
+  port: 8080,
+});
+
+wss.on('connection', (ws) => {
+  ws.on('message', (data) => {
+    console.log('received: %s', data);
+    if (data.toString() === 'heartbeat') {
+      ws.send('heartbeat');
+    }
+  });
+});
+```
+
+```js
+/**
+ * 客户端，收到信息后，隔 5s 发送信息，5s 未收到响应则关闭链接
+ */
+const ws = new WebSocket('ws://localhost:8080');
+
+const PING_TIEMOUT = 5 * 1000;
+const PONG_TIMEOUT = 5 * 1000;
+// 发送和接受定时器超时
+let pingTimeoutId;
+let pongTimeoutId;
+
+ws.addEventListener('open', () => {
+  console.log('open');
+  heartbeat();
+});
+
+ws.addEventListener('close', () => {
+  console.log('close');
+  reset();
+});
+
+ws.addEventListener('message', (event) => {
+  console.log('message::', event.data);
+  heartbeat();
+});
+
+function heartbeat() {
+  reset();
+  start();
+}
+
+function start() {
+  pingTimeoutId = setTimeout(() => {
+    ws.send('heartbeat');
+    pongTimeoutId = setTimeout(() => {
+      ws.close();
+    }, PONG_TIMEOUT);
+  }, PING_TIEMOUT);
+}
+
+function reset() {
+  clearTimeout(pingTimeoutId);
+  clearTimeout(pongTimeoutId);
+}
+```
+
 ## 参考链接
 
 - [WebSocket - Web APIs \| MDN](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket)
+- [zimv/websocket-heartbeat-js: :hearts: simple and useful](https://github.com/zimv/websocket-heartbeat-js)
+- [Keep Those WebSocket Connections Alive! - YouTube](https://www.youtube.com/watch?v=cUGRlM3SZ1w)
