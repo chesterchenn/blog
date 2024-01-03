@@ -1,6 +1,6 @@
 ---
 layout: post
-tags: 2023 others
+tags: 2023 windows
 title: Windows 下 git-bash 安装 zsh
 ---
 
