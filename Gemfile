@@ -1,6 +1,6 @@
-# source "https://rubygems.org"
+source "https://rubygems.org"
 # source "https://gems.ruby-china.com"
-source "https://mirrors.aliyun.com/rubygems/"
+# source "https://mirrors.aliyun.com/rubygems/"
 
 gem "jekyll", "~> 4.3.2"
 # This is the default theme for new Jekyll sites. You may change this to anything you like.
@@ -22,3 +22,4 @@ end
 # Performance-booster for watching directories on Windows
 gem "wdm", "~> 0.1.1", :install_if => Gem.win_platform?
 
+gem "json"
