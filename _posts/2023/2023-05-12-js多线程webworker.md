@@ -1,10 +1,25 @@
 ---
 layout: post
 tags: 2023 javascript
-title: JS多线程
+title: JS多线程 Web Worker
 ---
 
 在 Web Worker 标准中，定义了解决客户端 JS 无法多线程的问题。不过，Web Worker 处在一个自包含的执行环境中，无法访问 Window 对象和 Document 对象，和主线程之间的通信也只能通过异步消息传递机制来实现。
+
+<!-- vim-markdown-toc GFM -->
+
+- [Web Workers 对象](#web-workers-对象)
+- [Dedicated workers](#dedicated-workers)
+  - [创建 Worker](#创建-worker)
+  - [传递/接收信息](#传递接收信息)
+  - [终止 Worker](#终止-worker)
+  - [错误处理](#错误处理)
+- [Shared Workers](#shared-workers)
+  - [创建共享 worker](#创建共享-worker)
+- [推荐阅读](#推荐阅读)
+- [参考资料](#参考资料)
+
+<!-- vim-markdown-toc -->
 
 ## Web Workers 对象
 
@@ -82,6 +97,10 @@ myWorker.onerror = (e) => {
 ```js
 const myShareWorker = new SharedWorker("worker.js");
 ```
+
+## 推荐阅读
+
+- [浅析Web Worker使用技巧及实战场景 - 古兰精 - 博客园](https://www.cnblogs.com/goloving/p/13962441.html)
 
 ## 参考资料
 
