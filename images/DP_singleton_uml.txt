@@ -1,0 +1,14 @@
+@startuml
+!theme plain
+
+class Singleton {
+  static uniqueInstance
+
+  {field} // 其他有用的单例数据……
+
+  static getInstance()
+
+  {method} // 其他有用的单例方法……
+}
+
+@enduml
