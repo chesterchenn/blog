@@ -5,3 +5,4 @@ _site
 vendor
 nohup.out
 *Zone.Identifier
+Gemfile.lock
