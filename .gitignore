@@ -5,4 +5,5 @@ _site
 vendor
 nohup.out
 *Zone.Identifier
+# 不可删除，删除导致远程 Action 失败
 # Gemfile.lock
