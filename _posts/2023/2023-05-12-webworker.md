@@ -1,7 +1,7 @@
 ---
 layout: post
 tags: 2023 javascript
-title: JS多线程 Web Worker
+title: WebWorker
 ---
 
 在 Web Worker 标准中，定义了解决客户端 JS 无法多线程的问题。不过，Web Worker 处在一个自包含的执行环境中，无法访问 Window 对象和 Document 对象，和主线程之间的通信也只能通过异步消息传递机制来实现。
