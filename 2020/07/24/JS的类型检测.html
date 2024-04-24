@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>JS的类型检测 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="JS的类型检测" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="类型是值的内部特征，它定义了值的行为，以使其区别于其他值。" />
+<meta property="og:description" content="类型是值的内部特征，它定义了值的行为，以使其区别于其他值。" />
+<link rel="canonical" href="/blog/2020/07/24/JS%E7%9A%84%E7%B1%BB%E5%9E%8B%E6%A3%80%E6%B5%8B.html" />
+<meta property="og:url" content="/blog/2020/07/24/JS%E7%9A%84%E7%B1%BB%E5%9E%8B%E6%A3%80%E6%B5%8B.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-07-24T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="JS的类型检测" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2020-07-24T00:00:00+00:00","datePublished":"2020-07-24T00:00:00+00:00","description":"类型是值的内部特征，它定义了值的行为，以使其区别于其他值。","headline":"JS的类型检测","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2020/07/24/JS%E7%9A%84%E7%B1%BB%E5%9E%8B%E6%A3%80%E6%B5%8B.html"},"url":"/blog/2020/07/24/JS%E7%9A%84%E7%B1%BB%E5%9E%8B%E6%A3%80%E6%B5%8B.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">JS的类型检测</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2020-07-24T00:00:00+00:00" itemprop="datePublished">Jul 24, 2020
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2020"><i>2020</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/javascript"><i>javascript</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>类型是值的内部特征，它定义了值的行为，以使其区别于其他值。</p>
+
+<p>JavaScript 的数据类型分为两类：原始类型（primitive type）和对象类型（object type）。一共有七种内置类型：</p>
+
+<ul>
+  <li>数字(number)</li>
+  <li>字符串(string)</li>
+  <li>布尔值(boolean)</li>
+  <li>空值(null)</li>
+  <li>未定义(undefined)</li>
+  <li>符号(symbol)</li>
+  <li>对象(object)</li>
+</ul>
+
+<p>检测基本类型的值使用 typeof 操作符会比较合适，检测引用类型的值 instanceof 操作符会比较好用。</p>
+
+<h2 id="typeof">typeof</h2>
+
+<p>语法：<code class="language-plaintext highlighter-rouge">typeof operand</code> 或者 <code class="language-plaintext highlighter-rouge">typeof(operand)</code></p>
+
+<p>typeof 返回的结果是字符串，有以下：</p>
+
+<ul>
+  <li>“undefined”</li>
+  <li>“boolean”</li>
+  <li>“string”</li>
+  <li>“number”</li>
+  <li>“object”</li>
+  <li>“symbol”</li>
+  <li>“function”</li>
+</ul>
+
+<h3 id="两种特殊情况">两种特殊情况</h3>
+
+<ol>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">typeof null</code> 会返回 “object”，因为特殊值 null 被认为是一个空的对象引用。</p>
+
+    <p>使用复合条件检测 null 类型:</p>
+
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+<span class="o">!</span><span class="nx">a</span> <span class="o">&amp;&amp;</span> <span class="k">typeof</span> <span class="nx">a</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">object</span><span class="dl">'</span><span class="p">;</span> <span class="c1">// true</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">typeof &lt;function&gt;</code> 会返回 “function”</p>
+
+    <p>函数 function 在 ECMAScript 中不是一种数据类型，实际上是 object 中的一个“子类型”。</p>
+  </li>
+</ol>
+
+<h2 id="undeclared">undeclared</h2>
+
+<p>已在作用域中声明但未赋值的变量，是 undefined 的。还没有在作用域中声明过的变量，是 undeclared 的。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">a</span><span class="p">;</span>
+<span class="nx">a</span><span class="p">;</span> <span class="c1">// undefined</span>
+<span class="nx">b</span><span class="p">;</span> <span class="c1">// ReferenceError: b is not defined</span>
+</code></pre></div></div>
+
+<p>“undefined” 和 “is not defined” 不是同一回事。</p>
+
+<p>注意：但是 typeof 处理 undeclared 变量又很特别</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">a</span><span class="p">;</span>
+<span class="k">typeof</span> <span class="nx">a</span><span class="p">;</span> <span class="c1">// "undefined"</span>
+<span class="k">typeof</span> <span class="nx">b</span><span class="p">;</span> <span class="c1">// "undefined"</span>
+</code></pre></div></div>
+
+<h2 id="instanceof">instanceof</h2>
+
+<p>语法：<code class="language-plaintext highlighter-rouge">object instanceof constructor</code>，返回的是 boolean 值</p>
+
+<p>注意：</p>
+
+<ol>
+  <li>所有的引用类型的值都是 Object 的实例。因此，在检测一个引用类型值和 Object 构造函数时，instanceof 操作符始终返回 true。</li>
+  <li>如果使用 instanceof 操作符检测基本类型的值，则该操作符始终返回 false，因为基本类型不是对象。</li>
+</ol>
+
+<h2 id="constructor">constructor</h2>
+
+<p>每个对象实例可以通过 constructor 对象访问其构造函数。可以以此来判断一些内置构造函数：Object、Array、Function、Date、RegExp、Map、Set、String 等。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">date</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Date</span><span class="p">();</span>
+<span class="kd">const</span> <span class="kd">set</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Set</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">map</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Map</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">reg</span> <span class="o">=</span> <span class="sr">/</span><span class="se">\w</span><span class="sr">/</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="kd">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{};</span>
+
+<span class="nx">date</span><span class="p">.</span><span class="kd">constructor</span> <span class="o">===</span> <span class="nb">Date</span><span class="p">;</span> <span class="c1">// true</span>
+<span class="kd">set</span><span class="p">.</span><span class="kd">constructor</span> <span class="o">===</span> <span class="nb">Set</span><span class="p">;</span> <span class="c1">// true</span>
+<span class="nx">map</span><span class="p">.</span><span class="kd">constructor</span> <span class="o">===</span> <span class="nb">Map</span><span class="p">;</span> <span class="c1">// true</span>
+<span class="nx">reg</span><span class="p">.</span><span class="kd">constructor</span> <span class="o">===</span> <span class="nb">RegExp</span><span class="p">;</span> <span class="c1">// true</span>
+<span class="nx">arr</span><span class="p">.</span><span class="kd">constructor</span> <span class="o">===</span> <span class="nb">Array</span><span class="p">;</span> <span class="c1">// true</span>
+<span class="nx">obj</span><span class="p">.</span><span class="kd">constructor</span> <span class="o">===</span> <span class="nb">Object</span><span class="p">;</span> <span class="c1">// true</span>
+</code></pre></div></div>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li>《JavaScript 高级程序设计（第 3 版）》</li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof">MDN: typeof</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/instanceof">MDN: instanceof</a></li>
+  <li>《你不知道的 JavaScript（中）》第一章</li>
+  <li><a href="https://www.jb51.net/article/190286.htm">JS数据类型判断的几种常用方法</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2020/07/24/JS%E7%9A%84%E7%B1%BB%E5%9E%8B%E6%A3%80%E6%B5%8B.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

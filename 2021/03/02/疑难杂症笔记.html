@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>疑难杂症笔记 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="疑难杂症笔记" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="记录日常中遇到的一些奇奇怪怪的问题以及解决方法。" />
+<meta property="og:description" content="记录日常中遇到的一些奇奇怪怪的问题以及解决方法。" />
+<link rel="canonical" href="/blog/2021/03/02/%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87%E7%AC%94%E8%AE%B0.html" />
+<meta property="og:url" content="/blog/2021/03/02/%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87%E7%AC%94%E8%AE%B0.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-03-02T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="疑难杂症笔记" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2021-03-02T00:00:00+00:00","datePublished":"2021-03-02T00:00:00+00:00","description":"记录日常中遇到的一些奇奇怪怪的问题以及解决方法。","headline":"疑难杂症笔记","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2021/03/02/%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87%E7%AC%94%E8%AE%B0.html"},"url":"/blog/2021/03/02/%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87%E7%AC%94%E8%AE%B0.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">疑难杂症笔记</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-03-02T00:00:00+00:00" itemprop="datePublished">Mar 2, 2021
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2021"><i>2021</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/others"><i>others</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/linux"><i>linux</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>记录日常中遇到的一些奇奇怪怪的问题以及解决方法。</p>
+
+<!-- vim-markdown-toc GFM -->
+
+<ul>
+  <li><a href="#杀死-nohup-进程">杀死 nohup 进程</a></li>
+  <li><a href="#为硬件保留的内存">为硬件保留的内存</a></li>
+  <li><a href="#ssh-链接-github-错误">ssh 链接 github 错误</a></li>
+  <li><a href="#ssh-链接服务器闲置容易断开">SSH 链接服务器闲置容易断开</a></li>
+  <li><a href="#postman-配置证书">PostMan 配置证书</a>
+    <ul>
+      <li><a href="#添加-ca-证书">添加 CA 证书</a></li>
+      <li><a href="#添加客户端证书">添加客户端证书</a></li>
+    </ul>
+  </li>
+</ul>
+
+<!-- vim-markdown-toc -->
+
+<h2 id="杀死-nohup-进程">杀死 nohup 进程</h2>
+
+<p>nohup 的进程会挂载在后台运行，直接 <code class="language-plaintext highlighter-rouge">Ctrl + C</code> 不会退出进程，需要查询对应的进程 PID，杀死对应的进程。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ps <span class="nt">-ef</span> | <span class="nb">grep</span> &lt;process&gt;
+<span class="nb">kill </span>PID
+</code></pre></div></div>
+
+<h2 id="为硬件保留的内存">为硬件保留的内存</h2>
+
+<p>可能是一张内存条加载失败，关机断开电源，再重新启动。</p>
+
+<p>如果上述无法解决，<code class="language-plaintext highlighter-rouge">win + r</code> 输入 <code class="language-plaintext highlighter-rouge">msconfig</code>，进入引导标签页，点击高级选项，勾选最大内存，重启。重启之后取消勾选上述最大内存的选项，再重启一遍。</p>
+
+<h2 id="ssh-链接-github-错误">ssh 链接 github 错误</h2>
+
+<p>链接：<a href="https://docs.github.com/en/authentication/troubleshooting-ssh/using-ssh-over-the-https-port">Using SSH over the HTTPS port</a></p>
+
+<p>编辑 <code class="language-plaintext highlighter-rouge">~/.ssh/config</code> 文件，添加下面的内容</p>
+
+<pre><code class="language-plain">Host github.com
+Hostname ssh.github.com
+Port 443
+User git
+</code></pre>
+
+<h2 id="ssh-链接服务器闲置容易断开">SSH 链接服务器闲置容易断开</h2>
+
+<ol>
+  <li>
+    <p>编辑配置文件</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vim /etc/ssh/sshd_config
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>修改以下内容,分别对应客户端每隔多少秒发送心跳包,客户端多少秒没响应就断开链接</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#ClientAliveInterval 0</span>
+<span class="c">#ClientAliveCountMax 3</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>重启 sshd 服务</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>service sshd restart
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="postman-配置证书">PostMan 配置证书</h2>
+
+<p>PostMan 证书有两个，CA 证书和客户端证书。</p>
+
+<p>添加自定义的 CA 证书可以向端点发送请求而无需关闭 SSL 验证。</p>
+
+<p>要链接到使用双向 TLS(mTLS)的 API，需要将客户端证书添加到 PostMan 中。</p>
+
+<h3 id="添加-ca-证书">添加 CA 证书</h3>
+
+<p>为避免出现在发送请求时出现“自签名证书”的错误，需要将自定义的 CA 证书添加到 PostMan</p>
+
+<ol>
+  <li>打开 CA Certificates 的开关</li>
+  <li>导入对应的 PEM 文件</li>
+</ol>
+
+<h3 id="添加客户端证书">添加客户端证书</h3>
+
+<p>添加客户端证书，需要点击 Add Certificate 按钮。</p>
+
+<pre><code class="language-plain">.pfx 同时包含公钥和私钥信息
+.cer 为客户端密钥的公钥
+.key 为客户端密钥的私钥
+passphrase 为客户端密钥的密码
+</code></pre>
+
+<ul>
+  <li>Host 字段支持模式匹配，如 <code class="language-plaintext highlighter-rouge">*.example.com</code>，默认端口为 443。</li>
+  <li>可以选择 CRT 文件（证书）和 KEY 文件（私钥）进行导入。也可以选择 PFX 文件导入，选择其中一种方式导入即可。</li>
+</ul>
+
+<p>参考资料：</p>
+
+<ul>
+  <li><a href="https://www.w3cschool.cn/postman/postman-uses-certificates.html">Postman 使用证书</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2021/03/02/%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87%E7%AC%94%E8%AE%B0.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

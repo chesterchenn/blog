@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>React Hooks 中的闭包陷阱 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="React Hooks 中的闭包陷阱" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="React Hooks 中的闭包，指函数式组件每次 render 都会产生一个新的函数，这个函数会产生一个在当前阶段的闭包。" />
+<meta property="og:description" content="React Hooks 中的闭包，指函数式组件每次 render 都会产生一个新的函数，这个函数会产生一个在当前阶段的闭包。" />
+<link rel="canonical" href="/blog/2023/05/16/react-hooks%E4%B8%AD%E7%9A%84%E9%97%AD%E5%8C%85%E9%99%B7%E9%98%B1.html" />
+<meta property="og:url" content="/blog/2023/05/16/react-hooks%E4%B8%AD%E7%9A%84%E9%97%AD%E5%8C%85%E9%99%B7%E9%98%B1.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-05-16T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="React Hooks 中的闭包陷阱" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-05-16T00:00:00+00:00","datePublished":"2023-05-16T00:00:00+00:00","description":"React Hooks 中的闭包，指函数式组件每次 render 都会产生一个新的函数，这个函数会产生一个在当前阶段的闭包。","headline":"React Hooks 中的闭包陷阱","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2023/05/16/react-hooks%E4%B8%AD%E7%9A%84%E9%97%AD%E5%8C%85%E9%99%B7%E9%98%B1.html"},"url":"/blog/2023/05/16/react-hooks%E4%B8%AD%E7%9A%84%E9%97%AD%E5%8C%85%E9%99%B7%E9%98%B1.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">React Hooks 中的闭包陷阱</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2023-05-16T00:00:00+00:00" itemprop="datePublished">May 16, 2023
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2023"><i>2023</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/react"><i>react</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>React Hooks 中的闭包，指函数式组件每次 render 都会产生一个新的函数，这个函数会产生一个在当前阶段的闭包。</p>
+
+<p>最近在工作中刚好遇到这个问题，经过一些资料的查阅，总结出一部分总结。</p>
+
+<!-- vim-markdown-toc GFM -->
+
+<ul>
+  <li><a href="#问题">问题</a></li>
+  <li><a href="#解决方案">解决方案</a></li>
+  <li><a href="#原因">原因</a></li>
+  <li><a href="#其他例子">其他例子</a></li>
+  <li><a href="#使用-useref-解决闭包陷阱">使用 useRef 解决闭包陷阱</a></li>
+  <li><a href="#参考链接">参考链接</a></li>
+</ul>
+
+<!-- vim-markdown-toc -->
+
+<h2 id="问题">问题</h2>
+
+<p>以下是一个简化版本的代码示例：</p>
+
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">():</span> <span class="nx">React</span><span class="p">.</span><span class="nx">ReactElement</span> <span class="o">|</span> <span class="kc">null</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">count</span><span class="p">,</span> <span class="nx">setCount</span><span class="p">]</span> <span class="o">=</span> <span class="nf">useState</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">handleCount</span><span class="p">,</span> <span class="nx">setHanleCount</span><span class="p">]</span> <span class="o">=</span> <span class="nf">useState</span><span class="p">({</span>
+    <span class="na">action</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{},</span>
+  <span class="p">});</span>
+
+  <span class="nf">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nf">setHanleCount</span><span class="p">({</span>
+      <span class="na">action</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nf">setCount</span><span class="p">(</span><span class="nx">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="p">});</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+
+  <span class="k">return </span><span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="nx">handleCount</span><span class="p">.</span><span class="nx">action</span><span class="si">}</span><span class="p">&gt;</span>Click<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">count</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p><a href="https://codesandbox.io/s/capture-2l2vq5">https://codesandbox.io/s/capture-2l2vq5</a></p>
+
+<p>上面例子中，Button 组件的 action 需要依赖父组件传递。当我们点击了一次按钮之后，count 变成 1，之后再点击不会增加。</p>
+
+<h2 id="解决方案">解决方案</h2>
+
+<p>如果你安装 <a href="https://www.npmjs.com/package/eslint-plugin-react-hooks">eslint-plugin-react-hooks</a> 插件，会得到下面的警告提示，提示我们使用 <code class="language-plaintext highlighter-rouge">useEffect</code> 缺少 count 的依赖。</p>
+
+<p><code class="language-plaintext highlighter-rouge">React Hook useEffect has a missing dependency: 'count'. Either include it or remove the dependency array. You can also do a functional update 'setCount(c =&gt; ...)' if you only need 'count' in the 'setCount' call. (react-hooks/exhaustive-deps)</code></p>
+
+<p>从上面的 eslint 插件中，我们可以快速修复这个问题。</p>
+
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nf">setHanleCount</span><span class="p">({</span>
+    <span class="na">action</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nf">setCount</span><span class="p">(</span><span class="nx">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span>
+  <span class="p">});</span>
+<span class="p">},</span> <span class="p">[</span><span class="nx">count</span><span class="p">]);</span>
+</code></pre></div></div>
+
+<h2 id="原因">原因</h2>
+
+<p>在 React Fiber 架构中，Fiber 节点就是一个组件，其 Hook 节点类型大致如下:</p>
+
+<div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">Hook</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">memoizedState</span><span class="p">:</span> <span class="kr">any</span><span class="p">;</span>
+  <span class="nl">baseState</span><span class="p">:</span> <span class="kr">any</span><span class="p">;</span>
+  <span class="nl">baseUpdate</span><span class="p">:</span> <span class="nx">Update</span><span class="o">&lt;</span><span class="kr">any</span><span class="p">,</span> <span class="kr">any</span><span class="o">&gt;</span> <span class="o">|</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="nl">queue</span><span class="p">:</span> <span class="nx">Update</span><span class="o">&lt;</span><span class="kr">any</span><span class="p">,</span> <span class="kr">any</span><span class="o">&gt;</span> <span class="o">|</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="nl">next</span><span class="p">:</span> <span class="nx">Hook</span> <span class="o">|</span> <span class="kc">null</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>memoizedState 用来存放组件的 state，next 指向 Hook 对象。由于不知道开发者会使用多少个 Hook，所以 Hook 都是链表存储的来保证调用的顺序。</p>
+
+<p>假设我们有如下的代码，则对应的链表为：</p>
+
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">App</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[]</span> <span class="o">=</span> <span class="nf">useState</span><span class="p">();</span>
+  <span class="kd">const</span> <span class="p">[]</span> <span class="o">=</span> <span class="nf">useState</span><span class="p">();</span>
+  <span class="nf">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{},</span> <span class="p">[]);</span>
+  <span class="nf">useMemo</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{},</span> <span class="p">[]);</span>
+  <span class="kd">const</span> <span class="p">[]</span> <span class="o">=</span> <span class="nf">useState</span><span class="p">();</span>
+
+  <span class="k">return</span> <span class="p">&lt;&gt;&lt;/&gt;;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><img src="/blog/images/react-hook-chain.png" alt="" class="img--center" /></p>
+
+<p>当我们每次渲染更新的时候，react 会对 <code class="language-plaintext highlighter-rouge">useEffect</code> 和 <code class="language-plaintext highlighter-rouge">useMemo</code> 的依赖项进行判断是否改变，有更新会执行回调函数，否则跳过。</p>
+
+<p>回到原先的问题上，react 进行组件渲染调用组件函数，函数执行创建了函数作用域。组件在初次渲染时，count 为 0，点击之后组件重新渲染，创建新的作用域，但是 <code class="language-plaintext highlighter-rouge">useEffect</code> 的依赖项未更新，其回调函数被跳过执行，里面的 count 变量引用的还是组件初始化的值。</p>
+
+<p>所以 hooks 产生闭包陷阱的原因是依赖项缺失，在渲染过程中 hooks 的依赖项未更新跳过，内部函数依赖也是未更新前的值。</p>
+
+<h2 id="其他例子">其他例子</h2>
+
+<p>在下面例子中，先点击 alert 按钮，后面点击 add 按钮，那么弹窗的值和页面展示的 value 是什么？</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">FunctionComponent</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">value</span><span class="p">,</span> <span class="nx">setValue</span><span class="p">]</span> <span class="o">=</span> <span class="nf">useState</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+  <span class="kd">const</span> <span class="nx">log</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nf">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nf">alert</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+    <span class="p">},</span> <span class="mi">3000</span><span class="p">);</span>
+  <span class="p">};</span>
+
+  <span class="k">return </span><span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>value: <span class="si">{</span><span class="nx">value</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="nx">log</span><span class="si">}</span><span class="p">&gt;</span>alert<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nf">setValue</span><span class="p">(</span><span class="nx">value</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="p">&gt;</span>add<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>答案是：弹出的值是 1，页面的值是 2</p>
+
+<p>我们发现弹出的值和当前页面显示的值不相同，这个就是一个闭包陷阱。</p>
+
+<ol>
+  <li>初次渲染，生成一个 log 函数（value = 1）</li>
+  <li>点击 alert 按钮，执行 log 函数（value = 1）</li>
+  <li>点击 add 按钮，value 的值增加，组件重新渲染，生成一个新的 log 函数（value = 2）</li>
+  <li>计时器触发，log 函数（value = 1）弹出闭包内的 value</li>
+</ol>
+
+<h2 id="使用-useref-解决闭包陷阱">使用 useRef 解决闭包陷阱</h2>
+
+<p>使用 useRef 每次渲染是都返回同一个引用类型的对象，读取和设置 value 都在这个对象上处理。</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">FunctionComponent</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">value</span><span class="p">,</span> <span class="nx">setValue</span><span class="p">]</span> <span class="o">=</span> <span class="nf">useState</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+  <span class="kd">const</span> <span class="nx">countRef</span> <span class="o">=</span> <span class="nf">useRef</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+
+  <span class="kd">const</span> <span class="nx">log</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nf">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nf">alert</span><span class="p">(</span><span class="nx">countRef</span><span class="p">.</span><span class="nx">current</span><span class="p">);</span>
+    <span class="p">},</span> <span class="mi">3000</span><span class="p">);</span>
+  <span class="p">};</span>
+
+  <span class="nf">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">countRef</span><span class="p">.</span><span class="nx">current</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">value</span><span class="p">]);</span>
+
+  <span class="k">return </span><span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>value: <span class="si">{</span><span class="nx">value</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="nx">log</span><span class="si">}</span><span class="p">&gt;</span>alert<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nf">setValue</span><span class="p">(</span><span class="nx">value</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="p">&gt;</span>add<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="https://fe.ecool.fun/topic/207b117b-2e93-4760-91ed-8e618a85a50e?orderBy=updateTime&amp;order=desc&amp;tagId=13">闭包陷阱</a></li>
+  <li><a href="https://juejin.cn/post/7093699777556119565">从 react hooks“闭包陷阱”切入，浅谈 react hooks</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/356409759">React Hooks useState 返回的 setState 方法不生效怎么办?</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2023/05/16/react-hooks%E4%B8%AD%E7%9A%84%E9%97%AD%E5%8C%85%E9%99%B7%E9%98%B1.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>ES6 Features | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="ES6 Features" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="ECMAScript 6，也称为 ECMAScript 2015，是 ECMAScript 最新版本(注: 已经不是最新版本)。ES6 对于这门语言来说是一个很重要的更新，而且这是 2009 年后的 ES5 标准之后的第一次更新。现在主流的 JavaScript 引擎都已经实现这些功能——查看详情。" />
+<meta property="og:description" content="ECMAScript 6，也称为 ECMAScript 2015，是 ECMAScript 最新版本(注: 已经不是最新版本)。ES6 对于这门语言来说是一个很重要的更新，而且这是 2009 年后的 ES5 标准之后的第一次更新。现在主流的 JavaScript 引擎都已经实现这些功能——查看详情。" />
+<link rel="canonical" href="/blog/2018/07/24/ES6.html" />
+<meta property="og:url" content="/blog/2018/07/24/ES6.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-07-24T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="ES6 Features" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2018-07-24T00:00:00+00:00","datePublished":"2018-07-24T00:00:00+00:00","description":"ECMAScript 6，也称为 ECMAScript 2015，是 ECMAScript 最新版本(注: 已经不是最新版本)。ES6 对于这门语言来说是一个很重要的更新，而且这是 2009 年后的 ES5 标准之后的第一次更新。现在主流的 JavaScript 引擎都已经实现这些功能——查看详情。","headline":"ES6 Features","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2018/07/24/ES6.html"},"url":"/blog/2018/07/24/ES6.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">ES6 Features</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2018-07-24T00:00:00+00:00" itemprop="datePublished">Jul 24, 2018
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2018"><i>2018</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/javascript"><i>javascript</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>ECMAScript 6，也称为 ECMAScript 2015，是 ECMAScript 最新版本(注: 已经不是最新版本)。ES6 对于这门语言来说是一个很重要的更新，而且这是 2009 年后的 ES5 标准之后的第一次更新。现在主流的 JavaScript 引擎都已经实现这些功能——<a href="http://kangax.github.io/compat-table/es6/">查看详情</a>。</p>
+
+<p>By <a href="https://github.com/lukehoban">lukehoban</a></p>
+
+<p>原文地址：<a href="https://github.com/lukehoban/es6features">lukehoban/es6features</a></p>
+
+<p>这里你可以查看<a href="http://www.ecma-international.org/ecma-262/6.0/">ES6 规范</a>的全部标准。</p>
+
+<p>ES6 包含以下新功能：</p>
+
+<ul>
+  <li><a href="#arrows-箭头函数">arrows 箭头函数</a></li>
+  <li><a href="#classes-类">classes 类</a></li>
+  <li><a href="#enhanced-object-literals-对象字面量">enhanced object literals 对象字面量</a></li>
+  <li><a href="#template-strings-字符串模版">template strings 字符串模版</a></li>
+  <li><a href="#destructuring-解构赋值">destructuring 解构赋值</a></li>
+  <li><a href="#default--rest--spread-默认值rest-参数扩展运算符">default + rest + spread 默认值/rest 参数/扩展运算符</a></li>
+  <li><a href="#let--const">let + const</a></li>
+  <li><a href="#iterators--forof-迭代器forof">iterators + for..of 迭代器/for..of</a></li>
+  <li><a href="#generators-生成器">generators 生成器</a></li>
+  <li><a href="#unicode-统一码">Unicode 统一码</a></li>
+  <li><a href="#modules-模块">modules 模块</a></li>
+  <li><a href="#module-loaders-模块加载器">module loaders 模块加载器</a></li>
+  <li><a href="#map--set--weakmap--weakset">Map + Set + Weakmap + Weakset</a></li>
+  <li><a href="#proxies-代理">proxies 代理</a></li>
+  <li><a href="#symbols-符号">symbols 符号</a></li>
+  <li><a href="#subclassable-built-ins-内置子类">subclassable built-ins 内置子类</a></li>
+  <li><a href="#promises">promises</a></li>
+  <li><a href="#math--number--string--array--object-apis">Math + Number + String + Array + Object APIs</a></li>
+  <li><a href="#binary-and-octal-literals-二进制和八进制字面量">binary and octal literals 二进制和八进制字面量</a></li>
+  <li><a href="#reflect-api">Reflect Api</a></li>
+  <li><a href="#tail-calls-尾调用">tail calls 尾调用</a></li>
+</ul>
+
+<h2 id="ecmascript-6-功能">ECMAScript 6 功能</h2>
+
+<h3 id="arrows-箭头函数">Arrows 箭头函数</h3>
+
+<p>箭头函数是使用<code class="language-plaintext highlighter-rouge">=&gt;</code>符号简写的函数。它们在语法上类似于 C#，Java 8 以及 CoffeeScript 中的功能。他们对于语句式体和表达式体(直接返回值)都有很好的支持。不同于普通函数，箭头函数不绑定 <code class="language-plaintext highlighter-rouge">this</code>, 从自己作用域上一层继承 <code class="language-plaintext highlighter-rouge">this</code></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 表达式体</span>
+<span class="kd">var</span> <span class="nx">odds</span> <span class="o">=</span> <span class="nx">evens</span><span class="p">.</span><span class="nf">map</span><span class="p">((</span><span class="nx">v</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">v</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">nums</span> <span class="o">=</span> <span class="nx">evens</span><span class="p">.</span><span class="nf">map</span><span class="p">((</span><span class="nx">v</span><span class="p">,</span> <span class="nx">i</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">v</span> <span class="o">+</span> <span class="nx">i</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">pairs</span> <span class="o">=</span> <span class="nx">evens</span><span class="p">.</span><span class="nf">map</span><span class="p">((</span><span class="nx">v</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">({</span> <span class="na">even</span><span class="p">:</span> <span class="nx">v</span><span class="p">,</span> <span class="na">odd</span><span class="p">:</span> <span class="nx">v</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">}));</span>
+
+<span class="c1">// 语句式体</span>
+<span class="nx">nums</span><span class="p">.</span><span class="nf">forEach</span><span class="p">((</span><span class="nx">v</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">v</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="nx">fives</span><span class="p">.</span><span class="nf">push</span><span class="p">(</span><span class="nx">v</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="c1">// 词法this</span>
+<span class="kd">var</span> <span class="nx">bob</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">_name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Bob</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">_friends</span><span class="p">:</span> <span class="p">[],</span>
+  <span class="nf">printFriends</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">_friend</span><span class="p">.</span><span class="nf">forEach</span><span class="p">((</span><span class="nx">f</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">_this</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="dl">'</span><span class="s1"> knows </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">f</span><span class="p">));</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>更多信息: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions">MDN Arrow Functions</a></p>
+
+<h3 id="classes-类">Classes 类</h3>
+
+<p>ES6 的类是基于原型继承的面向对象简易语法糖，这使得有一个更方便的类声明去使用，并鼓励互通性。类支持基于原型继承，<code class="language-plaintext highlighter-rouge">super</code>调用，实例化，静态方法以及 <code class="language-plaintext highlighter-rouge">constructor</code>构造。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">SkinnedMesh</span> <span class="kd">extends</span> <span class="nc">THREE</span><span class="p">.</span><span class="nx">Mesh</span> <span class="p">{</span>
+  <span class="nf">constructor</span><span class="p">(</span><span class="nx">geometry</span><span class="p">,</span> <span class="nx">materials</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">(</span><span class="nx">geometry</span><span class="p">,</span> <span class="nx">materials</span><span class="p">);</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">idMatrix</span> <span class="o">=</span> <span class="nx">SkinnedMesh</span><span class="p">.</span><span class="nf">defaultMatrix</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">bones</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">boneMatrices</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="c1">//...</span>
+  <span class="p">}</span>
+  <span class="nf">update</span><span class="p">(</span><span class="nx">camera</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//...</span>
+    <span class="k">super</span><span class="p">.</span><span class="nf">update</span><span class="p">();</span>
+  <span class="p">}</span>
+  <span class="kd">get</span> <span class="nf">boneCount</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">bones</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="kd">set</span> <span class="nf">matrixType</span><span class="p">(</span><span class="nx">matrixType</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">idMatrix</span> <span class="o">=</span> <span class="nx">SkinnedMesh</span><span class="p">[</span><span class="nx">matrixType</span><span class="p">]();</span>
+  <span class="p">}</span>
+  <span class="kd">static</span> <span class="nf">defaultMatrix</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nc">Matrix4</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>更多信息: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes">MDN Classes</a></p>
+
+<h3 id="enhanced-object-literals-对象字面量">Enhanced object literals 对象字面量</h3>
+
+<p>对象字面量被扩展至支持在构造时设置原型，简写了 <code class="language-plaintext highlighter-rouge">foo: foo</code> 的赋值，定义方法，<code class="language-plaintext highlighter-rouge">super</code>调用以及通过表达式计算属性名。同时，这些使对象字面值和类声明更加紧密地联系起来，让基于对象的设计从中受益更加便利。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// __proto__</span>
+  <span class="na">__proto__</span><span class="p">:</span> <span class="nx">theProtoObj</span><span class="p">,</span>
+  <span class="c1">// 简写赋值：‘handler: handler’</span>
+  <span class="nx">handler</span><span class="p">,</span>
+  <span class="c1">// 方法</span>
+  <span class="nf">toString</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Super调用</span>
+    <span class="k">return</span> <span class="dl">'</span><span class="s1">d </span><span class="dl">'</span> <span class="o">+</span> <span class="k">super</span><span class="p">.</span><span class="nf">toString</span><span class="p">();</span>
+  <span class="p">},</span>
+  <span class="c1">// （动态）计算属性名称</span>
+  <span class="p">[</span><span class="dl">'</span><span class="s1">prop_</span><span class="dl">'</span> <span class="o">+</span> <span class="p">(()</span> <span class="o">=&gt;</span> <span class="mi">42</span><span class="p">)()]:</span> <span class="mi">42</span><span class="p">,</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>更多信息: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#Enhanced_Object_literals">MDN Grammar and types: Enhanced Object literals</a></p>
+
+<h3 id="template-strings-字符串模版">Template strings 字符串模版</h3>
+
+<p>字符串模版为构建字符串提供了语法糖，这有点像 Perl, Python 等字符串插值功能。可选的，允许添加标签来自定义字符串模版，避免注入攻击或者从字符串内容中构建更加高级别的数据结构。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 创建基本字符串面量</span>
+<span class="s2">`In JavaScript '\n' is a line-feed.`</span> <span class="c1">// 多行字符串</span>
+<span class="s2">`In JavaScript this is
+ not legal.`</span><span class="p">;</span>
+
+<span class="c1">// 字符串插值</span>
+<span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Bob</span><span class="dl">'</span><span class="p">,</span>
+  <span class="nx">time</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">today</span><span class="dl">'</span><span class="p">;</span>
+<span class="s2">`Hello </span><span class="p">${</span><span class="nx">name</span><span class="p">}</span><span class="s2">, how are you </span><span class="p">${</span><span class="nx">time</span><span class="p">}</span><span class="s2">?`</span><span class="p">;</span>
+
+<span class="c1">// 构建一个HTTP请求前缀使用插值的替换和构造</span>
+<span class="nx">POST</span><span class="s2">`http://foo.org/bar?a=</span><span class="p">${</span><span class="nx">a</span><span class="p">}</span><span class="s2">&amp;b=</span><span class="p">${</span><span class="nx">b</span><span class="p">}</span><span class="s2">
+     Content-Type: application/json
+     X-Credentials: </span><span class="p">${</span><span class="nx">credentials</span><span class="p">}</span><span class="s2">
+     { "foo": </span><span class="p">${</span><span class="nx">foo</span><span class="p">}</span><span class="s2">,
+       "bar": </span><span class="p">${</span><span class="nx">bar</span><span class="p">}</span><span class="s2">}`</span><span class="p">(</span><span class="nx">myOnReadyStateChangeHandler</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>更多信息: <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/template_strings">MDN Template Strings</a></p>
+
+<h3 id="destructuring-解构赋值">Destructuring 解构赋值</h3>
+
+<p>解构赋值允许使用模式匹配进行绑定，并支持匹配数组和对象。解构能够故障弱化，在查找类似于标准对象 <code class="language-plaintext highlighter-rouge">foo["bar"]</code>，当未找到时会提供 <code class="language-plaintext highlighter-rouge">undefined</code>值。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 匹配数组</span>
+<span class="kd">var</span> <span class="p">[</span><span class="nx">a</span><span class="p">,</span> <span class="p">,</span> <span class="nx">b</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">];</span>
+
+<span class="c1">// 匹配对象</span>
+<span class="kd">var</span> <span class="p">{</span>
+  <span class="na">op</span><span class="p">:</span> <span class="nx">a</span><span class="p">,</span>
+  <span class="na">lhs</span><span class="p">:</span> <span class="p">{</span> <span class="na">op</span><span class="p">:</span> <span class="nx">b</span> <span class="p">},</span>
+  <span class="na">rhs</span><span class="p">:</span> <span class="nx">c</span><span class="p">,</span>
+<span class="p">}</span> <span class="o">=</span> <span class="nf">getASTNode</span><span class="p">();</span>
+
+<span class="c1">// 匹配对象作用域的'op', 'lhs', 'rhs'</span>
+<span class="kd">var</span> <span class="p">{</span> <span class="nx">op</span><span class="p">,</span> <span class="nx">lhs</span><span class="p">,</span> <span class="nx">rhs</span> <span class="p">}</span> <span class="o">=</span> <span class="nf">getASTNode</span><span class="p">();</span>
+
+<span class="c1">// 作为参数</span>
+<span class="kd">function</span> <span class="nf">g</span><span class="p">({</span> <span class="na">name</span><span class="p">:</span> <span class="nx">x</span> <span class="p">})</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nf">g</span><span class="p">({</span> <span class="na">name</span><span class="p">:</span> <span class="mi">5</span> <span class="p">});</span>
+
+<span class="c1">// 解构故障弱化</span>
+<span class="kd">var</span> <span class="p">[</span><span class="nx">a</span><span class="p">]</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="nx">a</span> <span class="o">===</span> <span class="kc">undefined</span><span class="p">;</span>
+
+<span class="c1">// 带默认值的的解构赋值故障弱化</span>
+<span class="kd">var</span> <span class="p">[</span><span class="nx">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="nx">a</span> <span class="o">===</span> <span class="mi">1</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>更多信息：<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment">MDN Destructuring assignment</a></p>
+
+<h3 id="default--rest--spread-默认值rest-参数扩展运算符">Default + rest + spread 默认值/rest 参数/扩展运算符</h3>
+
+<p>在函数调用中可以指定默认参数值，将数组转换成连续参数，绑定尾部参数到数组中。rest 替代了<code class="language-plaintext highlighter-rouge">arguments</code>的需求，并更直接地解决了问题。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">f</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span> <span class="o">=</span> <span class="mi">12</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// 如果y没有传值或者被传入undefined，那么y的值为12</span>
+  <span class="k">return</span> <span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nf">f</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">==</span> <span class="mi">15</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">f</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="p">...</span><span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// y是一个数组</span>
+  <span class="k">return</span> <span class="nx">x</span> <span class="o">*</span> <span class="nx">y</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nf">f</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span> <span class="o">==</span> <span class="mi">6</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">f</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">z</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span> <span class="o">+</span> <span class="nx">z</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// 传递数组里的每一个元素作为参数</span>
+<span class="nf">f</span><span class="p">(...[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span> <span class="o">==</span> <span class="mi">6</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>更多信息：<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters">Default parameters</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters">Rest parameters</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax">Spread Operator</a></p>
+
+<h3 id="let--const">Let + Const</h3>
+
+<p>绑定并构造块作用域。<code class="language-plaintext highlighter-rouge">let</code>是一个新的<code class="language-plaintext highlighter-rouge">var</code>,<code class="language-plaintext highlighter-rouge">const</code>只能声明一次。静态限制，防止使用之前已经被声明。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">f</span><span class="p">()</span> <span class="p">{</span>
+  <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">x</span><span class="p">;</span>
+    <span class="p">{</span>
+      <span class="c1">// 正常，块作用域里的名称</span>
+      <span class="kd">const</span> <span class="nx">x</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">sneaky</span><span class="dl">'</span><span class="p">;</span>
+      <span class="c1">// 错误，x是常量</span>
+      <span class="nx">x</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">foo</span><span class="dl">'</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">// 错误，在块里面已经被声明</span>
+    <span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">inner</span><span class="dl">'</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>更多信息: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let">let statement</a>,
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const">const statment</a></p>
+
+<h3 id="iterators--forof-迭代器forof">Iterators + for..of 迭代器/for..of</h3>
+
+<p>迭代对象能够自定义迭代，像 CLR 的 IEnumerable 或 Java 的 Iterable。总结来说，<code class="language-plaintext highlighter-rouge">for..of</code>是<code class="language-plaintext highlighter-rouge">for..in</code>的基础上自定义的迭代。不需要实现数组，启用了像 LINQ 惰性设计模式。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">fibonacci</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nb">Symbol</span><span class="p">.</span><span class="nx">iterator</span><span class="p">]()</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">pre</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="nx">cur</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="nf">next</span><span class="p">()</span> <span class="p">{</span>
+        <span class="p">[</span><span class="nx">pre</span><span class="p">,</span> <span class="nx">cur</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nx">cur</span><span class="p">,</span> <span class="nx">pre</span> <span class="o">+</span> <span class="nx">cur</span><span class="p">];</span>
+        <span class="k">return</span> <span class="p">{</span> <span class="na">done</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="nx">cur</span> <span class="p">};</span>
+      <span class="p">},</span>
+    <span class="p">};</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+
+<span class="k">for </span><span class="p">(</span><span class="kd">var</span> <span class="nx">n</span> <span class="k">of</span> <span class="nx">fibonacci</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// 缩减数列到1000</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">n</span> <span class="o">&gt;</span> <span class="mi">1000</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">n</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>迭代是基于鸭子类型接口(仅使用 TypeScript 语法作为展示)</p>
+
+<div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">interface</span> <span class="nx">IteratorResult</span> <span class="p">{</span>
+  <span class="nl">done</span><span class="p">:</span> <span class="nx">boolean</span><span class="p">;</span>
+  <span class="nl">value</span><span class="p">:</span> <span class="kr">any</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kr">interface</span> <span class="nx">Iterator</span> <span class="p">{</span>
+  <span class="nf">next</span><span class="p">():</span> <span class="nx">IteratorResult</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kr">interface</span> <span class="nx">Iterable</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nb">Symbol</span><span class="p">.</span><span class="nx">iterator</span><span class="p">]():</span> <span class="nx">Iterator</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>更多信息: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of">MDN for…of</a></p>
+
+<h3 id="generators-生成器">Generators 生成器</h3>
+
+<p>生成器是一个使用了<code class="language-plaintext highlighter-rouge">function*</code>和<code class="language-plaintext highlighter-rouge">yield</code>简易化迭代器生成的。一个函数作为<code class="language-plaintext highlighter-rouge">function*</code>声明时会返回一个生成器实例。生成器是迭代器的一个子类并且包含了额外的<code class="language-plaintext highlighter-rouge">next</code>和<code class="language-plaintext highlighter-rouge">throw</code>。这使得值能够流回生成器，所以<code class="language-plaintext highlighter-rouge">yield</code>是一个返回值(或者抛出)的表达式。</p>
+
+<p>注意：也可以用于启用’await’式的异步编程，请参考 ES7 <code class="language-plaintext highlighter-rouge">await</code> 提案。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">fibonacci</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nb">Symbol</span><span class="p">.</span><span class="nx">iterator</span><span class="p">]:</span> <span class="kd">function</span><span class="o">*</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">pre</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="nx">cur</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">for </span><span class="p">(;;)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">temp</span> <span class="o">=</span> <span class="nx">pre</span><span class="p">;</span>
+      <span class="nx">pre</span> <span class="o">=</span> <span class="nx">cur</span><span class="p">;</span>
+      <span class="nx">cur</span> <span class="o">+=</span> <span class="nx">temp</span><span class="p">;</span>
+      <span class="k">yield</span> <span class="nx">cur</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+
+<span class="k">for </span><span class="p">(</span><span class="kd">var</span> <span class="nx">n</span> <span class="k">of</span> <span class="nx">fibonacci</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// 缩减数列到1000</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">n</span> <span class="o">&gt;</span> <span class="mi">1000</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">n</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>生成器的接口是(仅使用 TypeScript 语法作为展示):</p>
+
+<div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">interface</span> <span class="nx">Generator</span> <span class="kd">extends</span> <span class="nx">Iterator</span> <span class="p">{</span>
+  <span class="nf">next</span><span class="p">(</span><span class="nx">value</span><span class="p">?:</span> <span class="kr">any</span><span class="p">):</span> <span class="nx">IteratorResult</span><span class="p">;</span>
+  <span class="k">throw</span><span class="p">(</span><span class="nx">exception</span><span class="p">:</span> <span class="kr">any</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>更多信息: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols">MDN iteration protocols</a></p>
+
+<h3 id="unicode-统一码">Unicode 统一码</h3>
+
+<p>非破坏性地增加支持统一码，包括了新的字符字面量统一码以及新的正则表达式<code class="language-plaintext highlighter-rouge">u</code>处理位码，以及新的 API 也可以在 21 位位码处理字符串。这些增加的功能支持在在 JavaScript 里面建立全局应用。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 等同于ES5.1</span>
+<span class="dl">'</span><span class="s1">𠮷</span><span class="dl">'</span><span class="p">.</span><span class="nx">length</span> <span class="o">==</span> <span class="mi">2</span><span class="p">;</span>
+
+<span class="c1">// 新的正则表达式, 内置‘u’</span>
+<span class="dl">'</span><span class="s1">𠮷</span><span class="dl">'</span><span class="p">.</span><span class="nf">match</span><span class="p">(</span><span class="sr">/./u</span><span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="nx">length</span> <span class="o">==</span> <span class="mi">2</span><span class="p">;</span>
+
+<span class="c1">// 新形式</span>
+<span class="p">(</span><span class="dl">'</span><span class="se">\</span><span class="s1">u{20BB7}</span><span class="dl">'</span> <span class="o">==</span> <span class="dl">'</span><span class="s1">𠮷</span><span class="dl">'</span><span class="p">)</span> <span class="o">==</span> <span class="dl">'</span><span class="se">\</span><span class="s1">uD842</span><span class="se">\</span><span class="s1">uDFB7</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="c1">// 新的字符串操作</span>
+<span class="dl">'</span><span class="s1">𠮷</span><span class="dl">'</span><span class="p">.</span><span class="nf">codePointAt</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mh">0x20bb7</span><span class="p">;</span>
+
+<span class="c1">// for-of迭代位码</span>
+<span class="k">for </span><span class="p">(</span><span class="kd">var</span> <span class="nx">c</span> <span class="k">of</span> <span class="dl">'</span><span class="s1">𠮷</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">c</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>更多信息: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/unicode">MDN RegExp.prototype.unicode</a></p>
+
+<h3 id="modules-模块">Modules 模块</h3>
+
+<p>语言级别地支持模块化的组件定义。借鉴于流行的 JavaScript 模块加载器(AMD, CommonJS)。运行期间的行为定义由主机默认加载器定义。隐式异步模型——在被请求的模块加载处理且可用之前，不会执行代码。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// lib/math.js</span>
+<span class="k">export</span> <span class="kd">function</span> <span class="nf">sum</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">export</span> <span class="kd">var</span> <span class="nx">pi</span> <span class="o">=</span> <span class="mf">3.141593</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app.js</span>
+<span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">math</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">lib/math</span><span class="dl">'</span><span class="p">;</span>
+<span class="nf">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">2π = </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">math</span><span class="p">.</span><span class="nf">sum</span><span class="p">(</span><span class="nx">math</span><span class="p">.</span><span class="nx">pi</span><span class="p">,</span> <span class="nx">math</span><span class="p">.</span><span class="nx">pi</span><span class="p">));</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// otherApp.js</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">sum</span><span class="p">,</span> <span class="nx">pi</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">lib/math</span><span class="dl">'</span><span class="p">;</span>
+<span class="nf">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">2π = </span><span class="dl">'</span> <span class="o">+</span> <span class="nf">sum</span><span class="p">(</span><span class="nx">pi</span><span class="p">,</span> <span class="nx">pi</span><span class="p">));</span>
+</code></pre></div></div>
+
+<p>一些额外的新增功能，包括<code class="language-plaintext highlighter-rouge">export default</code>以及<code class="language-plaintext highlighter-rouge">export *</code></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// lib/mathplusplus.js</span>
+<span class="k">export</span> <span class="o">*</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">lib/math</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">export</span> <span class="kd">var</span> <span class="nx">e</span> <span class="o">=</span> <span class="mf">2.71828182846</span><span class="p">;</span>
+<span class="k">export</span> <span class="k">default</span> <span class="nf">function </span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nb">Math</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app.js</span>
+<span class="k">import</span> <span class="nx">ln</span><span class="p">,</span> <span class="p">{</span> <span class="nx">pi</span><span class="p">,</span> <span class="nx">e</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">lib/mathplusplus</span><span class="dl">'</span><span class="p">;</span>
+<span class="nf">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">2π = </span><span class="dl">'</span> <span class="o">+</span> <span class="nf">ln</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">*</span> <span class="nx">pi</span> <span class="o">*</span> <span class="mi">2</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>更多信息: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import">import statement</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export">export statement</a></p>
+
+<h3 id="module-loaders-模块加载器">Module loaders 模块加载器</h3>
+
+<p>模块加载器支持：</p>
+
+<ul>
+  <li>动态加载</li>
+  <li>状态隔离</li>
+  <li>全局命名空间隔离</li>
+  <li>编译钩子</li>
+  <li>内嵌虚拟化</li>
+</ul>
+
+<p>默认的加载器能够被配置，同时在隔离或者上下文可以构造新加载器执行和加载代码。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 动态加载 – ‘System’ 是默认的加载器</span>
+<span class="nx">System</span><span class="p">.</span><span class="k">import</span><span class="p">(</span><span class="dl">'</span><span class="s1">lib/math</span><span class="dl">'</span><span class="p">).</span><span class="nf">then</span><span class="p">(</span><span class="nf">function </span><span class="p">(</span><span class="nx">m</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nf">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">2π = </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">m</span><span class="p">.</span><span class="nf">sum</span><span class="p">(</span><span class="nx">m</span><span class="p">.</span><span class="nx">pi</span><span class="p">,</span> <span class="nx">m</span><span class="p">.</span><span class="nx">pi</span><span class="p">));</span>
+<span class="p">});</span>
+
+<span class="c1">// 创建一个执行沙盒 - 新的加载器</span>
+<span class="kd">var</span> <span class="nx">loader</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Loader</span><span class="p">({</span>
+  <span class="na">global</span><span class="p">:</span> <span class="nf">fixup</span><span class="p">(</span><span class="nb">window</span><span class="p">),</span> <span class="c1">// replace ‘console.log’</span>
+<span class="p">});</span>
+<span class="nx">loader</span><span class="p">.</span><span class="nf">eval</span><span class="p">(</span><span class="dl">"</span><span class="s2">console.log('hello world!');</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="c1">// 直接操作模块缓存</span>
+<span class="nx">System</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">jquery</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">System</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="dl">'</span><span class="s1">jquery</span><span class="dl">'</span><span class="p">,</span> <span class="nc">Module</span><span class="p">({</span> <span class="na">$</span><span class="p">:</span> <span class="nx">$</span> <span class="p">}));</span> <span class="c1">// 警告: 尚未最终确定</span>
+</code></pre></div></div>
+
+<h3 id="map--set--weakmap--weakset">Map + Set + Weakmap + Weakset</h3>
+
+<p>常见算法中的高效数据结构。WeakMap 提供了无泄漏的对象键值的侧表。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Sets</span>
+<span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Set</span><span class="p">();</span>
+<span class="nx">s</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span><span class="p">).</span><span class="nf">add</span><span class="p">(</span><span class="dl">'</span><span class="s1">goodbye</span><span class="dl">'</span><span class="p">).</span><span class="nf">add</span><span class="p">(</span><span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">s</span><span class="p">.</span><span class="nx">size</span> <span class="o">===</span> <span class="mi">2</span><span class="p">;</span>
+<span class="nx">s</span><span class="p">.</span><span class="nf">has</span><span class="p">(</span><span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span><span class="p">)</span> <span class="o">===</span> <span class="kc">true</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Maps</span>
+<span class="kd">var</span> <span class="nx">m</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Map</span><span class="p">();</span>
+<span class="nx">m</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span><span class="p">,</span> <span class="mi">42</span><span class="p">);</span>
+<span class="nx">m</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="nx">s</span><span class="p">,</span> <span class="mi">34</span><span class="p">);</span>
+<span class="nx">m</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span> <span class="o">==</span> <span class="mi">34</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Weak Maps</span>
+<span class="kd">var</span> <span class="nx">wm</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">WeakMap</span><span class="p">();</span>
+<span class="nx">wm</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="nx">s</span><span class="p">,</span> <span class="p">{</span> <span class="na">extra</span><span class="p">:</span> <span class="mi">42</span> <span class="p">});</span>
+<span class="nx">wm</span><span class="p">.</span><span class="nx">size</span> <span class="o">===</span> <span class="kc">undefined</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Weak Sets</span>
+<span class="kd">var</span> <span class="nx">ws</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">WeakSet</span><span class="p">();</span>
+<span class="nx">ws</span><span class="p">.</span><span class="nf">add</span><span class="p">({</span> <span class="na">data</span><span class="p">:</span> <span class="mi">42</span> <span class="p">});</span>
+<span class="c1">// 因为增加的对象没有其他的参值，所以在set不会被持有</span>
+</code></pre></div></div>
+
+<p>更多信息：<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">Map</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set">Set</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap">WeakMap</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet">WeakSet</a></p>
+
+<h3 id="proxies-代理">Proxies 代理</h3>
+
+<p>代理允许创建具有目标对象范围内所有行为的对象。可用于拦截，对象虚拟化，日志记录/分析等。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 代理一个普通的对象</span>
+<span class="kd">var</span> <span class="nx">target</span> <span class="o">=</span> <span class="p">{};</span>
+<span class="kd">var</span> <span class="nx">handler</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">get</span><span class="p">:</span> <span class="nf">function </span><span class="p">(</span><span class="nx">receiver</span><span class="p">,</span> <span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s2">`Hello, </span><span class="p">${</span><span class="nx">name</span><span class="p">}</span><span class="s2">!`</span><span class="p">;</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Proxy</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">handler</span><span class="p">);</span>
+<span class="nx">p</span><span class="p">.</span><span class="nx">world</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">Hello, world!</span><span class="dl">'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 代理一个函数对象</span>
+<span class="kd">var</span> <span class="nx">target</span> <span class="o">=</span> <span class="nf">function </span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="dl">'</span><span class="s1">I am the target</span><span class="dl">'</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">handler</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">apply</span><span class="p">:</span> <span class="nf">function </span><span class="p">(</span><span class="nx">receiver</span><span class="p">,</span> <span class="p">...</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="dl">'</span><span class="s1">I am the proxy</span><span class="dl">'</span><span class="p">;</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Proxy</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">handler</span><span class="p">);</span>
+<span class="nf">p</span><span class="p">()</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">I am the proxy</span><span class="dl">'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>这里是所有在运行级别的元操作的<code class="language-plaintext highlighter-rouge">trap</code>(<code class="language-plaintext highlighter-rouge">trap</code>: 提供属性访问的方法)</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">handler</span> <span class="o">=</span>
+<span class="p">{</span>
+  <span class="na">get</span><span class="p">:...,</span>
+  <span class="na">set</span><span class="p">:...,</span>
+  <span class="na">has</span><span class="p">:...,</span>
+  <span class="na">deleteProperty</span><span class="p">:...,</span>
+  <span class="na">apply</span><span class="p">:...,</span>
+  <span class="na">construct</span><span class="p">:...,</span>
+  <span class="na">getOwnPropertyDescriptor</span><span class="p">:...,</span>
+  <span class="na">defineProperty</span><span class="p">:...,</span>
+  <span class="na">getPrototypeOf</span><span class="p">:...,</span>
+  <span class="na">setPrototypeOf</span><span class="p">:...,</span>
+  <span class="na">enumerate</span><span class="p">:...,</span>
+  <span class="na">ownKeys</span><span class="p">:...,</span>
+  <span class="na">preventExtensions</span><span class="p">:...,</span>
+  <span class="na">isExtensible</span><span class="p">:...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>更多信息: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy">MDN Proxy</a></p>
+
+<h3 id="symbols-符号">Symbols 符号</h3>
+
+<p>符号能够访问控制对象的状态，符号允许对象属性的键值是<code class="language-plaintext highlighter-rouge">string</code>或者<code class="language-plaintext highlighter-rouge">symbol</code>。符号是一个新的原始类型，可选的参数<code class="language-plaintext highlighter-rouge">description</code>可以用于调试–但这不是符号本身的一部分。符号是唯一的(像 gensym)，但不是私有的，因为它们能够通过<code class="language-plaintext highlighter-rouge">Object.getOwnPropertySymbols</code>反射特性公开的</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">MyClass</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+  <span class="c1">// 模块作用域符号</span>
+  <span class="kd">var</span> <span class="nx">key</span> <span class="o">=</span> <span class="nc">Symbol</span><span class="p">(</span><span class="dl">"</span><span class="s2">key</span><span class="dl">"</span><span class="p">);</span>
+
+  <span class="kd">function</span> <span class="nf">MyClass</span><span class="p">(</span><span class="nx">privateData</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">privateData</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nx">MyClass</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">doStuff</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="p">...</span> <span class="k">this</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="p">...</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+
+  <span class="k">return</span> <span class="nx">MyClass</span><span class="p">;</span>
+<span class="p">})();</span>
+
+<span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MyClass</span><span class="p">(</span><span class="dl">"</span><span class="s2">hello</span><span class="dl">"</span><span class="p">)</span>
+<span class="nx">c</span><span class="p">[</span><span class="dl">"</span><span class="s2">key</span><span class="dl">"</span><span class="p">]</span> <span class="o">===</span> <span class="kc">undefined</span>
+</code></pre></div></div>
+
+<p>更多信息: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol">MDN Symbol</a></p>
+
+<h3 id="subclassable-built-ins-内置子类">Subclassable built-ins 内置子类</h3>
+
+<p>在 ES6 里面，内置的<code class="language-plaintext highlighter-rouge">Array</code>，<code class="language-plaintext highlighter-rouge">Date</code>和 DOM<code class="language-plaintext highlighter-rouge">Element</code>对象能够创建子类。</p>
+
+<p>对于命名为<code class="language-plaintext highlighter-rouge">Ctor</code>函数的对象构造，现使用两个阶段（都是虚拟派遣）:</p>
+
+<ul>
+  <li>调用<code class="language-plaintext highlighter-rouge">Ctor[@@create]</code>去申请对象，安装任意特殊行为</li>
+  <li>在新实例中调用构造器进行初始化</li>
+</ul>
+
+<p>已知<code class="language-plaintext highlighter-rouge">@@create</code>符号可通过<code class="language-plaintext highlighter-rouge">Symbol.create</code>得到。内置对象现在明确地暴露它们的<code class="language-plaintext highlighter-rouge">@@create</code></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 数组的伪代码</span>
+<span class="kd">class</span> <span class="nc">Array</span> <span class="p">{</span>
+  <span class="nf">constructor</span><span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="cm">/* ... */</span>
+  <span class="p">}</span>
+  <span class="kd">static</span> <span class="p">[</span><span class="nb">Symbol</span><span class="p">.</span><span class="nx">create</span><span class="p">]()</span> <span class="p">{</span>
+    <span class="c1">// 设置指定的 [[DefineOwnProperty]] 来更新'length'</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 数组子类的用户代码</span>
+<span class="kd">class</span> <span class="nc">MyArray</span> <span class="kd">extends</span> <span class="nc">Array</span> <span class="p">{</span>
+  <span class="nf">constructor</span><span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">(...</span><span class="nx">args</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Two-phase 'new':</span>
+<span class="c1">// 1) 调用 @@create 申请对象</span>
+<span class="c1">// 2) 在新实例上调用构造函数</span>
+<span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MyArray</span><span class="p">();</span>
+<span class="nx">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">12</span><span class="p">;</span>
+<span class="nx">arr</span><span class="p">.</span><span class="nx">length</span> <span class="o">==</span> <span class="mi">2</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="promises">Promises</h3>
+
+<p>Promise 是一个异步编程的库，Promise 是将来可能提供的值的最先表示。Promise 现已经在许多库使用中。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">timeout</span><span class="p">(</span><span class="nx">duration</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nc">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nf">setTimeout</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">duration</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="nf">timeout</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+  <span class="p">.</span><span class="nf">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nf">timeout</span><span class="p">(</span><span class="mi">2000</span><span class="p">);</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="nf">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nc">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">hmm</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nb">Promise</span><span class="p">.</span><span class="nf">all</span><span class="p">([</span><span class="nf">timeout</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span> <span class="nf">timeout</span><span class="p">(</span><span class="mi">200</span><span class="p">)]);</span>
+  <span class="p">});</span>
+</code></pre></div></div>
+
+<p>更多信息：<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">MDN Promise</a></p>
+
+<h3 id="math--number--string--array--object-apis">Math + Number + String + Array + Object APIs</h3>
+
+<p>许多新的库被增加，包括核心的数学库，数组转换，字符串和用来拷贝的<code class="language-plaintext highlighter-rouge">Object.assign</code>方法</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">Number</span><span class="p">.</span><span class="nx">EPSILON</span><span class="p">;</span>
+<span class="nb">Number</span><span class="p">.</span><span class="nf">isInteger</span><span class="p">(</span><span class="kc">Infinity</span><span class="p">);</span> <span class="c1">// false</span>
+<span class="nb">Number</span><span class="p">.</span><span class="nf">isNaN</span><span class="p">(</span><span class="dl">'</span><span class="s1">NaN</span><span class="dl">'</span><span class="p">);</span> <span class="c1">// false</span>
+
+<span class="nb">Math</span><span class="p">.</span><span class="nf">acosh</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span> <span class="c1">// 1.762747174039086</span>
+<span class="nb">Math</span><span class="p">.</span><span class="nf">hypot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span> <span class="c1">// 5</span>
+<span class="nb">Math</span><span class="p">.</span><span class="nf">imul</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nf">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">Math</span><span class="p">.</span><span class="nf">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">);</span> <span class="c1">// 2</span>
+
+<span class="dl">'</span><span class="s1">abcde</span><span class="dl">'</span><span class="p">.</span><span class="nf">includes</span><span class="p">(</span><span class="dl">'</span><span class="s1">cd</span><span class="dl">'</span><span class="p">);</span> <span class="c1">// true</span>
+<span class="dl">'</span><span class="s1">abc</span><span class="dl">'</span><span class="p">.</span><span class="nf">repeat</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span> <span class="c1">// "abcabcabc"</span>
+
+<span class="nb">Array</span><span class="p">.</span><span class="k">from</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nf">querySelectorAll</span><span class="p">(</span><span class="dl">'</span><span class="s1">*</span><span class="dl">'</span><span class="p">));</span> <span class="c1">// 返回一个数组</span>
+<span class="nb">Array</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="c1">// 类似new Array(...), 但不用指明第一个参数</span>
+  <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)].</span><span class="nf">fill</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="c1">// [0,7,7]</span>
+  <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)].</span><span class="nf">find</span><span class="p">((</span><span class="nx">x</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">x</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span> <span class="c1">// 3</span>
+  <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)].</span><span class="nf">findIndex</span><span class="p">((</span><span class="nx">x</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">x</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="c1">// 1</span>
+  <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)].</span><span class="nf">copyWithin</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">// [1, 2, 3, 1, 2]</span>
+  <span class="p">[(</span><span class="dl">'</span><span class="s1">a</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">b</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">c</span><span class="dl">'</span><span class="p">)].</span><span class="nf">entries</span><span class="p">()</span> <span class="c1">// iterator [0, "a"], [1,"b"], [2,"c"]</span>
+  <span class="p">[(</span><span class="dl">'</span><span class="s1">a</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">b</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">c</span><span class="dl">'</span><span class="p">)].</span><span class="nf">keys</span><span class="p">()</span> <span class="c1">// iterator 0, 1, 2</span>
+  <span class="p">[(</span><span class="dl">'</span><span class="s1">a</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">b</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">c</span><span class="dl">'</span><span class="p">)].</span><span class="nf">values</span><span class="p">();</span> <span class="c1">// iterator "a", "b", "c"</span>
+
+<span class="nb">Object</span><span class="p">.</span><span class="nf">assign</span><span class="p">(</span><span class="nx">Point</span><span class="p">,</span> <span class="p">{</span> <span class="na">origin</span><span class="p">:</span> <span class="k">new</span> <span class="nc">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="p">});</span>
+</code></pre></div></div>
+
+<p>更多信息: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math">Math</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from">Array.from</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/of">Array.of</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/CopyWithin">Array.prototype.copyWithin</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign">Object.assign</a></p>
+
+<h3 id="binary-and-octal-literals-二进制和八进制字面量">Binary and octal literals 二进制和八进制字面量</h3>
+
+<p>两个新的数字字面量被增加的，二进制(b)和八进制(o)</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mb">0b111110111</span> <span class="o">===</span> <span class="mi">503</span><span class="p">;</span> <span class="c1">// true</span>
+<span class="mo">0o767</span> <span class="o">===</span> <span class="mi">503</span><span class="p">;</span> <span class="c1">// true</span>
+</code></pre></div></div>
+
+<h3 id="reflect-api">Reflect Api</h3>
+
+<p>完整反射 API 暴露对象在运行级别上的元操作。这实际上是代理 API 反转，并且允许进行与代理 trap 相同的元操作调用。特别适合用于实现代理。</p>
+
+<p>更多信息: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect">MDN Reflect</a></p>
+
+<h3 id="tail-calls-尾调用">Tail calls 尾调用</h3>
+
+<p>保证在尾部位置的调用不会无限制地增加堆栈。当输入是无界的情况下可以确保递归算法的安全。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">factorial</span><span class="p">(</span><span class="nx">n</span><span class="p">,</span> <span class="nx">acc</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="dl">'</span><span class="s1">use strict</span><span class="dl">'</span><span class="p">;</span>
+    <span class="k">if </span><span class="p">(</span><span class="nx">n</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="nx">acc</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nf">factorial</span><span class="p">(</span><span class="nx">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">n</span> <span class="o">*</span> <span class="nx">acc</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// 在当今大部分堆栈会溢出,</span>
+<span class="c1">// 在ES6里，任意输入都是安全的</span>
+<span class="nf">factorial</span><span class="p">(</span><span class="mi">100000</span><span class="p">)</span>
+</code></pre></div></div>
+
+  </div><a class="u-url" href="/blog/2018/07/24/ES6.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

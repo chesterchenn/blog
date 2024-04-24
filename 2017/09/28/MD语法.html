@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>MarkDown语法 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="MarkDown语法" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="此文用于收集平时使用的 markdown 语法。" />
+<meta property="og:description" content="此文用于收集平时使用的 markdown 语法。" />
+<link rel="canonical" href="/blog/2017/09/28/MD%E8%AF%AD%E6%B3%95.html" />
+<meta property="og:url" content="/blog/2017/09/28/MD%E8%AF%AD%E6%B3%95.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2017-09-28T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="MarkDown语法" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2017-09-28T00:00:00+00:00","datePublished":"2017-09-28T00:00:00+00:00","description":"此文用于收集平时使用的 markdown 语法。","headline":"MarkDown语法","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2017/09/28/MD%E8%AF%AD%E6%B3%95.html"},"url":"/blog/2017/09/28/MD%E8%AF%AD%E6%B3%95.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">MarkDown语法</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2017-09-28T00:00:00+00:00" itemprop="datePublished">Sep 28, 2017
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/others"><i>others</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2018"><i>2018</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>此文用于收集平时使用的 markdown 语法。</p>
+
+<!-- vim-markdown-toc GFM -->
+
+<ul>
+  <li><a href="#标题">标题</a></li>
+  <li><a href="#列表">列表</a></li>
+  <li><a href="#链接">链接</a></li>
+  <li><a href="#图片">图片</a></li>
+  <li><a href="#文字引用强调">文字引用,强调</a></li>
+  <li><a href="#代码块">代码块</a></li>
+  <li><a href="#线条">线条</a></li>
+  <li><a href="#表格">表格</a></li>
+  <li><a href="#注释">注释</a></li>
+  <li><a href="#常见的代码块类型">常见的代码块类型</a></li>
+</ul>
+
+<!-- vim-markdown-toc -->
+
+<h2 id="标题">标题</h2>
+
+<div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># H1</span>
+
+<span class="gu">## H2</span>
+
+<span class="gu">### H3</span>
+
+<span class="gu">#### H4</span>
+
+<span class="gu">##### H5</span>
+</code></pre></div></div>
+
+<h2 id="列表">列表</h2>
+
+<div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">-</span> 无序列表
+<span class="p">-</span> 无序列表
+<span class="p">-</span> 无序列表
+<span class="p">
+1.</span> 有序列表
+<span class="p">2.</span> 有序列表
+<span class="p">3.</span> 有序列表
+</code></pre></div></div>
+
+<ul>
+  <li>无序列表</li>
+  <li>无序列表</li>
+  <li>无序列表</li>
+</ul>
+
+<ol>
+  <li>有序列表</li>
+  <li>有序列表</li>
+  <li>有序列表</li>
+</ol>
+
+<h2 id="链接">链接</h2>
+
+<div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- 链接引入方式一 --&gt;</span>
+
+<span class="p">[</span><span class="nv">This is a Link</span><span class="p">](</span><span class="sx">http://www.example.com</span><span class="p">)</span>
+
+<span class="c">&lt;!-- 链接引入方式二 --&gt;</span>
+
+<span class="p">[</span><span class="nv">链接到标题</span><span class="p">][</span><span class="ss">url</span><span class="p">]</span>
+<span class="p">[</span><span class="ss">url</span><span class="p">]:</span> <span class="sx">/#标题</span>
+</code></pre></div></div>
+
+<p><a href="http://www.example.com">This is a Link</a></p>
+
+<p><a href="#标题">链接到标题</a></p>
+
+<h2 id="图片">图片</h2>
+
+<div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">![</span><span class="nv">Image</span><span class="p">](</span><span class="sx">../../../images/github.ico</span><span class="p">)</span>
+
+<span class="p">![</span><span class="nv">Image</span><span class="p">][</span><span class="ss">imgurl</span><span class="p">]</span>
+<span class="p">[</span><span class="ss">imgUrl</span><span class="p">]:</span> <span class="sx">../../../images/github.ico</span>
+
+<span class="c">&lt;!-- 部分markdown支持图片属性，如 kramdown --&gt;</span>
+<span class="p">![</span><span class="nv">Image</span><span class="p">](</span><span class="sx">../../../images/github.ico</span><span class="p">)</span>{:height="80px" width="80px"}
+</code></pre></div></div>
+
+<p><img src="../../../images/github.ico" alt="Image" /></p>
+
+<p><img src="../../../images/github.ico" alt="Image" /></p>
+
+<p><img src="../../../images/github.ico" alt="Image" height="80px" width="80px" /></p>
+
+<h2 id="文字引用强调">文字引用,强调</h2>
+
+<div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gt">&gt; 文字引用</span>
+
+<span class="ge">*斜体强调*</span>
+
+<span class="gs">**加粗强调**</span>
+
+<span class="sb">`行内代码`</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>文字引用</p>
+</blockquote>
+
+<p><em>斜体强调</em></p>
+
+<p><strong>加粗强调</strong></p>
+
+<p><code class="language-plaintext highlighter-rouge">行内代码</code></p>
+
+<h2 id="代码块">代码块</h2>
+
+<p>```plain<br />
+代码块<br />
+```</p>
+
+<h2 id="线条">线条</h2>
+
+<div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">---
+</span>
+~~删除线~~
+</code></pre></div></div>
+
+<hr />
+
+<p><del>删除线</del></p>
+
+<h2 id="表格">表格</h2>
+
+<div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>| left-align | center-align | right-align |
+| ---------- | :----------: | ----------: |
+| left       |    center    |       right |
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>left-align</th>
+      <th style="text-align: center">center-align</th>
+      <th style="text-align: right">right-align</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>left</td>
+      <td style="text-align: center">center</td>
+      <td style="text-align: right">right</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="注释">注释</h2>
+
+<div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- 这是一段被注释的文字 --&gt;</span>
+
+<span class="p">[</span><span class="ss">//</span><span class="p">]:</span> <span class="sx">(这一段被注释的文字2)</span>
+
+这是一段没有被注释的文字
+</code></pre></div></div>
+
+<!-- 这是一段被注释的文字 -->
+
+<p>这是一段没有被注释的文字</p>
+
+<h2 id="常见的代码块类型">常见的代码块类型</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>名称</th>
+      <th>关键字</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>C</td>
+      <td>cpp, c</td>
+    </tr>
+    <tr>
+      <td>CSS</td>
+      <td>css</td>
+    </tr>
+    <tr>
+      <td>Go</td>
+      <td>go, golang</td>
+    </tr>
+    <tr>
+      <td>Java</td>
+      <td>java</td>
+    </tr>
+    <tr>
+      <td>JavaScript</td>
+      <td>js, javascript</td>
+    </tr>
+    <tr>
+      <td>JSX Element</td>
+      <td>jsx</td>
+    </tr>
+    <tr>
+      <td>JSON</td>
+      <td>json</td>
+    </tr>
+    <tr>
+      <td>MarkDown</td>
+      <td>markdown, md</td>
+    </tr>
+    <tr>
+      <td>PHP</td>
+      <td>php</td>
+    </tr>
+    <tr>
+      <td>Python</td>
+      <td>py, python</td>
+    </tr>
+    <tr>
+      <td>Ruby</td>
+      <td>ruby, rb</td>
+    </tr>
+    <tr>
+      <td>Shell</td>
+      <td>bash, shell</td>
+    </tr>
+    <tr>
+      <td>SQL</td>
+      <td>sql</td>
+    </tr>
+    <tr>
+      <td>Text</td>
+      <td>text, plain</td>
+    </tr>
+    <tr>
+      <td>TSX Element</td>
+      <td>tsx</td>
+    </tr>
+    <tr>
+      <td>TypeScript</td>
+      <td>ts, typescript</td>
+    </tr>
+    <tr>
+      <td>VimScript</td>
+      <td>vim</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>更多代码块类型请参考：</p>
+
+<ul>
+  <li><a href="https://coding.net/help/docs/ci/lint/markdown-code-lang.html">Markdown 代码块编程语言清单 - CODING 帮助中心</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2017/09/28/MD%E8%AF%AD%E6%B3%95.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>samba服务的搭建 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="samba服务的搭建" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="主要是通过搭建 samba 服务实现大文件的快速传输。" />
+<meta property="og:description" content="主要是通过搭建 samba 服务实现大文件的快速传输。" />
+<link rel="canonical" href="/blog/2022/03/31/samba%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA.html" />
+<meta property="og:url" content="/blog/2022/03/31/samba%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-03-31T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="samba服务的搭建" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-03-31T00:00:00+00:00","datePublished":"2022-03-31T00:00:00+00:00","description":"主要是通过搭建 samba 服务实现大文件的快速传输。","headline":"samba服务的搭建","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2022/03/31/samba%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA.html"},"url":"/blog/2022/03/31/samba%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">samba服务的搭建</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2022-03-31T00:00:00+00:00" itemprop="datePublished">Mar 31, 2022
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2022"><i>2022</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/others"><i>others</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/network"><i>network</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/linux"><i>linux</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>主要是通过搭建 samba 服务实现大文件的快速传输。</p>
+
+<h2 id="准备工作">准备工作</h2>
+
+<ul>
+  <li>Linux 系统的主机</li>
+</ul>
+
+<h2 id="samba">samba</h2>
+
+<p>安装方式可以通过查看 samba 官网 <a href="https://www.samba.org/samba/download/">https://www.samba.org/samba/download</a></p>
+
+<p>一般对应 linux 仓库也会有对应的 samba 软件，网上搜索一下也可以查到。</p>
+
+<h3 id="查看状态">查看状态</h3>
+
+<p>安装完成之后，确认服务状态</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl status smbd  <span class="c"># 查看状态</span>
+systemctl <span class="nb">enable </span>smbd  <span class="c"># 自启动服务</span>
+systemctl stop smbd    <span class="c"># 停止运行服务</span>
+systemctl start smbd   <span class="c"># 启动服务</span>
+systemctl restart smbd <span class="c"># 重启服务</span>
+</code></pre></div></div>
+
+<p>可以通过命令查看端口来确定是否启用 smbd 服务: <code class="language-plaintext highlighter-rouge">netstat -antpu | grep smbd</code></p>
+
+<p>一般情况为下 139 和 445 端口</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tcp        0      0 0.0.0.0:445             0.0.0.0:<span class="k">*</span>               LISTEN      5380/smbd
+tcp        0      0 0.0.0.0:139             0.0.0.0:<span class="k">*</span>               LISTEN      5380/smbd
+tcp        0      0 192.168.0.114:445       192.168.0.110:53656     ESTABLISHED 7329/smbd
+tcp6       0      0 :::445                  :::<span class="k">*</span>                    LISTEN      5380/smbd
+tcp6       0      0 :::139                  :::<span class="k">*</span>                    LISTEN      5380/smbd
+</code></pre></div></div>
+
+<h3 id="配置">配置</h3>
+
+<p>确认服务启动，修改 samba 配置，配置文件位于 <code class="language-plaintext highlighter-rouge">/etc/samba/</code> 目录下</p>
+
+<p>我们通过修改 samba 的配置文件 smb.conf，创建一个简单的共享目录</p>
+
+<pre><code class="language-plain">[home]
+  comment = Home # 描述文件
+  path = /home/chen/smaba # 存放文件的绝对路径
+  writeable = true
+  guest ok = yes
+</code></pre>
+
+<p>隐藏当前没有权限的文件夹</p>
+
+<pre><code class="language-plain">[global]
+access based share enum=yes
+</code></pre>
+
+<p>指定用户 chen 私有文件夹</p>
+
+<pre><code class="language-plain">[chen]
+valid users = chen
+read only = no
+public = no
+</code></pre>
+
+<ul>
+  <li>关于 smaba 的配置过多，完整的配置列表在：<a href="https://www.samba.org/samba/docs/current/man-html/smb.conf.5.html">https://www.samba.org/samba/docs/current/man-html/smb.conf.5.html</a>，修改完配置需要重新启动一下 smaba 服务。</li>
+</ul>
+
+<h3 id="pdbedit-管理用户信息">pdbedit 管理用户信息</h3>
+
+<p>使用 <code class="language-plaintext highlighter-rouge">pdbedit --help</code> 查看命令，常见的命令</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pdbedit <span class="nt">-a</span> &lt;user&gt;  <span class="c"># 创建用户</span>
+pdbedit <span class="nt">-r</span> &lt;user&gt;  <span class="c"># 修改用户</span>
+pdbedit <span class="nt">-x</span> &lt;user&gt;  <span class="c"># 删除用户</span>
+pdbedit <span class="nt">-L</span>, <span class="nt">--list</span> <span class="c"># 列举用户</span>
+</code></pre></div></div>
+
+<p>注：创建的用户必须是存在主机上的用户</p>
+
+<h2 id="ssh">SSH</h2>
+
+<p>Linux 主机上安装 openssh-server，让其他机器通过 ssh 访问。</p>
+
+<p>运行命令 <code class="language-plaintext highlighter-rouge">systemctl status sshd</code> 查看 ssh 服务的运行状态，如果 active 的话说明服务运行中。</p>
+
+<p>其他电脑登陆到主机上，只要通过命令 <code class="language-plaintext highlighter-rouge">ssh &lt;user&gt;@192.168.x.x</code></p>
+
+<h2 id="连接主机">连接主机</h2>
+
+<p>查看路由器分配给主机的网卡 inet 地址，一般地址为 192.168.x.x</p>
+
+<ul>
+  <li>
+    <p>直接登陆路由器的管理面板查看</p>
+  </li>
+  <li>
+    <p>运行命令 <code class="language-plaintext highlighter-rouge">ip a</code></p>
+  </li>
+</ul>
+
+<h2 id="访问">访问</h2>
+
+<h3 id="linux">Linux</h3>
+
+<p>Linux 下主要是通过 smbclient 命令访问。</p>
+
+<ul>
+  <li>
+    <p>查看所有共享目录 <code class="language-plaintext highlighter-rouge">smbclient -L 192.168.x.x</code></p>
+  </li>
+  <li>
+    <p>连接指定的共享目录 <code class="language-plaintext highlighter-rouge">smbclient //192.168.x.x/&lt;directory&gt;</code>，成功后会出现提示符 <code class="language-plaintext highlighter-rouge">smb: \&gt;</code></p>
+  </li>
+  <li>
+    <p>成功连接后可以使用的命令</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>get &lt;remote name&gt; &lt;<span class="nb">local </span>name&gt; <span class="c"># 下载文件</span>
+put &lt;<span class="nb">local </span>name&gt; &lt;remote name&gt; <span class="c"># 上传文件</span>
+其他常见的如 <span class="nb">ls</span>, <span class="nb">exit</span>, <span class="nb">cd</span>, mkdir...等
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="windows">Windows</h3>
+
+<p>打开运行之后，输入对应的 inet 地址 <code class="language-plaintext highlighter-rouge">//192.168.x.x</code></p>
+
+<h3 id="ios">IOS</h3>
+
+<p>通过 文件-&gt;右上角菜单-&gt;连接服务器，然后输入 <code class="language-plaintext highlighter-rouge">smb://192.168.x.x</code></p>
+
+<h3 id="android">Android</h3>
+
+<p>安卓通过软件访问，例如使用 CX 文件管理器</p>
+
+  </div><a class="u-url" href="/blog/2022/03/31/samba%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

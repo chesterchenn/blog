@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>函数柯里化 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="函数柯里化" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="函数柯里化（Currying）就是将函数多个参数转换成一列单个参数的函数。" />
+<meta property="og:description" content="函数柯里化（Currying）就是将函数多个参数转换成一列单个参数的函数。" />
+<link rel="canonical" href="/blog/2020/07/12/%E5%87%BD%E6%95%B0%E6%9F%AF%E9%87%8C%E5%8C%96.html" />
+<meta property="og:url" content="/blog/2020/07/12/%E5%87%BD%E6%95%B0%E6%9F%AF%E9%87%8C%E5%8C%96.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-07-12T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="函数柯里化" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2020-07-12T00:00:00+00:00","datePublished":"2020-07-12T00:00:00+00:00","description":"函数柯里化（Currying）就是将函数多个参数转换成一列单个参数的函数。","headline":"函数柯里化","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2020/07/12/%E5%87%BD%E6%95%B0%E6%9F%AF%E9%87%8C%E5%8C%96.html"},"url":"/blog/2020/07/12/%E5%87%BD%E6%95%B0%E6%9F%AF%E9%87%8C%E5%8C%96.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">函数柯里化</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2020-07-12T00:00:00+00:00" itemprop="datePublished">Jul 12, 2020
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2020"><i>2020</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/javascript"><i>javascript</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>函数柯里化（Currying）就是将函数多个参数转换成一列单个参数的函数。</p>
+
+<p>例如：</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>x = f(a, b, c) 变成
+    h = g(a)
+    i = h(b)
+    x = i(c)
+或者序列调用
+x = f(a)(b)(c)
+</code></pre></div></div>
+
+<h2 id="在-js-简单使用">在 JS 简单使用</h2>
+<h4 id="使用函数声明式">使用函数声明式</h4>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">currying</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="kd">function</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nf">currying</span><span class="p">(</span><span class="dl">'</span><span class="s1">a</span><span class="dl">'</span><span class="p">)(</span><span class="dl">'</span><span class="s1">b</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h4 id="使用函数表达式">使用函数表达式</h4>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">currying</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="kd">function</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nf">currying</span><span class="p">(</span><span class="dl">'</span><span class="s1">c</span><span class="dl">'</span><span class="p">)(</span><span class="dl">'</span><span class="s1">d</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h4 id="使用箭头函数">使用箭头函数</h4>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">currying</span> <span class="o">=</span> <span class="p">(</span><span class="nx">a</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="nx">b</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nf">currying</span><span class="p">(</span><span class="dl">'</span><span class="s1">e</span><span class="dl">'</span><span class="p">)(</span><span class="dl">'</span><span class="s1">f</span><span class="dl">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="js-函数柯里化">JS 函数柯里化</h2>
+<p>柯里化函数通常由以下步骤动态创建：调用另一个函数并为它传入要柯里化的函数和必要的参数。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">add</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">args</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">slice</span><span class="p">.</span><span class="nf">call</span><span class="p">(</span><span class="nx">arguments</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">args</span><span class="p">.</span><span class="nf">reduce</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">;</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nf">currying</span><span class="p">(</span><span class="nx">fn</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">args</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">slice</span><span class="p">.</span><span class="nf">call</span><span class="p">(</span><span class="nx">arguments</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+  <span class="k">return</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">innerArgs</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">slice</span><span class="p">.</span><span class="nf">call</span><span class="p">(</span><span class="nx">arguments</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">finalArgs</span> <span class="o">=</span> <span class="nx">args</span><span class="p">.</span><span class="nf">concat</span><span class="p">(</span><span class="nx">innerArgs</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">fn</span><span class="p">.</span><span class="nf">apply</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">finalArgs</span><span class="p">);</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">curryAdd</span> <span class="o">=</span> <span class="nf">currying</span><span class="p">(</span><span class="nx">add</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+<span class="nf">curryAdd</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// 11</span>
+<span class="nf">curryAdd</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span> <span class="c1">// 15</span>
+<span class="nf">curryAdd</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span> <span class="c1">// 13</span>
+</code></pre></div></div>
+<p>通过闭包将初步参数保存下来，然后获取剩下的参数进行拼接，最后执行需要 currying 的函数。这样在返回只扩展一个参数，不支持多参数调用，像 <code class="language-plaintext highlighter-rouge">curryAdd(1)(2)(3)</code> 这样的函数是无法执行的。</p>
+
+<h4 id="todo">TODO</h4>
+<ul>
+  <li>实现不定参数 <code class="language-plaintext highlighter-rouge">curry(1)(2)(3)</code></li>
+</ul>
+
+<h2 id="参考链接">参考链接</h2>
+<ul>
+  <li>《JavaScript高级程序设计》 22.1.5</li>
+  <li><a href="https://github.com/mqyqingfeng/Blog/issues/42">JavaScript专题之函数柯里化</a></li>
+  <li><a href="https://github.com/lgwebdream/FE-Interview/issues/21">实现 add(1)(2)(3) </a></li>
+  <li><a href="https://www.zhangxinxu.com/wordpress/2013/02/js-currying/">JS中的柯里化(currying)</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2020/07/12/%E5%87%BD%E6%95%B0%E6%9F%AF%E9%87%8C%E5%8C%96.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

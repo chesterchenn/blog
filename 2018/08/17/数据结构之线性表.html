@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>数据结构之线性表 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="数据结构之线性表" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="线性表(Linear List)是一种线性结构。线性表是由 n(n ≥ 0)个数据元素的有限序列。" />
+<meta property="og:description" content="线性表(Linear List)是一种线性结构。线性表是由 n(n ≥ 0)个数据元素的有限序列。" />
+<link rel="canonical" href="/blog/2018/08/17/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E7%BA%BF%E6%80%A7%E8%A1%A8.html" />
+<meta property="og:url" content="/blog/2018/08/17/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E7%BA%BF%E6%80%A7%E8%A1%A8.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-08-17T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="数据结构之线性表" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2018-08-17T00:00:00+00:00","datePublished":"2018-08-17T00:00:00+00:00","description":"线性表(Linear List)是一种线性结构。线性表是由 n(n ≥ 0)个数据元素的有限序列。","headline":"数据结构之线性表","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2018/08/17/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E7%BA%BF%E6%80%A7%E8%A1%A8.html"},"url":"/blog/2018/08/17/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E7%BA%BF%E6%80%A7%E8%A1%A8.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">数据结构之线性表</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2018-08-17T00:00:00+00:00" itemprop="datePublished">Aug 17, 2018
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2018"><i>2018</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/algorithm"><i>algorithm</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>线性表(Linear List)是一种线性结构。线性表是由 n(n ≥ 0)个数据元素的有限序列。</p>
+
+<h2 id="非空线性表的结构特点">非空线性表的结构特点</h2>
+
+<ul>
+  <li>存在一个唯一没有前驱的数据元素(头元素)</li>
+  <li>存在一个唯一没有后驱的数据元素(尾元素)</li>
+  <li>除了头元素，尾元素，每个元素的均有一个直接前驱和一个直接后继的数据元素。</li>
+</ul>
+
+<h2 id="线性表的存储结构">线性表的存储结构</h2>
+
+<ul>
+  <li>顺序存储 - 顺序表
+    <ul>
+      <li>数组</li>
+    </ul>
+  </li>
+  <li>链式存储 - 链表
+    <ul>
+      <li>单链表</li>
+      <li>双链表</li>
+      <li>循环链表</li>
+      <li>静态链表</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="顺序表sequenatial-list">顺序表(Sequenatial list)</h2>
+
+<p>顺序表是指用一组地址连续的存储单元依次存储数据元素的线性结构。</p>
+
+<p>优点：可以随机存取表中的元素。缺点：插入和删除操作需要移动元素。</p>
+
+<h2 id="数组与链表的对比">数组与链表的对比</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">时间复杂度</th>
+      <th style="text-align: left">数组</th>
+      <th style="text-align: left">链表</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">插入删除</td>
+      <td style="text-align: left">O(n)</td>
+      <td style="text-align: left">O(1)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">随机访问</td>
+      <td style="text-align: left">O(1)</td>
+      <td style="text-align: left">O(n)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>链表简单易用，在实现上使用的是连续内存空间，可以借助 CPU 的缓存机制，预读数组中的数据，所以访问效率更高。而链表在内存中并不是连续存储，所以对 CPU 缓存不友好，没办法有效预读。</p>
+
+<p>数组的缺点是大小固定，一经声明就要占用整块连续内存空间。如果声明的数组过大，系统可能没有足够的连续内存空间分配，导致“内存不足（out of memory）”。如果声明的数组过小，则可能出现不够用的情况。这时只能申请一个更大的内存空间，把原数组拷贝进去。链表本身没有大小的限制，支持动态扩容。</p>
+
+<h3 id="参考链接">参考链接</h3>
+
+<ul>
+  <li><a href="http://www.nowamagic.net/librarys/veda/detail/1866">数据结构一些常见术语的中英文对照</a></li>
+  <li><a href="https://time.geekbang.org/column/article/41013">极客时间：数据结构与算法之美-链表（上）如何实现 LRU 缓存淘汰算法？</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2018/08/17/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E7%BA%BF%E6%80%A7%E8%A1%A8.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

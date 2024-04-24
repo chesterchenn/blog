@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>查找算法 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="查找算法" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="关于查找算法。" />
+<meta property="og:description" content="关于查找算法。" />
+<link rel="canonical" href="/blog/2018/10/26/%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95.html" />
+<meta property="og:url" content="/blog/2018/10/26/%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-10-26T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="查找算法" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2018-10-26T00:00:00+00:00","datePublished":"2018-10-26T00:00:00+00:00","description":"关于查找算法。","headline":"查找算法","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2018/10/26/%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95.html"},"url":"/blog/2018/10/26/%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">查找算法</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2018-10-26T00:00:00+00:00" itemprop="datePublished">Oct 26, 2018
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2018"><i>2018</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/algorithm"><i>algorithm</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>关于查找算法。</p>
+
+<h2 id="基本概念">基本概念</h2>
+
+<p>查找表：由同一类型的数据元素（或记录）构成的集合。</p>
+
+<p>关键字：数据元素（或记录）的某个数据项的值。主关键字是指能唯一标识一个数据元素的关键字。次关键字是指能标识多个数据元素的关键字。</p>
+
+<p>静态查找：查询数据元素是否在查找表中或者检索属性。</p>
+
+<p>动态查找：在查找表中插入或者删除数据元素。</p>
+
+<h2 id="常见的查找算法">常见的查找算法</h2>
+
+<ul>
+  <li><a href="#顺序查找">顺序查找</a></li>
+  <li><a href="#二分查找">二分查找</a></li>
+  <li><a href="#哈希表查找">哈希表查找</a></li>
+  <li><a href="#插值查找">插值查找</a></li>
+  <li><a href="#斐波那契查找">斐波那契查找</a></li>
+  <li><a href="#二叉树查找">二叉树查找</a></li>
+</ul>
+
+<h3 id="顺序查找">顺序查找</h3>
+
+<p>顺序查找，也叫线性查找(Linear Search)。其基本思路：从表的一端开始，逐个进行记录的关键字和给定值的比较，若找到一个记录的关键字与给定值的值相等，则查找成功。若整个表中的记录均比较过，仍未找到关键字等于给定值的记录，则查找失败。</p>
+
+<p>顺序查找的方法对于顺序存储方式和链式存储方式的查找表都适用。</p>
+
+<p>顺序查找成功的平均查找长度为：ASL<sub>ss</sub> = (n + 1) / 2</p>
+
+<p>优劣势：顺序查找方法在 n 值较大时，其平均查找长度较大，查找效率较低。优点就是算法简单且适应面广，堆查找表的结构没有要求，无论记录是否有序排列均可应用。</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">Search</span><span class="o">(</span><span class="kt">int</span> <span class="n">arr</span><span class="o">[],</span> <span class="kt">int</span> <span class="n">len</span><span class="o">,</span> <span class="kt">int</span> <span class="n">key</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">len</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">==</span> <span class="n">key</span><span class="o">)</span>
+      <span class="k">return</span> <span class="n">i</span><span class="o">;</span>
+  <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="二分查找">二分查找</h2>
+
+<p>重要前提：查找表的元素已经按关键字递增（或递减）方式排序。</p>
+
+<p>二分查找(Binary Search)也叫折半查找。主要思想：首先将查找元素关键字(key)值与表中间位置(下标 mid)记录的关键字进行比较，若相等，则查找成功。若关键字大于中间记录的关键字，则在中间记录的右半区继续查找。若关键字小于中间记录的关键字，则在中间记录的左半区继续查找。重复上述过程，直至查找成功或者子表为空失败为止。</p>
+
+<p>二分查找成功的平均长度为：ASL<sub>bs</sub> = (n + 1) / n * log<sub>2</sub>(n + 1) - 1</p>
+
+<p>当 n 较大时，可以近似看成：ASL<sub>bs</sub> ≈ log<sub>2</sub>(n + 1) - 1</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">BSearch</span><span class="o">(</span><span class="kt">int</span> <span class="n">arr</span><span class="o">[],</span> <span class="kt">int</span> <span class="n">low</span><span class="o">,</span> <span class="kt">int</span> <span class="n">high</span><span class="o">,</span> <span class="kt">int</span> <span class="n">key</span><span class="o">)</span> <span class="o">{</span>
+  <span class="kt">int</span> <span class="n">mid</span><span class="o">;</span>
+  <span class="k">while</span><span class="o">(</span><span class="n">low</span> <span class="o">&lt;=</span> <span class="n">high</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">mid</span> <span class="o">=</span> <span class="o">(</span><span class="n">low</span> <span class="o">+</span> <span class="n">high</span><span class="o">)</span> <span class="o">/</span> <span class="mi">2</span><span class="o">;</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">key</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">mid</span><span class="o">])</span> <span class="k">return</span> <span class="n">mid</span><span class="o">;</span>
+    <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="n">key</span> <span class="o">&lt;</span> <span class="n">arr</span><span class="o">[</span><span class="n">mid</span><span class="o">])</span> <span class="n">high</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="k">else</span> <span class="n">low</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+  <span class="o">}</span>
+  <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="c1">//======================</span>
+<span class="c1">// 用二分查找的递归实现</span>
+<span class="c1">//======================</span>
+<span class="kt">int</span> <span class="nf">BSearch_rec</span><span class="o">(</span><span class="kt">int</span> <span class="n">arr</span><span class="o">[],</span> <span class="kt">int</span> <span class="n">low</span><span class="o">,</span> <span class="kt">int</span> <span class="n">high</span><span class="o">,</span> <span class="kt">int</span> <span class="n">key</span><span class="o">)</span> <span class="o">{</span>
+  <span class="kt">int</span> <span class="n">mid</span><span class="o">;</span>
+  <span class="k">if</span> <span class="o">(</span><span class="n">low</span> <span class="o">&lt;=</span> <span class="n">high</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">mid</span> <span class="o">=</span> <span class="o">(</span><span class="n">low</span> <span class="o">+</span> <span class="n">high</span><span class="o">)</span> <span class="o">/</span> <span class="mi">2</span><span class="o">;</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">key</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">mid</span><span class="o">])</span> <span class="k">return</span> <span class="n">mid</span><span class="o">;</span>
+    <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="n">key</span> <span class="o">&lt;</span> <span class="n">arr</span><span class="o">[</span><span class="n">mid</span><span class="o">])</span> <span class="k">return</span> <span class="n">BSearch_rec</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span> <span class="n">low</span><span class="o">,</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span><span class="o">,</span> <span class="n">key</span><span class="o">);</span>
+    <span class="k">else</span> <span class="k">return</span> <span class="nf">BSearch_rec</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="o">,</span> <span class="n">high</span><span class="o">,</span> <span class="n">key</span><span class="o">);</span>
+  <span class="o">}</span>
+  <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="插值查找">插值查找</h2>
+
+<p>插值查找(Interpolation Search)是一种基于二分查找的算法。二分查找根据查找关键字确定不同的位置。</p>
+
+<p>在二分查找里面，mid = (low + high) / 2，即 mid = low + (high - low) / 2
+插值查找的计算，mid = low + (key - a[low]) / (a[high] - key) * (high - low)</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">ISearch</span><span class="o">(</span><span class="kt">int</span> <span class="n">arr</span><span class="o">[],</span> <span class="kt">int</span> <span class="n">low</span><span class="o">,</span> <span class="kt">int</span> <span class="n">high</span><span class="o">,</span> <span class="kt">int</span> <span class="n">key</span><span class="o">)</span> <span class="o">{</span>
+  <span class="kt">int</span> <span class="n">mid</span><span class="o">;</span>
+  <span class="k">while</span><span class="o">(</span><span class="n">low</span> <span class="o">&lt;=</span> <span class="n">high</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">mid</span> <span class="o">=</span> <span class="n">low</span> <span class="o">+</span> <span class="o">(</span><span class="n">key</span> <span class="o">-</span> <span class="n">a</span><span class="o">[</span><span class="n">low</span><span class="o">])</span> <span class="o">/</span> <span class="o">(</span><span class="n">a</span><span class="o">[</span><span class="n">high</span><span class="o">]</span> <span class="o">-</span> <span class="n">key</span><span class="o">)</span> <span class="o">*</span> <span class="o">(</span><span class="n">high</span> <span class="o">-</span> <span class="n">low</span><span class="o">);</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">key</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">mid</span><span class="o">])</span> <span class="k">return</span> <span class="n">mid</span><span class="o">;</span>
+    <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="n">key</span> <span class="o">&lt;</span> <span class="n">arr</span><span class="o">[</span><span class="n">mid</span><span class="o">])</span> <span class="n">high</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="k">else</span> <span class="n">low</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+  <span class="o">}</span>
+  <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="哈希表查找">哈希表查找</h2>
+
+<p>基本思想：已知关键字集合 U，最大关键字 m，设计一个函数 Hash，它以关键字为自变量，关键字的存储地址为因变量，将关键字映射到一个有限的、地址连续的区间 T[0..n-1]中，这个区间被称为哈希表，哈希表查找使用的转换函数被称为哈希函数。</p>
+
+<p>对于哈希表，主要考虑两个问题：一是如何构造哈希函数，二是如何解决冲突。</p>
+
+<p>常用的哈希构造方法有直接定址法、数字分析法、平方取中法、折叠法、随机数法和除留余数法等。</p>
+
+<p>解决冲突就是为出现冲突的关键字找到另一个“空”的哈希地址。</p>
+
+<p>常用的处理冲突的方法有开放定址法，链地址法，再哈希法和建立一个公共溢出区。</p>
+
+<h2 id="斐波那契查找">斐波那契查找</h2>
+
+<p>斐波那契查找(Fibonacci Search)也是一种基于二分查找的算法。利用斐波那契数列选择查找点进行查找，提高查找效率。</p>
+
+<p>斐波那契数列数组可以直接定义：F = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765, 10946, 17711, 28657, 46368]</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">initFib</span><span class="o">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">fib</span><span class="o">,</span> <span class="kt">int</span> <span class="n">size</span><span class="o">)</span> <span class="o">{</span>
+  <span class="kt">int</span> <span class="n">i</span><span class="o">;</span>
+  <span class="n">fib</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+  <span class="n">fib</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+  <span class="k">for</span> <span class="o">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
+    <span class="n">fib</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">fib</span><span class="o">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="o">]</span> <span class="o">+</span> <span class="n">fib</span><span class="o">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">2</span><span class="o">];</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define FIB_MAXSIZE 100
+</span>
+<span class="kt">int</span> <span class="nf">FSearch</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">arr</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">low</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">high</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">fib</span><span class="p">[</span><span class="n">FIB_MAXSIZE</span><span class="p">];</span>
+  <span class="n">initFib</span><span class="p">(</span><span class="n">fib</span><span class="p">,</span> <span class="n">FIB_MAXSIZE</span><span class="p">);</span>
+
+  <span class="c1">// 找到有序表元素个数在斐波那契数列中最接近的最大数列值</span>
+  <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">while</span> <span class="p">(</span><span class="n">high</span> <span class="o">&gt;</span> <span class="n">fib</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="n">k</span><span class="o">++</span><span class="p">;</span>
+
+  <span class="c1">// 补齐有序表</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="n">length</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">fib</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">high</span><span class="p">];</span>
+  <span class="p">}</span>
+
+  <span class="k">while</span> <span class="p">(</span><span class="n">low</span> <span class="o">&lt;=</span> <span class="n">high</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">mid</span> <span class="o">=</span> <span class="n">low</span> <span class="o">+</span> <span class="n">fib</span><span class="p">[</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">==</span> <span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">mid</span> <span class="o">&lt;=</span> <span class="n">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">mid</span><span class="p">;</span>
+      <span class="k">else</span> <span class="k">return</span> <span class="n">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">high</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+      <span class="n">k</span> <span class="o">=</span> <span class="n">k</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">low</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+      <span class="n">k</span> <span class="o">=</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="二叉树查找">二叉树查找</h2>
+
+<p>详见<a href="./2018-10-14__数据结构之树.md#二叉查找树binary-search-tree">数据结构之树__二叉查找树</a></p>
+
+  </div><a class="u-url" href="/blog/2018/10/26/%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

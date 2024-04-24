@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>回流与重绘 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="回流与重绘" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="当渲染树中的元素尺寸，结构或属性发生改变时，需要浏览器重新渲染的过程称为回流( reflow )，而当渲染树中元素样式的改变，并不影响布局时，浏览器重新绘制它的过程称为重绘( repaint )" />
+<meta property="og:description" content="当渲染树中的元素尺寸，结构或属性发生改变时，需要浏览器重新渲染的过程称为回流( reflow )，而当渲染树中元素样式的改变，并不影响布局时，浏览器重新绘制它的过程称为重绘( repaint )" />
+<link rel="canonical" href="/blog/2019/10/12/%E5%9B%9E%E6%B5%81%E4%B8%8E%E9%87%8D%E7%BB%98.html" />
+<meta property="og:url" content="/blog/2019/10/12/%E5%9B%9E%E6%B5%81%E4%B8%8E%E9%87%8D%E7%BB%98.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-10-12T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="回流与重绘" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2019-10-12T00:00:00+00:00","datePublished":"2019-10-12T00:00:00+00:00","description":"当渲染树中的元素尺寸，结构或属性发生改变时，需要浏览器重新渲染的过程称为回流( reflow )，而当渲染树中元素样式的改变，并不影响布局时，浏览器重新绘制它的过程称为重绘( repaint )","headline":"回流与重绘","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2019/10/12/%E5%9B%9E%E6%B5%81%E4%B8%8E%E9%87%8D%E7%BB%98.html"},"url":"/blog/2019/10/12/%E5%9B%9E%E6%B5%81%E4%B8%8E%E9%87%8D%E7%BB%98.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">回流与重绘</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2019-10-12T00:00:00+00:00" itemprop="datePublished">Oct 12, 2019
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2019"><i>2019</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/css"><i>css</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>当渲染树中的元素尺寸，结构或属性发生改变时，需要浏览器重新渲染的过程称为<strong>回流( reflow )</strong>，而当渲染树中元素样式的改变，并不影响布局时，浏览器重新绘制它的过程称为<strong>重绘( repaint )</strong></p>
+
+<h2 id="dom-树与渲染树">DOM 树与渲染树</h2>
+
+<p>DOM 树是包含了所有 HTML 节点的树，渲染树是 DOM 树和 CSSOM 树组合而成的，最终渲染在页面上的树。DOM 树和渲染树都是浏览器生成的。</p>
+
+<h2 id="帧数">帧数</h2>
+
+<p>一般浏览器的刷新率为 60HZ，即 1 秒钟刷新 60 次。</p>
+
+<p>1000ms / 60hz = 16.6 ，也就是大概每过 16.6ms 浏览器就会渲染一帧画面。</p>
+
+<p>浏览器对每一帧画面的渲染工作都要在 16ms 内完成，超出这个时间，页面的渲染就会出现卡顿现象，影响用户体验。</p>
+
+<p>简单概括下，浏览器在每一帧里会依次执行以下这些动作：</p>
+
+<ul>
+  <li>JavaScript：JavaScript 实现动画效果，DOM 元素操作等。</li>
+  <li>Style（计算样式）：确定每个 DOM 元素应该应用什么 CSS 规则。</li>
+  <li>Layout（布局）：计算每个 DOM 元素在最终屏幕上显示的大小和位置。由于 web 页面的元素布局是相对的，所以其中任意一个元素的位置发生变化，都会联动的引起其他元素发生变化，这个过程叫 reflow。</li>
+  <li>Paint（绘制）：在多个层上绘制 DOM 元素的的文字、颜色、图像、边框和阴影等。</li>
+  <li>Composite（渲染层合并）：按照合理的顺序合并图层然后显示到屏幕上。</li>
+</ul>
+
+<p>减少或者避免 layout，paint 可以让页面减少卡顿，动画效果更加流畅。</p>
+
+<h2 id="浏览器渲染过程">浏览器渲染过程</h2>
+
+<ol>
+  <li>处理 HTML 标记并构建 DOM 树。</li>
+  <li>处理 CSS 标记并构建 CSSOM 树。</li>
+  <li>将 DOM 与 CSSOM 合并成一个渲染树。</li>
+  <li>根据渲染树来布局，以计算每个节点的几何信息。</li>
+  <li>将各个节点绘制到屏幕上。</li>
+</ol>
+
+<h2 id="图例">图例</h2>
+
+<p><img src="../../../images/2019-10-12-render-tree-construction.png" alt="Image" /></p>
+
+<h2 id="构建渲染树过程">构建渲染树过程</h2>
+
+<ol>
+  <li>
+    <p>从 DOM 树的根节点开始遍历每个可见节点。</p>
+
+    <ul>
+      <li>某些节点不可见（例如脚本标记、元标记等），因为它们不会体现在渲染输出中，所以会被忽略。</li>
+      <li>某些节点通过 CSS 隐藏，因此在渲染树中也会被忽略。例如，图中的 span 节点不会出现在渲染树中，因为有一个显式规则在该节点上设置了“display: none”属性。</li>
+    </ul>
+  </li>
+  <li>对于每个可见节点，为其找到适配的 CSSOM 规则并应用它们。</li>
+  <li>发射可见节点，连同其内容和计算的样式。</li>
+</ol>
+
+<h2 id="引起回流和重绘">引起回流和重绘</h2>
+
+<p>常见的引起回流操作：页面首次渲染，窗口大小改变，元素尺寸大小改变，元素内容变化，添加或删除可见的 DOM 元素等</p>
+
+<p>常见的引起重绘操作：改变颜色，改变背景颜色，visibility 隐藏显示等</p>
+
+<h2 id="注意">注意</h2>
+
+<h3 id="回流一定会引起重绘而重绘不一定会引起回流">回流一定会引起重绘，而重绘不一定会引起回流</h3>
+
+<p>请注意 visibility: hidden 与 display: none 是不一样的。前者隐藏元素，但元素仍占据着布局空间（即将其渲染成一个空框），而后者 (display: none) 将元素从渲染树中完全移除，元素既不可见，也不是布局的组成部分</p>
+
+<h2 id="普通图层和复合图层">普通图层和复合图层</h2>
+
+<p>上面的介绍中，提到了 composite 概念。</p>
+
+<p>可以简单的这样理解，浏览器渲染的图层一般包含两大类：渲染图层（普通图层）以及复合图层</p>
+
+<ul>
+  <li>渲染图层：又称默认复合层，是页面普通的文档流。我们虽然可以通过绝对定位，相对定位，浮动定位脱离文档流，但它仍然属于默认复合层，共用同一个绘图上下文对象（GraphicsContext）。</li>
+  <li>复合图层，它会单独分配资源（当然也会脱离普通文档流，这样一来，不管这个复合图层中怎么变化，也不会影响默认复合层里的回流重绘）</li>
+</ul>
+
+<p>某些特殊的渲染层会被提升为复合成层（Compositing Layers），复合图层拥有单独的 GraphicsLayer，而其他不是复合图层的渲染层，则和其第一个拥有 GraphicsLayer 父层共用一个。</p>
+
+<p>每个 GraphicsLayer 都有一个 GraphicsContext，GraphicsContext 会负责输出该层的位图，位图是存储在共享内存中，作为纹理上传到 GPU 中，最后由 GPU 将多个位图进行合成，然后 draw 到屏幕上，此时，我们的页面也就展现到了屏幕上。</p>
+
+<p>可以 Chrome 源码调试 -&gt; More Tools -&gt; Rendering -&gt; Layer borders 中看到，黄色的就是复合图层信息。</p>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-tree-construction?hl=zh-cn">渲染树构建、布局及绘制</a></li>
+  <li><a href="https://fe.ecool.fun/topic/5adab921-8dfb-4a65-9f44-38ae8a70820f?orderBy=updateTime&amp;order=desc&amp;tagId=11">硬件加速的原理是什么</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2019/10/12/%E5%9B%9E%E6%B5%81%E4%B8%8E%E9%87%8D%E7%BB%98.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

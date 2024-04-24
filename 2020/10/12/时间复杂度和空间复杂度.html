@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>时间复杂度和空间复杂度 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="时间复杂度和空间复杂度" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="在计算机科学中，算法的时间复杂度（Time complexity）是一个函数，它定性描述该算法的运行时间。当 n 很大时，公式中的低阶、常量、系数不能左右增长趋势，都可以忽略。" />
+<meta property="og:description" content="在计算机科学中，算法的时间复杂度（Time complexity）是一个函数，它定性描述该算法的运行时间。当 n 很大时，公式中的低阶、常量、系数不能左右增长趋势，都可以忽略。" />
+<link rel="canonical" href="/blog/2020/10/12/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%92%8C%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6.html" />
+<meta property="og:url" content="/blog/2020/10/12/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%92%8C%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-10-12T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="时间复杂度和空间复杂度" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2020-10-12T00:00:00+00:00","datePublished":"2020-10-12T00:00:00+00:00","description":"在计算机科学中，算法的时间复杂度（Time complexity）是一个函数，它定性描述该算法的运行时间。当 n 很大时，公式中的低阶、常量、系数不能左右增长趋势，都可以忽略。","headline":"时间复杂度和空间复杂度","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2020/10/12/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%92%8C%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6.html"},"url":"/blog/2020/10/12/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%92%8C%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">时间复杂度和空间复杂度</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2020-10-12T00:00:00+00:00" itemprop="datePublished">Oct 12, 2020
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2020"><i>2020</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/algorithm"><i>algorithm</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>在计算机科学中，算法的时间复杂度（Time complexity）是一个函数，它定性描述该算法的运行时间。当 n 很大时，公式中的低阶、常量、系数不能左右增长趋势，都可以忽略。</p>
+
+<p>时间复杂度：随着自变量的增长，算法所需时间的增长情况。</p>
+
+<h3 id="常见的时间复杂度">常见的时间复杂度</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>运行时间</th>
+      <th>名称</th>
+      <th>英文名称</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>O(1)</td>
+      <td>常数时间</td>
+      <td>Constant time</td>
+    </tr>
+    <tr>
+      <td>O(log n)</td>
+      <td>对数时间</td>
+      <td>Logarithmic time</td>
+    </tr>
+    <tr>
+      <td>O(n)</td>
+      <td>线性时间</td>
+      <td>Linear time</td>
+    </tr>
+    <tr>
+      <td>O(n log n)</td>
+      <td>线性对数时间</td>
+      <td>linearithmic time</td>
+    </tr>
+    <tr>
+      <td>O(n^2)</td>
+      <td>平方时间</td>
+      <td>N square time</td>
+    </tr>
+    <tr>
+      <td>O(n^3)</td>
+      <td>次方时间</td>
+      <td>N cubic time</td>
+    </tr>
+    <tr>
+      <td>O(2^n)</td>
+      <td>指数时间</td>
+      <td>Exponential time</td>
+    </tr>
+    <tr>
+      <td>O(n!)</td>
+      <td>阶乘时间</td>
+      <td>Factorial</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>以上时间复杂度的量级依次递增。</p>
+
+<p>我们在计算时间复杂度的时候，取其中最大的量级。当我们代码的时间复杂度有 O(n) 和 O(n^2) 的时候，那么时间复杂度就为 O(n^2)。总的时间复杂度等于量级最大的时间复杂度。</p>
+
+<h2 id="一些案例">一些案例</h2>
+
+<h3 id="o1">O(1)</h3>
+
+<p>一般情况下，只要算法中不存在循环、递归语句，其时间复杂度是 O(1）</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span><span class="o">;</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Hello, World "</span> <span class="o">+</span> <span class="n">n</span><span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"So... "</span> <span class="o">+</span> <span class="n">n</span><span class="o">);</span>
+</code></pre></div></div>
+
+<h3 id="on">O(N)</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+  <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Hello, "</span> <span class="o">+</span> <span class="n">n</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="olog-n">O(log n)</h3>
+
+<p>对数阶时间复杂度非常常见，同时也是最难分析的一种。</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="o">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
+  <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Hello, "</span> <span class="o">+</span> <span class="n">n</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>从代码中，变量 i 的取值就是一个等比数列。2<sup>0</sup> 2<sup>1</sup> 2<sup>2</sup>…2<sup>k</sup>…2<sup>x</sup> = n。求解 x 等到的值：x = log<sub>2</sub>n，所以上面代码的时间复杂度 O(log<sub>2</sub>n)。</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span><span class="n">n</span><span class="o">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">3</span><span class="o">)</span> <span class="o">{</span>
+  <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">n</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>同理分析可得，上面代码的时间复杂度为 O(log<sub>3</sub>n)。</p>
+
+<p>对数之间可以相互之间转换的，log<sub>3</sub>n 可以等于 log<sub>3</sub>2 * log<sub>2</sub>n，所以我们可以忽略系数。而在对数阶的时间复杂度表示方法里，我们忽略对数的“底”，统一表示为 O(log n)。</p>
+
+<h3 id="on-log-n">O(n log n)</h3>
+
+<p>O(n log n) 是一种非常常见的算法时间复杂度，归并排序，快速排序的时间复杂度都是 O(n log n)。</p>
+
+<h3 id="on2">O(N^2)</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+  <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Hello, "</span> <span class="o">+</span> <span class="n">n</span><span class="o">);</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="o2n">O(2^n)</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">fib</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="o">)</span> <span class="k">return</span> <span class="n">n</span><span class="o">;</span>
+  <span class="k">return</span> <span class="nf">fib</span><span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">+</span> <span class="n">fib</span><span class="o">(</span><span class="n">n</span> <span class="o">-</span><span class="mi">2</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="几个概念">几个概念</h2>
+
+<h3 id="最好情况时间复杂度">最好情况时间复杂度</h3>
+
+<p>最好情况时间复杂度(best case time complexity)，就是在最理想的情况下，执行这段代码的时间复杂度。</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// n 表示数组 array 的长度</span>
+<span class="kt">int</span> <span class="nf">find</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">array</span><span class="o">,</span> <span class="kt">int</span> <span class="n">n</span><span class="o">,</span> <span class="n">inx</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+  <span class="kt">int</span> <span class="n">pos</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+  <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">array</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">==</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">pos</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
+      <span class="k">break</span><span class="o">;</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+  <span class="k">return</span> <span class="n">pos</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>在这段代码下，最理想的情况下，要查找的变量 x 刚好是数组的第一个元素，这个情况下对应的时间复杂度就是最好的情况时间复杂度。</p>
+
+<h3 id="最坏情况时间复杂度">最坏情况时间复杂度</h3>
+
+<p>最坏情况时间复杂度(worst case time complexity)，就是在最糟糕的情况下，执行这段代码的时间复杂度。</p>
+
+<p>在上面的例子中，如果数组中没有要查找的变量 x，我们需要把整个数组都遍历一遍，这个情况下对应的时间复杂度就是最坏情况时间复杂度。</p>
+
+<h3 id="平均情况时间复杂度">平均情况时间复杂度</h3>
+
+<p>平均情况时间复杂度(average case time complexity)，为了更好表示平均情况下的复杂度。</p>
+
+<p>在上面的例子中，有 n + 1 种情况：在数组的 0 ～ n - 1 位置中和不在数组中。我们把每种情况下，查找需要遍历的元素的个数累加起来，然后再除以 n + 1，就可以得到需要遍历的元素个数的平均值。即：</p>
+
+<pre><code class="language-plain">1 + 2 + 3 + ... + n + n       n(n + 1) + 2n      n(n + 3)
+------------------------ = ------------------ = -----------
+       n + 1                   2 * (n + 1)       2(n + 1)
+</code></pre>
+
+<p>省略掉系数，低阶，常量，可以得到平均时间复杂度就是 O(n)。</p>
+
+<p>这种推论是最大的问题就是，没有将各种情况发生的概率考虑进去，我们假设 x 在数组和不在数组中的概率均为 1/2。那么计算公式变成了</p>
+
+<pre><code class="language-plain">(1 + 2 + 3 + ... + n) * 1/2n + n * 1/2 = (3n + 1) / 4
+</code></pre>
+
+<p>去掉系数，低阶和常量，平均时间复杂度还是 O(n)。我们将这个值称为加权平均值，也叫期望值。</p>
+
+<h3 id="均摊时间复杂度">均摊时间复杂度</h3>
+
+<p>均摊时间复杂度(amortized time complexity)</p>
+
+<h2 id="空间复杂度">空间复杂度</h2>
+
+<p>空间复杂度全称是渐进空间复杂度（asymptotic space complexity），表示算法的存储空间与数据的规模之间的增长关系。</p>
+
+<p>常见的空间复杂度有 O(1)，O(n)，O(n<sup>2</sup>，而像 O(log n)，O(n log n) 这样的对数阶复杂度平时用不到。</p>
+
+<h2 id="思考题">思考题</h2>
+
+<ul>
+  <li>二叉树遍历-前序，中序，后序：时间复杂度是多少？</li>
+  <li>图的遍历：时间复杂度是多少？</li>
+  <li>搜索算法：DFS，BFS 时间复杂度是多少？</li>
+  <li>二分查找：时间复杂度是多少？</li>
+</ul>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="https://www.zhihu.com/question/21387264">如何理解算法时间复杂度的表示法，例如 O(n²)、O(n)、O(1)、O(nlogn) 等？</a></li>
+  <li><a href="https://mp.weixin.qq.com/s/AOze7X3R2hdaDqhCybLIrw">这才是面试官想听的：详解「递归」正确的打开方式</a></li>
+  <li><a href="https://time.geekbang.org/column/article/40036">极客时间：复杂度分析（上）</a></li>
+  <li><a href="https://time.geekbang.org/column/article/40447">极客时间：复杂度分析（下）</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2020/10/12/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%92%8C%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

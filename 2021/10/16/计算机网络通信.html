@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>计算机网络通信 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="计算机网络通信" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="主要记录一些计算机协议以及三层协议" />
+<meta property="og:description" content="主要记录一些计算机协议以及三层协议" />
+<link rel="canonical" href="/blog/2021/10/16/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1.html" />
+<meta property="og:url" content="/blog/2021/10/16/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-10-16T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="计算机网络通信" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2021-10-16T00:00:00+00:00","datePublished":"2021-10-16T00:00:00+00:00","description":"主要记录一些计算机协议以及三层协议","headline":"计算机网络通信","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2021/10/16/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1.html"},"url":"/blog/2021/10/16/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">计算机网络通信</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-10-16T00:00:00+00:00" itemprop="datePublished">Oct 16, 2021
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2021"><i>2021</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/network"><i>network</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>主要记录一些计算机协议以及三层协议</p>
+
+<h2 id="网络协议">网络协议</h2>
+
+<h3 id="arp">ARP</h3>
+
+<p>ARP（Address Resolution Protocol）即地址解析协议，用于实现从 IP 地址到 MAC 地址的映射，即询问目标 IP 对应的 MAC 地址。</p>
+
+<p>在网络通信中，主机和主机通信的数据包需要依据 OSI 模型从上到下进行数据封装，当数据封装完整后，再向外发出。所以在局域网的通信中，不仅需要源目 IP 地址的封装，也需要源目 MAC 的封装。</p>
+
+<p>一般情况下，上层应用程序更多关心 IP 地址而不关心 MAC 地址，所以需要通过 ARP 协议来获取目的主机的 MAC 地址，完成数据封装。</p>
+
+<h3 id="icmp">ICMP</h3>
+
+<p>Internet 控制信息协议（Internet Control Message Protocol, ICMP），是专门用于发送差错报文的协议。ICMP 定义了 5 种差错报文（源抑制、超时、目的不可达、重定向和要求分段）和 4 种信息报文（回应请求、回应应答、地址屏蔽码请求和地址屏蔽码应答）。IP 在需要发送一个差错报文时要使用 ICMP，而 ICMP 也是利用 IP 来传送报文的。ICMP 也可以用于测试 Internet，例如 Ping 就是利用 ICMP 报文进行目标是否可达测试。</p>
+
+<h3 id="dhcp">DHCP</h3>
+
+<p>动态主机配置协议（Dynamic Host Configuration Protocol）是一种网络管理协议，用于集中对用户 IP 地址进行动态管理和配置。</p>
+
+<p>DHCP 协议由 RFC 2131 定义，采用客户端/服务器通信模式，由客户端（DHCP Client）向服务器（DHCP Server）提出配置申请，DHCP Server 向网络上的每个设备动态分配 IP 地址、子网掩码、默认网关地址、域名服务器（DNS）和其他相关配置参数，以便可以与其他 IP 网络通信。</p>
+
+<h2 id="三层网络">三层网络</h2>
+
+<p>三层网络架构：是采用层次化模型设计的三层网络。三层网络架构主要有三个层次，核心层、汇聚层和接入层。</p>
+
+<h3 id="核心层core-layer">核心层（Core Layer）</h3>
+
+<p>核心层为进出数据中心的包提供高速的转发，为多个汇聚层提供连接性，核心层为整个网络提供一个弹性的 L3 路由网络。</p>
+
+<p>核心层是网络的高速交换主干，应该采用高宽带的千兆以上交换机。</p>
+
+<h3 id="汇聚层aggregation-layer">汇聚层（Aggregation Layer）</h3>
+
+<p>汇聚层连接接入交换机，同时提供其他的服务，如：防火墙、入侵检测、网络分析等。</p>
+
+<p>汇聚层是网络接入层和核心层的中间层，就是在 Serve 接入核心层先做汇聚，以减轻核心层设备的负荷。汇聚层具有实施策略、安全、工作组接入、虚拟局域网之间的路由、源地址或目的地址过滤等功能。</p>
+
+<h3 id="接入层access-layer">接入层（Access Layer）</h3>
+
+<p>接入层通常位于机架顶部，也称 ToR(Top of Rack)交换机，它们物理连接服务器。</p>
+
+<p>接入层是直接面向用户连接的部分，向本地网段提供工作站接入，主要解决了相邻用户之间的互访需求。</p>
+
+<h2 id="无线网">无线网</h2>
+
+<p>无线网的划分</p>
+
+<ul>
+  <li>无线局域网（WLAN，802.11 WiFi）</li>
+  <li>无线城域网（WMAN，802.16 WiMax）</li>
+  <li>无线广域网（WWAN，3G/4G）</li>
+  <li>无线个人网（WPAN，802.15 Bluetooth）</li>
+</ul>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="https://zhuanlan.zhihu.com/p/28771785">图解 ARP 协议（一）</a></li>
+  <li><a href="https://info.support.huawei.com/info-finder/encyclopedia/zh/DHCP.html">什么是 DHCP</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2021/10/16/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Sass的基础用法 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Sass的基础用法" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Sass is an extension of CSS, adding nested rules, variables, mixins, selector inheritance, and more." />
+<meta property="og:description" content="Sass is an extension of CSS, adding nested rules, variables, mixins, selector inheritance, and more." />
+<link rel="canonical" href="/blog/2022/06/09/Sass%E7%9A%84%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95.html" />
+<meta property="og:url" content="/blog/2022/06/09/Sass%E7%9A%84%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-06-09T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Sass的基础用法" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-06-09T00:00:00+00:00","datePublished":"2022-06-09T00:00:00+00:00","description":"Sass is an extension of CSS, adding nested rules, variables, mixins, selector inheritance, and more.","headline":"Sass的基础用法","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2022/06/09/Sass%E7%9A%84%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95.html"},"url":"/blog/2022/06/09/Sass%E7%9A%84%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Sass的基础用法</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2022-06-09T00:00:00+00:00" itemprop="datePublished">Jun 9, 2022
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2022"><i>2022</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/css"><i>css</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Sass is an extension of CSS, adding nested rules, variables, mixins, selector inheritance, and more.</p>
+
+<!-- vim-markdown-toc GFM -->
+
+<ul>
+  <li><a href="#安装">安装</a></li>
+  <li><a href="#webpack-全局使用-sass">webpack 全局使用 sass</a></li>
+  <li><a href="#变量">变量</a></li>
+  <li><a href="#规则">@规则</a>
+    <ul>
+      <li><a href="#mixin-与-include">@mixin 与 @include</a></li>
+      <li><a href="#import">@import</a></li>
+      <li><a href="#use">@use</a></li>
+      <li><a href="#extend">@extend</a></li>
+      <li><a href="#function">@function</a></li>
+    </ul>
+  </li>
+  <li><a href="#参考链接">参考链接</a></li>
+</ul>
+
+<!-- vim-markdown-toc -->
+
+<h2 id="安装">安装</h2>
+
+<ol>
+  <li>
+    <p>直接编译成 css</p>
+
+    <p>使用命令行的方式安装 <code class="language-plaintext highlighter-rouge">npm i -g sass</code></p>
+
+    <p>运行编译命令 <code class="language-plaintext highlighter-rouge">sass input.scss outpu.css</code>，生成编译的文件</p>
+  </li>
+  <li>
+    <p>在 webpack 中使用</p>
+
+    <p>webpack 中需要安装 sass-loader，需要安装 Dart Sass，Node Sass 或者 Sass Embedded 其中之一。</p>
+
+    <p>推荐使用 Dart Sass，因为 Node Sass 不支持 @use 规则，Sass Embedded 还在实验中，部分功能暂不完善。</p>
+
+    <p>具体配置方式：<a href="https://webpack.js.org/loaders/sass-loader">webpack: sass-loader</a></p>
+  </li>
+</ol>
+
+<h2 id="webpack-全局使用-sass">webpack 全局使用 sass</h2>
+
+<p>一些基础配置的 sass 文件，如: <code class="language-plaintext highlighter-rouge">_base.scss</code> 或 <code class="language-plaintext highlighter-rouge">_variables.scss</code> 经常会在其他文件引用，那么就需要全局使用 sass 文件。</p>
+
+<p>全局使用 sass 文件，主要是修改 webpack 中的 sass-loader 的配置中的 additionalData 配置。</p>
+
+<p>假设我们有一个 sass 文件 <code class="language-plaintext highlighter-rouge">sass/_variables.scss</code></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">themeColor</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nf">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="dl">'</span><span class="s1">sass</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">_variables.scss</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="c1">// 使用 @import</span>
+<span class="p">{</span>
+  <span class="na">loader</span><span class="p">:</span> <span class="dl">'</span><span class="s1">sass-loader</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">options</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">additionalData</span><span class="p">:</span> <span class="s2">`additionalData: @import "../src/sass/_variables.scss";`</span><span class="p">,</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 使用 @use，并可以直接使用</span>
+<span class="p">{</span>
+  <span class="na">loader</span><span class="p">:</span> <span class="dl">'</span><span class="s1">sass-loader</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">options</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">additionalData</span><span class="p">:</span> <span class="s2">`additionalData: @use "../src/sass/_variables.scss"; as *`</span><span class="p">,</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 使用 @use，并作为变量 variables</span>
+<span class="p">{</span>
+  <span class="na">loader</span><span class="p">:</span> <span class="dl">'</span><span class="s1">sass-loader</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">options</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">`additionalData: @use "</span><span class="p">${</span><span class="nx">themeColor</span><span class="p">}</span><span class="s2">"; as variables`</span><span class="p">,</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="变量">变量</h2>
+
+<p>Sass 定义变量使用 <code class="language-plaintext highlighter-rouge">$</code> 符合开头。</p>
+
+<div class="language-scss highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$base-color</span><span class="p">:</span> <span class="mh">#c6538c</span><span class="p">;</span>
+<span class="nv">$border-dark</span><span class="p">:</span> <span class="nf">rgba</span><span class="p">(</span><span class="nv">$base-color</span><span class="o">,</span> <span class="m">0</span><span class="mi">.88</span><span class="p">);</span>
+
+<span class="nc">.alert</span> <span class="p">{</span>
+  <span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="nv">$border-dark</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="规则">@规则</h2>
+
+<h3 id="mixin-与-include">@mixin 与 @include</h3>
+
+<p>@mixin 用于声明一个混合器，而 @include 调用声明的混合器。</p>
+
+<p>@mixin 可以传参，且可以自带默认参数，传递的参数可以作为值使用，也可以作为属性使用。</p>
+
+<div class="language-scss highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">@mixin</span> <span class="o">&lt;</span><span class="nt">name</span><span class="o">&gt;</span> <span class="p">{</span> <span class="nc">...</span> <span class="p">}</span>
+<span class="k">@mixin</span> <span class="nf">name</span><span class="p">(</span><span class="o">&lt;</span><span class="n">arguments</span><span class="o">...&gt;</span><span class="p">)</span> <span class="p">{</span> <span class="nc">...</span> <span class="p">}</span>
+<span class="k">@include</span> <span class="o">&lt;</span><span class="nt">name</span><span class="o">&gt;</span>
+<span class="o">@</span><span class="nt">include</span> <span class="o">&lt;</span><span class="nt">name</span><span class="o">&gt;(&lt;</span><span class="nt">arguments</span><span class="nc">...</span><span class="o">&gt;)</span>
+</code></pre></div></div>
+
+<h3 id="import">@import</h3>
+
+<p>@import 可以同时引入多个文件，<code class="language-plaintext highlighter-rouge">@import 'foundation/code', 'foundation/list'</code></p>
+
+<p>Sass 团队不鼓励继续使用 @import，更倾向于使用 @use 替代。主要是 @import 存在以下问题：</p>
+
+<ul>
+  <li>@import 让所有的变量、混合器和函数都可以全局访问。这让人们很难知道是在哪里定义的。</li>
+  <li>因为所有的东西都是全局的，所以库必须给所有成员加上前缀，以避免命名冲突。</li>
+  <li>每次 @import 时，每个样式表都会被执行，增加编译时间，产生臃肿的输出。</li>
+  <li>没有办法定义私有成员或占位符选择器。</li>
+</ul>
+
+<h3 id="use">@use</h3>
+
+<p>@use 是从其他模块载入 mixin，function，变量等，将其组合一起。通过 @use 加载进来的样式被称为模块，sass 有内置的模块。
+通过 @use 加载的样式最终只会输出一份。</p>
+
+<p>默认情况下，use 的命名空间就是最后的 URL，也可以通过 <code class="language-plaintext highlighter-rouge">as name</code> 或者 <code class="language-plaintext highlighter-rouge">as *</code> 来重命名。</p>
+
+<div class="language-scss highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 调用方式加上对应的 &lt;namespace&gt;</span>
+<span class="c1">// &lt;namespace&gt;.&lt;variable&gt;</span>
+<span class="c1">// &lt;namespace&gt;.&lt;function&gt;()</span>
+<span class="c1">// @include &lt;namespace&gt;.&lt;mixin&gt;()`</span>
+
+<span class="k">@use</span> <span class="s1">'theme'</span><span class="p">;</span>
+<span class="k">@use</span> <span class="s1">'src/corners'</span><span class="p">;</span>
+
+<span class="nc">.div</span> <span class="p">{</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="n">theme</span><span class="o">.</span><span class="nv">$textColor</span><span class="p">;</span>
+  <span class="k">@include</span> <span class="nd">corners</span><span class="o">.</span><span class="n">rounded</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>私有变量</p>
+
+<ul>
+  <li>通过命名以 <code class="language-plaintext highlighter-rouge">-</code> 或 <code class="language-plaintext highlighter-rouge">_</code> 开头的变量，通过 @use 导入的时候，其他文件无法访问使用。</li>
+</ul>
+
+<p>默认值</p>
+
+<ul>
+  <li>
+    <p>通过 <code class="language-plaintext highlighter-rouge">!default</code> 定义一个有默认值的可配置变量，可通过 @use 重新赋值</p>
+
+    <div class="language-scss highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 通过 with 重复赋值</span>
+<span class="k">@use</span> <span class="o">&lt;</span><span class="nt">url</span><span class="o">&gt;</span> <span class="nt">with</span> <span class="o">(</span>
+  <span class="o">&lt;</span><span class="nt">variable</span><span class="o">&gt;</span><span class="nd">:</span> <span class="o">&lt;</span><span class="nt">value</span><span class="o">&gt;</span>
+<span class="o">)</span><span class="p">;</span>
+
+<span class="c1">// 直接重新赋值</span>
+<span class="k">@use</span> <span class="s1">'theme'</span><span class="p">;</span>
+<span class="na">theme</span><span class="err">.$</span><span class="nl">color</span><span class="p">:</span> <span class="no">red</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p>局部文件</p>
+
+<ul>
+  <li>局部文件以下划线 <code class="language-plaintext highlighter-rouge">_</code> 开头，引入的时候可以忽略下划线。局部文件默认不编译。</li>
+</ul>
+
+<p>@use 企图替换掉 @import，主要的区别：</p>
+
+<ul>
+  <li>@use 只让变量，函数与混合器在当前文件的范围内可用，不会把它们添加到全局范围。</li>
+  <li>@use 对每个文件只加载一次，这可以确保不会意外重复依赖相同的 CSS。</li>
+  <li>@use 必须出现在文件的开头，且不能嵌套在样式规则中。</li>
+  <li>每个 @use 规则只能有一个 URL。</li>
+  <li>@use 需要在其 URL 周围加上引号。</li>
+</ul>
+
+<h3 id="extend">@extend</h3>
+
+<p>不同于 @mixin 的复制样式至当前的样式规则里，@extend 则是将当前的选择器更新至样式规则里。</p>
+
+<p>@extend 用在 BEM 修饰器的类的复用挺方便的。</p>
+
+<h3 id="function">@function</h3>
+
+<p>函数允许你定义更加复杂的 Sass 脚本，使得你更加方便重用。</p>
+
+<p><code class="language-plaintext highlighter-rouge">@function &lt;name&gt;(&lt;arguments...&gt; {...})</code></p>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="https://sass-lang.com">Sass: Syntactically Awesome Style Sheets</a></li>
+  <li><a href="https://webpack.js.org/loaders/sass-loader/">sass-loader | webpack</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2022/06/09/Sass%E7%9A%84%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>
