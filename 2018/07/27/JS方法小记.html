@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>JS方法小记 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="JS方法小记" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="关于 JS 的一些方法" />
+<meta property="og:description" content="关于 JS 的一些方法" />
+<link rel="canonical" href="/blog/2018/07/27/JS%E6%96%B9%E6%B3%95%E5%B0%8F%E8%AE%B0.html" />
+<meta property="og:url" content="/blog/2018/07/27/JS%E6%96%B9%E6%B3%95%E5%B0%8F%E8%AE%B0.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-07-27T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="JS方法小记" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2018-07-27T00:00:00+00:00","datePublished":"2018-07-27T00:00:00+00:00","description":"关于 JS 的一些方法","headline":"JS方法小记","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2018/07/27/JS%E6%96%B9%E6%B3%95%E5%B0%8F%E8%AE%B0.html"},"url":"/blog/2018/07/27/JS%E6%96%B9%E6%B3%95%E5%B0%8F%E8%AE%B0.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">JS方法小记</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2018-07-27T00:00:00+00:00" itemprop="datePublished">Jul 27, 2018
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2018"><i>2018</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/javascript"><i>javascript</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>关于 JS 的一些方法</p>
+
+<!-- vim-markdown-toc GFM -->
+
+<ul>
+  <li><a href="#自定义排序">自定义排序</a></li>
+  <li><a href="#arrayincludes-处理多重条件">Array.includes 处理多重条件</a></li>
+  <li><a href="#arrayevery-和-arraysome-处理条件">Array.every 和 Array.some 处理条件</a></li>
+  <li><a href="#接收参数的方式">接收参数的方式</a></li>
+  <li><a href="#对象转数组">对象转数组</a></li>
+  <li><a href="#数组的判断">数组的判断</a></li>
+  <li><a href="#检查是否为工作日">检查是否为工作日</a></li>
+  <li><a href="#concat-和-push">concat 和 push</a></li>
+  <li><a href="#返回从-0-开始的数组">返回从 0 开始的数组</a></li>
+  <li><a href="#中断-foreach">中断 forEach</a></li>
+  <li><a href="#中断-for-循环">中断 for 循环</a></li>
+  <li><a href="#千分位分隔符">千分位分隔符</a></li>
+  <li><a href="#forin-与-forof">for…in 与 for…of</a></li>
+  <li><a href="#js-中常用的按位运算应用">JS 中常用的按位运算应用</a></li>
+  <li><a href="#在-arraymap-使用-asyncawait">在 Array.map 使用 async/await</a></li>
+</ul>
+
+<!-- vim-markdown-toc -->
+
+<h2 id="自定义排序">自定义排序</h2>
+
+<div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">customSort</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span>
+  <span class="nx">group</span><span class="p">:</span> <span class="p">{</span> <span class="p">[</span><span class="nx">key</span><span class="p">:</span> <span class="kr">string</span><span class="p">]:</span> <span class="nx">T</span> <span class="p">}[],</span>
+  <span class="nx">arr</span><span class="p">:</span> <span class="nx">T</span><span class="p">[],</span>
+  <span class="nx">key</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span>
+<span class="p">):</span> <span class="p">{</span> <span class="p">[</span><span class="nx">key</span><span class="p">:</span> <span class="kr">string</span><span class="p">]:</span> <span class="nx">T</span> <span class="p">}[]</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">group</span><span class="p">.</span><span class="nf">sort</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">arr</span><span class="p">.</span><span class="nf">indexOf</span><span class="p">(</span><span class="nx">a</span><span class="p">[</span><span class="nx">key</span><span class="p">])</span> <span class="o">-</span> <span class="nx">arr</span><span class="p">.</span><span class="nf">indexOf</span><span class="p">(</span><span class="nx">b</span><span class="p">[</span><span class="nx">key</span><span class="p">]);</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>示例如下：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">foo</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">bar</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">baz</span><span class="dl">'</span><span class="p">];</span>
+<span class="kd">const</span> <span class="nx">group</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">{</span>
+    <span class="na">key</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bar</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">value</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="na">key</span><span class="p">:</span> <span class="dl">'</span><span class="s1">foo</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">value</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="na">key</span><span class="p">:</span> <span class="dl">'</span><span class="s1">baz</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">value</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="na">key</span><span class="p">:</span> <span class="dl">'</span><span class="s1">foo</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">vlaue</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">];</span>
+
+<span class="kd">const</span> <span class="nx">sortGroup</span> <span class="o">=</span> <span class="nf">customSort</span><span class="p">(</span><span class="nx">group</span><span class="p">,</span> <span class="nx">arr</span><span class="p">,</span> <span class="dl">'</span><span class="s1">key</span><span class="dl">'</span><span class="p">);</span>
+<span class="c1">// [{value: 2, key: 'foo'}, {value: 4, key: 'foo'},</span>
+<span class="c1">//  {value: 1, key: 'bar'}, {value: 3, key: 'baz'}]</span>
+</code></pre></div></div>
+
+<h2 id="arrayincludes-处理多重条件">Array.includes 处理多重条件</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">func</span><span class="p">(</span><span class="nx">arg</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">arg</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">A</span><span class="dl">'</span> <span class="o">||</span> <span class="nx">arg</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">B</span><span class="dl">'</span> <span class="o">||</span> <span class="nx">arg</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">C</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="cm">/* do something */</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nf">func</span><span class="p">(</span><span class="nx">arg</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">A</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">B</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">C</span><span class="dl">'</span><span class="p">];</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">arr</span><span class="p">.</span><span class="nf">includes</span><span class="p">(</span><span class="nx">arg</span><span class="p">))</span> <span class="p">{</span>
+    <span class="cm">/* do something */</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="arrayevery-和-arraysome-处理条件">Array.every 和 Array.some 处理条件</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">AA</span><span class="dl">'</span><span class="p">,</span> <span class="na">age</span><span class="p">:</span> <span class="mi">10</span> <span class="p">},</span>
+  <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">BB</span><span class="dl">'</span><span class="p">,</span> <span class="na">age</span><span class="p">:</span> <span class="mi">20</span> <span class="p">},</span>
+  <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">CC</span><span class="dl">'</span><span class="p">,</span> <span class="na">age</span><span class="p">:</span> <span class="mi">30</span> <span class="p">},</span>
+<span class="p">];</span>
+
+<span class="c1">// 满足全部条件</span>
+<span class="kd">const</span> <span class="nx">bool</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nf">every</span><span class="p">((</span><span class="nx">item</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">item</span><span class="p">.</span><span class="nx">name</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">AA</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="c1">// 满足部分条件</span>
+<span class="kd">const</span> <span class="nx">bool</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nf">some</span><span class="p">((</span><span class="nx">item</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">item</span><span class="p">.</span><span class="nx">age</span> <span class="o">&lt;</span> <span class="mi">35</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="接收参数的方式">接收参数的方式</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">func</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">search</span><span class="p">,</span> <span class="nx">page</span><span class="p">,</span> <span class="nx">limit</span><span class="p">)</span> <span class="p">{}</span> <span class="c1">// 需要记住参数顺序</span>
+<span class="kd">function</span> <span class="nf">func</span><span class="p">({</span> <span class="nx">url</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">search</span><span class="p">,</span> <span class="nx">page</span><span class="p">,</span> <span class="nx">limit</span> <span class="p">})</span> <span class="p">{}</span> <span class="c1">// 不需要记住参数顺序，记参数名称</span>
+</code></pre></div></div>
+
+<h2 id="对象转数组">对象转数组</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">nubmers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">one</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="na">two</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+<span class="p">};</span>
+<span class="kd">const</span> <span class="nx">key</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nf">keys</span><span class="p">(</span><span class="nx">numbers</span><span class="p">);</span> <span class="c1">// ['one', 'two']</span>
+<span class="kd">const</span> <span class="nx">value</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nf">values</span><span class="p">(</span><span class="nx">numbers</span><span class="p">);</span> <span class="c1">// [1, 2]</span>
+<span class="kd">const</span> <span class="nx">entry</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nf">entries</span><span class="p">(</span><span class="nx">numbers</span><span class="p">);</span> <span class="c1">// [['one': 1], ['two', 2]]</span>
+</code></pre></div></div>
+
+<h2 id="数组的判断">数组的判断</h2>
+
+<ul>
+  <li>判断是否为数组：<code class="language-plaintext highlighter-rouge">Array.isArray()</code></li>
+  <li>类数组转化数组：<code class="language-plaintext highlighter-rouge">Array.from()</code></li>
+</ul>
+
+<h2 id="检查是否为工作日">检查是否为工作日</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">isWeekday</span> <span class="o">=</span> <span class="p">(</span><span class="nx">date</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">date</span><span class="p">.</span><span class="nf">getDay</span><span class="p">()</span> <span class="o">%</span> <span class="mi">6</span> <span class="o">!==</span> <span class="mi">0</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="concat-和-push">concat 和 push</h2>
+
+<p>push 修改源数组，concat 返回新数组，concat 可以连接数组。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">];</span>
+<span class="nx">arr</span><span class="p">.</span><span class="nf">push</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span> <span class="c1">// arr: [1, 2, 3]</span>
+<span class="nx">arr</span><span class="p">.</span><span class="nf">push</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]);</span> <span class="c1">// arr: [1, 2, 3, [4, 5]]</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">arrA</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nf">concat</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span> <span class="c1">// arr: [1, 2]; arrA: [1, 2, 3];</span>
+<span class="kd">var</span> <span class="nx">arrB</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nf">concat</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]);</span> <span class="c1">// arr: [1, 2]; arrB: [1, 2, 4, 5];</span>
+</code></pre></div></div>
+
+<h2 id="返回从-0-开始的数组">返回从 0 开始的数组</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">Array</span><span class="p">.</span><span class="k">from</span><span class="p">(</span><span class="nc">Array</span><span class="p">(</span><span class="mi">5</span><span class="p">).</span><span class="nf">keys</span><span class="p">());</span> <span class="c1">//[0, 1, 2, 3, 4]</span>
+</code></pre></div></div>
+
+<h2 id="中断-foreach">中断 forEach</h2>
+
+<p>使用 splice 删除剩余项，中断 forEach 的循环。⛔<strong>该方法会改变原数组，请慎用</strong></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">];</span>
+<span class="nx">arr</span><span class="p">.</span><span class="nf">forEach</span><span class="p">((</span><span class="nx">item</span><span class="p">,</span> <span class="nx">idx</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">item</span> <span class="o">===</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">arr</span><span class="p">.</span><span class="nf">splice</span><span class="p">(</span><span class="nx">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="nx">idx</span><span class="p">);</span>
+    <span class="c1">// arr.length = 0; // 甚至可以直接清空数组</span>
+  <span class="p">}</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">item</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="c1">// 1, 2, 3</span>
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">arr</span><span class="p">);</span> <span class="c1">// [1, 2, 3]</span>
+</code></pre></div></div>
+
+<h2 id="中断-for-循环">中断 for 循环</h2>
+
+<p>使用 break 打断 for 循环</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">];</span>
+<span class="k">for </span><span class="p">(</span><span class="nx">k</span> <span class="k">in</span> <span class="nx">arr</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="nx">k</span><span class="p">]);</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="nx">k</span><span class="p">]</span> <span class="o">===</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">break</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">// 1, 2, 3</span>
+</code></pre></div></div>
+
+<h2 id="千分位分隔符">千分位分隔符</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">_comma</span><span class="p">(</span><span class="nx">number</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">number</span><span class="p">.</span><span class="nf">toString</span><span class="p">().</span><span class="nf">replace</span><span class="p">(</span><span class="sr">/</span><span class="se">(\d)(?=(?:\d{3})</span><span class="sr">+$</span><span class="se">)</span><span class="sr">/g</span><span class="p">,</span> <span class="dl">'</span><span class="s1">$1,</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><a href="https://blog.nowcoder.net/n/633bded80a164c5e946dfcce9df20327?f=comment">题解 | 实现数字按每隔 3 位用,区隔开</a></p>
+
+<h2 id="forin-与-forof">for…in 与 for…of</h2>
+
+<p>for…in 迭代对象的<strong>可枚举字符串属性</strong>，包括原型链上可枚举的属性。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for </span><span class="p">(</span><span class="nx">variable</span> <span class="k">in</span> <span class="nx">object</span><span class="p">)</span> <span class="nx">statement</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>for…of 语句是为了方便迭代迭代器。对象 <code class="language-plaintext highlighter-rouge">object</code> 是不可迭代的，迭代 <code class="language-plaintext highlighter-rouge">object</code> 会报错 <code class="language-plaintext highlighter-rouge">Error: object is no iterable</code></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for </span><span class="p">(</span><span class="nx">variable</span> <span class="k">of</span> <span class="nx">iterable</span><span class="p">)</span> <span class="nx">statement</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ul>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in">for…in</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of">for…of</a></li>
+</ul>
+
+<h2 id="js-中常用的按位运算应用">JS 中常用的按位运算应用</h2>
+
+<p><a href="https://wxxcarl.github.io/note/js/%E6%8C%89%E4%BD%8D%E8%BF%90%E7%AE%97.html">JS 中常用的按位运算应用</a></p>
+
+<h2 id="在-arraymap-使用-asyncawait">在 Array.map 使用 async/await</h2>
+
+<p>在使用 forEach 或者 map 等数组遍历的方式，遇到异步调用的函数，直接使用 async/await 的话，会得到一个 <code class="language-plaintext highlighter-rouge">Promise&lt;T&gt;[]</code> 的结果。</p>
+
+<p>通过使用 <code class="language-plaintext highlighter-rouge">Promise.all</code> 可以得到异步返回的结果</p>
+
+<div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">];</span>
+
+<span class="kd">var</span> <span class="nx">results</span><span class="p">:</span> <span class="kr">number</span><span class="p">[]</span> <span class="o">=</span> <span class="k">await</span> <span class="nb">Promise</span><span class="p">.</span><span class="nf">all</span><span class="p">(</span><span class="nx">arr</span><span class="p">.</span><span class="nf">map</span><span class="p">(</span><span class="k">async </span><span class="p">(</span><span class="nx">item</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="kr">number</span><span class="o">&gt;</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">await</span> <span class="nf">callAsynchronousOperation</span><span class="p">(</span><span class="nx">item</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">item</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}));</span>
+</code></pre></div></div>
+
+<ul>
+  <li><a href="https://stackoverflow.com/questions/40140149/use-async-await-with-array-map">Use async await with Array.map</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2018/07/27/JS%E6%96%B9%E6%B3%95%E5%B0%8F%E8%AE%B0.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

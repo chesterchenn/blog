@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Redux 的基本概念 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Redux 的基本概念" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Redux 中的基本概念。" />
+<meta property="og:description" content="Redux 中的基本概念。" />
+<link rel="canonical" href="/blog/2023/03/26/Redux%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5.html" />
+<meta property="og:url" content="/blog/2023/03/26/Redux%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-03-26T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Redux 的基本概念" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-03-26T00:00:00+00:00","datePublished":"2023-03-26T00:00:00+00:00","description":"Redux 中的基本概念。","headline":"Redux 的基本概念","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2023/03/26/Redux%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5.html"},"url":"/blog/2023/03/26/Redux%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Redux 的基本概念</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2023-03-26T00:00:00+00:00" itemprop="datePublished">Mar 26, 2023
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2023"><i>2023</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/react"><i>react</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Redux 中的基本概念。</p>
+
+<!-- vim-markdown-toc GFM -->
+
+<ul>
+  <li><a href="#store">Store</a>
+    <ul>
+      <li><a href="#创建-store">创建 Store</a></li>
+      <li><a href="#store-方法">Store 方法</a>
+        <ul>
+          <li><a href="#getstate">getState</a></li>
+          <li><a href="#dispatch">dispatch</a></li>
+          <li><a href="#subscribe">subscribe</a></li>
+        </ul>
+      </li>
+      <li><a href="#store-应用">Store 应用</a></li>
+    </ul>
+  </li>
+  <li><a href="#action">Action</a></li>
+  <li><a href="#reduer">Reduer</a>
+    <ul>
+      <li><a href="#combinereducer">combineReducer</a></li>
+    </ul>
+  </li>
+  <li><a href="#原则描述">原则描述</a></li>
+  <li><a href="#mobx-与-redux-的区别">Mobx 与 Redux 的区别</a>
+    <ul>
+      <li><a href="#存储数据形式的区别">存储数据形式的区别</a></li>
+      <li><a href="#操作对象方式的区别">操作对象方式的区别</a></li>
+      <li><a href="#store-的区别">Store 的区别</a></li>
+    </ul>
+  </li>
+  <li><a href="#参考链接">参考链接</a></li>
+</ul>
+
+<!-- vim-markdown-toc -->
+
+<h2 id="store">Store</h2>
+
+<p>store 保存了装个应用的状态树，整个应用中只存在一个 store。而 store 不是一个类，只是一个带有方法的对象。</p>
+
+<p>唯一修改 store 状态的方式在是 dispatch 一个 action。</p>
+
+<h3 id="创建-store">创建 Store</h3>
+
+<p>主要用 <code class="language-plaintext highlighter-rouge">createStore</code> API 来创建 Store。</p>
+
+<p><code class="language-plaintext highlighter-rouge">createStore(reducer, [initialState], [enhancer])</code></p>
+
+<ul>
+  <li>createStore 只接受一个 reducer，当有很多 reducer 时使用 <code class="language-plaintext highlighter-rouge">combineReducer</code> 融合成一个根 reducer</li>
+  <li>Redux 唯一自带的增强器是 <code class="language-plaintext highlighter-rouge">applyMiddleWare()</code></li>
+  <li>当有多个增强器的时候，使用 <code class="language-plaintext highlighter-rouge">compose()</code> 连接</li>
+</ul>
+
+<h3 id="store-方法">Store 方法</h3>
+
+<p>Store 主要有四个方法</p>
+
+<h4 id="getstate">getState</h4>
+
+<p><code class="language-plaintext highlighter-rouge">getState()</code> 返回应用中的状态树。</p>
+
+<h4 id="dispatch">dispatch</h4>
+
+<p><code class="language-plaintext highlighter-rouge">dispatch(action)</code> 派遣一个动作，这时唯一修改 store 内部状态的方法。</p>
+
+<h4 id="subscribe">subscribe</h4>
+
+<p><code class="language-plaintext highlighter-rouge">subscribe(listener)</code> 增加一个监听器，当有任何动作被派遣时，都会被调用。</p>
+
+<ol>
+  <li>如果在监听器中又调用 dispatch 时需要终止条件，否则会导致无限循环。</li>
+  <li>在 dispatch 多次更新状态时，监听器只会检测最后一次的状态更新。</li>
+  <li>如果需要取消订阅，则执行调用 subscribe 的返回结果。</li>
+</ol>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kd">function</span> <span class="nf">handleChange</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">i</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">const</span> <span class="nx">unsubscribe</span> <span class="o">=</span> <span class="nx">store</span><span class="p">.</span><span class="nf">subscribe</span><span class="p">(</span><span class="nx">handleChange</span><span class="p">);</span>
+<span class="nf">unsubscribe</span><span class="p">();</span>
+</code></pre></div></div>
+
+<h3 id="store-应用">Store 应用</h3>
+
+<p>以 React 中的应用为例：</p>
+
+<p>首先，使用 <code class="language-plaintext highlighter-rouge">react-redux</code> 库进行 store 初始化。使用 <code class="language-plaintext highlighter-rouge">react-redux</code> 提供的 Provider 组件。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">store</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./store</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Provider</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">redux</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="o">&lt;</span><span class="nx">Provider</span> <span class="nx">store</span><span class="o">=</span><span class="p">{</span><span class="nx">store</span><span class="p">}</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">App</span> <span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="sr">/Provider&gt;</span><span class="err">;
+</span></code></pre></div></div>
+
+<p>使用 <code class="language-plaintext highlighter-rouge">react-redux</code> 在别的组件访问 store。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">store</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./store</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">connect</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-redux</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">();</span>
+
+<span class="nf">connect</span><span class="p">(</span><span class="nx">mapStateToProps</span><span class="p">?,</span> <span class="nx">mapDispatchToProps</span><span class="p">?,</span> <span class="nx">mergeProps</span><span class="p">?,</span> <span class="nx">option</span><span class="p">?)(</span><span class="nx">App</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>也可以直接使用 redux 提供的 getState 和 dispatch 方法</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">store</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./store</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">store</span><span class="p">.</span><span class="nf">getState</span><span class="p">();</span>
+  <span class="nx">store</span><span class="p">.</span><span class="nf">dispatch</span><span class="p">({</span> <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">ADD_TODO</span><span class="dl">'</span><span class="p">,</span> <span class="na">text</span><span class="p">:</span> <span class="dl">'</span><span class="s1">123</span><span class="dl">'</span> <span class="p">});</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>可以发现，getState 与 <code class="language-plaintext highlighter-rouge">react-redux</code> 中的 mapStateToProps 都是可以访问 store 的状态树。同样的还有 dispatch 和 mapDispatchToProps。</p>
+
+<p>Stack Overflow 有一个相应的回答：<a href="https://stackoverflow.com/questions/52074622/store-getstate-or-mapstatetoprops-in-component">store.getState or mapStateToProps in Component</a>。总结就是提高代码的可阅读性以及更好管理组件，组件内所有的值来自 props 和 state 而不是直接来自 store。</p>
+
+<h2 id="action">Action</h2>
+
+<p>Action 是一个对象，<code class="language-plaintext highlighter-rouge">{ type: string; [extraProps: string]: any }</code></p>
+
+<p>Action 主要包含了 type, payload 的值，Action 用来描述发生了什么事，type 描述的事件类型名称，payload 描述了事件的内容变化。</p>
+
+<h2 id="reduer">Reduer</h2>
+
+<p>reducer 是将状态 state 和行为 action 联系在一起的函数，主要是描述了 store 通过派遣不同的 action 类型去更新 state 的过程函数。</p>
+
+<div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">Reducer</span><span class="o">&lt;</span><span class="nx">S</span> <span class="o">=</span> <span class="kr">any</span><span class="p">,</span> <span class="nx">A</span> <span class="kd">extends</span> <span class="nx">Action</span> <span class="o">=</span> <span class="nx">AnyAction</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">(</span>
+  <span class="nx">state</span><span class="p">:</span> <span class="nx">S</span> <span class="o">|</span> <span class="kc">undefined</span><span class="p">,</span> <span class="nx">action</span><span class="p">:</span> <span class="nx">A</span>
+<span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">S</span>
+
+<span class="kd">function</span> <span class="nf">somereducer</span> <span class="o">=</span> <span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span> <span class="p">{}</span>
+</code></pre></div></div>
+
+<h3 id="combinereducer">combineReducer</h3>
+
+<p><code class="language-plaintext highlighter-rouge">combineReducer(reducers)</code> 用来组合 reducers 并返回一个 rootReducer。</p>
+
+<p>当我们的应用程序越来越大，越来复杂时，需要将很多 reducer 分开管理。而 createStore 的入口参数只接受一个 reducer。可以通过使用 combineReducer 来将其组合。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">combineReducer</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">redux</span><span class="dl">'</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">rootReducer</span> <span class="o">=</span> <span class="nf">combineReducer</span><span class="p">({</span> <span class="nx">reducer1</span><span class="p">,</span> <span class="nx">reducer2</span> <span class="p">});</span>
+</code></pre></div></div>
+
+<p><img src="/blog/images/reducer.svg" alt="reducer" /></p>
+
+<h2 id="原则描述">原则描述</h2>
+
+<ul>
+  <li>单一数据源：整个应用的全局 state 会被存储在一颗 object tree 中，且该对象树只存在唯一一个 store 中</li>
+  <li>State 是只读的：唯一改变 State 的方法就是触发 action</li>
+  <li>使用纯函数来执行修改：为了描述 action 如何修改 state tree，需要编写纯函数 reducer</li>
+</ul>
+
+<h2 id="mobx-与-redux-的区别">Mobx 与 Redux 的区别</h2>
+
+<p>作为面试上一道高频题，面试官经常会问 mobx 与 redux 两者的区别？其实主要区别就是两者的原则。</p>
+
+<p><img src="/blog/images/mobx-flow.png" alt="Mobx Flow" /></p>
+
+<p><img src="/blog/images/redux-flow.gif" alt="Redux Flow" /></p>
+
+<p>首先，redux 面向的是函数式编程，mobx 面向的是对象式编程。</p>
+
+<h3 id="存储数据形式的区别">存储数据形式的区别</h3>
+
+<p>Redux 默认以原生 JavaScript 对象 Object 形式存储数据，而 Mobx 使用可观察对象 Observable</p>
+
+<h3 id="操作对象方式的区别">操作对象方式的区别</h3>
+
+<p>Redux 对象通常是不可变的（immutable），而是要在原有的状态树对象基础上返回一个新的状态数，而 mobx 是可以直接使用新值更新状态对象</p>
+
+<p>Redux 需要手动跟踪所有状态树对象的变更，而 Mobx 中可以监听可观察对象，当其变更时将自动触发监听</p>
+
+<h3 id="store-的区别">Store 的区别</h3>
+
+<p>Redux 默认一个 Store，而 Mobx 通常按模块划分，储存多个 Store</p>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="https://redux.js.org/api/api-reference">Redux: API Reference</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2023/03/26/Redux%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Windows 下的命令与操作 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Windows 下的命令与操作" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Windows 下的一些命令与操作脚本。" />
+<meta property="og:description" content="Windows 下的一些命令与操作脚本。" />
+<link rel="canonical" href="/blog/2021/11/12/windows%E4%B8%8B%E7%9A%84%E5%91%BD%E4%BB%A4%E4%B8%8E%E6%93%8D%E4%BD%9C.html" />
+<meta property="og:url" content="/blog/2021/11/12/windows%E4%B8%8B%E7%9A%84%E5%91%BD%E4%BB%A4%E4%B8%8E%E6%93%8D%E4%BD%9C.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-11-12T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Windows 下的命令与操作" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2021-11-12T00:00:00+00:00","datePublished":"2021-11-12T00:00:00+00:00","description":"Windows 下的一些命令与操作脚本。","headline":"Windows 下的命令与操作","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2021/11/12/windows%E4%B8%8B%E7%9A%84%E5%91%BD%E4%BB%A4%E4%B8%8E%E6%93%8D%E4%BD%9C.html"},"url":"/blog/2021/11/12/windows%E4%B8%8B%E7%9A%84%E5%91%BD%E4%BB%A4%E4%B8%8E%E6%93%8D%E4%BD%9C.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Windows 下的命令与操作</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-11-12T00:00:00+00:00" itemprop="datePublished">Nov 12, 2021
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2021"><i>2021</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/windows"><i>windows</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Windows 下的一些命令与操作脚本。</p>
+
+<!-- vim-markdown-toc GFM -->
+
+<ul>
+  <li><a href="#注册表">注册表</a>
+    <ul>
+      <li><a href="#其他">其他</a></li>
+    </ul>
+  </li>
+  <li><a href="#环境变量">环境变量</a></li>
+  <li><a href="#格式化-u-盘启动盘">格式化 U 盘启动盘</a></li>
+  <li><a href="#开机启动目录">开机启动目录</a></li>
+  <li><a href="#route">Route</a></li>
+</ul>
+
+<!-- vim-markdown-toc -->
+
+<h2 id="注册表">注册表</h2>
+
+<p>.Reg 脚本具有以下语法</p>
+
+<pre><code class="language-reg">[registry editor version]
+
+[registry path]
+"DataItemName"="DataType:DataValue"
+</code></pre>
+
+<ol>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">[registry editor version]</code> 宣告登陆编辑程序版本，通常 Windows 10 都是 5.0，所以第一行写 <code class="language-plaintext highlighter-rouge">Windows Registry Editor Version 5.00</code></p>
+
+    <p>如果没有声明，则会报错 <code class="language-plaintext highlighter-rouge">无法导入，指定文件不是注册脚本。你的注册表编辑器只能导入2进位注册文件</code>。</p>
+  </li>
+  <li>
+    <p>使用空行代表切换目录</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">[registry path]</code> 声明下个要操作的登陆路径，需要加上中括号表示。如果写的路径不存在，则会依照你指定的路径建立新的子键。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">"DataItemName"</code> 指定注册表项的名称，需要用双括号括住，如果不存在，则新建一项。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">DataType:DataValue</code> 指定注册表项值的类型和值。中间需要用冒号间隔，字符串类型不需要表明数据类型。</p>
+
+    <ul>
+      <li>字符串：”Foo”=”bar”</li>
+      <li>二进制：”Foo”=hex:</li>
+      <li>DWORD(32)：”Foo”=dword:000000000</li>
+      <li>DWORD(64): “Foo”=hex(b):00,00,00,00,00,00,00,00</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="其他">其他</h3>
+
+<p>如果要删除子键，直接在 DataItemName 的中括号内开头补上(-)，如 <code class="language-plaintext highlighter-rouge">[-HKEY_CURRENT_USER\Control Panel\Desktop\Some]</code></p>
+
+<p>注册表脚本注释标识符为<code class="language-plaintext highlighter-rouge">;</code></p>
+
+<h2 id="环境变量">环境变量</h2>
+
+<p>对于需要频繁的切换环境变量值，我们可以创建文件 *.bat</p>
+
+<ul>
+  <li>设置环境变量 <code class="language-plaintext highlighter-rouge">setx &lt;ENV&gt; &lt;value&gt;</code></li>
+  <li>删除环境变量 <code class="language-plaintext highlighter-rouge">wmic ENVIRONMENT where "name='&lt;ENV&gt;'" delete</code></li>
+  <li>查询环境变量 <code class="language-plaintext highlighter-rouge">set &lt;ENV&gt;</code>，使用 <code class="language-plaintext highlighter-rouge">pause</code> 暂停执行完毕不退出</li>
+</ul>
+
+<h2 id="格式化-u-盘启动盘">格式化 U 盘启动盘</h2>
+
+<p>在将 U 盘做启动盘之后，可能需要将 U 盘启动盘格式化成普通 U 盘。</p>
+
+<p>注意：以下操作基于 Windows</p>
+
+<ol>
+  <li>
+    <p>插入 U 盘 -&gt; 右键“此电脑” -&gt; 管理 -&gt; 存储下的 “磁盘管理” -&gt; 找到对应的 U 盘索引，即“磁盘 X”</p>
+  </li>
+  <li>
+    <p>打开 DOS 命令终端，输入 <code class="language-plaintext highlighter-rouge">diskpart</code>，回车进入 diskpart.exe</p>
+  </li>
+  <li>
+    <p>输入 <code class="language-plaintext highlighter-rouge">select disk X</code> (X 对应 U 盘索引)，可以输入 <code class="language-plaintext highlighter-rouge">list disk</code> 确认当前选中的磁盘</p>
+  </li>
+  <li>
+    <p>输入 <code class="language-plaintext highlighter-rouge">clean</code>，清除 U 盘</p>
+  </li>
+  <li>
+    <p>回到磁盘管理，右键“建立简单卷”，一直确认即可</p>
+  </li>
+</ol>
+
+<p>按理来说，使用 diskpart 建立简单卷也是可以的，但是产生了一些奇怪的错误，等下次有机会再测试。</p>
+
+<p>同理，使用 DiskGenius 等图形工具也是很轻松完成的。</p>
+
+<h2 id="开机启动目录">开机启动目录</h2>
+
+<p>在 Windows 下可能需要开机启动部分脚本，放在开机启动的目录下。</p>
+
+<p>对应的目录：<code class="language-plaintext highlighter-rouge">C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp</code></p>
+
+<h2 id="route">Route</h2>
+
+<p>Route 命令可以帮我们实现多网关配置，在部分场景下可以实现内外网共连。</p>
+
+<p>常见的命令有 <code class="language-plaintext highlighter-rouge">route print</code>, <code class="language-plaintext highlighter-rouge">route print -4</code>, <code class="language-plaintext highlighter-rouge">route add</code>, <code class="language-plaintext highlighter-rouge">route delete</code>。</p>
+
+<p>先进行网关查询，记录内网 IP 网关，可以通过使用 <code class="language-plaintext highlighter-rouge">ipconfig</code> 查询网关，非 IP 地址。</p>
+
+<p>使用 <code class="language-plaintext highlighter-rouge">route add 172.0.0.0 mask 255.0.0.0 &lt;内网网关地址&gt; -p</code> 永久记录到网关表。</p>
+
+<p>使用 <code class="language-plaintext highlighter-rouge">route delete 172.0.0.0</code> 删除刚刚记录的网关地址。</p>
+
+  </div><a class="u-url" href="/blog/2021/11/12/windows%E4%B8%8B%E7%9A%84%E5%91%BD%E4%BB%A4%E4%B8%8E%E6%93%8D%E4%BD%9C.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

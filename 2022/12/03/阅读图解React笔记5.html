@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>阅读图解React笔记5 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="阅读图解React笔记5" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="本文仅仅是阅读 图解 React 原理系列 的笔记，了解更多内容请查看原文链接。" />
+<meta property="og:description" content="本文仅仅是阅读 图解 React 原理系列 的笔记，了解更多内容请查看原文链接。" />
+<link rel="canonical" href="/blog/2022/12/03/%E9%98%85%E8%AF%BB%E5%9B%BE%E8%A7%A3React%E7%AC%94%E8%AE%B05.html" />
+<meta property="og:url" content="/blog/2022/12/03/%E9%98%85%E8%AF%BB%E5%9B%BE%E8%A7%A3React%E7%AC%94%E8%AE%B05.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-12-03T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="阅读图解React笔记5" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-12-03T00:00:00+00:00","datePublished":"2022-12-03T00:00:00+00:00","description":"本文仅仅是阅读 图解 React 原理系列 的笔记，了解更多内容请查看原文链接。","headline":"阅读图解React笔记5","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2022/12/03/%E9%98%85%E8%AF%BB%E5%9B%BE%E8%A7%A3React%E7%AC%94%E8%AE%B05.html"},"url":"/blog/2022/12/03/%E9%98%85%E8%AF%BB%E5%9B%BE%E8%A7%A3React%E7%AC%94%E8%AE%B05.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">阅读图解React笔记5</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2022-12-03T00:00:00+00:00" itemprop="datePublished">Dec 3, 2022
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2022"><i>2022</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/react"><i>react</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>本文仅仅是阅读 <a href="https://7kms.github.io/react-illustration-series/">图解 React 原理系列</a> 的笔记，了解更多内容请查看原文链接。</p>
+
+<p>调度原理</p>
+
+<h2 id="调度实现">调度实现</h2>
+
+<p>调度中心最核心的代码，在 <em>scheduler/src/forks/SchedulerHostConfig.default.js</em> 中。该文件共导出 8 个函数。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/** 请求及时回调 */</span>
+<span class="k">export</span> <span class="kd">let</span> <span class="nx">requestHostCallback</span><span class="p">;</span>
+<span class="cm">/** 取消及时回调 */</span>
+<span class="k">export</span> <span class="kd">let</span> <span class="nx">cancelHostCallback</span><span class="p">;</span>
+<span class="cm">/** 请求延时回调 */</span>
+<span class="k">export</span> <span class="kd">let</span> <span class="nx">requestHostTimeout</span><span class="p">;</span>
+<span class="cm">/** 取消延时回调 */</span>
+<span class="k">export</span> <span class="kd">let</span> <span class="nx">cancelHostTimeout</span><span class="p">;</span>
+<span class="cm">/** 是否让出主线程 */</span>
+<span class="k">export</span> <span class="kd">let</span> <span class="nx">shouldYieldToHost</span><span class="p">;</span>
+<span class="cm">/** 请求绘制 */</span>
+<span class="k">export</span> <span class="kd">let</span> <span class="nx">requestPaint</span><span class="p">;</span>
+<span class="cm">/** 获取当前时间 */</span>
+<span class="k">export</span> <span class="kd">let</span> <span class="nx">getCurrentTime</span><span class="p">;</span>
+<span class="cm">/** 强制设置 yieldInterval */</span>
+<span class="k">export</span> <span class="kd">let</span> <span class="nx">forceFrameRate</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="调度相关">调度相关</h3>
+
+<p>与调度相关的，请求或取消调度，它们的目的是请求执行（或取消）回调函数</p>
+
+<ul>
+  <li>requestHostCallback</li>
+  <li>cancelHostCallback</li>
+  <li>requestHostTimeout</li>
+  <li>cancelHostTimeout</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">performWorkUnitlDeadline</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">scheduledHostCallback</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">currentTime</span> <span class="o">=</span> <span class="nf">getCurrentTime</span><span class="p">();</span>
+    <span class="c1">// 在 yieldInterval 毫秒后产生，无论我们在 vsync 周期中的哪个位置</span>
+    <span class="c1">// 这意味着在消息时间开始时总是有剩余时间</span>
+    <span class="nx">deadline</span> <span class="o">=</span> <span class="nx">currentTime</span> <span class="o">+</span> <span class="nx">yieldInterval</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">hasTimeRemaining</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="c1">// 执行回调，返回是否还有剩余任务</span>
+      <span class="kd">const</span> <span class="nx">hasMoreWork</span> <span class="o">=</span> <span class="nf">scheduledHostCallback</span><span class="p">(</span><span class="nx">hasTimeRemaining</span><span class="p">,</span> <span class="nx">currentTime</span><span class="p">);</span>
+      <span class="k">if </span><span class="p">(</span><span class="o">!</span><span class="nx">hasMoreWork</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">isMessageLoopRunning</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="nx">scheduledHostCallback</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="c1">// 如果还有更多的工作，在前一个消息事件的末尾安排下一个消息事件</span>
+        <span class="nx">port</span><span class="p">.</span><span class="nf">postMessage</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span> <span class="k">catch </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// 如果调度任务抛错，退出当前浏览器任务以便观察错误</span>
+      <span class="nx">port</span><span class="p">.</span><span class="nf">postMessage</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+      <span class="k">throw</span> <span class="nx">error</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">isMessageLoopRunning</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nx">needsPaint</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">channel</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MessageChannel</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">port</span> <span class="o">=</span> <span class="nx">channel</span><span class="p">.</span><span class="nx">port2</span><span class="p">;</span>
+<span class="nx">channel</span><span class="p">.</span><span class="nx">port1</span><span class="p">.</span><span class="nx">onmessage</span> <span class="o">=</span> <span class="nx">performWorkUnitlDeadline</span><span class="p">;</span>
+
+<span class="nx">requestHostCallback</span> <span class="o">=</span> <span class="nf">function </span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">scheduledHostCallback</span> <span class="o">=</span> <span class="nx">callback</span><span class="p">;</span>
+  <span class="k">if </span><span class="p">(</span><span class="o">!</span><span class="nx">isMessageLoopRunning</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">isMessageLoopRunning</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="nx">port</span><span class="p">.</span><span class="nf">postMessage</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="nx">cancelHostCallback</span> <span class="o">=</span> <span class="nf">function </span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">scheduledHostCallback</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="nx">requestHostTimeout</span> <span class="o">=</span> <span class="nf">function </span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">ms</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">taskTimeoutId</span> <span class="o">=</span> <span class="nf">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nf">callback</span><span class="p">(</span><span class="nf">getCurrentTime</span><span class="p">());</span>
+  <span class="p">},</span> <span class="nx">ms</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="nx">cancelHostTimeout</span> <span class="o">=</span> <span class="nf">function </span><span class="p">()</span> <span class="p">{</span>
+  <span class="nf">clearTimeout</span><span class="p">(</span><span class="nx">taskTimeoutId</span><span class="p">);</span>
+  <span class="nx">taskTimeoutId</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>请求回调之后 scheduledHostCallback = callback，然后通过 MessageChannel 发消息的方式触发 performWorkUnitlDeadline，最后执行回调 scheduledHostCallback。</p>
+
+<p>需要注意：MessageChannel 在浏览器事件循环中属于宏任务，所以调度中心用于是异步执行回调函数。</p>
+
+<h3 id="时间切片">时间切片</h3>
+
+<p>时间切片（time slicing），执行时间分割，让出主线程（把控制权归返浏览器，浏览器可以处理用户输入，UI 绘制等紧急任务）</p>
+
+<ul>
+  <li>getCurrentTime</li>
+  <li>shouldYieldToHost</li>
+  <li>requestPaint</li>
+  <li>forceFrameRate</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if </span><span class="p">(</span>
+  <span class="nx">enableIsInputPending</span> <span class="o">&amp;&amp;</span>
+  <span class="nb">navigator</span> <span class="o">!==</span> <span class="kc">undefined</span> <span class="o">&amp;&amp;</span>
+  <span class="nb">navigator</span><span class="p">.</span><span class="nx">scheduler</span> <span class="o">!==</span> <span class="kc">undefined</span> <span class="o">&amp;&amp;</span>
+  <span class="nb">navigator</span><span class="p">.</span><span class="nx">scheduler</span><span class="p">.</span><span class="nx">isInputPending</span> <span class="o">!==</span> <span class="kc">undefined</span>
+<span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">scheduling</span> <span class="o">=</span> <span class="nb">navigator</span><span class="p">.</span><span class="nx">scheduling</span><span class="p">;</span>
+  <span class="nx">shouldYieldToHost</span> <span class="o">=</span> <span class="nf">function </span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">currentTime</span> <span class="o">=</span> <span class="nf">getCurrentTime</span><span class="p">();</span>
+    <span class="k">if </span><span class="p">(</span><span class="nx">currentTime</span> <span class="o">&gt;=</span> <span class="nx">deadline</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if </span><span class="p">(</span><span class="nx">needsPaint</span> <span class="o">||</span> <span class="nx">scheduling</span><span class="p">.</span><span class="nf">isInputPending</span><span class="p">())</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">return</span> <span class="nx">currentTime</span> <span class="o">&gt;=</span> <span class="nx">maxYieldInterval</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+  <span class="nx">requestPaint</span> <span class="o">=</span> <span class="nf">function </span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">needsPaint</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="p">};</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="nx">shouldYieldToHost</span> <span class="o">=</span> <span class="nf">function </span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">getCurrentTime</span> <span class="o">&gt;=</span> <span class="nx">deadline</span><span class="p">;</span>
+  <span class="p">};</span>
+  <span class="nx">requestPaint</span> <span class="o">=</span> <span class="nf">function </span><span class="p">()</span> <span class="p">{};</span>
+<span class="p">}</span>
+
+<span class="nx">forceFrameRate</span> <span class="o">=</span> <span class="nf">function </span><span class="p">(</span><span class="nx">fps</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">fps</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="nx">fps</span> <span class="o">&gt;</span> <span class="mi">125</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">[</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">](</span>
+      <span class="dl">'</span><span class="s1">forceFrameRate takes a positive int between 0 and 125, </span><span class="dl">'</span> <span class="o">+</span>
+        <span class="dl">'</span><span class="s1">forcing frame rates higher than 125 fps is not supported</span><span class="dl">'</span>
+    <span class="p">);</span>
+    <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">fps</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">yieldInterval</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nf">floor</span><span class="p">(</span><span class="mi">1000</span> <span class="o">/</span> <span class="nx">fps</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">yieldInterval</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>shouldYieldToHost 的判定条件：</p>
+
+<ul>
+  <li>currentTime &gt;= deadline(currentTime + yieldInterval)，只有时间超过 deadline 之后才会让出主线程。
+    <ul>
+      <li>yieldInterval 默认是 5ms，只能通过 forceFrameRate 函数进行修改。</li>
+      <li>如果一个 task 运行时间超过 5ms，下一个 task 执行之前，会把控制权归还浏览器。</li>
+    </ul>
+  </li>
+  <li>navigator.scheduling.isInputPending，用于判断是否有输入事件。</li>
+</ul>
+
+<p>从上面可以得到调度中心的内核实现图：</p>
+
+<p><img src="/blog/images/react-scheduler-core.webp" alt="" /></p>
+
+<h2 id="任务队列管理">任务队列管理</h2>
+
+<p>调度的目的是为了消费任务，接下来看看任务队列的管理和实现。</p>
+
+<p>在 <em>scheduler/src/Scheduler.js</em> 维护一个 taskQueue，任务队列管理主要就是围绕 taskQueue 展开。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 任务队列保存在一个最小堆里</span>
+<span class="kd">var</span> <span class="nx">taskQueue</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="kd">var</span> <span class="nx">timerQueue</span> <span class="o">=</span> <span class="p">[];</span>
+</code></pre></div></div>
+
+<h3 id="创建任务">创建任务</h3>
+
+<p>在 <em>scheduler/src/Scheduler.js</em> 中的 unstable_schedulerCallback 函数：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">unstable_schedulerCallback</span><span class="p">(</span><span class="nx">priorityLevel</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">currentTime</span> <span class="o">=</span> <span class="nx">getCurrentTime</span><span class="p">;</span>
+
+  <span class="kd">var</span> <span class="nx">startTime</span><span class="p">;</span>
+
+  <span class="k">if </span><span class="p">(</span><span class="k">typeof</span> <span class="nx">options</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">object</span><span class="dl">'</span> <span class="o">&amp;&amp;</span> <span class="nx">options</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">delay</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">delay</span><span class="p">;</span>
+    <span class="k">if </span><span class="p">(</span><span class="k">typeof</span> <span class="nx">delay</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">number</span><span class="dl">'</span> <span class="o">&amp;&amp;</span> <span class="nx">delay</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">startTime</span> <span class="o">=</span> <span class="nx">currentTime</span> <span class="o">+</span> <span class="nx">delay</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="nx">startTime</span> <span class="o">=</span> <span class="nx">currentTime</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">startTime</span> <span class="o">=</span> <span class="nx">currentTime</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kd">var</span> <span class="nx">timeout</span><span class="p">;</span>
+
+  <span class="k">switch </span><span class="p">(</span><span class="nx">priorityLevel</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="nx">ImmediatePriority</span><span class="p">:</span>
+      <span class="nx">timeout</span> <span class="o">=</span> <span class="nx">IMMEDIATE_PRIORITY_TIMEOUT</span><span class="p">;</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="nx">UserBlockingPriority</span><span class="p">:</span>
+      <span class="nx">timeout</span> <span class="o">=</span> <span class="nx">USER_BLOCKING_PRIORITY_TIMEOUT</span><span class="p">;</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="nx">IdlePriority</span><span class="p">:</span>
+      <span class="nx">timeout</span> <span class="o">=</span> <span class="nx">IDLE_PRIORITY_TIMEOUT</span><span class="p">;</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="nx">LowPirority</span><span class="p">:</span>
+      <span class="nx">timeout</span> <span class="o">=</span> <span class="nx">LOW_PRIORITY_TIMEOUT</span><span class="p">;</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="nx">NormalPriority</span><span class="p">:</span>
+    <span class="k">default</span><span class="p">:</span>
+      <span class="nx">timeout</span> <span class="o">=</span> <span class="nx">NORMAL_PRIORITY_TIMEOUT</span><span class="p">;</span>
+      <span class="k">break</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kd">var</span> <span class="nx">expirationTime</span> <span class="o">=</span> <span class="nx">startTime</span> <span class="o">+</span> <span class="nx">timeout</span><span class="p">;</span>
+
+  <span class="kd">var</span> <span class="nx">newTask</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">id</span><span class="p">:</span> <span class="nx">taskIdCounter</span><span class="o">++</span><span class="p">,</span>
+    <span class="nx">callback</span><span class="p">,</span>
+    <span class="nx">priorityLevel</span><span class="p">,</span>
+    <span class="nx">startTime</span><span class="p">,</span>
+    <span class="nx">expirationTime</span><span class="p">,</span>
+    <span class="na">sortIndex</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+  <span class="p">};</span>
+
+  <span class="k">if </span><span class="p">(</span><span class="nx">startTime</span> <span class="o">&gt;</span> <span class="nx">currentTime</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 这是个延迟任务</span>
+    <span class="nx">newTask</span><span class="p">.</span><span class="nx">sortIndex</span> <span class="o">=</span> <span class="nx">startTime</span><span class="p">;</span>
+    <span class="nf">push</span><span class="p">(</span><span class="nx">timerQueue</span><span class="p">,</span> <span class="nx">newTask</span><span class="p">);</span>
+    <span class="k">if </span><span class="p">(</span><span class="nf">peek</span><span class="p">(</span><span class="nx">taskQueue</span><span class="p">)</span> <span class="o">===</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="nx">newTask</span> <span class="o">===</span> <span class="nf">peek</span><span class="p">(</span><span class="nx">timerQueue</span><span class="p">))</span> <span class="p">{</span>
+      <span class="c1">// 所有的任务都是延迟的，且该任务是最先被延迟的</span>
+      <span class="k">if </span><span class="p">(</span><span class="nx">isHostTimeoutScheduled</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nf">cancelHostTimeout</span><span class="p">();</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">isHostTimeoutScheduled</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="nf">requestHostTimeout</span><span class="p">(</span><span class="nx">handleTimeout</span><span class="p">,</span> <span class="nx">startTime</span> <span class="o">-</span> <span class="nx">currentTime</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">newTask</span><span class="p">.</span><span class="nx">sortIndex</span> <span class="o">=</span> <span class="nx">expirationTime</span><span class="p">;</span>
+    <span class="nf">push</span><span class="p">(</span><span class="nx">taskQueue</span><span class="p">,</span> <span class="nx">newTask</span><span class="p">);</span>
+    <span class="c1">// 省略无关代码</span>
+    <span class="c1">// 请求调度</span>
+    <span class="k">if </span><span class="p">(</span><span class="o">!</span><span class="nx">isHostCallbackScheduled</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">isPerformingWork</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">isHostCallbackScheduled</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+      <span class="nf">requestHostCallback</span><span class="p">(</span><span class="nx">flushWork</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">newTask</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="消费任务">消费任务</h3>
+
+<p>创建任务之后，最后请求调度 requestHostCallback(flushWork)，flushWork 函数作为参数传入调度中心内核等待回调。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">flushWork</span><span class="p">(</span><span class="nx">hasTimeRemaining</span><span class="p">,</span> <span class="nx">initialTime</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// 省略无关代码</span>
+  <span class="c1">// 做好全局标记，表示现在已经进入调度阶段</span>
+  <span class="nx">isHostCallbackScheduled</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">isHostTimeoutScheduled</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">isHostTimeoutScheduled</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="nf">cancelHostTimeout</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="nx">isPerformingWork</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">previousPriorityLevel</span> <span class="o">=</span> <span class="nx">currentPriorityLevel</span><span class="p">;</span>
+
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="c1">// 循环消费队列</span>
+    <span class="k">return</span> <span class="nf">workLoop</span><span class="p">(</span><span class="nx">hasTimeRemaining</span><span class="p">,</span> <span class="nx">initialTime</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">finally</span> <span class="p">{</span>
+    <span class="c1">// 还原全局标记</span>
+    <span class="nx">currentTask</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="nx">currentPriorityLevel</span> <span class="o">=</span> <span class="nx">previousPriorityLevel</span><span class="p">;</span>
+    <span class="nx">isPerformingWork</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>flushWork 中调用了 workLoop，队列消费的主要逻辑是在 workLoop 函数中，这就是 React 的任务调度循环。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">workLoop</span><span class="p">(</span><span class="nx">hasTimeRemaining</span><span class="p">,</span> <span class="nx">initialTime</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">currentTime</span> <span class="o">=</span> <span class="nx">initialTime</span><span class="p">;</span>
+  <span class="nf">advanceTimers</span><span class="p">(</span><span class="nx">currentTime</span><span class="p">);</span>
+  <span class="nx">currentTask</span> <span class="o">=</span> <span class="nf">peek</span><span class="p">(</span><span class="nx">taskQueue</span><span class="p">);</span>
+  <span class="k">while </span><span class="p">(</span><span class="nx">currentTask</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if </span><span class="p">(</span><span class="nx">currentTask</span><span class="p">.</span><span class="nx">expirationTime</span> <span class="o">&gt;</span> <span class="nx">currentTask</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="o">!</span><span class="nx">hasTimeRemaining</span> <span class="o">||</span> <span class="nf">shouldYieldToHost</span><span class="p">()))</span> <span class="p">{</span>
+      <span class="c1">// 当前任务未过期，但是达到时间限制</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kd">const</span> <span class="nx">callback</span> <span class="o">=</span> <span class="nx">currentTask</span><span class="p">.</span><span class="nx">callback</span><span class="p">;</span>
+    <span class="k">if </span><span class="p">(</span><span class="k">typeof</span> <span class="nx">callback</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">function</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">currentTask</span><span class="p">.</span><span class="nx">callback</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+      <span class="nx">currentPriorityLevel</span> <span class="o">=</span> <span class="nx">currentTask</span><span class="p">.</span><span class="nx">priorityLevel</span><span class="p">;</span>
+      <span class="kd">const</span> <span class="nx">didUserCallbackTimeout</span> <span class="o">=</span> <span class="nx">currentTask</span><span class="p">.</span><span class="nx">expirationTime</span> <span class="o">&lt;=</span> <span class="nx">currentTime</span><span class="p">;</span>
+      <span class="kd">const</span> <span class="nx">continuationCallback</span> <span class="o">=</span> <span class="nf">callback</span><span class="p">(</span><span class="nx">didUserCallbackTimeout</span><span class="p">);</span>
+      <span class="nx">currentTime</span> <span class="o">=</span> <span class="nf">getCurrentTime</span><span class="p">();</span>
+      <span class="k">if </span><span class="p">(</span><span class="k">typeof</span> <span class="nx">continuationCallback</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">function</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">currentTask</span><span class="p">.</span><span class="nx">callback</span> <span class="o">=</span> <span class="nx">continuationCallback</span><span class="p">;</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">if </span><span class="p">(</span><span class="nx">currentTask</span> <span class="o">===</span> <span class="nf">peek</span><span class="p">(</span><span class="nx">taskQueue</span><span class="p">))</span> <span class="p">{</span>
+          <span class="nf">pop</span><span class="p">(</span><span class="nx">taskQueue</span><span class="p">);</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+      <span class="nf">advanceTimers</span><span class="p">(</span><span class="nx">currentTime</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="nf">pop</span><span class="p">(</span><span class="nx">taskQueue</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nx">currentTask</span> <span class="o">=</span> <span class="nf">peek</span><span class="p">(</span><span class="nx">taskQueue</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// 返回，不管是否有额外的工作</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">currentTask</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">firstTimer</span> <span class="o">=</span> <span class="nf">peek</span><span class="p">(</span><span class="nx">timerQueue</span><span class="p">);</span>
+    <span class="k">if </span><span class="p">(</span><span class="nx">firstTimer</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nf">requestHostTimeout</span><span class="p">(</span><span class="nx">handleTimeout</span><span class="p">,</span> <span class="nx">firstTimer</span><span class="p">.</span><span class="nx">startTime</span> <span class="o">-</span> <span class="nx">currentTime</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>workLoop 就是一个大循环，在此处实现了时间切片和 fiber 树的可中断渲染。这 2 个大特性的实现，都集中于这个 while 循环。</p>
+
+<p>每一次 while 循环的推出就是一个时间切片，深入分析 while 循环的退出条件：</p>
+
+<ol>
+  <li>队列被完全清空：正常的退出。</li>
+  <li>
+    <p>执行超时：在消费 taskQueue 时，在执行 task.callback 之前，都会检测是否超时，所以超时检测是以 task 为单位。</p>
+
+    <p>如果某个 task.callback 执行时间太久也会超时（如 fiber 树过大，逻辑很重），这时使用检测机制，超时了立刻暂停 task.callback 的执行</p>
+  </li>
+</ol>
+
+<h3 id="时间切片原理">时间切片原理</h3>
+
+<p>消费任务队列的过程中，可以消费 1~n 个 task，甚至清空整个 queue。但是在每一次具体执行 task.callback 之前都要进行检测，如果超时可以立即推出循环并等待下一次调用。</p>
+
+<h3 id="可中断渲染">可中断渲染</h3>
+
+<p>在时间切片的基础之上，如果单个 task.callback 执行时间就很长（假设 200ms）。就需要 task.callback 自己能够检测是否超时，所以在 fiber 树构建过程中，每构建完成一个单元，都会检测一次超时，如遇超时就会退出 fiber 树循环构建，并返回一个新的回调函数（就是 continuationCallback）并等待下一次回调继续未完成的 fiber 树构造。</p>
+
+<h2 id="节流防抖">节流防抖</h2>
+
+<p>在 reconciler 运作流程中的总结的 4 个阶段中，注册调度任务属于第 2 个阶段，核心逻辑位于 <em>react-reconciler/src/ReactFiberWorkLoop.new.js</em> ensureRootIsScheduled 函数中。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">ensureRootIsScheduled</span><span class="p">(</span><span class="nx">root</span><span class="p">:</span> <span class="nx">FiberRoot</span><span class="p">,</span> <span class="nx">currentTime</span><span class="p">:</span> <span class="nx">number</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">existingCallbackNode</span> <span class="o">=</span> <span class="nx">root</span><span class="p">.</span><span class="nx">callbackNode</span><span class="p">;</span>
+
+  <span class="c1">// 检测是否有车道被其他工作占用，如果有，将它们标记为已过期</span>
+  <span class="nf">markStarvedLanesAsExpired</span><span class="p">(</span><span class="nx">root</span><span class="p">,</span> <span class="nx">currentTime</span><span class="p">);</span>
+
+  <span class="c1">// 确定下一个要处理的的车道及其优先级</span>
+  <span class="kd">const</span> <span class="nx">nextLanes</span> <span class="o">=</span> <span class="nf">getNextLanes</span><span class="p">(</span>
+    <span class="nx">root</span><span class="p">,</span>
+    <span class="nx">root</span> <span class="o">===</span> <span class="nx">workInProgressRoot</span> <span class="p">?</span> <span class="nx">workInProgressRootRenderLanes</span> <span class="p">:</span> <span class="nx">NoLanes</span>
+  <span class="p">);</span>
+
+  <span class="k">if </span><span class="p">(</span><span class="nx">nextLanes</span> <span class="o">===</span> <span class="nx">NoLanes</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if </span><span class="p">(</span><span class="nx">existingCallbackNode</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nf">cancelCallback</span><span class="p">(</span><span class="nx">existingCallbackNode</span><span class="p">);</span>
+      <span class="nx">root</span><span class="p">.</span><span class="nx">callbackNode</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+      <span class="nx">root</span><span class="p">.</span><span class="nx">callbackPriority</span> <span class="o">=</span> <span class="nx">NoLanePriority</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// 节流防抖</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">existingCallbackNode</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">existingCallbackPriority</span> <span class="o">=</span> <span class="nx">root</span><span class="p">.</span><span class="nx">callbackPriority</span><span class="p">;</span>
+    <span class="k">if </span><span class="p">(</span><span class="nx">existingCallbackPriority</span> <span class="o">===</span> <span class="nx">newCallbackPriority</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nf">cancelCallback</span><span class="p">(</span><span class="nx">existingCallbackNode</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// 调度一个新的任务</span>
+  <span class="kd">let</span> <span class="nx">newCallbackNode</span><span class="p">;</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">newCallbackPriority</span> <span class="o">===</span> <span class="nx">SyncLanePriority</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">newCallbackNode</span> <span class="o">=</span> <span class="nf">scheduledHostCallback</span><span class="p">(</span><span class="nx">performSyncWorkOnRoot</span><span class="p">.</span><span class="nf">bind</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">root</span><span class="p">));</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if </span><span class="p">(</span><span class="nx">newCallbackPriority</span> <span class="o">===</span> <span class="nx">SyncBatchedLanePriority</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">newCallbackNode</span> <span class="o">=</span> <span class="nf">scheduleCallback</span><span class="p">(</span>
+      <span class="nx">ImmediateSchedulerPriority</span><span class="p">,</span>
+      <span class="nx">performSyncWorkOnRoot</span><span class="p">.</span><span class="nf">bind</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">root</span><span class="p">)</span>
+    <span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">schedulerPriorityLevel</span> <span class="o">=</span> <span class="nf">lanePriorityToSchedulerPriority</span><span class="p">(</span><span class="nx">newCallbackPriority</span><span class="p">);</span>
+    <span class="nx">newCallbackNode</span> <span class="o">=</span> <span class="nf">scheduleCallback</span><span class="p">(</span>
+      <span class="nx">schedulerPriorityLevel</span><span class="p">,</span>
+      <span class="nx">performConcurrentWorkOnRoot</span><span class="p">.</span><span class="nf">bind</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">root</span><span class="p">)</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nx">root</span><span class="p">.</span><span class="nx">callbackPriority</span> <span class="o">=</span> <span class="nx">newCallbackPriority</span><span class="p">;</span>
+  <span class="nx">root</span><span class="p">.</span><span class="nx">callbackNode</span> <span class="o">=</span> <span class="nx">newCallbackNode</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>正常的情况下，ensureRootIsScheduled 函数会与 scheduler 包通信，最后注册一个 task 并等待回调。</p>
+
+<ol>
+  <li>在 task 注册完成之后，会设置 FiberRoot 对象上的属性，代表现在已经处于调度进行中。</li>
+  <li>
+    <p>再次进入 ensureRootIsScheduled 时，如果发现处于调度中，则需要一些节流和防抖措施，进而保证调度性能。</p>
+
+    <ol>
+      <li>节流（判断条件：existingCallbackPriority === newCallbackPriority，新旧更新的优先级相同），则无需注册新 task，直接退出调用。</li>
+      <li>防抖（判断条件：existingCallbackPriority !== newCallbackPriority，新旧更新的优先级不同），则取消旧 task，重新注册新 task。</li>
+    </ol>
+  </li>
+</ol>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="https://github.com/7kms/react-illustration-series">github: react-illustration-series</a></li>
+  <li><a href="https://github.com/facebook/react">github: react</a></li>
+  <li><a href="https://7kms.github.io/react-illustration-series/main/scheduler/">图解 React: 调度原理</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2022/12/03/%E9%98%85%E8%AF%BB%E5%9B%BE%E8%A7%A3React%E7%AC%94%E8%AE%B05.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

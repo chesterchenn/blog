@@ -1,0 +1,23 @@
+@startuml
+!theme plain
+
+interface Command
+class Invoker {
+  setCommand()
+}
+class Client
+class Receiver {
+  action()
+}
+class ConcreteCommand {
+  execute()
+  undo()
+}
+
+Command <-- Invoker
+Command <|.. ConcreteCommand
+Client --> Receiver
+ConcreteCommand --> Receiver
+Client --> ConcreteCommand
+
+@enduml

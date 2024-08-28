@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>this | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="this" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="当一个函数被调用时，会创建一个执行上下文。这个上下文会包含函数的调用栈，函数的调用方式，传入参数等信息。this 就是这个上下文的一个属性，会在函数的执行过程中用到。" />
+<meta property="og:description" content="当一个函数被调用时，会创建一个执行上下文。这个上下文会包含函数的调用栈，函数的调用方式，传入参数等信息。this 就是这个上下文的一个属性，会在函数的执行过程中用到。" />
+<link rel="canonical" href="/blog/2020/07/25/this.html" />
+<meta property="og:url" content="/blog/2020/07/25/this.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-07-25T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="this" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2020-07-25T00:00:00+00:00","datePublished":"2020-07-25T00:00:00+00:00","description":"当一个函数被调用时，会创建一个执行上下文。这个上下文会包含函数的调用栈，函数的调用方式，传入参数等信息。this 就是这个上下文的一个属性，会在函数的执行过程中用到。","headline":"this","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2020/07/25/this.html"},"url":"/blog/2020/07/25/this.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">this</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2020-07-25T00:00:00+00:00" itemprop="datePublished">Jul 25, 2020
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2020"><i>2020</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/javascript"><i>javascript</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>当一个函数被调用时，会创建一个执行上下文。这个上下文会包含函数的调用栈，函数的调用方式，传入参数等信息。this 就是这个上下文的一个属性，会在函数的执行过程中用到。</p>
+
+<h2 id="误解">误解</h2>
+
+<h3 id="1-指向函数自身">1. 指向函数自身</h3>
+
+<p>人们容易把 this 理解成指向函数自身。</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">foo</span><span class="p">(</span><span class="nx">num</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">count</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">foo</span><span class="p">.</span><span class="nx">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">for </span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nf">foo</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">foo</span><span class="p">.</span><span class="nx">count</span><span class="p">;</span> <span class="c1">// 0</span>
+<span class="nx">count</span><span class="p">;</span> <span class="c1">// NaN</span>
+</code></pre></div></div>
+
+<p>执行 foo.count = 0 时，函数对象 foo 添加了一个属性 count。但是函数内部代码 this.count 中的 this 并不是指向那个函数对象，虽然属性名相同，根对象并不相同，代码中无意中创建了一个全局变量 count，他的值为 NaN。</p>
+
+<p>可以使用 call(..) 确保 this 指向函数对象 foo 本身，<code class="language-plaintext highlighter-rouge">foo.call(foo, i);</code></p>
+
+<h3 id="2-函数的作用域">2. 函数的作用域</h3>
+
+<p>this 在任何情况下都不指向函数的词法作用域。</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nf">bar</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="kd">function</span> <span class="nf">bar</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">a</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nf">foo</span><span class="p">();</span> <span class="c1">// ReferenceError: a is not defined</span>
+</code></pre></div></div>
+
+<p>代码试图通过 this.bar() 来引用 bar() 函数，这样调用成功纯属意外，调用 bar() 最自然的办法是省略前面的 this，直接使用词法引用标识符。这段代码还试图使用 this 联通 foo() 和 bar() 的词法作用域，从而让 bar() 可以访问 foo() 作用域里的变量 a，这是不可能的。</p>
+
+<h2 id="绑定规则">绑定规则</h2>
+
+<h3 id="1-默认绑定">1. 默认绑定</h3>
+
+<p>在独立函数调用的时候，就会使用默认绑定，this 会指向全局对象。</p>
+
+<p>如果使用严格模式，则不能讲全局对象用于默认绑定，因此 this 会绑定到 undefined</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">a</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="nf">foo</span><span class="p">();</span> <span class="c1">// 2</span>
+</code></pre></div></div>
+
+<h3 id="2-隐式绑定">2. 隐式绑定</h3>
+
+<p>判断调用位置是否有上下文对象</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">a</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">a</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="na">foo</span><span class="p">:</span> <span class="nx">foo</span><span class="p">,</span>
+<span class="p">};</span>
+<span class="nx">obj</span><span class="p">.</span><span class="nf">foo</span><span class="p">();</span> <span class="c1">// 2</span>
+</code></pre></div></div>
+
+<p>我们必须在一个对象内部包含一个指向函数的属性，并通过这个属性间接引用函数，从而把 this 间接（隐式）绑定到这个对象上。</p>
+
+<h3 id="3-显式绑定">3. 显式绑定</h3>
+
+<p>显示绑定主要是用到了 call(..) 和 apply(..) 方法。</p>
+
+<h3 id="4-new-绑定">4. new 绑定</h3>
+
+<p>在 JavaScript 中，构造函数只是一些使用 new 操作符时被调用的函数。它们并不会属于某个类，也不会实例化一个类。实际上，他们甚至都不能说是一种特殊的函数类型，它们只是被 new 操作符调用的普通函数而已。</p>
+
+<p>使用 new 来调用函数，或者说发生构造函数调用时，会自动执行下面的操作：</p>
+
+<ol>
+  <li>创建（或者说构造）一个全新的对象。</li>
+  <li>这个新对象会被执行 [[Prototype]] 连接。</li>
+  <li>这个新对象会绑定到函数调用的 this。</li>
+  <li>如果函数没有返回其他对象，那么 new 表达式中的函数调用会自动返回这个新对象。</li>
+</ol>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">foo</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">a</span> <span class="o">=</span> <span class="nx">a</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">bar</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">foo</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="nx">bar</span><span class="p">.</span><span class="nx">a</span><span class="p">;</span> <span class="c1">// 2</span>
+</code></pre></div></div>
+
+<h2 id="优先级">优先级</h2>
+
+<p>new 绑定 &gt; 显式绑定 &gt; 隐式绑定 &gt; 默认绑定</p>
+
+<h2 id="箭头函数">箭头函数</h2>
+
+<p>箭头函数不会创建自己的 this ,它只会从自己的作用域链的上一层继承 this。所以箭头函数中的 this 是在定义函数的时候绑定，而不是在执行函数的时候绑定。</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">foo</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">foo</span><span class="dl">'</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">bar</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">foo</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bar</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">log</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">foo</span><span class="p">);</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+<span class="nx">bar</span><span class="p">.</span><span class="nf">log</span><span class="p">();</span> <span class="c1">// 'foo'</span>
+</code></pre></div></div>
+
+<p>通过 <a href="https://babeljs.io/repl">https://babeljs.io/repl</a> 编译过程，我们发现箭头函数会被转成 <code class="language-plaintext highlighter-rouge">console.log((void 0).foo)</code></p>
+
+<h2 id="其他">其他</h2>
+
+<p>setTimeout 中所执行函数中的 this，永远指向 window，严格模式指向 undefined。</p>
+
+<h2 id="题目">题目</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">msg</span><span class="p">:</span> <span class="dl">'</span><span class="s1">foo</span><span class="dl">'</span><span class="p">,</span>
+  <span class="nf">getMsg</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">msg</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">bar</span><span class="dl">'</span><span class="p">,</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">msg</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">obj</span><span class="p">.</span><span class="nf">getMsg</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>obj.getMsg() 是一个方法调用，调用该方法的上下文是 obj，所有 this 是指 obj。 答案是<code class="language-plaintext highlighter-rouge">foo</code>，可以参考误解 1。</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">length</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+<span class="kd">function</span> <span class="nf">cb</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">length</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+  <span class="nf">method</span><span class="p">(</span><span class="nx">cb</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">cb</span><span class="p">();</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+
+<span class="nx">obj</span><span class="p">.</span><span class="nf">method</span><span class="p">(</span><span class="nx">cb</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>cb() 是在 method() 内部使用常规函数调用来调用的。由于在常规函数调用期间的 this 值等于 window。答案是 <code class="language-plaintext highlighter-rouge">4</code>。</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">length</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+<span class="kd">function</span> <span class="nf">cb</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">length</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+  <span class="nf">method</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">arguments</span><span class="p">[</span><span class="mi">0</span><span class="p">]();</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+
+<span class="nx">obj</span><span class="p">.</span><span class="nf">method</span><span class="p">(</span><span class="nx">cb</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>obj.method(cb, 1, 2) 被调用时有 3 个参数。<code class="language-plaintext highlighter-rouge">arguments[0]()</code> 是 arguments 对象上的回调的方法调用，所以回调内部的参数等于 arguments。所以 callback() 中的 this.length 与 arguments.length 相同，答案是 <code class="language-plaintext highlighter-rouge">3</code>。</p>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li>《你不知道的 JavaScript（上卷）》</li>
+  <li><a href="https://segmentfault.com/a/1190000039341385">7 个关于”this”面试题，你能回答上来吗？</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2020/07/25/this.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

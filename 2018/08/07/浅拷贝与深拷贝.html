@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>浅拷贝与深拷贝 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="浅拷贝与深拷贝" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="JavaScript 变量有两种不同数据类型：基本类型和引用类型。" />
+<meta property="og:description" content="JavaScript 变量有两种不同数据类型：基本类型和引用类型。" />
+<link rel="canonical" href="/blog/2018/08/07/%E6%B5%85%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B7%B1%E6%8B%B7%E8%B4%9D.html" />
+<meta property="og:url" content="/blog/2018/08/07/%E6%B5%85%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B7%B1%E6%8B%B7%E8%B4%9D.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-08-07T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="浅拷贝与深拷贝" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2018-08-07T00:00:00+00:00","datePublished":"2018-08-07T00:00:00+00:00","description":"JavaScript 变量有两种不同数据类型：基本类型和引用类型。","headline":"浅拷贝与深拷贝","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2018/08/07/%E6%B5%85%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B7%B1%E6%8B%B7%E8%B4%9D.html"},"url":"/blog/2018/08/07/%E6%B5%85%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B7%B1%E6%8B%B7%E8%B4%9D.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">浅拷贝与深拷贝</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2018-08-07T00:00:00+00:00" itemprop="datePublished">Aug 7, 2018
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2018"><i>2018</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/javascript"><i>javascript</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>JavaScript 变量有两种不同数据类型：基本类型和引用类型。</p>
+
+<p>基本数据类型是按值访问，可以直接操作保存在变量中的实际值。引用类型的值是保存在堆内存中的对象，JavaScript 不能直接操作对象的内存空间，实际操作的是对象的引用。在传递的时候，基本类型是传值，引用类型是传址。所以，浅拷贝与深拷贝只针对于引用类型这种对象。</p>
+
+<h2 id="浅拷贝与深拷贝">浅拷贝与深拷贝</h2>
+
+<p>浅拷贝：浅拷贝只拷贝对象的引用地址，并没有创建新的对象，并没有开辟新的堆内存。拷贝出来的变量是同一个引用地址，指向同一个对象。</p>
+
+<p>深拷贝：深拷贝是对引用的对象全部进行拷贝。在内存中创建了新的对象，拷贝出来的变量指向不同的引用地址，指向不同的对象。</p>
+
+<h2 id="浅拷贝的示例">浅拷贝的示例</h2>
+
+<ul>
+  <li>赋值操作</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="na">a</span><span class="p">:</span> <span class="dl">'</span><span class="s1">a</span><span class="dl">'</span><span class="p">,</span> <span class="na">b</span><span class="p">:</span> <span class="dl">'</span><span class="s1">b</span><span class="dl">'</span> <span class="p">};</span>
+<span class="kd">var</span> <span class="nx">arrCopy</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">objCopy</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">;</span>
+
+<span class="nx">arrCopy</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="nx">objCopy</span><span class="p">.</span><span class="nx">a</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">aa</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="nf">log</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="nx">arrCopy</span><span class="p">);</span> <span class="c1">//[0, 2, 3, 4], [0, 2, 3, 4]</span>
+<span class="nf">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="nx">objCopy</span><span class="p">);</span> <span class="c1">//{ a: "aa", b: "b" }, { a: "aa", b: "b" }</span>
+</code></pre></div></div>
+
+<h2 id="特别的浅拷贝">特别的浅拷贝</h2>
+
+<p>当数据只有一层的时候，该方法可以当作深拷贝使用。当数据超过一层时候，只能用作浅拷贝。</p>
+
+<ul>
+  <li>Array.slice() –常用作数组</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">arrCopy</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nf">slice</span><span class="p">();</span>
+<span class="nx">arrCopy</span><span class="p">.</span><span class="nf">push</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+<span class="nf">log</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="nx">arrCopy</span><span class="p">);</span>
+<span class="c1">//[1, 2, 3, 4], [1, 2, 3, 4, 5]</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">]];</span>
+<span class="kd">var</span> <span class="nx">arrCopy</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nf">slice</span><span class="p">();</span>
+<span class="nx">arrCopy</span><span class="p">[</span><span class="mi">4</span><span class="p">].</span><span class="nf">push</span><span class="p">(</span><span class="mi">12</span><span class="p">);</span>
+<span class="nf">log</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="nx">arrCopy</span><span class="p">);</span>
+<span class="c1">//[1, 2, 3, 4, [10, 11, 12]], [1, 2, 3, 4, [10, 11, 12]]</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Ojbect.assign() –常用作对象</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="na">a</span><span class="p">:</span> <span class="dl">'</span><span class="s1">a</span><span class="dl">'</span><span class="p">,</span> <span class="na">b</span><span class="p">:</span> <span class="dl">'</span><span class="s1">b</span><span class="dl">'</span> <span class="p">};</span>
+<span class="kd">var</span> <span class="nx">objCopy</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nf">assign</span><span class="p">({},</span> <span class="nx">obj</span><span class="p">);</span>
+<span class="nx">objCopy</span><span class="p">.</span><span class="nx">a</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">aaa</span><span class="dl">'</span><span class="p">;</span>
+<span class="nf">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="nx">objCopy</span><span class="p">);</span>
+<span class="c1">//{ a: "a", b: "b" }, { a: "aaa", b: "b" }</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="na">a</span><span class="p">:</span> <span class="dl">'</span><span class="s1">a</span><span class="dl">'</span><span class="p">,</span> <span class="na">b</span><span class="p">:</span> <span class="dl">'</span><span class="s1">b</span><span class="dl">'</span><span class="p">,</span> <span class="na">c</span><span class="p">:</span> <span class="p">{</span> <span class="na">d</span><span class="p">:</span> <span class="dl">'</span><span class="s1">d</span><span class="dl">'</span> <span class="p">}</span> <span class="p">};</span>
+<span class="kd">var</span> <span class="nx">objCopy</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nf">assign</span><span class="p">({},</span> <span class="nx">obj</span><span class="p">);</span>
+<span class="nx">objCopy</span><span class="p">.</span><span class="nx">c</span><span class="p">.</span><span class="nx">d</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">ddd</span><span class="dl">'</span><span class="p">;</span>
+<span class="nf">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="nx">objCopy</span><span class="p">);</span>
+<span class="c1">//{ a: 'a', b: 'b', c: {d: "ddd"} }, { a: 'a', b: 'b', c: {d: "ddd"} }</span>
+</code></pre></div></div>
+
+<ul>
+  <li>扩展运算符… –数组，对象都常用</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="na">a</span><span class="p">:</span> <span class="dl">'</span><span class="s1">a</span><span class="dl">'</span><span class="p">,</span> <span class="na">b</span><span class="p">:</span> <span class="dl">'</span><span class="s1">b</span><span class="dl">'</span> <span class="p">};</span>
+<span class="kd">var</span> <span class="nx">arrCopy</span> <span class="o">=</span> <span class="p">[...</span><span class="nx">arr</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">objCopy</span> <span class="o">=</span> <span class="p">{</span> <span class="p">...</span><span class="nx">obj</span> <span class="p">};</span>
+<span class="nx">arr</span><span class="p">.</span><span class="nf">push</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+<span class="nx">obj</span><span class="p">.</span><span class="nx">c</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">c</span><span class="dl">'</span><span class="p">;</span>
+<span class="nf">log</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="nx">arrCopy</span><span class="p">);</span> <span class="c1">//[1, 2, 3, 4, 5] [1, 2, 3, 4]</span>
+<span class="nf">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="nx">objCopy</span><span class="p">);</span> <span class="c1">//{ a: "a", b: "b" }, { a: "a", b: "b", c: "c" }</span>
+</code></pre></div></div>
+
+<h2 id="深拷贝">深拷贝</h2>
+
+<ul>
+  <li>JSON.parse 和 JSON.stringify</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="na">a</span><span class="p">:</span> <span class="p">{</span> <span class="na">b</span><span class="p">:</span> <span class="dl">'</span><span class="s1">c</span><span class="dl">'</span> <span class="p">}</span> <span class="p">};</span>
+<span class="kd">var</span> <span class="nx">objCopy</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nf">stringify</span><span class="p">(</span><span class="nx">obj</span><span class="p">));</span>
+<span class="nx">objCopy</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nx">b</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">d</span><span class="dl">'</span><span class="p">;</span>
+<span class="nf">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="nx">objCopy</span><span class="p">);</span> <span class="c1">//{ a: { b: "c"} }, { a: { b: "d"} }</span>
+</code></pre></div></div>
+
+<p>局限性：无法转换<code class="language-plaintext highlighter-rouge">function</code>,<code class="language-plaintext highlighter-rouge">function</code>会直接消失掉。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">fun</span><span class="p">:</span> <span class="nf">function </span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">hi</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">objCopy</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nf">stringify</span><span class="p">(</span><span class="nx">obj</span><span class="p">));</span>
+<span class="nf">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">fun</span><span class="p">);</span> <span class="c1">//"function"</span>
+<span class="nf">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">objCopy</span><span class="p">.</span><span class="nx">fun</span><span class="p">);</span> <span class="c1">//"undefined"</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>Jquery 的 extend</p>
+  </li>
+  <li>
+    <p>Lodash 的 cloneDeep</p>
+  </li>
+</ul>
+
+<h2 id="题外话">题外话</h2>
+
+<p>数组的部分方法原本是不改变原数组的，如 map, filter, find…等等。但是如果数组项是对象的话，且遍历时修改原数组项会修改原数组。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">];</span>
+<span class="kd">const</span> <span class="nx">arr2</span> <span class="o">=</span> <span class="p">[{</span> <span class="na">value</span><span class="p">:</span> <span class="mi">1</span> <span class="p">},</span> <span class="p">{</span> <span class="na">value</span><span class="p">:</span> <span class="mi">2</span> <span class="p">}];</span>
+
+<span class="kd">const</span> <span class="nx">copy</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nf">map</span><span class="p">((</span><span class="nx">i</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">return</span> <span class="nx">i</span><span class="p">;</span>
+<span class="p">});</span>
+<span class="kd">const</span> <span class="nx">copy2</span> <span class="o">=</span> <span class="nx">arr2</span><span class="p">.</span><span class="nf">map</span><span class="p">((</span><span class="nx">i</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">i</span><span class="p">.</span><span class="nx">value</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">return</span> <span class="nx">i</span><span class="p">;</span>
+<span class="p">});</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="nx">copy</span><span class="p">);</span>
+<span class="c1">// [1, 2, 3] [2, 3, 4]</span>
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">arr2</span><span class="p">,</span> <span class="nx">copy2</span><span class="p">);</span>
+<span class="c1">// [{ value: 2 }, { value: 3 }] [{ value: 2 }, { value: 3 }]</span>
+</code></pre></div></div>
+
+  </div><a class="u-url" href="/blog/2018/08/07/%E6%B5%85%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B7%B1%E6%8B%B7%E8%B4%9D.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

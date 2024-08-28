@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>网格布局Grid | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="网格布局Grid" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="网格布局，Grid 布局，也叫栅格布局，是一种二维网格布局。" />
+<meta property="og:description" content="网格布局，Grid 布局，也叫栅格布局，是一种二维网格布局。" />
+<link rel="canonical" href="/blog/2022/01/27/%E7%BD%91%E6%A0%BC%E5%B8%83%E5%B1%80Grid.html" />
+<meta property="og:url" content="/blog/2022/01/27/%E7%BD%91%E6%A0%BC%E5%B8%83%E5%B1%80Grid.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-01-27T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="网格布局Grid" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-01-27T00:00:00+00:00","datePublished":"2022-01-27T00:00:00+00:00","description":"网格布局，Grid 布局，也叫栅格布局，是一种二维网格布局。","headline":"网格布局Grid","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2022/01/27/%E7%BD%91%E6%A0%BC%E5%B8%83%E5%B1%80Grid.html"},"url":"/blog/2022/01/27/%E7%BD%91%E6%A0%BC%E5%B8%83%E5%B1%80Grid.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">网格布局Grid</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2022-01-27T00:00:00+00:00" itemprop="datePublished">Jan 27, 2022
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2022"><i>2022</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/css"><i>css</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>网格布局，Grid 布局，也叫栅格布局，是一种二维网格布局。</p>
+
+<p>Grid 布局有三个重要的属性：行(row)，列(column)，沟槽(gutter，行列间隙)。</p>
+
+<h2 id="术语">术语</h2>
+
+<h3 id="网格容器-grid-container">网格容器 Grid Container</h3>
+
+<p>通过声明元素 <code class="language-plaintext highlighter-rouge">display: grid</code> 或者 <code class="language-plaintext highlighter-rouge">display: inline-grid</code> 创建了网格容器（grid container）。</p>
+
+<h3 id="网格项-grid-item">网格项 Grid Item</h3>
+
+<p>网格容器内的直接子元素均为网格项（grid item），但是孙元素不属于。</p>
+
+<h3 id="网格线-grid-line">网格线 Grid Line</h3>
+
+<p>构成网格结构的分割线,位于行或者列的任意一端。</p>
+
+<h3 id="网格单元-grid-cell">网格单元 Grid Cell</h3>
+
+<p>两个相邻行和两个相邻列网格线之间的区域。</p>
+
+<h2 id="fr">fr</h2>
+
+<p>新单位 fr 表示网格容器中可用空间的一部分。</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">grid-template-columns: 1fr 1fr 1fr;</code> 表示划分成三列，每列占三分之一。</li>
+  <li><code class="language-plaintext highlighter-rouge">grid-template-columns: 500px 1fr 2fr;</code> 表示划分成三列，首列占 500px，第二列占剩余部分的三分之一，最后一列占剩余部分的三分之二。</li>
+</ul>
+
+<p>当网格中有大量的轨迹时，我们可以使用 repeat() 符号</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">grid-template-columns: repeat(3, 1fr); =&gt; grid-template-columns: 1fr 1fr 1fr;</code></li>
+  <li><code class="language-plaintext highlighter-rouge">grid-template-columns: repeat(2, 1fr 2fr); =&gt; grid-template-columns: 1fr 2fr 1fr 2fr;</code></li>
+</ul>
+
+<h2 id="网格属性">网格属性</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">网格容器属性</th>
+      <th style="text-align: left">网格元素属性</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">display</td>
+      <td style="text-align: left">grid-column-start</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">grid-template-columns</td>
+      <td style="text-align: left">grid-column-end</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">grid-template-rows</td>
+      <td style="text-align: left">grid-row-start</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">grid-template-areas</td>
+      <td style="text-align: left">grid-row-end</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">grid-template</td>
+      <td style="text-align: left">grid-column</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">grid-column-gap</td>
+      <td style="text-align: left">grid-row</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">grid-row-gap</td>
+      <td style="text-align: left">grid-area</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">grid-gap</td>
+      <td style="text-align: left">justify-self</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">justify-items</td>
+      <td style="text-align: left">align-self</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">align-items</td>
+      <td style="text-align: left">place-self</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">place-items</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">justify-content</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">align-content</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">place-content</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">grid-auto-columns</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">grid-auto-rows</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">grid-auto-flow</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">grid</td>
+      <td style="text-align: left"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<style>
+.container {
+  display: grid;
+  border: 2px solid #11a4ff;
+}
+.item {
+  background-color: #ffe411;
+  border: 2px solid #fff8bf;
+  padding: 0 10px;
+  color: #122b3a;
+}
+</style>
+
+<h2 id="grid-template-columns">grid-template-columns</h2>
+
+<p><code class="language-plaintext highlighter-rouge">grid-template-columns</code> 它决定了网格中最多存在多少列以及每列的宽度大小。</p>
+
+<p><code class="language-plaintext highlighter-rouge">grid-auto-columns</code> 显示的定义每列的列宽。</p>
+
+<p>其值：</p>
+
+<ul>
+  <li>none: 表示没有显式的网格列，根据 <code class="language-plaintext highlighter-rouge">grid-auto-columns</code> 自动生成。</li>
+  <li>
+    <length>: 指定列宽。如 700px。
+</length>
+  </li>
+  <li>
+    <precentage>: 百分比。如 10%。
+</precentage>
+  </li>
+  <li>
+    <flex>: 自适应布局。使用单位 fr。
+</flex>
+  </li>
+  <li>minmax(min, max): 指定最小值和最大值。auto 表示自适应。</li>
+  <li>repeat: 重复列表。</li>
+</ul>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.container--grid-template-columns</span> <span class="p">{</span>
+  <span class="py">grid-template-columns</span><span class="p">:</span> <span class="m">120px</span> <span class="m">80px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="container container--grid-template-columns">
+  <div class="item">120px</div>
+  <div class="item">80px</div>
+  <div class="item">120px</div>
+  <div class="item">80px</div>
+</div>
+
+<style>
+.container--grid-template-columns {
+  grid-template-columns: 120px 80px;
+}
+</style>
+
+<h2 id="grid-template-rows">grid-template-rows</h2>
+
+<p><code class="language-plaintext highlighter-rouge">grid-template-rows</code> 规定 grid 的高度。</p>
+
+<p><code class="language-plaintext highlighter-rouge">grid-auto-rows</code> 显式的定义每行的高度。</p>
+
+<p>其值：</p>
+
+<ul>
+  <li>none: 没有显式的网格高度，根据 <code class="language-plaintext highlighter-rouge">grid-auto-rows</code> 自动生成。</li>
+  <li>
+    <length>: 指定高度数值。如 700px。
+</length>
+  </li>
+  <li>
+    <precentage>: 百分比。如 10%。
+</precentage>
+  </li>
+  <li>
+    <flex>: 自适应布局。使用单位 fr。
+</flex>
+  </li>
+  <li>minmax(min, max): 指定最小值和最大值。auto 表示自适应。</li>
+  <li>repeat: 重复列表。</li>
+</ul>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.container--grid-template-rows</span> <span class="p">{</span>
+  <span class="py">grid-template-rows</span><span class="p">:</span> <span class="m">40px</span> <span class="m">2rem</span> <span class="m">60px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="container container--grid-template-rows">
+  <div class="item">40px</div>
+  <div class="item">2rem</div>
+  <div class="item">60px</div>
+</div>
+
+<style>
+.container--grid-template-rows {
+  grid-template-rows: 40px 2rem 60px;
+}
+.container--grid-template-rows > .item {
+  height: auto;
+}
+</style>
+
+<h2 id="gap">gap</h2>
+
+<p>gap 表示行列之间的间隙。gap 是 row-gap 和 columns-gap 的简写。row-gap 表示行间隙，columns 表示列间隙。</p>
+
+<h2 id="justify-items">justify-items</h2>
+
+<p>沿行轴对其网格对齐网格项目。应用于容器内的所有网格项目。</p>
+
+<p>其值：<code class="language-plaintext highlighter-rouge">justify-items: start | end | center | stretch(default);</code></p>
+
+<p>示例：</p>
+
+<div class="container container__justify-items container__justify-items--start">
+  <div class="item">start</div>
+  <div class="item">start</div>
+  <div class="item">start</div>
+</div>
+
+<div class="container container__justify-items container__justify-items--end">
+  <div class="item">end</div>
+  <div class="item">end</div>
+  <div class="item">end</div>
+</div>
+
+<div class="container container__justify-items container__justify-items--center">
+  <div class="item">center</div>
+  <div class="item">center</div>
+  <div class="item">center</div>
+</div>
+
+<div class="container container__justify-items container__justify-items--stretch">
+  <div class="item">stretch</div>
+  <div class="item">stretch</div>
+  <div class="item">stretch</div>
+</div>
+
+<style>
+.container__justify-items {
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-bottom: 8px;
+}
+.container__justify-items > .item {
+  text-align: center;
+}
+.container__justify-items--start {
+  justify-items: start;
+}
+.container__justify-items--end {
+  justify-items: end;
+}
+.container__justify-items--center {
+  justify-items: center;
+}
+.container__justify-items--stretch {
+  justify-items: stretch;
+}
+</style>
+
+<h2 id="align-items">align-items</h2>
+
+<p>沿列轴对其网格对其网格项目。应用于容器内的所有网格项目。</p>
+
+<p>其值：<code class="language-plaintext highlighter-rouge">align-items: start | end | center | stretch(default);</code></p>
+
+<div class="container container__align-items container__align-items--start">
+  <div class="item">start</div>
+  <div class="item">start</div>
+  <div class="item">start</div>
+</div>
+
+<div class="container container__align-items container__align-items--end">
+  <div class="item">end</div>
+  <div class="item">end</div>
+  <div class="item">end</div>
+</div>
+
+<div class="container container__align-items container__align-items--center">
+  <div class="item">center</div>
+  <div class="item">center</div>
+  <div class="item">center</div>
+</div>
+
+<div class="container container__align-items container__align-items--stretch">
+  <div class="item">stretch</div>
+  <div class="item">stretch</div>
+  <div class="item">stretch</div>
+</div>
+
+<style>
+.container__align-items {
+  grid-template-columns: 1fr 1fr 1fr;
+  height: 50px;
+  margin-bottom: 8px;
+}
+.container__align-items > .item {
+  text-align: center;
+}
+.container__align-items--start {
+  align-items: start;
+}
+.container__align-items--end {
+  align-items: end;
+}
+.container__align-items--center {
+  align-items: center;
+}
+.container__align-items--stretch {
+  align-items: stretch;
+}
+</style>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Basic_Concepts_of_Grid_Layout">MDN: Basic Concepts of grid layout</a></li>
+  <li><a href="https://css-tricks.com/snippets/css/complete-guide-grid/">CSS Tricks: A Complete Guide to Grid</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2022/01/27/%E7%BD%91%E6%A0%BC%E5%B8%83%E5%B1%80Grid.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>浏览器的渲染 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="浏览器的渲染" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="我们需要去了解浏览器如何渲染一个页面。" />
+<meta property="og:description" content="我们需要去了解浏览器如何渲染一个页面。" />
+<link rel="canonical" href="/blog/2022/01/11/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E6%B8%B2%E6%9F%93.html" />
+<meta property="og:url" content="/blog/2022/01/11/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E6%B8%B2%E6%9F%93.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-01-11T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="浏览器的渲染" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-01-11T00:00:00+00:00","datePublished":"2022-01-11T00:00:00+00:00","description":"我们需要去了解浏览器如何渲染一个页面。","headline":"浏览器的渲染","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2022/01/11/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E6%B8%B2%E6%9F%93.html"},"url":"/blog/2022/01/11/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E6%B8%B2%E6%9F%93.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">浏览器的渲染</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2022-01-11T00:00:00+00:00" itemprop="datePublished">Jan 11, 2022
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2022"><i>2022</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/css"><i>css</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/javascript"><i>javascript</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>我们需要去了解浏览器如何渲染一个页面。</p>
+
+<h2 id="进程与线程">进程与线程</h2>
+
+<p>浏览器有多种进程，其中最主要的 5 种进程如下</p>
+
+<p><img src="/blog/images/brower_mul_process.png" alt="Brower Mul Process" /></p>
+
+<ol>
+  <li>浏览器进程负责界面展示、用户交互、子进程管理、提供存储等</li>
+  <li>渲染进程，每个页面都有一个单独的渲染进程，用于渲染页面，包括 webworker 线程</li>
+  <li>网络进程主要处理网络资源加载（HTML、CSS、JS、IMAGE、AJAX 等）</li>
+  <li>GPU 进程负责 3D 绘制，提高性能</li>
+  <li>插件进程负责插件，每个插件占用一个进程</li>
+</ol>
+
+<p>而我们最熟悉的就是渲染进程，也就是浏览器内核，对于渲染进程来说，也是多线程的。</p>
+
+<ul>
+  <li>
+    <p>GUI 渲染线程</p>
+
+    <ul>
+      <li>负责渲染页面，布局和绘制</li>
+      <li>页面需要重绘和回流时，该线程会执行</li>
+      <li>与 JS 引擎线程互斥，防止渲染结果不可预期</li>
+    </ul>
+  </li>
+  <li>
+    <p>JS 引擎线程</p>
+
+    <ul>
+      <li>负责处理解析和执行 javascript 脚本程序</li>
+      <li>只有一个 JS 引擎线程（单线程）</li>
+      <li>与 GUI 渲染线程互斥，防止渲染结果不可预期</li>
+    </ul>
+  </li>
+  <li>
+    <p>事件触发线程</p>
+
+    <ul>
+      <li>用来控制事件循环（鼠标点击，setTimeout，AJAX 等）</li>
+      <li>当事件满足触发条件时，将事件放入到 JS 引擎所在的执行队列中</li>
+    </ul>
+  </li>
+  <li>
+    <p>定时器触发器线程</p>
+
+    <ul>
+      <li>setTimeout 与 setInterval 所在的线程</li>
+      <li>定时任务并不是 JS 引擎及时的，是由定时触发线程来计时的</li>
+      <li>计时完毕后，通知事件触发线程</li>
+    </ul>
+  </li>
+  <li>
+    <p>异步 HTTP 请求线程</p>
+    <ul>
+      <li>浏览器有一个单独的线程用来处理 AJAX 请求</li>
+      <li>当请求完成时，若有回调函数，通知事件触发进程</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="输入-url-到页面展示">输入 URL 到页面展示</h2>
+
+<p><img src="/blog/images/brower_url_display.svg" alt="URL_DISPLAY" /></p>
+
+<h3 id="1-用户输入">1. 用户输入</h3>
+
+<p>用户在 <code class="language-plaintext highlighter-rouge">浏览器进程</code> 输入并按下回车后，浏览器判断用户输入的 url 是否为正确的 url，如果不是，则使用默认的搜索引擎将该关键字拼接成 url。</p>
+
+<h3 id="2-重定向">2. 重定向</h3>
+
+<p>然后浏览器会将现有页面卸载，并重定向到用户新输入的 url 页面，也就是图中【Process Unload Event】和【Redirect】流程。</p>
+
+<p>此时浏览器会准备一个 <code class="language-plaintext highlighter-rouge">渲染进程</code> 用于渲染即将到来的页面，和一个 <code class="language-plaintext highlighter-rouge">网络进程</code> 用于发送网络请求。</p>
+
+<h3 id="3-处理-service-worker">3. 处理 Service Worker</h3>
+
+<p>如果当前页面注册了 Service Worker 那么它可以拦截当前网站所有的请求，进行判断是否需要向远程发送网络请求。也就是图中【Service Worker Init】与【Service Worker Fecth Event 】步骤</p>
+
+<p>如果不需要发送网络请求，则取本地文件。如果需要则进行下一步。</p>
+
+<h3 id="4-网络请求">4. 网络请求</h3>
+
+<p>也就是图中【HTTP Cache】、【DNS】、【TCP】、【Request】、【Response】步骤</p>
+
+<h3 id="5-服务器响应">5. 服务器响应</h3>
+
+<p>服务器收到 HTTP 请求后需要根据请求信息来进行解析，并返回给客户端想要的数据，这也就服务端响应。</p>
+
+<p>目前前端处理服务端响应 html 请求主要分为 SSR 服务端渲染与 CSR 客户端渲染，CSR 就是返回一个空的 HTML 模版，然后浏览器加载 js 后通过 js 动态渲染页面。SSR 是服务端在接受到请求时事先在服务端渲染好 html 返回给客户端后，客户端再进行客户端激活。</p>
+
+<p>在打开一个站点的首屏页的完整链路中，使用 SSR 服务端渲染时的速度要远大于 CSR 客户端渲染，并且 SSR 对 SEO 友好。所以对于首屏加载速度比较敏感或者需要优化 SEO 的站点来说，使用 SSR 是更好的选择。</p>
+
+<h3 id="6-浏览器渲染">6. 浏览器渲染</h3>
+
+<h4 id="解析">解析</h4>
+
+<p>一旦浏览器收到数据，它就可以开始解析收到的数据。解析主要将收到的数据转换成 DOM 和 CSSOM，后面再通过渲染器渲染出来。</p>
+
+<p>描述这五个步骤在 <a href="https://developer.mozilla.org/en-US/docs/Web/Performance/Critical_rendering_path">关键渲染路径</a></p>
+
+<p>第一步，解析 HTML 标记并且构建 DOM 树。浏览器构建 DOM 树时，这个过程占用了主线程。当这种情况发生时，预加载扫描仪将解析可用的内容并请求高优先级资源，如 CSS、JavaScript 和 web 字体。</p>
+
+<p>第二步，处理 CSS 并构建 CSSOM 树。CSS 对象模型和 DOM 是相似的。DOM 和 CSSOM 是两棵树。它们是独立的数据结构。</p>
+
+<h4 id="渲染">渲染</h4>
+
+<p>渲染步骤包括样式、布局、绘制，在某些情况还包括合成。</p>
+
+<p>在解析步骤中创建的 CSSOM 树和 DOM 树组合成一个 Render 树，然后用于计算每个可见元素的布局，然后将其绘制到屏幕上。</p>
+
+<p>第三步，将 DOM 和 CSSOM 组合成一个 Render 树，计算渲染树从 DOM 树的根开始构建，遍历每个可见节点。</p>
+
+<p>第四步，在渲染树上运行布局以计算每个节点的几何体。布局是确定呈现树中所有节点的宽度、高度和位置，以及确定页面上每个对象的大小和位置的过程。</p>
+
+<p>第一次确定节点的大小和位置称为布局。随后对节点大小和位置的重新计算称为回流。</p>
+
+<p>最后一步，渲染关键路径的最后一步就是将各个节点绘制到屏幕上。</p>
+
+<h2 id="浏览器处理的每一帧的流程">浏览器处理的每一帧的流程</h2>
+
+<p>一般浏览器的刷新率为 60HZ，即 1 秒钟刷新 60 次。1000ms / 60hz = 16.6 ，也就是大概每过 16.6ms 浏览器就会渲染一帧画面。</p>
+
+<p>浏览器对每一帧画面的渲染工作都要在 16ms 内完成，超出这个时间，页面的渲染就会出现卡顿现象，影响用户体验。</p>
+
+<p><img src="/blog/images/brower_frame.png" alt="Brower Frame" /></p>
+
+<ul>
+  <li>【Input events】：处理用户事件，先处理阻塞事件，后处理非阻塞事件</li>
+  <li>【JS】：处理完用户事件后执行定时器</li>
+  <li>【Begin frame】：处理完定时器后开始进行每帧事件的处理，包括窗口大小改变、滚动、媒体查询的更改、动画事件</li>
+  <li>【rAF】：处理完帧事件后执行 requestAnimationFrame 回调函数和 IntersectionObserver 回调函数</li>
+  <li>【Layout】：然后重新计算样式、更新布局、调整 Observer 回调的大小</li>
+  <li>【Paint】：然后合成更新、Paint invalidation、Record</li>
+</ul>
+
+<h2 id="关键渲染路径">关键渲染路径</h2>
+
+<p>当通过 JS 或者其他任意方式修改 DOM 后，浏览器会进入如下流程</p>
+
+<p>【JS 通过 API 修改 DOM】&gt;【计算样式】&gt;【布局(重排)】&gt;【绘制(重绘)】&gt;【合成】</p>
+
+<p>所以关键路径的渲染：</p>
+
+<p><img src="/blog/images/brower_render.svg" alt="Brower Render" /></p>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="https://mp.weixin.qq.com/s?__biz=Mzg4NTE3NTY4Mg==&amp;mid=2247485744&amp;idx=1&amp;sn=fd04230edff9c4291ac132c956266dfd&amp;chksm=cfadadddf8da24cb447d3b5194ee54e19875a2d5974f7f34ec571634e1ea0708c163c4d084cd&amp;token=1008676742&amp;lang=zh_CN&amp;scene=21#wechat_redirect">Web 页面全链路性能优化指南</a></li>
+  <li><a href="https://juejin.cn/post/6844903919789801486">「前端进阶」从多线程到 Event Loop 全面梳理</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/Performance/How_browsers_work">MDN: Populating the page: how browers work</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/Performance/Critical_rendering_path">Critical rendering path</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2022/01/11/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E6%B8%B2%E6%9F%93.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

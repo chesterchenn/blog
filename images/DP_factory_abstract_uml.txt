@@ -1,0 +1,52 @@
+@startuml
+!theme plain
+
+package {
+  interface AbstractFactory {
+    CreateProductA()
+    createProductB()
+  }
+
+  class ConcreteFactory1 {
+    CreateProductA()
+    createProductB()
+  }
+
+  class ConcreteFactory2 {
+    CreateProductA()
+    createProductB()
+  }
+}
+
+package {
+  interface AbstractProductA
+  interface AbstractProductB
+
+  class ProductA1
+  class ProductA2
+  class ProductB1
+  class ProductB2
+}
+
+class Client {}
+
+
+AbstractFactory <|.. ConcreteFactory1
+AbstractFactory <|.. ConcreteFactory2
+
+AbstractFactory <-- Client
+Client --> AbstractProductA
+Client --> AbstractProductB
+
+AbstractProductA <|.. ProductA2
+AbstractProductA <|.. ProductA1
+AbstractProductB <|.. ProductB1
+AbstractProductB <|.. ProductB2
+
+ProductA2 <-- ConcreteFactory1
+ProductB2 <-- ConcreteFactory1
+
+ProductA1 <-- ConcreteFactory2
+ProductB1 <-- ConcreteFactory2
+
+@enduml

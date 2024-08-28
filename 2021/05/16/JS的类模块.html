@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>JS的类模块 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="JS的类模块" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="在 es5 中主要是通过构造函数方式和原型方式来定义一个类，在 es6 中我们可以通过 class 来定义一个类。" />
+<meta property="og:description" content="在 es5 中主要是通过构造函数方式和原型方式来定义一个类，在 es6 中我们可以通过 class 来定义一个类。" />
+<link rel="canonical" href="/blog/2021/05/16/JS%E7%9A%84%E7%B1%BB%E6%A8%A1%E5%9D%97.html" />
+<meta property="og:url" content="/blog/2021/05/16/JS%E7%9A%84%E7%B1%BB%E6%A8%A1%E5%9D%97.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-05-16T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="JS的类模块" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2021-05-16T00:00:00+00:00","datePublished":"2021-05-16T00:00:00+00:00","description":"在 es5 中主要是通过构造函数方式和原型方式来定义一个类，在 es6 中我们可以通过 class 来定义一个类。","headline":"JS的类模块","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2021/05/16/JS%E7%9A%84%E7%B1%BB%E6%A8%A1%E5%9D%97.html"},"url":"/blog/2021/05/16/JS%E7%9A%84%E7%B1%BB%E6%A8%A1%E5%9D%97.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">JS的类模块</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-05-16T00:00:00+00:00" itemprop="datePublished">May 16, 2021
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2021"><i>2021</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/javascript"><i>javascript</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>在 es5 中主要是通过构造函数方式和原型方式来定义一个类，在 es6 中我们可以通过 class 来定义一个类。</p>
+
+<h2 id="es5">ES5</h2>
+
+<p>在 es5 中主要是通过构造函数方式和原型方式来定义一个类，且一般以大写字母开头。</p>
+
+<p>ES6 中的类模块转换成 ES5。以下是根据 TSC 转换情况，</p>
+
+<ul>
+  <li>类 -&gt; 函数</li>
+  <li>方法 -&gt; prototype 方法</li>
+  <li>构造器参数 -&gt; 参数</li>
+  <li>静态方法 -&gt; 属性</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Log</span> <span class="p">{</span>
+  <span class="nf">constructor</span><span class="p">(</span><span class="nx">height</span><span class="p">,</span> <span class="nx">width</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">height</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kd">static</span> <span class="nx">displayName</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Point</span><span class="dl">'</span><span class="p">;</span>
+
+  <span class="nf">run</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">value</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>TS 编译之后的结果</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">Log</span> <span class="o">=</span> <span class="cm">/** @class */</span> <span class="p">(</span><span class="nf">function </span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">function</span> <span class="nf">Log</span><span class="p">(</span><span class="nx">height</span><span class="p">,</span> <span class="nx">width</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">height</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nx">Log</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">run</span> <span class="o">=</span> <span class="nf">function </span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">value</span><span class="p">;</span>
+  <span class="p">};</span>
+  <span class="nx">Log</span><span class="p">.</span><span class="nx">displayName</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Point</span><span class="dl">'</span><span class="p">;</span>
+  <span class="k">return</span> <span class="nx">Log</span><span class="p">;</span>
+<span class="p">})();</span>
+</code></pre></div></div>
+
+<h2 id="es6">ES6</h2>
+
+<p>在 ES6 中定义一个类使用关键字 class。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Rectangle</span> <span class="p">{</span>
+  <span class="nf">constructor</span><span class="p">(</span><span class="nx">height</span><span class="p">,</span> <span class="nx">width</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">height</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="构造器">构造器</h3>
+
+<p><code class="language-plaintext highlighter-rouge">constructor</code> 构造器是用于创建和初始化一个使用 <code class="language-plaintext highlighter-rouge">class</code> 创建的对象。一个类中只能包含一个构造器。</p>
+
+<p>一个构造器可以使用 <code class="language-plaintext highlighter-rouge">super</code> 关键字来调用父类的构造函数。</p>
+
+<p>对于类和子类来说，构造器并不是必须的。如果省略的话，那么二者都会自动提供一个默认构造器。具体来说，默认子类构造器会自动调用父类的构造器并传递所有参数。类似代码如下：</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">constructor</span><span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">super</span><span class="p">(...</span><span class="nx">args</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="static">static</h3>
+
+<p>通过 <code class="language-plaintext highlighter-rouge">static</code> 关键字定义静态方法和静态属性。静态成员（属性和方法）的调用不需要实例化他们的类，也不能通过类的实例来调用。静态方法通常用于为应用创建实用性函数，而静态属性通常用于缓存、固定配置或者其他不需要重复的实例数据。</p>
+
+<p>在类生命了 static 方法其实就是直接添加到这个类的函数对象上，而不是在这个函数对象的 protytpe 对象上。</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Point</span> <span class="p">{</span>
+  <span class="nf">constructor</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// 静态域</span>
+  <span class="kd">static</span> <span class="nx">Name</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Point</span><span class="dl">'</span><span class="p">;</span>
+
+  <span class="c1">// 静态方法</span>
+  <span class="kd">static</span> <span class="nf">getName</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">Name</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="kd">static</span> <span class="nf">position</span><span class="p">(</span><span class="nx">p</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s2">`(</span><span class="p">${</span><span class="nx">p</span><span class="p">.</span><span class="nx">x</span><span class="p">}</span><span class="s2">, </span><span class="p">${</span><span class="nx">p</span><span class="p">.</span><span class="nx">y</span><span class="p">}</span><span class="s2">)`</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 实例化 p1</span>
+<span class="kd">const</span> <span class="nx">p1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Point</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+
+<span class="c1">// 访问静态域和静态方法</span>
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">Point</span><span class="p">.</span><span class="nx">Name</span><span class="p">);</span> <span class="c1">// "Point"</span>
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">Point</span><span class="p">.</span><span class="nf">getName</span><span class="p">());</span> <span class="c1">// "Point"</span>
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">Point</span><span class="p">.</span><span class="nf">position</span><span class="p">(</span><span class="nx">p1</span><span class="p">));</span> <span class="c1">// (2, 5)</span>
+</code></pre></div></div>
+
+<h3 id="extends">extends</h3>
+
+<p><code class="language-plaintext highlighter-rouge">extends</code> 关键字在类声明或类表达式中用于创建一个类的子类。</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Foo</span> <span class="p">{</span>
+  <span class="nf">constructor</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">a</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">b</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nf">gimmeXY</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">Bar</span> <span class="kd">extends</span> <span class="nc">Foo</span> <span class="p">{</span>
+  <span class="nf">constructor</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">c</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">z</span> <span class="o">=</span> <span class="nx">c</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nf">gimmeXYZ</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">super</span><span class="p">.</span><span class="nf">gimmeXY</span><span class="p">()</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">z</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Bar</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">25</span><span class="p">);</span>
+
+<span class="nx">b</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span> <span class="c1">// 5</span>
+<span class="nx">b</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span> <span class="c1">// 15</span>
+<span class="nx">b</span><span class="p">.</span><span class="nx">z</span><span class="p">;</span> <span class="c1">// 25</span>
+<span class="nx">b</span><span class="p">.</span><span class="nf">gimmeXYZ</span><span class="p">();</span> <span class="c1">// 1875</span>
+</code></pre></div></div>
+
+<p>在 extends 经常会使用 super，那是因为子类中经常会调用父类的的属性或者方法。</p>
+
+<h3 id="super">super</h3>
+
+<p><code class="language-plaintext highlighter-rouge">super</code> 关键字被用来调用父类相应的方法。super 在构造器中，自动指向“父构造器”，在上面的例子中就是 Foo(..)。在方法中，super 会指向 “父对象”，这样就可以访问其属性/方法了，比如上面的 super.gimmeXY()。</p>
+
+<p>如果子类中定义了构造函数，那么它必须先调用 <code class="language-plaintext highlighter-rouge">super</code> 才能使用 <code class="language-plaintext highlighter-rouge">this</code>。注意，是在<strong>子类</strong>的构造函数才需要。</p>
+
+<h2 id="es5-的类与-es6-的-class-区别">ES5 的类与 ES6 的 class 区别</h2>
+
+<ol>
+  <li>
+    <p>class 类必须 new 调用，不能直接执行。</p>
+
+    <p>class 类执行的话会报错，而 ES5 中的类和普通函数并没有区别。</p>
+  </li>
+  <li>
+    <p>class 类不存在变量提升</p>
+
+    <p>ES5 函数声明会有变量提升，而 class 是没有将类的定义提升到顶部，这也是 TS 将 class 转成 ES5 的时候用到函数表达式的原因。</p>
+  </li>
+  <li>
+    <p>class 类有 static 静态方法</p>
+
+    <p>static 静态方法只能通过类调用，不会出现在实例上；另外如果静态方法包含 this 关键字，这个 this 指的是类，而不是实例。</p>
+
+    <p>static 静态属性和方法都不可以被子类继承。</p>
+  </li>
+</ol>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes">MDN: Classes</a></li>
+  <li>《你不知道的 Javascriopt(下)》第二部分 3.4</li>
+  <li><a href="https://fe.ecool.fun/topic/1036468a-13c7-49d5-af8f-31c31135ceea?orderBy=updateTime&amp;order=desc&amp;titleKey=%E7%B1%BB">es5 中的类和 es6 中的 class 有什么区别？</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2021/05/16/JS%E7%9A%84%E7%B1%BB%E6%A8%A1%E5%9D%97.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

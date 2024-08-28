@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Dockerfile文件 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Dockerfile文件" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Dockerfile 是 Docker 构建自己的镜像使用的配置文件。" />
+<meta property="og:description" content="Dockerfile 是 Docker 构建自己的镜像使用的配置文件。" />
+<link rel="canonical" href="/blog/2023/10/03/Dockerfile%E6%96%87%E4%BB%B6.html" />
+<meta property="og:url" content="/blog/2023/10/03/Dockerfile%E6%96%87%E4%BB%B6.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-10-03T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Dockerfile文件" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-10-03T00:00:00+00:00","datePublished":"2023-10-03T00:00:00+00:00","description":"Dockerfile 是 Docker 构建自己的镜像使用的配置文件。","headline":"Dockerfile文件","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2023/10/03/Dockerfile%E6%96%87%E4%BB%B6.html"},"url":"/blog/2023/10/03/Dockerfile%E6%96%87%E4%BB%B6.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Dockerfile文件</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2023-10-03T00:00:00+00:00" itemprop="datePublished">Oct 3, 2023
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2023"><i>2023</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/others"><i>others</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Dockerfile 是 Docker 构建自己的镜像使用的配置文件。</p>
+
+<!-- vim-markdown-toc GFM -->
+
+<ul>
+  <li><a href="#指令表格">指令表格</a></li>
+  <li><a href="#前端示例">前端示例</a>
+    <ul>
+      <li><a href="#配置-dockerfile">配置 Dockerfile</a></li>
+      <li><a href="#配置-nginx">配置 nginx</a></li>
+      <li><a href="#部署">部署</a></li>
+    </ul>
+  </li>
+  <li><a href="#dockerignore">.dockerignore</a></li>
+  <li><a href="#参考链接">参考链接</a></li>
+</ul>
+
+<!-- vim-markdown-toc -->
+
+<h2 id="指令表格">指令表格</h2>
+
+<p>Dockerfile 常用的指令</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">指令</th>
+      <th style="text-align: left">说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">FROM</td>
+      <td style="text-align: left">设置基础镜像</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">RUN</td>
+      <td style="text-align: left">指令的命令</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">CMD</td>
+      <td style="text-align: left">提供默认的命令</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">LABEL</td>
+      <td style="text-align: left">添加元数据</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">EXPOSE</td>
+      <td style="text-align: left">指定容器运行时监听的网络端口</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">ENV</td>
+      <td style="text-align: left">设置环境变量</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">ADD</td>
+      <td style="text-align: left">复制文件，目录或远程 URL 到镜像中</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">COPY</td>
+      <td style="text-align: left">复制文件，目录到镜像中</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">VOLUME</td>
+      <td style="text-align: left">创建挂载点或声明卷</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">USER</td>
+      <td style="text-align: left">设置用户名或分组</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">WORKDIR</td>
+      <td style="text-align: left">设置工作目录</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">ARG</td>
+      <td style="text-align: left">设置构建时的变量</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">ONBUILD</td>
+      <td style="text-align: left">当镜像被当作另一个构建过程中的基础时触发</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">STOPSIGNAL</td>
+      <td style="text-align: left">设置容器退出时的系统调用信号</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">HEALTHCHECK</td>
+      <td style="text-align: left">定义周期性检查容器健康状态的命令</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SHELL</td>
+      <td style="text-align: left">覆盖 Docker 中默认的 shell</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="前端示例">前端示例</h2>
+
+<h3 id="配置-dockerfile">配置 Dockerfile</h3>
+
+<p>首先在项目根目录创建 Dockerfile 文件，注意文件名大小写。</p>
+
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Nodejs 构建项目</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">node:16</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">build_image</span>
+<span class="c"># ENV NODE_ENV=production</span>
+<span class="k">WORKDIR</span><span class="s"> /app</span>
+<span class="k">COPY</span><span class="s"> package.json ./</span>
+<span class="k">RUN </span>npm <span class="nt">--registry</span><span class="o">=</span>https://registry.npmmirror.com <span class="nb">install</span>
+<span class="k">COPY</span><span class="s"> . .</span>
+<span class="k">RUN </span>npm run build
+
+<span class="c"># nginx 配置</span>
+<span class="k">FROM</span><span class="s"> nginx:latest</span>
+<span class="k">WORKDIR</span><span class="s"> /app</span>
+<span class="k">COPY</span><span class="s"> ./nginx.conf /etc/nginx/conf.d</span>
+<span class="k">COPY</span><span class="s"> --from=build_image /app/dist /usr/share/nginx/html/</span>
+
+<span class="k">EXPOSE</span><span class="s"> 8080</span>
+</code></pre></div></div>
+
+<p>注意：</p>
+
+<ol>
+  <li>设置 NODE_ENV=production 会导致 dev 依赖无法安装。</li>
+  <li>设置 WORKDIR 才可以读取生成的 dist 目录。</li>
+</ol>
+
+<h3 id="配置-nginx">配置 nginx</h3>
+
+<p>在根目录创建 nginx.conf</p>
+
+<div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">server</span> <span class="p">{</span>
+    <span class="kn">listen</span> <span class="mi">9528</span><span class="p">;</span>
+    <span class="kn">server_name</span> <span class="s">_</span><span class="p">;</span>
+
+    <span class="kn">location</span> <span class="n">/</span> <span class="p">{</span>
+        <span class="kn">root</span> <span class="n">/usr/share/nginx/html</span><span class="p">;</span>
+        <span class="kn">index</span> <span class="s">index.html</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="部署">部署</h3>
+
+<p>运行命令生成镜像: <code class="language-plaintext highlighter-rouge">docker build -t web:v0.1 .</code>，生成之后运行 <code class="language-plaintext highlighter-rouge">docker images</code> 可以看到对应的镜像。</p>
+
+<p>启动容器 <code class="language-plaintext highlighter-rouge">docker run -d -p 8080:8080 web:v0.1</code>，启动成功之后运行 <code class="language-plaintext highlighter-rouge">docker ps</code> 可以看到运行的容器。</p>
+
+<h2 id="dockerignore">.dockerignore</h2>
+
+<p>使用 .dockerignore 可以指定文件或路径不会拷贝进镜像，如 node_modules。</p>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="https://docs.docker.com/engine/reference/builder/">Dockerfile reference | Docker Docs</a></li>
+  <li><a href="https://www.runoob.com/docker/docker-dockerfile.html">Docker Dockerfile | 菜鸟教程</a></li>
+  <li><a href="https://docs.docker.com/language/">Language-specific guides | Docker Docs</a></li>
+  <li><a href="https://www.cnblogs.com/liuheng/p/16249022.html">如何使用Docker构建前端项目</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2023/10/03/Dockerfile%E6%96%87%E4%BB%B6.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>
