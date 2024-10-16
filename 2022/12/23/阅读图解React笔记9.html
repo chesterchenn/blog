@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>阅读图解React笔记9 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="阅读图解React笔记9" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="本文仅仅是阅读 图解 React 原理系列 的笔记，了解更多内容请查看原文链接。" />
+<meta property="og:description" content="本文仅仅是阅读 图解 React 原理系列 的笔记，了解更多内容请查看原文链接。" />
+<link rel="canonical" href="/blog/2022/12/23/%E9%98%85%E8%AF%BB%E5%9B%BE%E8%A7%A3React%E7%AC%94%E8%AE%B09.html" />
+<meta property="og:url" content="/blog/2022/12/23/%E9%98%85%E8%AF%BB%E5%9B%BE%E8%A7%A3React%E7%AC%94%E8%AE%B09.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-12-23T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="阅读图解React笔记9" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-12-23T00:00:00+00:00","datePublished":"2022-12-23T00:00:00+00:00","description":"本文仅仅是阅读 图解 React 原理系列 的笔记，了解更多内容请查看原文链接。","headline":"阅读图解React笔记9","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2022/12/23/%E9%98%85%E8%AF%BB%E5%9B%BE%E8%A7%A3React%E7%AC%94%E8%AE%B09.html"},"url":"/blog/2022/12/23/%E9%98%85%E8%AF%BB%E5%9B%BE%E8%A7%A3React%E7%AC%94%E8%AE%B09.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">阅读图解React笔记9</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2022-12-23T00:00:00+00:00" itemprop="datePublished">Dec 23, 2022
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2022"><i>2022</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/react"><i>react</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>本文仅仅是阅读 <a href="https://7kms.github.io/react-illustration-series/">图解 React 原理系列</a> 的笔记，了解更多内容请查看原文链接。</p>
+
+<p>状态 Hook</p>
+
+<h2 id="原理概念">原理概念</h2>
+
+<p>前面介绍了 Hook 原理（概览），主要内容有：</p>
+
+<ol>
+  <li>function 类型的 fiber 节点，它的处理函数是 updateFunctionComponent，其中再通过 renderWithHooks 调用 function。</li>
+  <li>在 function 中，通过 Hook Api 创建 Hook 对象。
+    <ul>
+      <li>状态 Hook 实现了持久化</li>
+      <li>副作用 Hook 则实现了维护 fiber.flags，并提供了副作用回调</li>
+    </ul>
+  </li>
+  <li>多个 Hook 对象构成了一个链表结构，并挂载到 fiber.memoizedState 之上。</li>
+  <li>fiber 树更新阶段，把 current.memoizedState 链表上的所有 Hook 按照顺序克隆到 workInProgress.memoizedState 上，实现数据的持久化。</li>
+</ol>
+
+<h2 id="创建-hook">创建 Hook</h2>
+
+<p>本节将深入分析状态 Hook 的特性和实现原理。</p>
+
+<p>在 fiber 初次构造阶段，useState 对应的源码 mountState，useReducer 对应的源码 mountReducer</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">mountState</span><span class="o">&lt;</span><span class="nx">S</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">initialState</span><span class="p">:</span> <span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">S</span><span class="p">)</span> <span class="o">|</span> <span class="nx">S</span><span class="p">):</span> <span class="p">[</span><span class="nx">S</span><span class="p">,</span> <span class="nx">Dispatch</span><span class="o">&lt;</span><span class="nx">BasicStateAction</span><span class="o">&lt;</span><span class="nx">S</span><span class="o">&gt;&gt;</span><span class="p">]</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">hook</span> <span class="o">=</span> <span class="nf">mountWorkInProgressHook</span><span class="p">();</span>
+  <span class="k">if </span><span class="p">(</span><span class="k">typeof</span> <span class="nx">initialState</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">function</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">initialState</span> <span class="o">=</span> <span class="nf">initialState</span><span class="p">();</span>
+  <span class="p">}</span>
+  <span class="nx">hook</span><span class="p">.</span><span class="nx">memoizedState</span> <span class="o">=</span> <span class="nx">hook</span><span class="p">.</span><span class="nx">baseState</span> <span class="o">=</span> <span class="nx">initialState</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">queue</span> <span class="o">=</span> <span class="p">(</span><span class="nx">hook</span><span class="p">.</span><span class="nx">queue</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">pending</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">dispatch</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">lastRenderedReducer</span><span class="p">:</span> <span class="nx">basicStateReducer</span><span class="p">,</span>
+    <span class="na">lastRenderedState</span><span class="p">:</span> <span class="p">(</span><span class="na">initialState</span><span class="p">:</span> <span class="nx">any</span><span class="p">),</span>
+  <span class="p">});</span>
+  <span class="kd">const</span> <span class="nx">dispatch</span><span class="p">:</span> <span class="nx">Dispatch</span><span class="o">&lt;</span><span class="nx">BasicStateAction</span><span class="o">&lt;</span><span class="nx">S</span><span class="o">&gt;&gt;</span> <span class="o">=</span> <span class="p">(</span><span class="nx">queue</span><span class="p">.</span><span class="nx">dispatch</span> <span class="o">=</span> <span class="p">(</span><span class="nx">dispatchAction</span><span class="p">.</span><span class="nf">bind</span><span class="p">(</span>
+    <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">currentlyRenderingFiber</span><span class="p">,</span>
+    <span class="nx">queue</span>
+  <span class="p">):</span> <span class="nx">any</span><span class="p">));</span>
+  <span class="k">return</span> <span class="p">[</span><span class="nx">hook</span><span class="p">.</span><span class="nx">memoizedState</span><span class="p">,</span> <span class="nx">dispatch</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">mountReducer</span><span class="o">&lt;</span><span class="nx">S</span><span class="p">,</span> <span class="nx">I</span><span class="p">,</span> <span class="nx">A</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">reducer</span><span class="p">:</span> <span class="p">(</span><span class="nx">S</span><span class="p">,</span> <span class="nx">A</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">S</span><span class="p">,</span> <span class="nx">initialArg</span><span class="p">:</span> <span class="nx">I</span><span class="p">,</span> <span class="nx">init</span><span class="p">?:</span> <span class="p">(</span><span class="nx">I</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">S</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">hook</span> <span class="o">=</span> <span class="nf">mountWorkInProgressHook</span><span class="p">();</span>
+  <span class="kd">let</span> <span class="nx">initialState</span><span class="p">;</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">init</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">initialState</span> <span class="o">=</span> <span class="nf">init</span><span class="p">(</span><span class="nx">initialArg</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">initialState</span> <span class="o">=</span> <span class="p">((</span><span class="na">initialArg</span><span class="p">:</span> <span class="nx">any</span><span class="p">):</span> <span class="nx">S</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nx">hook</span><span class="p">.</span><span class="nx">memoizedState</span> <span class="o">=</span> <span class="nx">hook</span><span class="p">.</span><span class="nx">baseState</span> <span class="o">=</span> <span class="nx">initialState</span><span class="p">;</span>
+
+  <span class="kd">const</span> <span class="nx">queue</span> <span class="o">=</span> <span class="p">(</span><span class="nx">hook</span><span class="p">.</span><span class="nx">queue</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">pending</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">dispatch</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">lastRenderedReducer</span><span class="p">:</span> <span class="nx">reducer</span><span class="p">,</span>
+    <span class="na">lastRenderedState</span><span class="p">:</span> <span class="p">(</span><span class="na">initialState</span><span class="p">:</span> <span class="nx">any</span><span class="p">),</span>
+  <span class="p">});</span>
+
+  <span class="kd">const</span> <span class="nx">dispatch</span><span class="p">:</span> <span class="nx">Dispatch</span><span class="o">&lt;</span><span class="nx">A</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">(</span><span class="nx">queue</span><span class="p">.</span><span class="nx">dispatch</span> <span class="o">=</span> <span class="p">(</span><span class="nx">dispatchAction</span><span class="p">.</span><span class="nf">bind</span><span class="p">(</span>
+    <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">currentlyRenderingFiber</span><span class="p">,</span>
+    <span class="nx">queue</span>
+  <span class="p">):</span> <span class="nx">any</span><span class="p">));</span>
+
+  <span class="k">return</span> <span class="p">[</span><span class="nx">hook</span><span class="p">.</span><span class="nx">memoizedState</span><span class="p">,</span> <span class="nx">dispatch</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>mountState 和 mountReducer 逻辑简单，主要负责创建 hook，初始化 hook 的属性，最后返回 [当前状态，dispatch 函数]</p>
+
+<p>唯一的不同点是 hook.queue.lastRenderedReducer:</p>
+
+<ul>
+  <li>mountState 使用的内置的 basicStateReducer</li>
+  <li>mountReducer 使用的外部传入自定义 reducer</li>
+</ul>
+
+<p>可见 mountState 是 mountReducer 的一种特殊情况，即 useState 也是 useReducer 一种特殊情况。</p>
+
+<p>在 useState(initialState) 函数内部，设置 hook.memoizedState = hook.baseState = initialState; 初始状态被同时保存到了 hook.baseState, hook.memoizedState 中。</p>
+
+<ol>
+  <li>hook.memoizedState: 当前状态</li>
+  <li>hook.baseState：基础状态，作为合并 hook.baseQueue 的初始值。</li>
+</ol>
+
+<p>最后返回 [hook.memoizedState, dispatch]，所以在 function 中使用的是 hook.memoizedState。</p>
+
+<h2 id="状态更新">状态更新</h2>
+
+<p>有如下示例代码：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nf">App</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">count</span><span class="p">,</span> <span class="nx">dispatch</span><span class="p">]</span> <span class="o">=</span> <span class="nf">useState</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="k">return </span><span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">button</span>
+      <span class="nx">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nf">dispatch</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+      <span class="p">}}</span>
+    <span class="o">&gt;</span>
+      <span class="p">{</span><span class="nx">count</span><span class="p">}</span>
+    <span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>点击 button，通过 dispatch 函数的更新，dispatch 实际就是 dispatchAction：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">dispatchAction</span><span class="o">&lt;</span><span class="nx">S</span><span class="p">,</span> <span class="nx">A</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">fiber</span><span class="p">:</span> <span class="nx">Fiber</span><span class="p">,</span> <span class="nx">queue</span><span class="p">:</span> <span class="nx">UpdateQueue</span><span class="o">&lt;</span><span class="nx">S</span><span class="p">,</span> <span class="nx">A</span><span class="o">&gt;</span><span class="p">,</span> <span class="nx">action</span><span class="p">:</span> <span class="nx">A</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">eventTime</span> <span class="o">=</span> <span class="nf">requestEventTime</span><span class="p">();</span>
+  <span class="kd">const</span> <span class="nx">lane</span> <span class="o">=</span> <span class="nf">requestUpdateLane</span><span class="p">(</span><span class="nx">fiber</span><span class="p">);</span>
+
+  <span class="kd">const</span> <span class="nx">update</span><span class="p">:</span> <span class="nx">Udpate</span><span class="o">&lt;</span><span class="nx">S</span><span class="p">,</span> <span class="nx">A</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">lane</span><span class="p">,</span>
+    <span class="nx">action</span><span class="p">,</span>
+    <span class="na">eagerReducer</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">eagerState</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">next</span><span class="p">:</span> <span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">any</span><span class="p">),</span>
+  <span class="p">};</span>
+
+  <span class="kd">const</span> <span class="nx">pending</span> <span class="o">=</span> <span class="nx">queue</span><span class="p">.</span><span class="nx">pending</span><span class="p">;</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">pending</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">update</span><span class="p">.</span><span class="nx">next</span> <span class="o">=</span> <span class="nx">update</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">update</span><span class="p">.</span><span class="nx">next</span> <span class="o">=</span> <span class="nx">pending</span><span class="p">.</span><span class="nx">next</span><span class="p">;</span>
+    <span class="nx">pending</span><span class="p">.</span><span class="nx">next</span> <span class="o">=</span> <span class="nx">update</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nx">queue</span><span class="p">.</span><span class="nx">pending</span> <span class="o">=</span> <span class="nx">update</span><span class="p">;</span>
+
+  <span class="kd">const</span> <span class="nx">alternate</span> <span class="o">=</span> <span class="nx">fiber</span><span class="p">.</span><span class="nx">alternate</span><span class="p">;</span>
+  <span class="k">if </span><span class="p">(</span>
+    <span class="nx">fiber</span> <span class="o">===</span> <span class="nx">currentlyRenderingFiber</span> <span class="o">||</span>
+    <span class="p">(</span><span class="nx">alternate</span> <span class="o">!==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="nx">alternate</span> <span class="o">===</span> <span class="nx">currentlyRenderingFiber</span><span class="p">)</span>
+  <span class="p">)</span> <span class="p">{</span>
+    <span class="nx">didScheduleRenderPhaseUpdateDuringThisPass</span> <span class="o">=</span> <span class="nx">didScheduleRenderPhaseUpdate</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="c1">// 省略性能优化部分。。。</span>
+
+    <span class="nf">scheduleUpdateOnFiber</span><span class="p">(</span><span class="nx">fiber</span><span class="p">,</span> <span class="nx">lane</span><span class="p">,</span> <span class="nx">eventTime</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li>创建 update 对象，其中 update.lane 代表优先级。</li>
+  <li>将 update 对象添加到 hook.queue.pending 环形链表。
+    <ul>
+      <li>环形链表的特征：为了方便添加新元素和快速拿到队首元素（O(l)），所以 pending 指针指向了链表中最后一个元素。</li>
+    </ul>
+  </li>
+  <li>发起调度更新：调用 scheduleUpdateOnFiber，进入 reconciler 运作流程中的输入阶段。</li>
+</ol>
+
+<p>从调用 scheduleUpdateOnFiber 开始，进入了 react-reconciler 包，在 fiber 树构造过程中，再次调用 function，这时 useState 对应的函数是 updateState，实际上调用的 updateReducer。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">updateState</span><span class="o">&lt;</span><span class="nx">S</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">initialState</span><span class="p">:</span> <span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">S</span><span class="p">)</span> <span class="o">|</span> <span class="nx">S</span><span class="p">):</span> <span class="p">[</span><span class="nx">S</span><span class="p">,</span> <span class="nx">Dispatch</span><span class="o">&lt;</span><span class="nx">BasicStateAction</span><span class="o">&lt;</span><span class="nx">S</span><span class="o">&gt;&gt;</span><span class="p">]</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nf">updateReducer</span><span class="p">(</span><span class="nx">basicStateReducer</span><span class="p">,</span> <span class="p">(</span><span class="nx">initialState</span><span class="p">:</span> <span class="nx">any</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">updateReducer</span><span class="o">&lt;</span><span class="nx">S</span><span class="p">,</span> <span class="nx">I</span><span class="p">,</span> <span class="nx">A</span><span class="o">&gt;</span><span class="p">(</span>
+  <span class="nx">reducer</span><span class="p">:</span> <span class="p">(</span><span class="nx">S</span><span class="p">,</span> <span class="nx">A</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">S</span><span class="p">,</span>
+  <span class="nx">initialArg</span><span class="p">:</span> <span class="nx">I</span><span class="p">,</span>
+  <span class="nx">init</span><span class="p">?:</span> <span class="p">(</span><span class="nx">I</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">S</span>
+<span class="p">):</span> <span class="p">[</span><span class="nx">S</span><span class="p">,</span> <span class="nx">Dispatch</span><span class="o">&lt;</span><span class="nx">A</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">hook</span> <span class="o">=</span> <span class="nf">updateWorkInProgressHook</span><span class="p">();</span>
+  <span class="kd">const</span> <span class="nx">queue</span> <span class="o">=</span> <span class="nx">hook</span><span class="p">.</span><span class="nx">queue</span><span class="p">;</span>
+
+  <span class="nx">queue</span><span class="p">.</span><span class="nx">lastRenderedReducer</span> <span class="o">=</span> <span class="nx">reducer</span><span class="p">;</span>
+
+  <span class="kd">const</span> <span class="nx">current</span><span class="p">:</span> <span class="nx">Hook</span> <span class="o">=</span> <span class="p">(</span><span class="nx">currentHook</span><span class="p">:</span> <span class="nx">any</span><span class="p">);</span>
+
+  <span class="kd">let</span> <span class="nx">baseQueue</span> <span class="o">=</span> <span class="nx">current</span><span class="p">.</span><span class="nx">baseQueue</span><span class="p">;</span>
+
+  <span class="kd">const</span> <span class="nx">pendingQueue</span> <span class="o">=</span> <span class="nx">queue</span><span class="p">.</span><span class="nx">pending</span><span class="p">;</span>
+
+  <span class="k">if </span><span class="p">(</span><span class="nx">pendingQueue</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if </span><span class="p">(</span><span class="nx">baseQueue</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">baseFirst</span> <span class="o">=</span> <span class="nx">baseQueue</span><span class="p">.</span><span class="nx">next</span><span class="p">;</span>
+      <span class="kd">const</span> <span class="nx">pendingFirst</span> <span class="o">=</span> <span class="nx">pendingQueue</span><span class="p">.</span><span class="nx">next</span><span class="p">;</span>
+      <span class="nx">baseQueue</span><span class="p">.</span><span class="nx">next</span> <span class="o">=</span> <span class="nx">pendingFirst</span><span class="p">;</span>
+      <span class="nx">pendingQueue</span><span class="p">.</span><span class="nx">next</span> <span class="o">=</span> <span class="nx">baseFirst</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nx">current</span><span class="p">.</span><span class="nx">baseQueue</span> <span class="o">=</span> <span class="nx">baseQueue</span> <span class="o">=</span> <span class="nx">pendingQueue</span><span class="p">;</span>
+    <span class="nx">queue</span><span class="p">.</span><span class="nx">pending</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nx">current</span><span class="p">.</span><span class="nx">baseQueue</span> <span class="o">=</span> <span class="nx">baseQueue</span> <span class="o">=</span> <span class="nx">pendingQueue</span><span class="p">;</span>
+  <span class="nx">queue</span><span class="p">.</span><span class="nx">pending</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+  <span class="k">if </span><span class="p">(</span><span class="nx">baseQueue</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">first</span> <span class="o">=</span> <span class="nx">baseQueue</span><span class="p">.</span><span class="nx">next</span><span class="p">;</span>
+    <span class="kd">let</span> <span class="nx">newState</span> <span class="o">=</span> <span class="nx">current</span><span class="p">.</span><span class="nx">baseState</span><span class="p">;</span>
+
+    <span class="kd">let</span> <span class="nx">newBaseState</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="kd">let</span> <span class="nx">newBaseQueueFirst</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="kd">let</span> <span class="nx">newBaseQueueLast</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="kd">let</span> <span class="nx">update</span> <span class="o">=</span> <span class="nx">first</span><span class="p">;</span>
+
+    <span class="k">do</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">updateLane</span> <span class="o">=</span> <span class="nx">update</span><span class="p">.</span><span class="nx">lane</span><span class="p">;</span>
+      <span class="k">if </span><span class="p">(</span><span class="o">!</span><span class="nf">isSubsetOfLanes</span><span class="p">(</span><span class="nx">renderLanes</span><span class="p">,</span> <span class="nx">updateLane</span><span class="p">))</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="na">clone</span><span class="p">:</span> <span class="nx">Update</span><span class="o">&lt;</span><span class="nx">S</span><span class="p">,</span> <span class="nx">A</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+          <span class="na">lane</span><span class="p">:</span> <span class="nx">updateLane</span><span class="p">,</span>
+          <span class="na">action</span><span class="p">:</span> <span class="nx">update</span><span class="p">.</span><span class="nx">action</span><span class="p">,</span>
+          <span class="na">eagerReducer</span><span class="p">:</span> <span class="nx">update</span><span class="p">.</span><span class="nx">eagerReducer</span><span class="p">,</span>
+          <span class="na">eagerState</span><span class="p">:</span> <span class="nx">update</span><span class="p">.</span><span class="nx">eagerState</span><span class="p">,</span>
+          <span class="na">next</span><span class="p">:</span> <span class="p">(</span><span class="na">null</span><span class="p">:</span> <span class="nx">any</span><span class="p">),</span>
+        <span class="p">};</span>
+        <span class="k">if </span><span class="p">(</span><span class="nx">newBaseQueueLast</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">newBaseQueueFirst</span> <span class="o">=</span> <span class="nx">newBaseQueueLast</span> <span class="o">=</span> <span class="nx">clone</span><span class="p">;</span>
+          <span class="nx">newBaseState</span> <span class="o">=</span> <span class="nx">newState</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="nx">newBaseQueueLast</span> <span class="o">=</span> <span class="nx">newBaseQueueLast</span><span class="p">.</span><span class="nx">next</span> <span class="o">=</span> <span class="nx">clone</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="nx">currentlyRenderingFiber</span><span class="p">.</span><span class="nx">lanes</span> <span class="o">=</span> <span class="nf">mergeLanes</span><span class="p">(</span><span class="nx">currentlyRenderingFiber</span><span class="p">.</span><span class="nx">lanes</span><span class="p">,</span> <span class="nx">updateLane</span><span class="p">);</span>
+        <span class="nf">markSkippedUpdateLanes</span><span class="p">(</span><span class="nx">updateLane</span><span class="p">);</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">if </span><span class="p">(</span><span class="nx">newBaseQueueLast</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+          <span class="kd">const</span> <span class="na">clone</span><span class="p">:</span> <span class="nx">Update</span><span class="o">&lt;</span><span class="nx">S</span><span class="p">,</span> <span class="nx">A</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="na">lane</span><span class="p">:</span> <span class="nx">NoLane</span><span class="p">,</span>
+            <span class="na">action</span><span class="p">:</span> <span class="nx">update</span><span class="p">.</span><span class="nx">action</span><span class="p">,</span>
+            <span class="na">eagerReducer</span><span class="p">:</span> <span class="nx">update</span><span class="p">.</span><span class="nx">eagerReducer</span><span class="p">,</span>
+            <span class="na">eagerState</span><span class="p">:</span> <span class="nx">update</span><span class="p">.</span><span class="nx">eagerState</span><span class="p">,</span>
+            <span class="na">next</span><span class="p">:</span> <span class="p">(</span><span class="na">null</span><span class="p">:</span> <span class="nx">any</span><span class="p">),</span>
+          <span class="p">};</span>
+          <span class="nx">nextBaseQueueLast</span> <span class="o">=</span> <span class="nx">newBaseQueueLast</span><span class="p">.</span><span class="nx">next</span> <span class="o">=</span> <span class="nx">clone</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if </span><span class="p">(</span><span class="nx">update</span><span class="p">.</span><span class="nx">eagerReducer</span> <span class="o">===</span> <span class="nx">reducer</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">newState</span> <span class="o">=</span> <span class="p">((</span><span class="nx">update</span><span class="p">.</span><span class="na">eagerState</span><span class="p">:</span> <span class="nx">any</span><span class="p">):</span> <span class="nx">S</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="kd">const</span> <span class="nx">action</span> <span class="o">=</span> <span class="nx">update</span><span class="p">.</span><span class="nx">action</span><span class="p">;</span>
+          <span class="nx">newState</span> <span class="o">=</span> <span class="nf">reducer</span><span class="p">(</span><span class="nx">newState</span><span class="p">,</span> <span class="nx">action</span><span class="p">);</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+      <span class="nx">udpate</span> <span class="o">=</span> <span class="nx">update</span><span class="p">.</span><span class="nx">next</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">while </span><span class="p">(</span><span class="nx">update</span> <span class="o">!==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="nx">update</span> <span class="o">!==</span> <span class="nx">first</span><span class="p">);</span>
+
+    <span class="k">if </span><span class="p">(</span><span class="nx">newBaseState</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">newBaseState</span> <span class="o">=</span> <span class="nx">newState</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="nx">newBaseQueueLast</span><span class="p">.</span><span class="nx">next</span> <span class="o">=</span> <span class="p">(</span><span class="na">newBaseQueueFirst</span><span class="p">:</span> <span class="nx">any</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">if </span><span class="p">(</span><span class="o">!</span><span class="nf">is</span><span class="p">(</span><span class="nx">newState</span><span class="p">,</span> <span class="nx">hook</span><span class="p">.</span><span class="nx">memoizedState</span><span class="p">))</span> <span class="p">{</span>
+      <span class="nf">markWorkInProgressReceivedUpdate</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="nx">hook</span><span class="p">.</span><span class="nx">memoizedState</span> <span class="o">=</span> <span class="nx">newState</span><span class="p">;</span>
+    <span class="nx">hook</span><span class="p">.</span><span class="nx">baseState</span> <span class="o">=</span> <span class="nx">newBaseState</span><span class="p">;</span>
+    <span class="nx">hook</span><span class="p">.</span><span class="nx">baseQueue</span> <span class="o">=</span> <span class="nx">newBaseQueueLast</span><span class="p">;</span>
+
+    <span class="nx">queue</span><span class="p">.</span><span class="nx">lastRenderedState</span> <span class="o">=</span> <span class="nx">newState</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kd">const</span> <span class="nx">dispatch</span><span class="p">:</span> <span class="nx">Dispatch</span><span class="o">&lt;</span><span class="nx">A</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">(</span><span class="nx">queue</span><span class="p">.</span><span class="nx">dispatch</span><span class="p">:</span> <span class="nx">any</span><span class="p">);</span>
+  <span class="k">return</span> <span class="p">[</span><span class="nx">hook</span><span class="p">.</span><span class="nx">memoizedState</span><span class="p">,</span> <span class="nx">dispatch</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li>调用 updateWorkInProgressHook 获取 workInProgress 对象。</li>
+  <li>链表拼接：将 hook.queue.pending 拼接到 current.baseQueue。</li>
+  <li>状态计算
+    <ol>
+      <li>update 优先级不够：加入 baseQueue，等待下一次 render。</li>
+      <li>update 优先级足够：状态合并。</li>
+      <li>更新属性。</li>
+    </ol>
+  </li>
+</ol>
+
+<h2 id="性能优化">性能优化</h2>
+
+<p>dispatchAction 函数中，在调用 scheduleUpdateOnFiber 之前，针对 update 对象做了性能优化。</p>
+
+<ol>
+  <li>queue.pending 只包含当前 update 时，即当前 update 是 queue.pending 中的第一个 update。</li>
+  <li>直接调用 queue.lastRenderedReducer，计算出 update 之后的 state，记为 eagerState。</li>
+  <li>如果 eagerState 与 currentState 相同，则直接退出，不用发起调度更新。</li>
+  <li>已经挂载到 queue.pending 上的 update 会在下一次 render 时再次合并。</li>
+</ol>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">dispatchAction</span><span class="o">&lt;</span><span class="nx">S</span><span class="p">,</span> <span class="nx">A</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">fiber</span><span class="p">:</span> <span class="nx">Fiber</span><span class="p">,</span> <span class="nx">queue</span><span class="p">:</span> <span class="nx">UpdateQueue</span><span class="o">&lt;</span><span class="nx">S</span><span class="p">,</span> <span class="nx">A</span><span class="o">&gt;</span><span class="p">,</span> <span class="nx">action</span><span class="p">:</span> <span class="nx">A</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// 省略其他部分代码，只保留性能优化部分代码</span>
+
+  <span class="k">if </span><span class="p">(</span><span class="nx">fiber</span><span class="p">.</span><span class="nx">lanes</span> <span class="o">===</span> <span class="nx">NoLanes</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">alternate</span> <span class="o">===</span> <span class="kc">null</span> <span class="o">||</span> <span class="nx">alternate</span><span class="p">.</span><span class="nx">lanes</span> <span class="o">===</span> <span class="nx">NoLanes</span><span class="p">))</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">lastRenderedReducer</span> <span class="o">=</span> <span class="nx">queue</span><span class="p">.</span><span class="nx">lastRenderedReducer</span><span class="p">;</span>
+    <span class="k">if </span><span class="p">(</span><span class="nx">lastRenderedReducer</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">let</span> <span class="nx">prevDispatcher</span><span class="p">;</span>
+      <span class="kd">const</span> <span class="nx">currentState</span><span class="p">:</span> <span class="nx">S</span> <span class="o">=</span> <span class="p">(</span><span class="nx">queue</span><span class="p">.</span><span class="nx">lastRenderedState</span><span class="p">:</span> <span class="nx">any</span><span class="p">);</span>
+      <span class="kd">const</span> <span class="nx">eagerState</span> <span class="o">=</span> <span class="nf">lastRenderedReducer</span><span class="p">(</span><span class="nx">currentState</span><span class="p">,</span> <span class="nx">action</span><span class="p">);</span>
+      <span class="nx">update</span><span class="p">.</span><span class="nx">eagerReducer</span> <span class="o">=</span> <span class="nx">lastRenderedReducer</span><span class="p">;</span>
+      <span class="nx">update</span><span class="p">.</span><span class="nx">eagerState</span> <span class="o">=</span> <span class="nx">eagerState</span><span class="p">;</span>
+      <span class="k">if </span><span class="p">(</span><span class="nf">is</span><span class="p">(</span><span class="nx">eagerState</span><span class="p">,</span> <span class="nx">currentState</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">return</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="nf">scheduleUpdateOnFiber</span><span class="p">(</span><span class="nx">fiber</span><span class="p">,</span> <span class="nx">lane</span><span class="p">,</span> <span class="nx">eventTime</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="https://github.com/7kms/react-illustration-series">github: react-illustration-series</a></li>
+  <li><a href="https://github.com/facebook/react">github: react</a></li>
+  <li><a href="https://7kms.github.io/react-illustration-series/main/hook-state/">图解 React: 状态 Hook</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2022/12/23/%E9%98%85%E8%AF%BB%E5%9B%BE%E8%A7%A3React%E7%AC%94%E8%AE%B09.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

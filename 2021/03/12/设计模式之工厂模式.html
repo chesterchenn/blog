@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>设计模式之工厂模式 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="设计模式之工厂模式" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="一般情况下，工厂模式可以分为：简单工厂，工厂方法和抽象工厂。而简单工厂、工厂方法原理比较简单，在实际项目中也比较常用。" />
+<meta property="og:description" content="一般情况下，工厂模式可以分为：简单工厂，工厂方法和抽象工厂。而简单工厂、工厂方法原理比较简单，在实际项目中也比较常用。" />
+<link rel="canonical" href="/blog/2021/03/12/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html" />
+<meta property="og:url" content="/blog/2021/03/12/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-03-12T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="设计模式之工厂模式" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2021-03-12T00:00:00+00:00","datePublished":"2021-03-12T00:00:00+00:00","description":"一般情况下，工厂模式可以分为：简单工厂，工厂方法和抽象工厂。而简单工厂、工厂方法原理比较简单，在实际项目中也比较常用。","headline":"设计模式之工厂模式","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2021/03/12/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html"},"url":"/blog/2021/03/12/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">设计模式之工厂模式</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-03-12T00:00:00+00:00" itemprop="datePublished">Mar 12, 2021
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2021"><i>2021</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/algorithm"><i>algorithm</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>一般情况下，工厂模式可以分为：简单工厂，工厂方法和抽象工厂。而简单工厂、工厂方法原理比较简单，在实际项目中也比较常用。</p>
+
+<h2 id="简单工厂">简单工厂</h2>
+
+<p>简单工厂（Simple Factory）就是将代码中负责创建对象的代码抽离到一个独立的类中，让这个类只处理创建对象的细节。</p>
+
+<p>简单工厂是为了让类的职责更加单一、代码更加清晰。简单工厂其实不像一个设计模式，反而比较像一中编程习惯。</p>
+
+<p>来自《Head First 设计模式》的代码实例：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Pizza</span> <span class="nf">orderPizza</span><span class="o">(</span><span class="nc">String</span> <span class="n">type</span><span class="o">)</span> <span class="o">{</span>
+  <span class="nc">Pizza</span> <span class="n">pizza</span><span class="o">;</span>
+
+  <span class="c1">// 创建Pizza对象的代码</span>
+  <span class="k">if</span> <span class="o">(</span><span class="n">type</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">"cheese"</span><span class="o">))</span> <span class="o">{</span>
+    <span class="n">pizza</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">CheesePizza</span><span class="o">();</span>
+  <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">type</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">"greek"</span><span class="o">))</span> <span class="o">{</span>
+    <span class="n">pizza</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">GreekPizza</span><span class="o">();</span>
+  <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">type</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">"pepperoni"</span><span class="o">))</span> <span class="o">{</span>
+    <span class="n">pizza</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PepperoniPizza</span><span class="o">();</span>
+  <span class="o">}</span>
+
+  <span class="k">return</span> <span class="n">pizza</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>我们将创建 Pizza 对象的代码抽离出来到 SimplePizzaFactory 类中。</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SimplePizzaFactory</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="nc">Pizza</span> <span class="nf">createPizza</span><span class="o">(</span><span class="nc">String</span> <span class="n">type</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">Pizza</span> <span class="n">pizza</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">type</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">"cheese"</span><span class="o">))</span> <span class="o">{</span>
+      <span class="n">pizza</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">CheesePizza</span><span class="o">();</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">type</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">"greek"</span><span class="o">))</span> <span class="o">{</span>
+      <span class="n">pizza</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">GreekPizza</span><span class="o">();</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">type</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">"pepperoni"</span><span class="o">))</span> <span class="o">{</span>
+      <span class="n">pizza</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PepperoniPizza</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">pizza</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>再重新修改一下 Pizza 商店代码。</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">PizzaStore</span> <span class="o">{</span>
+  <span class="nc">SimplePizzaFactory</span> <span class="n">factory</span><span class="o">;</span>
+
+  <span class="kd">public</span> <span class="nf">PizzaStore</span><span class="o">(</span><span class="nc">SimplePizzaFactory</span> <span class="n">factory</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">factory</span> <span class="o">=</span> <span class="n">factory</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="nc">Pizza</span> <span class="nf">orderPizza</span><span class="o">(</span><span class="nc">String</span> <span class="n">type</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">Pizza</span> <span class="n">pizza</span><span class="o">;</span>
+
+    <span class="c1">// 通过使用简单工厂来创建披萨</span>
+    <span class="n">pizza</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="na">createPizza</span><span class="o">(</span><span class="n">type</span><span class="o">);</span>
+
+    <span class="k">return</span> <span class="n">pizza</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="工厂方法">工厂方法</h2>
+
+<p>当对象的创建逻辑比较复杂，不只是简单的 new 一下就可以，而是要组合其他类对象，做各种初始化操作的时候，我们推荐使用工厂方法模式，将复杂的创建逻辑拆分到多个工厂类中，让每个工厂类都不至于过于复杂。而使用简单工厂模式，将所有的创建逻辑都放到一个工厂类中，会导致这个工厂类变得很复杂。</p>
+
+<p>《设计模式》中定义：一个用于创建对象的接口，让子类决定实例化哪一个类，工厂方法使得一个类的实例化延迟到子类。</p>
+
+<p><img src="/blog/images/DP_factory_method_uml.svg" alt="img" /></p>
+
+<p>工厂方法的代码示例：<a href="https://github.com/chesterchenn/HFDP/tree/master/src/chapterd/b">https://github.com/chesterchenn/HFDP/tree/master/src/chapterd/b</a></p>
+
+<h3 id="使用工厂模式的情况">使用工厂模式的情况</h3>
+
+<p>当创建逻辑比较复杂，我们就考虑使用工厂模式，封装对象的创建过程，将对象的创建和使用相分离。何为创建逻辑比较复杂呢？下面两种情况：</p>
+
+<ul>
+  <li>
+    <p>第一种情况：类似规则配置解析的例子，代码中存在 if-else 分支判断，动态地根据不同的类型创建不同的对象。针对这种情况，我们就考虑使用工厂模式，将这一大坨 if-else 创建对象的代码抽离出来，放到工厂类中。</p>
+  </li>
+  <li>
+    <p>还有一种情况，尽管我们不需要根据不同的类型创建不同的对象，但是，单个对象本身的创建过程比较复杂，比如前面提到的要组合其他类对象，做各种初始化操作。在这种情况下，我们也可以考虑使用工厂模式，将对象的创建过程封装到工厂类中。</p>
+  </li>
+</ul>
+
+<h3 id="工厂方法与简单工厂的差异">工厂方法与简单工厂的差异</h3>
+
+<p>工厂方法的子类的确看起来很像简单工厂。简单工厂把全部事情，在一个地方都处理完了，然而工厂方法却是创建一个框架，让子类决定要如何实现。简单工厂可以将对象的创建封装起来，但是不具备工厂方法的弹性，因为简单工厂不能变更正在创建的产品。</p>
+
+<h2 id="di-容器">DI 容器</h2>
+
+<p>DI 容器叫依赖注入容器（Dependency Injection Container），也叫依赖注入框架。</p>
+
+<p>DI 容器底层的设计思路是基于工厂模式的。DI 容器相当于一个大的工厂类，负责在程序启动的时候，根据配置事先创建好对象。当应用程序需要使用某个类对象的时候，直接从容器中获取即可。一个工厂类只负责某个类对象或者一组相关类的对象的创建，而 DI 容器负责的是整个应用中所有类对象的创建。</p>
+
+<h3 id="di-容器的核心功能">DI 容器的核心功能</h3>
+
+<p>DI 容器的核心功能一般有三个：配置解析，对象创建和对象生命周期管理。</p>
+
+<h4 id="配置解析">配置解析</h4>
+
+<p>将需要由 DI 容器创建的类对象和创建类对象的必要信息，放到配置文件中。容器读取配置文件，根据配置文件提供的信息来创建对象。</p>
+
+<h4 id="对象创建">对象创建</h4>
+
+<p>我们将所有的类对象创建放到一个工厂类中完成就可以了，比如 BeansFactory。避免每个类的创建一个工厂类，导致的类个数成倍增加。</p>
+
+<h4 id="对象的生命周期管理">对象的生命周期管理</h4>
+
+<p>简单工厂模式有两种实现方式，一种是每次都返回新创建的对象，另一种是每次都返回同一个事先创建好的对象，也就是所谓的单例对象。可以配置对象是否支持懒加载，还可以配置对象的 init-method 和 destroy-method 方法。</p>
+
+<h2 id="抽象工厂">抽象工厂</h2>
+
+<p>抽象工厂模式提供了一个接口，用于创建相关或依赖对象的家族，而不需要明确指定具体类。</p>
+
+<p>抽象工厂允许客户使用抽象的接口来创建一组相关的产品，而不需要知道实际产出的具体产品是什么。这样一来，客户就从具体的产品中被解耦。</p>
+
+<p><img src="/blog/images/DP_factory_abstract_uml.svg" alt="img" /></p>
+
+<h2 id="其他">其他</h2>
+
+<p>大部分工厂类都是以“Factory”结尾，工厂类中的创建对象的方法一般都是 create 开头，但都不是必须的。</p>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Factory_method_pattern">Wiki: Factory method pattern</a></li>
+  <li><a href="https://time.geekbang.org/column/article/197254">极客时间：设计模式之美-工厂模式（上）</a></li>
+  <li>《李建忠：C++ 设计模式》</li>
+  <li>《Head First 设计模式》</li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2021/03/12/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

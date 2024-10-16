@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Arch的相关问题 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Arch的相关问题" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="关于 Arch Linux 一些相关问题及笔记。" />
+<meta property="og:description" content="关于 Arch Linux 一些相关问题及笔记。" />
+<link rel="canonical" href="/blog/2022/11/13/Arch%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98.html" />
+<meta property="og:url" content="/blog/2022/11/13/Arch%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-11-13T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Arch的相关问题" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-11-13T00:00:00+00:00","datePublished":"2022-11-13T00:00:00+00:00","description":"关于 Arch Linux 一些相关问题及笔记。","headline":"Arch的相关问题","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2022/11/13/Arch%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98.html"},"url":"/blog/2022/11/13/Arch%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Arch的相关问题</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2022-11-13T00:00:00+00:00" itemprop="datePublished">Nov 13, 2022
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2022"><i>2022</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/linux"><i>linux</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/others"><i>others</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>关于 Arch Linux 一些相关问题及笔记。</p>
+
+<!-- vim-markdown-toc GFM -->
+
+<ul>
+  <li><a href="#字体管理">字体管理</a></li>
+  <li><a href="#aur-编译安装">AUR 编译安装</a></li>
+  <li><a href="#yay">yay</a>
+    <ul>
+      <li><a href="#代理问题">代理问题</a></li>
+      <li><a href="#升级">升级</a></li>
+    </ul>
+  </li>
+  <li><a href="#输入法">输入法</a>
+    <ul>
+      <li><a href="#fcitx-符号输入">Fcitx 符号输入</a></li>
+    </ul>
+  </li>
+  <li><a href="#清除缓存">清除缓存</a>
+    <ul>
+      <li><a href="#清除-pacman-缓存">清除 pacman 缓存</a></li>
+      <li><a href="#清除-yay-缓存">清除 yay 缓存</a></li>
+    </ul>
+  </li>
+  <li><a href="#unable-to-lock-database">unable to lock database</a></li>
+  <li><a href="#flatpak-国内镜像">flatpak 国内镜像</a></li>
+</ul>
+
+<!-- vim-markdown-toc -->
+
+<h2 id="字体管理">字体管理</h2>
+
+<p>查看已安装的字体</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fc-list
+</code></pre></div></div>
+
+<p>搜索库可用字体</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pacman <span class="nt">-Ss</span> ttf
+</code></pre></div></div>
+
+<p>手动安装，将 ttf 文件复制到 /usr/share/fonts/TTF 目录下，更新字体库。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fc-cache <span class="nt">-vf</span>
+</code></pre></div></div>
+
+<h2 id="aur-编译安装">AUR 编译安装</h2>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 如果已经安装则不用执行</span>
+pacman <span class="nt">-S</span> <span class="nt">--needed</span> git base-devl
+
+git clone https://aur.archlinux.org/&lt;pkg-name&gt;.git
+<span class="nb">cd</span> &lt;pkg-name&gt;
+makepkg <span class="nt">-si</span>
+</code></pre></div></div>
+
+<h2 id="yay">yay</h2>
+
+<h3 id="代理问题">代理问题</h3>
+
+<ol>
+  <li>无法使用 proxychains 代理，使用 gcc-go 代替 go</li>
+  <li>编辑 proxychains.conf 文件，注释 proxy_dns</li>
+</ol>
+
+<ul>
+  <li><a href="https://github.com/Jguer/yay/issues/951">Does yay support proxy?</a></li>
+  <li><a href="https://suiahae.me/yay-s-guide-No-2-proxy-issues/">yay 指南: 2. 代理问题</a></li>
+</ul>
+
+<h3 id="升级">升级</h3>
+
+<p>yay 的直接升级需要下载安装 go，会遇到网络上的错误，通过 proxychains 的代理 yay 的则会导致 gcc-go 与 go 的冲突。</p>
+
+<p>yay-bin 是通过 GitHub Action 构建的，无需下载安装 go。</p>
+
+<p>通过 yay 的官方包 <a href="https://github.com/Jguer/yay">https://github.com/Jguer/yay</a> 来进行安装 yay-bin。</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://aur.archlinux.org/yay-bin.git
+<span class="nb">cd </span>yay-bin
+makepkg <span class="nt">-si</span>
+</code></pre></div></div>
+
+<h2 id="输入法">输入法</h2>
+
+<h3 id="fcitx-符号输入">Fcitx 符号输入</h3>
+
+<p>使用快捷键 <code class="language-plaintext highlighter-rouge">Ctrl+.</code> 可以设置 Full Width Punc Mode，就可以在输入中文符号变成英文符号。同理可以取消。</p>
+
+<h2 id="清除缓存">清除缓存</h2>
+
+<p>清除缓存实际上就是删除缓存目录的文件内容，所以找到对应缓存目录，直接执行 <code class="language-plaintext highlighter-rouge">rm -rf &lt;缓存目录&gt;</code> 即可。</p>
+
+<p><a href="https://devpress.csdn.net/linux/62ed056f89d9027116a11c5c.html">Arch Linux 中自动清理 pacman 和 yay 缓存</a></p>
+
+<h3 id="清除-pacman-缓存">清除 pacman 缓存</h3>
+
+<p>包缓存是为了防止我们重新安装时不必重复下载，但是，包缓存不会自动清除，随着时间的推移，占用的空间会越来越大。</p>
+
+<p>pacman 包缓存会被存储在 /var/cache/pacman/pkg 目录下，pacman 具有清理已卸载的缓存命令 <code class="language-plaintext highlighter-rouge">pacman -Sc</code>，以及清理每个包缓存命令 <code class="language-plaintext highlighter-rouge">pacman -Scc</code>。</p>
+
+<h3 id="清除-yay-缓存">清除 yay 缓存</h3>
+
+<p>yay 的缓存位于 <code class="language-plaintext highlighter-rouge">$HOME/.cache/yay</code> 目录下，yay 具有清理 pacman 和 yay 的缓存命令 <code class="language-plaintext highlighter-rouge">yay -Sc</code>。</p>
+
+<h2 id="unable-to-lock-database">unable to lock database</h2>
+
+<p>在安装包的时候，可能会遇到 <code class="language-plaintext highlighter-rouge">unable to lock database</code> 的错误，可以通过下面的命令解决。</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo rm</span> /var/lib/pacman/db.lck
+</code></pre></div></div>
+
+<h2 id="flatpak-国内镜像">flatpak 国内镜像</h2>
+
+<p>flatpak 在国内下载的速度很慢，可以通过国内的镜像来解决。</p>
+
+<p>修改镜像地址：<code class="language-plaintext highlighter-rouge">flatpak remote-modify flathub --url=https://mirror.sjtu.edu.cn/flathub</code></p>
+
+<p>查看镜像地址：<code class="language-plaintext highlighter-rouge">flatpak remotes --show-details</code></p>
+
+  </div><a class="u-url" href="/blog/2022/11/13/Arch%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

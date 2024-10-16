@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>高阶组件HOC | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="高阶组件HOC" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="高阶组件 HOC 是一个函数，它接受一个组件并返回一个新组件。普通组件是将 props 转换成 UI，而高阶组件将组件转换成另一个组件。" />
+<meta property="og:description" content="高阶组件 HOC 是一个函数，它接受一个组件并返回一个新组件。普通组件是将 props 转换成 UI，而高阶组件将组件转换成另一个组件。" />
+<link rel="canonical" href="/blog/2021/06/23/%E9%AB%98%E9%98%B6%E7%BB%84%E4%BB%B6HOC.html" />
+<meta property="og:url" content="/blog/2021/06/23/%E9%AB%98%E9%98%B6%E7%BB%84%E4%BB%B6HOC.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-06-23T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="高阶组件HOC" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2021-06-23T00:00:00+00:00","datePublished":"2021-06-23T00:00:00+00:00","description":"高阶组件 HOC 是一个函数，它接受一个组件并返回一个新组件。普通组件是将 props 转换成 UI，而高阶组件将组件转换成另一个组件。","headline":"高阶组件HOC","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2021/06/23/%E9%AB%98%E9%98%B6%E7%BB%84%E4%BB%B6HOC.html"},"url":"/blog/2021/06/23/%E9%AB%98%E9%98%B6%E7%BB%84%E4%BB%B6HOC.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">高阶组件HOC</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-06-23T00:00:00+00:00" itemprop="datePublished">Jun 23, 2021
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2021"><i>2021</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/react"><i>react</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>高阶组件 HOC 是一个函数，它接受一个组件并返回一个新组件。普通组件是将 props 转换成 UI，而高阶组件将组件转换成另一个组件。</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">EnhancedComponent</span> <span class="o">=</span> <span class="nf">higherOrderComponent</span><span class="p">(</span><span class="nx">WrappedComponent</span><span class="p">);</span>
+</code></pre></div></div>
+
+<!-- vim-markdown-toc GFM -->
+
+<ul>
+  <li><a href="#使用原因和实现">使用原因和实现</a></li>
+  <li><a href="#属性代理">属性代理</a></li>
+  <li><a href="#实例应用---页面复用">实例应用 - 页面复用</a></li>
+  <li><a href="#实例应用---权限控制">实例应用 - 权限控制</a></li>
+  <li><a href="#实例应用---类组件使用-hooks">实例应用 - 类组件使用 Hooks</a></li>
+  <li><a href="#不要改变原始组件使用组合">不要改变原始组件，使用组合</a></li>
+  <li><a href="#三个约定">三个约定</a></li>
+  <li><a href="#注意事项">注意事项</a></li>
+  <li><a href="#参考链接">参考链接</a></li>
+</ul>
+
+<!-- vim-markdown-toc -->
+
+<h2 id="使用原因和实现">使用原因和实现</h2>
+
+<p>高阶组件主要可以帮忙解决以下三个方面的问题：</p>
+
+<ol>
+  <li>抽取重复代码，实现组件复用。如页面复用。</li>
+  <li>条件渲染，控制组件的渲染逻辑（渲染劫持）。如权限控制。</li>
+  <li>捕获/劫持被处理组件的生命周期。如组件渲染性能跟踪，日志打点。</li>
+</ol>
+
+<p>主要实现有两种方式</p>
+
+<ol>
+  <li>属性代理（Props Proxy）</li>
+  <li>反向继承（Inheritance Inversion）</li>
+</ol>
+
+<h2 id="属性代理">属性代理</h2>
+
+<p>属性代理本质是使用组合的方式，通过将组件包装在容器组件中实现功能。</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 返回一个函数组件</span>
+<span class="kd">function</span> <span class="nf">hoc</span><span class="p">(</span><span class="nx">WrappedComponent</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">newProps</span> <span class="o">=</span> <span class="p">{</span> <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">HOC</span><span class="dl">'</span> <span class="p">};</span>
+  <span class="k">return </span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">&lt;</span><span class="nc">WrappedComponent</span> <span class="si">{</span><span class="p">...</span><span class="nx">props</span><span class="si">}</span> <span class="si">{</span><span class="p">...</span><span class="nx">newProps</span><span class="si">}</span> <span class="p">/&gt;;</span>
+<span class="p">}</span>
+
+<span class="c1">// 返回一个类组件</span>
+<span class="kd">function</span> <span class="nf">hoc</span><span class="p">(</span><span class="nx">WrappedComponent</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="kd">class</span> <span class="nc">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+    <span class="nf">render</span><span class="p">()</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">newProps</span> <span class="o">=</span> <span class="p">{</span> <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">HOC</span><span class="dl">'</span> <span class="p">};</span>
+      <span class="k">return</span> <span class="p">&lt;</span><span class="nc">WrappedComponent</span> <span class="si">{</span><span class="p">...</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="si">}</span> <span class="si">{</span><span class="p">...</span><span class="nx">newProps</span><span class="si">}</span> <span class="p">/&gt;;</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>代码示例：<a href="https://codesandbox.io/s/nostalgic-liskov-d2km9y?file=/src/App.js">codesandbox</a></p>
+
+<h2 id="实例应用---页面复用">实例应用 - 页面复用</h2>
+
+<p>横切关注点（Cross-Cutting Concern），即系统中的部分功能在多个模块中出现。所谓横切关注点就是页面复用。</p>
+
+<p>假设有一个 CommentList 评论列表组件和一个 BlogPost 博客帖子组件。CommentList 组件订阅外部数据源，用以渲染评论列表。BlogPost 订阅单个博客帖子，用以渲染博客。</p>
+
+<p>对于经常复用的逻辑，我们可以进行抽象，在一个地方定义这个逻辑，并且在许多组件之间共享它。对于上面的例子，我们可以编写一个创建组件的函数，该函数将接受一个子组件作为它的其中一个参数，该子组件将订阅数据作为 prop。我们定义函数 withSubscription</p>
+
+<p>第一个参数是被包装的组件。第二个参数通过 DataSource 和当前的 props 返回我们需要的数据。</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">DataSource</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">..</span><span class="dl">'</span><span class="p">;</span>
+<span class="c1">// hoc</span>
+<span class="kd">function</span> <span class="nf">withSubscription</span><span class="p">(</span><span class="nx">WrappedComponent</span><span class="p">,</span> <span class="nx">selectData</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return </span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">[</span><span class="nx">data</span><span class="p">,</span> <span class="nx">setData</span><span class="p">]</span> <span class="o">=</span> <span class="nf">useState</span><span class="p">(</span><span class="nf">selectData</span><span class="p">(</span><span class="nx">DataSource</span><span class="p">,</span> <span class="nx">props</span><span class="p">));</span>
+
+    <span class="kd">function</span> <span class="nf">handlechange</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nf">setData</span><span class="p">(</span><span class="nf">selectdata</span><span class="p">(</span><span class="nx">Datasource</span><span class="p">,</span> <span class="nx">props</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="nf">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">Datasource</span><span class="p">.</span><span class="nf">addchangelistener</span><span class="p">(</span><span class="nx">handlechange</span><span class="p">);</span>
+      <span class="k">return </span><span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">Datasource</span><span class="p">.</span><span class="nf">removechangelistener</span><span class="p">(</span><span class="nx">handlechange</span><span class="p">);</span>
+      <span class="p">};</span>
+    <span class="p">},</span> <span class="p">[]);</span>
+
+    <span class="k">return</span> <span class="p">&lt;</span><span class="nt">wrappedcomponent</span> <span class="na">data</span><span class="p">=</span><span class="si">{</span><span class="nx">data</span><span class="si">}</span> <span class="si">{</span><span class="p">...</span><span class="nx">props</span><span class="si">}</span> <span class="p">/&gt;;</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">Commentlistwithsubscription</span> <span class="o">=</span> <span class="nf">withsubscription</span><span class="p">(</span><span class="nx">Commentlist</span><span class="p">,</span> <span class="p">(</span><span class="nx">datasource</span><span class="p">)</span> <span class="o">=&gt;</span>
+  <span class="nx">Datasource</span><span class="p">.</span><span class="nf">getcomments</span><span class="p">(),</span>
+<span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">BlogPostWithSubscrption</span> <span class="o">=</span> <span class="nf">withSubscription</span><span class="p">(</span><span class="nx">BlogPost</span><span class="p">,</span> <span class="p">(</span><span class="nx">DataSource</span><span class="p">,</span> <span class="nx">props</span><span class="p">)</span> <span class="o">=&gt;</span>
+  <span class="nx">DataSource</span><span class="p">.</span><span class="nf">getBlogPost</span><span class="p">(</span><span class="nx">props</span><span class="p">.</span><span class="nx">id</span><span class="p">),</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="实例应用---权限控制">实例应用 - 权限控制</h2>
+
+<p>权限控制其实就是利用高阶组件的条件渲染来控制渲染的组件。</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">authWrapper</span><span class="p">(</span><span class="nx">WrappedComponent</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// 通过其他方法路径获取权限</span>
+  <span class="kd">const</span> <span class="nx">isAuth</span> <span class="o">=</span> <span class="nf">getAuth</span><span class="p">();</span>
+  <span class="k">if </span><span class="p">(</span><span class="o">!</span><span class="nx">isAuth</span><span class="p">)</span> <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="k">return </span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">&lt;</span><span class="nc">WrappedComponent</span> <span class="si">{</span><span class="p">...</span><span class="nx">props</span><span class="si">}</span> <span class="p">/&gt;;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="实例应用---类组件使用-hooks">实例应用 - 类组件使用 Hooks</h2>
+
+<p>在有继承的或者部分复杂的类组件，需要使用 hooks 时，可以使用 HOC 来包裹成函数组件。</p>
+
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// App.tsx</span>
+<span class="k">import</span> <span class="nx">useName</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./useName</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">Greeting</span> <span class="kd">extends</span> <span class="nc">React</span><span class="p">.</span><span class="nx">Component</span><span class="o">&lt;</span><span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="kr">string</span> <span class="p">}</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="nf">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return </span><span class="p">(</span>
+      <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>
+        Hello <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">WrapperGreeting</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nf">useName</span><span class="p">(</span><span class="dl">'</span><span class="s1">chen</span><span class="dl">'</span><span class="p">);</span>
+  <span class="k">return</span> <span class="p">&lt;</span><span class="nc">Greeting</span> <span class="na">name</span><span class="p">=</span><span class="si">{</span><span class="nx">name</span><span class="si">}</span> <span class="p">/&gt;;</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nf">App</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return </span><span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"App"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">WrapperGreeting</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// useName.ts</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">useEffect</span><span class="p">,</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">useName</span> <span class="o">=</span> <span class="p">(</span><span class="nx">n</span><span class="p">:</span> <span class="kr">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">name</span><span class="p">,</span> <span class="nx">setName</span><span class="p">]</span> <span class="o">=</span> <span class="nf">useState</span><span class="p">(</span><span class="dl">''</span><span class="p">);</span>
+  <span class="nf">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nf">setName</span><span class="p">(</span><span class="nx">n</span><span class="p">);</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">n</span><span class="p">]);</span>
+  <span class="k">return</span> <span class="p">[</span><span class="nx">name</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">useName</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p><a href="https://codesandbox.io/s/class-component-use-hooks-cgmoo1">https://codesandbox.io/s/class-component-use-hooks-cgmoo1</a></p>
+
+<h2 id="不要改变原始组件使用组合">不要改变原始组件，使用组合</h2>
+
+<p>不要在 HOC 中修改组件原型，这样子会产生一些不良后果，HOC 不应该修改传入的组件，而应该使用组合的方式，通过将组件包装在容器组件中实现功能</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 错误的使用方式</span>
+<span class="kd">function</span> <span class="nf">logPrpos</span><span class="p">(</span><span class="nx">InputComponent</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">InputComponent</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">componentDidUpdate</span> <span class="o">=</span> <span class="nf">function </span><span class="p">(</span><span class="nx">prevProps</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Current props: </span><span class="dl">'</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Previous props: </span><span class="dl">'</span><span class="p">,</span> <span class="nx">prevProps</span><span class="p">);</span>
+  <span class="p">};</span>
+  <span class="c1">// 返回原始的 input 组件，暗示它已经被修改。</span>
+  <span class="k">return</span> <span class="nx">InputComponent</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// 每次调用 logPrpos 时，增强组件都会有 log 输出</span>
+<span class="kd">const</span> <span class="nx">EnhancedComponent</span> <span class="o">=</span> <span class="nf">logPrpos</span><span class="p">(</span><span class="nx">InputComponent</span><span class="p">);</span>
+</code></pre></div></div>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 使用组合的方式</span>
+<span class="kd">function</span> <span class="nf">logProps</span><span class="p">(</span><span class="nx">WrappedComponent</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="kd">class</span> <span class="nc">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+    <span class="nf">componentDidUpdate</span><span class="p">(</span><span class="nx">prevProps</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Current props: </span><span class="dl">'</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">);</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Previous props: </span><span class="dl">'</span><span class="p">,</span> <span class="nx">prevProps</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nf">render</span><span class="p">()</span> <span class="p">{</span>
+      <span class="c1">// 将 input 组件包装在容器中，而不对其进行修改</span>
+      <span class="k">return</span> <span class="p">&lt;</span><span class="nc">WrappedComponent</span> <span class="si">{</span><span class="p">...</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="si">}</span> <span class="p">/&gt;;</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="三个约定">三个约定</h2>
+
+<ul>
+  <li>
+    <p>约定：将不相关的 props 传递给被包裹的组件</p>
+
+    <p>这个约定保证了 HOC 的灵活性以及可复用性。HOC 为组件添加特性，HOC 应该透传与自身无关的 props。大多数 HOC 都应该包含类似下面的 render 方法</p>
+
+    <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">render</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// 过滤掉非此 HOC 且额外不要进行透传的 props</span>
+  <span class="kd">const</span> <span class="p">{</span> <span class="nx">extraProp</span><span class="p">,</span> <span class="p">...</span><span class="nx">passThroughProps</span> <span class="p">}</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">;</span>
+
+  <span class="c1">// 将 props 注入到被包装的组件中。</span>
+  <span class="c1">// 通常为 state 的值或者实例方法。</span>
+  <span class="kd">const</span> <span class="nx">injectedProps</span> <span class="o">=</span> <span class="nx">someStateOrInstanceMethod</span><span class="p">;</span>
+
+  <span class="c1">// 将 props 传递给被包裹的组件</span>
+  <span class="k">return </span><span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">wrappedcomponent</span> <span class="na">injectedProps</span><span class="p">=</span><span class="si">{</span><span class="nx">injectedProps</span><span class="si">}</span> <span class="si">{</span><span class="p">...</span><span class="nx">passThroughProps</span><span class="si">}</span> <span class="p">/&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>约定：最大化可组合性</p>
+  </li>
+  <li>
+    <p>约定：包装显示名称以便轻松调试</p>
+  </li>
+</ul>
+
+<h2 id="注意事项">注意事项</h2>
+
+<ul>
+  <li>
+    <p>不要在 render 方法中使用 HOC</p>
+  </li>
+  <li>
+    <p>务必复制静态方法</p>
+  </li>
+  <li>
+    <p>Refs 不会被传递</p>
+  </li>
+</ul>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="https://reactjs.org/docs/higher-order-components.html">Reactjs: higher-order component</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/76618283">zhihu: 面向对象困境之 —— 横切关注点</a></li>
+  <li><a href="https://juejin.cn/post/6844904050236850184">React 高阶组件(HOC)的入门 📖 及实践 💻 - 掘金</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2021/06/23/%E9%AB%98%E9%98%B6%E7%BB%84%E4%BB%B6HOC.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

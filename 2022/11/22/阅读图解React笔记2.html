@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>阅读图解React笔记2 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="阅读图解React笔记2" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="本文仅仅是阅读 图解 React 原理系列 的笔记，了解更多内容请查看原文链接。" />
+<meta property="og:description" content="本文仅仅是阅读 图解 React 原理系列 的笔记，了解更多内容请查看原文链接。" />
+<link rel="canonical" href="/blog/2022/11/22/%E9%98%85%E8%AF%BB%E5%9B%BE%E8%A7%A3React%E7%AC%94%E8%AE%B02.html" />
+<meta property="og:url" content="/blog/2022/11/22/%E9%98%85%E8%AF%BB%E5%9B%BE%E8%A7%A3React%E7%AC%94%E8%AE%B02.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-11-22T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="阅读图解React笔记2" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-11-22T00:00:00+00:00","datePublished":"2022-11-22T00:00:00+00:00","description":"本文仅仅是阅读 图解 React 原理系列 的笔记，了解更多内容请查看原文链接。","headline":"阅读图解React笔记2","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2022/11/22/%E9%98%85%E8%AF%BB%E5%9B%BE%E8%A7%A3React%E7%AC%94%E8%AE%B02.html"},"url":"/blog/2022/11/22/%E9%98%85%E8%AF%BB%E5%9B%BE%E8%A7%A3React%E7%AC%94%E8%AE%B02.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">阅读图解React笔记2</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2022-11-22T00:00:00+00:00" itemprop="datePublished">Nov 22, 2022
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2022"><i>2022</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/react"><i>react</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>本文仅仅是阅读 <a href="https://7kms.github.io/react-illustration-series/">图解 React 原理系列</a> 的笔记，了解更多内容请查看原文链接。</p>
+
+<p>reconciler 运作流程的笔记。</p>
+
+<h2 id="概览">概览</h2>
+
+<p>react-reconciler 主要的作用有 4 个方面：</p>
+
+<ol>
+  <li>输入：暴露 api 函数（如 scheduleUpdateOnFiber），供给其他包调用。</li>
+  <li>注册调度任务：与调度中心（scheduler）交互，注册调度任务 task，等待任务回调。</li>
+  <li>执行任务回调：在内存中构造出 fiber 树，同时与渲染器交互，在内存中创建出与 fiber 对应的 DOM 节点。</li>
+  <li>输出：与渲染器交互，渲染 DOM 节点。</li>
+</ol>
+
+<p>主要功能代码集中于 <code class="language-plaintext highlighter-rouge">react-reconciler/src/ReactFiberWorkLoop.new.js</code>（v18.2.0），可以用图示表示：</p>
+
+<p><img src="/blog/images/react-fiber-workloop.webp" alt="" /></p>
+
+<h2 id="输入">输入</h2>
+
+<p>在 ReactFiberWorkLoop.js 中，承接输入函数的只有 scheduleUpdateOnFiber。在 react-reconciler 对外暴露的 api 函数中，只要涉及到需要改变 fiber 的操作，最后都会间接调用 scheduleUpdateOnFiber。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 唯一接收输入信号的函数</span>
+<span class="k">export</span> <span class="kd">function</span> <span class="nf">scheduleUpdateOnFiber</span><span class="p">(</span>
+  <span class="nx">root</span><span class="p">:</span> <span class="nx">FiberRoot</span><span class="p">,</span>
+  <span class="nx">fiber</span><span class="p">:</span> <span class="nx">Fiber</span><span class="p">,</span>
+  <span class="nx">lane</span><span class="p">:</span> <span class="nx">Lane</span><span class="p">,</span>
+  <span class="nx">eventTime</span><span class="p">:</span> <span class="nx">number</span>
+<span class="p">)</span> <span class="p">{</span>
+  <span class="k">if </span><span class="p">((</span><span class="nx">executionContext</span> <span class="o">&amp;</span> <span class="nx">RenderContext</span><span class="p">)</span> <span class="o">!==</span> <span class="nx">NoLanes</span> <span class="o">&amp;&amp;</span> <span class="nx">root</span> <span class="o">===</span> <span class="nx">workInProgressRoot</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//...</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="c1">//...</span>
+    <span class="nf">ensureRootIsScheduled</span><span class="p">(</span><span class="nx">root</span><span class="p">,</span> <span class="nx">eventTime</span><span class="p">);</span>
+    <span class="c1">//...</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="注册调度任务">注册调度任务</h2>
+
+<p>与输入环节紧密相连，scheduleUpdateOnFiber 函数之后，立即进入 ensureRootIsScheduled 函数。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 该函数为 root 注册一个调度任务，在 root 下只能存在一个任务。</span>
+<span class="c1">// 如果有任务已经调度，会检测确保现有的任务的优先级与 root 的下一个任务优先级相同。</span>
+<span class="c1">// 该函数在每次更新和退出任务之前都会被调用。</span>
+<span class="kd">function</span> <span class="nf">ensureRootIsScheduled</span><span class="p">(</span><span class="nx">root</span><span class="p">:</span> <span class="nx">FiberRoot</span><span class="p">,</span> <span class="nx">currentTime</span><span class="p">:</span> <span class="nx">number</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// 前半部分：判断是否需要注册新的调度</span>
+  <span class="kd">const</span> <span class="nx">existingCallbackNode</span> <span class="o">=</span> <span class="nx">root</span><span class="p">.</span><span class="nx">callbackNode</span><span class="p">;</span>
+
+  <span class="c1">// 检测是否存在有通道(lanes)还在等待，如果有，将其标记为过期，以便接下来处理。</span>
+  <span class="nf">markStarvedLanesAsExpired</span><span class="p">(</span><span class="nx">root</span><span class="p">,</span> <span class="nx">currentTime</span><span class="p">);</span>
+
+  <span class="c1">// 判断下个通道(lanes)的执行和优先级</span>
+  <span class="kd">const</span> <span class="nx">nextLanes</span> <span class="o">=</span> <span class="nf">getNextLanes</span><span class="p">(</span>
+    <span class="nx">root</span><span class="p">,</span>
+    <span class="nx">root</span> <span class="o">===</span> <span class="nx">workInProgressRoot</span> <span class="p">?</span> <span class="nx">workInProgressRootRenderLanes</span> <span class="p">:</span> <span class="nx">NoLanes</span>
+  <span class="p">);</span>
+
+  <span class="k">if </span><span class="p">(</span><span class="nx">nextLanes</span> <span class="o">===</span> <span class="nx">NoLanes</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if </span><span class="p">(</span><span class="nx">existingCallbackNode</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nf">cancelCallback</span><span class="p">(</span><span class="nx">existingCallbackNode</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nx">root</span><span class="p">.</span><span class="nx">callbackNode</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="nx">root</span><span class="p">.</span><span class="nx">callbackPriority</span> <span class="o">=</span> <span class="nx">NoLanes</span><span class="p">;</span>
+    <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// 使用最高的优先级通道代表回调的优先级</span>
+  <span class="kd">const</span> <span class="nx">newCallbackPriority</span> <span class="o">=</span> <span class="nf">getHighestPriorityLane</span><span class="p">(</span><span class="nx">nextLanes</span><span class="p">);</span>
+
+  <span class="c1">// 检查是否存在已有的任务</span>
+  <span class="kd">const</span> <span class="nx">existingCallbackPriority</span> <span class="o">=</span> <span class="nx">root</span><span class="p">.</span><span class="nx">callbackPriority</span><span class="p">;</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">existingCallbackPriority</span> <span class="o">===</span> <span class="nx">newCallbackPriority</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">if </span><span class="p">(</span><span class="nx">existingCallbackNode</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">cancelCallback</span><span class="p">(</span><span class="nx">existingCallbackNode</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// 后半部分：注册一个新的调度任务</span>
+  <span class="kd">let</span> <span class="nx">newCallbackNode</span><span class="p">;</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">newCallbackPriority</span> <span class="o">===</span> <span class="nx">SyncLane</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if </span><span class="p">(</span><span class="nx">root</span><span class="p">.</span><span class="nx">tag</span> <span class="o">===</span> <span class="nx">LegacyRoot</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nf">scheduleLegacySyncCallback</span><span class="p">(</span><span class="nx">performSyncWorkOnRoot</span><span class="p">.</span><span class="nf">bind</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">root</span><span class="p">));</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="nf">scheduleSyncCallback</span><span class="p">(</span><span class="nx">performSyncWorkOnRoot</span><span class="p">.</span><span class="nf">bind</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">root</span><span class="p">));</span>
+    <span class="p">}</span>
+    <span class="k">if </span><span class="p">(</span><span class="nx">supportsMicrotasks</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nf">scheduleMicrotask</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nf">flushSyncCallbacks</span><span class="p">();</span>
+      <span class="p">});</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="nf">scheduleCallback</span><span class="p">(</span><span class="nx">ImmediateSchedulerPriority</span><span class="p">,</span> <span class="nx">flushSyncCallbacks</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nx">newCallbackNode</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">schedulerPriorityLevel</span><span class="p">;</span>
+    <span class="k">switch </span><span class="p">(</span><span class="nf">lanesToEventPriority</span><span class="p">(</span><span class="nx">nextLanes</span><span class="p">))</span> <span class="p">{</span>
+      <span class="k">case</span> <span class="na">DiscreteEventPriority</span><span class="p">:</span>
+        <span class="nx">schedulerPriorityLevel</span> <span class="o">=</span> <span class="nx">ImmediateSchedulerPriority</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+      <span class="k">case</span> <span class="na">ContinuousEventPriority</span><span class="p">:</span>
+        <span class="nx">schedulerPriorityLevel</span> <span class="o">=</span> <span class="nx">NormalSchedulerPriority</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+      <span class="k">case</span> <span class="na">IdleEventPriority</span><span class="p">:</span>
+        <span class="nx">schedulerPriorityLevel</span> <span class="o">=</span> <span class="nx">IdleEventPriority</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+      <span class="nl">default</span><span class="p">:</span>
+        <span class="nx">schedulerPriorityLevel</span> <span class="o">=</span> <span class="nx">NormalSchedulerPriority</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nx">newCallbackNode</span> <span class="o">=</span> <span class="nf">scheduleCallback</span><span class="p">(</span>
+      <span class="nx">schedulerPriorityLevel</span><span class="p">,</span>
+      <span class="nx">performConcurrentWorkOnRoot</span><span class="p">.</span><span class="nf">bind</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">root</span><span class="p">)</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nx">root</span><span class="p">.</span><span class="nx">callbackPriority</span> <span class="o">=</span> <span class="nx">newCallbackPriority</span><span class="p">;</span>
+  <span class="nx">root</span><span class="p">.</span><span class="nx">callbackNode</span> <span class="o">=</span> <span class="nx">newCallbackNode</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>ensureRootIsScheduled 的逻辑分为 2 部分：</p>
+
+<ol>
+  <li>前半部分：判断是否需要注册新的调度（如果无需新的调度，退出函数）</li>
+  <li>后半部分：注册调度任务
+    <ul>
+      <li>performSyncWorkOnRoot 和 performConcurrentWorkOnRoot 都封装到了任务回调(scheduleCallback)中</li>
+      <li>等待调度中心执行任务，任务其实就是执行 performSyncWorkOnRoot 或 performConcurrentWorkOnRoot</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="执行任务回调">执行任务回调</h2>
+
+<p>performSyncWorkOnRoot 的逻辑分为 3 部分：</p>
+
+<ol>
+  <li>fiber 树构建</li>
+  <li>异常处理：有可能 fiber 树构建过程中出现异常</li>
+  <li>调用输出</li>
+</ol>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 不经过 scheduler 的同步任务入口</span>
+<span class="kd">function</span> <span class="nf">performSyncWorkOnRoot</span><span class="p">(</span><span class="nx">root</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nf">flushPassiveEffects</span><span class="p">();</span>
+
+  <span class="c1">// 1. fiber 树构建</span>
+  <span class="kd">let</span> <span class="nx">lanes</span> <span class="o">=</span> <span class="nf">getNextLanes</span><span class="p">(</span><span class="nx">root</span><span class="p">,</span> <span class="nx">NoLanes</span><span class="p">);</span>
+  <span class="k">if </span><span class="p">(</span><span class="o">!</span><span class="nf">includesSomeLane</span><span class="p">(</span><span class="nx">lanes</span><span class="p">,</span> <span class="nx">SyncLane</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nf">ensureRootIsScheduled</span><span class="p">(</span><span class="nx">root</span><span class="p">,</span> <span class="nf">now</span><span class="p">());</span>
+    <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kd">let</span> <span class="nx">exitStatus</span> <span class="o">=</span> <span class="nf">renderRootSync</span><span class="p">(</span><span class="nx">root</span><span class="p">,</span> <span class="nx">lanes</span><span class="p">);</span>
+
+  <span class="c1">// 2. 异常处理的：有可能 fiber 构建过程中实现异常</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">root</span><span class="p">.</span><span class="nx">tag</span> <span class="o">!==</span> <span class="nx">LegacyRoot</span> <span class="o">&amp;&amp;</span> <span class="nx">exitStatus</span> <span class="o">===</span> <span class="nx">RootErrored</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//...</span>
+  <span class="p">}</span>
+
+  <span class="c1">// 3. 渲染 Fiber 树</span>
+  <span class="kd">const</span> <span class="nx">finishedWork</span><span class="p">:</span> <span class="nx">Fiber</span> <span class="o">=</span> <span class="p">(</span><span class="nx">root</span><span class="p">.</span><span class="nx">current</span><span class="p">.</span><span class="nx">alternate</span><span class="p">:</span> <span class="nx">any</span><span class="p">);</span>
+  <span class="nx">root</span><span class="p">.</span><span class="nx">finishedWork</span> <span class="o">=</span> <span class="nx">finishedWork</span><span class="p">;</span>
+  <span class="nx">root</span><span class="p">.</span><span class="nx">finishedLanes</span> <span class="o">=</span> <span class="nx">lanes</span><span class="p">;</span>
+  <span class="nf">commitRoot</span><span class="p">(</span><span class="nx">root</span><span class="p">,</span> <span class="nx">workInProgressRootRecoverableErrors</span><span class="p">,</span> <span class="nx">workInProgressTransitions</span><span class="p">);</span>
+
+  <span class="c1">// 退出之前，确保下一个回调调度处于 pending 状态。</span>
+  <span class="nf">ensureRootIsScheduled</span><span class="p">(</span><span class="nx">root</span><span class="p">,</span> <span class="nf">now</span><span class="p">());</span>
+  <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>performConcurrentWorkOnRoot 的逻辑与 performSyncWorkOnRoot 的不同之处在于，对于可中断渲染的支持：</p>
+
+<ol>
+  <li>调用 performConcurrentWorkOnRoot 函数时，首先检查是否处于渲染过程中，是否需要恢复上一次渲染。</li>
+  <li>如果本次渲染被中断，最后返回一个新的 performConcurrentWorkOnRoot 函数，等待下一次调用。</li>
+</ol>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 这是每一个并发任务的入口。</span>
+<span class="kd">function</span> <span class="nf">performConcurrentWorkOnRoot</span><span class="p">(</span><span class="nx">root</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// 1. 刷新 pending 状态的被动副作用，以防它们安排额外的工作。</span>
+  <span class="kd">const</span> <span class="nx">originalCallbackNode</span> <span class="o">=</span> <span class="nx">root</span><span class="p">.</span><span class="nx">callbackNode</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">didFlushPassiveEffects</span> <span class="o">=</span> <span class="nf">flushPassiveEffects</span><span class="p">();</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">didFlushPassiveEffects</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if </span><span class="p">(</span><span class="nx">root</span><span class="p">.</span><span class="nx">callbackNode</span> <span class="o">!==</span> <span class="nx">originalCallbackNode</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="c1">// 当前任务不会被取消，继续</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="c1">// 2. 获取本次渲染的优先级</span>
+  <span class="kd">let</span> <span class="nx">lanes</span> <span class="o">=</span> <span class="nf">getNextLanes</span><span class="p">(</span>
+    <span class="nx">root</span><span class="p">,</span>
+    <span class="nx">root</span> <span class="o">===</span> <span class="nx">workInProgressRoot</span> <span class="p">?</span> <span class="nx">workInProgressRootRenderLanes</span> <span class="p">:</span> <span class="nx">NoLanes</span>
+  <span class="p">);</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">lanes</span> <span class="o">===</span> <span class="nx">NoLanes</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// 构建 fiber 树</span>
+  <span class="kd">let</span> <span class="nx">exitStatus</span> <span class="o">=</span> <span class="nf">renderRootConcurrent</span><span class="p">(</span><span class="nx">root</span><span class="p">,</span> <span class="nx">lanes</span><span class="p">);</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">exitStatus</span> <span class="o">!==</span> <span class="nx">RootInProgress</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if </span><span class="p">(</span><span class="nx">exitStatus</span> <span class="o">===</span> <span class="nx">RootErrored</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">//...</span>
+    <span class="p">}</span>
+    <span class="k">if </span><span class="p">(</span><span class="nx">exitStatus</span> <span class="o">===</span> <span class="nx">RootFatalErrored</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">//...</span>
+    <span class="p">}</span>
+    <span class="k">if </span><span class="p">(</span><span class="nx">exitStatus</span> <span class="o">===</span> <span class="nx">RootDidNotComplete</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nf">markRootSuspended</span><span class="p">(</span><span class="nx">root</span><span class="p">,</span> <span class="nx">lanes</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">renderWasConcurrent</span> <span class="o">=</span> <span class="o">!</span><span class="nf">includesBlockingLane</span><span class="p">(</span><span class="nx">root</span><span class="p">,</span> <span class="nx">lanes</span><span class="p">);</span>
+      <span class="kd">const</span> <span class="na">finishedWork</span><span class="p">:</span> <span class="nx">Fiber</span> <span class="o">=</span> <span class="p">(</span><span class="nx">root</span><span class="p">.</span><span class="nx">current</span><span class="p">.</span><span class="na">alternate</span><span class="p">:</span> <span class="nx">any</span><span class="p">);</span>
+      <span class="nx">root</span><span class="p">.</span><span class="nx">finishedWork</span> <span class="o">=</span> <span class="nx">finishedWork</span><span class="p">;</span>
+      <span class="nx">root</span><span class="p">.</span><span class="nx">finishedLanes</span> <span class="o">=</span> <span class="nx">lanes</span><span class="p">;</span>
+      <span class="c1">// 渲染 fiber 树</span>
+      <span class="nf">finishConcurrentRender</span><span class="p">(</span><span class="nx">root</span><span class="p">,</span> <span class="nx">exitStatus</span><span class="p">,</span> <span class="nx">lanes</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="nf">ensureRootIsScheduled</span><span class="p">(</span><span class="nx">root</span><span class="p">,</span> <span class="nf">now</span><span class="p">());</span>
+
+  <span class="k">if </span><span class="p">(</span><span class="nx">root</span><span class="p">.</span><span class="nx">callbackNode</span> <span class="o">===</span> <span class="nx">originalCallbackNode</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 渲染被阻断，返回一个新的 performConcurrentWorkOnRoot 函数，等待下一次调用</span>
+    <span class="k">return</span> <span class="nx">performConcurrentWorkOnRoot</span><span class="p">.</span><span class="nf">bind</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">root</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="输出">输出</h2>
+
+<p>在输出阶段，commitRoot 的实现逻辑在 commitRootImpl 函数上，其主要逻辑是处理副作用队列，将最新的 fiber 树结构反映到 DOM 上。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">commitRootImpl</span><span class="p">(</span>
+  <span class="nx">root</span><span class="p">:</span> <span class="nx">FiberRoot</span><span class="p">,</span>
+  <span class="nx">recoverableErrors</span><span class="p">:</span> <span class="kc">null</span> <span class="o">|</span> <span class="nb">Array</span><span class="o">&lt;</span><span class="nx">CapturedValue</span><span class="o">&lt;</span><span class="nx">mixed</span><span class="o">&gt;&gt;</span><span class="p">,</span>
+  <span class="nx">transtions</span><span class="p">:</span> <span class="nb">Array</span><span class="o">&lt;</span><span class="nx">Transition</span><span class="o">&gt;</span> <span class="o">|</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="nx">renderPriorityLevel</span><span class="p">:</span> <span class="nx">EventPriority</span>
+<span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// 设置局部变量</span>
+  <span class="kd">const</span> <span class="nx">finishedWork</span> <span class="o">=</span> <span class="nx">root</span><span class="p">.</span><span class="nx">finishedWork</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">lanes</span> <span class="o">=</span> <span class="nx">root</span><span class="p">.</span><span class="nx">finishedLanes</span><span class="p">;</span>
+
+  <span class="c1">// 清空 FiberRoot 对象上的属性</span>
+  <span class="nx">root</span><span class="p">.</span><span class="nx">finishedWork</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="nx">root</span><span class="p">.</span><span class="nx">finishedLanes</span> <span class="o">=</span> <span class="nx">NoLanes</span><span class="p">;</span>
+  <span class="nx">root</span><span class="p">.</span><span class="nx">callbackNode</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+  <span class="c1">// 提交阶段</span>
+  <span class="kd">let</span> <span class="nx">firstEffect</span> <span class="o">=</span> <span class="nx">finishedWork</span><span class="p">.</span><span class="nx">firstEffect</span><span class="p">;</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">firstEffect</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">prevExecutionContext</span> <span class="o">=</span> <span class="nx">executionContext</span><span class="p">;</span>
+    <span class="nx">executionContext</span> <span class="o">|=</span> <span class="nx">CommitContext</span><span class="p">;</span>
+    <span class="c1">// 阶段1: dom突变之前</span>
+    <span class="nx">nextEffect</span> <span class="o">=</span> <span class="nx">firstEffect</span><span class="p">;</span>
+    <span class="k">do</span> <span class="p">{</span>
+      <span class="nf">commitBeforeMutationEffects</span><span class="p">();</span>
+    <span class="p">}</span> <span class="k">while </span><span class="p">(</span><span class="nx">nextEffect</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">);</span>
+
+    <span class="c1">// 阶段2: dom突变, 界面发生改变</span>
+    <span class="nx">nextEffect</span> <span class="o">=</span> <span class="nx">firstEffect</span><span class="p">;</span>
+    <span class="k">do</span> <span class="p">{</span>
+      <span class="nf">commitMutationEffects</span><span class="p">(</span><span class="nx">root</span><span class="p">,</span> <span class="nx">renderPriorityLevel</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">while </span><span class="p">(</span><span class="nx">nextEffect</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">);</span>
+    <span class="nx">root</span><span class="p">.</span><span class="nx">current</span> <span class="o">=</span> <span class="nx">finishedWork</span><span class="p">;</span>
+
+    <span class="c1">// 阶段3: layout阶段, 调用生命周期componentDidUpdate和回调函数等</span>
+    <span class="nx">nextEffect</span> <span class="o">=</span> <span class="nx">firstEffect</span><span class="p">;</span>
+    <span class="k">do</span> <span class="p">{</span>
+      <span class="nf">commitLayoutEffects</span><span class="p">(</span><span class="nx">root</span><span class="p">,</span> <span class="nx">lanes</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">while </span><span class="p">(</span><span class="nx">nextEffect</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">);</span>
+    <span class="nx">nextEffect</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="nx">executionContext</span> <span class="o">=</span> <span class="nx">prevExecutionContext</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nf">ensureRootIsScheduled</span><span class="p">(</span><span class="nx">root</span><span class="p">,</span> <span class="nf">now</span><span class="p">());</span>
+  <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>核心逻辑分为 3 个步骤：</p>
+
+<ol>
+  <li>
+    <p>commitBeforeMutationEffects</p>
+
+    <ul>
+      <li>dom 变更之前，主要处理副作用队列中带有 Snapshot, Passive 标记的 fiber 节点。</li>
+    </ul>
+  </li>
+  <li>
+    <p>commitMutationEffects</p>
+
+    <ul>
+      <li>dom 变更，界面得到更新，主要处理副作用队列中带有 Placement, Update, Deletion, Hydrating 标记的 fiber 节点。</li>
+    </ul>
+  </li>
+  <li>
+    <p>commitLayoutEffects</p>
+
+    <ul>
+      <li>dom 变更后，主要处理副作用队列中带有 Update, Callback 标记的 fiber 节点。</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="https://github.com/7kms/react-illustration-series">github: react-illustration-series</a></li>
+  <li><a href="https://7kms.github.io/react-illustration-series/main/reconciler-workflow">图解 React: 运作流程</a></li>
+  <li><a href="https://github.com/facebook/react">github: react</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2022/11/22/%E9%98%85%E8%AF%BB%E5%9B%BE%E8%A7%A3React%E7%AC%94%E8%AE%B02.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

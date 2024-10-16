@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>数据结构之队列 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="数据结构之队列" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="队列，是一个特殊的线性表。它有两个位置，头部 front 和末端 end。在队列的末端进行插入元素，称为enqueue。在队列的头部进行删除元素，称为dequeue。" />
+<meta property="og:description" content="队列，是一个特殊的线性表。它有两个位置，头部 front 和末端 end。在队列的末端进行插入元素，称为enqueue。在队列的头部进行删除元素，称为dequeue。" />
+<link rel="canonical" href="/blog/2018/09/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E9%98%9F%E5%88%97.html" />
+<meta property="og:url" content="/blog/2018/09/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E9%98%9F%E5%88%97.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-09-29T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="数据结构之队列" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2018-09-29T00:00:00+00:00","datePublished":"2018-09-29T00:00:00+00:00","description":"队列，是一个特殊的线性表。它有两个位置，头部 front 和末端 end。在队列的末端进行插入元素，称为enqueue。在队列的头部进行删除元素，称为dequeue。","headline":"数据结构之队列","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2018/09/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E9%98%9F%E5%88%97.html"},"url":"/blog/2018/09/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E9%98%9F%E5%88%97.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">数据结构之队列</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2018-09-29T00:00:00+00:00" itemprop="datePublished">Sep 29, 2018
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2018"><i>2018</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/algorithm"><i>algorithm</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>队列，是一个特殊的线性表。它有两个位置，头部 front 和末端 end。在队列的末端进行插入元素，称为<code class="language-plaintext highlighter-rouge">enqueue</code>。在队列的头部进行删除元素，称为<code class="language-plaintext highlighter-rouge">dequeue</code>。</p>
+
+<p>队列遵循着 FIFO(First-In-First-Out)的原则。队列常见的实现方式是圆形缓冲区(circular buffer)和线性表(linked list)。</p>
+
+<h2 id="链表实现">链表实现</h2>
+
+<pre><code class="language-C">// 单个链表结点存储单个队列项
+struct QNode {
+  int key;
+  struct QNode *next;
+}
+
+// 队列，front存储前结点，rear存储后结点
+struct Queue {
+  struct QNode *front, *rear;
+}
+
+// 功能函数创建新的队列结点
+struct QNode* newNode(int k) {
+  struct QNode *temp = (struct QNode*)malloc(sizeof(struct QNode));
+  temp-&gt;key = k;
+  temp-&gt;next = NULL;
+  return temp;
+}
+
+// 功能函数创建新的队列
+struct Queue *createQueue() {
+  struct Queue *q = (struct Queue*)malloc(sizeof(struct Queue));
+  q-&gt;front = q-&gt;next = NULL;
+  return q;
+}
+
+// 入列操作
+void enQueue(struct Queue *q, int k) {
+  struct QNode *temp = newNode(k);
+  if (q-&gt;rear = NULL) {
+    q-&gt;front = q-&gt;rear = temp;
+    return;
+  }
+  q-&gt;rear-&gt;next = temp;
+  q-&gt;rear = temp;
+}
+
+// 出列操作
+struct QNode *deQueue(struct Queue *q) {
+  if (q-&gt;front == NULL) {
+    return NULL;
+  }
+  struct QNode *temp = q-&gt;front;
+  q-&gt;front = q-&gt;front-&gt;next;
+
+  if (q-&gt;front == NULL) {
+    q-&gt;rear = NULL;
+  }
+  return temp;
+}
+</code></pre>
+
+<h2 id="循环实现">循环实现</h2>
+
+<p>设循环队列 Q 的容量为 MAXSIZE，初始化队列为空，且 Q.rear 和 Q.front 都等于 0</p>
+
+<p>元素入列时，修改队尾指针 Q.rear = (Q.rear + 1) % MAXSIZE</p>
+
+<p>元素出列时，修改对头指针 Q.front = (Q.front + 1) % MAXSIZE</p>
+
+<p>根据队列操作的定义，当出列操作导致队列为空时，则有 Q.rear==Q.front。若入列操作导致队列满，则 Q.rear==Q.front。所以无法根据 Q.rear 和 Q.front 判断队列状态。两种方式处理：一.设置一个标志 flag。二.牺牲一个存储单元，以’队列的尾指针所指位置的下一个位置是队头指针’表示队列满。</p>
+
+<pre><code class="language-C">// 循环队列的类型定义
+#define MAXSIZE 100
+typeof struct {
+  int *base;    /* 循环队列的存储空间 */
+  int front;    /* 指示队头 */
+  int rear;     /* 指示队尾 */
+}SqQueue;
+
+// 创建空的循环队列
+int InitQueue(SqQueue *Q) {
+  Q-&gt;base = (int *)malloc(MAXSIZE * sizeof(int));
+  if(!Q-&gt;base) return -1;
+  Q-&gt;front = 0;
+  Q-&gt;rear = 0;
+  return 0;
+}
+
+// 入列操作
+int EnQueue(SqQueue *Q, int e)  {
+  if((Q-&gt;rear + 1) % MAXSIZE == Q-&gt;front) return -1;
+  Q-&gt;base[Q-&gt;rear] = e;
+  Q-&gt;rear = (Q-&gt;rear + 1) % MAXSIZE;
+  return 0;
+}
+
+// 出列操作
+int DeQueue(SqQueue *Q, int *e) {
+  if (Q-&gt;rear == Q-&gt;front) return -1;
+  *e = Q-&gt;base[Q-&gt;front];
+  Q-&gt;front = (Q-&gt;front + 1) % MAXSIZE;
+  return 0;
+}
+</code></pre>
+
+  </div><a class="u-url" href="/blog/2018/09/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E9%98%9F%E5%88%97.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>发布订阅与观察者 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="发布订阅与观察者" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="发布订阅与观察者是经常被混淆的两种模式" />
+<meta property="og:description" content="发布订阅与观察者是经常被混淆的两种模式" />
+<link rel="canonical" href="/blog/2019/10/10/%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E4%B8%8E%E8%A7%82%E5%AF%9F%E8%80%85.html" />
+<meta property="og:url" content="/blog/2019/10/10/%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E4%B8%8E%E8%A7%82%E5%AF%9F%E8%80%85.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-10-10T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="发布订阅与观察者" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2019-10-10T00:00:00+00:00","datePublished":"2019-10-10T00:00:00+00:00","description":"发布订阅与观察者是经常被混淆的两种模式","headline":"发布订阅与观察者","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2019/10/10/%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E4%B8%8E%E8%A7%82%E5%AF%9F%E8%80%85.html"},"url":"/blog/2019/10/10/%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E4%B8%8E%E8%A7%82%E5%AF%9F%E8%80%85.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">发布订阅与观察者</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2019-10-10T00:00:00+00:00" itemprop="datePublished">Oct 10, 2019
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2019"><i>2019</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/algorithm"><i>algorithm</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/javascript"><i>javascript</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>发布订阅与观察者是经常被混淆的两种模式</p>
+
+<h2 id="观察者">观察者</h2>
+
+<blockquote>
+  <p>In software design and engineering, the observer pattern is a software design pattern in which an object, named the <em>subject</em>, maintains a list of its dependents, called <em>observers</em>, and notifies them automatically of any state changes, usually by calling one of their methods.</p>
+</blockquote>
+
+<p>观察者模式里，Subject 会维护一个 Observer 列表， 当 Subject 对象更新的时候，会自动通知（notifies）所有的 Observer 对象。</p>
+
+<p><img src="/blog/images/Observer_w_update.svg" alt="UML" /></p>
+
+<p><img src="/blog/images/observer_simple.svg" alt="Simple" /></p>
+
+<h2 id="发布与订阅">发布与订阅</h2>
+
+<blockquote>
+  <p>In software architecture, publish–subscribe is a messaging pattern where senders of messages, called publishers, do not program the messages to be sent directly to specific receivers, called subscribers</p>
+</blockquote>
+
+<p>发布订阅是一种消息模式。消息发送者叫做发布者，不直接接受消息的人叫订阅者。</p>
+
+<p>发布者将消息归类，供订阅者订阅，发布者不知道订阅者，订阅者也不知道发布者。</p>
+
+<h3 id="两者的区别">两者的区别</h3>
+
+<p>从上面可以得知，观察者的 Subject 与发布订阅 Publisher 非常像，而 Observer 与 Subscriber 又是非常相似。</p>
+
+<ul>
+  <li>发布订阅之间并不清楚彼此的存在，所有发布订阅需要借助消息中介（message broker）或事件总结（event bus）通讯，而观察者模式里 Subject 是有维护着 Observer 的列表。</li>
+  <li>发布订阅是松耦合的。</li>
+  <li>观察者大部分以同步的方式实现，发布订阅大多以异步的方式实现的。</li>
+  <li>观察者模式需要在单一的应用地址空间中实现。另一方面，发布者/订阅者模式更像是一种跨应用模式。</li>
+</ul>
+
+<h3 id="发布订阅">发布订阅</h3>
+
+<div align="center">
+  <img src="/blog/images/pub-sub.png" />
+</div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//pubsub.js</span>
+
+<span class="c1">// 消息列表</span>
+<span class="kd">let</span> <span class="nx">events</span> <span class="o">=</span> <span class="p">{};</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// 消息发布</span>
+  <span class="nf">publish</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 如果消息不存在，不处理</span>
+    <span class="k">if </span><span class="p">(</span><span class="o">!</span><span class="nx">events</span><span class="p">[</span><span class="nx">name</span><span class="p">])</span> <span class="k">return</span><span class="p">;</span>
+    <span class="c1">// 如果消息存在，则将消息列表中的每个事件都处理一遍</span>
+    <span class="nx">events</span><span class="p">[</span><span class="nx">name</span><span class="p">].</span><span class="nf">forEach</span><span class="p">((</span><span class="nx">cb</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nf">cb</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
+  <span class="p">},</span>
+
+  <span class="c1">// 消息订阅</span>
+  <span class="nf">subscribe</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">cb</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 如果消息不存在，则进行初始化</span>
+    <span class="k">if </span><span class="p">(</span><span class="o">!</span><span class="nx">events</span><span class="p">[</span><span class="nx">name</span><span class="p">])</span> <span class="p">{</span>
+      <span class="nx">events</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="p">}</span>
+    <span class="nx">events</span><span class="p">[</span><span class="nx">name</span><span class="p">].</span><span class="nf">push</span><span class="p">(</span><span class="nx">cb</span><span class="p">);</span>
+  <span class="p">},</span>
+
+  <span class="c1">// 取消订阅</span>
+  <span class="nf">unsubscribe</span><span class="p">(</span><span class="nx">cb</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 如果消息不存在，直接返回</span>
+    <span class="k">if </span><span class="p">(</span><span class="o">!</span><span class="nx">events</span><span class="p">[</span><span class="nx">name</span><span class="p">])</span> <span class="k">return</span><span class="p">;</span>
+    <span class="c1">// 如果消息存在，则进行删除</span>
+    <span class="k">delete</span> <span class="nx">event</span><span class="p">[</span><span class="nx">name</span><span class="p">];</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>前端比较出名的 <a href="https://github.com/primus/eventemitter3">EventEmitter3</a> 的实现</p>
+
+<p>在很多库里面，publish, subscribe, unsubscribe 也会经常被叫做 emit, on, off。</p>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="https://medium.com/@thebabscraig/javascript-design-patterns-part-2-the-publisher-subscriber-pattern-8fe07e157213">JavaScript Design Patterns Part 2: The Publisher/Subscriber Pattern</a></li>
+  <li><a href="https://github.com/shaodahong/dahong/issues/6">一看就懂的设计模式之发布/订阅模式</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern">Wiki: Publish–subscribe pattern</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Observer_pattern">Wiki: Observer pattern</a></li>
+  <li><a href="https://hackernoon.com/observer-vs-pub-sub-pattern-50d3b27f838c">Observer vs Pub-Sub pattern</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2019/10/10/%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E4%B8%8E%E8%A7%82%E5%AF%9F%E8%80%85.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

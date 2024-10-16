@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>NeoVim 中英文输入法切换的问题 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="NeoVim 中英文输入法切换的问题" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="在使用 Vim/NeoVim 编辑器，特别是由 Insert 切换到 Normal 模式，如果使用到中文输入法，很容易在 Normal 模式下输入中文，就会造成了很多不必要的麻烦。" />
+<meta property="og:description" content="在使用 Vim/NeoVim 编辑器，特别是由 Insert 切换到 Normal 模式，如果使用到中文输入法，很容易在 Normal 模式下输入中文，就会造成了很多不必要的麻烦。" />
+<link rel="canonical" href="/blog/2023/06/02/NeoVim%E4%B8%AD%E8%8B%B1%E6%96%87%E8%BE%93%E5%85%A5%E6%B3%95%E5%88%87%E6%8D%A2%E9%97%AE%E9%A2%98.html" />
+<meta property="og:url" content="/blog/2023/06/02/NeoVim%E4%B8%AD%E8%8B%B1%E6%96%87%E8%BE%93%E5%85%A5%E6%B3%95%E5%88%87%E6%8D%A2%E9%97%AE%E9%A2%98.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-06-02T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="NeoVim 中英文输入法切换的问题" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-06-02T00:00:00+00:00","datePublished":"2023-06-02T00:00:00+00:00","description":"在使用 Vim/NeoVim 编辑器，特别是由 Insert 切换到 Normal 模式，如果使用到中文输入法，很容易在 Normal 模式下输入中文，就会造成了很多不必要的麻烦。","headline":"NeoVim 中英文输入法切换的问题","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2023/06/02/NeoVim%E4%B8%AD%E8%8B%B1%E6%96%87%E8%BE%93%E5%85%A5%E6%B3%95%E5%88%87%E6%8D%A2%E9%97%AE%E9%A2%98.html"},"url":"/blog/2023/06/02/NeoVim%E4%B8%AD%E8%8B%B1%E6%96%87%E8%BE%93%E5%85%A5%E6%B3%95%E5%88%87%E6%8D%A2%E9%97%AE%E9%A2%98.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">NeoVim 中英文输入法切换的问题</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2023-06-02T00:00:00+00:00" itemprop="datePublished">Jun 2, 2023
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2023"><i>2023</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/linux"><i>linux</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/others"><i>others</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>在使用 Vim/NeoVim 编辑器，特别是由 Insert 切换到 Normal 模式，如果使用到中文输入法，很容易在 Normal 模式下输入中文，就会造成了很多不必要的麻烦。</p>
+
+<p>我们需要的做是在退出 Insert 模式的时候自动切换到英文输入法。</p>
+
+<h2 id="linux">Linux</h2>
+
+<p>在 Linux 一般都是使用 fcitx 的输入法，关于这个切换，在 Arch Linux Wiki 上关于 Fcitx 的输入法说明也已经给出说明了</p>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>autocmd <span class="nb">InsertLeave</span> * <span class="p">:</span><span class="k">silent</span> <span class="p">!</span>fcitx5<span class="p">-</span>remote <span class="p">-</span><span class="k">c</span>
+</code></pre></div></div>
+
+<p>以下是来自官网的用法，本质上都是差不多：</p>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> fcitx5state<span class="p">=</span><span class="nb">system</span><span class="p">(</span><span class="s2">"fcitx5-remote"</span><span class="p">)</span>
+autocmd <span class="nb">InsertLeave</span> * <span class="p">:</span><span class="k">silent</span> <span class="k">let</span> fcitx5state<span class="p">=</span><span class="nb">system</span><span class="p">(</span><span class="s2">"fcitx5-remote"</span><span class="p">)[</span><span class="m">0</span><span class="p">]</span> <span class="p">|</span> <span class="k">silent</span> <span class="p">!</span>fcitx5<span class="p">-</span>remote <span class="p">-</span><span class="k">c</span>
+autocmd <span class="nb">InsertEnter</span> * <span class="p">:</span><span class="k">silent</span> <span class="k">if</span> fcitx5state <span class="p">==</span> <span class="m">2</span> <span class="p">|</span> <span class="k">call</span> <span class="nb">system</span><span class="p">(</span><span class="s2">"fcitx5-remote -o"</span><span class="p">)</span> <span class="p">|</span> <span class="k">endif</span>
+</code></pre></div></div>
+
+<h2 id="windows">Windows</h2>
+
+<p>Windows 在 WSL 里面切换起来是比较麻烦的，主要是借用了系统英文和 im-select.exe 程序。</p>
+
+<p>在 Normal 模式下使用 im-select.exe 切换到系统英文，进入 Insert 模式下使用 im-select.exe 切换到系统中文。</p>
+
+<h3 id="安装英文语言">安装英文语言</h3>
+
+<p>首先是对 Windows 系统进行安装英文系统语言（如已安装则忽略）。</p>
+
+<p>进入 <strong>系统设置</strong> -&gt; <strong>时间和语言</strong> -&gt; <strong>语言和区域</strong> -&gt; <strong>添加语言</strong></p>
+
+<p>找到 English(United States) 即 英语(美国)，点击下一页进行安装即可。</p>
+
+<h3 id="安装-im-select">安装 im-select</h3>
+
+<p><a href="https://github.com/daipeihust/im-select">GitHub: im-select</a> 页面找到 Windows 的下载链接进行下载。将其放入指定的目录，如：<code class="language-plaintext highlighter-rouge">D:\im-select\im-select.exe</code></p>
+
+<p>在 WSL 可以使用下面的命令进行输入法的切换和操作：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/mnt/d/im-select/im-select.exe <span class="c"># 查看当前输入法的代码编号</span>
+
+/mnt/d/im-select/im-select.exe locale <span class="c"># 切换当前输入法</span>
+
+/mnt/d/im-select/im-select.exe 2052 <span class="c"># 切换到中文输入法</span>
+
+/mnt/d/im-select/im-select.exe 1033 <span class="c"># 切换到英文输入法</span>
+</code></pre></div></div>
+
+<h3 id="设置-vimrc">设置 vimrc</h3>
+
+<p>在 vimrc 文件中按需设置自动切换的功能</p>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>autocmd <span class="nb">VimEnter</span> * <span class="p">:</span><span class="k">silent</span> <span class="p">!(</span><span class="sr">/mnt/</span><span class="k">d</span><span class="sr">/im-select/</span><span class="nb">im</span><span class="p">-</span>select<span class="p">.</span>exe <span class="m">1033</span><span class="p">)</span>
+autocmd <span class="nb">InsertEnter</span> * <span class="p">:</span><span class="k">silent</span> <span class="p">!(</span><span class="sr">/mnt/</span><span class="k">d</span><span class="sr">/im-select/</span><span class="nb">im</span><span class="p">-</span>select<span class="p">.</span>exe <span class="m">2052</span><span class="p">)</span>
+autocmd <span class="nb">InsertLeave</span> * <span class="p">:</span><span class="k">silent</span> <span class="p">!(</span><span class="sr">/mnt/</span><span class="k">d</span><span class="sr">/im-select/</span><span class="nb">im</span><span class="p">-</span>select<span class="p">.</span>exe <span class="m">1033</span><span class="p">)</span>
+autocmd <span class="nb">VimLeave</span> * <span class="p">:</span><span class="k">silent</span> <span class="p">!(</span><span class="sr">/mnt/</span><span class="k">d</span><span class="sr">/im-select/</span><span class="nb">im</span><span class="p">-</span>select<span class="p">.</span>exe <span class="m">2052</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="vscodevim">VSCodeVim</h3>
+
+<p>在 VSCode 使用 Vim 插件也需要安装英文语言和 im-select，但没有 vim 下使用更加便捷。</p>
+
+<p>在设置里面设置：</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">"vim.autoSwitchInputMethod.enable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="err">,</span><span class="w">
+</span><span class="nl">"vim.autoSwitchInputMethod.defaultIM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1033"</span><span class="err">,</span><span class="w">
+</span><span class="nl">"vim.autoSwitchInputMethod.obtainIMCmd"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D:</span><span class="se">\\</span><span class="s2">im-select</span><span class="se">\\</span><span class="s2">im-select.exe"</span><span class="err">,</span><span class="w">
+</span><span class="nl">"vim.autoSwitchInputMethod.switchIMCmd"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D:</span><span class="se">\\</span><span class="s2">im-select</span><span class="se">\\</span><span class="s2">im-select.exe {im}"</span><span class="err">,</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="https://www.cnblogs.com/tuilk/p/16421831.html">解决 Windows 下(Neo)Vim 中文输入法的切换问题</a></li>
+  <li><a href="https://wiki.archlinux.org/title/Fcitx">Arch Wiki: Fcitx5</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2023/06/02/NeoVim%E4%B8%AD%E8%8B%B1%E6%96%87%E8%BE%93%E5%85%A5%E6%B3%95%E5%88%87%E6%8D%A2%E9%97%AE%E9%A2%98.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

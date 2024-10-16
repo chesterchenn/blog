@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>阅读图解React笔记10 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="阅读图解React笔记10" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="本文仅仅是阅读 图解 React 原理系列 的笔记，了解更多内容请查看原文链接。" />
+<meta property="og:description" content="本文仅仅是阅读 图解 React 原理系列 的笔记，了解更多内容请查看原文链接。" />
+<link rel="canonical" href="/blog/2022/12/25/%E9%98%85%E8%AF%BB%E5%9B%BE%E8%A7%A3React%E7%AC%94%E8%AE%B010.html" />
+<meta property="og:url" content="/blog/2022/12/25/%E9%98%85%E8%AF%BB%E5%9B%BE%E8%A7%A3React%E7%AC%94%E8%AE%B010.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-12-25T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="阅读图解React笔记10" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-12-25T00:00:00+00:00","datePublished":"2022-12-25T00:00:00+00:00","description":"本文仅仅是阅读 图解 React 原理系列 的笔记，了解更多内容请查看原文链接。","headline":"阅读图解React笔记10","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2022/12/25/%E9%98%85%E8%AF%BB%E5%9B%BE%E8%A7%A3React%E7%AC%94%E8%AE%B010.html"},"url":"/blog/2022/12/25/%E9%98%85%E8%AF%BB%E5%9B%BE%E8%A7%A3React%E7%AC%94%E8%AE%B010.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">阅读图解React笔记10</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2022-12-25T00:00:00+00:00" itemprop="datePublished">Dec 25, 2022
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2022"><i>2022</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/react"><i>react</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>本文仅仅是阅读 <a href="https://7kms.github.io/react-illustration-series/">图解 React 原理系列</a> 的笔记，了解更多内容请查看原文链接。</p>
+
+<p>副作用 Hook</p>
+
+<h2 id="创建-hook">创建 Hook</h2>
+
+<p>在 fiber 初次构造阶段，useEffect 对应源码 mountEffect，useLayoutEffect 对应的源码 mountLayoutEffect</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">mountEffect</span><span class="p">(</span><span class="nx">create</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(()</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">)</span> <span class="o">|</span> <span class="k">void</span><span class="p">,</span> <span class="nx">deps</span><span class="p">:</span> <span class="nb">Array</span><span class="o">&lt;</span><span class="nx">mixed</span><span class="o">&gt;</span> <span class="o">|</span> <span class="k">void</span> <span class="o">|</span> <span class="kc">null</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nf">mountEffectImpl</span><span class="p">(</span><span class="nx">PassiveEffect</span> <span class="o">|</span> <span class="nx">PassiveStaticEffect</span><span class="p">,</span> <span class="nx">HookPassive</span><span class="p">,</span> <span class="nx">create</span><span class="p">,</span> <span class="nx">deps</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">mountLayoutEffect</span><span class="p">(</span><span class="nx">create</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(()</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">)</span> <span class="o">|</span> <span class="k">void</span><span class="p">,</span> <span class="nx">deps</span><span class="p">:</span> <span class="nb">Array</span><span class="o">&lt;</span><span class="nx">mixed</span><span class="o">&gt;</span> <span class="o">|</span> <span class="k">void</span> <span class="o">|</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nf">mountEffectImpl</span><span class="p">(</span><span class="nx">UpdateEffect</span><span class="p">,</span> <span class="nx">HookLayout</span><span class="p">,</span> <span class="nx">create</span><span class="p">,</span> <span class="nx">deps</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>可见 mountEffect 和 mountLayoutEffect 内部都是通过调用 mountEffectImpl。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">mountEffectImpl</span><span class="p">(</span><span class="nx">fiberFlags</span><span class="p">,</span> <span class="nx">hookFlags</span><span class="p">,</span> <span class="nx">create</span><span class="p">,</span> <span class="nx">deps</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">hook</span> <span class="o">=</span> <span class="nf">mountWorkInProgressHook</span><span class="p">();</span>
+  <span class="kd">const</span> <span class="nx">nextDeps</span> <span class="o">=</span> <span class="nx">deps</span> <span class="o">===</span> <span class="kc">undefined</span> <span class="p">?</span> <span class="kc">null</span> <span class="p">:</span> <span class="nx">deps</span><span class="p">;</span>
+  <span class="nx">currentlyRenderingFiber</span><span class="p">.</span><span class="nx">flags</span> <span class="o">|=</span> <span class="nx">fiberFlags</span><span class="p">;</span>
+  <span class="nx">hook</span><span class="p">.</span><span class="nx">memoizedState</span> <span class="o">=</span> <span class="nf">pushEffect</span><span class="p">(</span><span class="nx">HookHasEffect</span> <span class="o">|</span> <span class="nx">hookFlags</span><span class="p">,</span> <span class="nx">create</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">,</span> <span class="nx">nextDeps</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>mountEffectImpl 逻辑：</p>
+
+<ol>
+  <li>创建 hook。</li>
+  <li>设置 workInProgress 的副作用标记：flags |= fiberFlags。</li>
+  <li>创建 effect，挂载到 hook.memoizedState 上，即 hook.memoizedState = effect</li>
+</ol>
+
+<p>PS：状态 Hook 的 hook.memoizedState = state。</p>
+
+<h3 id="创建-effect">创建 Effect</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">pushEffect</span><span class="p">(</span><span class="nx">tag</span><span class="p">,</span> <span class="nx">create</span><span class="p">,</span> <span class="nx">destroy</span><span class="p">,</span> <span class="nx">deps</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// 创建 effect 对象</span>
+  <span class="kd">const</span> <span class="nx">effect</span><span class="p">:</span> <span class="nx">Effect</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">tag</span><span class="p">,</span>
+    <span class="nx">create</span><span class="p">,</span>
+    <span class="nx">destroy</span><span class="p">,</span>
+    <span class="nx">deps</span><span class="p">,</span>
+    <span class="na">next</span><span class="p">:</span> <span class="p">(</span><span class="na">null</span><span class="p">:</span> <span class="nx">any</span><span class="p">),</span>
+  <span class="p">};</span>
+  <span class="c1">// 将 effect 对象添加到环形链表末尾</span>
+  <span class="kd">let</span> <span class="nx">componentUpdateQueue</span><span class="p">:</span> <span class="kc">null</span> <span class="o">|</span> <span class="nx">FunctionComponentUpdateQueue</span> <span class="o">=</span>
+    <span class="p">(</span><span class="nx">currentlyRenderingFiber</span><span class="p">.</span><span class="nx">updateQueue</span><span class="p">:</span> <span class="nx">any</span><span class="p">);</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">componentUpdateQueue</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">componentUpdateQueue</span> <span class="o">=</span> <span class="nf">createFunctionComponentUpdateQueue</span><span class="p">();</span>
+    <span class="nx">currentlyRenderingFiber</span><span class="p">.</span><span class="nx">updateQueue</span> <span class="o">=</span> <span class="p">(</span><span class="nx">componentUpdateQueue</span><span class="p">:</span> <span class="nx">any</span><span class="p">);</span>
+    <span class="nx">componentUpdateQueue</span><span class="p">.</span><span class="nx">lastEffect</span> <span class="o">=</span> <span class="nx">effect</span><span class="p">.</span><span class="nx">next</span> <span class="o">=</span> <span class="nx">effect</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">lastEffect</span> <span class="o">=</span> <span class="nx">componentUpdateQueue</span><span class="p">.</span><span class="nx">lastEffect</span><span class="p">;</span>
+    <span class="k">if </span><span class="p">(</span><span class="nx">lastEffect</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">componentUpdateQueue</span><span class="p">.</span><span class="nx">lastEffect</span> <span class="o">=</span> <span class="nx">effect</span><span class="p">.</span><span class="nx">next</span> <span class="o">=</span> <span class="nx">effect</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">firstEffect</span> <span class="o">=</span> <span class="nx">lastEffect</span><span class="p">.</span><span class="nx">next</span><span class="p">;</span>
+      <span class="nx">lastEffect</span><span class="p">.</span><span class="nx">next</span> <span class="o">=</span> <span class="nx">effect</span><span class="p">;</span>
+      <span class="nx">effect</span><span class="p">.</span><span class="nx">next</span> <span class="o">=</span> <span class="nx">firstEffect</span><span class="p">;</span>
+      <span class="nx">componentUpdateQueue</span><span class="p">.</span><span class="nx">lastEffect</span> <span class="o">=</span> <span class="nx">effect</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">effect</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>effect 的数据结构：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">export</span> <span class="nx">type</span> <span class="nx">Effect</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">tag</span><span class="p">:</span> <span class="nx">HookFlags</span><span class="p">,</span>
+  <span class="na">create</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(()</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">)</span> <span class="o">|</span> <span class="k">void</span><span class="p">,</span>
+  <span class="na">destroy</span><span class="p">:</span> <span class="p">(()</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">)</span> <span class="o">|</span> <span class="k">void</span><span class="p">,</span>
+  <span class="na">deps</span><span class="p">:</span> <span class="nb">Array</span><span class="o">&lt;</span><span class="nx">mixed</span><span class="o">&gt;</span> <span class="o">|</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="na">next</span><span class="p">:</span> <span class="nx">Effect</span><span class="p">,</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>effect.tag: HookFlags 类型定义位于 <em>react-reconciler/src/ReactHookEffectTags.js</em> 中，是二进制属性，代表 effect 类型：</p>
+
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">export</span> <span class="nx">type</span> <span class="nx">HookFlags</span> <span class="o">=</span> <span class="nx">number</span><span class="p">;</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">NoFlags</span> <span class="o">=</span> <span class="cm">/*   */</span> <span class="mb">0b000</span><span class="p">;</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">HasEffect</span> <span class="o">=</span> <span class="cm">/* */</span> <span class="mb">0b001</span><span class="p">;</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">Layout</span> <span class="o">=</span> <span class="cm">/*    */</span> <span class="mb">0b010</span><span class="p">;</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">Passive</span> <span class="o">=</span> <span class="cm">/*   */</span> <span class="mb">0b100</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>effect.create: 通过 useEffect() 所传入的函数</li>
+  <li>effect.deps：依赖项，如果依赖变动，会创建新的 effect</li>
+</ul>
+
+<p>现在 workInProgress.flags 被打上标记，最后会在 fiber 树渲染阶段的 commitRoot 函数中处理。</p>
+
+<h3 id="区别">区别</h3>
+
+<p>从上面可知，useEffect 与 useLayoutEffect 只是内部 flags，tag 状态的区别</p>
+
+<ol>
+  <li>fiber.flags 区别：
+    <ul>
+      <li>useEffect 的 <code class="language-plaintext highlighter-rouge">fiber.flags = UpdateEffect | PassiveEffect</code></li>
+      <li>useLayoutEffect 的 <code class="language-plaintext highlighter-rouge">fiber.flags= UpdateEffect</code></li>
+    </ul>
+  </li>
+  <li>fiber.tag 的区别：
+    <ul>
+      <li>useEffect 的 <code class="language-plaintext highlighter-rouge">fiber.tag = HookHasEffect | HookPassive</code></li>
+      <li>useLayoutEffect 的 <code class="language-plaintext highlighter-rouge">fiber.tag = HookHasEffect | HookLayout</code></li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="处理-effect-回调">处理 Effect 回调</h2>
+
+<p>完成 fiber 树构造后，逻辑会进入渲染阶段，在 commitRootImp 函数中，整个渲染过程被 3 个函数分步实现：</p>
+
+<ol>
+  <li>commitBeforeMutationEffects</li>
+  <li>commitMutationEffects</li>
+  <li>recursivelyCommitLayoutEffects</li>
+</ol>
+
+<p>这 3 个函数会处理 fiber.flags，也会根据情况处理 fiber.updateQueue.lastEffect。</p>
+
+<h3 id="commitmutationeffects">commitMutationEffects</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">commitBeforeMutationEffects</span><span class="p">(</span><span class="nx">firstEffect</span><span class="p">:</span> <span class="nx">Fiber</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">fiber</span> <span class="o">=</span> <span class="nx">firstEffect</span><span class="p">;</span>
+  <span class="k">while </span><span class="p">(</span><span class="nx">fiber</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if </span><span class="p">(</span><span class="nx">fiber</span><span class="p">.</span><span class="nx">deletions</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nf">commitBeforeMutationEffectsDeletions</span><span class="p">(</span><span class="nx">fiber</span><span class="p">.</span><span class="nx">deletions</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">if </span><span class="p">(</span><span class="nx">fiber</span><span class="p">.</span><span class="nx">child</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">primarySubtreeFlags</span> <span class="o">=</span> <span class="nx">fiber</span><span class="p">.</span><span class="nx">subtreeFlags</span> <span class="o">&amp;</span> <span class="nx">BeforeMutationMask</span><span class="p">;</span>
+      <span class="k">if </span><span class="p">(</span><span class="nx">primarySubtreeFlags</span> <span class="o">!==</span> <span class="nx">NoFlags</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nf">commitBeforeMutationEffects</span><span class="p">(</span><span class="nx">fiber</span><span class="p">.</span><span class="nx">child</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="nf">commitBeforeMutationEffectsImpl</span><span class="p">(</span><span class="nx">fiber</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nf">captureCommitPhaseError</span><span class="p">(</span><span class="nx">fiber</span><span class="p">,</span> <span class="nx">fiber</span><span class="p">.</span><span class="k">return</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nx">fiber</span> <span class="o">=</span> <span class="nx">fiber</span><span class="p">.</span><span class="nx">sibling</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nf">commitBeforeMutationEffectsImpl</span><span class="p">(</span><span class="nx">fiber</span><span class="p">:</span> <span class="nx">Fiber</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">flags</span> <span class="o">=</span> <span class="nx">fiber</span><span class="p">.</span><span class="nx">flags</span><span class="p">;</span>
+
+  <span class="c1">// 省略其他代码，只保留 Hook 相关</span>
+
+  <span class="k">if </span><span class="p">((</span><span class="nx">flags</span> <span class="o">&amp;</span> <span class="nx">Passive</span><span class="p">)</span> <span class="o">!==</span> <span class="nx">NoFlags</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if </span><span class="p">(</span><span class="o">!</span><span class="nx">rootDoesHavePassiveEffects</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">rootDoesHavePassiveEffects</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+      <span class="nf">scheduleCallback</span><span class="p">(</span><span class="nx">NormalSchedulerPriority</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nf">flushPassiveEffects</span><span class="p">();</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+      <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>第一阶段：DOM 变更之前，处理副作用队列中带有 Passive 标记的 fiber 节点。</p>
+
+<p>注意：由于 flushPassiveEffects 被包裹在 scheduleCallback 回调中，由调度中心来处理的，且参数是 NormalSchedulerPriority，故这是一个异步回调。</p>
+
+<p>由于 scheduleCallback(NormalSchedulerPriority, callback) 是异步的，flushPassiveEffects 并不会立即执行。</p>
+
+<h3 id="commitmutationeffects-1">commitMutationEffects</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">commitMutationEffects</span><span class="p">(</span>
+  <span class="nx">firstChild</span><span class="p">:</span> <span class="nx">Fiber</span><span class="p">,</span>
+  <span class="nx">root</span><span class="p">:</span> <span class="nx">FiberRoot</span><span class="p">,</span>
+  <span class="nx">renderPriorityLevel</span><span class="p">:</span> <span class="nx">ReactPriorityLevel</span>
+<span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">fiber</span> <span class="o">=</span> <span class="nx">firstChild</span><span class="p">;</span>
+  <span class="k">while </span><span class="p">(</span><span class="nx">fiber</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">deletions</span> <span class="o">=</span> <span class="nx">fiber</span><span class="p">.</span><span class="nx">deletions</span><span class="p">;</span>
+    <span class="k">if </span><span class="p">(</span><span class="nx">deletions</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nf">commitMutationEffectsDeletions</span><span class="p">(</span><span class="nx">deletions</span><span class="p">,</span> <span class="nx">fiber</span><span class="p">,</span> <span class="nx">root</span><span class="p">,</span> <span class="nx">renderPriorityLevel</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">if </span><span class="p">(</span><span class="nx">fiber</span><span class="p">.</span><span class="nx">child</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">mutationFlags</span> <span class="o">=</span> <span class="nx">fiber</span><span class="p">.</span><span class="nx">subtreeFlags</span> <span class="o">&amp;</span> <span class="nx">mutationMask</span><span class="p">;</span>
+      <span class="k">if </span><span class="p">(</span><span class="nx">mutationFlags</span> <span class="o">!==</span> <span class="nx">NoFlags</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nf">commitMutationEffects</span><span class="p">(</span><span class="nx">fiber</span><span class="p">.</span><span class="nx">child</span><span class="p">,</span> <span class="nx">root</span><span class="p">,</span> <span class="nx">renderPriorityLevel</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="nf">commitMutationEffectsImpl</span><span class="p">(</span><span class="nx">fiber</span><span class="p">,</span> <span class="nx">root</span><span class="p">,</span> <span class="nx">renderPriorityLevel</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nf">captureCommitPhaseError</span><span class="p">(</span><span class="nx">fiber</span><span class="p">,</span> <span class="nx">fiber</span><span class="p">.</span><span class="k">return</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nx">fiber</span> <span class="o">=</span> <span class="nx">fiber</span><span class="p">.</span><span class="nx">sibling</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nf">commitMutationEffectsImpl</span><span class="p">(</span><span class="nx">fiber</span><span class="p">:</span> <span class="nx">Fiber</span><span class="p">,</span> <span class="nx">root</span><span class="p">:</span> <span class="nx">FiberRoot</span><span class="p">,</span> <span class="nx">renderPriorityLevel</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">flags</span> <span class="o">=</span> <span class="nx">fiber</span><span class="p">.</span><span class="nx">flags</span><span class="p">;</span>
+
+  <span class="c1">// 省略其他代码，只保留 Hook 相关</span>
+
+  <span class="kd">const</span> <span class="nx">primaryFlags</span> <span class="o">=</span> <span class="nx">flags</span> <span class="o">&amp;</span> <span class="p">(</span><span class="nx">Placement</span> <span class="o">|</span> <span class="nx">Update</span> <span class="o">|</span> <span class="nx">Hydrating</span><span class="p">);</span>
+
+  <span class="k">switch </span><span class="p">(</span><span class="nx">primaryFlags</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="nx">Update</span><span class="p">:</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">current</span> <span class="o">=</span> <span class="nx">fiber</span><span class="p">.</span><span class="nx">alternate</span><span class="p">;</span>
+      <span class="nf">commitWork</span><span class="p">(</span><span class="nx">current</span><span class="p">,</span> <span class="nx">fiber</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nf">commitWork</span><span class="p">(</span><span class="nx">current</span><span class="p">:</span> <span class="nx">Fiber</span> <span class="o">|</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">finishedWork</span><span class="p">:</span> <span class="nx">Fiber</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+  <span class="c1">// 省略其他代码，只保留 Hook 相关</span>
+
+  <span class="k">switch </span><span class="p">(</span><span class="nx">finishedWork</span><span class="p">.</span><span class="nx">tag</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="na">FunctionComponent</span><span class="p">:</span>
+    <span class="k">case</span> <span class="na">ForwardRef</span><span class="p">:</span>
+    <span class="k">case</span> <span class="na">MemoComponent</span><span class="p">:</span>
+    <span class="k">case</span> <span class="na">SimpleMemoComponent</span><span class="p">:</span>
+    <span class="k">case</span> <span class="na">Block</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nf">commitWorkEffectListUnmount</span><span class="p">(</span><span class="nx">HookLayout</span> <span class="o">|</span> <span class="nx">HookHasEffect</span><span class="p">,</span> <span class="nx">finishedWork</span><span class="p">,</span> <span class="nx">finishedWork</span><span class="p">.</span><span class="k">return</span><span class="p">);</span>
+      <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 依次执行 effect.destroy</span>
+<span class="kd">function</span> <span class="nf">commitHookEffectListUnmount</span><span class="p">(</span>
+  <span class="nx">flags</span><span class="p">:</span> <span class="nx">HookFlags</span><span class="p">,</span>
+  <span class="nx">finishedWork</span><span class="p">:</span> <span class="nx">Fiber</span><span class="p">,</span>
+  <span class="nx">nearestMountedAncestor</span><span class="p">:</span> <span class="nx">Fiber</span> <span class="o">|</span> <span class="kc">null</span>
+<span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">updateQueue</span><span class="p">:</span> <span class="nx">FunctionComponentUpdateQueue</span> <span class="o">|</span> <span class="kc">null</span> <span class="o">=</span> <span class="p">(</span><span class="nx">finishedWork</span><span class="p">.</span><span class="nx">updateQueue</span><span class="p">:</span> <span class="nx">any</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">lastEffect</span> <span class="o">=</span> <span class="nx">updateQueue</span> <span class="o">!==</span> <span class="kc">null</span> <span class="p">?</span> <span class="nx">updateQueue</span><span class="p">.</span><span class="nx">lastEffect</span> <span class="p">:</span> <span class="kc">null</span><span class="p">;</span>
+
+  <span class="k">if </span><span class="p">(</span><span class="nx">lastEffect</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">firstEffect</span> <span class="o">=</span> <span class="nx">lastEffect</span><span class="p">.</span><span class="nx">next</span><span class="p">;</span>
+    <span class="kd">let</span> <span class="nx">effect</span> <span class="o">=</span> <span class="nx">firstEffect</span><span class="p">;</span>
+    <span class="k">do</span> <span class="p">{</span>
+      <span class="k">if </span><span class="p">((</span><span class="nx">effect</span><span class="p">.</span><span class="nx">tag</span> <span class="o">&amp;</span> <span class="nx">flags</span><span class="p">)</span> <span class="o">===</span> <span class="nx">flags</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">destroy</span> <span class="o">=</span> <span class="nx">effect</span><span class="p">.</span><span class="nx">destroy</span><span class="p">;</span>
+        <span class="nx">effect</span><span class="p">.</span><span class="nx">destroy</span> <span class="o">=</span> <span class="kc">undefined</span><span class="p">;</span>
+        <span class="k">if </span><span class="p">(</span><span class="nx">destroy</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nf">safelyCallDestroy</span><span class="p">(</span><span class="nx">finishedWork</span><span class="p">,</span> <span class="nx">nearestMountedAncestor</span><span class="p">,</span> <span class="nx">destroy</span><span class="p">);</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+      <span class="nx">effect</span> <span class="o">=</span> <span class="nx">effect</span><span class="p">.</span><span class="nx">next</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">while </span><span class="p">(</span><span class="nx">effect</span> <span class="o">!==</span> <span class="nx">firstEffect</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>第二阶段：DOM 变更，界面得到更新。</p>
+
+<p>调用关系：commitMutationEffects -&gt; commitWork -&gt; commitHookEffectListUnmount。</p>
+
+<ul>
+  <li>注意在调用 commitMutationEffects(HookLayout | HookHasEffect, finishedWork) 时，参数是 HookLayout | HookHasEffect，所以只处理由 useLayoutEffect() 创建的 effect。</li>
+  <li>根据上文的分析 HookLayout | HookHasEffect 是通过 useLayoutEffect 创建的 effect。所以 commitMutationEffects 函数只能处理由 useLayoutEffect() 创建的 effect。</li>
+  <li>同步调用 effect.destroy()。</li>
+</ul>
+
+<h3 id="recursivelycommitlayouteffects">recursivelyCommitLayoutEffects</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">recursivelyCommitLayoutEffects</span><span class="p">(</span><span class="nx">finishedWork</span><span class="p">:</span> <span class="nx">Fiber</span><span class="p">,</span> <span class="nx">finishedRoot</span><span class="p">:</span> <span class="nx">FiberRoot</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">{</span> <span class="nx">flags</span><span class="p">,</span> <span class="nx">tag</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">finishedWork</span><span class="p">;</span>
+
+  <span class="k">switch </span><span class="p">(</span><span class="nx">tag</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="nx">Profiler</span><span class="p">:</span> <span class="p">{</span>
+      <span class="c1">// 省略其他代码</span>
+    <span class="p">}</span>
+
+    <span class="nl">default</span><span class="p">:</span> <span class="p">{</span>
+      <span class="c1">// 省略其他代码</span>
+      <span class="kd">const</span> <span class="nx">primaryFlags</span> <span class="o">=</span> <span class="nx">flags</span> <span class="o">&amp;</span> <span class="p">(</span><span class="nx">Update</span> <span class="o">|</span> <span class="nx">Callback</span><span class="p">);</span>
+      <span class="k">if </span><span class="p">(</span><span class="nx">primaryFlags</span> <span class="o">!==</span> <span class="nx">NoFlags</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">switch </span><span class="p">(</span><span class="nx">tag</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">case</span> <span class="na">FunctionComponent</span><span class="p">:</span>
+          <span class="k">case</span> <span class="na">ForwardRef</span><span class="p">:</span>
+          <span class="k">case</span> <span class="na">SimpleMemoComponent</span><span class="p">:</span>
+          <span class="k">case</span> <span class="na">Block</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nf">commitHookEffectListMount</span><span class="p">(</span><span class="nx">HookLayout</span> <span class="o">|</span> <span class="nx">HookHasEffect</span><span class="p">,</span> <span class="nx">finishedWork</span><span class="p">);</span>
+
+            <span class="k">if </span><span class="p">((</span><span class="nx">finishedWork</span><span class="p">.</span><span class="nx">subtreeFlags</span> <span class="o">&amp;</span> <span class="nx">PassiveMask</span><span class="p">)</span> <span class="o">!==</span> <span class="nx">NoFlags</span><span class="p">)</span> <span class="p">{</span>
+              <span class="nf">schedulePassiveEffectCallback</span><span class="p">();</span>
+            <span class="p">}</span>
+            <span class="k">break</span><span class="p">;</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nf">commitHookEffectListMount</span><span class="p">(</span><span class="nx">flags</span><span class="p">:</span> <span class="nx">HookFlags</span><span class="p">,</span> <span class="nx">finishedWork</span><span class="p">:</span> <span class="nx">Fiber</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">updateQueue</span><span class="p">:</span> <span class="nx">FunctionComponentUpdateQueue</span> <span class="o">|</span> <span class="kc">null</span> <span class="o">=</span> <span class="p">(</span><span class="nx">finishedWork</span><span class="p">.</span><span class="nx">updateQueue</span><span class="p">:</span> <span class="nx">any</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">lastEffect</span> <span class="o">=</span> <span class="nx">updateQueue</span> <span class="o">!==</span> <span class="kc">null</span> <span class="p">?</span> <span class="nx">updateQueue</span><span class="p">.</span><span class="nx">lastEffect</span> <span class="p">:</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">lastEffect</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">firstEffect</span> <span class="o">=</span> <span class="nx">lastEffect</span><span class="p">.</span><span class="nx">next</span><span class="p">;</span>
+    <span class="kd">let</span> <span class="nx">effect</span> <span class="o">=</span> <span class="nx">firstEffect</span><span class="p">;</span>
+    <span class="k">do</span> <span class="p">{</span>
+      <span class="k">if </span><span class="p">((</span><span class="nx">effect</span><span class="p">.</span><span class="nx">tag</span> <span class="o">&amp;</span> <span class="nx">flags</span><span class="p">)</span> <span class="o">===</span> <span class="nx">flags</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">create</span> <span class="o">=</span> <span class="nx">effect</span><span class="p">.</span><span class="nx">create</span><span class="p">;</span>
+        <span class="nx">effect</span><span class="p">.</span><span class="nx">destroy</span> <span class="o">=</span> <span class="nf">create</span><span class="p">();</span>
+      <span class="p">}</span>
+      <span class="nx">effect</span> <span class="o">=</span> <span class="nx">effect</span><span class="p">.</span><span class="nx">next</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">while </span><span class="p">(</span><span class="nx">effect</span> <span class="o">!==</span> <span class="nx">firstEffect</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="更新-hook">更新 Hook</h2>
+
+<p>在更新过程中 useEffect 对应的源码 UpdateEffect，useLayoutEffect 对应的源码 updateLayoutEffect。他们内部都是调用 UpdateEffectImpl，与初次创建时一样，只是参数不同。</p>
+
+<h3 id="更新-effect">更新 Effect</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">UpdateEffectImpl</span><span class="p">(</span><span class="nx">fiberFlags</span><span class="p">,</span> <span class="nx">hookFlags</span><span class="p">,</span> <span class="nx">create</span><span class="p">,</span> <span class="nx">deps</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">hook</span> <span class="o">=</span> <span class="nf">mountWorkInProgressHook</span><span class="p">();</span>
+  <span class="kd">const</span> <span class="nx">nextDeps</span> <span class="o">=</span> <span class="nx">deps</span> <span class="o">===</span> <span class="kc">undefined</span> <span class="p">?</span> <span class="kc">null</span> <span class="p">:</span> <span class="nx">deps</span><span class="p">;</span>
+  <span class="kd">let</span> <span class="nx">destroy</span> <span class="o">=</span> <span class="kc">undefined</span><span class="p">;</span>
+
+  <span class="c1">// 分析依赖</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">currentHook</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">prevEffect</span> <span class="o">=</span> <span class="nx">currentHook</span><span class="p">.</span><span class="nx">memoizedState</span><span class="p">;</span>
+    <span class="nx">destroy</span> <span class="o">=</span> <span class="nx">prevEffect</span><span class="p">.</span><span class="nx">destroy</span><span class="p">;</span>
+    <span class="k">if </span><span class="p">(</span><span class="nx">nextDeps</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">prevDeps</span> <span class="o">=</span> <span class="nx">prevEffect</span><span class="p">.</span><span class="nx">deps</span><span class="p">;</span>
+      <span class="c1">// 比较依赖是否变化</span>
+      <span class="k">if </span><span class="p">(</span><span class="nf">areHookInputsEqual</span><span class="p">(</span><span class="nx">nextDeps</span><span class="p">,</span> <span class="nx">prevDeps</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nf">pushEffect</span><span class="p">(</span><span class="nx">hookFlags</span><span class="p">,</span> <span class="nx">create</span><span class="p">,</span> <span class="nx">destroy</span><span class="p">,</span> <span class="nx">nextDeps</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="c1">// 如果依赖变动，更改 fiber.flag，新建 effect</span>
+  <span class="nx">currentlyRenderingFiber</span><span class="p">.</span><span class="nx">flags</span> <span class="o">|=</span> <span class="nx">fiberFlags</span><span class="p">;</span>
+
+  <span class="nx">hook</span><span class="p">.</span><span class="nx">memoizedState</span> <span class="o">=</span> <span class="nf">pushEffect</span><span class="p">(</span><span class="nx">HookHasEffect</span> <span class="o">|</span> <span class="nx">hookFlags</span><span class="p">,</span> <span class="nx">create</span><span class="p">,</span> <span class="nx">destroy</span><span class="p">,</span> <span class="nx">nextDeps</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>UpdateEffectImpl 与 mountEffectImpl 逻辑有所不同，如果 useEffect/useLayoutEffect 的依赖不变，新建的 effect 对象不带 HasEffect 标记。</p>
+
+<p>注意：无论依赖是否变化，都复用之前的 effect.destroy。等待 commitRoot 阶段的调用。</p>
+
+<h3 id="处理-effect-回调-1">处理 Effect 回调</h3>
+
+<p>新的 Hook 以及新的 Effect 创建完成之后，余下逻辑与初次渲染完全一致。处理 Effect 回调时也会根据 effect.tag 进行判断：只有effect.tag 包含 HookHasEffect 时才会调用 effect.destroy 和 effect.create()</p>
+
+<h2 id="组件销毁">组件销毁</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td>当 function 组件被销毁时，fiber 节点必然会被打上 Deletion 标记，即 fiber.flags</td>
+      <td>= Deletion，带有 Deletion 标记的 fiber 在 commitMutationEffect 被处理</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>在 commitDeletion 函数之后，继续调用 unmountHostComponents -&gt; commitUnmount，在 commitUnmount 中，执行 effect.destroy()，结束整个闭环。</p>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="https://github.com/7kms/react-illustration-series">github: react-illustration-series</a></li>
+  <li><a href="https://github.com/facebook/react">github: react</a></li>
+  <li><a href="https://7kms.github.io/react-illustration-series/main/hook-effect/">图解 React: 副作用 Hook</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2022/12/25/%E9%98%85%E8%AF%BB%E5%9B%BE%E8%A7%A3React%E7%AC%94%E8%AE%B010.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

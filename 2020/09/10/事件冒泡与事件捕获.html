@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>事件冒泡与事件捕获 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="事件冒泡与事件捕获" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="事件流描述的是从页面中接受事件的顺序，主要是事件冒泡和事件捕获。" />
+<meta property="og:description" content="事件流描述的是从页面中接受事件的顺序，主要是事件冒泡和事件捕获。" />
+<link rel="canonical" href="/blog/2020/09/10/%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1%E4%B8%8E%E4%BA%8B%E4%BB%B6%E6%8D%95%E8%8E%B7.html" />
+<meta property="og:url" content="/blog/2020/09/10/%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1%E4%B8%8E%E4%BA%8B%E4%BB%B6%E6%8D%95%E8%8E%B7.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-09-10T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="事件冒泡与事件捕获" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2020-09-10T00:00:00+00:00","datePublished":"2020-09-10T00:00:00+00:00","description":"事件流描述的是从页面中接受事件的顺序，主要是事件冒泡和事件捕获。","headline":"事件冒泡与事件捕获","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2020/09/10/%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1%E4%B8%8E%E4%BA%8B%E4%BB%B6%E6%8D%95%E8%8E%B7.html"},"url":"/blog/2020/09/10/%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1%E4%B8%8E%E4%BA%8B%E4%BB%B6%E6%8D%95%E8%8E%B7.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">事件冒泡与事件捕获</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2020-09-10T00:00:00+00:00" itemprop="datePublished">Sep 10, 2020
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2020"><i>2020</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/javascript"><i>javascript</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>事件流描述的是从页面中接受事件的顺序，主要是事件冒泡和事件捕获。</p>
+
+<h2 id="事件冒泡">事件冒泡</h2>
+
+<p>事件冒泡（event bubbling），即事件开始时由最具体的元素接收，然后逐级向上传播到 window 对象。</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Document<span class="nt">&lt;/title&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"myDiv"</span><span class="nt">&gt;</span>Click<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<p>当点击了 div 元素，事件传播 div -&gt; body -&gt; html -&gt; Document -&gt; window。</p>
+
+<h2 id="事件捕获">事件捕获</h2>
+
+<p>事件捕获（event capturing），是由事件从 window 对象开始接收事件，然后逐级向下传播到具体元素。</p>
+
+<p>如上代码，点击掉了 div 元素，事件传播 window -&gt; Document -&gt; html -&gt; body -&gt; div。</p>
+
+<h2 id="dom-事件流">DOM 事件流</h2>
+
+<p>三个阶段：事件捕获阶段，处于目标阶段和事件冒泡阶段。</p>
+
+<p>新增事件和删除事件的操作：<code class="language-plaintext highlighter-rouge">addEventListener(type, listener [, options])</code> 和 <code class="language-plaintext highlighter-rouge">removeEventListener(type, listener [, options])</code></p>
+
+<h2 id="事件委托">事件委托</h2>
+
+<p>事件委托就是利用事件的冒泡原理，把元素的响应事件代理到其父辈元素上，可以减少循环绑定。</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- 普通的html列表标签 --&gt;</span>
+<span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">"list"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;li&gt;</span>item 1<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>item 2<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>item 3<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* 普通的遍历元素注册事件监听 */</span>
+<span class="kd">var</span> <span class="nx">items</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nf">getElementsByTagName</span><span class="p">(</span><span class="dl">'</span><span class="s1">li</span><span class="dl">'</span><span class="p">);</span>
+<span class="k">for </span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">items</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">items</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nf">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="nf">function </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nf">removeChild</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* 事件委托 */</span>
+<span class="kd">var</span> <span class="nx">list</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nf">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">list</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">list</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="nf">function </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">list</span><span class="p">.</span><span class="nf">removeChild</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h2 id="event-对象的属性和方法">event 对象的属性和方法</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性/方法</th>
+      <th>类型</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>target</td>
+      <td>Element</td>
+      <td>事件的目标</td>
+    </tr>
+    <tr>
+      <td>currentTarget</td>
+      <td>Element</td>
+      <td>其事件处理程序当前正在处理事件的那么元素，即触发事件的元素</td>
+    </tr>
+    <tr>
+      <td>preventDefault</td>
+      <td>Function</td>
+      <td>取消事件的默认行为</td>
+    </tr>
+    <tr>
+      <td>stopPropagation</td>
+      <td>Function</td>
+      <td>取消事件的进一步捕获或冒泡</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="target-与-currenttarget">target 与 currentTarget</h3>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;button&gt;</span>Click me<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">div</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nf">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">.container</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">div</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">target</span><span class="dl">'</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">currentTarget</span><span class="dl">'</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>当我们点击按钮的时候，我们可以看到不同的输出结果</p>
+
+<pre><code class="language-plain">target &lt;button&gt;Click me&lt;/button&gt;
+currentTarget &lt;div class="container"&gt;...&lt;/div&gt;
+</code></pre>
+
+<ul>
+  <li>targt 是触发事件的根元素</li>
+  <li>currentTarget 是处理该事件的元素</li>
+</ul>
+
+<h2 id="不会触发冒泡的事件">不会触发冒泡的事件</h2>
+
+<ul>
+  <li>scroll</li>
+  <li>blur</li>
+  <li>focus</li>
+  <li>mouseentter</li>
+  <li>mouseleave</li>
+</ul>
+
+<h2 id="其他">其他</h2>
+
+<p>React 的事件体系就是基于事件委托建立的，其中有很大的部分都是处理不同事件之间的差异性的，对于这些不会冒泡的事件，React 也进行了处理。</p>
+
+<p>React 的事件系统可以参考上一篇的《React事件系统》</p>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li>《JavaScript 高级程序设计（第 3 版）》</li>
+  <li><a href="https://zhuanlan.zhihu.com/p/165089379">React 中的事件委托</a></li>
+  <li><a href="https://www.carlrippon.com/event-target-v-current-target/">Event target v currentTarget</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2020/09/10/%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1%E4%B8%8E%E4%BA%8B%E4%BB%B6%E6%8D%95%E8%8E%B7.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

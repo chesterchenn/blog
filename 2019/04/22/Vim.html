@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Vim | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Vim" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Vim 中的一些快捷键。" />
+<meta property="og:description" content="Vim 中的一些快捷键。" />
+<link rel="canonical" href="/blog/2019/04/22/Vim.html" />
+<meta property="og:url" content="/blog/2019/04/22/Vim.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-04-22T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Vim" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2019-04-22T00:00:00+00:00","datePublished":"2019-04-22T00:00:00+00:00","description":"Vim 中的一些快捷键。","headline":"Vim","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2019/04/22/Vim.html"},"url":"/blog/2019/04/22/Vim.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Vim</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2019-04-22T00:00:00+00:00" itemprop="datePublished">Apr 22, 2019
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2019"><i>2019</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/linux"><i>linux</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Vim 中的一些快捷键。</p>
+
+<h2 id="vim-的模式">vim 的模式</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">模式</th>
+      <th style="text-align: left">说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">正常模式</td>
+      <td style="text-align: left">快捷命令，或者按:输入命令行</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">插入模式</td>
+      <td style="text-align: left">输入文本，按 i、a、o、s 等进入</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">可视模式</td>
+      <td style="text-align: left">选择文本，按 v 进入可视模式，V 进入可视行模式, ctrl + v 进入可视块模式</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="插入模式">插入模式</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">按键</th>
+      <th style="text-align: left">动作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">a</td>
+      <td style="text-align: left">在光标所在字符后添加文本</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">A</td>
+      <td style="text-align: left">在当前行最后一个字符后添加文本</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">c</td>
+      <td style="text-align: left">开始修改操作，允许更改当前行文本</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">C</td>
+      <td style="text-align: left">修改从光标位置开始到当前行末尾范围内的内容</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">在光标所在的字符前插入文本</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">I</td>
+      <td style="text-align: left">在当前行开头插入文本</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">o</td>
+      <td style="text-align: left">在当前行下方打开一空行并将光标置于该空行行首</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">O</td>
+      <td style="text-align: left">在当前行上方打开一空行并将光标置于该空行行首</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">s</td>
+      <td style="text-align: left">删除光标所在的一个字符，并进入编辑模式</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">S</td>
+      <td style="text-align: left">删除光标所在的整行，光标保留当前行，不同于 dd</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="命令模式">命令模式</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">命令</th>
+      <th style="text-align: left">动作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">:q</td>
+      <td style="text-align: left">退出</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">:q!</td>
+      <td style="text-align: left">放弃缓冲区内容，并退出</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">:w</td>
+      <td style="text-align: left">保存缓冲区内容</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">:wq</td>
+      <td style="text-align: left">保存缓冲区内容，并退出</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">ZZ</td>
+      <td style="text-align: left">退出，仅当文件在最后一次保存后进行了修改，才保存缓冲区内容</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">/something</td>
+      <td style="text-align: left">在后面的文本查找 something，结合 n 键使用</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">?something</td>
+      <td style="text-align: left">在前面的文本查找 something，结合 n 键使用</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">:s/old/new</td>
+      <td style="text-align: left">用 new 替换一个 old</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">:s/old/new/g</td>
+      <td style="text-align: left">用 new 替换当前行所有 old</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">:%s/old/new/g</td>
+      <td style="text-align: left">用 new 替换所有的的 old</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="正常模式">正常模式</h2>
+
+<h3 id="光标移动">光标移动</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">命令</th>
+      <th style="text-align: left">动作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">h/←</td>
+      <td style="text-align: left">光标向左移动一个字符</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">j/↓</td>
+      <td style="text-align: left">光标向下移动一个字符</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">k/↑</td>
+      <td style="text-align: left">光标向上移动一个字符</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">l/→</td>
+      <td style="text-align: left">光标向右移动一个字符</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">nG/[n]gg</td>
+      <td style="text-align: left">将光标移到文件 n 行</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">G</td>
+      <td style="text-align: left">将光标移到文件末行,gg 可以移到首行</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">^</td>
+      <td style="text-align: left">将光标移到当前行最开始的字符</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">$</td>
+      <td style="text-align: left">将光标移到当前行最后一个字符</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">将光标移到当前行首</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">w</td>
+      <td style="text-align: left">将光标每次前移一词</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">将光标每次倒退一词</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">%</td>
+      <td style="text-align: left">跳转到匹配的项目上，([{}])</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">f{char}</td>
+      <td style="text-align: left">将光标移至同一行的下一个{char}字符</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">F{char}</td>
+      <td style="text-align: left">将光标移至同一行的上一个{char}字符</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">t{char}</td>
+      <td style="text-align: left">将光标移至同一行的下一个{char}字符前</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">T{char}</td>
+      <td style="text-align: left">将光标移至同一行的下一个{char}字符后</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">;</td>
+      <td style="text-align: left">配合 f &amp; t，重复一次</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">,</td>
+      <td style="text-align: left">配合 f &amp; t，反向重复一次</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">H</td>
+      <td style="text-align: left">移动至屏幕顶部一行</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">M</td>
+      <td style="text-align: left">移动至屏幕中间一行</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">L</td>
+      <td style="text-align: left">移动至屏幕底部一行</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">zt</td>
+      <td style="text-align: left">将当前行移动至屏幕顶部</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">zz</td>
+      <td style="text-align: left">将当前行移动至屏幕中间</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">zb</td>
+      <td style="text-align: left">将当前行移动至屏幕底部</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">ctrl+U</td>
+      <td style="text-align: left">向上翻半页</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">ctrl+B</td>
+      <td style="text-align: left">上一页</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">ctrl+D</td>
+      <td style="text-align: left">向下翻半页</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">ctrl+F</td>
+      <td style="text-align: left">下一页</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">n</td>
+      <td style="text-align: left">向后查找下一个</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">N</td>
+      <td style="text-align: left">向前查找下一个</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">g;</td>
+      <td style="text-align: left">上一个修改的地方</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">g,</td>
+      <td style="text-align: left">下一个修改的地方</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">*</td>
+      <td style="text-align: left">向下搜索光标所在的词</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">g*</td>
+      <td style="text-align: left">向下搜索搜标所在的词，部分符合</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">#</td>
+      <td style="text-align: left">向上搜索光标所在的词</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">g#</td>
+      <td style="text-align: left">向上搜索光标所在的词，部分符合</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="复制剪贴">复制剪贴</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">命令</th>
+      <th style="text-align: left">动作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">剪切光标位置上的字符</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">r</td>
+      <td style="text-align: left">代替光标位置上的字符</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">cc</td>
+      <td style="text-align: left">改写整行</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">c[n]w</td>
+      <td style="text-align: left">改写 n 个词</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">c[n]c</td>
+      <td style="text-align: left">改写 n 行</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">d</td>
+      <td style="text-align: left">可视模式剪切，也可以加左右方向键进行剪切</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">dd</td>
+      <td style="text-align: left">剪切整行</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">d[n]w</td>
+      <td style="text-align: left">剪切 n 个词汇, l，h，方向键替换 w 可以选择剪切方向</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">d[n]d</td>
+      <td style="text-align: left">删除 n 行</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">y</td>
+      <td style="text-align: left">可视模式复制，也可以加左右方向键进行赋值</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">yy\Y</td>
+      <td style="text-align: left">复制整行</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">y[n]w</td>
+      <td style="text-align: left">赋值 n 个词汇，l，h，方向键替换 w 可以选择复制方向</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">y[n]y</td>
+      <td style="text-align: left">复制 n 行</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">ci[ di[ yi[</td>
+      <td style="text-align: left">修改，删除，复制[]之间的内容</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">ca[ da[ ya[</td>
+      <td style="text-align: left">修改，删除，复制[]之间的内容, 包含[]</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">p</td>
+      <td style="text-align: left">在当前行后面插入此前被复制或剪切的行</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">P</td>
+      <td style="text-align: left">在当前行前面插入此前被复制或剪切的行</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">u</td>
+      <td style="text-align: left">撤销最近一次所做的修改</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">ctrl+R</td>
+      <td style="text-align: left">取消最近的一次撤销</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">&lt;&lt;</td>
+      <td style="text-align: left">向左缩进一个宽度</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">&gt;&gt;</td>
+      <td style="text-align: left">向右缩进一个宽度</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">重新加载文件</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">e!</td>
+      <td style="text-align: left">放弃当前修改，强制重新载入</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="多标签页">多标签页</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">命令</th>
+      <th style="text-align: left">动作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">tabe\tabnew</td>
+      <td style="text-align: left">加上文件名，在新标签页打开文件，否则打开一个空缓冲区</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">gt\tabn</td>
+      <td style="text-align: left">移动至下一个标签页</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">gT\tabp</td>
+      <td style="text-align: left">移动至上一个标签页</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">[n]gt</td>
+      <td style="text-align: left">切换到第 n 个标签页</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">tabc[lose]</td>
+      <td style="text-align: left">关闭当前标签页</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">tabo[nly]</td>
+      <td style="text-align: left">关闭其他标签页</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">tabs</td>
+      <td style="text-align: left">列出所有的标签页</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">:bd</td>
+      <td style="text-align: left">关闭 buffer</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="记录">记录</h2>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">q&lt;缓冲器名称&gt;</code> 开始进行操作</li>
+  <li>操作完毕，在正常模式下按 <code class="language-plaintext highlighter-rouge">q</code> 记录完毕</li>
+  <li><code class="language-plaintext highlighter-rouge">@&lt;缓冲器名称&gt;</code> 执行</li>
+  <li><code class="language-plaintext highlighter-rouge">[num]@&lt;缓冲器名称&gt;</code> 多次执行</li>
+</ol>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="http://vimdoc.sourceforge.net/htmldoc/usr_toc.html">vimdoc: htmldoc</a></li>
+  <li><a href="https://www.cnblogs.com/codehome/p/10214801.html">cnblog: Vim 快捷键大全</a></li>
+  <li><a href="https://vimawesome.com/">VimAwesome</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2019/04/22/Vim.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>
