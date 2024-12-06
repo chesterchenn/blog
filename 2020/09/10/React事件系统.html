@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>React事件系统 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="React事件系统" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="React 基于 Virtual DOM 实现了一个 SyntheticEvent（合成事件）层，我们所定义的事件处理器会接收到一个 SyntheticEvent 对象的实例。所有事件都自动绑定到最外层上。如果需要访问原生事件对象，可以使用 nativeEvent 属性。" />
+<meta property="og:description" content="React 基于 Virtual DOM 实现了一个 SyntheticEvent（合成事件）层，我们所定义的事件处理器会接收到一个 SyntheticEvent 对象的实例。所有事件都自动绑定到最外层上。如果需要访问原生事件对象，可以使用 nativeEvent 属性。" />
+<link rel="canonical" href="/blog/2020/09/10/React%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F.html" />
+<meta property="og:url" content="/blog/2020/09/10/React%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-09-10T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="React事件系统" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2020-09-10T00:00:00+00:00","datePublished":"2020-09-10T00:00:00+00:00","description":"React 基于 Virtual DOM 实现了一个 SyntheticEvent（合成事件）层，我们所定义的事件处理器会接收到一个 SyntheticEvent 对象的实例。所有事件都自动绑定到最外层上。如果需要访问原生事件对象，可以使用 nativeEvent 属性。","headline":"React事件系统","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2020/09/10/React%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F.html"},"url":"/blog/2020/09/10/React%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">React事件系统</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2020-09-10T00:00:00+00:00" itemprop="datePublished">Sep 10, 2020
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2020"><i>2020</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/react"><i>react</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>React 基于 Virtual DOM 实现了一个 SyntheticEvent（合成事件）层，我们所定义的事件处理器会接收到一个 SyntheticEvent 对象的实例。所有事件都自动绑定到最外层上。如果需要访问原生事件对象，可以使用 nativeEvent 属性。</p>
+
+<h2 id="实现机制">实现机制</h2>
+
+<p>在 React 底层，主要对合成事件做了两件事：事件委派和自动绑定。</p>
+
+<h3 id="事件委派">事件委派</h3>
+
+<p>从 v17.0.0 开始，React 不会将事件处理添加到 document 上，而是将事件处理添加到渲染 React 树的根 DOM 容器中。</p>
+
+<p><img src="/blog/images/react_17_delegation.webp" alt="react_17_delegation" /></p>
+
+<p>当组件挂载或卸载时，只是在这个统一的事件监听器上插入或删除一些对象；当事件发生时，首先被这个统一的事件监听器处理，然后在映射里找到真正的事件处理函数并调用。这样做简化了事件处理和回收机制，效率也有很大提升。</p>
+
+<h3 id="自动绑定">自动绑定</h3>
+
+<p>在 React 组件中，每个方法的上下文都会指向该组件的实例，即自动绑定 this 为当前组件。而且 React 还会对这种引用进行缓存，以达到 CPU 和内存的最优化。在使用 ES6 classes 或者纯函数时，这种自动绑定就不复存在了，我们需要手动实现 this 的绑定，否则 this 会被定义成 undefined。</p>
+
+<p>绑定 this 的几个方法： 1. bind 方法 2. 构造器内声明 3. 箭头函数</p>
+
+<h2 id="react-合成事件与-javascript-原生事件">React 合成事件与 JavaScript 原生事件</h2>
+
+<ol>
+  <li>
+    <p>事件传播与阻止事件传播</p>
+
+    <p>DOM 事件传播有三个阶段：事件捕获阶段，目标对象的时间处理以及事件冒泡。而 React 的合成事件则没有实现事件捕获，仅仅支持事件冒泡机制。</p>
+  </li>
+  <li>
+    <p>事件类型</p>
+
+    <p>React 合成事件的事件类型是 JavaScript 原生事件类型的一个子集。</p>
+  </li>
+  <li>
+    <p>事件绑定方式</p>
+
+    <p>React 事件使用驼峰法命名，而不是小写。传递函数作为事件处理，而不是字符串。典型例子如下：</p>
+
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- 原生 --&gt;</span>
+<span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"handleEvent()"</span><span class="nt">&gt;</span>Click Me<span class="nt">&lt;/button&gt;</span>
+
+<span class="c">&lt;!-- React --&gt;</span>
+<span class="nt">&lt;button</span> <span class="na">onClick=</span><span class="s">"{handleEvent}"</span><span class="nt">&gt;</span>Click Me<span class="nt">&lt;/button&gt;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>事件对象</p>
+
+    <p>React 合成事件系统中，不存在兼容性问题，在事件处理函数中可以得到一个合成事件对象。</p>
+  </li>
+</ol>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li>《深入 React 技术栈》</li>
+  <li><a href="https://reactjs.org/docs/events.html">React: SyntheticEvent</a></li>
+  <li><a href="https://reactjs.org/docs/handling-events.html">React: Handling Events</a></li>
+  <li><a href="https://reactjs.org/blog/2020/10/20/react-v17.html#changes-to-event-delegation">React: v17.0</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2020/09/10/React%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

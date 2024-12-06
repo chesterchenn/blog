@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Linux 下使用 Clash | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Linux 下使用 Clash" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="在 Windows 或者手机端很容易找到 clash 的应用，但在 Linux 下一般比较难找到对应的软件。使用在后台运行的命令反而称为一个更加稳定的选择。" />
+<meta property="og:description" content="在 Windows 或者手机端很容易找到 clash 的应用，但在 Linux 下一般比较难找到对应的软件。使用在后台运行的命令反而称为一个更加稳定的选择。" />
+<link rel="canonical" href="/blog/2022/06/28/Linux%E4%B8%8B%E4%BD%BF%E7%94%A8Clash.html" />
+<meta property="og:url" content="/blog/2022/06/28/Linux%E4%B8%8B%E4%BD%BF%E7%94%A8Clash.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-06-28T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Linux 下使用 Clash" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-06-28T00:00:00+00:00","datePublished":"2022-06-28T00:00:00+00:00","description":"在 Windows 或者手机端很容易找到 clash 的应用，但在 Linux 下一般比较难找到对应的软件。使用在后台运行的命令反而称为一个更加稳定的选择。","headline":"Linux 下使用 Clash","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2022/06/28/Linux%E4%B8%8B%E4%BD%BF%E7%94%A8Clash.html"},"url":"/blog/2022/06/28/Linux%E4%B8%8B%E4%BD%BF%E7%94%A8Clash.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Linux 下使用 Clash</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2022-06-28T00:00:00+00:00" itemprop="datePublished">Jun 28, 2022
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2022"><i>2022</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/linux"><i>linux</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>在 Windows 或者手机端很容易找到 clash 的应用，但在 Linux 下一般比较难找到对应的软件。使用在后台运行的命令反而称为一个更加稳定的选择。</p>
+
+<h2 id="安装">安装</h2>
+
+<p>主要的安装来源：<a href="https://github.com/Dreamacro/clash">https://github.com/Dreamacro/clash</a></p>
+
+<p>安装方式可以选择用源码安装，也可以选择使用包管理器进行安装（如果包管理器有的话）。</p>
+
+<h3 id="包管理安装">包管理安装</h3>
+
+<p>如果包管理有 clash 软件，直接安装就比较简单方便。</p>
+
+<ul>
+  <li>ArchLinux: <code class="language-plaintext highlighter-rouge">sudo pacman -Syu clash</code></li>
+</ul>
+
+<p>很遗憾在 ubuntu 下竟然没有相应的版本，搜索结果可以查看 <a href="https://packages.ubuntu.com/search?keywords=clash&amp;searchon=names&amp;suite=all&amp;section=all">https://packages.ubuntu.com/search?keywords=clash&amp;searchon=names&amp;suite=all&amp;section=all</a></p>
+
+<h3 id="源码安装">源码安装</h3>
+
+<p>发布页面 <a href="https://github.com/Dreamacro/clash/releases">https://github.com/Dreamacro/clash/releases</a> 查看对应版本号。</p>
+
+<p>一般 Linux 都是 amd64 位。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 下载对应版本的 clash</span>
+wget https://github.com/Dreamacro/clash/releases/download/v1.x.x/clash-linux-amd64-v1.x.x.gz
+
+<span class="c"># 由于使用的 gz 压缩，直接使用 gzip 解压</span>
+<span class="nb">gzip</span> <span class="nt">-d</span> clash-linux-amd64-v1.x.x.gz
+
+<span class="c"># 移至 /usr/local/bin 目录下，修改文件目录</span>
+<span class="nb">mv </span>clash-linux-amd64-v1.x.x.gz /usr/local/bin/clash
+
+<span class="c"># 添加执行权限</span>
+<span class="nb">chmod</span> +x /usr/local/bin/clash
+</code></pre></div></div>
+
+<p>安装完成之后运行命令 <code class="language-plaintext highlighter-rouge">clash -v</code> 查看当前安装的版本。</p>
+
+<h2 id="配置文件">配置文件</h2>
+
+<p>根据官网的建议，默认配置放在 <code class="language-plaintext highlighter-rouge">$HOME/.config/clash/config.yaml</code>。</p>
+
+<p>也可以通过 <code class="language-plaintext highlighter-rouge">-d</code> 指定配置文件夹，<code class="language-plaintext highlighter-rouge">-f</code> 指定配置文件。</p>
+
+<p>从订阅链接中下载对应的文件至配置文件夹下：<code class="language-plaintext highlighter-rouge">wget -O ~/.config/clash/config.yaml &lt;订阅链接&gt;</code></p>
+
+<h3 id="测试链接">测试链接</h3>
+
+<p>由于 <code class="language-plaintext highlighter-rouge">ping</code> 使用 ip 直接网络连接，而代理是工作在更高的层级 TCP/IP 网络模型，所以无法用 ping 测试连通性。相关详见: <a href="https://superuser.com/questions/175428/how-to-ping-when-behind-a-proxy">How to ping when behind a proxy?</a></p>
+
+<p>我们将使用 curl 测试连通性，同时记得不带缓存。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 请求失败</span>
+curl <span class="nt">-H</span> <span class="s1">'Cache-Control: no-cache, no-store'</span> www.google.com
+
+<span class="c"># 结果返回</span>
+curl <span class="nt">-H</span> <span class="s1">'Cache-Control: no-cache, no-store'</span> <span class="nt">--proxy</span> http://127.0.0.1:7890 www.google.com
+</code></pre></div></div>
+
+<h2 id="自启动">自启动</h2>
+
+<p>在服务器端，自启动服务的需求可能相对那么高，但是对于 PC 端的 Linux 服务，开机自启动服务的需求则是必不可少。</p>
+
+<p>创建文件 <code class="language-plaintext highlighter-rouge">/etc/systemd/system/clash.service</code></p>
+
+<p>编辑文件，注释可以忽略</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>Unit]
+<span class="nv">Description</span><span class="o">=</span>clash daemon <span class="c"># 服务名称</span>
+<span class="nv">After</span><span class="o">=</span>network.target     <span class="c"># 网络服务启动之后启动</span>
+
+<span class="o">[</span>Service]
+<span class="nv">Type</span><span class="o">=</span>simple              <span class="c"># 默认值，这个 daemon 主要由 ExecStart 的命令来启动，启动后常驻于内存</span>
+<span class="nv">Restart</span><span class="o">=</span>always
+<span class="nv">ExecStart</span><span class="o">=</span>/usr/local/bin/clash <span class="c"># Arch 下安装命令在 /usr/bin/clash</span>
+
+<span class="o">[</span>Install]
+<span class="nv">WantedBy</span><span class="o">=</span>multi-user.target
+</code></pre></div></div>
+
+<ul>
+  <li>开机启动 clash：<code class="language-plaintext highlighter-rouge">sudo systemctl enable clash</code></li>
+  <li>立即启动 clash：<code class="language-plaintext highlighter-rouge">sudo systemctl start clash</code></li>
+</ul>
+
+<h2 id="其他">其他</h2>
+
+<p>配置默认代理，这样子可以不用特意指定代理。clash 默认提供了 http 7890 端口，socks 7891 端口。</p>
+
+<p>编辑 <code class="language-plaintext highlighter-rouge">/etc/profile</code> 文件，添加内容：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">http_proxy</span><span class="o">=</span>http://127.0.0.1:7890
+<span class="nb">export </span><span class="nv">https_proxy</span><span class="o">=</span>http://127.0.0.1:7890
+<span class="nb">export </span><span class="nv">all_proxy</span><span class="o">=</span>socks5://127.0.0.1:7891
+</code></pre></div></div>
+
+<p>然后重载一下 <code class="language-plaintext highlighter-rouge">source /etc/profile</code></p>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="https://maintao.com/2021/use-clash-as-a-proxy/">用 Clash 做代理</a></li>
+  <li><a href="https://github.com/Dreamacro/clash">Github: clash</a></li>
+  <li><a href="https://github.com/Dreamacro/clash/wiki">Github: clash wiki</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2022/06/28/Linux%E4%B8%8B%E4%BD%BF%E7%94%A8Clash.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

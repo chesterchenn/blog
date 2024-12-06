@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="249px" preserveAspectRatio="none" style="width:293px;height:249px;background:#FFFFFF;" version="1.1" viewBox="0 0 293 249" width="293px" zoomAndPan="magnify"><defs/><g><rect fill="#FFFFFF" height="36.7373" id="_title" style="stroke:#FFFFFF;stroke-width:0.0;" width="98" x="93.25" y="10"/><text fill="#000000" font-family="Verdana" font-size="22" font-weight="bold" lengthAdjust="spacing" textLength="88" x="98.25" y="37.1182">代理模式</text><!--MD5=[d0da0a299942266ebd64acf2b2e95fa4]
+class Subject--><g id="elem_Subject"><rect codeLine="4" fill="#FFFFFF" height="61.0146" id="Subject" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="82" x="115.5" y="59.7373"/><ellipse cx="128.5" cy="73.7373" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1.0;"/><path d="M124.4219,69.5029 L124.4219,67.3467 L131.8125,67.3467 L131.8125,69.5029 L129.3438,69.5029 L129.3438,77.5811 L131.8125,77.5811 L131.8125,79.7373 L124.4219,79.7373 L124.4219,77.5811 L126.8906,77.5811 L126.8906,69.5029 L124.4219,69.5029 Z " fill="#000000"/><text fill="#000000" font-family="Verdana" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="54" x="140.5" y="79.3052">Subject</text><line style="stroke:#000000;stroke-width:1.0;" x1="116.5" x2="196.5" y1="87.7373" y2="87.7373"/><line style="stroke:#000000;stroke-width:1.0;" x1="116.5" x2="196.5" y1="95.7373" y2="95.7373"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="66" x="121.5" y="113.8125">request()</text></g><!--MD5=[f7109e258b7e3e4bb390e34b115b99ce]
+class Proxy--><g id="elem_Proxy"><rect codeLine="7" fill="#FFFFFF" height="61.0146" id="Proxy" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="78" x="208.5" y="181.7373"/><ellipse cx="226" cy="195.7373" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1.0;"/><path d="M228.9688,201.3779 Q228.3906,201.6748 227.75,201.8154 Q227.1094,201.9717 226.4063,201.9717 Q223.9063,201.9717 222.5781,200.3311 Q221.2656,198.6748 221.2656,195.5498 Q221.2656,192.4248 222.5781,190.7686 Q223.9063,189.1123 226.4063,189.1123 Q227.1094,189.1123 227.75,189.2686 Q228.4063,189.4248 228.9688,189.7217 L228.9688,192.4404 Q228.3438,191.8623 227.75,191.5967 Q227.1563,191.3154 226.5313,191.3154 Q225.1875,191.3154 224.5,192.3936 Q223.8125,193.4561 223.8125,195.5498 Q223.8125,197.6436 224.5,198.7217 Q225.1875,199.7842 226.5313,199.7842 Q227.1563,199.7842 227.75,199.5186 Q228.3438,199.2373 228.9688,198.6592 L228.9688,201.3779 Z " fill="#000000"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="40" x="239" y="201.3052">Proxy</text><line style="stroke:#000000;stroke-width:1.0;" x1="209.5" x2="285.5" y1="209.7373" y2="209.7373"/><line style="stroke:#000000;stroke-width:1.0;" x1="209.5" x2="285.5" y1="217.7373" y2="217.7373"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="66" x="214.5" y="235.8125">request()</text></g><!--MD5=[449b3045b33c31979c3bb324a2b48d70]
+class RealSubject--><g id="elem_RealSubject"><rect codeLine="10" fill="#FFFFFF" height="61.0146" id="RealSubject" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="111" x="12" y="181.7373"/><ellipse cx="25" cy="195.7373" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1.0;"/><path d="M27.9688,201.3779 Q27.3906,201.6748 26.75,201.8154 Q26.1094,201.9717 25.4063,201.9717 Q22.9063,201.9717 21.5781,200.3311 Q20.2656,198.6748 20.2656,195.5498 Q20.2656,192.4248 21.5781,190.7686 Q22.9063,189.1123 25.4063,189.1123 Q26.1094,189.1123 26.75,189.2686 Q27.4063,189.4248 27.9688,189.7217 L27.9688,192.4404 Q27.3438,191.8623 26.75,191.5967 Q26.1563,191.3154 25.5313,191.3154 Q24.1875,191.3154 23.5,192.3936 Q22.8125,193.4561 22.8125,195.5498 Q22.8125,197.6436 23.5,198.7217 Q24.1875,199.7842 25.5313,199.7842 Q26.1563,199.7842 26.75,199.5186 Q27.3438,199.2373 27.9688,198.6592 L27.9688,201.3779 Z " fill="#000000"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="83" x="37" y="201.3052">RealSubject</text><line style="stroke:#000000;stroke-width:1.0;" x1="13" x2="122" y1="209.7373" y2="209.7373"/><line style="stroke:#000000;stroke-width:1.0;" x1="13" x2="122" y1="217.7373" y2="217.7373"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="66" x="18" y="235.8125">request()</text></g><!--MD5=[3c3c3ce047c26dc485554d65ad2bca9c]
+reverse link Subject to Proxy--><g id="link_Subject_Proxy"><path codeLine="14" d="M192.16,138.2573 C203.24,152.8773 215.14,168.5673 225.06,181.6473 " fill="none" id="Subject-backto-Proxy" style="stroke:#000000;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="186.65,142.5773,180.14,122.4173,197.81,134.1173,186.65,142.5773" style="stroke:#000000;stroke-width:1.0;"/></g><!--MD5=[d47c67f0c46790a0239e176d4e556341]
+reverse link Subject to RealSubject--><g id="link_Subject_RealSubject"><path codeLine="15" d="M121.63,138.2573 C110.79,152.8773 99.14,168.5673 89.45,181.6473 " fill="none" id="Subject-backto-RealSubject" style="stroke:#000000;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="115.83,134.3173,133.37,122.4273,127.08,142.6573,115.83,134.3173" style="stroke:#000000;stroke-width:1.0;"/></g><!--MD5=[b996b55dbb33adfe80b254548a748d40]
+reverse link RealSubject to Proxy--><g id="link_RealSubject_Proxy"><path codeLine="16" d="M129.66,212.2373 C155.69,212.2373 185.16,212.2373 208.13,212.2373 " fill="none" id="RealSubject-backto-Proxy" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="#000000" points="124.98,212.2373,133.98,216.2373,129.98,212.2373,133.98,208.2373,124.98,212.2373" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="13" lengthAdjust="spacing" textLength="49" x="141.25" y="206.3071">subject</text></g><!--MD5=[e68fd838b2bcbef61e14d5d258edd085]
+@startuml
+!theme plain
+title 代理模式
+
+interface Subject {
+  request()
+}
+Class Proxy {
+  request()
+}
+Class RealSubject {
+  request()
+}
+
+Subject <|.. Proxy
+Subject <|.. RealSubject
+RealSubject <-R- Proxy : subject
+
+@enduml
+
+@startuml
+
+
+
+
+
+
+
+<style>
+  root {
+    BackgroundColor white
+    FontColor black
+    FontName Verdana
+    HyperLinkColor blue
+    LineColor black
+    LineThickness 1
+    Margin 5
+  }
+  caption {
+    LineThickness 0
+  }
+  footer {
+    LineThickness 0
+  }
+  header {
+    LineThickness 0
+  }
+  node {
+    MaximumWidth 300
+  }
+  title {
+    FontSize 22
+    LineThickness 0
+  }
+</style>
+
+skinparam ArrowLollipopColor black
+skinparam BackgroundColor white
+skinparam DefaultFontName Verdana
+skinparam DefaultMonospacedFontName Courier
+skinparam LifelineStrategy nosolid
+skinparam ParticipantPadding 10
+skinparam SequenceLifeLineBorderColor black
+skinparam Shadowing false
+skinparam UseBetaStyle true
+
+skinparam Activity {
+  BackgroundColor white
+  BarColor black
+  BorderColor black
+  FontColor black
+  FontName Verdana
+}
+skinparam Boundary {
+  FontColor black
+}
+skinparam Box {
+  Padding 5
+}
+skinparam CircledCharacter {
+  FontColor black
+  FontName Courier
+  Radius 9
+}
+skinparam Class {
+  BackgroundColor white
+  BorderColor black
+  FontColor black
+  FontName Verdana
+}
+skinparam ClassAttribute {
+  FontColor black
+  FontName Verdana
+}
+skinparam ClassStereotype {
+  FontColor black
+  FontName Verdana
+}
+skinparam Footer {
+  FontColor black
+  FontName Verdana
+}
+skinparam Header {
+  FontColor black
+  FontName Verdana
+}
+skinparam Hyperlink {
+  Color blue
+}
+skinparam IconPackage {
+  Color black
+  BackgroundColor white
+}
+skinparam IconPrivate {
+  Color black
+  BackgroundColor white
+}
+skinparam IconProtected {
+  Color black
+  BackgroundColor white
+}
+skinparam IconPublic {
+  Color black
+  BackgroundColor white
+}
+skinparam Note {
+  FontColor black
+  FontName Verdana
+}
+skinparam Object {
+  BorderColor black
+}
+skinparam Package {
+  BorderColor black
+  FontColor black
+  FontName Verdana
+}
+skinparam State {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam StereotypeA {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam StereotypeC {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam StereotypeE {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam StereotypeI {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam StereotypeN {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam UseCaseStereoType {
+  FontColor black
+  FontName Verdana
+}
+title 代理模式
+
+interface Subject {
+  request()
+}
+Class Proxy {
+  request()
+}
+Class RealSubject {
+  request()
+}
+
+Subject <|.. Proxy
+Subject <|.. RealSubject
+RealSubject <-R- Proxy : subject
+
+@enduml
+
+PlantUML version 1.2022.7(Tue Aug 23 01:01:30 CST 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

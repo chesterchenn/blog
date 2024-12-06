@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>JSON.parse和JSON.stringify | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="JSON.parse和JSON.stringify" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="JSON 包含了两个静态方法，分别是 JSON.parse 和JSON.stringify。" />
+<meta property="og:description" content="JSON 包含了两个静态方法，分别是 JSON.parse 和JSON.stringify。" />
+<link rel="canonical" href="/blog/2021/10/17/JSON-parse%E5%92%8CJSON.stringify.html" />
+<meta property="og:url" content="/blog/2021/10/17/JSON-parse%E5%92%8CJSON.stringify.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-10-17T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="JSON.parse和JSON.stringify" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2021-10-17T00:00:00+00:00","datePublished":"2021-10-17T00:00:00+00:00","description":"JSON 包含了两个静态方法，分别是 JSON.parse 和JSON.stringify。","headline":"JSON.parse和JSON.stringify","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2021/10/17/JSON-parse%E5%92%8CJSON.stringify.html"},"url":"/blog/2021/10/17/JSON-parse%E5%92%8CJSON.stringify.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">JSON.parse和JSON.stringify</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-10-17T00:00:00+00:00" itemprop="datePublished">Oct 17, 2021
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2021"><i>2021</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/javascript"><i>javascript</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>JSON 包含了两个静态方法，分别是 <code class="language-plaintext highlighter-rouge">JSON.parse</code> 和<code class="language-plaintext highlighter-rouge">JSON.stringify</code>。</p>
+
+<h2 id="jsonparse">JSON.parse</h2>
+
+<p>JSON.parse 解析一个 JSON 字符串，转换成 JavaScript 值或者对象。</p>
+
+<h3 id="语法">语法</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
+<span class="nx">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="nx">text</span><span class="p">,</span> <span class="nx">reviver</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><strong>text</strong>：被解析成 JSON 的字符串。</p>
+
+<p><strong>reviver</strong>：可选参数，如果是函数，返回解析出来的值的转换值。</p>
+
+<h3 id="例子">例子</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="dl">'</span><span class="s1">{}</span><span class="dl">'</span><span class="p">);</span> <span class="c1">// {}</span>
+<span class="nx">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="dl">'</span><span class="s1">true</span><span class="dl">'</span><span class="p">);</span> <span class="c1">// true</span>
+<span class="nx">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="dl">'</span><span class="s1">"foo"</span><span class="dl">'</span><span class="p">);</span> <span class="c1">// "foo"</span>
+<span class="nx">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="dl">'</span><span class="s1">[1, 5, "false"]</span><span class="dl">'</span><span class="p">);</span> <span class="c1">// [1, 5, "false"]</span>
+<span class="nx">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="dl">'</span><span class="s1">null</span><span class="dl">'</span><span class="p">);</span> <span class="c1">// null</span>
+</code></pre></div></div>
+
+<h3 id="使用-reviver-参数">使用 reviver 参数</h3>
+
+<p>reviver 包含的两个参数分别是属性名称，属性值。</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="dl">'</span><span class="s1">{"p": 5, "s": "str"}</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="o">=&gt;</span>
+  <span class="p">(</span><span class="k">typeof</span> <span class="nx">value</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">number</span><span class="dl">'</span> <span class="p">?</span> <span class="nx">value</span> <span class="o">*</span> <span class="mi">2</span> <span class="p">:</span> <span class="nx">value</span><span class="p">)</span>
+<span class="p">);</span>
+<span class="c1">// { p: 10, s: "str" }</span>
+</code></pre></div></div>
+
+<h3 id="错误情况">错误情况</h3>
+
+<p>以下情况会抛出错误</p>
+
+<ol>
+  <li>
+    <p>不允许尾部逗号</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nx">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="dl">'</span><span class="s1">[1, 2, 3, 4, ]</span><span class="dl">'</span><span class="p">);</span>
+ <span class="nx">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="dl">'</span><span class="s1">{"foo": 1,}</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>不允许单引号</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nx">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="dl">"</span><span class="s2">{'foo': 1}</span><span class="dl">"</span><span class="p">);</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="jsonstringify">JSON.stringify</h2>
+
+<p>JSON.stringify 将 JavaScript 值或者对象转换成一个 JSON 字符串。</p>
+
+<h3 id="语法-1">语法</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">JSON</span><span class="p">.</span><span class="nf">stringify</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+<span class="nx">JSON</span><span class="p">.</span><span class="nf">stringify</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">replacer</span><span class="p">);</span>
+<span class="nx">JSON</span><span class="p">.</span><span class="nf">stringify</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">replacer</span><span class="p">,</span> <span class="nx">space</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><strong>value</strong>：转换成 JSON 字符串的值。</p>
+
+<p><strong>replacer</strong>：可选参数，改变字符串格式化过程的格式，或者一个字符串或者数字的数组。</p>
+
+<ol>
+  <li>如果是一个函数，则 value 的每个属性都要经过函数的处理。</li>
+  <li>如果是一个数组，则包含在数组内的属性才会被序列化。</li>
+  <li>如果未提供或者 null，则 value 所有的属性都会被序列化。</li>
+</ol>
+
+<p><strong>space</strong>：一个字符串或数字对象，用于在输出的 JSON 字符串中插入空白。</p>
+
+<ol>
+  <li>如果是数字，代表有多少个空格，上限为10。小于1，代表没有空格。</li>
+  <li>如果是字符串，空格替换成字符串，上限为10个字母。</li>
+  <li>如果未提供或者 null，代表没有空格。</li>
+</ol>
+
+<h3 id="异常">异常</h3>
+
+<ul>
+  <li>当序列化循环对象值（cyclic object value）会抛出 <code class="language-plaintext highlighter-rouge">TypeError</code>。</li>
+  <li>当序列化 BigInt 值会抛出 <code class="language-plaintext highlighter-rouge">TypeError</code>，BinInt 值不能在 JSON 里序列化。</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">circularRefer</span> <span class="o">=</span> <span class="p">{</span> <span class="na">data</span><span class="p">:</span> <span class="mi">123</span> <span class="p">};</span>
+<span class="nx">circularRefer</span><span class="p">.</span><span class="nx">myself</span> <span class="o">=</span> <span class="nx">circularRefer</span><span class="p">;</span>
+
+<span class="nx">JSON</span><span class="p">.</span><span class="nf">stringify</span><span class="p">(</span><span class="nx">circularRefer</span><span class="p">);</span>  <span class="c1">// TypeError: cyclic object value</span>
+</code></pre></div></div>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">huge</span> <span class="o">=</span> <span class="nc">BigInt</span><span class="p">(</span><span class="mi">1234</span><span class="p">);</span>
+
+<span class="nx">JSON</span><span class="p">.</span><span class="nf">stringify</span><span class="p">(</span><span class="nx">huge</span><span class="p">);</span> <span class="c1">// TypeError: BigInt value can't be serialized in JSON</span>
+</code></pre></div></div>
+
+<h3 id="描述">描述</h3>
+
+<ol>
+  <li>
+    <p>如果序列化的值有 <code class="language-plaintext highlighter-rouge">toJSON()</code> 的方法，调用该方法进行序列化。</p>
+
+    <p>如我们之前的 BigInt 是无法被序列化的，我们可以通过自己实现 toJSON 方法</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nx">BigInt</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toJSON</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nf">toString</span><span class="p">()</span> <span class="p">}</span>
+ <span class="nx">JSON</span><span class="p">.</span><span class="nf">stringify</span><span class="p">(</span><span class="nc">BigInt</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span> <span class="c1">// '"1"'</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Number</code>，<code class="language-plaintext highlighter-rouge">Boolean</code> 和 <code class="language-plaintext highlighter-rouge">String</code> 对象会被转换成对应的原始值。</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">JSON</span><span class="p">.</span><span class="nf">stringify</span><span class="p">([</span><span class="k">new</span> <span class="nc">Number</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="k">new</span> <span class="nc">String</span><span class="p">(</span><span class="dl">'</span><span class="s1">false</span><span class="dl">'</span><span class="p">),</span> <span class="k">new</span> <span class="nc">Boolean</span><span class="p">(</span><span class="kc">false</span><span class="p">)]);</span>
+<span class="c1">// '[3, "false", false]'</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">undefined</code>、<code class="language-plaintext highlighter-rouge">Function</code> 和 <code class="language-plaintext highlighter-rouge">Symbol</code> 不是有效的 JSON 值，在数组内被转换成 null，在对象内被忽略。当传入“纯”值时，返回 undefined。</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">JSON</span><span class="p">.</span><span class="nf">stringify</span><span class="p">([</span><span class="kc">undefined</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{},</span> <span class="nc">Symbol</span><span class="p">(</span><span class="dl">''</span><span class="p">)]);</span>
+<span class="c1">// "[null,null,null]"</span>
+
+<span class="nx">JSON</span><span class="p">.</span><span class="nf">stringify</span><span class="p">({</span><span class="na">u</span><span class="p">:</span> <span class="kc">undefined</span><span class="p">,</span> <span class="na">f</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{},</span> <span class="na">s</span><span class="p">:</span> <span class="nc">Symbol</span><span class="p">(</span><span class="dl">''</span><span class="p">)});</span>
+<span class="c1">// "{}"</span>
+
+<span class="nx">JSON</span><span class="p">.</span><span class="nf">stringify</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{});</span>
+<span class="c1">// undefined 注：这里不是序列化的 "undefined" 字符串</span>
+
+<span class="nx">JSON</span><span class="p">.</span><span class="nf">stringify</span><span class="p">(</span><span class="kc">undefined</span><span class="p">,</span> <span class="nc">Symbol</span><span class="p">(</span><span class="dl">''</span><span class="p">));</span>
+<span class="c1">// undefined 注：这里不是序列化的 "undefined" 字符串</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>所有用 Symbol 作为键值都会被忽略，即使在 replacer 函数内。</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">JSON</span><span class="p">.</span><span class="nf">stringify</span><span class="p">({</span> <span class="p">[</span><span class="nc">Symbol</span><span class="p">(</span><span class="dl">'</span><span class="s1">foo</span><span class="dl">'</span><span class="p">)]:</span> <span class="dl">'</span><span class="s1">foo</span><span class="dl">'</span>  <span class="p">});</span> <span class="c1">// '{}'</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Date 类型通过实现 toJSON 函数返回一个字符串（该方法等同于 date.toISOString()）。</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">JSON</span><span class="p">.</span><span class="nf">stringify</span><span class="p">(</span><span class="k">new</span> <span class="nc">Date</span><span class="p">(</span><span class="mi">2006</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">));</span> <span class="c1">// '"2006-01-02T15:04:05.000Z"'</span>
+
+<span class="k">new</span> <span class="nc">Date</span><span class="p">(</span><span class="mi">2006</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">).</span><span class="nf">toISOString</span><span class="p">();</span> <span class="c1">// "2006-01-02T15:04:05.000Z"</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>数字 <code class="language-plaintext highlighter-rouge">Infinity</code> 和 <code class="language-plaintext highlighter-rouge">NaN</code>，以及 <code class="language-plaintext highlighter-rouge">null</code> 值都被当成 null。</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">JSON</span><span class="p">.</span><span class="nf">stringify</span><span class="p">([</span><span class="kc">NaN</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="kc">Infinity</span><span class="p">]);</span> <span class="c1">// '[null,null,null]'</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>所有其他对象实例（包括 Map、Set、WeakMap 和 WeakSet）都只序列化它们的可枚举属性。</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">JSON</span><span class="p">.</span><span class="nf">stringify</span><span class="p">([</span><span class="k">new</span> <span class="nc">Set</span><span class="p">([</span><span class="mi">1</span><span class="p">]),</span> <span class="k">new</span> <span class="nc">Map</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])]);</span>
+<span class="c1">// '[{},{}]'</span>
+
+<span class="nx">JSON</span><span class="p">.</span><span class="nf">stringify</span><span class="p">([</span><span class="k">new</span> <span class="nc">WeakSet</span><span class="p">([{</span><span class="na">a</span><span class="p">:</span> <span class="mi">1</span><span class="p">}]),</span> <span class="k">new</span> <span class="nc">WeakMap</span><span class="p">([[{</span><span class="na">a</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="mi">2</span><span class="p">]])]);</span>
+<span class="c1">// '[{},{}]'</span>
+
+<span class="kd">var</span> <span class="nx">o</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="p">{</span> <span class="na">x</span><span class="p">:</span> <span class="p">{</span> <span class="na">value</span><span class="p">:</span> <span class="dl">'</span><span class="s1">x</span><span class="dl">'</span><span class="p">,</span> <span class="na">enumerable</span><span class="p">:</span> <span class="kc">false</span> <span class="p">},</span> <span class="na">y</span><span class="p">:</span> <span class="p">{</span> <span class="na">value</span><span class="p">:</span> <span class="dl">'</span><span class="s1">y</span><span class="dl">'</span><span class="p">,</span> <span class="na">enumerable</span><span class="p">:</span> <span class="kc">true</span> <span class="p">}});</span>
+<span class="nx">JSON</span><span class="p">.</span><span class="nf">stringify</span><span class="p">(</span><span class="nx">o</span><span class="p">);</span>
+<span class="c1">// '{"y":"y"}'</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="参考连接">参考连接</h2>
+
+<ul>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse">JSON.parse</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify">JSON.stringify</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2021/10/17/JSON-parse%E5%92%8CJSON.stringify.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

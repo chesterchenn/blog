@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>JS的类型转换 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="JS的类型转换" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="将值从一种类型转换为另一种类型通常称为类型转换（type casting）,这是显式的情况；隐式的情况称为强制类型转换（coercion）。 – 《你不知道的 JavaScript》" />
+<meta property="og:description" content="将值从一种类型转换为另一种类型通常称为类型转换（type casting）,这是显式的情况；隐式的情况称为强制类型转换（coercion）。 – 《你不知道的 JavaScript》" />
+<link rel="canonical" href="/blog/2020/09/21/JS%E7%9A%84%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2.html" />
+<meta property="og:url" content="/blog/2020/09/21/JS%E7%9A%84%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-09-21T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="JS的类型转换" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2020-09-21T00:00:00+00:00","datePublished":"2020-09-21T00:00:00+00:00","description":"将值从一种类型转换为另一种类型通常称为类型转换（type casting）,这是显式的情况；隐式的情况称为强制类型转换（coercion）。 – 《你不知道的 JavaScript》","headline":"JS的类型转换","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2020/09/21/JS%E7%9A%84%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2.html"},"url":"/blog/2020/09/21/JS%E7%9A%84%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">JS的类型转换</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2020-09-21T00:00:00+00:00" itemprop="datePublished">Sep 21, 2020
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2020"><i>2020</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/javascript"><i>javascript</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>将值从一种类型转换为另一种类型通常称为<em>类型转换</em>（type casting）,这是显式的情况；隐式的情况称为<em>强制类型转换</em>（coercion）。 – 《你不知道的 JavaScript》</p>
+
+<p>JS 中的强制类型转换总是返回基本类型值。类型转换发生在静态类型语言的编译阶段，而强制类型转换则发生在动态类型语言的运行时（runtime）。为了更好区分它们，我们将它们分别称为“显示转换”和“隐式转换”。</p>
+
+<h2 id="表格">表格</h2>
+
+<p>JavaScript 常见的类型转换表格如下：</p>
+
+<h3 id="undefined-和-null">undefined 和 null</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">值</th>
+      <th style="text-align: left">布尔值</th>
+      <th style="text-align: left">字符串</th>
+      <th style="text-align: left">数字</th>
+      <th style="text-align: left">对象</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">undefined</td>
+      <td style="text-align: left">false</td>
+      <td style="text-align: left">“undefined”</td>
+      <td style="text-align: left">NaN</td>
+      <td style="text-align: left">throws TypeError</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">null</td>
+      <td style="text-align: left">false</td>
+      <td style="text-align: left">“null”</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">throws TypeError</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="boolean-转换">boolean 转换</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">值</th>
+      <th style="text-align: left">字符串</th>
+      <th style="text-align: left">数字</th>
+      <th style="text-align: left">对象</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">true</td>
+      <td style="text-align: left">“true”</td>
+      <td style="text-align: left">1</td>
+      <td style="text-align: left">new Boolean(true)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">false</td>
+      <td style="text-align: left">“fasle”</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">new Boolean(false)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="string-转换">string 转换</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">值</th>
+      <th style="text-align: left">布尔值</th>
+      <th style="text-align: left">数字</th>
+      <th style="text-align: left">对象</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">””</td>
+      <td style="text-align: left">fasle</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">new String(“”)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">“2”</td>
+      <td style="text-align: left">true</td>
+      <td style="text-align: left">2</td>
+      <td style="text-align: left">new String(“2”)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">“one”</td>
+      <td style="text-align: left">true</td>
+      <td style="text-align: left">NaN</td>
+      <td style="text-align: left">new String(“two”)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="number-转换">number 转换</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">值</th>
+      <th style="text-align: left">布尔值</th>
+      <th style="text-align: left">字符串</th>
+      <th style="text-align: left">对象</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">0(-0)</td>
+      <td style="text-align: left">false</td>
+      <td style="text-align: left">“0”</td>
+      <td style="text-align: left">new Number(0)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">NaN</td>
+      <td style="text-align: left">false</td>
+      <td style="text-align: left">“NaN”</td>
+      <td style="text-align: left">new Number(NaN)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">1</td>
+      <td style="text-align: left">true</td>
+      <td style="text-align: left">“1”</td>
+      <td style="text-align: left">new Number(1)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="object-转换">object 转换</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">值</th>
+      <th style="text-align: left">布尔值</th>
+      <th style="text-align: left">字符串</th>
+      <th style="text-align: left">数字</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">[]</td>
+      <td style="text-align: left">true</td>
+      <td style="text-align: left">””</td>
+      <td style="text-align: left">0</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">[9]</td>
+      <td style="text-align: left">true</td>
+      <td style="text-align: left">“9”</td>
+      <td style="text-align: left">9</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">{}</td>
+      <td style="text-align: left">true</td>
+      <td style="text-align: left">“[object Object]”</td>
+      <td style="text-align: left">NaN</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>object 转换成数字先转字符串，再转数字，否则抛出类型错误异常</p>
+
+<p>隐式转换 Boolean false 值只有: <code class="language-plaintext highlighter-rouge">undefined</code>, <code class="language-plaintext highlighter-rouge">null</code>, <code class="language-plaintext highlighter-rouge">""</code>, <code class="language-plaintext highlighter-rouge">0</code>, <code class="language-plaintext highlighter-rouge">-0</code>, <code class="language-plaintext highlighter-rouge">NaN</code></p>
+
+<h2 id="特殊操作符">特殊操作符</h2>
+
+<p>和其他的语言不同，在 JavaScript 中它们返回的并不是布尔值，是两个操作数中的一个（仅且一个）</p>
+
+<ul>
+  <li>只要 <code class="language-plaintext highlighter-rouge">&amp;&amp;</code> 前面是 <code class="language-plaintext highlighter-rouge">false</code>，返回 <code class="language-plaintext highlighter-rouge">&amp;&amp;</code> 前面的值，否则将返 <code class="language-plaintext highlighter-rouge">&amp;&amp;</code> 后面的值</li>
+  <li>只要 <code class="language-plaintext highlighter-rouge">||</code> 前面为 <code class="language-plaintext highlighter-rouge">true</code>，返回 <code class="language-plaintext highlighter-rouge">||</code> 前面的值，否则返回 <code class="language-plaintext highlighter-rouge">||</code> 后面的值</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="mi">2</span><span class="p">);</span> <span class="c1">// 2</span>
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">||</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// 1</span>
+</code></pre></div></div>
+
+<p>由上面可得知，我们只会对 <code class="language-plaintext highlighter-rouge">&amp;&amp;</code> 和 <code class="language-plaintext highlighter-rouge">||</code> 前面的操作数进行类型转换，根据类型转换结果返回操作数</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 默认值</span>
+<span class="kd">function</span> <span class="nf">func</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">a</span> <span class="o">=</span> <span class="nx">a</span> <span class="o">||</span> <span class="mi">1000</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// 短路判断</span>
+<span class="nx">bool</span> <span class="o">&amp;&amp;</span> <span class="nf">done</span><span class="p">();</span>
+</code></pre></div></div>
+
+<h2 id="隐式转换的规则">隐式转换的规则</h2>
+
+<ul>
+  <li>NaN 不等于 NaN</li>
+  <li>null 与 undefined 比较结果为 true。其他值跟它们比较都为 false</li>
+  <li>字符串和数字之间相等比较时，把字符串转换成数字</li>
+  <li>布尔值和其他类型相等比较时，把布尔值转换成数字。false 转换成 0，true 转换成 1</li>
+  <li>对象和字符串类型相等比较时，把对象转换成字符串</li>
+  <li>对象和数字类型相等比较时，把对象转换成数字</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kc">NaN</span> <span class="o">==</span> <span class="kc">NaN</span><span class="p">;</span> <span class="cm">/*  */</span> <span class="c1">// false</span>
+<span class="dl">''</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span> <span class="cm">/*     */</span> <span class="c1">// true</span>
+<span class="dl">''</span> <span class="o">==</span> <span class="kc">false</span><span class="p">;</span> <span class="cm">/* */</span> <span class="c1">// true</span>
+<span class="dl">''</span> <span class="o">==</span> <span class="p">[];</span> <span class="cm">/*    */</span> <span class="c1">// true</span>
+<span class="dl">''</span> <span class="o">==</span> <span class="p">{};</span> <span class="cm">/*    */</span> <span class="c1">// false {}转成字符串 [object Object]</span>
+<span class="kc">null</span> <span class="o">==</span> <span class="kc">undefined</span><span class="p">;</span> <span class="c1">// true</span>
+<span class="p">[]</span> <span class="o">==</span> <span class="o">!</span><span class="p">[];</span> <span class="cm">/*   */</span> <span class="c1">// true 操作符!优先级更高，![] 会被转换成 false，所以题目 [] == false</span>
+</code></pre></div></div>
+
+<h2 id="-和--">+ 和 -</h2>
+
+<p>如果 <code class="language-plaintext highlighter-rouge">+</code> 的其中一个操作数是字符串（或者通过隐式转换得到字符串），则执行字符串拼接。否则执行数字加法。</p>
+
+<p><code class="language-plaintext highlighter-rouge">-</code> 是数字减法运算符，只用于数字，因此会将字符串类型转换为数字。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="dl">'</span><span class="s1">a</span><span class="dl">'</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// "a1"</span>
+<span class="dl">'</span><span class="s1">2</span><span class="dl">'</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// "21"</span>
+<span class="dl">'</span><span class="s1">a</span><span class="dl">'</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// NaN</span>
+<span class="dl">'</span><span class="s1">3</span><span class="dl">'</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// 2</span>
+<span class="dl">'</span><span class="s1">b</span><span class="dl">'</span> <span class="o">-</span> <span class="dl">'</span><span class="s1">a</span><span class="dl">'</span><span class="p">;</span> <span class="c1">// NaN</span>
+<span class="dl">'</span><span class="s1">3</span><span class="dl">'</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// 31</span>
+<span class="mi">5</span> <span class="o">+</span> <span class="o">+</span><span class="dl">'</span><span class="s1">3.14</span><span class="dl">'</span><span class="p">;</span> <span class="c1">// 8.14</span>
+</code></pre></div></div>
+
+<h2 id="位运算">位运算</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">PI</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">3.14</span><span class="dl">'</span><span class="p">;</span>
+<span class="dl">''</span> <span class="o">+</span> <span class="nx">PI</span><span class="p">;</span> <span class="cm">/* */</span> <span class="c1">// '3.14' to String</span>
+<span class="o">~~</span><span class="nx">PI</span><span class="p">;</span> <span class="cm">/*    */</span> <span class="c1">// 3 to integer</span>
+<span class="o">+</span><span class="nx">PI</span><span class="p">;</span> <span class="cm">/*     */</span> <span class="c1">// 3.14</span>
+<span class="mi">1</span> <span class="o">*</span> <span class="nx">PI</span><span class="p">;</span> <span class="cm">/*  */</span> <span class="c1">// 3.14 to float</span>
+<span class="o">!!</span><span class="nx">PI</span><span class="p">;</span> <span class="cm">/*    */</span> <span class="c1">// true to boolean</span>
+<span class="p">[</span><span class="nx">PI</span><span class="p">];</span> <span class="cm">/*    */</span> <span class="c1">// ['3.14'] to array</span>
+</code></pre></div></div>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li>《你不知道的 JavaScript(中)》第 4 章 强制类型转换</li>
+  <li>《JavaScript 权威指南》</li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2020/09/21/JS%E7%9A%84%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

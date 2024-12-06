@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>浮点数 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="浮点数" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="在 JS 中学习 0.1 + 0.2 == 0.30000000000000004 的问题时候，引申出来浮点数的学习。" />
+<meta property="og:description" content="在 JS 中学习 0.1 + 0.2 == 0.30000000000000004 的问题时候，引申出来浮点数的学习。" />
+<link rel="canonical" href="/blog/2021/10/20/%E6%B5%AE%E7%82%B9%E6%95%B0.html" />
+<meta property="og:url" content="/blog/2021/10/20/%E6%B5%AE%E7%82%B9%E6%95%B0.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-10-20T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="浮点数" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2021-10-20T00:00:00+00:00","datePublished":"2021-10-20T00:00:00+00:00","description":"在 JS 中学习 0.1 + 0.2 == 0.30000000000000004 的问题时候，引申出来浮点数的学习。","headline":"浮点数","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2021/10/20/%E6%B5%AE%E7%82%B9%E6%95%B0.html"},"url":"/blog/2021/10/20/%E6%B5%AE%E7%82%B9%E6%95%B0.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">浮点数</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-10-20T00:00:00+00:00" itemprop="datePublished">Oct 20, 2021
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2021"><i>2021</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/javascript"><i>javascript</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/os"><i>os</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>在 JS 中学习 0.1 + 0.2 == 0.30000000000000004 的问题时候，引申出来浮点数的学习。</p>
+
+<h2 id="什么是浮点数">什么是浮点数</h2>
+
+<p>浮点数的意思是指，小数点的位置是漂浮不定的。浮点数是采用科学计数法表示的。如十进制的小数 1.234 用不同的科学计数法表示：</p>
+
+<ul>
+  <li>1.234 = 1.234 * 10^0</li>
+  <li>1.234 = 12.34 * 10^-1</li>
+  <li>1.234 = 123.4 * 10^-2</li>
+  <li>…</li>
+</ul>
+
+<p>格式可以写成：<code class="language-plaintext highlighter-rouge">V = (-1)^S * M * R^E</code></p>
+
+<ul>
+  <li>S: 符号位，取值 0 或 1，决定数字的符号，0 表示正，1 表示负</li>
+  <li>M: 尾数，用小数表示，如 1.234 * 10^0，1.234 就是尾数</li>
+  <li>R: 基数，表示十进制时，基数 R 就是 10，表示二进制的时，基数 R 就是 2</li>
+  <li>E: 指数，用整数表示，例如 10^-2，-2 就是指数</li>
+</ul>
+
+<h2 id="ieee-754-编码规范">IEEE 754 编码规范</h2>
+
+<p>IEEE 754 提供了 4 个精度级别的浮点数定义：单精度，双精度，扩展精度和可扩展精度。JavaScript 里的数字是采用 IEEE 754 标准的 64 位双精度浮点数。</p>
+
+<ul>
+  <li>单精度浮点数：32 位，符号位占 1 位，指数占 8 位，尾数占 23 位</li>
+  <li>双精度浮点数：64 位，符号位占 1 位，指数占 11 位，尾数占 52 位</li>
+</ul>
+
+<p>每个浮点数只有一种二进制交换格式的编码。</p>
+
+<p>IEEE 754 的二进制编码由 3 部分组成，分别是:</p>
+
+<ul>
+  <li>sign（符号位）0 表示正，1 表示负，占 1bit。</li>
+  <li>based exponent（基于偏移的阶码域）</li>
+  <li>fraction（尾数）</li>
+</ul>
+
+<p><img src="/blog/images/float_point_format.jpg" alt="float_point_format" /></p>
+
+<p>同时还规范：</p>
+
+<ol>
+  <li>尾数的第一位总是 1，因此这个 1 可以省略不写，它是个隐藏位</li>
+  <li>指数是个无符号整数，指数可以负的，规定指数在原本的值加中间数。8 bit 的中间数是 127(0111 1111)，11 bit 的中间数是 1023(011 1111 1111)</li>
+  <li>当存储空间无法存储完整的无限循环小数，IEEE 754 采用 round to nearest, tie to even(舍入到最接近可以表示的值，优先取偶数) 的舍入模式</li>
+</ol>
+
+<p>我们试着将 25.125 转换成单精度的浮点数</p>
+
+<ol>
+  <li>整数部分：25(D) = 11001(B)</li>
+  <li>小数部分：0.125(D) = 0.001(B)</li>
+  <li>二进制科学计数法表示：11001.001(B) = 1.1001001 * 2^4(B)</li>
+  <li>符号位为 0，指数 4 + 127 = 131(D) = 1000 0011(B)，尾数去掉隐藏位 1 后为 1001001</li>
+</ol>
+
+<p>最后的结果为 <code class="language-plaintext highlighter-rouge">0|10000011|10010010000000000000000</code></p>
+
+<h2 id="浮点数的运算">浮点数的运算</h2>
+
+<p>浮点数的加减运算一般由以下五个步骤完成：对阶、尾数运算、规格化、舍入处理、溢出判断。</p>
+
+<h3 id="对阶">对阶</h3>
+
+<p>对阶是指将两个运算的数的阶码对齐的操作，对阶是为了让两个浮点数的尾数能够进行加减运算。</p>
+
+<p>对阶的主要方法：修改小的阶码使其与大的阶码相等，并将对应的尾数右移相应的位数。</p>
+
+<h3 id="尾数运算">尾数运算</h3>
+
+<p>对阶完成之后，我们将尾数进行相加减得到最后的尾数。</p>
+
+<h3 id="规范化">规范化</h3>
+
+<p>相加减之后得到的结果，尾数可能非规范化的形式，我们需要将其进行规范化。</p>
+
+<h3 id="舍入方式">舍入方式</h3>
+
+<p>舍入方式参考：<a href="https://www.zhihu.com/question/68131179/answer/261539674">IEEE754规范的舍入方案怎么理解呢？</a></p>
+
+<p>根据 <a href="https://www.zhihu.com/people/huang-ke-fen">Boss呱呱</a> 的总结大致：</p>
+
+<ul>
+  <li>”最近“原则其实是”损失精度最小“原则</li>
+  <li>“偶数”原则其实是”舍入后保留的最低有效位是偶数（二进制表示则是0）“原则</li>
+</ul>
+
+<p>具体例子和讲解可以参考原回答。我们这里也以下面的 0.2 的尾数 10011…0011001(10011) 作为例子</p>
+
+<ul>
+  <li>首先我们的有效位为 10011…0011001，舍入部分为 (10011)</li>
+  <li>向上舍入的 10011…0011010，精度损失为 0.000…0(01101)，向下舍入为 10011…0011001，精度损失 0.000…0(10011)</li>
+  <li>向上舍入的精度更小，所以我们向上舍入，结果为 10011…0011010</li>
+</ul>
+
+<p>第二个原则则是当损失精度一样时，我们优先选择偶数。如 1.01101 舍入到 4 位，向上舍入 1.0111，损失精度 0.00001，向下舍入为 1.0110，损失精度也是 0.00001，这时优先选择偶数，采用向下舍入，结果为 1.0110</p>
+
+<h3 id="溢出判断">溢出判断</h3>
+
+<p>将最终的结果进行溢出判断，判断是否超过浮点数所能表示的最大数指。</p>
+
+<h2 id="01--02">0.1 + 0.2</h2>
+
+<p>让我们回到最初的 0.1 + 0.2 的问题上，主要原因是因为 0.1 和 0.2 在转成 IEEE 754 标准浮点数的二进制上会有精度损失。</p>
+
+<p>0.2 转换为二进制的过程是不断乘以 2，直到不存在小数为止。</p>
+
+<pre><code class="language-plain">0.2 * 2 = 0.4 -&gt; 0
+0.4 * 2 = 0.8 -&gt; 0
+0.8 * 2 = 1.6 -&gt; 1
+0.6 * 2 = 1.2 -&gt; 1
+...(开始循环)
+</code></pre>
+
+<p>所以我们得到 0.2(D) = 0.00110011…(B), 根据上面的计算方法等到双精度</p>
+
+<ol>
+  <li>整数部分为 0(D) = 0(B)</li>
+  <li>小数部分为 0.2(D) = 0.00110011…(B)</li>
+  <li>二进制科学计数法表示：0.00110011…(B) = 1.100110011…(B) * 2^-3(B)</li>
+  <li>符号位为 0，指数 -3 + 127 = 124(D) = 011 1111 1100(B)，尾数去掉隐藏位 1 后为 100110011…(B)</li>
+  <li>由于其舍入方式，尾数 10011…0011001(10011) 成 10011…0011010</li>
+</ol>
+
+<p>最后的结果为 <code class="language-plaintext highlighter-rouge">0|011 1111 1100|10011...0011010</code></p>
+
+<p>同理得到 0.1 的结果为 <code class="language-plaintext highlighter-rouge">0|011 1111 1011|10011...0011010</code></p>
+
+<p>实际存储的位模式作为操作数进行浮点数加法，得到 <code class="language-plaintext highlighter-rouge">0|011 1111 1101|00110..0110100</code>, 得到结果为 0.30000000000000004</p>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="https://irem.univ-reunion.fr/IMG/pdf/ieee-754-2008.pdf">IEEE Standard for Floating-Point Arithmetic</a></li>
+  <li><a href="https://0.30000000000000004.com">https://0.30000000000000004.com</a></li>
+  <li><a href="https://www.cnblogs.com/fsjohnhuang/p/5115672.html">JS 魔法堂：彻底理解 0.1 + 0.2 === 0.30000000000000004 的背后</a></li>
+  <li><a href="https://www.cnblogs.com/fsjohnhuang/p/5109766.html">基础野：细说浮点数</a></li>
+  <li><a href="https://tooltt.com/floatconverter/">在线浮点数转二进制</a></li>
+  <li><a href="https://mikemcl.github.io/decimal.js/">decimal.js</a></li>
+  <li><a href="https://www.cnblogs.com/yilang/p/11277201.html">浮点数的运算步骤</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2021/10/20/%E6%B5%AE%E7%82%B9%E6%95%B0.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

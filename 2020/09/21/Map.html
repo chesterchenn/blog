@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Map | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Map" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Map 和 Set 是 ES6 中新增的数据结构，Map 类似于对象，但可以使用对象或者 map 值作为键值。我们一般将 Map 跟 Object 进行比较。" />
+<meta property="og:description" content="Map 和 Set 是 ES6 中新增的数据结构，Map 类似于对象，但可以使用对象或者 map 值作为键值。我们一般将 Map 跟 Object 进行比较。" />
+<link rel="canonical" href="/blog/2020/09/21/Map.html" />
+<meta property="og:url" content="/blog/2020/09/21/Map.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-09-21T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Map" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2020-09-21T00:00:00+00:00","datePublished":"2020-09-21T00:00:00+00:00","description":"Map 和 Set 是 ES6 中新增的数据结构，Map 类似于对象，但可以使用对象或者 map 值作为键值。我们一般将 Map 跟 Object 进行比较。","headline":"Map","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2020/09/21/Map.html"},"url":"/blog/2020/09/21/Map.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Map</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2020-09-21T00:00:00+00:00" itemprop="datePublished">Sep 21, 2020
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2020"><i>2020</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/javascript"><i>javascript</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Map 和 Set 是 ES6 中新增的数据结构，Map 类似于对象，但可以使用对象或者 map 值作为键值。我们一般将 Map 跟 Object 进行比较。</p>
+
+<!-- vim-markdown-toc GFM -->
+
+<ul>
+  <li><a href="#map">Map</a>
+    <ul>
+      <li><a href="#map-的属性">Map 的属性</a></li>
+      <li><a href="#map-的方法">Map 的方法</a></li>
+      <li><a href="#map-转换为数组">Map 转换为数组</a></li>
+    </ul>
+  </li>
+  <li><a href="#map-与-object-的比较">Map 与 Object 的比较</a>
+    <ul>
+      <li><a href="#创建">创建</a></li>
+      <li><a href="#读取元素">读取元素</a></li>
+      <li><a href="#新增移除元素">新增移除元素</a></li>
+      <li><a href="#长度">长度</a></li>
+      <li><a href="#使用场景">使用场景</a></li>
+    </ul>
+  </li>
+  <li><a href="#weakmap">WeakMap</a></li>
+  <li><a href="#参考链接">参考链接</a></li>
+</ul>
+
+<!-- vim-markdown-toc -->
+
+<h2 id="map">Map</h2>
+
+<p>在 JavaScript 中，对象是创建无序键/值对数据结构[也称映射（map）]的主要机制。但是，对象作为映射的主要缺点是不能使用非字符串值作为键。如下：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">m</span> <span class="o">=</span> <span class="p">{};</span>
+<span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">1</span> <span class="p">},</span>
+  <span class="nx">y</span> <span class="o">=</span> <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">2</span> <span class="p">};</span>
+<span class="nx">m</span><span class="p">[</span><span class="nx">x</span><span class="p">]</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">foo</span><span class="dl">'</span><span class="p">;</span>
+<span class="nx">m</span><span class="p">[</span><span class="nx">y</span><span class="p">]</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">bar</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="nx">m</span><span class="p">[</span><span class="nx">x</span><span class="p">];</span> <span class="c1">// "bar"</span>
+<span class="nx">m</span><span class="p">[</span><span class="nx">y</span><span class="p">];</span> <span class="c1">// "bar"</span>
+<span class="nx">m</span><span class="p">;</span> <span class="c1">// "[object Object]": "bar"</span>
+</code></pre></div></div>
+
+<p>因为 x 和 y 两个对象作为键值（属性值）的时候，都被转化成字符串“[object Object]”，实际上在 m 中只设置了一个键值。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">m</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Map</span><span class="p">();</span>
+<span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">1</span> <span class="p">},</span>
+  <span class="nx">y</span> <span class="o">=</span> <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">2</span> <span class="p">};</span>
+<span class="nx">m</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="dl">'</span><span class="s1">foo</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">m</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="nx">y</span><span class="p">,</span> <span class="dl">'</span><span class="s1">bar</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="nx">m</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span> <span class="c1">// "foo"</span>
+<span class="nx">m</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="nx">y</span><span class="p">);</span> <span class="c1">// "bar"</span>
+<span class="nx">m</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="nx">y</span><span class="p">);</span>
+<span class="nx">m</span><span class="p">.</span><span class="nx">size</span><span class="p">;</span> <span class="c1">// 1</span>
+<span class="nx">m</span><span class="p">.</span><span class="nf">clear</span><span class="p">();</span>
+</code></pre></div></div>
+
+<h3 id="map-的属性">Map 的属性</h3>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Map.prototype.size</code> 返回 Map 对象内的元素个数。</li>
+</ul>
+
+<h3 id="map-的方法">Map 的方法</h3>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Map.prototype.clear()</code> 清空 Map 对象。</li>
+  <li><code class="language-plaintext highlighter-rouge">Map.prototype.delete(key)</code> 删除 Map 对象内的 key 元素。</li>
+  <li><code class="language-plaintext highlighter-rouge">Map.prototype.entries()</code> 返回一个 <code class="language-plaintext highlighter-rouge">[key, value]</code> 数组的遍历对象。</li>
+  <li><code class="language-plaintext highlighter-rouge">Map.prototype.forEach(callbackFn([value, [key, [map]]]), [thisArg])</code> 按照插入 Map 的顺序进行遍历。</li>
+  <li><code class="language-plaintext highlighter-rouge">Map.prototype.get(key)</code> 获取 Map 对象内的 key 的值，不存在则返回 <code class="language-plaintext highlighter-rouge">undefined</code>。</li>
+  <li><code class="language-plaintext highlighter-rouge">Map.prototype.has(key)</code> 判断 Map 对象内是否存在 key，返回 boolean。</li>
+  <li><code class="language-plaintext highlighter-rouge">Map.prototype.keys()</code> 返回 Map 对象内键值的遍历。</li>
+  <li><code class="language-plaintext highlighter-rouge">Map.prototype.set(key, value)</code> 添加或者更新 Map 对象的值。</li>
+  <li><code class="language-plaintext highlighter-rouge">Map.prototype.values()</code> 返回 Map 对象内值的遍历.</li>
+</ul>
+
+<h3 id="map-转换为数组">Map 转换为数组</h3>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Array.from(map.values())</code> 利用 Array.from 方法</li>
+  <li><code class="language-plaintext highlighter-rouge">[...map.values()]</code> 利用扩展运算符</li>
+  <li><code class="language-plaintext highlighter-rouge">map.values().toArray()</code> 实验性特性，尽量不要使用</li>
+</ul>
+
+<p>转换键的方法与转换值的方法类似，只需要将 values() 替换为 keys() 即可。</p>
+
+<h2 id="map-与-object-的比较">Map 与 Object 的比较</h2>
+
+<ul>
+  <li>
+    <p>Map 和 Object 都是键值对，且都是惟一性，但是 Object 只能使用基本类型作为键值（integer, string, symbol），而 Map 可以使用任意类型作为键值。</p>
+  </li>
+  <li>
+    <p>Map 会保持插入元素的顺序，而 Object 则不会。</p>
+  </li>
+</ul>
+
+<h3 id="创建">创建</h3>
+
+<p>Object 直接声明，Map 构造器接受数组，数组用逗号进行分割，<code class="language-plaintext highlighter-rouge">new Map([iterable])</code>。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{};</span>
+<span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">o</span><span class="dl">'</span> <span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">map</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Map</span><span class="p">();</span>
+<span class="kd">var</span> <span class="nx">map</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Map</span><span class="p">([</span>
+  <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+  <span class="p">[</span><span class="dl">'</span><span class="s1">n</span><span class="dl">'</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+<span class="p">]);</span> <span class="c1">// map = { 1=&gt;2, 'n'=&gt;3 }</span>
+</code></pre></div></div>
+
+<h3 id="读取元素">读取元素</h3>
+
+<p>对于 Map，我们可以通过 <code class="language-plaintext highlighter-rouge">Map.prototype.get(key)</code> 可以读取值，而 Object 通过 <code class="language-plaintext highlighter-rouge">Object.&lt;key&gt;</code> 或者 <code class="language-plaintext highlighter-rouge">Object['key']</code> 读取值。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">map</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// 2</span>
+
+<span class="nx">obj</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span> <span class="c1">// 1</span>
+<span class="nx">obj</span><span class="p">[</span><span class="dl">'</span><span class="s1">id</span><span class="dl">'</span><span class="p">];</span> <span class="c1">// 1</span>
+</code></pre></div></div>
+
+<p>对于 Map, 我们还可以通过 <code class="language-plaintext highlighter-rouge">has()</code> 的方法进行判断是否有该键值。对于 Object 则需要一些特别的技巧。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">map</span><span class="p">.</span><span class="nf">has</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// true</span>
+
+<span class="nx">obj</span><span class="p">.</span><span class="nx">id</span> <span class="o">===</span> <span class="kc">undefined</span><span class="p">;</span> <span class="c1">// 通过未定义来判断</span>
+<span class="dl">'</span><span class="s1">id</span><span class="dl">'</span> <span class="k">in</span> <span class="nx">obj</span><span class="p">;</span> <span class="c1">// 通过继承判断</span>
+</code></pre></div></div>
+
+<h3 id="新增移除元素">新增移除元素</h3>
+
+<p>Map 通过 <code class="language-plaintext highlighter-rouge">Map.prototype.set(&lt;key&gt;, &lt;value&gt;)</code> 进行新增元素，Object 则直接进行新增。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">map</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span> <span class="c1">// { 1=&gt;2, 'n'=&gt;3, 4=&gt;5 }</span>
+
+<span class="nx">obj</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="nx">obj</span><span class="p">[</span><span class="dl">'</span><span class="s1">gender</span><span class="dl">'</span><span class="p">]</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">male</span><span class="dl">'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Map 通过 <code class="language-plaintext highlighter-rouge">detele(key)</code> 进行删除，使用 <code class="language-plaintext highlighter-rouge">clear()</code> 可以清除所有元素。而对象通过 <code class="language-plaintext highlighter-rouge">delete</code> 操作符进行删除属性</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">map</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span> <span class="c1">// { 1=&gt;2, 'n'=&gt;3 }</span>
+<span class="nx">map</span><span class="p">.</span><span class="nf">clear</span><span class="p">();</span> <span class="c1">// {}</span>
+
+<span class="k">delete</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">age</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="长度">长度</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">map</span><span class="p">.</span><span class="nf">size</span><span class="p">();</span>
+
+<span class="nb">Object</span><span class="p">.</span><span class="nf">keys</span><span class="p">(</span><span class="nx">obj</span><span class="p">).</span><span class="nx">length</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="使用场景">使用场景</h3>
+
+<p>对于数据量不大，建议使用 Object，因为 Object 对象的创建更平滑，对于数据量更大或者频繁进行新增，删除操作的建议使用 Map，因为 Map 本身的遍历性，搜索更快。</p>
+
+<h2 id="weakmap">WeakMap</h2>
+
+<p>WeakMap 是 map 的变体，区别在于内部内存分配（特别是垃圾回收）的工作方式。</p>
+
+<p>在 map 中如果使用对象作为映射的键，这个对象后来被丢弃（所有的引用解除），试图让垃圾回收（GC）回收其内存，那么 map 本身仍会保持其项目。你需要从 map 中移除这个项目来支持 GC。</p>
+
+<p>WeakMap 只接受对象作为键。这些对象是被弱持有，也就是说如果对象本身被垃圾回收的话，在 WeakMap 中的这个项目也会被移除。</p>
+
+<p>WeakMap 没有 size 属性或 clear() 方法。</p>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li>《你不知道的 JavaScript》(下)</li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">MDN: Map</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap">MDN: WeakMap</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">NDN: Object</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/358378689">知乎：JS 项目中究竟应该使用 Object 还是 Map？</a></li>
+  <li><a href="https://medium.com/front-end-weekly/es6-map-vs-object-what-and-when-b80621932373">Medium: ES6 - Map vs Object- What and when?</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2020/09/21/Map.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

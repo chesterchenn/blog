@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>pip 安装相关的问题 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="pip 安装相关的问题" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="在初学 Python 会遇到一些安装新手问题" />
+<meta property="og:description" content="在初学 Python 会遇到一些安装新手问题" />
+<link rel="canonical" href="/blog/2023/06/23/pip%E5%AE%89%E8%A3%85%E7%9B%B8%E5%85%B3%E7%9A%84%E9%97%AE%E9%A2%98.html" />
+<meta property="og:url" content="/blog/2023/06/23/pip%E5%AE%89%E8%A3%85%E7%9B%B8%E5%85%B3%E7%9A%84%E9%97%AE%E9%A2%98.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-06-23T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="pip 安装相关的问题" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-06-23T00:00:00+00:00","datePublished":"2023-06-23T00:00:00+00:00","description":"在初学 Python 会遇到一些安装新手问题","headline":"pip 安装相关的问题","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2023/06/23/pip%E5%AE%89%E8%A3%85%E7%9B%B8%E5%85%B3%E7%9A%84%E9%97%AE%E9%A2%98.html"},"url":"/blog/2023/06/23/pip%E5%AE%89%E8%A3%85%E7%9B%B8%E5%85%B3%E7%9A%84%E9%97%AE%E9%A2%98.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">pip 安装相关的问题</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2023-06-23T00:00:00+00:00" itemprop="datePublished">Jun 23, 2023
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2023"><i>2023</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/python"><i>python</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>在初学 Python 会遇到一些安装新手问题</p>
+
+<h2 id="国内镜像">国内镜像</h2>
+
+<h3 id="临时修改">临时修改</h3>
+
+<p>pip 命令加上 <code class="language-plaintext highlighter-rouge">-i</code> 参数，指定 pip 源</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install </span>foo <span class="nt">-i</span> https://mirrors.aliyun.com/pypi/simple
+</code></pre></div></div>
+
+<h3 id="永久修改">永久修改</h3>
+
+<p>修改 pip.conf 文件，修改内容如下：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[global]
+
+index-url=https://mirrors.aliyun.com/pypi/simple
+</code></pre></div></div>
+
+<p>各个系统 pip.conf 位置如下：</p>
+
+<ul>
+  <li>Linux: <code class="language-plaintext highlighter-rouge">$HOME/.config/pip/pip.cof</code></li>
+  <li>Mac: <code class="language-plaintext highlighter-rouge">$HOME/.config/pip/pip.conf</code></li>
+  <li>Windows: <code class="language-plaintext highlighter-rouge">%APPDATA%\pip\pip.ini</code></li>
+</ul>
+
+<h3 id="镜像源">镜像源</h3>
+
+<ul>
+  <li>阿里云：<a href="https://mirrors.aliyun.com/pypi/simple">https://mirrors.aliyun.com/pypi/simple</a></li>
+  <li>清华大：<a href="https://pypi.tuna.tsinghua.edu.cn/simple">https://pypi.tuna.tsinghua.edu.cn/simple</a></li>
+  <li>中科大：<a href="https://pypi.mirrors.ustc.edu.cn/simple">https://pypi.mirrors.ustc.edu.cn/simple</a></li>
+</ul>
+
+<h2 id="pip-安装错误">Pip 安装错误</h2>
+
+<p>在使用 PIP 安装模块会遇到多版本的问题</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>error: externally-managed-environment
+
+× This environment is externally managed
+╰─&gt; To <span class="nb">install </span>Python packages system-wide, try <span class="s1">'pacman -S
+    python-xyz'</span>, where xyz is the package you are trying to
+    install.
+
+    If you wish to <span class="nb">install </span>a non-Arch-packaged Python package,
+    create a virtual environment using <span class="s1">'python -m venv path/to/venv'</span><span class="nb">.</span>
+    Then use path/to/venv/bin/python and path/to/venv/bin/pip.
+
+    If you wish to <span class="nb">install </span>a non-Arch packaged Python application,
+    it may be easiest to use <span class="s1">'pipx install xyz'</span>, which will manage a
+    virtual environment <span class="k">for </span>you. Make sure you have python-pipx
+    installed via pacman.
+
+note: If you believe this is a mistake, please contact your Python installation or OS distribution provider.You can override this, at the risk of breaking your Python installation or OS, by passing <span class="nt">--break-system-packages</span><span class="nb">.</span>
+hint: See PEP 668 <span class="k">for </span>the detailed specification.
+</code></pre></div></div>
+
+<p>解决办法是使用 venv:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 <span class="nt">-m</span> venv .venv
+<span class="nb">source</span> .venv/bin/activate
+python3 <span class="nt">-m</span> pip <span class="nb">install</span> <span class="nt">-r</span> requirements.txt
+</code></pre></div></div>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="https://developer.aliyun.com/article/652884">更换（Pypi）pip源到国内镜像</a></li>
+  <li><a href="https://stackoverflow.com/questions/75602063/pip-install-r-requirements-txt-is-failing-this-environment-is-externally-manag/75696359#75696359">pip install -r requirements.txt is failing: This environment is externally managed</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2023/06/23/pip%E5%AE%89%E8%A3%85%E7%9B%B8%E5%85%B3%E7%9A%84%E9%97%AE%E9%A2%98.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>
