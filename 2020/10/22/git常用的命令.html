@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Git常用的命令 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Git常用的命令" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="记录一些常用的 git 命令" />
+<meta property="og:description" content="记录一些常用的 git 命令" />
+<link rel="canonical" href="/blog/2020/10/22/git%E5%B8%B8%E7%94%A8%E7%9A%84%E5%91%BD%E4%BB%A4.html" />
+<meta property="og:url" content="/blog/2020/10/22/git%E5%B8%B8%E7%94%A8%E7%9A%84%E5%91%BD%E4%BB%A4.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-10-22T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Git常用的命令" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2020-10-22T00:00:00+00:00","datePublished":"2020-10-22T00:00:00+00:00","description":"记录一些常用的 git 命令","headline":"Git常用的命令","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2020/10/22/git%E5%B8%B8%E7%94%A8%E7%9A%84%E5%91%BD%E4%BB%A4.html"},"url":"/blog/2020/10/22/git%E5%B8%B8%E7%94%A8%E7%9A%84%E5%91%BD%E4%BB%A4.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Git常用的命令</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2020-10-22T00:00:00+00:00" itemprop="datePublished">Oct 22, 2020
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2020"><i>2020</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/others"><i>others</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>记录一些常用的 git 命令</p>
+
+<!-- vim-markdown-toc GFM -->
+
+<ul>
+  <li><a href="#配置">配置</a></li>
+  <li><a href="#克隆">克隆</a></li>
+  <li><a href="#分支">分支</a></li>
+  <li><a href="#删除分支">删除分支</a></li>
+  <li><a href="#远程仓库">远程仓库</a></li>
+  <li><a href="#中途保存">中途保存</a></li>
+  <li><a href="#日志">日志</a></li>
+  <li><a href="#重置">重置</a></li>
+  <li><a href="#标签">标签</a></li>
+  <li><a href="#变基">变基</a></li>
+  <li><a href="#gitignore">.gitignore</a></li>
+  <li><a href="#多个账号">多个账号</a></li>
+  <li><a href="#搭建">搭建</a></li>
+  <li><a href="#参考链接">参考链接</a></li>
+</ul>
+
+<!-- vim-markdown-toc -->
+
+<p>如果终端是 zsh, 那么使用 oh-my-zsh 的 git 插件时，包含一套它们标准的 git 命令缩写 - <a href="https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/git/git.plugin.zsh">https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/git/git.plugin.zsh</a></p>
+
+<h2 id="配置">配置</h2>
+
+<p>用户信息全局配置，配置当前项目去掉参数 –globale 即可。</p>
+
+<p><code class="language-plaintext highlighter-rouge">git config --global user.name 'username'</code> 配置全局用户名称</p>
+
+<p><code class="language-plaintext highlighter-rouge">git config --global user.email 'email@example.com'</code> 配置全局用户邮箱</p>
+
+<p><code class="language-plaintext highlighter-rouge">git config --global core.editor vim</code> 修改 git 默认编辑器</p>
+
+<h2 id="克隆">克隆</h2>
+
+<p><code class="language-plaintext highlighter-rouge">git clone --depth=1</code> 浅克隆当前的仓库，不拉取历史的提交记录
+<code class="language-plaintext highlighter-rouge">git clone -b &lt;name&gt;, --branch &lt;name&gt;</code> 克隆指定的分支</p>
+
+<h2 id="分支">分支</h2>
+
+<p><code class="language-plaintext highlighter-rouge">git checkout -b &lt;branch&gt; &lt;remote&gt;/&lt;branch&gt;</code> 从 remote/branch 切出分支，省略代表当前分支</p>
+
+<p><code class="language-plaintext highlighter-rouge">git branch -m &lt;branch&gt;</code> 重命名分支</p>
+
+<h2 id="删除分支">删除分支</h2>
+
+<p><code class="language-plaintext highlighter-rouge">git branch -d &lt;branch&gt;</code> 删除本地分支</p>
+
+<p><code class="language-plaintext highlighter-rouge">git branch -D &lt;branch&gt;</code> 强制删除本地分支</p>
+
+<p><code class="language-plaintext highlighter-rouge">git push &lt;remote&gt; :&lt;branch&gt;</code> 或 <code class="language-plaintext highlighter-rouge">git push origin --delete branch</code> 删除远程分支</p>
+
+<p><code class="language-plaintext highlighter-rouge">git remote prune origin</code> 若追踪的远程分支已经删除，则删除本地分支</p>
+
+<h2 id="远程仓库">远程仓库</h2>
+
+<p><code class="language-plaintext highlighter-rouge">git remote -v</code> 查看远程仓库地址</p>
+
+<p><code class="language-plaintext highlighter-rouge">git remote set-url origin &lt;URL&gt;</code> 修改远程仓库的 url</p>
+
+<h2 id="中途保存">中途保存</h2>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git stash     <span class="c"># 将本地代码放在暂存区</span>
+git pull      <span class="c"># 从远程拉取新代码</span>
+git stash pop <span class="c"># 将暂存区代码放回本地</span>
+</code></pre></div></div>
+
+<h2 id="日志">日志</h2>
+
+<p><code class="language-plaintext highlighter-rouge">git log &lt;branch&gt; &lt;branch&gt;</code> 指定分支的日志</p>
+
+<p><code class="language-plaintext highlighter-rouge">git log --all --oneline --graph</code> 展示所有分支的提交记录，以单线图形展示</p>
+
+<p><code class="language-plaintext highlighter-rouge">git log --author='name'</code> 指定指定作者的记录</p>
+
+<p><code class="language-plaintext highlighter-rouge">git log --grep="msg"</code> 匹配 msg 的记录</p>
+
+<p><code class="language-plaintext highlighter-rouge">git log --after="2022-01-01" --before="2022-04-01"</code> 统计 2022-01-01 之后，2022-04-01 之前的记录</p>
+
+<p><code class="language-plaintext highlighter-rouge">git log --pretty=format:"%an %ad: %s"</code> 格式化统计</p>
+
+<p><code class="language-plaintext highlighter-rouge">git reflog</code> 显示本地更新过的 HEAD 的 git 命令记录</p>
+
+<p><code class="language-plaintext highlighter-rouge">git log --abbrev-commit</code> 使用较短的 SHA 值展示日志记录</p>
+
+<h2 id="重置">重置</h2>
+
+<p><code class="language-plaintext highlighter-rouge">git reset &lt;commit-id&gt;</code> 回退到指定的提交，保留修改文件</p>
+
+<p><code class="language-plaintext highlighter-rouge">git reset --hard &lt;commit-id&gt;</code> 回退到指定的提交，不保留修改文件</p>
+
+<p><code class="language-plaintext highlighter-rouge">git reset HEAD^</code> 回退到最近的提交</p>
+
+<h2 id="标签">标签</h2>
+
+<p><code class="language-plaintext highlighter-rouge">git tag</code> 查看标签</p>
+
+<p><code class="language-plaintext highlighter-rouge">git tag &lt;version&gt;</code> 创建标签</p>
+
+<p><code class="language-plaintext highlighter-rouge">git tag -a &lt;version&gt; -m 'description' &lt;commit-id&gt;</code> 更加详细的描述</p>
+
+<p><code class="language-plaintext highlighter-rouge">git push origin &lt;version&gt;</code> 推送本地标签到远程</p>
+
+<p><code class="language-plaintext highlighter-rouge">git tag -d &lt;version&gt;</code> 删除本地标签</p>
+
+<h2 id="变基">变基</h2>
+
+<p>请不要在主分支上执行变基操作</p>
+
+<p><code class="language-plaintext highlighter-rouge">git rebase &lt;branch&gt;</code> 将当前分支基于某分支进行变基操作</p>
+
+<p><code class="language-plaintext highlighter-rouge">git rebase -i HEAD~2</code> 将最近两次的提交进行合并变基</p>
+
+<h2 id="gitignore">.gitignore</h2>
+
+<p>当一个文件被追踪之后，再添加到 .gitignore 文件会无效，解决办法：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git <span class="nb">rm</span> <span class="nt">-r</span> <span class="nt">--cached</span> &lt;文件名&gt;
+git add &lt;文件名&gt;
+git commit <span class="nt">-m</span> <span class="s1">'untracked file'</span>
+</code></pre></div></div>
+
+<h2 id="多个账号">多个账号</h2>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>includeIf <span class="s2">"gitdir:~/Code/"</span><span class="o">]</span>
+  path <span class="o">=</span> .gitconfig-person
+<span class="o">[</span>includeIf <span class="s2">"gitdir:~/Work/"</span><span class="o">]</span>
+  path <span class="o">=</span> .gitconfig-work
+<span class="o">[</span>includeIf <span class="s2">"gitdir:~/GitHub/"</span><span class="o">]</span>
+  path <span class="o">=</span> ~/GitHub/.gitconfig
+<span class="o">[</span>includeIf <span class="s2">"gitdir/i:D:/WorkSpace/"</span><span class="o">]</span>
+  path <span class="o">=</span> D:/WorkSpace/.gitconfig
+</code></pre></div></div>
+
+<h2 id="搭建">搭建</h2>
+
+<ul>
+  <li><a href="https://toyobayashi.github.io/2019/12/23/RemoteGit/">在 WSL Ubuntu 下搭建 Git 远程仓库</a></li>
+</ul>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="https://git-scm.com/docs">git-scm</a></li>
+  <li><a href="https://github.com/521xueweihan/git-tips">521xueweihan: git-tips</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2020/10/22/git%E5%B8%B8%E7%94%A8%E7%9A%84%E5%91%BD%E4%BB%A4.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

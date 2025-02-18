@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>前端常规的性能优化手段 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="前端常规的性能优化手段" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="网页性能优化是经常会被询问的一个点。" />
+<meta property="og:description" content="网页性能优化是经常会被询问的一个点。" />
+<link rel="canonical" href="/blog/2023/05/17/%E5%89%8D%E7%AB%AF%E5%B8%B8%E8%A7%84%E7%9A%84%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%89%8B%E6%AE%B5.html" />
+<meta property="og:url" content="/blog/2023/05/17/%E5%89%8D%E7%AB%AF%E5%B8%B8%E8%A7%84%E7%9A%84%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%89%8B%E6%AE%B5.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-05-17T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="前端常规的性能优化手段" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-05-17T00:00:00+00:00","datePublished":"2023-05-17T00:00:00+00:00","description":"网页性能优化是经常会被询问的一个点。","headline":"前端常规的性能优化手段","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2023/05/17/%E5%89%8D%E7%AB%AF%E5%B8%B8%E8%A7%84%E7%9A%84%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%89%8B%E6%AE%B5.html"},"url":"/blog/2023/05/17/%E5%89%8D%E7%AB%AF%E5%B8%B8%E8%A7%84%E7%9A%84%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%89%8B%E6%AE%B5.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">前端常规的性能优化手段</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2023-05-17T00:00:00+00:00" itemprop="datePublished">May 17, 2023
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2023"><i>2023</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/javascript"><i>javascript</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/css"><i>css</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/http"><i>http</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>网页性能优化是经常会被询问的一个点。</p>
+
+<h2 id="网络优化策略">网络优化策略</h2>
+
+<h3 id="减少-http-请求">减少 HTTP 请求</h3>
+
+<p>合并 JS，合并 CSS，使用 CSS sprite。</p>
+
+<h3 id="使用-http-缓存">使用 HTTP 缓存</h3>
+
+<p>使用强制缓存可以不走网络请求，直接走本地缓存数据来加载资源。</p>
+
+<p>使用协商缓存可以减少数据传输，当不需要更新数据时可通知客户端直接使用本地缓存。</p>
+
+<h3 id="使用-http20">使用 HTTP/2.0</h3>
+
+<p>使用 HTTP/2.0 的功能，多路复用，首部压缩，服务器推送等。</p>
+
+<h3 id="cdn">CDN</h3>
+
+<p>静态资源上 CDN，CDN 能非常有效的加快网站静态资源的访问速度。</p>
+
+<h3 id="压缩">压缩</h3>
+
+<p>gzip 压缩，html 压缩，JS 压缩，CSS 压缩，图片压缩</p>
+
+<h2 id="浏览器渲染优化策略">浏览器渲染优化策略</h2>
+
+<h3 id="关键渲染路径的优化">关键渲染路径的优化</h3>
+
+<p>在 JS 或者其他方式进行修改 DOM 后，浏览器会进行：</p>
+
+<p>DOM 构建 -&gt; CSSOM 构建 -&gt; 合成渲染树 -&gt; 布局 -&gt; 绘制</p>
+
+<p>Reflow 重排：重排在 Chrome Performance 中叫做布局，通常添加或删除元素、修改元素大小、移动元素位置、获取位置信息都会触发页面的重排，因为重排可能会改变元素的大小位置等信息，这样的改变会影响到页面大量其它元素的大小位置信息，会耗费掉大量的性能，所以在实际应用中我们应该尽可能的减少重排</p>
+
+<p>Repaint 重绘：重绘在 Chrome Performance 中叫做绘制，通常样式改变但没有影响位置时会触发重绘操作，重绘性能还好，但我们也需要尽量减少重绘，如果需要做一些动画，我们尽量使用 CSS3 动画，CSS3 动画只需要在初始化时绘制一次，之后的动画都不会触发重绘操作。</p>
+
+<h2 id="静态文件的优化策略">静态文件的优化策略</h2>
+
+<h3 id="css">CSS</h3>
+
+<ul>
+  <li>将样式表放到页面顶部</li>
+  <li>避免 css 表达式</li>
+</ul>
+
+<h3 id="javascript">JavaScript</h3>
+
+<ul>
+  <li>将脚本放到页面底部</li>
+  <li>使用 webworker 解决复杂运算，避免复杂运算阻塞主线程，webworker 线程位于渲染进程</li>
+  <li>使用事件委托，能减少事件绑定个数</li>
+</ul>
+
+<h2 id="浏览器储存优化策略">浏览器储存优化策略</h2>
+
+<h3 id="cookie">Cookie</h3>
+
+<p>cookie 在过期之前一直有效，最大储存大小为 4k，限制字段个数，不适合大量的数据储存，每次请求会携带 cookie，主要用来做身份校验。</p>
+
+<p>优化方式：</p>
+
+<ol>
+  <li>需要合理设置 cookie 有效期</li>
+  <li>根据不同子域划分 cookie 来减少 cookie 传输</li>
+  <li>静态资源域名和 cookie 域名采用不同域名，避免静态资源请求携带 cookie。</li>
+</ol>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="https://mp.weixin.qq.com/s?__biz=Mzg4NTE3NTY4Mg==&amp;mid=2247485744&amp;idx=1&amp;sn=fd04230edff9c4291ac132c956266dfd&amp;chksm=cfadadddf8da24cb447d3b5194ee54e19875a2d5974f7f34ec571634e1ea0708c163c4d084cd&amp;token=1008676742&amp;lang=zh_CN&amp;scene=21#wechat_redirect">Web 页面全链路性能优化指南</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2023/05/17/%E5%89%8D%E7%AB%AF%E5%B8%B8%E8%A7%84%E7%9A%84%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%89%8B%E6%AE%B5.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Linux查看磁盘空间 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Linux查看磁盘空间" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="在 Linux 系统下查看磁盘空间命令以及 Arch 下清理缓存建议。" />
+<meta property="og:description" content="在 Linux 系统下查看磁盘空间命令以及 Arch 下清理缓存建议。" />
+<link rel="canonical" href="/blog/2022/02/23/Linux%E6%9F%A5%E7%9C%8B%E7%A3%81%E7%9B%98%E7%A9%BA%E9%97%B4.html" />
+<meta property="og:url" content="/blog/2022/02/23/Linux%E6%9F%A5%E7%9C%8B%E7%A3%81%E7%9B%98%E7%A9%BA%E9%97%B4.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-02-23T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Linux查看磁盘空间" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-02-23T00:00:00+00:00","datePublished":"2022-02-23T00:00:00+00:00","description":"在 Linux 系统下查看磁盘空间命令以及 Arch 下清理缓存建议。","headline":"Linux查看磁盘空间","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2022/02/23/Linux%E6%9F%A5%E7%9C%8B%E7%A3%81%E7%9B%98%E7%A9%BA%E9%97%B4.html"},"url":"/blog/2022/02/23/Linux%E6%9F%A5%E7%9C%8B%E7%A3%81%E7%9B%98%E7%A9%BA%E9%97%B4.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Linux查看磁盘空间</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2022-02-23T00:00:00+00:00" itemprop="datePublished">Feb 23, 2022
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2022"><i>2022</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/linux"><i>linux</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>在 Linux 系统下查看磁盘空间命令以及 Arch 下清理缓存建议。</p>
+
+<h2 id="df">df</h2>
+
+<p>df 命令的英文是 Disk Free，用于查看磁盘剩余空间的大小。df 命令查看的是磁盘分区的剩余空间，默认单位为 KB，使用 <code class="language-plaintext highlighter-rouge">df -h</code> 便于阅读。</p>
+
+<p>用法：<code class="language-plaintext highlighter-rouge">df [OPTION]... [FILE]...</code></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">参数</th>
+      <th style="text-align: left">说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">-a, –all</td>
+      <td style="text-align: left">显示所有系统文件</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">-h</td>
+      <td style="text-align: left">以易读的方式显示</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">-k</td>
+      <td style="text-align: left">等同 –block-size=1K</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">-m</td>
+      <td style="text-align: left">等同 –block-size=1M</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="du">du</h2>
+
+<p>du 命令的英文是 Disk Usage，用于查看磁盘占用空间的大小。dh 命令查看的是文件和目录的使用空间。</p>
+
+<p>用法: <code class="language-plaintext highlighter-rouge">du [OPTION]... [FILE]...</code></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">参数</th>
+      <th style="text-align: left">说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">-a, –all</td>
+      <td style="text-align: left">所有的文件的计数，不仅仅是目录</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">-h</td>
+      <td style="text-align: left">以易读的方式显示</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">-k</td>
+      <td style="text-align: left">等同 –block-size=1K</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">-m</td>
+      <td style="text-align: left">等同 –block-size=1M</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">-s, –summarize</td>
+      <td style="text-align: left">仅显示总计</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>一些用法：</p>
+
+<ul>
+  <li>查看单个文件的大小：<code class="language-plaintext highlighter-rouge">du -h debug.log</code></li>
+  <li>查看占用空间最大的文件排名：<code class="language-plaintext highlighter-rouge">du -a . | sort -rh | head -n 10</code></li>
+</ul>
+
+<h2 id="清除-arch-包缓存">清除 Arch 包缓存</h2>
+
+<p>Arch 的包缓存占用了极大的空间。Arch 的包在 /var/cache/pacman/pkg/ 目录下。</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">pacman -Sc</code> 删除缓存中当前所有未安装的包</li>
+  <li><code class="language-plaintext highlighter-rouge">pacman -Scc</code> 删除所有缓存的包</li>
+</ul>
+
+<p>也可以使用 <a href="https://archlinux.org/packages/community/x86_64/pacman-contrib/">pacman-contrib</a> 中的paccache 来进行管理。</p>
+
+<p>PS: 需要安装 pacam-contrib 才可以使用 paccache 的命令。</p>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="https://zhongguo.eskere.club/%E5%A6%82%E4%BD%95%E6%B8%85%E7%90%86-arch-linux-%E4%B8%AD%E7%9A%84%E5%8C%85%E7%BC%93%E5%AD%98/2021-09-03/">如何清理 Arch Linux 中的包缓存</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2022/02/23/Linux%E6%9F%A5%E7%9C%8B%E7%A3%81%E7%9B%98%E7%A9%BA%E9%97%B4.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

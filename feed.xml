@@ -1,0 +1,801 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="/blog/" rel="alternate" type="text/html" /><updated>2025-02-18T04:24:38+00:00</updated><id>/blog/feed.xml</id><title type="html">主页</title><subtitle>看自己超过两周之前写的代码就跟之前没看过一样。</subtitle><entry><title type="html">移动 WSL 到其他硬盘</title><link href="/blog/2025/02/18/%E7%A7%BB%E5%8A%A8WSL%E5%88%B0%E5%85%B6%E4%BB%96%E7%A1%AC%E7%9B%98.html" rel="alternate" type="text/html" title="移动 WSL 到其他硬盘" /><published>2025-02-18T00:00:00+00:00</published><updated>2025-02-18T00:00:00+00:00</updated><id>/blog/2025/02/18/%E7%A7%BB%E5%8A%A8WSL%E5%88%B0%E5%85%B6%E4%BB%96%E7%A1%AC%E7%9B%98</id><content type="html" xml:base="/blog/2025/02/18/%E7%A7%BB%E5%8A%A8WSL%E5%88%B0%E5%85%B6%E4%BB%96%E7%A1%AC%E7%9B%98.html"><![CDATA[<p>在使用 WSL 的时候往往会占用 C 盘的空间，可以将 WSL 移动到其他硬盘，这样可以节省 C 盘的空间。</p>
+
+<ol>
+  <li>
+    <p>以管理员的身份运行 PowerShell 或者 CMD。</p>
+  </li>
+  <li>
+    <p>执行命令: <code class="language-plaintext highlighter-rouge">wsl -l -v</code> 查看当前运行的子系统，如果运行状态，执行 <code class="language-plaintext highlighter-rouge">wsl -t Ubuntu</code> 命令停止子系统。</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   NAME      STATE           VERSION
+ <span class="k">*</span> Ubuntu    Running         2
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>将子系统导出。</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wsl <span class="nt">--export</span> Ubuntu D:<span class="se">\u</span>buntu.tar
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>取消注册分发版并删除根文件系统。</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wsl <span class="nt">--unregister</span> Ubuntu
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>将系统导入到新的目录，以 <code class="language-plaintext highlighter-rouge">D:\wsl</code> 目录为例。</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wsl <span class="nt">--import</span> Ubuntu D:<span class="se">\w</span>sl D:<span class="se">\u</span>buntu.tar
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>导入后，默认为 root 用户，设置默认用户。</p>
+
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ubuntu config <span class="nt">--default-user</span> <span class="o">[</span>user]
+</code></pre></div>    </div>
+  </li>
+</ol>]]></content><author><name></name></author><category term="2025" /><category term="linux" /><category term="windows" /><summary type="html"><![CDATA[在使用 WSL 的时候往往会占用 C 盘的空间，可以将 WSL 移动到其他硬盘，这样可以节省 C 盘的空间。]]></summary></entry><entry><title type="html">dante 安装与使用</title><link href="/blog/2024/11/04/dante%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8.html" rel="alternate" type="text/html" title="dante 安装与使用" /><published>2024-11-04T00:00:00+00:00</published><updated>2024-11-04T00:00:00+00:00</updated><id>/blog/2024/11/04/dante%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8</id><content type="html" xml:base="/blog/2024/11/04/dante%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8.html"><![CDATA[<p>Dante 是一个提供 SOCKS 服务的网络代理软件。</p>
+
+<!-- vim-markdown-toc GFM -->
+
+<ul>
+  <li><a href="#安装">安装</a></li>
+  <li><a href="#配置">配置</a></li>
+  <li><a href="#启动与停止">启动与停止</a></li>
+  <li><a href="#其他事项">其他事项</a></li>
+  <li><a href="#参考链接">参考链接</a></li>
+</ul>
+
+<!-- vim-markdown-toc -->
+
+<h2 id="安装">安装</h2>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt <span class="nb">install </span>dante-server
+</code></pre></div></div>
+
+<h2 id="配置">配置</h2>
+
+<p>配置文件是 <code class="language-plaintext highlighter-rouge">/etc/danted.conf</code>。</p>
+
+<p>使用时最好添加一个专门代理的用户，这样可以限制用户的访问权限。假设我们设置的用户为 <code class="language-plaintext highlighter-rouge">dante</code>。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 添加一个本地用户，不创建默认目录和登录 shell</span>
+<span class="nb">sudo </span>useradd <span class="nt">--no-create-home</span> <span class="nt">-s</span> /sbin/nologin dante
+
+<span class="c"># 设置密码，客户端登陆使用</span>
+<span class="nb">sudo </span>passwd dante
+</code></pre></div></div>
+
+<p>部分配置如下</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># /etc/danted.conf</span>
+
+internal: 0.0.0.0 port <span class="o">=</span> 1080
+external: eth0
+
+clientmethod: none
+socksmethod: pam.username none
+
+user.privileged: root
+user.unprivileged: dante
+
+client pass <span class="o">{</span>
+    from: 0/0 to: 0/0
+<span class="o">}</span>
+
+socks pass <span class="o">{</span>
+    from: 0/0 to: 0/0
+    socksmethod: pam.username
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>最后可以使用 <code class="language-plaintext highlighter-rouge">dnated -V</code> 检查配置是否正确</p>
+
+<h2 id="启动与停止">启动与停止</h2>
+
+<p>使用 <code class="language-plaintext highlighter-rouge">systemctl</code> 或者 <code class="language-plaintext highlighter-rouge">service</code> 命令来管理服务，分别是启动，停止，重启和检查服务状态</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>systemctl start danted
+<span class="nb">sudo </span>systemctl stop danted
+
+<span class="c"># 或者</span>
+<span class="nb">sudo </span>service danted status
+<span class="nb">sudo </span>service danted restart
+</code></pre></div></div>
+
+<p>测试是否正常使用</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-x</span> socks5://127.0.0.1:1080 https://ifconfig.co <span class="nt">--proxy-user</span> proxy:[password]
+</code></pre></div></div>
+
+<h2 id="其他事项">其他事项</h2>
+
+<ul>
+  <li>需要开启防火墙对应的端口，防火墙命令是 <code class="language-plaintext highlighter-rouge">sudo ufw allow 1080</code> 或者到 VPS 开启对应的网络规则</li>
+</ul>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="https://github.com/Lozy/danted">GitHub - Lozy/danted: Fast script for installing &amp; configing Danted–Socks5 Proxy Server.</a></li>
+  <li><a href="https://virmach.com/how-to-set-up-socks5-proxy-server-on-a-vps/">How to set up SOCKS5 proxy server (Dante) on a VPS</a></li>
+</ul>]]></content><author><name></name></author><category term="2024" /><category term="linux" /><summary type="html"><![CDATA[Dante 是一个提供 SOCKS 服务的网络代理软件。]]></summary></entry><entry><title type="html">IndexedDB</title><link href="/blog/2024/08/28/indexeddb.html" rel="alternate" type="text/html" title="IndexedDB" /><published>2024-08-28T00:00:00+00:00</published><updated>2024-08-28T00:00:00+00:00</updated><id>/blog/2024/08/28/indexeddb</id><content type="html" xml:base="/blog/2024/08/28/indexeddb.html"><![CDATA[<p>IndexedDB 是个客户端存储键值存储的数据库。</p>
+
+<!-- vim-markdown-toc GFM -->
+
+<ul>
+  <li><a href="#概念">概念</a></li>
+  <li><a href="#打开">打开</a></li>
+  <li><a href="#构建">构建</a></li>
+  <li><a href="#插入删除查询更新数据">插入/删除/查询/更新数据</a></li>
+  <li><a href="#游标">游标</a></li>
+  <li><a href="#索引">索引</a></li>
+  <li><a href="#参考链接">参考链接</a></li>
+</ul>
+
+<!-- vim-markdown-toc -->
+
+<h2 id="概念">概念</h2>
+
+<ul>
+  <li>仓库 Store：IndexedDB 没有表，只有仓库。</li>
+  <li>索引 Index: 索引方便快速筛选。</li>
+  <li>游标 Cursor: 用于查询满足条件的数据。</li>
+  <li>事务 Transaction：对数据库进行操作失败的话会回滚，保证数据的一致性。</li>
+</ul>
+
+<h2 id="打开">打开</h2>
+
+<p>开数据库，若没有则会自动创建。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">indexedDB</span><span class="p">.</span><span class="nf">open</span><span class="p">(</span><span class="dl">'</span><span class="s1">MyDatabase</span><span class="dl">'</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+<span class="nx">request</span><span class="p">.</span><span class="nx">onsuccess</span> <span class="o">=</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// 保存 IDBDatabase 接口</span>
+  <span class="kd">const</span> <span class="nx">db</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">result</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="nx">request</span><span class="p">.</span><span class="nx">onerror</span> <span class="o">=</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{};</span>
+<span class="nx">request</span><span class="p">.</span><span class="nx">onupgradeneeded</span> <span class="o">=</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{};</span>
+</code></pre></div></div>
+
+<h2 id="构建">构建</h2>
+
+<p><code class="language-plaintext highlighter-rouge">createObjectStore</code> 第一个参数代表创建仓库名称，第二个为对象。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 省略打开</span>
+<span class="nx">request</span><span class="p">.</span><span class="nx">onupgradeneeded</span> <span class="o">=</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">db</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">result</span><span class="p">;</span>
+  <span class="c1">// 仓库</span>
+  <span class="kd">const</span> <span class="nx">objectStore</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nf">createObjectStore</span><span class="p">(</span><span class="dl">'</span><span class="s1">customers</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> <span class="na">keyPath</span><span class="p">:</span> <span class="dl">'</span><span class="s1">ssn</span><span class="dl">'</span> <span class="p">});</span>
+  <span class="c1">// 索引</span>
+  <span class="nx">objectStore</span><span class="p">.</span><span class="nf">createIndex</span><span class="p">(</span><span class="dl">'</span><span class="s1">name</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">name</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> <span class="na">unique</span><span class="p">:</span> <span class="kc">false</span> <span class="p">});</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="插入删除查询更新数据">插入/删除/查询/更新数据</h2>
+
+<p>插入操作基于事务，执行插入操作之前需要创建事务</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 创建事务</span>
+<span class="kd">const</span> <span class="nx">transaction</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nf">transaction</span><span class="p">([</span><span class="dl">'</span><span class="s1">customers</span><span class="dl">'</span><span class="p">],</span> <span class="dl">'</span><span class="s1">readwrite</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="nx">transaction</span><span class="p">.</span><span class="nx">oncomplete</span> <span class="o">=</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{};</span>
+<span class="nx">transaction</span><span class="p">.</span><span class="nx">onerror</span> <span class="o">=</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{};</span>
+
+<span class="kd">const</span> <span class="nx">objectStore</span> <span class="o">=</span> <span class="nx">transaction</span><span class="p">.</span><span class="nf">objectStore</span><span class="p">(</span><span class="dl">'</span><span class="s1">customers</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">objectStore</span><span class="p">.</span><span class="nf">add</span><span class="p">({</span> <span class="na">ssn</span><span class="p">:</span> <span class="dl">'</span><span class="s1">4-4</span><span class="dl">'</span><span class="p">,</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Bill</span><span class="dl">'</span> <span class="p">});</span>
+
+<span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">objectStore</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">4-4</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">objectStore</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="dl">'</span><span class="s1">4-4</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">objectStore</span><span class="p">.</span><span class="nf">put</span><span class="p">({</span> <span class="na">ssn</span><span class="p">:</span> <span class="dl">'</span><span class="s1">4-4</span><span class="dl">'</span><span class="p">,</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">John</span><span class="dl">'</span> <span class="p">});</span>
+</code></pre></div></div>
+
+<h2 id="游标">游标</h2>
+
+<p>使用游标可以遍历所有值，必须需要先进行判断游标的值是否为空。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">objectStore</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nf">transaction</span><span class="p">(</span><span class="dl">'</span><span class="s1">customers</span><span class="dl">'</span><span class="p">).</span><span class="nf">objectStore</span><span class="p">(</span><span class="dl">'</span><span class="s1">customers</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">objectStore</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nf">transaction</span><span class="p">([</span><span class="dl">'</span><span class="s1">customers</span><span class="dl">'</span><span class="p">]).</span><span class="nf">objectStore</span><span class="p">(</span><span class="dl">'</span><span class="s1">customers</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="nx">objectStore</span><span class="p">.</span><span class="nf">openCursor</span><span class="p">().</span><span class="nx">onsuccess</span> <span class="o">=</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">cursor</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">result</span><span class="p">;</span>
+  <span class="c1">// 判断必须要有</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">cursor</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="s2">`Name for SSN </span><span class="p">${</span><span class="nx">cursor</span><span class="p">.</span><span class="nx">key</span><span class="p">}</span><span class="s2"> is </span><span class="p">${</span><span class="nx">cursor</span><span class="p">.</span><span class="nx">value</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+    <span class="nx">cursor</span><span class="p">.</span><span class="k">continue</span><span class="p">();</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">No more entries!</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="索引">索引</h2>
+
+<p>使用索引可以获得第一个符合条件的值</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">objectStore</span><span class="p">.</span><span class="nf">index</span><span class="p">(</span><span class="dl">'</span><span class="s1">name</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">index</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">Jane</span><span class="dl">'</span><span class="p">).</span><span class="nx">onsuccess</span> <span class="o">=</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{};</span>
+</code></pre></div></div>
+
+<p>配合游标查询所有符合条件的值</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">objectStore</span><span class="p">.</span><span class="nf">index</span><span class="p">(</span><span class="dl">'</span><span class="s1">name</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">index</span><span class="p">.</span><span class="nf">openCursor</span><span class="p">().</span><span class="nx">onsuccess</span> <span class="o">=</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">cursor</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">result</span><span class="p">;</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">cursor</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nx">cursor</span><span class="p">.</span><span class="k">continue</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>一个完整的示例：<a href="https://codesandbox.io/p/sandbox/indexdb-rn76fm">sandbox</a></p>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API">IndexedDB API - Web APIs | MDN</a></li>
+  <li><a href="https://www.w3.org/TR/IndexedDB/">Indexed Database API 3.0</a></li>
+  <li><a href="https://www.tangshuang.net/3735.html#">IndexedDB 中文教程_唐霜的博客</a></li>
+</ul>]]></content><author><name></name></author><category term="2024" /><category term="javascript" /><summary type="html"><![CDATA[IndexedDB 是个客户端存储键值存储的数据库。]]></summary></entry><entry><title type="html">NeoVim 使用体验</title><link href="/blog/2024/02/22/neovim%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C.html" rel="alternate" type="text/html" title="NeoVim 使用体验" /><published>2024-02-22T00:00:00+00:00</published><updated>2024-02-22T00:00:00+00:00</updated><id>/blog/2024/02/22/neovim%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C</id><content type="html" xml:base="/blog/2024/02/22/neovim%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C.html"><![CDATA[<p>在使用 vim 的一段时间时候，接触到 neovim，刚开始并没有打算切换过去，但是随着慢慢的深入使用。发现 neovim 的一些优势：</p>
+
+<ol>
+  <li>插件生态更加丰富。</li>
+  <li>vim 切换 neovim 的成本极低。</li>
+</ol>
+
+<!-- vim-markdown-toc GFM -->
+
+<ul>
+  <li><a href="#安装">安装</a></li>
+  <li><a href="#配置">配置</a></li>
+  <li><a href="#插件">插件</a>
+    <ul>
+      <li><a href="#依赖">依赖</a></li>
+    </ul>
+  </li>
+  <li><a href="#参考链接">参考链接</a></li>
+</ul>
+
+<!-- vim-markdown-toc -->
+
+<h2 id="安装">安装</h2>
+
+<p>主要是针对 Linux 上的 neovim 安装，Windows 下也有 neovim 的使用，但是没怎么实践。</p>
+
+<p>Arch 下运行命令：<code class="language-plaintext highlighter-rouge">sudo pacman -S neovim</code> 即可。</p>
+
+<p>Ubuntu 下默认的 PPA 包已经不再更新，一个简单的可选的方法就是安装开发版本，除了偶尔版本问题，大部分情况下还是可以正常使用。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>add-apt-repository ppa:neovim-ppa/unstable
+<span class="nb">sudo </span>apt-get update
+<span class="nb">sudo </span>apt-get <span class="nb">install </span>neovim
+</code></pre></div></div>
+
+<p>其他相关安装可以查看官方链接 <a href="https://github.com/neovim/neovim/blob/master/INSTALL.md">neovim/INSTALL.md</a></p>
+
+<h2 id="配置">配置</h2>
+
+<p>安装成功之后即可使用 <code class="language-plaintext highlighter-rouge">nvim</code> 打开 neovim，为了更加易用，配置 neovim 就很有必要性了。</p>
+
+<p>默认的配置文件是在 <code class="language-plaintext highlighter-rouge">$HOME/.config/nvim/init.vim</code></p>
+
+<h2 id="插件">插件</h2>
+
+<p>插件管理工具则使用了 <a href="https://github.com/junegunn/vim-plug">Vim-Plug</a>，默认位置：<code class="language-plaintext highlighter-rouge">$HOME/.config/share/nvim/site/autoload/plug.vim</code>, 快速安装指令</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sh <span class="nt">-c</span> <span class="s1">'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'</span>
+</code></pre></div></div>
+
+<p>下载完成之后即可使用 <code class="language-plaintext highlighter-rouge">:PlugInstall</code> 进行插件的安装。</p>
+
+<h3 id="依赖">依赖</h3>
+
+<p>部分插件需要安装依赖的东西。</p>
+
+<ul>
+  <li>
+    <p>代码提示 <a href="https://github.com/neoclide/coc.nvim">neoclide/coc.nvim</a></p>
+
+    <p>需要 nodejs &gt;= 16.18.0</p>
+  </li>
+  <li>
+    <p>文件导航 <a href="https://github.com/kevinhwang91/rnvimr">kevinhwang91/rnvimr</a></p>
+
+    <p>ranger 使用 pip 安装 <code class="language-plaintext highlighter-rouge">pip3 install ranger-fm</code></p>
+  </li>
+  <li>
+    <p>快速搜索 <a href="https://github.com/nvim-telescope/telescope.nvim">nvim-telescope/telescope.nvim</a></p>
+
+    <p>需要安装的 NeoVim &gt;= 0.9.0</p>
+
+    <p>需要在系统安装 <a href="https://github.com/BurntSushi/ripgrep">ripgrep</a></p>
+  </li>
+</ul>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="https://github.com/neovim/neovim/blob/master/INSTALL.md">neovim/INSTALL.md</a></li>
+  <li><a href="https://github.com/junegunn/vim-plug">Vim-Plug</a></li>
+</ul>]]></content><author><name></name></author><category term="2024" /><category term="linux" /><summary type="html"><![CDATA[在使用 vim 的一段时间时候，接触到 neovim，刚开始并没有打算切换过去，但是随着慢慢的深入使用。发现 neovim 的一些优势：]]></summary></entry><entry><title type="html">Cordova 开发的问题</title><link href="/blog/2024/02/21/cordova%E5%BC%80%E5%8F%91%E7%9A%84%E9%97%AE%E9%A2%98.html" rel="alternate" type="text/html" title="Cordova 开发的问题" /><published>2024-02-21T00:00:00+00:00</published><updated>2024-02-21T00:00:00+00:00</updated><id>/blog/2024/02/21/cordova%E5%BC%80%E5%8F%91%E7%9A%84%E9%97%AE%E9%A2%98</id><content type="html" xml:base="/blog/2024/02/21/cordova%E5%BC%80%E5%8F%91%E7%9A%84%E9%97%AE%E9%A2%98.html"><![CDATA[<p>Cordova 开发中遇到的问题与解决方案。</p>
+
+<!-- vim-markdown-toc GFM -->
+
+<ul>
+  <li><a href="#gradle-下载">gradle 下载</a></li>
+  <li><a href="#debug-webview">Debug Webview</a></li>
+</ul>
+
+<!-- vim-markdown-toc -->
+
+<h2 id="gradle-下载">gradle 下载</h2>
+
+<p>在构建 android 项目的时候，需要下载 gradle 速度特别慢的问题。</p>
+
+<p>可以去 <code class="language-plaintext highlighter-rouge">https://services.gradle.org/distributions/</code> 使用浏览器等方式下载。</p>
+
+<p>然后解压到 <code class="language-plaintext highlighter-rouge">C:\Users\&lt;youruser&gt;\.gradle\wrapper\dists\gradle-x.y-bin</code> 目录下。</p>
+
+<h2 id="debug-webview">Debug Webview</h2>
+
+<p>前置条件：打开 <code class="language-plaintext highlighter-rouge">USB调试</code> 功能</p>
+
+<ol>
+  <li>
+    <p>Chrome</p>
+
+    <p>使用 Chrome，打开 <code class="language-plaintext highlighter-rouge">chrome://inspect/#devices</code></p>
+  </li>
+  <li>
+    <p>Edge</p>
+
+    <p>使用 Edge，打开 <code class="language-plaintext highlighter-rouge">edge://inspect/#devices</code></p>
+  </li>
+</ol>
+
+<p>使用了 chrome 可能会遇到网络的问题，只需要科学上网即可。</p>]]></content><author><name></name></author><category term="2024" /><category term="app" /><summary type="html"><![CDATA[Cordova 开发中遇到的问题与解决方案。]]></summary></entry><entry><title type="html">Nodejs 的 Process</title><link href="/blog/2024/01/17/nodejs%E7%9A%84process.html" rel="alternate" type="text/html" title="Nodejs 的 Process" /><published>2024-01-17T00:00:00+00:00</published><updated>2024-01-17T00:00:00+00:00</updated><id>/blog/2024/01/17/nodejs%E7%9A%84process</id><content type="html" xml:base="/blog/2024/01/17/nodejs%E7%9A%84process.html"><![CDATA[<p>在 nodejs 开发中经常会遇到 process 变量，process 是一个全局变量，负责提供信息，以及控制当前 nodejs 进程。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">process</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">node:process</span><span class="dl">'</span><span class="p">);</span>
+<span class="k">import</span> <span class="nx">process</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">node:process</span><span class="dl">'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<!-- vim-markdown-toc GFM -->
+
+<ul>
+  <li><a href="#processenv">process.env</a>
+    <ul>
+      <li><a href="#配置">配置</a></li>
+    </ul>
+  </li>
+  <li><a href="#参考链接">参考链接</a></li>
+</ul>
+
+<!-- vim-markdown-toc -->
+
+<h2 id="processenv">process.env</h2>
+
+<p>process.env 返回当前用户的环境变量的对象。一个常见的 process.env 命令如下，省略部分：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
+    <span class="nl">COLORTERM</span><span class="p">:</span> <span class="dl">'</span><span class="s1">turecolor</span><span class="dl">'</span><span class="p">,</span>
+    <span class="nx">DESKTOP_SESSION</span><span class="p">:</span> <span class="dl">'</span><span class="s1">plasma</span><span class="dl">'</span><span class="p">,</span>
+    <span class="nx">GEM_HOME</span><span class="p">:</span> <span class="dl">'</span><span class="s1">/home/chen/.local/share/gem</span><span class="dl">'</span><span class="p">,</span>
+    <span class="nx">GTK_IM_MODULE</span><span class="p">:</span> <span class="dl">'</span><span class="s1">fcitx</span><span class="dl">'</span><span class="p">,</span>
+    <span class="nx">HOME</span><span class="p">:</span> <span class="dl">'</span><span class="s1">/home/chen</span><span class="dl">'</span><span class="p">,</span>
+    <span class="nx">LANG</span><span class="p">:</span> <span class="dl">'</span><span class="s1">en_US.UTF-8</span><span class="dl">'</span><span class="p">,</span>
+    <span class="nx">SHELL</span><span class="p">:</span> <span class="dl">'</span><span class="s1">/usr/bin/zsh</span><span class="dl">'</span><span class="p">,</span>
+    <span class="nx">TERM</span><span class="p">:</span> <span class="dl">'</span><span class="s1">tmux-256color</span><span class="dl">'</span><span class="p">,</span>
+    <span class="nx">USER</span><span class="p">:</span> <span class="dl">'</span><span class="s1">chen</span><span class="dl">'</span><span class="p">,</span>
+    <span class="nx">EDITOR</span><span class="p">:</span> <span class="dl">'</span><span class="s1">nvim</span><span class="dl">'</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>可以看出，都是用户（我）的环境变量设置，而且变量名都习惯性大写。</p>
+
+<h3 id="配置">配置</h3>
+
+<p>由于 process.env 变量是可以直接修改的，所以需要配置临时变量就可以在当前终端下直接添加变量。</p>
+
+<p>Window 临时添加命令如下：</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 查看</span>
+<span class="nb">set </span>NODE_ENV
+<span class="c"># 添加</span>
+<span class="nb">set </span><span class="nv">NODE_ENV</span><span class="o">=</span>production
+<span class="c"># 追加</span>
+<span class="nb">set </span><span class="nv">path</span><span class="o">=</span>%path%<span class="p">;</span>C:<span class="se">\n</span>odejs
+<span class="c"># 删除</span>
+<span class="nb">set </span><span class="nv">NODE_ENV</span><span class="o">=</span>
+</code></pre></div></div>
+
+<p>Linux 临时添加命令如下：</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 查看</span>
+<span class="nb">echo</span> <span class="nv">$NODE_ENV</span>
+<span class="c"># 添加</span>
+<span class="nb">export </span><span class="nv">NODE_ENV</span><span class="o">=</span>production
+<span class="c"># 追加</span>
+<span class="nb">export </span><span class="nv">path</span><span class="o">=</span><span class="nv">$path</span>:/usr/local/
+<span class="c"># 删除</span>
+<span class="nb">unset </span>NODE_ENV
+<span class="c"># 查看所有环境变量</span>
+<span class="nb">env</span>
+</code></pre></div></div>
+
+<p>永久保存环境变量则需要修改系统配置</p>
+
+<ol>
+  <li>Windows: 右键（此电脑） -&gt; 属性 -&gt; 高级系统设置 -&gt; 环境变量</li>
+  <li>Linux: 编辑用户的环境变量配置，如：<code class="language-plaintext highlighter-rouge">.bashrc</code> <code class="language-plaintext highlighter-rouge">.bash_profile</code> <code class="language-plaintext highlighter-rouge">.zshrc</code></li>
+</ol>
+
+<p>在项目上经常会在 package.json 里面编辑：</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"script"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"build"</span><span class="p">:</span><span class="w"> </span><span class="s2">"webpack NODE_ENV=production"</span><span class="w">
+    </span><span class="nl">"dev"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cross-env NODE_ENV=development"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="https://nodejs.org/dist/latest-v20.x/docs/api/process.html">Process | Node.js v20.11.0 Documentation</a></li>
+  <li><a href="https://segmentfault.com/a/1190000011683741">node.js - Node 环境变量 process.env 的那些事儿</a></li>
+</ul>]]></content><author><name></name></author><category term="2024" /><category term="nodejs" /><summary type="html"><![CDATA[在 nodejs 开发中经常会遇到 process 变量，process 是一个全局变量，负责提供信息，以及控制当前 nodejs 进程。]]></summary></entry><entry><title type="html">Vue 的使用问题</title><link href="/blog/2024/01/14/vue%E7%9A%84%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98.html" rel="alternate" type="text/html" title="Vue 的使用问题" /><published>2024-01-14T00:00:00+00:00</published><updated>2024-01-14T00:00:00+00:00</updated><id>/blog/2024/01/14/vue%E7%9A%84%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98</id><content type="html" xml:base="/blog/2024/01/14/vue%E7%9A%84%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98.html"><![CDATA[<p>在使用 Vue 遇到的部分问题。</p>
+
+<!-- vim-markdown-toc GFM -->
+
+<ul>
+  <li><a href="#prettier">Prettier</a></li>
+  <li><a href="#debug-in-vs-code">Debug in VS Code</a></li>
+</ul>
+
+<!-- vim-markdown-toc -->
+
+<h2 id="prettier">Prettier</h2>
+
+<p>在使用 Prettier 格式化文件，会遇到结束标签 <code class="language-plaintext highlighter-rouge">&gt;</code> 跑到下一行的问题。</p>
+
+<p>通过修改 .prettier 的配置项：</p>
+
+<p><code class="language-plaintext highlighter-rouge">htmlWhitespaceSensitivity: ignore</code></p>
+
+<p>参考链接：</p>
+
+<ul>
+  <li><a href="https://prettier.io/docs/en/options#html-whitespace-sensitivity">HTML Whitespace Sensitivity</a></li>
+  <li><a href="https://prettier.io/blog/2018/11/07/1.15.0#whitespace-sensitive-formatting">Prettier 1.15: HTML, Vue, Angular and MDX Support · Prettier</a></li>
+</ul>
+
+<h2 id="debug-in-vs-code">Debug in VS Code</h2>
+
+<p>先阅读官方文档 <a href="https://v2.vuejs.org/v2/cookbook/debugging-in-vscode">Debugging in VS Code</a></p>
+
+<p>大致有以下几个点：</p>
+
+<ol>
+  <li>如果是 Firefox，需要安装对应的插件，Chrome 已经内置对应插件，无需安装。</li>
+  <li>
+    <p>需要修改 <code class="language-plaintext highlighter-rouge">vue.config.js</code>，内容如下：</p>
+
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">configureWebpack</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">devtool</span><span class="p">:</span> <span class="dl">'</span><span class="s1">source-map</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>参考文档：</p>
+
+<ul>
+  <li><a href="https://www.cnblogs.com/jasongrass/p/16438571.html">VSCode Vue 调试 - J.晒太阳的猫 - 博客园</a></li>
+</ul>]]></content><author><name></name></author><category term="2023" /><category term="vue" /><summary type="html"><![CDATA[在使用 Vue 遇到的部分问题。]]></summary></entry><entry><title type="html">Windows 下的软件及脚本</title><link href="/blog/2024/01/13/windows%E4%B8%8B%E7%9A%84%E8%BD%AF%E4%BB%B6%E5%8F%8A%E8%84%9A%E6%9C%AC.html" rel="alternate" type="text/html" title="Windows 下的软件及脚本" /><published>2024-01-13T00:00:00+00:00</published><updated>2024-01-13T00:00:00+00:00</updated><id>/blog/2024/01/13/windows%E4%B8%8B%E7%9A%84%E8%BD%AF%E4%BB%B6%E5%8F%8A%E8%84%9A%E6%9C%AC</id><content type="html" xml:base="/blog/2024/01/13/windows%E4%B8%8B%E7%9A%84%E8%BD%AF%E4%BB%B6%E5%8F%8A%E8%84%9A%E6%9C%AC.html"><![CDATA[<p>记录在使用 Windows 下的一些优化软件以及脚本。</p>
+
+<!-- vim-markdown-toc GFM -->
+
+<ul>
+  <li><a href="#powertoys">PowerToys</a></li>
+  <li><a href="#小鹤双拼">小鹤双拼</a></li>
+  <li><a href="#微软拼音禁用英文">微软拼音禁用英文</a></li>
+</ul>
+
+<!-- vim-markdown-toc -->
+
+<h2 id="powertoys">PowerToys</h2>
+
+<p>首先是微软官方出品的系统工具软件 - PowerToys。</p>
+
+<p>很好用的功能包括颜色选取器 <code class="language-plaintext highlighter-rouge">Win + Shift + C</code>，以及最常用的快速搜索 PowerToys Run <code class="language-plaintext highlighter-rouge">Alt + Space</code></p>
+
+<p>可以通过微软商店，<a href="https://github.com/microsoft/PowerToys">GitHub</a> 等方式下载。</p>
+
+<h2 id="小鹤双拼">小鹤双拼</h2>
+
+<p>最微软自带的微软拼音软件里面虽包含了双拼的输入法，但是缺少了常用的小鹤双拼。</p>
+
+<p>运行以下注册表的脚本就可以添加到微软拼音里面</p>
+
+<pre><code class="language-reg">Windows Registry Editor Version 5.00
+
+; 为微软拼音输入法添加小鹤双拼
+[HKEY_CURRENT_USER\Software\Microsoft\InputMethod\Settings\CHS]
+"UserDefinedDoublePinyinScheme0"="小鹤双拼*2*^*iuvdjhcwfg^xmlnpbksqszxkrltvyovt"
+</code></pre>
+
+<h2 id="微软拼音禁用英文">微软拼音禁用英文</h2>
+
+<p>出于部分需求，现有的语言安装了英语，所以需要关闭微软拼音的英文输入模式。</p>
+
+<p>在网上找到一些相关的办法: 使用 <a href="https://www.autohotkey.com/v2/">AutoHotKey</a> 脚本实现切换检测到切换的英文模式就帮忙切换到中文模式。</p>
+
+<ol>
+  <li>
+    <p>首先进行 AHK 软件的安装，并将之后要运行的脚本放入 Windows 开机自启目录 <code class="language-plaintext highlighter-rouge">C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp</code>。</p>
+  </li>
+  <li>
+    <p>找到别人写的脚本。<a href="https://gist.github.com/maokwen/4d99f5c0aa2e7c0c114c708b03fb73ae">AutoHotKey-Switch-IME</a></p>
+
+    <pre><code class="language-ahk">#Include %A_ScriptDir%
+
+timeInterval := 500
+
+InChs() {
+  ime_status := DllCall("GetKeyboardLayout", "int", 0, "UInt")
+  return (ime_status &amp; 0xffff) = 0x804 ; LANGID(Chinese) = 0x804
+}
+
+SwitchImeState(id) {
+    SendMessage(0x283, ; WM_IME_CONTROL
+                0x002, ; wParam IMC_SETCONVERSIONMODE
+                1025,  ; lParam (Chinese)
+                ,      ; Control (Window)
+                id)
+}
+
+DetectHiddenWindows True
+
+outer:
+Loop {
+  try {
+    hWnd := WinGetID("A")
+    id := DllCall("imm32\ImmGetDefaultIMEWnd", "Uint", hWnd, "Uint")
+
+    if (InChs()) {
+      SwitchImeState(id)
+    }
+
+} catch as e {
+  ; ^Esc 开始菜单弹窗，会卡死在找不到当前窗口
+  continue("outer")
+}
+
+Sleep(500)
+}
+</code></pre>
+  </li>
+  <li>
+    <p>快捷键的切换。默认是 <code class="language-plaintext highlighter-rouge">Win + Space</code>，使用很不习惯，修改称常用的 <code class="language-plaintext highlighter-rouge">Ctrl + Space</code>。</p>
+    <ol>
+      <li>使用 PowerToys 的快捷键映射。（最好开启管理员权限）</li>
+      <li>使用 AHK 脚本，可以合并到上面的脚本。 <code class="language-plaintext highlighter-rouge">^Space::#Space</code></li>
+    </ol>
+  </li>
+</ol>]]></content><author><name></name></author><category term="2024" /><category term="windows" /><summary type="html"><![CDATA[记录在使用 Windows 下的一些优化软件以及脚本。]]></summary></entry><entry><title type="html">自定义 Hooks</title><link href="/blog/2023/11/01/%E8%87%AA%E5%AE%9A%E4%B9%89hooks.html" rel="alternate" type="text/html" title="自定义 Hooks" /><published>2023-11-01T00:00:00+00:00</published><updated>2023-11-01T00:00:00+00:00</updated><id>/blog/2023/11/01/%E8%87%AA%E5%AE%9A%E4%B9%89hooks</id><content type="html" xml:base="/blog/2023/11/01/%E8%87%AA%E5%AE%9A%E4%B9%89hooks.html"><![CDATA[<p>自定义 Hooks 是一个函数，其名称以 use 开头，函数内部可以调用其他 Hooks。通过自定义 Hooks，可以将组件逻辑提取到可重用的函数中。</p>
+
+<!-- vim-markdown-toc GFM -->
+
+<ul>
+  <li><a href="#组件间共享逻辑">组件间共享逻辑</a></li>
+  <li><a href="#何时自定义-hooks">何时自定义 Hooks</a></li>
+  <li><a href="#自定义-hooks-与普通函数区别">自定义 Hooks 与普通函数区别</a></li>
+  <li><a href="#参考链接">参考链接</a></li>
+</ul>
+
+<!-- vim-markdown-toc -->
+
+<h2 id="组件间共享逻辑">组件间共享逻辑</h2>
+
+<p>使用自定义 Hooks 最大一个好处就是可以共享组件之间的逻辑。</p>
+
+<p>以 <a href="https://github.com/streamich/react-use">react-use</a> 里面的 <code class="language-plaintext highlighter-rouge">useLocalStorage</code> 作为例子。</p>
+
+<p><code class="language-plaintext highlighter-rouge">useLocalStorage</code> 里面封装一系列操作，包括对异常处理，读取，更新以及删除等操作。而我们在使用的过程中就可以不用重复编码。</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useLocalStorage</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-use</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">Demo</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">value</span><span class="p">,</span> <span class="nx">setValue</span><span class="p">,</span> <span class="nx">remove</span><span class="p">]</span> <span class="o">=</span> <span class="nf">useLocalStorage</span><span class="p">(</span><span class="dl">'</span><span class="s1">my-key</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">foo</span><span class="dl">'</span><span class="p">);</span>
+
+  <span class="k">return </span><span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>Value: <span class="si">{</span><span class="nx">value</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nf">setValue</span><span class="p">(</span><span class="dl">'</span><span class="s1">bar</span><span class="dl">'</span><span class="p">)</span><span class="si">}</span><span class="p">&gt;</span>bar<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nf">setValue</span><span class="p">(</span><span class="dl">'</span><span class="s1">baz</span><span class="dl">'</span><span class="p">)</span><span class="si">}</span><span class="p">&gt;</span>baz<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nf">remove</span><span class="p">()</span><span class="si">}</span><span class="p">&gt;</span>Remove<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="何时自定义-hooks">何时自定义 Hooks</h2>
+
+<p>hook 本身也是一个函数，对于常用的组件会经常遇到一个问题：什么时候抽取 Hooks？什么时候抽取 utils？</p>
+
+<p>来自 React 官方文档一个很简易的标准，就是如果你的函数调用了其他 Hooks，那么它就应该是一个以 <code class="language-plaintext highlighter-rouge">use</code> 开头的 Hooks。</p>
+
+<p>一个应该放在 utils 下的普通函数：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 🔴 Avoid: A Hook that doesn't use Hooks</span>
+<span class="kd">function</span> <span class="nf">useSorted</span><span class="p">(</span><span class="nx">items</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">items</span><span class="p">.</span><span class="nf">slice</span><span class="p">().</span><span class="nf">sort</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">// ✅ Good: A regular function that doesn't use Hooks</span>
+<span class="kd">function</span> <span class="nf">getSorted</span><span class="p">(</span><span class="nx">items</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">items</span><span class="p">.</span><span class="nf">slice</span><span class="p">().</span><span class="nf">sort</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>而一个理应命名 use 的 Hook:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: A Hook that uses other Hooks</span>
+<span class="kd">function</span> <span class="nf">useAuth</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nf">useContext</span><span class="p">(</span><span class="nx">Auth</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="自定义-hooks-与普通函数区别">自定义 Hooks 与普通函数区别</h2>
+
+<p>根据上面的内容，可以总结一下：</p>
+
+<ol>
+  <li>Hooks 写在组件顶部，每次渲染的时候都会调用，普通函数需要手动调用。</li>
+  <li>Hooks 只能在 React 组件里面使用，普通函数可以在其他普通函数里面调用。</li>
+  <li>Hooks 中可以调用其他 hook，如 useEffect, useState，普通函数不可以处理 Hooks 逻辑。</li>
+  <li>Hooks 约定使用 use 开头命名，使用 use 开头可以让 React 识别出 hook，从而检查 Hooks 的规则约束。</li>
+</ol>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="https://www.jianshu.com/p/cc58fc005070">react hook – 自定义 Hook</a></li>
+  <li><a href="https://stackoverflow.com/questions/60133412/react-custom-hooks-vs-normal-functions-what-is-the-difference">reactjs - react custom hooks vs normal functions, what is the difference - Stack Overflow</a></li>
+  <li><a href="https://www.zhihu.com/question/491311403">自定义 hooks 和普通函数有什么区别？ - 知乎</a></li>
+  <li><a href="https://react.dev/learn/reusing-logic-with-custom-hooks">react.dev/learn/reusing-logic-with-custom-hooks</a></li>
+  <li><a href="https://github.com/streamich/react-use">streamich/react-use: React Hooks — 👍</a></li>
+</ul>]]></content><author><name></name></author><category term="2023" /><category term="react" /><summary type="html"><![CDATA[自定义 Hooks 是一个函数，其名称以 use 开头，函数内部可以调用其他 Hooks。通过自定义 Hooks，可以将组件逻辑提取到可重用的函数中。]]></summary></entry><entry><title type="html">React 父组件调用子组件的方法</title><link href="/blog/2023/10/25/react%E7%88%B6%E7%BB%84%E4%BB%B6%E8%B0%83%E7%94%A8%E5%AD%90%E7%BB%84%E4%BB%B6%E6%96%B9%E6%B3%95.html" rel="alternate" type="text/html" title="React 父组件调用子组件的方法" /><published>2023-10-25T00:00:00+00:00</published><updated>2023-10-25T00:00:00+00:00</updated><id>/blog/2023/10/25/react%E7%88%B6%E7%BB%84%E4%BB%B6%E8%B0%83%E7%94%A8%E5%AD%90%E7%BB%84%E4%BB%B6%E6%96%B9%E6%B3%95</id><content type="html" xml:base="/blog/2023/10/25/react%E7%88%B6%E7%BB%84%E4%BB%B6%E8%B0%83%E7%94%A8%E5%AD%90%E7%BB%84%E4%BB%B6%E6%96%B9%E6%B3%95.html"><![CDATA[<p>在 React 中，父组件调用父组件的方法，一般用 props 回调即可。但是如果需要在父组件中调用子组件的方法？</p>
+
+<p><strong>其实核心思想就是通过 <code class="language-plaintext highlighter-rouge">ref</code> 来获取子组件的实例/方法。</strong></p>
+
+<!-- vim-markdown-toc GFM -->
+
+<ul>
+  <li><a href="#类组件">类组件</a></li>
+  <li><a href="#函数组件">函数组件</a></li>
+  <li><a href="#总结">总结</a></li>
+  <li><a href="#参考链接">参考链接</a></li>
+</ul>
+
+<!-- vim-markdown-toc -->
+
+<h2 id="类组件">类组件</h2>
+
+<p>类组件可以通过 ref 获取子组件的实例，从而调用实例的方法。</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Sub</span> <span class="kd">extends</span> <span class="nc">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+  <span class="nx">func</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">sub function</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">};</span>
+  <span class="nf">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>Hello from Sub<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">App</span> <span class="kd">extends</span> <span class="nc">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+  <span class="nf">constructor</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">(</span><span class="nx">props</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">ref</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nf">createRef</span><span class="p">();</span>
+  <span class="p">}</span>
+  <span class="nx">handleBtnClick</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">ref</span><span class="p">.</span><span class="nx">current</span><span class="p">.</span><span class="nf">func</span><span class="p">();</span>
+  <span class="p">};</span>
+  <span class="nf">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return </span><span class="p">(</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"App"</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">Sub</span> <span class="na">ref</span><span class="p">=</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">ref</span><span class="si">}</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">handleBtnClick</span><span class="si">}</span><span class="p">&gt;</span>Click Me<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>代码示例：<a href="https://codesandbox.io/s/class-wg76yp?file=/src/App.js">codesandbox</a></p>
+
+<h2 id="函数组件">函数组件</h2>
+
+<p>函数组件对于 ref 的处理，需要使用 <code class="language-plaintext highlighter-rouge">forwardRef</code> 来进行 ref 的转发。使用 forwardRef 需要指定 ref 的指向。</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">forwardRef</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">MyInput</span> <span class="o">=</span> <span class="nf">forwardRef</span><span class="p">(</span><span class="kd">function</span> <span class="nf">MyInput</span><span class="p">(</span><span class="nx">props</span><span class="p">,</span> <span class="nx">ref</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">{</span> <span class="nx">label</span><span class="p">,</span> <span class="p">...</span><span class="nx">otherProps</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">props</span><span class="p">;</span>
+  <span class="k">return </span><span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">label</span><span class="p">&gt;</span>
+      <span class="si">{</span><span class="nx">label</span><span class="si">}</span>
+      <span class="p">&lt;</span><span class="nt">input</span> <span class="si">{</span><span class="p">...</span><span class="nx">otherProps</span><span class="si">}</span> <span class="na">ref</span><span class="p">=</span><span class="si">{</span><span class="nx">ref</span><span class="si">}</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>上面是最常用的 ref 使用方式，指向一个 DOM 节点，可以获取 DOM 实例。但是这样子无法获取子组件的方法。</p>
+
+<p>好在 React 提供了导出内部方法的钩子 <code class="language-plaintext highlighter-rouge">useImperativeHandle</code></p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">MyInput</span> <span class="o">=</span> <span class="nf">forwardRef</span><span class="p">(</span><span class="kd">function</span> <span class="nf">MyInput</span><span class="p">(</span><span class="nx">props</span><span class="p">,</span> <span class="nx">ref</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">inputRef</span> <span class="o">=</span> <span class="nf">useRef</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+
+  <span class="nf">useImperativeHandle</span><span class="p">(</span>
+    <span class="nx">ref</span><span class="p">,</span>
+    <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="p">{</span>
+        <span class="nf">focus</span><span class="p">()</span> <span class="p">{</span>
+          <span class="nx">inputRef</span><span class="p">.</span><span class="nx">current</span><span class="p">.</span><span class="nf">focus</span><span class="p">();</span>
+        <span class="p">},</span>
+        <span class="nf">scrollIntoView</span><span class="p">()</span> <span class="p">{</span>
+          <span class="nx">inputRef</span><span class="p">.</span><span class="nx">current</span><span class="p">.</span><span class="nf">scrollIntoView</span><span class="p">();</span>
+        <span class="p">},</span>
+      <span class="p">};</span>
+    <span class="p">},</span>
+    <span class="p">[],</span>
+  <span class="p">);</span>
+
+  <span class="k">return</span> <span class="p">&lt;</span><span class="nt">input</span> <span class="si">{</span><span class="p">...</span><span class="nx">props</span><span class="si">}</span> <span class="na">ref</span><span class="p">=</span><span class="si">{</span><span class="nx">inputRef</span><span class="si">}</span> <span class="p">/&gt;;</span>
+<span class="p">});</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nf">Form</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">ref</span> <span class="o">=</span> <span class="nf">useRef</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+
+  <span class="kd">function</span> <span class="nf">handleClick</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">ref</span><span class="p">.</span><span class="nx">current</span><span class="p">.</span><span class="nf">focus</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="k">return </span><span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">form</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">MyInput</span> <span class="na">placeholder</span><span class="p">=</span><span class="s">"Enter your name"</span> <span class="na">ref</span><span class="p">=</span><span class="si">{</span><span class="nx">ref</span><span class="si">}</span> <span class="p">/&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="p">=</span><span class="s">"button"</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="nx">handleClick</span><span class="si">}</span><span class="p">&gt;</span>
+        Edit
+      <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>代码实例：<a href="https://codesandbox.io/s/admiring-vaughan-hqsjww">codesandbox</a></p>
+
+<h2 id="总结">总结</h2>
+
+<p>React 父组件想要获取子组件的实例方法，必须通过 ref 来获取。而在类组件和函数组件上有部分区别。</p>
+
+<ul>
+  <li>类组件可以直接通过 createRef 创建 ref 指向子组件实例，从而调用子组件内部的方法。</li>
+  <li>函数组件则需要使用 useImperativeHandle 暴露子组件的方法。</li>
+</ul>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="https://react.dev/reference/react/forwardRef">forwardRef - React</a></li>
+  <li><a href="https://react.dev/reference/react/useImperativeHandle">useImperativeHandle - React</a></li>
+</ul>]]></content><author><name></name></author><category term="2023" /><category term="react" /><summary type="html"><![CDATA[在 React 中，父组件调用父组件的方法，一般用 props 回调即可。但是如果需要在父组件中调用子组件的方法？]]></summary></entry></feed>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TypeScript中的泛型 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="TypeScript中的泛型" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="泛型（generics），在 C# 和 Java 这样的语言中，可以使用泛型来创建可重用的组件，一个组件可以支持多种类型的组件。" />
+<meta property="og:description" content="泛型（generics），在 C# 和 Java 这样的语言中，可以使用泛型来创建可重用的组件，一个组件可以支持多种类型的组件。" />
+<link rel="canonical" href="/blog/2021/11/18/TypeScript%E4%B8%AD%E7%9A%84%E6%B3%9B%E5%9E%8B.html" />
+<meta property="og:url" content="/blog/2021/11/18/TypeScript%E4%B8%AD%E7%9A%84%E6%B3%9B%E5%9E%8B.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-11-18T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="TypeScript中的泛型" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2021-11-18T00:00:00+00:00","datePublished":"2021-11-18T00:00:00+00:00","description":"泛型（generics），在 C# 和 Java 这样的语言中，可以使用泛型来创建可重用的组件，一个组件可以支持多种类型的组件。","headline":"TypeScript中的泛型","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2021/11/18/TypeScript%E4%B8%AD%E7%9A%84%E6%B3%9B%E5%9E%8B.html"},"url":"/blog/2021/11/18/TypeScript%E4%B8%AD%E7%9A%84%E6%B3%9B%E5%9E%8B.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">TypeScript中的泛型</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-11-18T00:00:00+00:00" itemprop="datePublished">Nov 18, 2021
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2021"><i>2021</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/typescript"><i>typescript</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>泛型（generics），在 C# 和 Java 这样的语言中，可以使用泛型来创建可重用的组件，一个组件可以支持多种类型的组件。</p>
+
+<p>泛型可以保证我们传入的类型与返回的类型是相同的。泛型可以接收不同类型的入参，但不同于 any，any 不能保证入参与出参的一致。</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">identity</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">arg</span><span class="p">:</span> <span class="nx">T</span><span class="p">):</span> <span class="nx">T</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">arg</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="泛型类型">泛型类型</h2>
+
+<p>泛型函数的类型跟非泛型的类型没有什么不同，只是有个类型参数，像函数声明一样</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 函数实现</span>
+<span class="kd">function</span> <span class="nf">identity</span><span class="o">&lt;</span><span class="nx">Type</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">arg</span><span class="p">:</span> <span class="nx">Type</span><span class="p">):</span> <span class="nx">Type</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">arg</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">let</span> <span class="nx">myIdentity</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Type</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">arg</span><span class="p">:</span> <span class="nx">Type</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">Type</span> <span class="o">=</span> <span class="nx">identity</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>使用类型别名声明泛型函数类型</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 函数实现</span>
+<span class="kd">function</span> <span class="nf">identity</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">arg</span><span class="p">:</span> <span class="nx">T</span><span class="p">):</span> <span class="nx">T</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">arg</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// 类型别名</span>
+<span class="kd">type</span> <span class="nx">Identity</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">arg</span><span class="p">:</span> <span class="nx">T</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">T</span><span class="p">;</span>
+
+<span class="kd">let</span> <span class="nx">myIdentity</span><span class="p">:</span> <span class="nx">Identity</span> <span class="o">=</span> <span class="nx">identity</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>泛型接口</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 泛型接口</span>
+<span class="kr">interface</span> <span class="nx">GenericsIdentityFn</span> <span class="p">{</span>
+  <span class="o">&lt;</span><span class="nx">Type</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">arg</span><span class="p">:</span> <span class="nx">Type</span><span class="p">):</span> <span class="nx">Type</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// 函数实现</span>
+<span class="kd">function</span> <span class="nf">identity</span><span class="o">&lt;</span><span class="nx">Type</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">arg</span><span class="p">:</span> <span class="nx">Type</span><span class="p">):</span> <span class="nx">Type</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">arg</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">let</span> <span class="nx">myIdentity</span><span class="p">:</span> <span class="nx">GenericsIdentityFn</span> <span class="o">=</span> <span class="nx">identity</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="泛型类">泛型类</h2>
+
+<p>泛型类看起来跟泛型接口类似，使用<code class="language-plaintext highlighter-rouge">&lt;&gt;</code>括起泛型类型，跟在类名后</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">GenericsNumber</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="na">value</span><span class="p">:</span> <span class="nx">T</span><span class="p">;</span>
+  <span class="nl">add</span><span class="p">:</span> <span class="p">(</span><span class="na">x</span><span class="p">:</span> <span class="nx">T</span><span class="p">,</span> <span class="na">y</span><span class="p">:</span> <span class="nx">T</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">T</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">let</span> <span class="nx">myNumber</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">GenericsNumber</span><span class="o">&lt;</span><span class="kr">number</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="nx">myNumber</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="nx">myNumber</span><span class="p">.</span><span class="nx">add</span> <span class="o">=</span> <span class="nf">function </span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span><span class="p">;</span>
+  <span class="k">return</span> <span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span><span class="p">;;</span>
+</code></pre></div></div>
+
+<h2 id="泛型约束">泛型约束</h2>
+
+<p>当我们访问类型的未声明的属性时候，编译器无法识别会报错</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">logging</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">arg</span><span class="p">:</span> <span class="nx">T</span><span class="p">):</span> <span class="nx">T</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">arg</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span> <span class="c1">// 报错：Property 'length' does not exist on type 'T'.</span>
+  <span class="k">return</span> <span class="nx">arg</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>使用泛型约束来保证传入的类型的属性。我们使用接口定义约束条件，使用 <code class="language-plaintext highlighter-rouge">extends</code> 实现约束。</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">interface</span> <span class="nx">Length</span> <span class="p">{</span>
+  <span class="nl">length</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nf">logging</span><span class="o">&lt;</span><span class="nx">T</span> <span class="kd">extends</span> <span class="nx">Length</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">arg</span><span class="p">:</span> <span class="nx">T</span><span class="p">):</span> <span class="nx">T</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">arg</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">arg</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="https://www.typescriptlang.org/docs/handbook/2/generics.html">TypeScript Handbook: Generics</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2021/11/18/TypeScript%E4%B8%AD%E7%9A%84%E6%B3%9B%E5%9E%8B.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>ranger | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="ranger" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="ranger 是 linux 下的一个文件管理器。" />
+<meta property="og:description" content="ranger 是 linux 下的一个文件管理器。" />
+<link rel="canonical" href="/blog/2021/05/01/ranger.html" />
+<meta property="og:url" content="/blog/2021/05/01/ranger.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-05-01T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="ranger" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2021-05-01T00:00:00+00:00","datePublished":"2021-05-01T00:00:00+00:00","description":"ranger 是 linux 下的一个文件管理器。","headline":"ranger","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2021/05/01/ranger.html"},"url":"/blog/2021/05/01/ranger.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">ranger</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-05-01T00:00:00+00:00" itemprop="datePublished">May 1, 2021
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2021"><i>2021</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/linux"><i>linux</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>ranger 是 linux 下的一个文件管理器。</p>
+
+<h2 id="配置">配置</h2>
+
+<p>首次运行时，ranger 会创建一个目录 <code class="language-plaintext highlighter-rouge">~/.config/ranger/</code>。使用以下命令复制默认配置文件到目录里</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ranger <span class="nt">--copy-config</span><span class="o">=</span>file  file: all, commands, commands_full, rc, rifle, scope
+</code></pre></div></div>
+
+<p>常见的配置文件：</p>
+
+<ul>
+  <li>rc.conf    用于设置选项和绑定快捷键</li>
+  <li>scope.sh   用于设置文件的预览方式</li>
+  <li>rifle.conf 用于设置文件的打开方式</li>
+</ul>
+
+<h2 id="快捷键">快捷键</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td>快捷键</td>
+      <td>命令</td>
+    </tr>
+    <tr>
+      <td>?</td>
+      <td>打开帮手册、列出快捷键以及设置选项</td>
+    </tr>
+    <tr>
+      <td>h, j, k, l</td>
+      <td>目录移动</td>
+    </tr>
+    <tr>
+      <td>s</td>
+      <td>等同 :shell，输入 shell 命令</td>
+    </tr>
+    <tr>
+      <td>/</td>
+      <td>搜索</td>
+    </tr>
+    <tr>
+      <td>f</td>
+      <td>查找，运行满足条件的文件或者打开满足条件的文件夹</td>
+    </tr>
+    <tr>
+      <td>gn 或者 ^n</td>
+      <td>新建标签页</td>
+    </tr>
+    <tr>
+      <td>gc 或者 ^c</td>
+      <td>关闭当前标签页，最后一个则不关闭</td>
+    </tr>
+    <tr>
+      <td>gt 或者 Tab</td>
+      <td>切换到下一个标签页</td>
+    </tr>
+    <tr>
+      <td>gT 或者 Shift + Tab</td>
+      <td>切换到上一个标签页</td>
+    </tr>
+    <tr>
+      <td>dd</td>
+      <td>剪切</td>
+    </tr>
+    <tr>
+      <td>dD 或者 :delete</td>
+      <td>删除</td>
+    </tr>
+    <tr>
+      <td>cw</td>
+      <td>重命名（含后缀名）</td>
+    </tr>
+    <tr>
+      <td>I</td>
+      <td>重命名，光标在开头</td>
+    </tr>
+    <tr>
+      <td>A</td>
+      <td>重命名，光标在结尾（含后缀名）</td>
+    </tr>
+    <tr>
+      <td>a</td>
+      <td>重命名，光标在结尾（不含后缀名）</td>
+    </tr>
+    <tr>
+      <td>:mkdir 或者 F7</td>
+      <td>新建文件夹</td>
+    </tr>
+    <tr>
+      <td>:touch 或者 INSERT</td>
+      <td>新建文件</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="排序">排序</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">os</code> 按大小排序</li>
+  <li><code class="language-plaintext highlighter-rouge">ob</code> 按名称排序</li>
+  <li><code class="language-plaintext highlighter-rouge">ot</code> 按文件类型排序</li>
+  <li><code class="language-plaintext highlighter-rouge">or</code> 反向排序</li>
+</ul>
+
+<h2 id="遇到的问题">遇到的问题</h2>
+
+<ol>
+  <li>
+    <p>更改默认的打开方式？</p>
+
+    <p>如果更改本次的打开方式，按下 <code class="language-plaintext highlighter-rouge">r</code>，然后选择对应的启动方式。</p>
+
+    <p>如果要长期更改，运行 <code class="language-plaintext highlighter-rouge">ranger --copy-config=rifle</code>，生成一份指定不同类型的文件的默认打开方式配置文件。配置位于 <code class="language-plaintext highlighter-rouge">~/.config/ranger/rifle.conf</code>。若配置文件存在则不用生成。更新该文件即可修改默认打开方式。</p>
+  </li>
+</ol>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="https://github.com/ranger/ranger">Github: ranger</a></li>
+  <li><a href="http://www.huangpan.net/posts/ji-ke/2019-08-21-ranger.html">Blog: Ranger 用法总结</a></li>
+  <li><a href="https://man.archlinux.org/man/ranger.1">arhclinux: ranger</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2021/05/01/ranger.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

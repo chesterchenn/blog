@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>CSS实现图形 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="CSS实现图形" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="有一些形状可以通过纯 CSS 实现图形，如下拉三角型，下拉箭头等。。。" />
+<meta property="og:description" content="有一些形状可以通过纯 CSS 实现图形，如下拉三角型，下拉箭头等。。。" />
+<link rel="canonical" href="/blog/2021/06/27/CSS%E5%AE%9E%E7%8E%B0%E5%9B%BE%E5%BD%A2.html" />
+<meta property="og:url" content="/blog/2021/06/27/CSS%E5%AE%9E%E7%8E%B0%E5%9B%BE%E5%BD%A2.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-06-27T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="CSS实现图形" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2021-06-27T00:00:00+00:00","datePublished":"2021-06-27T00:00:00+00:00","description":"有一些形状可以通过纯 CSS 实现图形，如下拉三角型，下拉箭头等。。。","headline":"CSS实现图形","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2021/06/27/CSS%E5%AE%9E%E7%8E%B0%E5%9B%BE%E5%BD%A2.html"},"url":"/blog/2021/06/27/CSS%E5%AE%9E%E7%8E%B0%E5%9B%BE%E5%BD%A2.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">CSS实现图形</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-06-27T00:00:00+00:00" itemprop="datePublished">Jun 27, 2021
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2021"><i>2021</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/css"><i>css</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>有一些形状可以通过纯 CSS 实现图形，如下拉三角型，下拉箭头等。。。</p>
+
+<h2 id="下拉三角形">下拉三角形</h2>
+
+<p>主要通过设置宽高为 0，正常设置其中一条边，其他三条边的 <code class="language-plaintext highlighter-rouge">border-color</code> 为透明 <code class="language-plaintext highlighter-rouge">transparent</code>。</p>
+
+<p><strong>不能删掉其他三个边框</strong>，如果没有其他边框的支撑，上边框只有 <code class="language-plaintext highlighter-rouge">20px</code> 的高度，而没有宽度（宽度需要左右边框支撑），从而无法显示。</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.triangle</span> <span class="p">{</span>
+  <span class="nl">width</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+  <span class="nl">height</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+  <span class="nl">border</span><span class="p">:</span> <span class="m">20px</span> <span class="nb">solid</span> <span class="m">#888</span><span class="p">;</span>
+  <span class="nl">border-color</span><span class="p">:</span> <span class="m">#888</span> <span class="nb">transparent</span> <span class="nb">transparent</span> <span class="nb">transparent</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="triangle"></div>
+
+<style>
+  .triangle {
+    width: 0;
+    height: 0;
+    border: 20px solid #888;
+    border-color: #888 transparent transparent transparent;
+  }
+</style>
+
+<p>其他变形- <a href="https://codepen.io/chesterchenn/pen/MWmgQeB">codepen: 实心三角形</a></p>
+
+<h2 id="下拉箭头">下拉箭头</h2>
+
+<h3 id="旋转">旋转</h3>
+
+<p>通过旋转其中两边边框 <code class="language-plaintext highlighter-rouge">transform: rotate()</code> 实现箭头。</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.tri_arrow_rotate</span> <span class="p">{</span>
+  <span class="nl">width</span><span class="p">:</span> <span class="m">40px</span><span class="p">;</span>
+  <span class="nl">height</span><span class="p">:</span> <span class="m">40px</span><span class="p">;</span>
+  <span class="nl">border-top</span><span class="p">:</span> <span class="m">8px</span> <span class="nb">solid</span> <span class="m">#888</span><span class="p">;</span>
+  <span class="nl">border-right</span><span class="p">:</span> <span class="m">8px</span> <span class="nb">solid</span> <span class="m">#888</span><span class="p">;</span>
+  <span class="nl">transform</span><span class="p">:</span> <span class="n">rotate</span><span class="p">(</span><span class="m">45deg</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="tri_arrow_rotate"></div>
+
+<style>
+.tri_arrow_rotate {
+  width: 40px;
+  height: 40px;
+  border-top: 8px solid #888;
+  border-right: 8px solid #888;
+  transform: rotate(45deg);
+  margin-top: 12px;
+  margin-bottom: 16px;
+}
+</style>
+
+<h3 id="叠加">叠加</h3>
+
+<p>通过叠加两个双三角，并将一个设置成背景色。通过这个样子的设置，箭头会更加协调。</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.tri_arrow_overlay</span> <span class="p">{</span>
+  <span class="nl">position</span><span class="p">:</span> <span class="nb">relative</span><span class="p">;</span>
+  <span class="nl">width</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+  <span class="nl">height</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+  <span class="nl">border</span><span class="p">:</span> <span class="m">40px</span> <span class="nb">solid</span> <span class="m">#888</span><span class="p">;</span>
+  <span class="nl">border-color</span><span class="p">:</span> <span class="nb">transparent</span> <span class="nb">transparent</span> <span class="nb">transparent</span> <span class="m">#888</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.tri_arrow_overlay</span><span class="nd">:before</span> <span class="p">{</span>
+  <span class="nl">content</span><span class="p">:</span> <span class="s2">''</span><span class="p">;</span>
+  <span class="nl">position</span><span class="p">:</span> <span class="nb">absolute</span><span class="p">;</span>
+  <span class="nl">top</span><span class="p">:</span> <span class="m">-40px</span><span class="p">;</span>
+  <span class="nl">left</span><span class="p">:</span> <span class="m">-52px</span><span class="p">;</span>
+  <span class="nl">border</span><span class="p">:</span> <span class="m">40px</span> <span class="nb">solid</span> <span class="m">#cc5500</span><span class="p">;</span>
+  <span class="nl">border-color</span><span class="p">:</span> <span class="nb">transparent</span> <span class="nb">transparent</span> <span class="nb">transparent</span> <span class="m">#fff</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="tri_arrow_overlay"></div>
+
+<style>
+.tri_arrow_overlay {
+  position: relative;
+  width: 0;
+  height: 0;
+  border: 40px solid #888;
+  border-color: transparent transparent transparent #888;
+}
+
+.tri_arrow_overlay:before {
+  content: '';
+  position: absolute;
+  top: -40px;
+  left: -52px;
+  border: 40px solid #cc5500;
+  border-color: transparent transparent transparent #fff;
+}
+</style>
+
+<p><a href="https://codepen.io/chesterchenn/pen/PomYQdJ">codepen: 三角箭头</a></p>
+
+  </div><a class="u-url" href="/blog/2021/06/27/CSS%E5%AE%9E%E7%8E%B0%E5%9B%BE%E5%BD%A2.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

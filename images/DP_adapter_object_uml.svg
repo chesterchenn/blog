@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="248px" preserveAspectRatio="none" style="width:369px;height:248px;background:#FFFFFF;" version="1.1" viewBox="0 0 369 248" width="369px" zoomAndPan="magnify"><defs/><g><rect fill="#FFFFFF" height="36.7373" id="_title" style="stroke:#FFFFFF;stroke-width:0.0;" width="120" x="120.25" y="10"/><text fill="#000000" font-family="Verdana" font-size="22" font-weight="bold" lengthAdjust="spacing" textLength="110" x="125.25" y="37.1182">对象适配器</text><!--MD5=[fc07866a383d07d405a25512054a0e5c]
+class Target--><g id="elem_Target"><rect codeLine="4" fill="#FFFFFF" height="61.0146" id="Target" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="78" x="114.5" y="59.7373"/><ellipse cx="129.3" cy="73.7373" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1.0;"/><path d="M125.2219,69.5029 L125.2219,67.3467 L132.6125,67.3467 L132.6125,69.5029 L130.1438,69.5029 L130.1438,77.5811 L132.6125,77.5811 L132.6125,79.7373 L125.2219,79.7373 L125.2219,77.5811 L127.6906,77.5811 L127.6906,69.5029 L125.2219,69.5029 Z " fill="#000000"/><text fill="#000000" font-family="Verdana" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="46" x="141.7" y="79.3052">Target</text><line style="stroke:#000000;stroke-width:1.0;" x1="115.5" x2="191.5" y1="87.7373" y2="87.7373"/><line style="stroke:#000000;stroke-width:1.0;" x1="115.5" x2="191.5" y1="95.7373" y2="95.7373"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="66" x="120.5" y="113.8125">request()</text></g><!--MD5=[ed6624c6556d5e7b1bd23032162d20b7]
+class Client--><g id="elem_Client"><rect codeLine="7" fill="#FFFFFF" height="44" id="Client" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="67" x="12" y="68.2373"/><ellipse cx="25" cy="82.2373" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1.0;"/><path d="M27.9688,87.8779 Q27.3906,88.1748 26.75,88.3154 Q26.1094,88.4717 25.4063,88.4717 Q22.9063,88.4717 21.5781,86.8311 Q20.2656,85.1748 20.2656,82.0498 Q20.2656,78.9248 21.5781,77.2686 Q22.9063,75.6123 25.4063,75.6123 Q26.1094,75.6123 26.75,75.7686 Q27.4063,75.9248 27.9688,76.2217 L27.9688,78.9404 Q27.3438,78.3623 26.75,78.0967 Q26.1563,77.8154 25.5313,77.8154 Q24.1875,77.8154 23.5,78.8936 Q22.8125,79.9561 22.8125,82.0498 Q22.8125,84.1436 23.5,85.2217 Q24.1875,86.2842 25.5313,86.2842 Q26.1563,86.2842 26.75,86.0186 Q27.3438,85.7373 27.9688,85.1592 L27.9688,87.8779 Z " fill="#000000"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="39" x="37" y="87.8052">Client</text><line style="stroke:#000000;stroke-width:1.0;" x1="13" x2="78" y1="96.2373" y2="96.2373"/><line style="stroke:#000000;stroke-width:1.0;" x1="13" x2="78" y1="104.2373" y2="104.2373"/></g><!--MD5=[f38a85e47f7d4f812523dd9b6d7d2c16]
+class Adapter--><g id="elem_Adapter"><rect codeLine="8" fill="#FFFFFF" height="61.0146" id="Adapter" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="84" x="111.5" y="180.7373"/><ellipse cx="124.5" cy="194.7373" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1.0;"/><path d="M127.4688,200.3779 Q126.8906,200.6748 126.25,200.8154 Q125.6094,200.9717 124.9063,200.9717 Q122.4063,200.9717 121.0781,199.3311 Q119.7656,197.6748 119.7656,194.5498 Q119.7656,191.4248 121.0781,189.7686 Q122.4063,188.1123 124.9063,188.1123 Q125.6094,188.1123 126.25,188.2686 Q126.9063,188.4248 127.4688,188.7217 L127.4688,191.4404 Q126.8438,190.8623 126.25,190.5967 Q125.6563,190.3154 125.0313,190.3154 Q123.6875,190.3154 123,191.3936 Q122.3125,192.4561 122.3125,194.5498 Q122.3125,196.6436 123,197.7217 Q123.6875,198.7842 125.0313,198.7842 Q125.6563,198.7842 126.25,198.5186 Q126.8438,198.2373 127.4688,197.6592 L127.4688,200.3779 Z " fill="#000000"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="56" x="136.5" y="200.3052">Adapter</text><line style="stroke:#000000;stroke-width:1.0;" x1="112.5" x2="194.5" y1="208.7373" y2="208.7373"/><line style="stroke:#000000;stroke-width:1.0;" x1="112.5" x2="194.5" y1="216.7373" y2="216.7373"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="66" x="117.5" y="234.8125">request()</text></g><!--MD5=[7393b79429f23cd61e6e6a493d3a2b14]
+class Adaptee--><g id="elem_Adaptee"><rect codeLine="11" fill="#FFFFFF" height="61.0146" id="Adaptee" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="132" x="230.5" y="180.7373"/><ellipse cx="264.2" cy="194.7373" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1.0;"/><path d="M267.1688,200.3779 Q266.5906,200.6748 265.95,200.8154 Q265.3094,200.9717 264.6063,200.9717 Q262.1063,200.9717 260.7781,199.3311 Q259.4656,197.6748 259.4656,194.5498 Q259.4656,191.4248 260.7781,189.7686 Q262.1063,188.1123 264.6063,188.1123 Q265.3094,188.1123 265.95,188.2686 Q266.6063,188.4248 267.1688,188.7217 L267.1688,191.4404 Q266.5438,190.8623 265.95,190.5967 Q265.3563,190.3154 264.7313,190.3154 Q263.3875,190.3154 262.7,191.3936 Q262.0125,192.4561 262.0125,194.5498 Q262.0125,196.6436 262.7,197.7217 Q263.3875,198.7842 264.7313,198.7842 Q265.3563,198.7842 265.95,198.5186 Q266.5438,198.2373 267.1688,197.6592 L267.1688,200.3779 Z " fill="#000000"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="58" x="280.8" y="200.3052">Adaptee</text><line style="stroke:#000000;stroke-width:1.0;" x1="231.5" x2="361.5" y1="208.7373" y2="208.7373"/><line style="stroke:#000000;stroke-width:1.0;" x1="231.5" x2="361.5" y1="216.7373" y2="216.7373"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="120" x="236.5" y="234.8125">specificRequest()</text></g><!--MD5=[431c3f1848dccc83292155c400886313]
+link Client to Target--><g id="link_Client_Target"><path codeLine="15" d="M79.25,90.2373 C89.21,90.2373 99.17,90.2373 109.14,90.2373 " fill="none" id="Client-to-Target" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="#000000" points="114.34,90.2373,105.34,86.2373,109.34,90.2373,105.34,94.2373,114.34,90.2373" style="stroke:#000000;stroke-width:1.0;"/></g><!--MD5=[e8afce381d6978114aa9e217ec9a4ba2]
+reverse link Target to Adapter--><g id="link_Target_Adapter"><path codeLine="16" d="M153.5,141.0673 C153.5,154.4673 153.5,168.5473 153.5,180.4773 " fill="none" id="Target-backto-Adapter" style="stroke:#000000;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="146.5,140.9573,153.5,120.9573,160.5,140.9573,146.5,140.9573" style="stroke:#000000;stroke-width:1.0;"/></g><!--MD5=[ac16be24c016d0cc1b5b2bfc6dfbddbe]
+link Adapter to Adaptee--><g id="link_Adapter_Adaptee"><path codeLine="17" d="M195.67,211.2373 C205.51,211.2373 215.35,211.2373 225.19,211.2373 " fill="none" id="Adapter-to-Adaptee" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="#000000" points="230.33,211.2373,221.33,207.2373,225.33,211.2373,221.33,215.2373,230.33,211.2373" style="stroke:#000000;stroke-width:1.0;"/></g><!--MD5=[0e47593bc56bc45f448d7c4725efed6b]
+@startuml
+!theme plain
+title 对象适配器
+
+interface Target {
+  request()
+}
+class Client
+class Adapter {
+  request()
+}
+class Adaptee {
+  specificRequest()
+}
+
+Target <- -l- Client
+Target <|.. Adapter
+Adapter -r- -> Adaptee
+
+@enduml
+
+@startuml
+
+
+
+
+
+
+
+<style>
+  root {
+    BackgroundColor white
+    FontColor black
+    FontName Verdana
+    HyperLinkColor blue
+    LineColor black
+    LineThickness 1
+    Margin 5
+  }
+  caption {
+    LineThickness 0
+  }
+  footer {
+    LineThickness 0
+  }
+  header {
+    LineThickness 0
+  }
+  node {
+    MaximumWidth 300
+  }
+  title {
+    FontSize 22
+    LineThickness 0
+  }
+</style>
+
+skinparam ArrowLollipopColor black
+skinparam BackgroundColor white
+skinparam DefaultFontName Verdana
+skinparam DefaultMonospacedFontName Courier
+skinparam LifelineStrategy nosolid
+skinparam ParticipantPadding 10
+skinparam SequenceLifeLineBorderColor black
+skinparam Shadowing false
+skinparam UseBetaStyle true
+
+skinparam Activity {
+  BackgroundColor white
+  BarColor black
+  BorderColor black
+  FontColor black
+  FontName Verdana
+}
+skinparam Boundary {
+  FontColor black
+}
+skinparam Box {
+  Padding 5
+}
+skinparam CircledCharacter {
+  FontColor black
+  FontName Courier
+  Radius 9
+}
+skinparam Class {
+  BackgroundColor white
+  BorderColor black
+  FontColor black
+  FontName Verdana
+}
+skinparam ClassAttribute {
+  FontColor black
+  FontName Verdana
+}
+skinparam ClassStereotype {
+  FontColor black
+  FontName Verdana
+}
+skinparam Footer {
+  FontColor black
+  FontName Verdana
+}
+skinparam Header {
+  FontColor black
+  FontName Verdana
+}
+skinparam Hyperlink {
+  Color blue
+}
+skinparam IconPackage {
+  Color black
+  BackgroundColor white
+}
+skinparam IconPrivate {
+  Color black
+  BackgroundColor white
+}
+skinparam IconProtected {
+  Color black
+  BackgroundColor white
+}
+skinparam IconPublic {
+  Color black
+  BackgroundColor white
+}
+skinparam Note {
+  FontColor black
+  FontName Verdana
+}
+skinparam Object {
+  BorderColor black
+}
+skinparam Package {
+  BorderColor black
+  FontColor black
+  FontName Verdana
+}
+skinparam State {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam StereotypeA {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam StereotypeC {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam StereotypeE {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam StereotypeI {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam StereotypeN {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam UseCaseStereoType {
+  FontColor black
+  FontName Verdana
+}
+title 对象适配器
+
+interface Target {
+  request()
+}
+class Client
+class Adapter {
+  request()
+}
+class Adaptee {
+  specificRequest()
+}
+
+Target <- -l- Client
+Target <|.. Adapter
+Adapter -r- -> Adaptee
+
+@enduml
+
+PlantUML version 1.2022.7(Tue Aug 23 01:01:30 CST 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

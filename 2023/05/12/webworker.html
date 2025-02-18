@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>WebWorker | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="WebWorker" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="在 Web Worker 标准中，定义了解决客户端 JS 无法多线程的问题。不过，Web Worker 处在一个自包含的执行环境中，无法访问 Window 对象和 Document 对象，和主线程之间的通信也只能通过异步消息传递机制来实现。" />
+<meta property="og:description" content="在 Web Worker 标准中，定义了解决客户端 JS 无法多线程的问题。不过，Web Worker 处在一个自包含的执行环境中，无法访问 Window 对象和 Document 对象，和主线程之间的通信也只能通过异步消息传递机制来实现。" />
+<link rel="canonical" href="/blog/2023/05/12/webworker.html" />
+<meta property="og:url" content="/blog/2023/05/12/webworker.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-05-12T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="WebWorker" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-05-12T00:00:00+00:00","datePublished":"2023-05-12T00:00:00+00:00","description":"在 Web Worker 标准中，定义了解决客户端 JS 无法多线程的问题。不过，Web Worker 处在一个自包含的执行环境中，无法访问 Window 对象和 Document 对象，和主线程之间的通信也只能通过异步消息传递机制来实现。","headline":"WebWorker","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2023/05/12/webworker.html"},"url":"/blog/2023/05/12/webworker.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">WebWorker</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2023-05-12T00:00:00+00:00" itemprop="datePublished">May 12, 2023
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2023"><i>2023</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/javascript"><i>javascript</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>在 Web Worker 标准中，定义了解决客户端 JS 无法多线程的问题。不过，Web Worker 处在一个自包含的执行环境中，无法访问 Window 对象和 Document 对象，和主线程之间的通信也只能通过异步消息传递机制来实现。</p>
+
+<!-- vim-markdown-toc GFM -->
+
+<ul>
+  <li><a href="#web-workers-对象">Web Workers 对象</a></li>
+  <li><a href="#dedicated-workers">Dedicated workers</a>
+    <ul>
+      <li><a href="#创建-worker">创建 Worker</a></li>
+      <li><a href="#传递接收信息">传递/接收信息</a></li>
+      <li><a href="#终止-worker">终止 Worker</a></li>
+      <li><a href="#错误处理">错误处理</a></li>
+    </ul>
+  </li>
+  <li><a href="#shared-workers">Shared Workers</a>
+    <ul>
+      <li><a href="#创建共享-worker">创建共享 worker</a></li>
+    </ul>
+  </li>
+  <li><a href="#推荐阅读">推荐阅读</a></li>
+  <li><a href="#参考资料">参考资料</a></li>
+</ul>
+
+<!-- vim-markdown-toc -->
+
+<h2 id="web-workers-对象">Web Workers 对象</h2>
+
+<p>一个 worker 就是一个使用构造器（<a href="https://developer.mozilla.org/en-US/docs/Web/API/Worker/Worker">Worker</a>）创建的对象用来执行 JS 文件。workers 会运行在不同当前 window 的另一个全局上下文。</p>
+
+<p>Web Worker 可以分为 Dedicated Worker 和 Shared Worker 两种，一个专有的 Worker 只能被创建它的脚本访问，而一个共享的 Worker 可以被来自同一域的任何脚本访问。</p>
+
+<h2 id="dedicated-workers">Dedicated workers</h2>
+
+<p>一个专有的脚本只能由调用它的脚本访问。</p>
+
+<h3 id="创建-worker">创建 Worker</h3>
+
+<p>要创建一个新的 Worker，只需调用 <code class="language-plaintext highlighter-rouge">Worker()</code> 构造函数，并且指定要运行的脚本 URL。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">myWorker</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Worker</span><span class="p">(</span><span class="dl">'</span><span class="s1">worker.js</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="传递接收信息">传递/接收信息</h3>
+
+<p>向 Worker 发送信息是通过 <code class="language-plaintext highlighter-rouge">postMessage()</code> 或者接收信息 <code class="language-plaintext highlighter-rouge">onmessage</code> 事件处理。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">first</span><span class="p">.</span><span class="nx">onchange</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">myWorker</span><span class="p">.</span><span class="nf">postMessage</span><span class="p">([</span><span class="nx">first</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span> <span class="nx">second</span><span class="p">.</span><span class="nx">value</span><span class="p">]);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Message posted to worker</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>在 Worker 里面通过 <code class="language-plaintext highlighter-rouge">onmessage</code> 事件的 data 属性接收响应信息。并且通过 postMessage 传递回给主线程。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">onmessage</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Message received from main script</span><span class="dl">'</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">workerResult</span> <span class="o">=</span> <span class="s2">`Result: </span><span class="p">${</span><span class="nx">e</span><span class="p">.</span><span class="nx">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]}</span><span class="s2"> * </span><span class="p">${</span><span class="nx">e</span><span class="p">.</span><span class="nx">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]}</span><span class="s2">`</span><span class="p">;</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Posting message back to main script</span><span class="dl">'</span><span class="p">);</span>
+  <span class="nf">postMessage</span><span class="p">(</span><span class="nx">workerResult</span><span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>回到主线程，我们使用 <code class="language-plaintext highlighter-rouge">onmessage</code> 来接收响应信息。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">myWorker</span><span class="p">.</span><span class="nx">onmessage</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">result</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Message received from worker</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="终止-worker">终止 Worker</h3>
+
+<p>需要终止一个 worker，只需调用 <code class="language-plaintext highlighter-rouge">terminate</code> 方法。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">myWorker</span><span class="p">.</span><span class="nf">terminate</span><span class="p">();</span>
+</code></pre></div></div>
+
+<h3 id="错误处理">错误处理</h3>
+
+<p>当 Worker 报错时候，可以调用 <code class="language-plaintext highlighter-rouge">onerror</code> 来处理，错误事件主要包括了 message, filename, lineno.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">myWorker</span><span class="p">.</span><span class="nx">onerror</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">filename</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">: </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">e</span><span class="p">.</span><span class="nx">lineno</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">:</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">e</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="shared-workers">Shared Workers</h2>
+
+<p>一个共享的 worker 可以被多个脚本访问</p>
+
+<h3 id="创建共享-worker">创建共享 worker</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">myShareWorker</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SharedWorker</span><span class="p">(</span><span class="dl">"</span><span class="s2">worker.js</span><span class="dl">"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="推荐阅读">推荐阅读</h2>
+
+<ul>
+  <li><a href="https://www.cnblogs.com/goloving/p/13962441.html">浅析Web Worker使用技巧及实战场景 - 古兰精 - 博客园</a></li>
+</ul>
+
+<h2 id="参考资料">参考资料</h2>
+
+<ul>
+  <li>《JavaScript 权威指南》</li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers">MDN: Using Web Workers</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Worker">MDN: Worker</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2023/05/12/webworker.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

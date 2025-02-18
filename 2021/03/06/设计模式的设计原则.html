@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>设计模式的设计原则 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="设计模式的设计原则" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="设计模式的简介与一些经典的设计原则，其中包括 SOLID 等。" />
+<meta property="og:description" content="设计模式的简介与一些经典的设计原则，其中包括 SOLID 等。" />
+<link rel="canonical" href="/blog/2021/03/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99.html" />
+<meta property="og:url" content="/blog/2021/03/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-03-06T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="设计模式的设计原则" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2021-03-06T00:00:00+00:00","datePublished":"2021-03-06T00:00:00+00:00","description":"设计模式的简介与一些经典的设计原则，其中包括 SOLID 等。","headline":"设计模式的设计原则","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2021/03/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99.html"},"url":"/blog/2021/03/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">设计模式的设计原则</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-03-06T00:00:00+00:00" itemprop="datePublished">Mar 6, 2021
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2021"><i>2021</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/algorithm"><i>algorithm</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>设计模式的简介与一些经典的设计原则，其中包括 SOLID 等。</p>
+
+<h2 id="如何解决复杂性">如何解决复杂性</h2>
+
+<h3 id="分解">分解</h3>
+
+<p>人们面对复杂性有一个常用的做法：即分而治之。将复杂问题分解为多个简单的问题。</p>
+
+<h3 id="抽象">抽象</h3>
+
+<p>更高层次来讲，人们处理复杂性有一个通用的技术，即抽象。由于不能掌握全部的复杂对象，我们选择忽视它的非本质细节，而去处理泛化和理想化了的对象模型。</p>
+
+<p>软件设计的目的：<strong>复用</strong>，用抽象思维替代分解思维。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Line</span> <span class="p">{</span>
+  <span class="nx">point</span> <span class="nx">x</span><span class="p">;</span>
+  <span class="nx">point</span> <span class="nx">y</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">Rect</span> <span class="p">{</span>
+  <span class="nx">point</span> <span class="nx">a</span><span class="p">;</span>
+  <span class="nx">point</span> <span class="nx">b</span><span class="p">;</span>
+  <span class="nx">point</span> <span class="nx">c</span><span class="p">;</span>
+  <span class="nx">point</span> <span class="nx">d</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nf">Shape</span><span class="p">(</span><span class="nx">S</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// 画线条</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">S</span> <span class="o">===</span> <span class="nx">Line</span><span class="p">)</span> <span class="p">{...}</span>
+  <span class="c1">// 画矩形</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">S</span> <span class="o">===</span> <span class="nx">Rect</span><span class="p">)</span> <span class="p">{...}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>用分治的思想实现一个画形状的方法，我们在 Shape 里面对需要实现的形状一一进行实现，当我们需要新增一个圆形，我们不仅需要实现圆形，还要修改 Shape 方法。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Circle</span> <span class="p">{</span>
+  <span class="nx">point</span> <span class="nx">x</span><span class="p">;</span>
+  <span class="nx">radius</span> <span class="nx">r</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nf">Shape</span><span class="p">(</span><span class="nx">S</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// 画线条</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">S</span> <span class="o">===</span> <span class="nx">Line</span><span class="p">)</span> <span class="p">{...}</span>
+  <span class="c1">// 画矩形</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">S</span> <span class="o">===</span> <span class="nx">Rect</span><span class="p">)</span> <span class="p">{...}</span>
+  <span class="c1">// 画圆形</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">S</span> <span class="o">===</span> <span class="nx">Circle</span><span class="p">)</span> <span class="p">{...}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>如果我们通过抽象实现的方式，则在进行扩展变动的时候则不用修改 Shape 方法.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Line</span> <span class="p">{</span>
+  <span class="nx">point</span> <span class="nx">x</span><span class="p">;</span>
+  <span class="nx">point</span> <span class="nx">y</span><span class="p">;</span>
+  <span class="nf">draw</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 画线条</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">Rect</span> <span class="p">{</span>
+  <span class="nx">point</span> <span class="nx">a</span><span class="p">;</span>
+  <span class="nx">point</span> <span class="nx">b</span><span class="p">;</span>
+  <span class="nx">point</span> <span class="nx">c</span><span class="p">;</span>
+  <span class="nx">point</span> <span class="nx">d</span><span class="p">;</span>
+  <span class="nf">draw</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 画矩形</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nf">Shape</span><span class="p">(</span><span class="nx">S</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// 内部实现</span>
+  <span class="nx">S</span><span class="p">.</span><span class="nf">draw</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">// 拓展变动则不需要修改 Shape 形状</span>
+<span class="nx">Circle</span> <span class="p">{</span>
+  <span class="nx">point</span> <span class="nx">x</span><span class="p">;</span>
+  <span class="nx">radius</span> <span class="nx">r</span><span class="p">;</span>
+  <span class="nf">draw</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 画圆形的实现</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="设计原则">设计原则</h2>
+
+<p>SOLID 原则，即单一责任原则，开放封闭原则，里氏替换原则，接口隔离原则和依赖倒置原则组成。</p>
+
+<ul>
+  <li>单一责任原则（SRP）
+    <ol>
+      <li>一个类或者模块只负责完成一个职责</li>
+    </ol>
+  </li>
+  <li>开放封闭原则（OCP）
+    <ol>
+      <li>对扩展开放，对更改封闭</li>
+    </ol>
+  </li>
+  <li>里氏替换原则（LSP）
+    <ol>
+      <li>子类必须能够替换它们的基类</li>
+    </ol>
+  </li>
+  <li>接口隔离原则（ISP）
+    <ol>
+      <li>不应该强迫客户程序依赖它们不用的方法</li>
+    </ol>
+  </li>
+  <li>依赖倒置原则（DIP）
+    <ol>
+      <li>高层模块（稳定）不应该依赖于底层模块（变化），二者都应该依赖于抽象（稳定）</li>
+      <li>抽象（稳定）不应该依赖于实现细节（变化），实现细节应该依赖于抽象（稳定）</li>
+    </ol>
+  </li>
+  <li>组合重用原则：优先使用对象组合，而不是类继承
+    <ol>
+      <li>类继承通常为“白箱复用”，对象组合通常为“黑箱复用”</li>
+      <li>继承在某种程度上破坏了封装性，子类父类耦合度高</li>
+      <li>而对象组合则只要求被组合的对象具有良好定义的接口，耦合度低</li>
+    </ol>
+  </li>
+  <li>封装变化点
+    <ol>
+      <li>使用封装来创建对象之间的分界层，让设计者可以分界层的一侧进行修改，而不会对另一侧产生不良的影响，从而实现层次间的松耦合</li>
+    </ol>
+  </li>
+  <li>针对接口编程，而不是针对实现编程
+    <ol>
+      <li>不将变量类型声明为某个特定的具体类，而是声明为某个接口</li>
+      <li>客户程序无需获知对象的具体类型，只需要知道对象所具有的接口</li>
+      <li>减少系统中各部分的依赖关系，从而实现“”高内聚，松耦合“的类型设计方案</li>
+    </ol>
+  </li>
+</ul>
+
+<h2 id="单一职责原则">单一职责原则</h2>
+
+<p>单一职责原则（SRP），Single Responsibility Principle，即一个类或者模块只负责完成一个职责。</p>
+
+<p>我们可以先写一个粗粒度的类，满足业务需求。随着业务的发展，如果粗粒度的类越来越庞大，代码越来越多，这个时候，我们就可以将这个粗粒度的类，拆分成几个更细粒度的类。这就是所谓的持续重构。</p>
+
+<h3 id="如何判断类的职责是否足够单一">如何判断类的职责是否足够单一？</h3>
+
+<ul>
+  <li>类中的代码行数，函数或者属性过多；</li>
+  <li>类依赖的其他类过多，或者依赖类的其他类过多；</li>
+  <li>私有方法过多；</li>
+  <li>比较难给类起一个合适的名字；</li>
+  <li>类中的大量的方法都是集中类中的某几个属性；</li>
+</ul>
+
+<h2 id="开闭原则">开闭原则</h2>
+
+<p>开闭原则（OCP），Open Close Principle，即对扩展开发，对修改关闭。</p>
+
+<p>详细表述就是，添加一个新的功能应该是，在已有代码基础上扩展代码（新增模块，类，方法等），而非修改已有代码（修改模块，类，方法等）。</p>
+
+<h2 id="里氏替换原则">里氏替换原则</h2>
+
+<p>里氏替换原则（LSP），Liskov Substitution Principle。子类对象能够替换程序中的父类对象出现的任何地方，并且保证原来程序的逻辑行为不变及正确性不被破坏。</p>
+
+<h3 id="多态与里氏替换原则的区别">多态与里氏替换原则的区别？</h3>
+
+<p>多态是面向对象编程的一大特性，也是面向对象编程语言的一种语法。它是一种代码实现的思路。而里式替换是一种设计原则，是用来指导继承关系中子类该如何设计的，子类的设计要保证在替换父类的时候，不改变原有程序的逻辑以及不破坏原有程序的正确性。</p>
+
+<h3 id="违背里氏替换原则">违背里氏替换原则</h3>
+
+<ol>
+  <li>子类违背父类声明要实现的功能</li>
+  <li>子类违背父类对输入、输出、异常的约定</li>
+  <li>子类违背父类注释中所罗列的任何特殊说明</li>
+</ol>
+
+<p>可以通过拿父类的单元测试来验证子类的代码，如果某些单元测试运行失败，就有可能说明，子类的设计实现没有完全遵守父类的约定，子类可能违背了里氏替换原则。</p>
+
+<h2 id="接口隔离原则">接口隔离原则</h2>
+
+<p>接口隔离原则（ISP），Interface Segregation Principle，客户端不应该被强迫依赖它不需要的接口。</p>
+
+<p>当接口为 API 接口集合时，如果部分接口只被部分调用者使用，我们就需要将这部分接口隔离出来，单独给对应的调用者使用，而不是强迫其他调用者也依赖这部分不会被用到的接口。</p>
+
+<p>如果接口理解为单个接口或函数，那么接口隔离原则可以理解为：函数的设计要功能单一，不要将多个不同的功能逻辑在一个函数中实现。</p>
+
+<h3 id="接口隔离原则与单一职责原则的区别">接口隔离原则与单一职责原则的区别</h3>
+
+<p>单一职责原则针对的是模块、类、接口的设计。接口隔离原则相对于单一职责原则，一方面更侧重于接口的设计，另一方面它的思考角度也是不同的。接口隔离原则提供了一种判断接口的职责是否单一的标准：通过调用者如何使用接口来间接地判定。如果调用者只使用部分接口或接口的部分功能，那接口的设计就不够职责单一。</p>
+
+<h2 id="依赖倒置原则">依赖倒置原则</h2>
+
+<h3 id="控制反转">控制反转</h3>
+
+<p>控制反转（IOC），英文翻译是：<code class="language-plaintext highlighter-rouge">Inversion Of Control</code>。控制反转是一个比较笼统的设计思想，并不是一种具体的实现方法，一般用来指导框架层面的设计。</p>
+
+<h4 id="依赖注入">依赖注入</h4>
+
+<p>依赖注入（DI），英文翻译是：<code class="language-plaintext highlighter-rouge">Dependency Injection</code>，一句话概括就是：不通过 new() 的方法在类内部创建依赖类对象，而是将依赖的类对象在外部创建好之后，通过构造函数、函数参数等方式传递（或注入）给类使用。</p>
+
+<p>依赖反转原则（DIP），Dependency Inversion Principle，也叫依赖倒置原则。英文描述是 <code class="language-plaintext highlighter-rouge">High-level modules shouldn't depend on low-level modules. Both modules should depend on abstractions. In addition, abstraction shouldn't depended on details. Details depned on abstractions.</code>。翻译成中文就是：<code class="language-plaintext highlighter-rouge">高层模块不要依赖低层模块，高层模块和低层模块应该通过抽象来相互依赖。抽象不要依赖具体实现细节，具体实现细节依赖抽象</code>。</p>
+
+<p>在调用链上，调用者属于高层，被调用者属于低层。但在平时的业务代码开发中，高层模块依赖底层模块是没有任何问题的，这条原则主要还是用来指导框架层面的设计。</p>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li>李建忠：C++设计模式</li>
+  <li><a href="https://github.com/ryanmcdermott/clean-code-javascript#solid">github: clean-code-javascript#solid</a></li>
+  <li><a href="https://time.geekbang.org/column/intro/100039001">极客时间：设计模式之美</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2021/03/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

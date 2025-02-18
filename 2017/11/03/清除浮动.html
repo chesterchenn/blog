@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>清除浮动 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="清除浮动" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="当未设置容器高度时，同时容器内有浮动的元素时，容器的高度不能自动伸长以适应内容的高度，使得内容溢出到容器外面而影响布局的现象，这个现象叫浮动溢出。为了防止这种现象出现而进行的 CSS 处理，就叫清除浮动。" />
+<meta property="og:description" content="当未设置容器高度时，同时容器内有浮动的元素时，容器的高度不能自动伸长以适应内容的高度，使得内容溢出到容器外面而影响布局的现象，这个现象叫浮动溢出。为了防止这种现象出现而进行的 CSS 处理，就叫清除浮动。" />
+<link rel="canonical" href="/blog/2017/11/03/%E6%B8%85%E9%99%A4%E6%B5%AE%E5%8A%A8.html" />
+<meta property="og:url" content="/blog/2017/11/03/%E6%B8%85%E9%99%A4%E6%B5%AE%E5%8A%A8.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2017-11-03T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="清除浮动" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2017-11-03T00:00:00+00:00","datePublished":"2017-11-03T00:00:00+00:00","description":"当未设置容器高度时，同时容器内有浮动的元素时，容器的高度不能自动伸长以适应内容的高度，使得内容溢出到容器外面而影响布局的现象，这个现象叫浮动溢出。为了防止这种现象出现而进行的 CSS 处理，就叫清除浮动。","headline":"清除浮动","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2017/11/03/%E6%B8%85%E9%99%A4%E6%B5%AE%E5%8A%A8.html"},"url":"/blog/2017/11/03/%E6%B8%85%E9%99%A4%E6%B5%AE%E5%8A%A8.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">清除浮动</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2017-11-03T00:00:00+00:00" itemprop="datePublished">Nov 3, 2017
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/css"><i>css</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2018"><i>2018</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>当未设置容器高度时，同时容器内有浮动的元素时，容器的高度不能自动伸长以适应内容的高度，使得内容溢出到容器外面而影响布局的现象，这个现象叫<strong>浮动溢出</strong>。为了防止这种现象出现而进行的 CSS 处理，就叫<strong>清除浮动</strong>。</p>
+
+<h2 id="例子">例子</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;div class="container"&gt;
+  &lt;div class="left"&gt;&lt;/div&gt;
+  &lt;div class="right"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+.container {
+  border: solid 1px black;
+}
+
+.left{
+  width: 30px;
+  height: 20px;
+  background-color: ##DDA0DD;
+  float: left;
+}
+
+.right {
+  width: 60px;
+  height: 40px;
+  background-color: #14CC8D;
+  float: right;
+}
+</code></pre></div></div>
+
+<div style="border: solid 1px black;">
+  <div style="width: 30px;height: 20px;float: left;background-color: #FFBE19;"></div>
+  <div style="width: 60px;height: 40px;float: right;background-color: #14CC8D;"></div>
+</div>
+
+<p><br />
+<br />
+如上所示：容器没有包围浮动元素，清除浮动后可以参考下面链接。</p>
+
+<h2 id="清除浮动的方法">清除浮动的方法</h2>
+<ol>
+  <li>
+    <p><strong>使用 clear: both 的空元素</strong><br />
+  在浮动元素后使用一个空元素如 <code class="language-plaintext highlighter-rouge">&lt;div style={ clear:both; }&gt;&lt;/div&gt;</code> 即可清理浮动。<br />
+  注：不推荐采用。需要添加无语义的html元素，代码不够优雅，后期不易维护。</p>
+  </li>
+  <li>
+    <p><strong>使用 overflow: hidden 属性</strong><br />
+  给容器添加 <code class="language-plaintext highlighter-rouge">overflow:hidden</code> 可以清除浮动。<br />
+  注：不推荐采用。离开容器所在的区域会被隐藏</p>
+  </li>
+  <li>
+    <p><strong>使用 :after 伪元素</strong><br />
+  给容器添加一个 :after 伪元素，实现元素末尾添加一个看不见的块。<br />
+  注：推荐采用。注意设置 :after 属性值</p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.container:after {
+  content: "";
+  display: block;
+  height: 0;
+  clear: both;         
+  visibility: hidden;
+}
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p><a href="https://codepen.io/chesterchenn/pen/xxZBpqo">CodePen：清楚浮动</a></p>
+
+<h2 id="总结">总结</h2>
+<p>推荐使用 <code class="language-plaintext highlighter-rouge">:after</code> 伪元素方法清除浮动，文档结构清晰。</p>
+
+  </div><a class="u-url" href="/blog/2017/11/03/%E6%B8%85%E9%99%A4%E6%B5%AE%E5%8A%A8.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

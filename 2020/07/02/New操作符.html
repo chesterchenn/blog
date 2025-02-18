@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>New 操作符 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="New 操作符" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="关于 New 操作符的一些东西" />
+<meta property="og:description" content="关于 New 操作符的一些东西" />
+<link rel="canonical" href="/blog/2020/07/02/New%E6%93%8D%E4%BD%9C%E7%AC%A6.html" />
+<meta property="og:url" content="/blog/2020/07/02/New%E6%93%8D%E4%BD%9C%E7%AC%A6.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-07-02T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="New 操作符" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2020-07-02T00:00:00+00:00","datePublished":"2020-07-02T00:00:00+00:00","description":"关于 New 操作符的一些东西","headline":"New 操作符","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2020/07/02/New%E6%93%8D%E4%BD%9C%E7%AC%A6.html"},"url":"/blog/2020/07/02/New%E6%93%8D%E4%BD%9C%E7%AC%A6.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">New 操作符</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2020-07-02T00:00:00+00:00" itemprop="datePublished">Jul 2, 2020
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2020"><i>2020</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/javascript"><i>javascript</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>关于 New 操作符的一些东西</p>
+
+<h2 id="语法">语法</h2>
+
+<p><code class="language-plaintext highlighter-rouge">new constructor[([arguments])]</code></p>
+
+<ul>
+  <li><em>constructor</em> 构造函数，指定对象实例类型的类或者函数</li>
+  <li><em>arguments</em> 参数，被构造函数调用的参数列表</li>
+</ul>
+
+<h2 id="描述">描述</h2>
+
+<p>new 关键字会进行如下的操作：</p>
+
+<ol>
+  <li>创建一个新的对象（即<code class="language-plaintext highlighter-rouge">{}</code>）。</li>
+  <li>连接新对象的原形链到构造函数。</li>
+  <li>将构造函数中的 <code class="language-plaintext highlighter-rouge">this</code> 绑定到新对象上。</li>
+  <li>如果构造函数返回对象，返回该对象，否则返回创建的新对象。</li>
+</ol>
+
+<p>模拟实现：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">_new</span><span class="p">(</span><span class="nx">fn</span><span class="p">,</span> <span class="p">...</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// 创建空对象，并将原型链绑定到构造对象</span>
+  <span class="c1">// 相当于 obj.__proto__ = fn.prototype</span>
+  <span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="nx">fn</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span>
+
+  <span class="c1">// 执行构造函数方法，绑定 this</span>
+  <span class="kd">let</span> <span class="nx">res</span> <span class="o">=</span> <span class="nx">fn</span><span class="p">.</span><span class="nf">apply</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="nx">args</span><span class="p">);</span>
+
+  <span class="c1">// 如果构造函数返回对象，返回该对象，否则返回创建的新对象。</span>
+  <span class="k">return</span> <span class="nx">res</span> <span class="k">instanceof</span> <span class="nb">Object</span> <span class="p">?</span> <span class="nx">res</span> <span class="p">:</span> <span class="nx">obj</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nf">Person</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="nx">age</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">p</span> <span class="o">=</span> <span class="nf">_new</span><span class="p">(</span><span class="nx">Person</span><span class="p">,</span> <span class="dl">'</span><span class="s1">chen</span><span class="dl">'</span><span class="p">,</span> <span class="mi">18</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="注意">注意</h2>
+
+<p>一个函数作为构造函数时候：</p>
+
+<ol>
+  <li>函数首字母大写（非必须条件）</li>
+  <li>用 <code class="language-plaintext highlighter-rouge">new</code> 调用调用函数</li>
+</ol>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">T</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">t1</span> <span class="o">=</span> <span class="nc">T</span><span class="p">(</span><span class="dl">'</span><span class="s1">t1</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">t2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">T</span><span class="p">(</span><span class="dl">'</span><span class="s1">t2</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">t1</span><span class="p">);</span> <span class="c1">// =&gt; "undefined"</span>
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">t2</span><span class="p">);</span> <span class="c1">// =&gt; { name: "t2" }</span>
+</code></pre></div></div>
+
+<p>实际上， T 和其他函数没有任何区别。函数本身并不是构造函数，然而，当你在普通的函数调用前面加上 new 关键字之后，就会把这个函数调用变成一个“构造函数调用”。实际上，new 会劫持所有普通函数并用构造对象的形式来调用它。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">NothingSpecial</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Hello, World.</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">NothingSpecial</span><span class="p">();</span>
+<span class="c1">// Hello, World.</span>
+
+<span class="nx">a</span><span class="p">;</span> <span class="c1">// {}</span>
+</code></pre></div></div>
+
+<p>NothingSpecial 只是一个普通的函数，但是使用 new 调用时，它就会构造一个对象并赋值 a。</p>
+
+<h2 id="返回值">返回值</h2>
+
+<p>在传统语言中，构造函数不应该有返回值，实际执行的返回值就是此构造函数的实例化对象。</p>
+
+<p>如果返回的类型是 object，那么构造函数返回这个 object</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">T</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="na">foo</span><span class="p">:</span> <span class="dl">'</span><span class="s1">foo</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">t1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">T</span><span class="p">(</span><span class="dl">'</span><span class="s1">bar</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">t1</span><span class="p">);</span> <span class="c1">// { foo: "foo" }</span>
+</code></pre></div></div>
+
+<p>如果返回的类型不是 object，那么构造函数返回的是 this</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">T</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">t2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">T</span><span class="p">(</span><span class="dl">'</span><span class="s1">bar</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">t2</span><span class="p">);</span> <span class="c1">// { name: 'bar' }</span>
+</code></pre></div></div>
+
+<h2 id="构造函数">构造函数</h2>
+
+<h3 id="string-构造函数">String 构造函数</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typeof</span> <span class="nc">String</span><span class="p">(</span><span class="dl">'</span><span class="s1">Hello world</span><span class="dl">'</span><span class="p">);</span> <span class="c1">// string</span>
+<span class="k">typeof</span> <span class="k">new</span> <span class="nc">String</span><span class="p">(</span><span class="dl">'</span><span class="s1">Hello world</span><span class="dl">'</span><span class="p">);</span> <span class="c1">// object</span>
+</code></pre></div></div>
+
+<h3 id="number-构造函数">Number 构造函数</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">a</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Number</span><span class="p">(</span><span class="dl">'</span><span class="s1">123</span><span class="dl">'</span><span class="p">);</span> <span class="c1">// a === 123 is false</span>
+<span class="kd">const</span> <span class="nx">b</span> <span class="o">=</span> <span class="nc">Number</span><span class="p">(</span><span class="dl">'</span><span class="s1">123</span><span class="dl">'</span><span class="p">);</span> <span class="c1">// b === 123 is true</span>
+<span class="nx">a</span> <span class="k">instanceof</span> <span class="nb">Number</span><span class="p">;</span> <span class="c1">// is true</span>
+<span class="nx">b</span> <span class="k">instanceof</span> <span class="nb">Number</span><span class="p">;</span> <span class="c1">// is false</span>
+</code></pre></div></div>
+
+<h3 id="boolean-构造函数">Boolean 构造函数</h3>
+
+<p>创建的 Boolean 对象默认值为 <code class="language-plaintext highlighter-rouge">false</code></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">bNoParam</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Boolean</span><span class="p">();</span>
+<span class="kd">var</span> <span class="nx">bZero</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Boolean</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">bNull</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Boolean</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">bEmptyString</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Boolean</span><span class="p">(</span><span class="dl">''</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">bfalse</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Boolean</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">bNaN</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Boolean</span><span class="p">(</span><span class="kc">NaN</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>在 JavaScript 中，false、null、0、”“、undefined 和 NaN 被称为假值。</p>
+
+<p>创建的 Boolean 对象默认值为 <code class="language-plaintext highlighter-rouge">true</code></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">btrue</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Boolean</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">btrueString</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Boolean</span><span class="p">(</span><span class="dl">'</span><span class="s1">true</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">bfalseString</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Boolean</span><span class="p">(</span><span class="dl">'</span><span class="s1">false</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">bSuLin</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Boolean</span><span class="p">(</span><span class="dl">'</span><span class="s1">Su Lin</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">bArrayProto</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Boolean</span><span class="p">([]);</span>
+<span class="kd">var</span> <span class="nx">bObjProto</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Boolean</span><span class="p">({});</span>
+</code></pre></div></div>
+
+<h2 id="题目">题目</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">Foo</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">getName</span> <span class="o">=</span> <span class="nf">function </span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+  <span class="p">};</span>
+  <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">Foo</span><span class="p">.</span><span class="nx">getName</span> <span class="o">=</span> <span class="nf">function </span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="p">};</span>
+<span class="nx">Foo</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">getName</span> <span class="o">=</span> <span class="nf">function </span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">getName</span> <span class="o">=</span> <span class="nf">function </span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+<span class="p">};</span>
+<span class="kd">function</span> <span class="nf">getName</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">//请写出以下输出结果：</span>
+<span class="nx">Foo</span><span class="p">.</span><span class="nf">getName</span><span class="p">();</span>
+<span class="nf">getName</span><span class="p">();</span>
+<span class="nc">Foo</span><span class="p">().</span><span class="nf">getName</span><span class="p">();</span>
+<span class="nf">getName</span><span class="p">();</span>
+<span class="k">new</span> <span class="nx">Foo</span><span class="p">.</span><span class="nf">getName</span><span class="p">();</span>
+<span class="k">new</span> <span class="nc">Foo</span><span class="p">().</span><span class="nf">getName</span><span class="p">();</span>
+<span class="k">new</span> <span class="k">new</span> <span class="nc">Foo</span><span class="p">().</span><span class="nf">getName</span><span class="p">();</span>
+</code></pre></div></div>
+
+<ol>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Foo.getName()</code> 访问的是 Foo 函数对象储存的静态属性，结果为 2。</p>
+  </li>
+  <li>
+    <p>直接调用 <code class="language-plaintext highlighter-rouge">getName()</code>，直接调用就是访问当前上下文作用内的 <code class="language-plaintext highlighter-rouge">getName</code> 函数。由于题目中会有变量提升，所以输出不是 5。题目中最后两行代码的执行顺序如下，所以最终结果输出结果为 4。</p>
+
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">getName</span><span class="p">;</span> <span class="c1">// 函数表达式会拆成两行代码执行</span>
+<span class="kd">function</span> <span class="nf">getName</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+<span class="p">}</span> <span class="c1">// 函数声明被提升，覆盖getName值</span>
+<span class="nx">getName</span> <span class="o">=</span> <span class="nf">function </span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+<span class="p">};</span> <span class="c1">// 函数表达式的赋值，再次覆盖函数声明的值。</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Foo().getName()</code> 先执行了 Foo 函数，然后调用 Foo 函数的返回值对象的 getName 属性函数。Foo 函数返回了 this，这个 this 是函数调用，默认会绑定到全局对象 window，所以 Foo().getName() 相当于执行 window.getName() 方法。但是 Foo 函数内部的 getName 并没有 var 声明，所以 Foo 函数内部的 getName 函数赋值会重新赋值覆盖全局变量，所以输出 1。</p>
+  </li>
+  <li>
+    <p>由于上面代码修改了全局变量 getName 变量，此时全局变量 getName 已变成 <code class="language-plaintext highlighter-rouge">function() {console.log(1)}</code>，结果为 1。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">new Foo.getName()</code> 考察的是 js 的运算符优先级。运算符的优先级可以查看 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence">Operator precedence</a>。相当于 <code class="language-plaintext highlighter-rouge">new (Foo.getName)()</code>。实则将 Foo.getName 函数作为构造函数执行。答案是 2</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">new Foo().getName()</code> 运算符优先级括号高于 new，实际执行为 <code class="language-plaintext highlighter-rouge">(new Foo()).getName()</code>。所以当调用 getName 方法的时候去原型链上找到结果 3。PS：Foo.getName 是绑定 Foo 上面的一个属性方法，实例化对象的时候不会存在。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">new new Foo().getName()</code> 运算符优先级转化后 <code class="language-plaintext highlighter-rouge">new ((new Foo()).getName())</code>。先初始化 Foo 的实例化对象，然后将其原型上的 getName 函数作为构造函数再实例化。结果为 3。</p>
+  </li>
+</ol>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new">new operator</a></li>
+  <li><a href="https://www.cnblogs.com/xxcanghai/p/5189353.html">一道常被人轻视的前端 JS 面试题</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence">MDN: Operator precedence</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2020/07/02/New%E6%93%8D%E4%BD%9C%E7%AC%A6.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

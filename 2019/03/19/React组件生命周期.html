@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>React组件生命周期 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="React组件生命周期" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="React 定义类的组件时会提供的更多功能，如生命周期。" />
+<meta property="og:description" content="React 定义类的组件时会提供的更多功能，如生命周期。" />
+<link rel="canonical" href="/blog/2019/03/19/React%E7%BB%84%E4%BB%B6%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.html" />
+<meta property="og:url" content="/blog/2019/03/19/React%E7%BB%84%E4%BB%B6%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-03-19T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="React组件生命周期" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2019-03-19T00:00:00+00:00","datePublished":"2019-03-19T00:00:00+00:00","description":"React 定义类的组件时会提供的更多功能，如生命周期。","headline":"React组件生命周期","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2019/03/19/React%E7%BB%84%E4%BB%B6%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.html"},"url":"/blog/2019/03/19/React%E7%BB%84%E4%BB%B6%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">React组件生命周期</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2019-03-19T00:00:00+00:00" itemprop="datePublished">Mar 19, 2019
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2019"><i>2019</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/react"><i>react</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>React 定义类的组件时会提供的更多功能，如生命周期。</p>
+
+<!-- vim-markdown-toc GFM -->
+
+<ul>
+  <li><a href="#生命周期图表">生命周期图表</a></li>
+  <li><a href="#三个阶段">三个阶段</a></li>
+  <li><a href="#mounting-挂载">Mounting 挂载</a></li>
+  <li><a href="#updating-更新">Updating 更新</a></li>
+  <li><a href="#unmounting-卸载">Unmounting 卸载</a></li>
+  <li><a href="#error-handling-错误处理">Error Handling 错误处理</a></li>
+  <li><a href="#常用的生命周期">常用的生命周期</a>
+    <ul>
+      <li><a href="#render">render</a></li>
+      <li><a href="#constructor">constructor</a></li>
+      <li><a href="#componentdidmount">componentDidMount</a></li>
+      <li><a href="#componentdidupdate">componentDidUpdate()</a></li>
+      <li><a href="#componentwillunmount">componentWillUnmount</a></li>
+    </ul>
+  </li>
+  <li><a href="#不常用的生命周期">不常用的生命周期</a>
+    <ul>
+      <li><a href="#shouldcomponentupdate">shouldComponentUpdate</a></li>
+      <li><a href="#static-getderivedstatefromprops">static getDerivedStateFromProps</a></li>
+      <li><a href="#getsnapshotbeforeupdate">getSnapshotBeforeUpdate</a></li>
+    </ul>
+  </li>
+  <li><a href="#错误处理">错误处理</a>
+    <ul>
+      <li><a href="#static-getderivedstatefromerror">static getDerivedStateFromError()</a></li>
+      <li><a href="#componentdidcatch">componentDidCatch()</a></li>
+    </ul>
+  </li>
+  <li><a href="#hook">HOOK</a></li>
+  <li><a href="#父子组件的加载顺序">父子组件的加载顺序</a></li>
+  <li><a href="#参考链接">参考链接</a></li>
+</ul>
+
+<!-- vim-markdown-toc -->
+
+<h2 id="生命周期图表">生命周期图表</h2>
+
+<p><img src="../../../images/react-lifecycle.png" alt="react-lifecycle" /></p>
+
+<p><a href="http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/">生命周期图表</a></p>
+
+<h2 id="三个阶段">三个阶段</h2>
+
+<p>react 的生命周期主要分为三种，挂载，更新和卸载。同时每个生命周期要经历三个阶段，分别是 <code class="language-plaintext highlighter-rouge">render</code>、<code class="language-plaintext highlighter-rouge">pre-commit</code> 和 <code class="language-plaintext highlighter-rouge">commit</code>。</p>
+
+<ul>
+  <li>
+    <p><strong>Render 阶段</strong>：是指 render 函数执行完返回 jsx 结构之前的过程。该阶段纯净且不包含副作用。可能会被 React 暂停，中止或重新启动。</p>
+  </li>
+  <li>
+    <p><strong>Pre-Commit 阶段</strong>：是指返回 jsx 结构到更新 DOM 之前的过程。该阶段可以读取 DOM。</p>
+  </li>
+  <li>
+    <p><strong>commit 阶段</strong>：是指更新 DOM，以及更新成功之后的过程。该阶段可以使用 DOM，运行副作用，安排更新。</p>
+  </li>
+</ul>
+
+<h2 id="mounting-挂载">Mounting 挂载</h2>
+
+<p>在创建组件并将其插入 DOM 时，将依次调用以下方法：</p>
+
+<ul>
+  <li><a href="#constructor">constructor()</a></li>
+  <li><a href="#static-getderivedstatefromprops">static getDerivedStateFromProps()</a></li>
+  <li><a href="#render">render()</a></li>
+  <li><a href="#componentdidmount">componentDidMount()</a></li>
+</ul>
+
+<h2 id="updating-更新">Updating 更新</h2>
+
+<p>当更新 props 或者 states 是，可能会重新渲染组件，将依次调用以下方法：</p>
+
+<ul>
+  <li><a href="#static-getderivedstatefromprops">static getDerivedStateFromProps()</a></li>
+  <li><a href="#shouldcomponentupdate">shouldComponentUpdate()</a></li>
+  <li><a href="#render">render()</a></li>
+  <li><a href="#getsnapshotbeforeupdate">getSnapshotBeforeUpdate()</a></li>
+  <li><a href="#componentdidupdate">componentDidUpdate()</a></li>
+</ul>
+
+<h2 id="unmounting-卸载">Unmounting 卸载</h2>
+
+<p>当从 DOM 中移除组件时，将调用以下的方法：</p>
+
+<ul>
+  <li><a href="#componentwillunmount">componentWillUnmount()</a></li>
+</ul>
+
+<h2 id="error-handling-错误处理">Error Handling 错误处理</h2>
+
+<p>当组件在构建或者渲染时发生错误，将调用以下的方法：</p>
+
+<ul>
+  <li><a href="#static-getderivedstatefromerror">static getDerivedStateFromError()</a></li>
+  <li><a href="#componentdidcatch">componentDidCatch()</a></li>
+</ul>
+
+<h2 id="常用的生命周期">常用的生命周期</h2>
+
+<h3 id="render">render</h3>
+
+<p>在类组件中 render 是唯一必须需要的方法。render 函数是纯净的，render 函数不会去修改组件的状态。</p>
+
+<p>返回的类型有如下：</p>
+
+<ul>
+  <li>React elements，典型例子就是 JSX。</li>
+  <li>Array 和 fragments</li>
+  <li>Portals</li>
+  <li>String 和 numbers 当返回字符串或者数字的时候，会渲染成文本节点。</li>
+  <li>Booleans 或者 null 不会渲染。</li>
+</ul>
+
+<h3 id="constructor">constructor</h3>
+
+<p>如果不进行初始化 state 或绑定函数，可以省略。constructor 会在 React 组件挂载前调用。如果是通过 <code class="language-plaintext highlighter-rouge">React.Component</code> 子类实现 constructor，那么任何声明之前都应该调用 <code class="language-plaintext highlighter-rouge">super(props)</code>。同时，<code class="language-plaintext highlighter-rouge">this.props</code>是未定义的，无法调用。</p>
+
+<p>constructor 只用在以下两个目的：</p>
+
+<ul>
+  <li>初始化 state</li>
+  <li>函数绑定</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">constructor</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">super</span><span class="p">(</span><span class="nx">props</span><span class="p">);</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span> <span class="na">counter</span><span class="p">:</span> <span class="mi">0</span> <span class="p">};</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">handleClick</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">bandleClick</span><span class="p">.</span><span class="nf">bind</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>不建议将 props 复制到 state 里面。因为这样子不是必要的（可以直接使用 this.props.xx 代替），还容易出现问题（更新 prop 属性不会更新 state）。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">constructor</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">super</span><span class="p">(</span><span class="nx">props</span><span class="p">);</span>
+  <span class="c1">// Don't do this!</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span> <span class="na">color</span><span class="p">:</span> <span class="nx">props</span><span class="p">.</span><span class="nx">color</span> <span class="p">};</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>只有在你不想更新 prop 时才使用这种模式，而在这种情况下，将 props 重命名为 initialColor 或 defaultColor 更有意义。然后，你可以在必要时通过改变键值来重置内部状态。详见：<a href="https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-uncontrolled-component-with-a-key">Recommendation: Fully uncontrolled component with a key</a></p>
+
+<h3 id="componentdidmount">componentDidMount</h3>
+
+<p>在组件挂载之后会立即调用 componentDidMount()，请求 DOM 节点的初始化，初始化一个网络请求应该放这里。</p>
+
+<h3 id="componentdidupdate">componentDidUpdate()</h3>
+
+<p><code class="language-plaintext highlighter-rouge">componentDidUpdate(prevProps, prevState, snapshot)</code> 在组件更新之后会立即调用 componentDidUpdate()。注意，首次渲染的时候不会触发。</p>
+
+<p>这里可以用作组件更新之后的操作，同时，这里也可以通过对当前 props 和之前 props 比较之后进行一些操作。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">componentDidUpdate</span><span class="p">(</span><span class="nx">prevProps</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// 典型应用（不要忘记 props）:</span>
+  <span class="k">if </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">userID</span> <span class="o">!==</span> <span class="nx">prevProps</span><span class="p">.</span><span class="nx">userID</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nf">fetchData</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">userID</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="componentwillunmount">componentWillUnmount</h3>
+
+<p>在组件卸载或销毁之前会立即调用 componentWillUnmount。可以用来清除定时器，取消网络请求，取消订阅等。</p>
+
+<h2 id="不常用的生命周期">不常用的生命周期</h2>
+
+<h3 id="shouldcomponentupdate">shouldComponentUpdate</h3>
+
+<p><code class="language-plaintext highlighter-rouge">shouldComponentUpdate(nextProps, nextState)</code> 通过 shouldComponentUpdate() 可以让 React 知道组件在受到当前的 state 或 porps 中的影响下是否变化。默认是每次 state 更新的时候都会重新渲染，默认为 true。首次渲染或者当调用 <code class="language-plaintext highlighter-rouge">forceUpdate()</code> 该方法不知被调用。</p>
+
+<p>这个方法仅适用于性能优化，不要依靠它来组织渲染，可能会导致 bug。使用内置的 PureComponent 代替手工的 shouldComponentUpdate。PureComponent 会对 props 和 state 进行浅层比较，从而减少一些不必要的更新。</p>
+
+<p>当 shouldComponentUpdate 返回 false 时，componentDidUpdate，render 不会被调用。</p>
+
+<h3 id="static-getderivedstatefromprops">static getDerivedStateFromProps</h3>
+
+<p><code class="language-plaintext highlighter-rouge">static getDerivedStateFromProps(props, state)</code> 在调用 render 方法之前调用，包括挂载时和更新时。该方法要么返回一个更新 state 对象，要么返回 null 不更新。该方法的 state 取决于 props 的变化。</p>
+
+<p>典型的应用场景：表单控件获取默认值。</p>
+
+<h3 id="getsnapshotbeforeupdate">getSnapshotBeforeUpdate</h3>
+
+<p><code class="language-plaintext highlighter-rouge">getSnapshotBeforeUpdate(prevProps, prevState)</code> 该方法在页面 render 之前调用，state 已更新。它允许组件去获取信息在 DOM 更新之前，此生命周期返回的值会作为参数传递给 componentDidUpdate()。</p>
+
+<h2 id="错误处理">错误处理</h2>
+
+<h3 id="static-getderivedstatefromerror">static getDerivedStateFromError()</h3>
+
+<p><code class="language-plaintext highlighter-rouge">static getDerivedStateFromError(error)</code> 这个生命周期在错误抛出的时候调用。它接受错误作为参数，并且返回值更新 state。</p>
+
+<h3 id="componentdidcatch">componentDidCatch()</h3>
+
+<p><code class="language-plaintext highlighter-rouge">componentDidCatch(error, info)</code> 此生命周期在后代组件抛出错误后调用。它接受两个参数</p>
+
+<h2 id="hook">HOOK</h2>
+
+<p>useEffect 通过不同的参数设置可以模拟 <code class="language-plaintext highlighter-rouge">componentDidMount</code>, <code class="language-plaintext highlighter-rouge">componentDidUpdate</code>, <code class="language-plaintext highlighter-rouge">componentWillUnmount</code> 等生命周期。</p>
+
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// componentDidMount</span>
+<span class="nf">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">componentDidMount</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">},</span> <span class="p">[]);</span>
+
+<span class="c1">// componentDidUpdate</span>
+<span class="nf">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">componentDidUpdate</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="c1">// componentWillUnmount</span>
+<span class="nf">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return </span><span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">componentWillUnmount</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">};</span>
+<span class="p">},</span> <span class="p">[]);</span>
+</code></pre></div></div>
+
+<p>注意：</p>
+
+<ul>
+  <li>effect 的返回函数（清除函数）也会在每次 effect 生效重新渲染时执行，而不是只在卸载组件的时候执行一次，且会在 effect 运行之前执行。</li>
+  <li>effect 里的 state 都是最新的。但 effect 里的返回函数（清除函数）的 state 是更新前的。</li>
+</ul>
+
+<p>具体效果可以查看 <a href="https://codesandbox.io/s/useeffect-get-state-g9mxwr">codesandbox</a></p>
+
+<h2 id="父子组件的加载顺序">父子组件的加载顺序</h2>
+
+<p>父子组件的生命周期顺序是如何的？</p>
+
+<p>挂载时，子组件的挂载钩子会被先触发，卸载时，父组件的卸载钩子先被触发。</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">Super</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nf">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Super Mounted.</span><span class="dl">'</span><span class="p">);</span>
+    <span class="k">return </span><span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Super UnMounted.</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">};</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+  <span class="k">return </span><span class="p">(</span>
+    <span class="p">&lt;&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>Super<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Sub</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;/&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nf">Sub</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nf">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Sub Mounted.</span><span class="dl">'</span><span class="p">);</span>
+    <span class="k">return </span><span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Sub UnMounted.</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">};</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+  <span class="k">return</span> <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>Sub<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>代码实例：<a href="https://codesandbox.io/s/sub-super-8rvlh8?file=/src/App.js">CodeSandBox</a></p>
+
+<p>Super 组件在挂载卸载的过程中，分别输出：<code class="language-plaintext highlighter-rouge">Sub Mounted</code>，<code class="language-plaintext highlighter-rouge">Super Mounted</code>，<code class="language-plaintext highlighter-rouge">Super UnMounted</code>，<code class="language-plaintext highlighter-rouge">Sub UnMounted</code></p>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="https://reactjs.org/docs/react-component.html">React.Component</a></li>
+  <li><a href="http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/">生命周期图表</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2019/03/19/React%E7%BB%84%E4%BB%B6%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

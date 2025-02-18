@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>关系数据库设计理论 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="关系数据库设计理论" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="关系数据库设计理论有 3 个方面的内容，即函数依赖、范式和模式设计。函数依赖起核心作用，它是模式分解和模式设计的基础；范式是模式分解的标准。" />
+<meta property="og:description" content="关系数据库设计理论有 3 个方面的内容，即函数依赖、范式和模式设计。函数依赖起核心作用，它是模式分解和模式设计的基础；范式是模式分解的标准。" />
+<link rel="canonical" href="/blog/2022/04/13/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E7%90%86%E8%AE%BA.html" />
+<meta property="og:url" content="/blog/2022/04/13/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E7%90%86%E8%AE%BA.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-04-13T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="关系数据库设计理论" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-04-13T00:00:00+00:00","datePublished":"2022-04-13T00:00:00+00:00","description":"关系数据库设计理论有 3 个方面的内容，即函数依赖、范式和模式设计。函数依赖起核心作用，它是模式分解和模式设计的基础；范式是模式分解的标准。","headline":"关系数据库设计理论","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2022/04/13/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E7%90%86%E8%AE%BA.html"},"url":"/blog/2022/04/13/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E7%90%86%E8%AE%BA.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">关系数据库设计理论</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2022-04-13T00:00:00+00:00" itemprop="datePublished">Apr 13, 2022
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2022"><i>2022</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/os"><i>os</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>关系数据库设计理论有 3 个方面的内容，即函数依赖、范式和模式设计。函数依赖起核心作用，它是模式分解和模式设计的基础；范式是模式分解的标准。</p>
+
+<h2 id="三级模式结构">三级模式结构</h2>
+
+<p>数据库基本上采用类似体系结构-“三级模式-两级映射”的关系。</p>
+
+<ul>
+  <li>三级模式：外模式，概念模式，内模式</li>
+  <li>两级映射：外模式-概念模式映射，概念模式-内模式映射</li>
+</ul>
+
+<p>外模式，也叫用户模式，是用户和数据库系统的接口。它由若干个外部记录类型组成。用户使用数据操纵语言对数据库进行操作，实际上是对外模式的外部记录进行操作。</p>
+
+<p>概念模式，它是数据库中的全部数据的逻辑结构和特征的描述，由若干个概念记录类型组成，只涉及型的描述，不涉及具体的值。</p>
+
+<p>内模式，也称为存储模式，是数据物理结构和存储方式的描述，是数据在数据库内部的表示方式，定义所有的内部记录类型、索引和文件的组织方式，以及数据控制方面的细节。</p>
+
+<p>两级映射分别存在对应的模式之间，实现了对应的模式之间的相互转换。</p>
+
+<h2 id="e-r-模型">E-R 模型</h2>
+
+<p>使用实体-联系图描述现实世界的概念模型，被称为实体-联系模型（Entity-Relationship Model，E-R 模型）。</p>
+
+<p>E-R 模型主要由实体，联系和属性组成。</p>
+
+<p>不同的实体集之间存在 3 种联系类型。</p>
+
+<ul>
+  <li>1:1（一对一）</li>
+  <li>1:n（一对多）</li>
+  <li>m:n（多对多）</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">构体</th>
+      <th style="text-align: left">表示</th>
+      <th style="text-align: left">说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">矩形</td>
+      <td style="text-align: left">实体</td>
+      <td style="text-align: left">表示个体或者具有相同属性的集合。如学生，职工等</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">双边矩形</td>
+      <td style="text-align: left">弱实体</td>
+      <td style="text-align: left">必须依赖实体存在的实体，如职工家属必须依赖职工的存在</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">双竖边框矩形</td>
+      <td style="text-align: left">子类</td>
+      <td style="text-align: left">特殊化的实体，如学生可以划分为高中生，本科生和研究生等</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">菱形</td>
+      <td style="text-align: left">联系</td>
+      <td style="text-align: left">联系主要有一对一，一对多和多对多三种常见的关系</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">椭圆</td>
+      <td style="text-align: left">属性</td>
+      <td style="text-align: left">常见的分类是简单属性和复合属性</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="关系代数">关系代数</h2>
+
+<p>常见的关系代数运算符</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">运算符</th>
+      <th style="text-align: left">含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">∪</td>
+      <td style="text-align: left">并</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">∩</td>
+      <td style="text-align: left">交</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">−</td>
+      <td style="text-align: left">差</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">×</td>
+      <td style="text-align: left">笛卡尔积</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">σ</td>
+      <td style="text-align: left">选择</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">π</td>
+      <td style="text-align: left">投影</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">⋈</td>
+      <td style="text-align: left">连接</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>一些名词：</p>
+
+<ul>
+  <li>候选码/候选键（Candidate Key）：能够唯一标识元组的属性或属性组。</li>
+  <li>主码/主键（Primary Key）：若一个关系有多个候选键，则选定一个为主键。</li>
+  <li>主属性和非主属性：包含在任意一个候选键中的属性被称为主属性，否则称为非主属性。</li>
+  <li>外码/外键（Foreign Key）：关系模式 R 中的属性或属性组非该关系模式中的键，是其他关系模式的键，那么对于关系模式 R 该属性集就是外键。</li>
+  <li>全码/全键（All-Key）：关系模式中的所有属性组都是这个关系模式的候选键。</li>
+</ul>
+
+<p>根据候选键的定义，候选键可以是单个属性，也可以是多个属性的集合。在学生表中，学号和身份证号都可以唯一标识学生，均为候选键，选择学号作为主键。</p>
+
+<p>如何求得候选键？</p>
+
+<p>将关系模式中的函数依赖关系用“有向图”表示，能够遍历图中的所有结点，则该属性即为关系模式中的候选键。</p>
+
+<h2 id="非规范化理论">非规范化理论</h2>
+
+<p>非规范化的关系模式，可能存在的问题包括：数据冗余，更新异常，插入异常和删除异常。</p>
+
+<h3 id="函数依赖">函数依赖</h3>
+
+<p>设 R(U) 是属性集 U 上的关系模式，X、Y 是 U 的子集。若对 R(U) 的任何一个可能的关系 r，r 中不可能存在两个元组在 X 上的属性值相等，而在 Y 上的属性不等，则称为 X 函数决定 Y 或 Y 函数依赖于 X，记作 X → Y。</p>
+
+<h3 id="范式">范式</h3>
+
+<p>1NF：若关系模式 R 的每一个分量是不可再分的数据项，则关系模式 R 属于第一范式。</p>
+
+<p>2NF：当 1NF 消除了非主属性对候选键的部分函数依赖。</p>
+
+<p>3NF：当 2NF 消除了非主属性对候选键的传递函数依赖。</p>
+
+<p>BCNF：对于关系模式 R ∈ 1NF，若 X → Y 且 Y ⊈ X 时 X 必含有码，则 R ∈ BCNF。</p>
+
+<p>由 BCNF 的定义可以得到如下结论，一个满足 BCNF 的关系模式有：</p>
+
+<ol>
+  <li>所有非主属性对每一个码都是完全函数依赖。</li>
+  <li>所有主属性对每一个不包含它的码也是完全函数依赖。</li>
+  <li>没有任何属性完全函数依赖与非码的任何一组属性。</li>
+</ol>
+
+<h3 id="模式分解">模式分解</h3>
+
+<p>关系模式的分解过程就是将一个关系模式分解成一组等价的关系子模式的过程。对一个关系模式的分解可以有多种方式，但分解后产生的模式与原来的模式等价。</p>
+
+<p>“等价”的概念形成以下 3 种不同的定义。</p>
+
+<ul>
+  <li>分解具有无损连接性。</li>
+  <li>分解要保持函数依赖。</li>
+  <li>分解既要保持函数依赖，又要具有无损连接性。</li>
+</ul>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="http://www.tup.com.cn/upload/books/yz/077145-01.pdf">关系数据库设计理论</a></li>
+  <li>《软件设计师教程》</li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2022/04/13/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E7%90%86%E8%AE%BA.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

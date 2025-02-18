@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>React 自定义 Hook 在 TypeScript 中的返回类型 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="React 自定义 Hook 在 TypeScript 中的返回类型" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="当我们在创建自定义的钩子，通常返回一个数组解构。" />
+<meta property="og:description" content="当我们在创建自定义的钩子，通常返回一个数组解构。" />
+<link rel="canonical" href="/blog/2023/03/05/react%E8%87%AA%E5%AE%9A%E4%B9%89hook%E7%9A%84%E8%BF%94%E5%9B%9E%E7%B1%BB%E5%9E%8B%E5%AE%9A%E4%B9%89.html" />
+<meta property="og:url" content="/blog/2023/03/05/react%E8%87%AA%E5%AE%9A%E4%B9%89hook%E7%9A%84%E8%BF%94%E5%9B%9E%E7%B1%BB%E5%9E%8B%E5%AE%9A%E4%B9%89.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-03-05T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="React 自定义 Hook 在 TypeScript 中的返回类型" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-03-05T00:00:00+00:00","datePublished":"2023-03-05T00:00:00+00:00","description":"当我们在创建自定义的钩子，通常返回一个数组解构。","headline":"React 自定义 Hook 在 TypeScript 中的返回类型","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2023/03/05/react%E8%87%AA%E5%AE%9A%E4%B9%89hook%E7%9A%84%E8%BF%94%E5%9B%9E%E7%B1%BB%E5%9E%8B%E5%AE%9A%E4%B9%89.html"},"url":"/blog/2023/03/05/react%E8%87%AA%E5%AE%9A%E4%B9%89hook%E7%9A%84%E8%BF%94%E5%9B%9E%E7%B1%BB%E5%9E%8B%E5%AE%9A%E4%B9%89.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">React 自定义 Hook 在 TypeScript 中的返回类型</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2023-03-05T00:00:00+00:00" itemprop="datePublished">Mar 5, 2023
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2023"><i>2023</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/react"><i>react</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>当我们在创建自定义的钩子，通常返回一个数组解构。</p>
+
+<p>使用数组的原因是因为数组没有名称属性，你可以自定义自己的名称。类似于：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="p">[</span><span class="nx">state</span><span class="p">,</span> <span class="nx">setState</span><span class="p">]</span> <span class="o">=</span> <span class="nf">useState</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+<span class="kd">const</span> <span class="p">[</span><span class="nx">count</span><span class="p">,</span> <span class="nx">setCount</span><span class="p">]</span> <span class="o">=</span> <span class="nf">useCount</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="钩子中的返回类型">钩子中的返回类型</h2>
+
+<p>我们在自定义的 hook，也想返回一个数组。</p>
+
+<p>一个简单的 typescript 自定义 hook：</p>
+
+<div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// useToggle.ts</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">useToggle</span> <span class="o">=</span> <span class="p">(</span><span class="nx">initialValue</span><span class="p">:</span> <span class="nx">boolean</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">value</span><span class="p">,</span> <span class="nx">setValue</span><span class="p">]</span> <span class="o">=</span> <span class="nf">useState</span><span class="p">(</span><span class="nx">initialValue</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">toggleValue</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nf">setValue</span><span class="p">(</span><span class="o">!</span><span class="nx">value</span><span class="p">);</span>
+  <span class="k">return</span> <span class="p">[</span><span class="nx">value</span><span class="p">,</span> <span class="nx">toggleValue</span><span class="p">];</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>我们只定义了输入的参数类型，除此之外没有什么特殊，让我们试着使用它。</p>
+
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// App.tsx</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">isVisible</span><span class="p">,</span> <span class="nx">toggleVisible</span><span class="p">]</span> <span class="o">=</span> <span class="nf">useToggle</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+
+  <span class="k">return </span><span class="p">(</span>
+    <span class="p">&lt;&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="nx">toggleVisible</span><span class="si">}</span><span class="p">&gt;</span>Click Me<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="si">{</span><span class="nx">isVisible</span> <span class="o">&amp;&amp;</span> <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>Hello World<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span><span class="si">}</span>
+    <span class="p">&lt;/&gt;</span>
+  <span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p><a href="https://codesandbox.io/s/hook-return-types-wrong-670zy5">https://codesandbox.io/s/hook-return-types-wrong-670zy5</a></p>
+
+<p>看似平平无奇，但是不出意外的出意外了。 TypeScript 给了我们一个错误信息：</p>
+
+<p><em style="color: #ce5777">Type ‘boolean | (() =&gt; void)’ is not assignable to type ‘MouseEventHandler&lt;HTMLButtonElement&gt; | undefined’. Type ‘boolean’ is not assignable to type ‘MouseEventHandler&lt;HTMLButtonElement&gt;’.</em></p>
+
+<p>在我们自定义的 hook 里， 我们返回了一个数组，而数组的类型是包含数组内所有元素类型的集合。该数组的类型包含了 <code class="language-plaintext highlighter-rouge">[boolean | (() =&gt; void)]</code> 两种类型，当我们在使用的时候，TypeScript 会提示不符合的类型的警告。</p>
+
+<h2 id="tuple">Tuple</h2>
+
+<blockquote>
+  <p>A tuple type is another sort of Array type that knows exactly how many elements it contains, and exactly which types it contains at specific positions</p>
+</blockquote>
+
+<p>Tuple 类型就是一个固定顺序，固定大小的数组。用 Tuple 指定自定义 hook 的返回类型。</p>
+
+<div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">type</span> <span class="nx">ToggleValue</span> <span class="o">=</span> <span class="p">[</span><span class="nx">boolean</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">];</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">useToggle</span> <span class="o">=</span> <span class="p">(</span><span class="nx">initialValue</span><span class="p">:</span> <span class="nx">boolean</span><span class="p">):</span> <span class="nx">ToggleValue</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">value</span><span class="p">,</span> <span class="nx">setValue</span><span class="p">]</span> <span class="o">=</span> <span class="nf">useState</span><span class="p">(</span><span class="nx">initialValue</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">toggleValue</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nf">setValue</span><span class="p">(</span><span class="o">!</span><span class="nx">value</span><span class="p">);</span>
+  <span class="k">return</span> <span class="p">[</span><span class="nx">value</span><span class="p">,</span> <span class="nx">toggleValue</span><span class="p">];</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<ul>
+  <li><a href="https://codesandbox.io/s/hook-return-types-tuple-yz5nyc">https://codesandbox.io/s/hook-return-types-tuple-yz5nyc</a></li>
+</ul>
+
+<h2 id="as-const">as const</h2>
+
+<p>使用 tuple，我们必须清楚返回数组的大小以及类型才能声明，而使用 const 断言则可以直接冻结类型。</p>
+
+<div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">useToggle</span> <span class="o">=</span> <span class="p">(</span><span class="nx">initialValue</span><span class="p">:</span> <span class="nx">boolean</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">value</span><span class="p">,</span> <span class="nx">setValue</span><span class="p">]</span> <span class="o">=</span> <span class="nf">useState</span><span class="p">(</span><span class="nx">initialValue</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">toggleValue</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nf">setValue</span><span class="p">(</span><span class="o">!</span><span class="nx">value</span><span class="p">);</span>
+  <span class="k">return</span> <span class="p">[</span><span class="nx">value</span><span class="p">,</span> <span class="nx">toggleValue</span><span class="p">]</span> <span class="k">as</span> <span class="kd">const</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p><a href="https://codesandbox.io/s/hook-return-types-as-const-9r88e6">https://codesandbox.io/s/hook-return-types-as-const-9r88e6</a></p>
+
+<p>useToggle 返回的类型则为 <code class="language-plaintext highlighter-rouge">readonly [boolean, () =&gt; void]</code> 变为仅读的 tuple 类型。</p>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="https://fettblog.eu/typescript-react-typeing-custom-hooks/">TypeScript + React: Typing custom hooks with tuple types</a></li>
+  <li><a href="https://www.typescriptlang.org/docs/handbook/2/objects.html#tuple-types">TypeScriptLang: Tuple Types</a></li>
+  <li><a href="https://stackoverflow.com/questions/66993264/what-does-the-as-const-mean-in-typescript-and-what-is-its-use-case">stackoverflow: What does the “as const” mean in TypeScript and what is its use case?</a></li>
+  <li><a href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-4.html#const-assertions">TypeScriptLang: Const Assertions</a></li>
+  <li><a href="https://blog.logrocket.com/const-assertions-are-the-killer-new-typescript-feature-b73451f35802/">const assertions are the killer new TypeScript feature</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2023/03/05/react%E8%87%AA%E5%AE%9A%E4%B9%89hook%E7%9A%84%E8%BF%94%E5%9B%9E%E7%B1%BB%E5%9E%8B%E5%AE%9A%E4%B9%89.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

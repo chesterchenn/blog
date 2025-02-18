@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TypeScript 中的通配符声明 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="TypeScript 中的通配符声明" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="一些模块允许导入非 JavaScript 的内容，它们通常使用前缀或后缀来表示。通用符模块声明可用于涵盖这些情况。" />
+<meta property="og:description" content="一些模块允许导入非 JavaScript 的内容，它们通常使用前缀或后缀来表示。通用符模块声明可用于涵盖这些情况。" />
+<link rel="canonical" href="/blog/2023/08/24/TypeScript%E4%B8%AD%E9%80%9A%E9%85%8D%E7%AC%A6%E5%A3%B0%E6%98%8E.html" />
+<meta property="og:url" content="/blog/2023/08/24/TypeScript%E4%B8%AD%E9%80%9A%E9%85%8D%E7%AC%A6%E5%A3%B0%E6%98%8E.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-08-24T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="TypeScript 中的通配符声明" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-08-24T00:00:00+00:00","datePublished":"2023-08-24T00:00:00+00:00","description":"一些模块允许导入非 JavaScript 的内容，它们通常使用前缀或后缀来表示。通用符模块声明可用于涵盖这些情况。","headline":"TypeScript 中的通配符声明","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2023/08/24/TypeScript%E4%B8%AD%E9%80%9A%E9%85%8D%E7%AC%A6%E5%A3%B0%E6%98%8E.html"},"url":"/blog/2023/08/24/TypeScript%E4%B8%AD%E9%80%9A%E9%85%8D%E7%AC%A6%E5%A3%B0%E6%98%8E.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">TypeScript 中的通配符声明</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2023-08-24T00:00:00+00:00" itemprop="datePublished">Aug 24, 2023
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2023"><i>2023</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/typescript"><i>typescript</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>一些模块允许导入非 JavaScript 的内容，它们通常使用前缀或后缀来表示。通用符模块声明可用于涵盖这些情况。</p>
+
+<h2 id="官方例子">官方例子</h2>
+
+<div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">declare</span> <span class="kr">module</span> <span class="dl">'</span><span class="s1">*!text</span><span class="dl">'</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">content</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="k">export</span> <span class="k">default</span> <span class="nx">content</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kr">declare</span> <span class="kr">module</span> <span class="dl">'</span><span class="s1">*!json</span><span class="dl">'</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">value</span><span class="p">:</span> <span class="kr">any</span><span class="p">;</span>
+  <span class="k">export</span> <span class="k">default</span> <span class="nx">value</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="实际应用中">实际应用中</h2>
+
+<p>在实际项目中，也会遇到这种情况。以下是一个 png 解决方案的示例：</p>
+
+<ol>
+  <li>
+    <p>创建声明文件</p>
+
+    <p>首先创建一个声明文件 <code class="language-plaintext highlighter-rouge">*.d.ts</code>，如：<code class="language-plaintext highlighter-rouge">types/index.d.ts</code></p>
+  </li>
+  <li>
+    <p>编辑内容如下</p>
+
+    <div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">declare</span> <span class="kr">module</span> <span class="dl">'</span><span class="s1">*.png</span><span class="dl">'</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">value</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="k">export</span> <span class="k">default</span> <span class="nx">value</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>修改 <code class="language-plaintext highlighter-rouge">tsconfig.json</code></p>
+
+    <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"include"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"types/**/*.d.ts"</span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="参考说明">参考说明</h2>
+
+<ul>
+  <li><a href="https://www.typescriptlang.org/docs/handbook/modules.html#wildcard-module-declarations">TypeScript: Wildcard module declarations</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2023/08/24/TypeScript%E4%B8%AD%E9%80%9A%E9%85%8D%E7%AC%A6%E5%A3%B0%E6%98%8E.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

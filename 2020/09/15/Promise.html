@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Promise | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Promise" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Promise 对象表示异步操作的最终完成（或失败）及其结果值。" />
+<meta property="og:description" content="Promise 对象表示异步操作的最终完成（或失败）及其结果值。" />
+<link rel="canonical" href="/blog/2020/09/15/Promise.html" />
+<meta property="og:url" content="/blog/2020/09/15/Promise.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-09-15T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Promise" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2020-09-15T00:00:00+00:00","datePublished":"2020-09-15T00:00:00+00:00","description":"Promise 对象表示异步操作的最终完成（或失败）及其结果值。","headline":"Promise","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2020/09/15/Promise.html"},"url":"/blog/2020/09/15/Promise.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Promise</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2020-09-15T00:00:00+00:00" itemprop="datePublished">Sep 15, 2020
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2020"><i>2020</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/javascript"><i>javascript</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Promise 对象表示异步操作的最终完成（或失败）及其结果值。</p>
+
+<!-- vim-markdown-toc GFM -->
+
+<ul>
+  <li><a href="#三种状态">三种状态</a></li>
+  <li><a href="#实例方法">实例方法</a>
+    <ul>
+      <li><a href="#then">then</a></li>
+      <li><a href="#catch">catch</a></li>
+      <li><a href="#finally">finally</a></li>
+    </ul>
+  </li>
+  <li><a href="#链式调用">链式调用</a></li>
+  <li><a href="#静态方法">静态方法</a>
+    <ul>
+      <li><a href="#promiseall">Promise.all</a></li>
+      <li><a href="#promiseallsettled">Promise.allSettled</a></li>
+      <li><a href="#promiserace">Promise.race</a></li>
+      <li><a href="#promiseany">Promise.any</a></li>
+      <li><a href="#promiseresolve">Promise.resolve</a></li>
+      <li><a href="#promisereject">Promise.reject</a></li>
+    </ul>
+  </li>
+  <li><a href="#参考链接">参考链接</a></li>
+</ul>
+
+<!-- vim-markdown-toc -->
+
+<p>Promise 在创建的时候并不知道最终的值，这使得异步方法像同步方法一样返回值，异步方法没有立即返回最终值，而是返回一个在未来使用的 promise 值。</p>
+
+<h2 id="三种状态">三种状态</h2>
+
+<p>Promise 有三种状态：pending(待定)，fulfilled(完成)，rejected(拒绝)。</p>
+
+<ol>
+  <li>当 pending 时，promise 可能切换到 fulfilled 或者 rejected 状态的值。</li>
+  <li>当 fulfilled 时，promise 无法切换到其他状态，且必须有一个不变的 value。</li>
+  <li>当 rejected 时，promise 无法切换到其他状态，且必须有一个不变的 reason。</li>
+</ol>
+
+<p><img src="/blog/images/promises.png" alt="promise" /></p>
+
+<h2 id="实例方法">实例方法</h2>
+
+<h3 id="then">then</h3>
+
+<p>Promise 最重要的方式就是 then 方法，该方法注册了回调，用以接受 Promise 的最终值或 Promise 拒绝的原因。</p>
+
+<p><code class="language-plaintext highlighter-rouge">Promise.prototype.then</code> 方法返回一个新的 Promise 实例，并接收两个参数 onFulfilled（可选），onRejected（可选）。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">p</span><span class="p">.</span><span class="nf">then</span><span class="p">(</span><span class="nx">onFulfilled</span><span class="p">[,</span> <span class="nx">onRejected</span><span class="p">]);</span>
+
+<span class="nx">p</span><span class="p">.</span><span class="nf">then</span><span class="p">(</span><span class="nx">value</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// fulfillment</span>
+<span class="p">},</span> <span class="nx">reason</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// rejection</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h3 id="catch">catch</h3>
+
+<p><code class="language-plaintext highlighter-rouge">Promise.prototype.catch</code> 方法返回一个新的 Promise 实例。catch 方法等同于 then 方法的 onRejected。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">p</span><span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">onRejected</span><span class="p">);</span>
+
+<span class="nx">p</span><span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nf">function </span><span class="p">(</span><span class="nx">reason</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// rejection</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h3 id="finally">finally</h3>
+
+<p><code class="language-plaintext highlighter-rouge">Promise.prototype.finally</code> 方法不管 Promise 状态如何都会执行，该方法的回调函数不接受任何参数。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">p</span><span class="p">.</span><span class="k">finally</span><span class="p">(</span><span class="nf">function </span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// settled (fulfilled or rejected)</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h2 id="链式调用">链式调用</h2>
+
+<p>在多个 Promise 调用的时候，可以通过扁平化的链式调用代替嵌套式的调用，这样可以更加简洁，清晰，易于理解。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 嵌套式调用</span>
+<span class="nf">promise1</span><span class="p">()</span>
+  <span class="p">.</span><span class="nf">then</span><span class="p">(</span><span class="nf">function </span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">promise2</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span>
+      <span class="p">.</span><span class="nf">then</span><span class="p">(</span><span class="nf">function </span><span class="p">(</span><span class="nx">newResult</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nf">promise3</span><span class="p">(</span><span class="nx">newResult</span><span class="p">)</span>
+          <span class="p">.</span><span class="nf">then</span><span class="p">(</span><span class="nf">function </span><span class="p">(</span><span class="nx">finalResult</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="s2">`Got the final result: </span><span class="p">${</span><span class="nx">finalResult</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+          <span class="p">})</span>
+          <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">failureCallback</span><span class="p">);</span>
+      <span class="p">})</span>
+      <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">failureCallback</span><span class="p">);</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">failureCallback</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>在嵌套式调用的时候，每个 Promise 写在一个 .then() 里，类似于递归的回调地狱。而在扁平化的链式调用中，每个 Promise 写在一个连续的 then() 里，每个 then() 方法接受返回下个 Promise 函数。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 扁平化的链式调用，与上面的嵌套式调用等价</span>
+<span class="nf">promise1</span><span class="p">()</span>
+  <span class="p">.</span><span class="nf">then</span><span class="p">(</span><span class="nf">function </span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nf">promise2</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="nf">then</span><span class="p">(</span><span class="nf">function </span><span class="p">(</span><span class="nx">newResult</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nf">promise3</span><span class="p">(</span><span class="nx">newResult</span><span class="p">);</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="nf">then</span><span class="p">(</span><span class="nf">function </span><span class="p">(</span><span class="nx">finalResult</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="s2">`Got the final result: </span><span class="p">${</span><span class="nx">finalResult</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">failureCallback</span><span class="p">);</span>
+
+<span class="c1">// 使用箭头函数省略 return</span>
+<span class="nf">promise1</span><span class="p">()</span>
+  <span class="p">.</span><span class="nf">then</span><span class="p">((</span><span class="nx">result</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nf">promise2</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="nf">then</span><span class="p">((</span><span class="nx">newResult</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nf">promise3</span><span class="p">(</span><span class="nx">newResult</span><span class="p">))</span>
+  <span class="p">.</span><span class="nf">then</span><span class="p">((</span><span class="nx">finalResult</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="s2">`Got the final result: </span><span class="p">${</span><span class="nx">finalResult</span><span class="p">}</span><span class="s2">`</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">failureCallback</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="静态方法">静态方法</h2>
+
+<h3 id="promiseall">Promise.all</h3>
+
+<p>Promise.all([..]) 方法接受一个 Promise 对象数组作为参数。当数组内全部的 Promise 对象成功才会返回一个数组，而失败的时候则返回最先被 reject 状态的值。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">Promise</span><span class="p">.</span><span class="nf">all</span><span class="p">(</span><span class="nx">iterable</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>一个例子：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">p1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nf">setTimeout</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="dl">'</span><span class="s1">foo</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="kd">const</span> <span class="nx">p2</span> <span class="o">=</span> <span class="nb">Promise</span><span class="p">.</span><span class="nf">resolve</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">p3</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">p4</span> <span class="o">=</span> <span class="nb">Promise</span><span class="p">.</span><span class="nf">reject</span><span class="p">(</span><span class="dl">'</span><span class="s1">bar</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="nb">Promise</span><span class="p">.</span><span class="nf">all</span><span class="p">([</span><span class="nx">p1</span><span class="p">,</span> <span class="nx">p2</span><span class="p">,</span> <span class="nx">p3</span><span class="p">]).</span><span class="nf">then</span><span class="p">((</span><span class="nx">values</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">values</span><span class="p">);</span>
+<span class="p">});</span> <span class="c1">// =&gt; ["foo", 3, 42]</span>
+
+<span class="nb">Promise</span><span class="p">.</span><span class="nf">all</span><span class="p">([</span><span class="nx">p1</span><span class="p">,</span> <span class="nx">p2</span><span class="p">,</span> <span class="nx">p3</span><span class="p">,</span> <span class="nx">p4</span><span class="p">]).</span><span class="k">catch</span><span class="p">((</span><span class="nx">reject</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">reject</span><span class="p">);</span>
+<span class="p">});</span> <span class="c1">// =&gt; bar</span>
+</code></pre></div></div>
+
+<h3 id="promiseallsettled">Promise.allSettled</h3>
+
+<p>Promise.allSettled([..]) 方法接受一个 Promise 对象数组作为参数。当数组内全部的 Promise 对象完成或失败才会返回一个数组，每个数组项的状态和值都是一个对象。</p>
+
+<p>Promise.allSettled 是为了解决 Promise.all 的缺陷，Promise.all 的缺陷是只有全部的 Promise 对象都成功了才会返回结果。如果有任意一个 Promise 对象失败了，那么都会进入 catch 异常。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">p1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nf">setTimeout</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="dl">'</span><span class="s1">foo</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="kd">const</span> <span class="nx">p2</span> <span class="o">=</span> <span class="nb">Promise</span><span class="p">.</span><span class="nf">resolve</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">p3</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">p4</span> <span class="o">=</span> <span class="nb">Promise</span><span class="p">.</span><span class="nf">reject</span><span class="p">(</span><span class="dl">'</span><span class="s1">bar</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="nb">Promise</span><span class="p">.</span><span class="nf">allSettled</span><span class="p">([</span><span class="nx">p1</span><span class="p">,</span> <span class="nx">p2</span><span class="p">,</span> <span class="nx">p3</span><span class="p">,</span> <span class="nx">p4</span><span class="p">]).</span><span class="nf">then</span><span class="p">((</span><span class="nx">values</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">values</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="c1">// [</span>
+<span class="c1">//   { status: 'fulfilled', value: 'foo' },</span>
+<span class="c1">//   { status: 'fulfilled', value: 3 },</span>
+<span class="c1">//   { status: 'fulfilled', value: 42 },</span>
+<span class="c1">//   { status: 'rejected', reason: 'bar' },</span>
+<span class="c1">// ];</span>
+</code></pre></div></div>
+
+<h3 id="promiserace">Promise.race</h3>
+
+<p>Promise.race([..]) 参数中的实例最先改变状态，就会立即将该实例的返回值作为 Promise.race([..]) 方法的返回值。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">promise1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nf">setTimeout</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="dl">'</span><span class="s1">one</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="kd">const</span> <span class="nx">promise2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nf">setTimeout</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="dl">'</span><span class="s1">two</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nb">Promise</span><span class="p">.</span><span class="nf">race</span><span class="p">([</span><span class="nx">promise1</span><span class="p">,</span> <span class="nx">promise2</span><span class="p">]).</span><span class="nf">then</span><span class="p">((</span><span class="nx">value</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span> <span class="c1">// two, 都是完成状态，但是第二个会更快</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h3 id="promiseany">Promise.any</h3>
+
+<p>Promise.any([..]) 返回输入中最先成功的 Promise，如果所有的 Promise 都失败，则返回一个 AggregateError 对象。</p>
+
+<p>Promise.any([..]) 跟 Promise.race([..]) 类似，只不过只会接受第一个成功的返回值，而不像 Promise.race([..]) 那样，会接受 reject 状态的返回值。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">promise1</span> <span class="o">=</span> <span class="nb">Promise</span><span class="p">.</span><span class="nf">reject</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">promise2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nf">setTimeout</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="dl">'</span><span class="s1">quick</span><span class="dl">'</span><span class="p">));</span>
+<span class="kd">const</span> <span class="nx">promise3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nf">setTimeout</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="dl">'</span><span class="s1">slow</span><span class="dl">'</span><span class="p">));</span>
+
+<span class="kd">const</span> <span class="nx">promises</span> <span class="o">=</span> <span class="p">[</span><span class="nx">promise1</span><span class="p">,</span> <span class="nx">promise2</span><span class="p">,</span> <span class="nx">promise3</span><span class="p">];</span>
+
+<span class="nb">Promise</span><span class="p">.</span><span class="nf">any</span><span class="p">(</span><span class="nx">promises</span><span class="p">).</span><span class="nf">then</span><span class="p">((</span><span class="nx">value</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">value</span><span class="p">));</span> <span class="c1">// quick，0 会被忽略</span>
+</code></pre></div></div>
+
+<h3 id="promiseresolve">Promise.resolve</h3>
+
+<p>Promise.resolve() 将现有对象转为 Promise 对象。</p>
+
+<p>如果该方法的参数为一个 Promise 对象，则直接返回；如果参数 thenable 对象(即具有 then 方法)，Promise.resolve() 将该对象转为 Promise 对象并立即执行 then 方法；如果参数是一个原始值，或者是一个不具有 then 方法的对象，则 Promise.resolve 方法返回一个新的 Promise 对象，状态为 fulfilled，其参数将会作为 then 方法中 onResolved 回调函数的参数，如果 Promise.resolve 方法不带参数，会直接返回一个 fulfilled 状态的 Promise 对象。</p>
+
+<p>需要注意的是，立即 resolve() 的 Promise 对象，是在本轮“事件循环”（event loop）的结束时执行，而不是在下一轮“事件循环”的开始时。</p>
+
+<h3 id="promisereject">Promise.reject</h3>
+
+<p>Promise.reject() 同样返回一个新的 Promise 对象，状态为 rejected，无论传入任何参数都将作为 reject() 的参数</p>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li>《你不知道的 JavaScriopt（中卷）》</li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">MDN: Promise</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises">MDN: Using promises - JavaScript</a></li>
+  <li><a href="https://promisesaplus.com/">Promise/A+</a></li>
+  <li><a href="https://tc39.es/ecma262/#sec-promise-objects">tc39: Promise Objects</a></li>
+  <li><a href="https://github.com/then/promise">then/promise</a></li>
+  <li><a href="https://github.com/lgwebdream/FE-Interview/issues/29">介绍下 promise 的特性、优缺点，内部是如何实现的，动手实现 Promise #29</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2020/09/15/Promise.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

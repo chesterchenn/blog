@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>数据结构之二叉树 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="数据结构之二叉树" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="由于二叉树的内容比较多，故分开来记录。" />
+<meta property="og:description" content="由于二叉树的内容比较多，故分开来记录。" />
+<link rel="canonical" href="/blog/2018/10/15/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91.html" />
+<meta property="og:url" content="/blog/2018/10/15/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-10-15T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="数据结构之二叉树" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2018-10-15T00:00:00+00:00","datePublished":"2018-10-15T00:00:00+00:00","description":"由于二叉树的内容比较多，故分开来记录。","headline":"数据结构之二叉树","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2018/10/15/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91.html"},"url":"/blog/2018/10/15/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">数据结构之二叉树</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2018-10-15T00:00:00+00:00" itemprop="datePublished">Oct 15, 2018
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2018"><i>2018</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/algorithm"><i>algorithm</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>由于二叉树的内容比较多，故分开来记录。</p>
+
+<h2 id="二叉树binary-tree">二叉树(Binary Tree)</h2>
+
+<p>二叉树是一个有序的树，且每一个结点最多只能拥有两个子结点。二叉树结点的子树有左、右子树区分，不能随意颠倒。即使只有一个子树的情况，也要说明是左、右子树。二叉树具有递归性质。</p>
+
+<h3 id="满二叉树">满二叉树</h3>
+
+<p>满二叉树(Full Binary Tree)是一棵高度为 h 的，且有 2<sup>k+1</sup> - 1 个结点的二叉树。即是每一层的结点都是满的。满二叉树是一棵特殊的完全二叉树。</p>
+
+<h3 id="完全二叉树">完全二叉树</h3>
+
+<p>完全二叉树(Complete Binary Tree)除了最一层，每一层都是满的，最后一层可以有 1 至 2<sup>h</sup>个结点，并且最后一层所有结点都靠近左边。</p>
+
+<h3 id="最优二叉树">最优二叉树</h3>
+
+<p>最优二叉树也称为哈夫曼树，它是一类带权路径长度最短的树。路径是从树中一个结点到另一个结点之间的通路，路径上的分支数目称为路径长度。</p>
+
+<h3 id="平衡二叉树">平衡二叉树</h3>
+
+<p>任意结点的左右子树深度相差不超过1，每结点的平衡度只能为 -1，0 或 1。</p>
+
+<h2 id="二叉树的性质">二叉树的性质</h2>
+
+<ol>
+  <li>二叉树的第 i 层上最多有 2<sup>i-1</sup>个结点(i≥1)。</li>
+  <li>深度为 k 的二叉树最多有 2<sup>k</sup> - 1 个结点(k≥1)。</li>
+  <li>对任意非空二叉树，其叶结点为 n<sub>0</sub>，度为 2 的结点为 n<sub>2</sub>，n<sub>0</sub> = n<sub>2</sub> + 1。</li>
+  <li>具有 n 个结点的完全二叉树，其深度为 ⌊log<sub>2</sub>n⌋ + 1。</li>
+  <li>对一颗 n 个结点的完全二叉树，其结点依次自上而下，自左至右编号，则对于任一结点 i (1 &lt;= i &lt;= n)，则有：
+    <ul>
+      <li>若 i 的双亲为 ⌊i/2⌋（i &gt; 1）</li>
+      <li>若 2i &gt; n，则结点 i 为叶子结点；否则，其左子结点为 2i</li>
+      <li>若 2i + 1 &gt; n，则结点 i 无右子结点；否则，其右子结点为 2i + 1</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="二叉树的遍历">二叉树的遍历</h2>
+
+<p>设二叉树的链表存储结构的结点类型定义如下:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">typeof</span> <span class="k">struct</span> <span class="n">BiTnode</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">data</span><span class="p">;</span>
+  <span class="k">struct</span> <span class="n">BiTnode</span> <span class="o">*</span><span class="n">lchild</span><span class="p">,</span> <span class="o">*</span><span class="n">rchild</span><span class="p">;</span>
+<span class="p">}</span><span class="n">BiTnode</span><span class="p">,</span> <span class="o">*</span><span class="n">BiTree</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="二叉树的先序遍历根-左-右">二叉树的先序遍历(根-&gt;左-&gt;右)</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">PreOrder</span><span class="p">(</span><span class="n">BiTree</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">);</span>   <span class="cm">/* 根结点 */</span>
+    <span class="n">PreOrder</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="p">);</span>     <span class="cm">/* 先序遍历根结点的左子树 */</span>
+    <span class="n">PreOrder</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="p">);</span>     <span class="cm">/* 先序遍历根结点的右子树 */</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="二叉树的中序遍历左-根-右">二叉树的中序遍历(左-&gt;根-&gt;右)</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">InOrder</span><span class="p">(</span><span class="n">BiTree</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">InOrder</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="p">);</span>      <span class="cm">/* 中序遍历根结点的左子树 */</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">);</span>   <span class="cm">/* 根结点 */</span>
+    <span class="n">InOrder</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="p">);</span>      <span class="cm">/* 中序遍历根结点的右子树 */</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="二叉树的后序遍历左-右-根">二叉树的后序遍历(左-&gt;右-&gt;根)</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">PostOrder</span><span class="p">(</span><span class="n">BiTree</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">PostOrder</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="p">);</span>    <span class="cm">/* 后序遍历根结点的左子树 */</span>
+    <span class="n">PostOrder</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="p">);</span>    <span class="cm">/* 后序遍历根结点的右子树 */</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">);</span>   <span class="cm">/* 根结点 */</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="二叉查找树binary-search-tree">二叉查找树(Binary Search Tree)</h2>
+
+<p>二叉查找树(BST)又叫二叉排序树(sorted binary tree)。他们允许快速查找，添加和删除数据项。他们的数据项按照顺序排列，在二叉树中若左，右子树非空，则有：</p>
+
+<ol>
+  <li>左子树上所有的结点的值均小于根结点的值。</li>
+  <li>右子树上所有的结点的值均大于根结点的值。</li>
+  <li>左右子树也是二叉查找树。</li>
+</ol>
+
+<h3 id="二叉查找树的查找">二叉查找树的查找</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="n">node</span> <span class="o">*</span><span class="nf">search</span><span class="p">(</span><span class="k">struct</span> <span class="n">node</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="kt">int</span> <span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="nb">NULL</span> <span class="o">||</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">key</span> <span class="o">==</span> <span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">key</span> <span class="o">&lt;</span> <span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">search</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">key</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">search</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">key</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="二叉查找树的插入">二叉查找树的插入</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="n">node</span> <span class="o">*</span><span class="nf">newNode</span><span class="p">(</span><span class="kt">int</span> <span class="n">item</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">struct</span> <span class="n">node</span> <span class="o">*</span><span class="n">temp</span> <span class="o">=</span> <span class="p">(</span><span class="k">struct</span> <span class="n">node</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">node</span><span class="p">));</span>
+  <span class="n">temp</span><span class="o">-&gt;</span><span class="n">key</span> <span class="o">=</span> <span class="n">item</span><span class="p">;</span>
+  <span class="n">temp</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">=</span> <span class="n">temp</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+  <span class="k">return</span> <span class="n">temp</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">struct</span> <span class="n">node</span> <span class="o">*</span><span class="nf">insert</span><span class="p">(</span><span class="k">struct</span> <span class="n">node</span><span class="o">*</span> <span class="n">node</span><span class="p">,</span> <span class="kt">int</span> <span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">node</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span> <span class="n">newNode</span><span class="p">(</span><span class="n">key</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">key</span> <span class="o">&lt;</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">node</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">=</span> <span class="n">insert</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">key</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">key</span> <span class="o">&gt;</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">node</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="n">insert</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">key</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="n">node</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="二叉查找树的删除">二叉查找树的删除</h3>
+
+<p>二叉查找树的删除有三种情况：</p>
+
+<ol>
+  <li>删除的结点没有子结点(叶结点)</li>
+  <li>删除的结点有一个子结点</li>
+  <li>删除的结点有两个子结点</li>
+</ol>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 返回一个非空二叉查找树的最小结点</span>
+<span class="k">struct</span> <span class="n">node</span> <span class="o">*</span><span class="nf">minValueNode</span><span class="p">(</span><span class="k">struct</span> <span class="n">node</span><span class="o">*</span> <span class="n">node</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">struct</span> <span class="n">node</span><span class="o">*</span> <span class="n">current</span> <span class="o">=</span> <span class="n">node</span><span class="p">;</span>
+  <span class="k">while</span><span class="p">(</span><span class="n">current</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">current</span> <span class="o">=</span> <span class="n">current</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="n">left</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">struct</span> <span class="n">node</span><span class="o">*</span> <span class="nf">deleteNode</span><span class="p">(</span><span class="k">struct</span> <span class="n">node</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="kt">int</span> <span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">key</span> <span class="o">&lt;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">=</span> <span class="n">deleteNode</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">key</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">key</span> <span class="o">&gt;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="n">deleteNode</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">key</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="cm">/* 结点没有子结点或者只有一个子结点 */</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">struct</span> <span class="n">node</span> <span class="o">*</span><span class="n">temp</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">;</span>
+      <span class="n">free</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+      <span class="k">return</span> <span class="n">temp</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">struct</span> <span class="n">node</span> <span class="o">*</span><span class="n">temp</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">;</span>
+      <span class="n">free</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+      <span class="k">return</span> <span class="n">temp</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="cm">/* 结点有两个子结点 */</span>
+    <span class="k">struct</span> <span class="n">node</span><span class="o">*</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">minValueNode</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+    <span class="n">root</span><span class="o">-&gt;</span><span class="n">key</span> <span class="o">=</span> <span class="n">temp</span><span class="o">-&gt;</span><span class="n">key</span><span class="p">;</span>
+    <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="n">deleteNode</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">temp</span><span class="o">-&gt;</span><span class="n">key</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="平衡二叉树self-balancing-tree">平衡二叉树(Self-balancing Tree)</h2>
+
+<p>自平衡二叉搜索树，又叫高度平衡二叉搜索树。AVL 树是第一个被发现的平衡二叉树，所以是最具有代表性的平衡二叉树。在 AVL 树中，左，右子树的高度差最多为 1，且左右子树也均为平衡二叉树。在任何时候，如果他们的高度差超过 1，则会重新进行操作以恢复平衡。在 AVL 树中，每一个维护平衡的结点都叫平衡因子(balance factor/BF)。</p>
+
+<p><code class="language-plaintext highlighter-rouge">Balance factor = heightOfLeftSubtree - heightOfRightSubtree</code></p>
+
+<h3 id="平衡二叉树的旋转">平衡二叉树的旋转</h3>
+
+<p>在 AVL 树，每一步的操作例如插入，删除我们都需要检测 AVL 树中每个结点的平衡因子。如果每个平衡因子都是平衡的，我们结束操作，否则我们使其平衡。我们使用旋转操作来移动左，右子树使树平衡。旋转操作有四种情况：</p>
+
+<pre><code class="language-plain">                            / Left Rotation  (LL Rotation)
+            Single Rotation
+          /                 \ Right Rotation (RR Rotation)
+Rotations
+          \                 / Left Right Rotation (LR Rotation)
+            Double Rotation
+                            \ Right Left Rotation (RL Rotation)
+</code></pre>
+
+  </div><a class="u-url" href="/blog/2018/10/15/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>HTTP2.0 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="HTTP2.0" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="HTTP2.0 新增的特性主要有二进制分帧，多路复用，首部压缩，服务端推送，请求优先级等。" />
+<meta property="og:description" content="HTTP2.0 新增的特性主要有二进制分帧，多路复用，首部压缩，服务端推送，请求优先级等。" />
+<link rel="canonical" href="/blog/2022/10/30/HTTP2.0.html" />
+<meta property="og:url" content="/blog/2022/10/30/HTTP2.0.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-10-30T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="HTTP2.0" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-10-30T00:00:00+00:00","datePublished":"2022-10-30T00:00:00+00:00","description":"HTTP2.0 新增的特性主要有二进制分帧，多路复用，首部压缩，服务端推送，请求优先级等。","headline":"HTTP2.0","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2022/10/30/HTTP2.0.html"},"url":"/blog/2022/10/30/HTTP2.0.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">HTTP2.0</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2022-10-30T00:00:00+00:00" itemprop="datePublished">Oct 30, 2022
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2022"><i>2022</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/http"><i>http</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>HTTP2.0 新增的特性主要有二进制分帧，多路复用，首部压缩，服务端推送，请求优先级等。</p>
+
+<h2 id="二进制分帧">二进制分帧</h2>
+
+<p>HTTP/2 性能增强的核心。HTTP/2 在应用层(HTTP/2)和传输层(TCP or UDP)之间增加一个二进制分帧层，将所有传输的信息分割成更小的消息和帧，并对它们采用二进制格式的编码。</p>
+
+<h2 id="多路复用">多路复用</h2>
+
+<p>在 HTTP/1.1 中，浏览器客户端在同一时间，针对同一域名下的请求有一定数量的限制。超过限制数目的请求会被阻塞。</p>
+
+<p>有了新的分帧机制后，HTTP/2 不再依赖多个 TCP 连接去实现多流并行了。可以在一个连接中发起多重请求，响应信息。</p>
+
+<h2 id="首部压缩">首部压缩</h2>
+
+<p>在 HTTP/1.1 中不支持 HTTP 首部压缩，HTTP/1.1 中则可以使用 SPDY 压缩。而 HTTP/2 则使用了 HPACK 算法，专门为首部压缩而设计的。</p>
+
+<h2 id="服务端推送">服务端推送</h2>
+
+<p>服务端根据客户端的请求，提前返回多个响应，推送额外的资源给客户端。</p>
+
+<h2 id="请求优先级">请求优先级</h2>
+
+<p>把 HTTP 消息分解为很多独立的帧之后，每个流都可以带有一个 31 比特的优先值，有了这个优先值，客户端和服务器就可以在处理不同的流时采取不同的策略，以最优的方式发送流、消息和帧。</p>
+
+<h2 id="http11-与-http10">HTTP1.1 与 HTTP1.0</h2>
+
+<h3 id="缓存处理">缓存处理</h3>
+
+<p>HTTP1.0 主要使用 header <code class="language-plaintext highlighter-rouge">If-Modified-Since</code> 和 <code class="language-plaintext highlighter-rouge">Expires</code> 来做缓存过期判断</p>
+
+<p>HTTP1.1 则引入更多的缓存控制策略：</p>
+
+<ul>
+  <li>Entity tag: 实体标签</li>
+  <li>If-Unmodifed-Since: 比较资源最后的更新时间是否不一致</li>
+  <li>If-Match: 比较 ETag 标签是否一致</li>
+  <li>If-None-Match: 比较 ETag 标签是否不一致</li>
+</ul>
+
+<h3 id="断点续传">断点续传</h3>
+
+<p>HTTP1.1 默认支持断点续传</p>
+
+<h3 id="长连接">长连接</h3>
+
+<p>HTTP1.1 默认支持长连接。<code class="language-plaintext highlighter-rouge">Connection: keep-alive</code></p>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li>《Web 性能权威指南》</li>
+  <li><a href="https://www.zhihu.com/question/34074946">知乎：HTTP/2 相比 1.0 有哪些重大改进？</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2022/10/30/HTTP2.0.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

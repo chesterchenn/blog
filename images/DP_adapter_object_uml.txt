@@ -1,0 +1,20 @@
+@startuml
+!theme plain
+title 对象适配器
+
+interface Target {
+  request()
+}
+class Client
+class Adapter {
+  request()
+}
+class Adaptee {
+  specificRequest()
+}
+
+Target <--l- Client
+Target <|.. Adapter
+Adapter -r--> Adaptee
+
+@enduml

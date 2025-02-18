@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TypeScript中的React Children | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="TypeScript中的React Children" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="原文出自：React Children with TypeScript" />
+<meta property="og:description" content="原文出自：React Children with TypeScript" />
+<link rel="canonical" href="/blog/2021/10/14/typescript%E4%B8%AD%E7%9A%84react-children.html" />
+<meta property="og:url" content="/blog/2021/10/14/typescript%E4%B8%AD%E7%9A%84react-children.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-10-14T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="TypeScript中的React Children" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2021-10-14T00:00:00+00:00","datePublished":"2021-10-14T00:00:00+00:00","description":"原文出自：React Children with TypeScript","headline":"TypeScript中的React Children","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2021/10/14/typescript%E4%B8%AD%E7%9A%84react-children.html"},"url":"/blog/2021/10/14/typescript%E4%B8%AD%E7%9A%84react-children.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">TypeScript中的React Children</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-10-14T00:00:00+00:00" itemprop="datePublished">Oct 14, 2021
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2021"><i>2021</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/typescript"><i>typescript</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/react"><i>react</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>原文出自：<a href="https://www.carlrippon.com/react-children-with-typescript/"><em>React Children with TypeScript</em></a></p>
+
+<p>这里主要介绍了在 TypeScript 中使用 React Children 属性的不同情况。</p>
+
+<h2 id="使用--fc-类型">使用  FC 类型</h2>
+
+<p>我们可以在函数组件上使用一个标准的 React 类型，<code class="language-plaintext highlighter-rouge">FC</code>。<code class="language-plaintext highlighter-rouge">FC</code> 就是函数组件，是在 TypeScript 使用的一个泛型。<code class="language-plaintext highlighter-rouge">React.FC</code> 也可以写作 <code class="language-plaintext highlighter-rouge">React.FunctionComponent</code>。</p>
+
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">Props</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">title</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">Page</span><span class="p">:</span> <span class="nx">React</span><span class="p">.</span><span class="nx">FC</span><span class="o">&lt;</span><span class="nx">Props</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">title</span><span class="p">,</span> <span class="nx">children</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">(</span>
+  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">title</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">h</span><span class="p">&gt;</span>
+    <span class="si">{</span><span class="nx">children</span><span class="si">}</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p>在上面的例子中，我们声明了包含了 title 属性的类型，请注意，children 并没有在 Props 中定义。相反，它已经定义在 FC 泛型中。让我们来看看 FC 大致的定义：</p>
+
+<div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">FC</span><span class="o">&lt;</span><span class="nx">P</span> <span class="o">=</span> <span class="p">{}</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">FunctionComponent</span><span class="o">&lt;</span><span class="nx">P</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="kr">interface</span> <span class="nx">FunctionComponent</span><span class="o">&lt;</span><span class="nx">P</span> <span class="o">=</span> <span class="p">{}</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="p">(</span><span class="na">props</span><span class="p">:</span> <span class="nx">PropsWithChildren</span><span class="o">&lt;</span><span class="nx">P</span><span class="o">&gt;</span><span class="p">,</span> <span class="nx">context</span><span class="p">?:</span> <span class="kr">any</span><span class="p">):</span> <span class="nx">ReactElement</span><span class="o">&lt;</span><span class="kr">any</span><span class="p">,</span> <span class="kr">any</span><span class="o">&gt;</span> <span class="o">|</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="p">...</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">PropsWithChildren</span><span class="o">&lt;</span><span class="nx">P</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">P</span> <span class="o">&amp;</span> <span class="p">{</span> <span class="nx">children</span><span class="p">?:</span> <span class="nx">ReactNode</span> <span class="o">|</span> <span class="kc">undefined</span> <span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="显式定义-children-类型">显式定义 children 类型</h2>
+
+<p>如果我们显式定义 children 类型属性，我们有一个不同选项来定义。</p>
+
+<h3 id="使用-jsxelement">使用 JSX.Element</h3>
+
+<div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">Props</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">title</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">children</span><span class="p">?:</span> <span class="nx">JSX</span><span class="p">.</span><span class="nx">Element</span> <span class="o">|</span> <span class="nx">JSX</span><span class="p">.</span><span class="nx">Element</span><span class="p">[];</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>我们可以 children 为可选类型声明，同时联合类型声明允许多个 children。</p>
+
+<p>使用 JSX.Element 的一个缺点就是不能使用 string，number，boolean 等。虽然可以通过联合类型声明，如以下，但是要处理的情况还是太多了。</p>
+
+<div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">Props</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">title</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">children</span><span class="p">:</span> <span class="nx">JSX</span><span class="p">.</span><span class="nx">Element</span> <span class="o">|</span> <span class="nx">JSX</span><span class="p">.</span><span class="nx">Element</span><span class="p">[]</span> <span class="o">|</span> <span class="kr">string</span> <span class="o">|</span> <span class="kr">string</span><span class="p">[];</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="使用-reactchild">使用 ReactChild</h3>
+
+<p>幸运的，有一个标准的类型叫做 ReactChild 包含了 React elements, string 和 number 等。</p>
+
+<div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">Props</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">title</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">children</span><span class="p">?:</span> <span class="nx">React</span><span class="p">.</span><span class="nx">ReactChild</span> <span class="o">|</span> <span class="nx">ReactChild</span><span class="p">[];</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="使用-reactnode">使用 ReactNode</h3>
+
+<p>虽然 <code class="language-plaintext highlighter-rouge">React.ReactChild | React.ReactChild[]</code> 符合我们广泛性的要求，但是过于冗余，使用 React.ReactNode 会更加简练。</p>
+
+<div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">Props</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">title</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">children</span><span class="p">?:</span> <span class="nx">React</span><span class="p">.</span><span class="nx">ReactNode</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>我们通过查看到 FC 泛型的时候也可以看到是使用 React.ReactNode。</p>
+
+<h2 id="类组件">类组件</h2>
+
+<p>跟函数组件 FC 一样，React.Component 类型一样会包含了 children 属性。</p>
+
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">Props</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">title</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kd">class</span> <span class="nc">Page</span> <span class="kd">extends</span> <span class="nc">React</span><span class="p">.</span><span class="nx">Component</span><span class="o">&lt;</span><span class="nx">Props</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="nf">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return </span><span class="p">(</span>
+      <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">title</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+        <span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">children</span><span class="si">}</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<p>我们可以查看到 children 的类型声明也是 ReacNode。</p>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="https://reactjs.org/docs/composition-vs-inheritance.html">Composition vs Inheritance</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2021/10/14/typescript%E4%B8%AD%E7%9A%84react-children.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

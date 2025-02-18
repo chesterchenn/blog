@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>XSS和CSRF | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="XSS和CSRF" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="关于 XSS 攻击和 CSRF 攻击" />
+<meta property="og:description" content="关于 XSS 攻击和 CSRF 攻击" />
+<link rel="canonical" href="/blog/2019/04/10/XSS%E5%92%8CCSRF.html" />
+<meta property="og:url" content="/blog/2019/04/10/XSS%E5%92%8CCSRF.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-04-10T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="XSS和CSRF" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2019-04-10T00:00:00+00:00","datePublished":"2019-04-10T00:00:00+00:00","description":"关于 XSS 攻击和 CSRF 攻击","headline":"XSS和CSRF","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2019/04/10/XSS%E5%92%8CCSRF.html"},"url":"/blog/2019/04/10/XSS%E5%92%8CCSRF.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">XSS和CSRF</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2019-04-10T00:00:00+00:00" itemprop="datePublished">Apr 10, 2019
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2019"><i>2019</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/network"><i>network</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>关于 XSS 攻击和 CSRF 攻击</p>
+
+<h2 id="xss">XSS</h2>
+
+<p>跨站脚本攻击，Cross Site Script(XSS)，XSS 攻击可以分为 3 类：反射型，存储型，基于 DOM XSS。</p>
+
+<h3 id="反射型">反射型</h3>
+
+<p>反射型 XSS 也叫做 “非持久型 XSS（Non-persistent XSS）”。</p>
+
+<p>反射型 XSS 只是简单地把用户输入的数据“反射”给浏览器。也就是说，黑客往往需要诱使用户“点击”一个恶意链接，才能攻击成功。</p>
+
+<h3 id="存储型">存储型</h3>
+
+<p>存储型 XSS 会把用户输入的数据“存储”在服务器端。这种 XSS 具有很强的稳定性。</p>
+
+<h3 id="基于-dom-xss">基于 DOM XSS</h3>
+
+<p>DOM 型 XSS 跟前两种 XSS 的区别：DOM 型 XSS 攻击中，取出和执行恶意代码由浏览器端完成，属于前端 JavaScript 自身的安全漏洞，而其他两种 XSS 都属于服务端的安全漏洞。</p>
+
+<h2 id="xss-防御">XSS 防御</h2>
+
+<h3 id="httponly">HTTPOnly</h3>
+
+<p>浏览器将禁止页面的 JavaScript 访问带有 HttpOnly 属性的 Cookie。所以我们需要在 http 的响应头 set-cookie 时设置 httpOnly，让浏览器知道不能通过 document.cookie 的方式获取到 cookie 内容。</p>
+
+<h3 id="输入检查">输入检查</h3>
+
+<p>在 XSS 的防御上，输入检查一般是检查用户输入的数据中是否包含一些特殊字符，如果发现存在特殊字符，则将这些字符过滤或者编码。</p>
+
+<h3 id="输出检查">输出检查</h3>
+
+<p>一般来说，除富文本的输出外，在变量输出到 HTML 页面时，可以使用编码或转义的方式来防御 XSS 攻击。</p>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="https://tech.meituan.com/2018/09/27/fe-security.html">美团：前端安全系列（一）：如何防止 XSS 攻击？</a></li>
+  <li><a href="https://tech.meituan.com/2018/10/11/fe-security-csrf.html">美团：前端安全系列（一）：如何防止 CSRF 攻击？</a></li>
+  <li><a href="https://fe.ecool.fun/topic/0958b45c-a5b9-4087-9431-e0ca02ff0597?orderBy=updateTime&amp;order=desc&amp;tagId=21">说说你对 XSS 的了解</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2019/04/10/XSS%E5%92%8CCSRF.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

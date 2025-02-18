@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>阅读图解React笔记3 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="阅读图解React笔记3" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="本文仅仅是阅读 图解 React 原理系列 的笔记，了解更多内容请查看原文链接。" />
+<meta property="og:description" content="本文仅仅是阅读 图解 React 原理系列 的笔记，了解更多内容请查看原文链接。" />
+<link rel="canonical" href="/blog/2022/11/23/%E9%98%85%E8%AF%BB%E5%9B%BE%E8%A7%A3React%E7%AC%94%E8%AE%B03.html" />
+<meta property="og:url" content="/blog/2022/11/23/%E9%98%85%E8%AF%BB%E5%9B%BE%E8%A7%A3React%E7%AC%94%E8%AE%B03.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-11-23T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="阅读图解React笔记3" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-11-23T00:00:00+00:00","datePublished":"2022-11-23T00:00:00+00:00","description":"本文仅仅是阅读 图解 React 原理系列 的笔记，了解更多内容请查看原文链接。","headline":"阅读图解React笔记3","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2022/11/23/%E9%98%85%E8%AF%BB%E5%9B%BE%E8%A7%A3React%E7%AC%94%E8%AE%B03.html"},"url":"/blog/2022/11/23/%E9%98%85%E8%AF%BB%E5%9B%BE%E8%A7%A3React%E7%AC%94%E8%AE%B03.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">阅读图解React笔记3</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2022-11-23T00:00:00+00:00" itemprop="datePublished">Nov 23, 2022
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2022"><i>2022</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/react"><i>react</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>本文仅仅是阅读 <a href="https://7kms.github.io/react-illustration-series/">图解 React 原理系列</a> 的笔记，了解更多内容请查看原文链接。</p>
+
+<p>React 的启动过程。</p>
+
+<!-- vim-markdown-toc GFM -->
+
+<ul>
+  <li><a href="#3-种启动方式">3 种启动方式</a></li>
+  <li><a href="#启动流程">启动流程</a>
+    <ul>
+      <li><a href="#创建全局对象">创建全局对象</a></li>
+      <li><a href="#创建-reactdomroot-对象">创建 ReactDOMRoot 对象</a></li>
+      <li><a href="#总结">总结</a></li>
+      <li><a href="#react-18">React 18</a></li>
+    </ul>
+  </li>
+  <li><a href="#创建-fiberroot">创建 FiberRoot</a>
+    <ul>
+      <li><a href="#创建-hostrootfiber">创建 HostRootFiber</a></li>
+    </ul>
+  </li>
+  <li><a href="#调用更新入口">调用更新入口</a></li>
+  <li><a href="#总结-1">总结</a></li>
+  <li><a href="#参考链接">参考链接</a></li>
+</ul>
+
+<!-- vim-markdown-toc -->
+
+<h2 id="3-种启动方式">3 种启动方式</h2>
+
+<ol>
+  <li>
+    <p>legacy 模式：当前 React App 使用的方式。可能不支持新功能（concurrent 支持的所有功能）</p>
+
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">ReactDOM</span><span class="p">.</span><span class="nf">render</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">App</span> <span class="o">/&gt;</span><span class="p">,</span> <span class="nb">document</span><span class="p">.</span><span class="nf">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">root</span><span class="dl">'</span><span class="p">),</span> <span class="p">(</span><span class="nx">dom</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{});</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Blocking 模式：它仅提供了 concurrent 模式的小部分功能，作为迁移到 concurrent 模式的第一个步骤。</p>
+
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 创建 ReactDOMRoot 对象</span>
+<span class="kd">const</span> <span class="nx">reactDOMBlockingRoot</span> <span class="o">=</span> <span class="nx">ReactDOM</span><span class="p">.</span><span class="nf">createBlockingRoot</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nf">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">id</span><span class="dl">'</span><span class="p">));</span>
+<span class="nx">reactDOMBlockingRoot</span><span class="p">.</span><span class="nf">render</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">App</span> <span class="o">/&gt;</span><span class="p">);</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Concurrent 模式：目前实验中，未来稳定之后，打算作为 React 的模式开发模式，这个模式开启所有新功能。</p>
+
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 创建 ReactDOMRoot 对象</span>
+<span class="kd">const</span> <span class="nx">ReactDOMRoot</span> <span class="o">=</span> <span class="nx">ReactDOMRoot</span><span class="p">.</span><span class="nf">createRoot</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nf">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">id</span><span class="dl">'</span><span class="p">));</span>
+<span class="nx">ReactDOMRoot</span><span class="p">.</span><span class="nf">render</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">App</span> <span class="o">/&gt;</span><span class="p">);</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="启动流程">启动流程</h2>
+
+<h3 id="创建全局对象">创建全局对象</h3>
+
+<p>以上 3 种模式，在 React 初始化的时候，都会创建 3 个全局对象。</p>
+
+<ol>
+  <li>
+    <p>ReactDOMRoot</p>
+
+    <p>属于 react-dom 包，该对象暴露 <code class="language-plaintext highlighter-rouge">render</code>, <code class="language-plaintext highlighter-rouge">unmount</code> 等方法，通过调用该实例的 render 方法，可以引导 react 应用的启动。</p>
+  </li>
+  <li>
+    <p>FiberRoot</p>
+
+    <p>属于 react-reconciler 包，作为 react-reconciler 在运行过程中的全局上下文，保存 fiber 构建过程中所依赖的全局状态。</p>
+
+    <p>大部分实例变量来存储 fiber 循环结构过程中的各种状态。react 应用内部，可以根据这些实例变量的值，控制执行逻辑。</p>
+  </li>
+  <li>
+    <p>HostRootFiber</p>
+
+    <p>属于 react-reconciler 包，这是 react 应用中的第一个 Fiber 对象，是 Fiber 树的根节点，节点的类型是 HostRoot。</p>
+  </li>
+</ol>
+
+<p>这一过程是从 react-dom 包发起，内部调用了 react-reconciler 包，核心流程如下：</p>
+
+<p><img src="/blog/images/react-function-call.webp" alt="" /></p>
+
+<h3 id="创建-reactdomroot-对象">创建 ReactDOMRoot 对象</h3>
+
+<p>由于 3 种模式启动的 API 有所不同，所以对应了 3 种方式，最终都 new 一个 ReactDOMRoot 的实例。</p>
+
+<p>对应也有 3 种 RootTag。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// react-reconciler/src/ReactRootTag.js</span>
+<span class="k">export</span> <span class="nx">type</span> <span class="nx">RootTag</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">|</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">2</span><span class="p">;</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">LegacyRoot</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">BlockingRoot</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">ConcurrentRoot</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="总结">总结</h3>
+
+<p>ReactDOMRoot 和 ReactDOMBlockingRoot 对象上的原型都有 render 和 unmount 的方法。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">ReactDOMRoot</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">render</span> <span class="o">=</span> <span class="nx">ReactDOMBlockingRoot</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">render</span> <span class="o">=</span> <span class="nf">function </span><span class="p">(</span>
+  <span class="nx">children</span><span class="p">:</span> <span class="nx">ReactNodeList</span><span class="p">,</span>
+<span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">root</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_internalRoot</span><span class="p">;</span>
+  <span class="nf">updateContainer</span><span class="p">(</span><span class="nx">children</span><span class="p">,</span> <span class="nx">root</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="nx">ReactDOMRoot</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">unmount</span> <span class="o">=</span> <span class="nx">ReactDOMBlockingRoot</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">unmount</span> <span class="o">=</span> <span class="nf">function </span><span class="p">():</span> <span class="k">void</span> <span class="p">{</span>
+  <span class="nf">updateContainer</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">root</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nf">unmarkContainerAsRoot</span><span class="p">(</span><span class="nx">container</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>ReactDOMRoot 和 ReactDOMBlockingRoot 有相同的特性</p>
+
+<ol>
+  <li>调用 createRootImpl 创建 fiberRoot 对象，并将其挂载到 this._internalRoot 上。</li>
+  <li>原型上有 render 和 unmount 方法，且内部都会调用 updateContainer 进行更新。</li>
+</ol>
+
+<p>再看看 createRootImpl</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">createRootImpl</span><span class="p">(</span><span class="nx">container</span><span class="p">:</span> <span class="nx">Container</span><span class="p">,</span> <span class="nx">tag</span><span class="p">:</span> <span class="nx">RootTag</span><span class="p">,</span> <span class="nx">options</span><span class="p">:</span> <span class="k">void</span> <span class="o">|</span> <span class="nx">RootOptions</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">hydrate</span> <span class="o">=</span> <span class="nx">options</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="nx">options</span><span class="p">.</span><span class="nx">hydrate</span> <span class="o">===</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">hydrationCallbacks</span> <span class="o">=</span> <span class="p">(</span><span class="nx">options</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="nx">options</span><span class="p">.</span><span class="nx">hydrationOptions</span><span class="p">)</span> <span class="o">||</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">mutableSources</span> <span class="o">=</span>
+    <span class="p">(</span><span class="nx">options</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span>
+      <span class="nx">options</span><span class="p">.</span><span class="nx">hydrationOptions</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span>
+      <span class="nx">options</span><span class="p">.</span><span class="nx">hydrationOptions</span><span class="p">.</span><span class="nx">mutableSources</span><span class="p">)</span> <span class="o">||</span>
+    <span class="kc">null</span><span class="p">;</span>
+
+  <span class="c1">// 创建 fiberRoot</span>
+  <span class="kd">const</span> <span class="nx">root</span> <span class="o">=</span> <span class="nf">createContainer</span><span class="p">(</span><span class="nx">container</span><span class="p">,</span> <span class="nx">tag</span><span class="p">,</span> <span class="nx">hydrate</span><span class="p">,</span> <span class="nx">hydrationCallbacks</span><span class="p">);</span>
+  <span class="c1">// 标记 dom 对象，把 dom 和 fiber 对象关联起来</span>
+  <span class="nf">markContainerAsRoot</span><span class="p">(</span><span class="nx">root</span><span class="p">.</span><span class="nx">current</span><span class="p">,</span> <span class="nx">container</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">containerNodeType</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">nodeType</span><span class="p">;</span>
+
+  <span class="k">if </span><span class="p">(</span><span class="nx">enableEagerRootListeners</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 省略部分代码</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="c1">// 省略部分代码</span>
+  <span class="p">}</span>
+
+  <span class="k">if </span><span class="p">(</span><span class="nx">mutableSources</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 省略部分代码</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="nx">root</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="react-18">React 18</h3>
+
+<p>React 在 v18 中不再提供三种开发模式，而是以“是否使用并发特性”作为“是否开启并发更新”的依据。</p>
+
+<p>具体来说，开发者在 v18 中统一使用 ReactDOM.createRoot 创建应用。</p>
+
+<h2 id="创建-fiberroot">创建 FiberRoot</h2>
+
+<p>无论在哪种模式下，在 ReactDOMRoot 的创建过程中，都会调用 createRootImpl，在 createRootImpl 里面，通过调用 createContainer 创建 fiberRoot 对象。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">export</span> <span class="kd">function</span> <span class="nf">createContainer</span><span class="p">(</span>
+  <span class="nx">containerInfo</span><span class="p">:</span> <span class="nx">Container</span><span class="p">,</span>
+  <span class="nx">tag</span><span class="p">:</span> <span class="nx">RootTag</span><span class="p">,</span>
+  <span class="nx">hydrate</span><span class="p">:</span> <span class="nx">boolean</span><span class="p">,</span>
+  <span class="nx">hydrationCallbacks</span><span class="p">:</span> <span class="kc">null</span> <span class="o">|</span> <span class="nx">SuspenseHydrationCallbacks</span><span class="p">,</span>
+<span class="p">):</span> <span class="nx">OpaqueRoot</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nf">createFiberRoot</span><span class="p">(</span><span class="nx">containerInfo</span><span class="p">,</span> <span class="nx">tag</span><span class="p">,</span> <span class="nx">hydrate</span><span class="p">,</span> <span class="nx">hydrationCallbacks</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="kd">function</span> <span class="nf">createFiberRoot</span><span class="p">(</span>
+  <span class="nx">containerInfo</span><span class="p">:</span> <span class="nx">any</span><span class="p">,</span>
+  <span class="nx">tag</span><span class="p">:</span> <span class="nx">RootTag</span><span class="p">,</span>
+  <span class="nx">hydrate</span><span class="p">:</span> <span class="nx">boolean</span><span class="p">,</span>
+  <span class="nx">hydrationCallbacks</span><span class="p">:</span> <span class="kc">null</span> <span class="o">|</span> <span class="nx">SuspenseHydrationCallbacks</span><span class="p">,</span>
+<span class="p">):</span> <span class="nx">FiberRoot</span> <span class="p">{</span>
+  <span class="c1">// 创建 fiberRoot 对象</span>
+  <span class="kd">const</span> <span class="nx">root</span><span class="p">:</span> <span class="nx">FiberRoot</span> <span class="o">=</span> <span class="p">(</span><span class="k">new</span> <span class="nc">FiberRootNode</span><span class="p">(</span><span class="nx">containerInfo</span><span class="p">,</span> <span class="nx">tag</span><span class="p">,</span> <span class="nx">hydrate</span><span class="p">):</span> <span class="nx">any</span><span class="p">);</span>
+
+  <span class="kd">const</span> <span class="nx">uninitializedFiber</span> <span class="o">=</span> <span class="nf">createHostRootFiber</span><span class="p">(</span><span class="nx">tag</span><span class="p">);</span>
+  <span class="nx">root</span><span class="p">.</span><span class="nx">current</span> <span class="o">=</span> <span class="nx">uninitializedFiber</span><span class="p">;</span>
+  <span class="nx">uninitializedFiber</span><span class="p">.</span><span class="nx">stateNode</span> <span class="o">=</span> <span class="nx">root</span><span class="p">;</span>
+
+  <span class="nf">initializeUpdateQueue</span><span class="p">(</span><span class="nx">uninitializedFiber</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="nx">root</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>在创建 HostRootFiber 时，其中 fiber.mode 属性会与 3 种 RootTag 关联起来。</p>
+
+<h3 id="创建-hostrootfiber">创建 HostRootFiber</h3>
+
+<p>fiber 树中的所有节点的 mode 都会和 HostRootFiber.mode 一致。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">export</span> <span class="kd">function</span> <span class="nf">createHostRootFiber</span><span class="p">(</span><span class="nx">tag</span><span class="p">:</span> <span class="nx">RootTag</span><span class="p">):</span> <span class="nx">Fiber</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">mode</span><span class="p">;</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">tag</span> <span class="o">===</span> <span class="nx">ConcurrentRoot</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">mode</span> <span class="o">=</span> <span class="nx">ConcurrentMode</span> <span class="o">|</span> <span class="nx">BlockingMode</span> <span class="o">|</span> <span class="nx">StrictMode</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if </span><span class="p">(</span><span class="nx">tag</span> <span class="o">===</span> <span class="nx">BlockingRoot</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">mode</span> <span class="o">=</span> <span class="nx">BlockingMode</span> <span class="o">|</span> <span class="nx">StrictMode</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">mode</span> <span class="o">=</span> <span class="nx">NoMode</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nf">createFiber</span><span class="p">(</span><span class="nx">HostRoot</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">mode</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="调用更新入口">调用更新入口</h2>
+
+<p>从上面的代码可以看出，3 种模式调用更新容器都是执行了 updateContainer。而在 legacy 模式下会先调用 unbatchedUpdates，更改执行上下文为 LegacyUnbatchedContext。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// react-reconciler/src/ReactFiberReconciler.js</span>
+<span class="k">export</span> <span class="kd">function</span> <span class="nf">updateContainer</span><span class="p">(</span>
+  <span class="nx">element</span><span class="p">:</span> <span class="nx">ReactNodeList</span><span class="p">,</span>
+  <span class="nx">container</span><span class="p">:</span> <span class="nx">OpaqueRoot</span><span class="p">,</span>
+  <span class="nx">parentComponent</span><span class="p">:</span> <span class="p">?</span><span class="nx">React$Component</span><span class="o">&lt;</span><span class="nx">any</span><span class="p">,</span> <span class="nx">any</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="nx">callback</span><span class="p">:</span> <span class="p">?</span><span class="nb">Function</span><span class="p">,</span>
+<span class="p">):</span> <span class="nx">Lane</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">current</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">current</span><span class="p">;</span>
+  <span class="c1">// 获取当前时间戳，计算本次更新的优先级</span>
+  <span class="kd">const</span> <span class="nx">eventTime</span> <span class="o">=</span> <span class="nf">requestEventTime</span><span class="p">();</span>
+  <span class="kd">const</span> <span class="nx">lane</span> <span class="o">=</span> <span class="nf">requestUpdateLane</span><span class="p">(</span><span class="nx">current</span><span class="p">);</span>
+
+  <span class="kd">const</span> <span class="nx">context</span> <span class="o">=</span> <span class="nf">getContextForSubtree</span><span class="p">(</span><span class="nx">parentComponent</span><span class="p">);</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">container</span><span class="p">.</span><span class="nx">context</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">container</span><span class="p">.</span><span class="nx">context</span> <span class="o">=</span> <span class="nx">context</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">container</span><span class="p">.</span><span class="nx">pendingContext</span> <span class="o">=</span> <span class="nx">context</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kd">const</span> <span class="nx">update</span> <span class="o">=</span> <span class="nf">createUpdate</span><span class="p">(</span><span class="nx">eventTime</span><span class="p">,</span> <span class="nx">lane</span><span class="p">);</span>
+  <span class="nx">update</span><span class="p">.</span><span class="nx">payload</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">element</span> <span class="p">};</span>
+
+  <span class="nx">callback</span> <span class="o">=</span> <span class="nx">callback</span> <span class="o">===</span> <span class="kc">undefined</span> <span class="p">?</span> <span class="kc">null</span> <span class="p">:</span> <span class="nx">callback</span><span class="p">;</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">callback</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">update</span><span class="p">.</span><span class="nx">callback</span> <span class="o">=</span> <span class="nx">callback</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nf">enqueueUpdate</span><span class="p">(</span><span class="nx">current</span><span class="p">,</span> <span class="nx">update</span><span class="p">);</span>
+
+  <span class="c1">// 进入 reconciler 运作流程中的输入环节</span>
+  <span class="nf">scheduleUpdateOnFiber</span><span class="p">(</span><span class="nx">current</span><span class="p">,</span> <span class="nx">lane</span><span class="p">,</span> <span class="nx">eventTime</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">lane</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>在前文 reconciler 运作流程中，分析过 scheduleUpdateOnFiber 是输入阶段的入口函数。</p>
+
+<p>到此，通过调用 react-dom 的 render，react 内部经过一系列运作，完成了初始化，并且进入了 reconciler 运作的第一个阶段。</p>
+
+<h2 id="总结-1">总结</h2>
+
+<p>本章节介绍了 react 应用的 3 种启动方式。分析了启动后创建了 3 个关键对象, 并绘制了对象在内存中的引用关系。启动过程最后调用 updateContainer 进入 react-reconciler 包,进而调用 schedulerUpdateOnFiber 函数, 与 reconciler 运作流程中的输入阶段相衔接。</p>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="https://github.com/7kms/react-illustration-series">github: react-illustration-series</a></li>
+  <li><a href="https://7kms.github.io/react-illustration-series/main/reconciler-workflow">图解 React: 运作流程</a></li>
+  <li><a href="https://github.com/facebook/react">github: react</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2022/11/23/%E9%98%85%E8%AF%BB%E5%9B%BE%E8%A7%A3React%E7%AC%94%E8%AE%B03.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

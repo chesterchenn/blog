@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TCP/IP协议 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="TCP/IP协议" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="TCP/IP 协议包含两个核心协议：TCP（传输控制协议）和 IP（网际协议）。TCP 包含了逻辑编址，路由选择，域名解析，错误检测和流量控制等重要特征。" />
+<meta property="og:description" content="TCP/IP 协议包含两个核心协议：TCP（传输控制协议）和 IP（网际协议）。TCP 包含了逻辑编址，路由选择，域名解析，错误检测和流量控制等重要特征。" />
+<link rel="canonical" href="/blog/2021/08/17/TCP-IP%E5%8D%8F%E8%AE%AE.html" />
+<meta property="og:url" content="/blog/2021/08/17/TCP-IP%E5%8D%8F%E8%AE%AE.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-08-17T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="TCP/IP协议" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2021-08-17T00:00:00+00:00","datePublished":"2021-08-17T00:00:00+00:00","description":"TCP/IP 协议包含两个核心协议：TCP（传输控制协议）和 IP（网际协议）。TCP 包含了逻辑编址，路由选择，域名解析，错误检测和流量控制等重要特征。","headline":"TCP/IP协议","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2021/08/17/TCP-IP%E5%8D%8F%E8%AE%AE.html"},"url":"/blog/2021/08/17/TCP-IP%E5%8D%8F%E8%AE%AE.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">TCP/IP协议</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-08-17T00:00:00+00:00" itemprop="datePublished">Aug 17, 2021
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2021"><i>2021</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/network"><i>network</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>TCP/IP 协议包含两个核心协议：TCP（传输控制协议）和 IP（网际协议）。TCP 包含了逻辑编址，路由选择，域名解析，错误检测和流量控制等重要特征。</p>
+
+<h2 id="重要特性">重要特性</h2>
+
+<ol>
+  <li>
+    <p>逻辑编址</p>
+
+    <p>每一块网卡在出厂时就由厂家分配了一个独一无二的永久性的物理地址。在 Internet 中，为每台连入的计算机分类一个逻辑地址，这个逻辑地址被称为 IP 地址。</p>
+  </li>
+  <li>
+    <p>路由选择</p>
+
+    <p>在 TCP/IP 中包含了专门用于定义路由器如何选择网络路径的协议，即 IP 数据包的路由选择。</p>
+  </li>
+  <li>
+    <p>域名解析</p>
+
+    <p>将域名映射为 IP 地址的操作称为域名解析。</p>
+  </li>
+  <li>
+    <p>错误检测和流量控制</p>
+
+    <p>TCP/IP 具有分组交换确保数据在网络上可靠传递的特性。</p>
+  </li>
+</ol>
+
+<h2 id="分层模型">分层模型</h2>
+
+<p><img src="/blog/images/tcp_ip_layer.webp" alt="tcp_ip_layer" /></p>
+
+<p>TCP/IP 分层模型由 4 个层次构成，即应用层、传输层、网际层和网络接口层。</p>
+
+<ol>
+  <li>
+    <p>应用层。用户调用应用程序来访问 TCP/IP 互连网络，应用程序负责发送和接受数据。</p>
+  </li>
+  <li>
+    <p>传输层。传输层的基本任务是提供应用程序之间的通信服务。这种通信又称为端到端的通信。在传输层与网际层之间传递的对象是传输层分组。</p>
+  </li>
+  <li>
+    <p>网际层。又称 IP 层，主要处理机器之间的通信问题。它接受传输层的请求，传输某个具有目的地址信息的分组。</p>
+  </li>
+  <li>
+    <p>网络接口层。处于 TCP/IP 协议层之下，负责接收 IP 数据报，并把数据报通过选定的网络发送出去。</p>
+  </li>
+</ol>
+
+<h2 id="网际层协议">网际层协议</h2>
+
+<h3 id="ip">IP</h3>
+
+<p>IP 所提供的服务通常被认为是无连接的（connectionless）和不可靠的（unreliable）。</p>
+
+<p>IP 的主要功能包括将上层数据（如 TCP、UDP 数据）或同层的其他数据（如 ICMP 数据）封装到 IP 数据报中；将 IP 数据报传送到最终目的地；为了使数据能够在链路层进行传输，对数据进行分段；确定数据报到达其他网络中的目的地路径。</p>
+
+<h3 id="arp-和-rarp">ARP 和 RARP</h3>
+
+<p>地址解析协议（Address Resolution Protocol, ARP）和反地址解析协议（RARP）是网际层另一个重要协议。ARP 的作用是将 IP 地址转换为物理地址，RARP 的作用是将物理地址转换为 IP 地址。</p>
+
+<h3 id="icmp">ICMP</h3>
+
+<p>Internet 控制信息协议（Internet Control Message Protocol, ICMP），是专门用于发送差错报文的协议。ICMP 定义了 5 种差错报文（源抑制、超时、目的不可达、重定向和要求分段）和 4 种信息报文（回应请求、回应应答、地址屏蔽码请求和地址屏蔽码应答）。IP 在需要发送一个差错报文时要使用 ICMP，而 ICMP 也是利用 IP 来传送报文的。ICMP 也可以用于测试 Internet，例如 Ping 就是利用 ICMP 报文进行目标是否可达测试。</p>
+
+<h2 id="传输层协议">传输层协议</h2>
+
+<h3 id="tcp">TCP</h3>
+
+<p>TCP（Transmission Control Protocol，传输控制协议），它在 IP 提供的不可靠数据服务的基础上为应用程序提供了一个可靠的、面向连接的、全双工的数据传输服务。</p>
+
+<p>每次 HTTP 请求都会有一次通道，每次通道都会建立三次握手四次挥手。</p>
+
+<h3 id="三次握手">三次握手</h3>
+
+<p>利用 TCP 在源主机和目标主机之间建立连接操作时，需要通过三次握手进行确认。</p>
+
+<pre><code class="language-plain">+--------+                                +--------+
+|        | 1 ====      SYN SEQ=X     ===&gt; |        |
+| Client | 2 &lt;=== ACK X+1, SYN SEQ=Y ==== | Server |
+|        | 3 ====       ACK Y+1      ===&gt; |        |
++--------+                                +--------+
+</code></pre>
+
+<p>序列号的作用是使得一个 TCP 接收端可丢弃重复的报文段，记录以杂乱次序到达的报文段。因为 TCP 使用 IP 来传输报文段，而 IP 不提供重复消除或者保证次序正确的功能。另一方面，TCP 是一个字节流协议，绝不会以杂乱的次序给上层程序发送数据。因此 TCP 接收端会被迫先保持大序列号的数据不交给应用程序，直到缺失的小序列号的报文段被填满。</p>
+
+<p>一个完整的 TCP 连接是双向和对称的，数据可以在两个方向上平等地流动。给上层应用程序提供一种双工服务。一旦建立了一个连接，这个连接的一个方向上的每个 TCP 报文段都包含了相反方向上的报文段的一个 ACK。</p>
+
+<h3 id="四次挥手">四次挥手</h3>
+
+<pre><code class="language-plain">+--------+                           +--------+
+|        |        FIN=1,seq=u        |        |
+|        +--------------------------&gt;|        |
+|        |                           |        |
+|        |    ACK=1,seq=v,ack=u+1    |        |
+|        |&lt;--------------------------+        |
+| Client |                           | Server |
+|        | FIN=1,ACK=1,seq=w,ack=u+1 |        |
+|        |&lt;--------------------------+        |
+|        |                           |        |
+|        |    ACK=1,seq=u+1,ack=w+1  |        |
+|        +--------------------------&gt;|        |
+|        |                           |        |
++--------+                           +--------+
+</code></pre>
+
+<p>上图符号：</p>
+
+<ul>
+  <li>FIN: 连接终止符</li>
+  <li>seq: 发送第一个字节的序号</li>
+  <li>ACK: 确认报文段</li>
+  <li>ack: 确认号。希望收到的下一个数据的第一个字节的序号</li>
+</ul>
+
+<p>由于 TCP 的半关闭特性，TCP 提供了连接的一端在结束它的发送后还能接受来自另一端的能力。</p>
+
+<p>任何一方都可以在数据传送结束后发出连接释放的通知，待对方确认后进入并关闭状态。当另一方也没有数据再发送的时候，则发出连接释放通知，对方确认后就完全关闭了 TCP 连接。</p>
+
+<h3 id="udp">UDP</h3>
+
+<p>用户数据报协议（User Datagram Protocol, UDP）是一种不可靠的、无连接的协议。UDP 有助于提高传输的速率。</p>
+
+<h2 id="ip-地址">IP 地址</h2>
+
+<p>每个 IP 地址都由 4 个小于 256 的数字组成，数字之间用“.”分开。IP 地址可分为 5 类：A 类、B 类、C 类、D 类和 E 类。</p>
+
+<p><img src="/blog/images/ip_address.webp" alt="ip_address" /></p>
+
+<p>在 IP 地址中，全 0 代表的是网络，全 1 代表的是广播。</p>
+
+<h3 id="子网掩码">子网掩码</h3>
+
+<p>网络软件和路由器使用子网掩码（Subnet Mask）来识别报文是仅存在网络内部还是被路由转发到其他地方。</p>
+
+<p>在一个字段内，1 表明一个字段包含所有或部分网络地址，0 表明主机地址位置。最常用的 C 类地址使用前 3 个字节来识别网络，最后一个字节识别主机。因此子网掩码是 255.255.255.0</p>
+
+<p>为了避免 IP 浪费，出现了允许应用不同大小的子网掩码来对 IP 地址空间进行子网划分的解决方案，称为可变长子网掩码（VLSM）。就是在 IP 地址后面加上 “/网络号及子网络号编码地址位数”。如 193.168.125.0/27 表示前 27 位表示网络号。</p>
+
+<h2 id="参考连接">参考连接</h2>
+
+<ul>
+  <li>《软件设计师教程》</li>
+  <li><a href="https://zhuanlan.zhihu.com/p/29287795">图解 IP 协议（一） IP 协议原理与实践</a></li>
+  <li><a href="https://segmentfault.com/a/1190000039165592">关于 TCP 三次握手和四次挥手，满分回答在此</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2021/08/17/TCP-IP%E5%8D%8F%E8%AE%AE.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

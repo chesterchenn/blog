@@ -1,0 +1,31 @@
+@startuml
+!theme plain
+skinparam classAttributeIconSize 0
+
+abstract class Component {
+  {abstract} methodA()
+}
+
+class ConcreteComponent {
+  methodA()
+}
+
+abstract class Decorator {
+  -component
+}
+
+class ConcreteDecoratorA {
+  methodA()
+}
+
+class ConcreteDecoratorB {
+  methodA()
+}
+
+Component <|-- ConcreteComponent
+Component <|-- Decorator
+Decorator o-- Component
+Decorator <|-- ConcreteDecoratorA
+Decorator <|-- ConcreteDecoratorB
+
+@end uml

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>图片宽度 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="图片宽度" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="如何计算元素/图片的宽度，以及一些特殊的图片处理及计算。" />
+<meta property="og:description" content="如何计算元素/图片的宽度，以及一些特殊的图片处理及计算。" />
+<link rel="canonical" href="/blog/2023/04/02/%E5%9B%BE%E7%89%87%E5%AE%BD%E5%BA%A6.html" />
+<meta property="og:url" content="/blog/2023/04/02/%E5%9B%BE%E7%89%87%E5%AE%BD%E5%BA%A6.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-04-02T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="图片宽度" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-04-02T00:00:00+00:00","datePublished":"2023-04-02T00:00:00+00:00","description":"如何计算元素/图片的宽度，以及一些特殊的图片处理及计算。","headline":"图片宽度","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2023/04/02/%E5%9B%BE%E7%89%87%E5%AE%BD%E5%BA%A6.html"},"url":"/blog/2023/04/02/%E5%9B%BE%E7%89%87%E5%AE%BD%E5%BA%A6.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">图片宽度</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2023-04-02T00:00:00+00:00" itemprop="datePublished">Apr 2, 2023
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2023"><i>2023</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/css"><i>css</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/javascript"><i>javascript</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>如何计算元素/图片的宽度，以及一些特殊的图片处理及计算。</p>
+
+<h2 id="getboundingclientrect">getBoundingClientRect</h2>
+
+<p><code class="language-plaintext highlighter-rouge">Element.getBoundingClientRect()</code> 返回一个 <a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMRect">DOMRect</a> 对象，并提供了该元素的大小信息以及相对 viewport 的相对位置。</p>
+
+<div style="text-align: center">
+  <img src="/blog/images/rect-box.svg" alt="" class="rect-img" />
+</div>
+
+<ul>
+  <li>left/x: 元素左侧与视口左侧的距离</li>
+  <li>top/y: 元素顶部与视口顶部的距离</li>
+  <li>right: 元素右侧与视口左侧的距离</li>
+  <li>bottom: 元素底部与视口顶部的距离</li>
+  <li>width: 元素的宽度</li>
+  <li>height: 元素的高度</li>
+</ul>
+
+<p>来自 MDN 一个简单的 DOMRect 示例：</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;style&gt;</span>
+  <span class="nc">.rect</span> <span class="p">{</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">220px</span><span class="p">;</span>
+    <span class="nl">height</span><span class="p">:</span> <span class="m">120px</span><span class="p">;</span>
+    <span class="nl">background</span><span class="p">:</span> <span class="m">#1ba784</span><span class="p">;</span>
+    <span class="nl">margin</span><span class="p">:</span> <span class="m">0</span> <span class="nb">auto</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="nt">&lt;/style&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"rect"</span><span class="nt">&gt;&lt;/div&gt;</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">elem</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nf">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">.rect</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">rect</span> <span class="o">=</span> <span class="nx">elem</span><span class="p">.</span><span class="nf">getBoundingClientRect</span><span class="p">();</span>
+<span class="k">for </span><span class="p">(</span><span class="kd">const</span> <span class="nx">key</span> <span class="k">in</span> <span class="nx">rect</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if </span><span class="p">(</span><span class="k">typeof</span> <span class="nx">rect</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">!==</span> <span class="dl">'</span><span class="s1">function</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">para</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nf">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">p</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nx">para</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="nx">key</span><span class="p">}</span><span class="s2"> : </span><span class="p">${</span><span class="nx">rect</span><span class="p">[</span><span class="nx">key</span><span class="p">]}</span><span class="s2">`</span><span class="p">;</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nf">appendChild</span><span class="p">(</span><span class="nx">para</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<iframe src="https://chesterchenn.github.io/embed/rect_basic.html" width="100%" height="450px"></iframe>
+
+<h2 id="图片宽度">图片宽度</h2>
+
+<p>当直接查询一个图片的大小信息，会得到 <code class="language-plaintext highlighter-rouge">width: 0; height: 0</code>，我们请求上图中的信息。</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">style=</span><span class="s">"text-align: center"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"/blog/images/rect-box.svg"</span> <span class="na">alt=</span><span class="s">""</span> <span class="na">class=</span><span class="s">"rect-img"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">box</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nf">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">.rect-img</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">rect</span> <span class="o">=</span> <span class="nx">box</span><span class="p">.</span><span class="nf">getBoundingClientRect</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">rect</span><span class="p">);</span> <span class="c1">// width: 0; height: 0;</span>
+</code></pre></div></div>
+
+<script>
+const box = document.querySelector('.rect-img');
+const rect = box.getBoundingClientRect();
+console.log(rect); // width: 0; height: 0;
+</script>
+
+<p>当执行 getBoundingClientRect 时，图片还未加载。所以需要在图片 onload 之后进行计算宽高。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">box</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">rect</span> <span class="o">=</span> <span class="nx">box</span><span class="p">.</span><span class="nf">getBoundingClientRect</span><span class="p">();</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">rect</span><span class="p">);</span> <span class="c1">// width: 548; height: 421;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<script>
+box.onload = function() {
+  const rect = box.getBoundingClientRect();
+  console.log(rect); // width: 548; height: 421;
+}
+</script>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect">Element.getBoundingClientRect()</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMRect">DOMRect</a></li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2023/04/02/%E5%9B%BE%E7%89%87%E5%AE%BD%E5%BA%A6.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

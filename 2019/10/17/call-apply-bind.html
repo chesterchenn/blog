@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Call Apply Bind | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Call Apply Bind" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="call, apply 和 bind 都是 JavaScript 中用于函数绑定的方法。" />
+<meta property="og:description" content="call, apply 和 bind 都是 JavaScript 中用于函数绑定的方法。" />
+<link rel="canonical" href="/blog/2019/10/17/call-apply-bind.html" />
+<meta property="og:url" content="/blog/2019/10/17/call-apply-bind.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-10-17T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Call Apply Bind" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2019-10-17T00:00:00+00:00","datePublished":"2019-10-17T00:00:00+00:00","description":"call, apply 和 bind 都是 JavaScript 中用于函数绑定的方法。","headline":"Call Apply Bind","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2019/10/17/call-apply-bind.html"},"url":"/blog/2019/10/17/call-apply-bind.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Call Apply Bind</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2019-10-17T00:00:00+00:00" itemprop="datePublished">Oct 17, 2019
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2019"><i>2019</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/javascript"><i>javascript</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>call, apply 和 bind 都是 JavaScript 中用于函数绑定的方法。</p>
+
+<h2 id="apply-和-call">Apply 和 Call</h2>
+
+<p><code class="language-plaintext highlighter-rouge">Function.prototype.apply</code> 方法调用给定 this 值函数，并将参数作为数组或类数组。</p>
+
+<p>语法：<code class="language-plaintext highlighter-rouge">func.apply(thisArg, [argsArray])</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">Function.prototype.call</code> 方法调用给定的 this 值函数，并分别地提供参数。</p>
+
+<p>语法：<code class="language-plaintext highlighter-rouge">func.call(thisArg, arg1, arg2, ...)</code></p>
+
+<p>两者返回值：指定 this 和参数之后的函数调用结果。</p>
+
+<h3 id="apply-和-call-比较">Apply 和 Call 比较</h3>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">Function.prototype.apply</code> 和 <code class="language-plaintext highlighter-rouge">Function.prototype.call</code> 的作用是一样的。</li>
+  <li>第一个参数都是要调用函数的母对象，它是调用上下文，在函数体内通过 this 来获得对它的引用。</li>
+  <li>从第二参数，<code class="language-plaintext highlighter-rouge">apply</code> 接受的是一个参数数组，把它作为参数传给函数。<code class="language-plaintext highlighter-rouge">call</code> 接受的是参数列表（不固定长度），然后全部作为参数传给函数。</li>
+  <li>call 比 apply 的性能好。</li>
+</ol>
+
+<p>关于 this，你可以调用现有的函数，然后分配给不同的对象。通过 <code class="language-plaintext highlighter-rouge">apply</code> 或 <code class="language-plaintext highlighter-rouge">call</code> 你可以继承别的对象的方法。</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">array</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">a</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">b</span><span class="dl">'</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">elements</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">];</span>
+
+<span class="c1">// 等价于 array.push(elements)，相当于 array 继承了 [].push 方法</span>
+<span class="p">[].</span><span class="nx">push</span><span class="p">.</span><span class="nf">apply</span><span class="p">(</span><span class="nx">array</span><span class="p">,</span> <span class="nx">elements</span><span class="p">);</span> <span class="c1">// array: ['a', 'b', 0, 1, 2]</span>
+</code></pre></div></div>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">intro</span><span class="p">:</span> <span class="nf">function </span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">company</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="s2">`I am </span><span class="p">${</span><span class="nx">name</span><span class="p">}</span><span class="s2">, use </span><span class="p">${</span><span class="nx">company</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">another</span> <span class="o">=</span> <span class="p">{};</span>
+<span class="nx">person</span><span class="p">.</span><span class="nx">intro</span><span class="p">.</span><span class="nf">call</span><span class="p">(</span><span class="nx">another</span><span class="p">,</span> <span class="dl">'</span><span class="s1">ABC</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">javascript</span><span class="dl">'</span><span class="p">);</span> <span class="c1">// I am ABC, use javascript</span>
+<span class="c1">// anthoer 本来没有 intro 方法，通过 call 继承了 person 的 intro 中的方法</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">apply</code> 可以传入类数组，所以经常与 <code class="language-plaintext highlighter-rouge">arugments</code> 参数一起使用。</p>
+
+<h3 id="call-的实现">call 的实现</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_call</span> <span class="o">=</span> <span class="nf">function </span><span class="p">(</span><span class="nx">context</span><span class="p">,</span> <span class="p">...</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// 判断调用者是否为函数，this 就是调用的函数</span>
+  <span class="k">if </span><span class="p">(</span><span class="k">typeof</span> <span class="k">this</span> <span class="o">!==</span> <span class="dl">'</span><span class="s1">function</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nc">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">need function</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// 生成唯一值用于挂载，后续删除</span>
+  <span class="kd">const</span> <span class="nx">fnKey</span> <span class="o">=</span> <span class="nc">Symbol</span><span class="p">();</span>
+
+  <span class="k">if </span><span class="p">(</span><span class="o">!</span><span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">context</span> <span class="o">=</span> <span class="nb">window</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nx">context</span><span class="p">[</span><span class="nx">fnKey</span><span class="p">]</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">res</span> <span class="o">=</span> <span class="nx">context</span><span class="p">[</span><span class="nx">fnKey</span><span class="p">](...</span><span class="nx">args</span><span class="p">);</span>
+  <span class="k">delete</span> <span class="nx">context</span><span class="p">[</span><span class="nx">fnKey</span><span class="p">];</span>
+  <span class="k">return</span> <span class="nx">res</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="bind">Bind</h2>
+
+<p><code class="language-plaintext highlighter-rouge">bind</code> 创建一个新函数，该函数在被调用时将 this 指定到提供的值，并在调用新函数时提供其余的参数。 简单的说，<strong>就是将函数的 this 绑定到指定的对象中</strong>。</p>
+
+<p>语法：<code class="language-plaintext highlighter-rouge">let boundFunc = func.bind(thisArg[,arg1[,arg2[, ...]]])</code></p>
+
+<p>返回值：指定了 this 和参数之后的一个函数副本。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">module</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">x</span><span class="p">:</span> <span class="mi">81</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="kd">const</span> <span class="nx">getX</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">const</span> <span class="nx">boundGetX</span> <span class="o">=</span> <span class="nx">getX</span><span class="p">.</span><span class="nf">bind</span><span class="p">(</span><span class="nx">module</span><span class="p">);</span>
+<span class="nf">getX</span><span class="p">();</span> <span class="o">=&gt;</span> <span class="mi">9</span>
+<span class="nf">boundGetX</span><span class="p">();</span> <span class="o">=&gt;</span> <span class="mi">81</span>
+</code></pre></div></div>
+
+<p>个人觉得，apply，call 和 bind 一个很重要的区别就是返回结果，前两者是调用了函数，返回执行之后的结果。后者是返回一个新的函数。</p>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply">Function.prototype.apply()</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call">Function.prototype.call()</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind">Function.prototype.bind()</a></li>
+  <li><a href="https://juejin.cn/post/6999893403395686413?share_token=ca6d97bf-4e7a-4833-a34e-b7a9858ebb9a">前端面试手写代码-bind</a></li>
+  <li><a href="https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/84">第 48 题：call 和 apply 的区别是什么，哪个性能更好一些</a></li>
+  <li>《JavaScript 权威指南》(第六版)</li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2019/10/17/call-apply-bind.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>浏览器调试动态元素 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="浏览器调试动态元素" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="当我们在控制台调试一些动态样式的话，会特别麻烦。" />
+<meta property="og:description" content="当我们在控制台调试一些动态样式的话，会特别麻烦。" />
+<link rel="canonical" href="/blog/2022/01/10/%E8%B0%83%E8%AF%95%E5%8A%A8%E6%80%81%E5%85%83%E7%B4%A0.html" />
+<meta property="og:url" content="/blog/2022/01/10/%E8%B0%83%E8%AF%95%E5%8A%A8%E6%80%81%E5%85%83%E7%B4%A0.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-01-10T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="浏览器调试动态元素" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-01-10T00:00:00+00:00","datePublished":"2022-01-10T00:00:00+00:00","description":"当我们在控制台调试一些动态样式的话，会特别麻烦。","headline":"浏览器调试动态元素","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2022/01/10/%E8%B0%83%E8%AF%95%E5%8A%A8%E6%80%81%E5%85%83%E7%B4%A0.html"},"url":"/blog/2022/01/10/%E8%B0%83%E8%AF%95%E5%8A%A8%E6%80%81%E5%85%83%E7%B4%A0.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">浏览器调试动态元素</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2022-01-10T00:00:00+00:00" itemprop="datePublished">Jan 10, 2022
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2022"><i>2022</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/css"><i>css</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>当我们在控制台调试一些动态样式的话，会特别麻烦。</p>
+
+<p>针对于这种情况，我们可以选中对应的元素，右键，打断点于（Break on），这时可以看到三个子选项：子树修改时（subtree modifications），属性修改时（attributions modifications）以及节点删除时（node removal），选中对应的选项。当我们点击动态元素的时候就会被断点。</p>
+
+<h2 id="实例">实例</h2>
+
+<p>如下一个例子中，当我们点击输入框的时候，下方的方框就会显示，当输入框失焦的时候，下方的方框消失不见。我们可以通过选中方框元素，然后 <code class="language-plaintext highlighter-rouge">Break on</code> -&gt; <code class="language-plaintext highlighter-rouge">attributions modifications</code>，然后点击输入框。此时可以看到效果。</p>
+
+<div class="container">
+  <input id="input" type="text" />
+  <div id="card"></div>
+</div>
+
+<style>
+  .container {
+    height: 180px;
+  }
+  #card {
+    width: 120px;
+    height: 120px;
+    background: #ffe411;
+    display: none;
+  }
+</style>
+
+<script>
+  const input = document.getElementById('input');
+  const card = document.getElementById('card');
+  input.onfocus = function () {
+    card.style.display = 'block';
+  };
+  input.onblur = function () {
+    card.style.display = 'none';
+  };
+</script>
+
+<p>代码如下：</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">"input"</span> <span class="na">type=</span><span class="s">"text"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"card"</span><span class="nt">&gt;&lt;/div&gt;</span>
+</code></pre></div></div>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">#card</span> <span class="p">{</span>
+  <span class="nl">width</span><span class="p">:</span> <span class="m">120px</span><span class="p">;</span>
+  <span class="nl">height</span><span class="p">:</span> <span class="m">120px</span><span class="p">;</span>
+  <span class="nl">background</span><span class="p">:</span> <span class="m">#ffe411</span><span class="p">;</span>
+  <span class="nl">display</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">input</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nf">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">input</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">card</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nf">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">card</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">input</span><span class="p">.</span><span class="nx">onfocus</span> <span class="o">=</span> <span class="nf">function </span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">card</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">block</span><span class="dl">'</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="nx">input</span><span class="p">.</span><span class="nx">onblur</span> <span class="o">=</span> <span class="nf">function </span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">card</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">none</span><span class="dl">'</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+  </div><a class="u-url" href="/blog/2022/01/10/%E8%B0%83%E8%AF%95%E5%8A%A8%E6%80%81%E5%85%83%E7%B4%A0.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

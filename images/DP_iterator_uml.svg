@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="316px" preserveAspectRatio="none" style="width:384px;height:316px;background:#FFFFFF;" version="1.1" viewBox="0 0 384 316" width="384px" zoomAndPan="magnify"><defs/><g><rect fill="#FFFFFF" height="36.7373" id="_title" style="stroke:#FFFFFF;stroke-width:0.0;" width="120" x="127.5" y="10"/><text fill="#000000" font-family="Verdana" font-size="22" font-weight="bold" lengthAdjust="spacing" textLength="110" x="132.5" y="37.1182">迭代器模式</text><!--MD5=[ed6624c6556d5e7b1bd23032162d20b7]
+class Client--><g id="elem_Client"><rect codeLine="4" fill="#FFFFFF" height="44" id="Client" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="67" x="168" y="85.2373"/><ellipse cx="181" cy="99.2373" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1.0;"/><path d="M183.9688,104.8779 Q183.3906,105.1748 182.75,105.3154 Q182.1094,105.4717 181.4063,105.4717 Q178.9063,105.4717 177.5781,103.8311 Q176.2656,102.1748 176.2656,99.0498 Q176.2656,95.9248 177.5781,94.2686 Q178.9063,92.6123 181.4063,92.6123 Q182.1094,92.6123 182.75,92.7686 Q183.4063,92.9248 183.9688,93.2217 L183.9688,95.9404 Q183.3438,95.3623 182.75,95.0967 Q182.1563,94.8154 181.5313,94.8154 Q180.1875,94.8154 179.5,95.8936 Q178.8125,96.9561 178.8125,99.0498 Q178.8125,101.1436 179.5,102.2217 Q180.1875,103.2842 181.5313,103.2842 Q182.1563,103.2842 182.75,103.0186 Q183.3438,102.7373 183.9688,102.1592 L183.9688,104.8779 Z " fill="#000000"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="39" x="193" y="104.8052">Client</text><line style="stroke:#000000;stroke-width:1.0;" x1="169" x2="234" y1="113.2373" y2="113.2373"/><line style="stroke:#000000;stroke-width:1.0;" x1="169" x2="234" y1="121.2373" y2="121.2373"/></g><!--MD5=[914cdf822bf80e984e8ac3bf93b406a5]
+class Aggregate--><g id="elem_Aggregate"><rect codeLine="5" fill="#FFFFFF" height="61.0146" id="Aggregate" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="121" x="12" y="76.7373"/><ellipse cx="34" cy="90.7373" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1.0;"/><path d="M29.9219,86.5029 L29.9219,84.3467 L37.3125,84.3467 L37.3125,86.5029 L34.8438,86.5029 L34.8438,94.5811 L37.3125,94.5811 L37.3125,96.7373 L29.9219,96.7373 L29.9219,94.5811 L32.3906,94.5811 L32.3906,86.5029 L29.9219,86.5029 Z " fill="#000000"/><text fill="#000000" font-family="Verdana" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="73" x="48" y="96.3052">Aggregate</text><line style="stroke:#000000;stroke-width:1.0;" x1="13" x2="132" y1="104.7373" y2="104.7373"/><line style="stroke:#000000;stroke-width:1.0;" x1="13" x2="132" y1="112.7373" y2="112.7373"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="109" x="18" y="130.8125">createIterator()</text></g><!--MD5=[ac192e3b58a2163e38488214a7837886]
+class ConcreteAggregate--><g id="elem_ConcreteAggregate"><rect codeLine="8" fill="#FFFFFF" height="61.0146" id="ConcreteAggregate" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="164" x="13.5" y="231.7373"/><ellipse cx="26.5" cy="245.7373" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1.0;"/><path d="M29.4688,251.3779 Q28.8906,251.6748 28.25,251.8154 Q27.6094,251.9717 26.9063,251.9717 Q24.4063,251.9717 23.0781,250.3311 Q21.7656,248.6748 21.7656,245.5498 Q21.7656,242.4248 23.0781,240.7686 Q24.4063,239.1123 26.9063,239.1123 Q27.6094,239.1123 28.25,239.2686 Q28.9063,239.4248 29.4688,239.7217 L29.4688,242.4404 Q28.8438,241.8623 28.25,241.5967 Q27.6563,241.3154 27.0313,241.3154 Q25.6875,241.3154 25,242.3936 Q24.3125,243.4561 24.3125,245.5498 Q24.3125,247.6436 25,248.7217 Q25.6875,249.7842 27.0313,249.7842 Q27.6563,249.7842 28.25,249.5186 Q28.8438,249.2373 29.4688,248.6592 L29.4688,251.3779 Z " fill="#000000"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="136" x="38.5" y="251.3052">ConcreteAggregate</text><line style="stroke:#000000;stroke-width:1.0;" x1="14.5" x2="176.5" y1="259.7373" y2="259.7373"/><line style="stroke:#000000;stroke-width:1.0;" x1="14.5" x2="176.5" y1="267.7373" y2="267.7373"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="109" x="19.5" y="285.8125">createIterator()</text></g><!--MD5=[023ecf6702e3ca2ce47ae747eafb20f1]
+class Iterator--><g id="elem_Iterator"><rect codeLine="11" fill="#FFFFFF" height="95.0439" id="Iterator" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="84" x="270.5" y="59.7373"/><ellipse cx="283.5" cy="73.7373" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1.0;"/><path d="M279.4219,69.5029 L279.4219,67.3467 L286.8125,67.3467 L286.8125,69.5029 L284.3438,69.5029 L284.3438,77.5811 L286.8125,77.5811 L286.8125,79.7373 L279.4219,79.7373 L279.4219,77.5811 L281.8906,77.5811 L281.8906,69.5029 L279.4219,69.5029 Z " fill="#000000"/><text fill="#000000" font-family="Verdana" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="56" x="295.5" y="79.3052">Iterator</text><line style="stroke:#000000;stroke-width:1.0;" x1="271.5" x2="353.5" y1="87.7373" y2="87.7373"/><line style="stroke:#000000;stroke-width:1.0;" x1="271.5" x2="353.5" y1="95.7373" y2="95.7373"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="70" x="276.5" y="113.8125">hasNext()</text><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="44" x="276.5" y="130.8271">next()</text><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="64" x="276.5" y="147.8418">remove()</text></g><!--MD5=[78d40d8566a036527f78884972139e1a]
+class ConcreateIterator--><g id="elem_ConcreateIterator"><rect codeLine="16" fill="#FFFFFF" height="95.0439" id="ConcreateIterator" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="153" x="224" y="214.7373"/><ellipse cx="237" cy="228.7373" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1.0;"/><path d="M239.9688,234.3779 Q239.3906,234.6748 238.75,234.8154 Q238.1094,234.9717 237.4063,234.9717 Q234.9063,234.9717 233.5781,233.3311 Q232.2656,231.6748 232.2656,228.5498 Q232.2656,225.4248 233.5781,223.7686 Q234.9063,222.1123 237.4063,222.1123 Q238.1094,222.1123 238.75,222.2686 Q239.4063,222.4248 239.9688,222.7217 L239.9688,225.4404 Q239.3438,224.8623 238.75,224.5967 Q238.1563,224.3154 237.5313,224.3154 Q236.1875,224.3154 235.5,225.3936 Q234.8125,226.4561 234.8125,228.5498 Q234.8125,230.6436 235.5,231.7217 Q236.1875,232.7842 237.5313,232.7842 Q238.1563,232.7842 238.75,232.5186 Q239.3438,232.2373 239.9688,231.6592 L239.9688,234.3779 Z " fill="#000000"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="125" x="249" y="234.3052">ConcreateIterator</text><line style="stroke:#000000;stroke-width:1.0;" x1="225" x2="376" y1="242.7373" y2="242.7373"/><line style="stroke:#000000;stroke-width:1.0;" x1="225" x2="376" y1="250.7373" y2="250.7373"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="70" x="230" y="268.8125">hasNext()</text><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="44" x="230" y="285.8271">next()</text><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="64" x="230" y="302.8418">remove()</text></g><!--MD5=[f9e9bc89fcdaa8287cda7eef935519d4]
+reverse link Aggregate to Client--><g id="link_Aggregate_Client"><path codeLine="22" d="M139.9,107.2373 C149.18,107.2373 158.47,107.2373 167.75,107.2373 " fill="none" id="Aggregate-backto-Client" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="#000000" points="134.99,107.2373,143.99,111.2373,139.99,107.2373,143.99,103.2373,134.99,107.2373" style="stroke:#000000;stroke-width:1.0;"/></g><!--MD5=[cdf31114c0a9b73670b48f28c83c0040]
+link Client to Iterator--><g id="link_Client_Iterator"><path codeLine="23" d="M235.32,107.2373 C244.88,107.2373 254.45,107.2373 264.01,107.2373 " fill="none" id="Client-to-Iterator" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="#000000" points="268.78,107.2373,259.78,103.2373,263.78,107.2373,259.78,111.2373,268.78,107.2373" style="stroke:#000000;stroke-width:1.0;"/></g><!--MD5=[ec16dd3faf36faf8d04f37a830811fa9]
+reverse link Aggregate to ConcreteAggregate--><g id="link_Aggregate_ConcreteAggregate"><path codeLine="24" d="M80.16,159.1573 C83.76,183.1473 87.94,210.9273 91.02,231.4473 " fill="none" id="Aggregate-backto-ConcreteAggregate" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="none" points="73.27,160.4173,77.21,139.5973,87.11,158.3373,73.27,160.4173" style="stroke:#000000;stroke-width:1.0;"/></g><!--MD5=[d720798e3690dfbe6195bcbefd365182]
+reverse link Iterator to ConcreateIterator--><g id="link_Iterator_ConcreateIterator"><path codeLine="25" d="M307.18,176.0873 C306.17,188.9773 305.13,202.1973 304.18,214.2573 " fill="none" id="Iterator-backto-ConcreateIterator" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="none" points="300.17,175.8773,308.72,156.4873,314.13,176.9673,300.17,175.8773" style="stroke:#000000;stroke-width:1.0;"/></g><!--MD5=[ac6d05952909203aaf24a7ca724ed7b9]
+link ConcreteAggregate to ConcreateIterator--><g id="link_ConcreteAggregate_ConcreateIterator"><path codeLine="26" d="M177.98,262.2373 C191.14,262.2373 204.3,262.2373 217.46,262.2373 " fill="none" id="ConcreteAggregate-to-ConcreateIterator" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="#000000" points="222.41,262.2373,213.41,258.2373,217.41,262.2373,213.41,266.2373,222.41,262.2373" style="stroke:#000000;stroke-width:1.0;"/></g><!--MD5=[a9307ece3361c55385f24f3537a939b3]
+@startuml
+!theme plain
+title 迭代器模式
+
+class Client
+interface Aggregate {
+  createIterator()
+}
+class ConcreteAggregate {
+  createIterator()
+}
+interface Iterator {
+  hasNext()
+  next()
+  remove()
+}
+class ConcreateIterator {
+  hasNext()
+  next()
+  remove()
+}
+
+Client -L-> Aggregate
+Client -R-> Iterator
+Aggregate <|- - ConcreteAggregate
+Iterator <|- - ConcreateIterator
+ConcreteAggregate -R-> ConcreateIterator
+
+@enduml
+
+@startuml
+
+
+
+
+
+
+
+<style>
+  root {
+    BackgroundColor white
+    FontColor black
+    FontName Verdana
+    HyperLinkColor blue
+    LineColor black
+    LineThickness 1
+    Margin 5
+  }
+  caption {
+    LineThickness 0
+  }
+  footer {
+    LineThickness 0
+  }
+  header {
+    LineThickness 0
+  }
+  node {
+    MaximumWidth 300
+  }
+  title {
+    FontSize 22
+    LineThickness 0
+  }
+</style>
+
+skinparam ArrowLollipopColor black
+skinparam BackgroundColor white
+skinparam DefaultFontName Verdana
+skinparam DefaultMonospacedFontName Courier
+skinparam LifelineStrategy nosolid
+skinparam ParticipantPadding 10
+skinparam SequenceLifeLineBorderColor black
+skinparam Shadowing false
+skinparam UseBetaStyle true
+
+skinparam Activity {
+  BackgroundColor white
+  BarColor black
+  BorderColor black
+  FontColor black
+  FontName Verdana
+}
+skinparam Boundary {
+  FontColor black
+}
+skinparam Box {
+  Padding 5
+}
+skinparam CircledCharacter {
+  FontColor black
+  FontName Courier
+  Radius 9
+}
+skinparam Class {
+  BackgroundColor white
+  BorderColor black
+  FontColor black
+  FontName Verdana
+}
+skinparam ClassAttribute {
+  FontColor black
+  FontName Verdana
+}
+skinparam ClassStereotype {
+  FontColor black
+  FontName Verdana
+}
+skinparam Footer {
+  FontColor black
+  FontName Verdana
+}
+skinparam Header {
+  FontColor black
+  FontName Verdana
+}
+skinparam Hyperlink {
+  Color blue
+}
+skinparam IconPackage {
+  Color black
+  BackgroundColor white
+}
+skinparam IconPrivate {
+  Color black
+  BackgroundColor white
+}
+skinparam IconProtected {
+  Color black
+  BackgroundColor white
+}
+skinparam IconPublic {
+  Color black
+  BackgroundColor white
+}
+skinparam Note {
+  FontColor black
+  FontName Verdana
+}
+skinparam Object {
+  BorderColor black
+}
+skinparam Package {
+  BorderColor black
+  FontColor black
+  FontName Verdana
+}
+skinparam State {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam StereotypeA {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam StereotypeC {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam StereotypeE {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam StereotypeI {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam StereotypeN {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam UseCaseStereoType {
+  FontColor black
+  FontName Verdana
+}
+title 迭代器模式
+
+class Client
+interface Aggregate {
+  createIterator()
+}
+class ConcreteAggregate {
+  createIterator()
+}
+interface Iterator {
+  hasNext()
+  next()
+  remove()
+}
+class ConcreateIterator {
+  hasNext()
+  next()
+  remove()
+}
+
+Client -L-> Aggregate
+Client -R-> Iterator
+Aggregate <|- - ConcreteAggregate
+Iterator <|- - ConcreateIterator
+ConcreteAggregate -R-> ConcreateIterator
+
+@enduml
+
+PlantUML version 1.2022.7(Tue Aug 23 01:01:30 CST 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

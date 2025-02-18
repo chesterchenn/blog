@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>设计模式之装饰器模式 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="设计模式之装饰器模式" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Decorator 装饰器模式。" />
+<meta property="og:description" content="Decorator 装饰器模式。" />
+<link rel="canonical" href="/blog/2021/03/17/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F.html" />
+<meta property="og:url" content="/blog/2021/03/17/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-03-17T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="设计模式之装饰器模式" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2021-03-17T00:00:00+00:00","datePublished":"2021-03-17T00:00:00+00:00","description":"Decorator 装饰器模式。","headline":"设计模式之装饰器模式","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2021/03/17/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F.html"},"url":"/blog/2021/03/17/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">设计模式之装饰器模式</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-03-17T00:00:00+00:00" itemprop="datePublished">Mar 17, 2021
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2021"><i>2021</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/algorithm"><i>algorithm</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Decorator 装饰器模式。</p>
+
+<p>装饰器模式主要解决继承关系过于复杂的问题，通过组合来替代继承。它主要的作用是给原始类添加增强功能。这也是判断是否该用装饰器模式的一个重要的依据。除此之外，装饰器模式还有一个特点，那就是可以对原始类嵌套使用多个装饰器。</p>
+
+<p>为了满足这个应用场景，在设计的时候，装饰器类需要跟原始类继承相同的抽象类或者接口。</p>
+
+<h2 id="定义">定义</h2>
+
+<p>动态（组合）地给一个对象增加一些额外的职责。就增加功能而言，Decorator 模式比生成子类（继承）更为灵活（消除重复代码和减少子类个数）== 《设计模式》GoF</p>
+
+<h2 id="uml">UML</h2>
+
+<p><img src="/blog/images/DP_decorator_uml.svg" alt="DP_decorator_uml" /></p>
+
+<h2 id="几条原则">几条原则</h2>
+
+<p>来自《Head First 设计模式》的几条原则。</p>
+
+<ul>
+  <li>装饰者和被装饰者对象有相同的超类型。</li>
+  <li>你可以用一个或多个装饰者包装一个对象。</li>
+  <li>既然装饰者和被装饰者对象有相同的超类型，所以在任何需要原始对象（被包装的）的场合，可以用装饰过的对象代替它。</li>
+  <li>装饰者可以在所委托被装饰者的行为之前或之后，加上自己的行为，以达到特定的目的。</li>
+  <li>对象可以在任何时候被装饰，所以可以在运行时动态地、不限量地用你喜欢的装饰者来装饰对象。</li>
+</ul>
+
+<h2 id="示例">示例</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">interface</span> <span class="nc">Coffee</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="kt">double</span> <span class="nf">getCost</span><span class="o">();</span>
+
+  <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getIngredients</span><span class="o">();</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">SimpleCoffee</span> <span class="kd">implements</span> <span class="nc">Coffee</span> <span class="o">{</span>
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="kt">double</span> <span class="nf">getCost</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getIngredients</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="s">"Coffee"</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">CoffeeDecorator</span> <span class="kd">implements</span> <span class="nc">Coffee</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="kd">final</span> <span class="nc">Coffee</span> <span class="n">decoratedCoffee</span><span class="o">;</span>
+
+  <span class="kd">public</span> <span class="nf">CoffeeDecorator</span><span class="o">(</span><span class="nc">Coffee</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">decoratedCoffee</span> <span class="o">=</span> <span class="n">c</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="kt">double</span> <span class="nf">getCost</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">decoratedCoffee</span><span class="o">.</span><span class="na">getCost</span><span class="o">();</span>
+  <span class="o">}</span>
+
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getIngredients</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">decoratedCoffee</span><span class="o">.</span><span class="na">getIngredients</span><span class="o">();</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">WithMilk</span> <span class="kd">extends</span> <span class="nc">CoffeeDecorator</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="nf">WithMilk</span><span class="o">(</span><span class="nc">Coffee</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">super</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="kt">double</span> <span class="nf">getCost</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">getCost</span><span class="o">()</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getIngredients</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">getIngredients</span><span class="o">()</span> <span class="o">+</span> <span class="s">", Milk"</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">WithSprinkles</span> <span class="kd">extends</span> <span class="nc">CoffeeDecorator</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="nf">WithSprinkles</span><span class="o">(</span><span class="nc">Coffee</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">super</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="kt">double</span> <span class="nf">getCost</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">getCost</span><span class="o">()</span> <span class="o">+</span> <span class="mf">0.2</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getIngredients</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">getIngredients</span><span class="o">()</span> <span class="o">+</span> <span class="s">", Sprinkles"</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">printInfo</span><span class="o">(</span><span class="nc">Coffee</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Cost: "</span> <span class="o">+</span> <span class="n">c</span><span class="o">.</span><span class="na">getCost</span><span class="o">()</span> <span class="o">+</span> <span class="s">"; Ingredients: "</span> <span class="o">+</span> <span class="n">c</span><span class="o">.</span><span class="na">getIngredients</span><span class="o">());</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">Coffee</span> <span class="n">c</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SimpleCoffee</span><span class="o">();</span>
+    <span class="n">printInfo</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>
+
+    <span class="n">c</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">WithMilk</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>
+    <span class="n">printInfo</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>
+
+    <span class="n">c</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">WithSprinkles</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>
+    <span class="n">printInfo</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">// Cost: 1.0; Ingredients: Coffee</span>
+<span class="c1">// Cost: 1.5; Ingredients: Coffee, Milk</span>
+<span class="c1">// Cost: 1.7; Ingredients: Coffee, Milk, Sprinkles</span>
+</code></pre></div></div>
+
+<h2 id="要点总结">要点总结</h2>
+
+<p>通过采用组合而非继承的手法，Decorator 模式实现了在运行时动态扩展对象功能的能力，而且可以根据需要扩展多个功能。避免了使用继承带来的“灵活性差”和“多子类衍生问题”。</p>
+
+<p>Decorator 类在接口上表现为 is-a Component 的继承关系，即 Decorator 类继承了 Component 类所具有的接口。但在实现上又表现为 has-a Component 的组合关系，即 Decorator 类又使用了另一个 Component 类。</p>
+
+<p>Decorator 模式的目的并非解决“多子类衍生的多继承”问题，Decorator 模式应用的要点在于解决“主体类在多个方向上的扩展功能”–是为“装饰”的含义。</p>
+
+<h2 id="个人观点">个人观点</h2>
+
+<p>装饰器模式是最能体现开放封闭原则的一种模式。</p>
+
+<p>装饰器模式是组合优先于继承最直观的一种模式。</p>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Decorator_pattern">Wiki: Decorator pattern</a></li>
+  <li>《李建忠：C++设计模式》- 装饰模式</li>
+</ul>
+
+  </div><a class="u-url" href="/blog/2021/03/17/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>

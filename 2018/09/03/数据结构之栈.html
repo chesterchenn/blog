@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>数据结构之栈 | 主页</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="数据结构之栈" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="栈是一个抽象的线性数据结构，遵循后进先出 LIFO(Last In First Out)的原则，也就是说只能通过一端来实现数据存储和检索。在栈中进行插入和删除操作的一端称为栈顶(top)，另一端称为栈底(bottom)。" />
+<meta property="og:description" content="栈是一个抽象的线性数据结构，遵循后进先出 LIFO(Last In First Out)的原则，也就是说只能通过一端来实现数据存储和检索。在栈中进行插入和删除操作的一端称为栈顶(top)，另一端称为栈底(bottom)。" />
+<link rel="canonical" href="/blog/2018/09/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E6%A0%88.html" />
+<meta property="og:url" content="/blog/2018/09/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E6%A0%88.html" />
+<meta property="og:site_name" content="主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-09-03T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="数据结构之栈" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2018-09-03T00:00:00+00:00","datePublished":"2018-09-03T00:00:00+00:00","description":"栈是一个抽象的线性数据结构，遵循后进先出 LIFO(Last In First Out)的原则，也就是说只能通过一端来实现数据存储和检索。在栈中进行插入和删除操作的一端称为栈顶(top)，另一端称为栈底(bottom)。","headline":"数据结构之栈","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2018/09/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E6%A0%88.html"},"url":"/blog/2018/09/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E6%A0%88.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/blog/assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /><link type="application/atom+xml" rel="alternate" href="/blog/feed.xml" title="主页" />
+    
+
+
+
+
+
+
+  
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">主页</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">关于</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">数据结构之栈</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2018-09-03T00:00:00+00:00" itemprop="datePublished">Sep 3, 2018
+      </time></p>
+    <span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/2018"><i>2018</i></a></span>
+      
+        <!--  -->
+        <span class="highligher-rouge"><a href="/blog/tag/algorithm"><i>algorithm</i></a></span>
+      
+    </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>栈是一个抽象的线性数据结构，遵循后进先出 LIFO(Last In First Out)的原则，也就是说只能通过一端来实现数据存储和检索。在栈中进行插入和删除操作的一端称为栈顶(top)，另一端称为栈底(bottom)。</p>
+
+<p>不含有数据元素的栈称为空栈。可以通过数据(Array)，链表(Linked List)实现栈。</p>
+
+<h2 id="栈的操作">栈的操作</h2>
+
+<ul>
+  <li>入栈：添加一个数据元素到集合中</li>
+  <li>出栈：移除最近添加尚未移除的数据元素</li>
+</ul>
+
+<h2 id="栈的实现">栈的实现</h2>
+
+<p>栈可以通过数组和链表实现。</p>
+
+<h3 id="数组实现栈">数组实现栈</h3>
+
+<pre><code class="language-C">// 栈的结构体
+struct Stack {
+  int top;
+  unsigned capacity;
+  int* array;
+}
+
+// 创建给定大小的栈，并初始化栈的大小为0
+struct Stack* createStack(unsigned capacity) {
+  struct Stack* stack = (struct Stack*) malloc(sizeof(struct Stack));
+  stack-&gt;capacity = capacity;
+  stack-&gt;top = 0;
+  stack-&gt;array = (int*) malloc(stack-&gt;capacity * sizeof(int));
+  return stack;
+}
+
+// 判断是否为满栈
+int isFull(struct Stack* stack) {
+  return stack-&gt;top == stack-&gt;capacity;
+}
+
+// 判断是否为空栈
+int isEmpty(struct Stack* stack) {
+  return stack-&gt;top == 0;
+}
+
+// 入栈操作，顶部+1
+void push(struct Stack* stack, int item) {
+  if (isFull(stack)) return;
+  stack-&gt;array[stack-&gt;top] == item;
+  stack-&gt;top++;
+}
+
+// 出栈操作，返回数据项，顶部-1
+int pop(struct Stack* stack) {
+  if (isEmpty(stack)) return;
+  stack-&gt;top--;
+  return stack-&gt;array[stack-&gt;top];
+}
+</code></pre>
+
+<h3 id="链表实现栈">链表实现栈</h3>
+
+<pre><code class="language-C">// 栈的结构体
+struct stackNode {
+  int data;
+  struct StackNode* next;
+}
+
+// 初始化一个栈
+struct StackNode* newNode(int data) {
+  struct StackNode* stackNode = (struct StackNode*) malloc(sizeof(struct StackNode));
+  stackNode-&gt;data = data;
+  stackNode-&gt;next = NULL;
+  return stackNode;
+}
+
+// 判断是否为空栈
+int isEmpty(struct StackNode *stack) {
+  return !stack;
+}
+
+// 入栈操作
+void push(struct StackNode** stack, int data) {
+  struct StackNode* stackNode = newNode(data);
+  stackNode-&gt;next = *stack;
+  *stack = stackNode;
+}
+
+// 出栈操作，返回出栈的数据项
+int pop(struct StackNode** stack) {
+  if (isEmpty(*stack)) return Error;
+  struct StackNode* temp = *stack;
+  *stack = (*stack)-&gt;next;
+  int result = temp-&gt;data;
+  free(temp);
+  return result;
+}
+
+// 查看栈顶部数据项
+int peek(struct StackNode* stack) {
+  if (isEmpty(stack)) return Error;
+  return stack-&gt;data;
+}
+</code></pre>
+
+<h2 id="操作系统里的堆栈">操作系统里的堆栈</h2>
+
+<p>操作系统里面的堆和栈都是内存中的一部分。</p>
+
+<p>栈(Stack)：</p>
+
+<ul>
+  <li>栈是作为执行线程的临时空间留出的内存。</li>
+  <li>由编译器自动申请，自动释放。</li>
+  <li>栈的变量分配比堆的变量分配快。</li>
+  <li>操作方式使用数据结构中的栈实现。</li>
+  <li>用于存储本地变量，返回地址，传递参数。</li>
+  <li>栈的存储地址是连续且有限，申请过多时会出现栈溢出。(例如：无限的递归，申请空间过大)</li>
+  <li>可以在没有指针的情况下,可以创建栈的数据。</li>
+  <li>栈的大小在程序编译期间已经确定大小。</li>
+</ul>
+
+<p>堆(Heap):</p>
+
+<ul>
+  <li>堆是动态分配的内存。</li>
+  <li>变量是手工申请，销毁，而且不会越界。</li>
+  <li>堆的变量分配比栈的变量分配慢。</li>
+  <li>根据用户程序按需分配数据块。</li>
+  <li>大量的分配和撤销容易产生碎片。</li>
+  <li>在 C++或者 C，堆上创建的数据由指针指向，并且分别由<code class="language-plaintext highlighter-rouge">new</code>和<code class="language-plaintext highlighter-rouge">malloc</code>分配。</li>
+  <li>如果请求分配的缓存过大，可能出现分配实拍的情况。</li>
+  <li>如果你不能确切地知道你运行时需要多大的数据或者你需要分配大量的数据，应该使用堆。</li>
+  <li>负责内存泄漏。</li>
+</ul>
+
+<p>参考: <a href="https://stackoverflow.com/questions/79923/what-and-where-are-the-stack-and-heap">what and where are the stack and heap</a></p>
+
+  </div><a class="u-url" href="/blog/2018/09/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E6%A0%88.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <div class="top">
+      <div class="top__tri"></div>
+    </div><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">结尾处</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li><li><a class="u-email" href="mailto:chesterchenn@outlook.com">chesterchenn@outlook.com</a></li><li>
+              <a href="/blog/feed.xml">
+                <svg class="svg-icon orange">
+                  <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+                </svg><span>Subscribe</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>看自己超过两周之前写的代码就跟之前没看过一样。</p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a href="https://github.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a href="https://twitter.com/chesterchenn" title="chesterchenn"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+  </div>
+</footer>
+<script src="/blog/assets/js/top.js"></script>
+
+  </body>
+
+</html>
