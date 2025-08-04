@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 # 自动化安装
 
 # 安装 ruby
