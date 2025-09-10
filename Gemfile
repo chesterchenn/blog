@@ -23,3 +23,6 @@ end
 gem "wdm", "~> 0.1.1", :install_if => Gem.win_platform?
 
 gem "json"
+
+gem "csv"
+gem "base64"

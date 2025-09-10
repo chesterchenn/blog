@@ -1,3 +1,6 @@
+@use 'sass:color';
+@use 'sass:math';
+
 /**
  * Site header
  */
@@ -139,7 +142,7 @@
   @include relative-font-size(0.9375);
   color: $grey-color;
   margin-left: math.div(-$spacing-unit, 2);
-  @extend %clearfix;
+  @extend %clearfix !optional;
 }
 
 .footer-col {
@@ -257,9 +260,7 @@
 
   h2 {
     @include relative-font-size(1.5);
-    // @include background-opacity($theme-color, 0.5);
-    // background: darken($theme-color, 10%);
-    background: lighten($theme-color, 30%);
+    background: color.adjust($theme-color, $lightness: 30%);
     padding: math.div($spacing-unit, 5);
 
     @media screen and (min-width: $on-large) {
@@ -346,7 +347,8 @@
  * Archive
  */
 .highligher-rouge {
-  font: $base-font-weight #{$base-font-size}/#{$base-line-height} $base-font-family;
+  font: $base-font-weight #{$base-font-size}/#{$base-line-height}
+    $base-font-family;
   border-radius: 1px;
   background: $tag-back-color;
   padding: 0 4px;

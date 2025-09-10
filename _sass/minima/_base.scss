@@ -1,3 +1,6 @@
+@use 'sass:color';
+@use 'sass:math';
+
 /**
  * Reset some basic elements
  */
@@ -10,7 +13,8 @@
  * Basic styling
  */
 body {
-  font: $base-font-weight #{$base-font-size}/#{$base-line-height} $base-font-family;
+  font: $base-font-weight #{$base-font-size}/#{$base-line-height}
+    $base-font-family;
   color: $text-color;
   background-color: $background-color;
   -webkit-text-size-adjust: 100%;
@@ -141,7 +145,7 @@ blockquote {
   margin-left: auto;
   padding-right: math.div($spacing-unit, 2);
   padding-left: math.div($spacing-unit, 2);
-  @extend %clearfix;
+  @extend %clearfix !optional;
 
   @media screen and (min-width: $on-large) {
     max-width: -webkit-calc(#{$content-width} - (#{$spacing-unit} * 2));
@@ -187,12 +191,12 @@ table {
   margin-bottom: $spacing-unit;
   width: 100%;
   text-align: $table-text-align;
-  color: lighten($text-color, 18%);
+  color: color.adjust($text-color, $lightness: 18%);
   border-collapse: collapse;
   border: 1px solid $grey-color-light;
   tr {
     &:nth-child(even) {
-      background-color: lighten($grey-color-light, 6%);
+      background-color: color.adjust($grey-color-light, $lightness: 6%);
     }
   }
   th,
@@ -200,9 +204,9 @@ table {
     padding: math.div($spacing-unit, 3) math.div($spacing-unit, 2);
   }
   th {
-    background-color: lighten($grey-color-light, 3%);
-    border: 1px solid darken($grey-color-light, 4%);
-    border-bottom-color: darken($grey-color-light, 12%);
+    background-color: color.adjust($grey-color-light, $lightness: 3%);
+    border: 1px solid color.adjust($grey-color-light, $lightness: -4%);
+    border-bottom-color: color.adjust($grey-color-light, $lightness: -12%);
   }
   td {
     border: 1px solid $grey-color-light;
