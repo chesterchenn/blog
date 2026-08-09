@@ -152,7 +152,7 @@ export interface SiteConfig {
   author: string
   tags: string[]
   pageSize: number
-  trailingSlashes: boolean
+  trailingSlashes: 'always' | 'never' | 'ignore'
   themes: ThemesConfig
   socialLinks: SocialLinks
   navLinks: NavLink[]

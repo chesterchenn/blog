@@ -16,6 +16,8 @@ import { getCollection, type CollectionEntry } from 'astro:content'
 import Color from 'color'
 import { slug } from 'github-slugger'
 
+const base = import.meta.env.BASE_URL.replace(/\/$/, '')
+
 export function dateString(date: Date) {
   return date.toISOString().split('T')[0]
 }
@@ -234,7 +236,7 @@ abstract class PostsCollationGroup implements CollationGroup<'posts'> {
       this.collations.push({
         title: collationTitle,
         titleSlug: collationTitleSlug,
-        url: `${this.url}/${encodeURIComponent(collationTitleSlug)}`,
+        url: `${base}${this.url}/${encodeURIComponent(collationTitleSlug)}`,
         entries: [item],
       })
     }

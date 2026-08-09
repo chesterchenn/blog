@@ -98,7 +98,7 @@ if (postData.tags && postData.tags.length > 0) {
   {
     nextPostInSeries && (
       <a
-        href={`/posts/${nextPostInSeries.id}`}
+        href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/posts/${nextPostInSeries.id}`}
         class="button justify-center -mt-8 mb-8 !whitespace-normal text-center flex gap-2 sm:gap-3 items-center"
       >
         <span>Next: {nextPostInSeries.data.title}</span>

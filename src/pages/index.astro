@@ -61,7 +61,7 @@ const postsHaveSeries = sortedPosts.some((post) => post.data.series)
           .map((post) => (
             <PostPreview post={post} />
           ))}
-        <Pagination nextLink="/posts" nextText="Archive" />
+        <Pagination nextLink={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/posts`} nextText="Archive" />
       </section>
     )
   }

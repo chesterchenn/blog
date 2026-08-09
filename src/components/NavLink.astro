@@ -12,7 +12,7 @@ const { link } = Astro.props
   class="underline"
   rel={link.external ? 'noopener noreferrer' : undefined}
   target={link.external ? '_blank' : undefined}
-  href={link.url}
+  href={link.external ? link.url : `${import.meta.env.BASE_URL.replace(/\/$/, '')}${link.url}`}
 >
   {link.name}
 </a>

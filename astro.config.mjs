@@ -3,7 +3,7 @@ import { defineConfig } from 'astro/config'
 import tailwindcss from '@tailwindcss/vite'
 import sitemap from '@astrojs/sitemap'
 import mdx from '@astrojs/mdx'
-import { rehypeHeadingIds } from '@astrojs/markdown-remark'
+import { rehypeHeadingIds, unified } from '@astrojs/markdown-remark'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import expressiveCode from 'astro-expressive-code'
 import siteConfig from './src/site.config'
@@ -27,35 +27,37 @@ import rehypePixelated from './src/plugins/rehype-pixelated' /* Custom plugin to
 export default defineConfig({
   site: siteConfig.site,
   base: siteConfig.base,
-  trailingSlash: siteConfig.trailingSlashes ? 'always' : 'never',
+  trailingSlash: siteConfig.trailingSlashes,
   prefetch: true,
   markdown: {
-    remarkPlugins: [
-      [remarkDescription, { maxChars: 200 }],
-      remarkReadingTime,
-      remarkDirective,
-      remarkGithubCard,
-      remarkAdmonitions,
-      [remarkCharacterDialogue, { characters: siteConfig.characters }],
-      remarkUnknownDirectives,
-      remarkMath,
-      remarkGemoji,
-    ],
-    rehypePlugins: [
-      [rehypeHeadingIds, { headingIdCompat: true }],
-      [rehypeAutolinkHeadings, { behavior: 'wrap' }],
-      rehypeTitleFigure,
-      [
-        rehypeExternalLinks,
-        {
-          rel: ['noreferrer', 'noopener'],
-          target: '_blank',
-        },
+    processor: unified({
+      remarkPlugins: [
+        [remarkDescription, { maxChars: 200 }],
+        remarkReadingTime,
+        remarkDirective,
+        remarkGithubCard,
+        remarkAdmonitions,
+        [remarkCharacterDialogue, { characters: siteConfig.characters }],
+        remarkUnknownDirectives,
+        remarkMath,
+        remarkGemoji,
       ],
-      rehypeUnwrapImages,
-      rehypePixelated,
-      rehypeKatex,
-    ],
+      rehypePlugins: [
+        rehypeHeadingIds,
+        [rehypeAutolinkHeadings, { behavior: 'wrap' }],
+        rehypeTitleFigure,
+        [
+          rehypeExternalLinks,
+          {
+            rel: ['noreferrer', 'noopener'],
+            target: '_blank',
+          },
+        ],
+        rehypeUnwrapImages,
+        rehypePixelated,
+        rehypeKatex,
+      ],
+    }),
     shikiConfig: {
       wrap: true,
     }
