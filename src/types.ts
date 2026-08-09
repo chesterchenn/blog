@@ -145,6 +145,7 @@ export type SocialLinks = {
 
 export interface SiteConfig {
   site: string
+  base: string
   font: string
   title: string
   description: string

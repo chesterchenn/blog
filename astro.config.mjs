@@ -12,7 +12,6 @@ import remarkDescription from './src/plugins/remark-description' /* Add descript
 import remarkReadingTime from './src/plugins/remark-reading-time' /* Add reading time to frontmatter */
 import rehypeTitleFigure from './src/plugins/rehype-title-figure' /* Wraps titles in figures */
 import { remarkGithubCard } from './src/plugins/remark-github-card'
-import { fromHtmlIsomorphic } from 'hast-util-from-html-isomorphic'
 import rehypeExternalLinks from 'rehype-external-links'
 import remarkDirective from 'remark-directive' /* Handle ::: directives as nodes */
 import rehypeUnwrapImages from 'rehype-unwrap-images'
@@ -23,11 +22,11 @@ import remarkMath from 'remark-math' /* for latex math support */
 import rehypeKatex from 'rehype-katex' /* again, for latex math support */
 import remarkGemoji from './src/plugins/remark-gemoji' /* for shortcode emoji support */
 import rehypePixelated from './src/plugins/rehype-pixelated' /* Custom plugin to handle pixelated images */
-import { bundledLanguages } from 'shiki/langs'
 
 // https://astro.build/config
 export default defineConfig({
   site: siteConfig.site,
+  base: siteConfig.base,
   trailingSlash: siteConfig.trailingSlashes ? 'always' : 'never',
   prefetch: true,
   markdown: {
@@ -59,7 +58,6 @@ export default defineConfig({
     ],
     shikiConfig: {
       wrap: true,
-      langs: Object.values(bundledLanguages),
     }
   },
   image: {

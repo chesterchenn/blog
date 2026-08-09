@@ -46,7 +46,7 @@ Windows Registry Editor Version 5.00
 
 2. 找到别人写的脚本。[AutoHotKey-Switch-IME](https://gist.github.com/maokwen/4d99f5c0aa2e7c0c114c708b03fb73ae)
 
-   ```ahk
+   ```ahk2
    #Include %A_ScriptDir%
 
    timeInterval := 500
