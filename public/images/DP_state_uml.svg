@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="248px" preserveAspectRatio="none" style="width:481px;height:248px;background:#FFFFFF;" version="1.1" viewBox="0 0 481 248" width="481px" zoomAndPan="magnify"><defs/><g><rect fill="#FFFFFF" height="36.7373" id="_title" style="stroke:#FFFFFF;stroke-width:0.0;" width="142" x="165.25" y="10"/><text fill="#000000" font-family="Verdana" font-size="22" font-weight="bold" lengthAdjust="spacing" textLength="132" x="170.25" y="37.1182">状态模式类图</text><!--MD5=[6754354365917abf8f1a56af1b7e344c]
+class Context--><g id="elem_Context"><rect codeLine="4" fill="#FFFFFF" height="61.0146" id="Context" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="85" x="162.5" y="59.7373"/><ellipse cx="175.5" cy="73.7373" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1.0;"/><path d="M178.4688,79.3779 Q177.8906,79.6748 177.25,79.8154 Q176.6094,79.9717 175.9063,79.9717 Q173.4063,79.9717 172.0781,78.3311 Q170.7656,76.6748 170.7656,73.5498 Q170.7656,70.4248 172.0781,68.7686 Q173.4063,67.1123 175.9063,67.1123 Q176.6094,67.1123 177.25,67.2686 Q177.9063,67.4248 178.4688,67.7217 L178.4688,70.4404 Q177.8438,69.8623 177.25,69.5967 Q176.6563,69.3154 176.0313,69.3154 Q174.6875,69.3154 174,70.3936 Q173.3125,71.4561 173.3125,73.5498 Q173.3125,75.6436 174,76.7217 Q174.6875,77.7842 176.0313,77.7842 Q176.6563,77.7842 177.25,77.5186 Q177.8438,77.2373 178.4688,76.6592 L178.4688,79.3779 Z " fill="#000000"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="57" x="187.5" y="79.3052">Context</text><line style="stroke:#000000;stroke-width:1.0;" x1="163.5" x2="246.5" y1="87.7373" y2="87.7373"/><line style="stroke:#000000;stroke-width:1.0;" x1="163.5" x2="246.5" y1="95.7373" y2="95.7373"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="66" x="168.5" y="113.8125">request()</text></g><!--MD5=[60d6b92408f98aed8df94d5c6e04aa63]
+class State--><g id="elem_State"><rect codeLine="8" fill="#FFFFFF" height="61.0146" id="State" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="70" x="283" y="59.7373"/><ellipse cx="298.25" cy="73.7373" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1.0;"/><path d="M294.1719,69.5029 L294.1719,67.3467 L301.5625,67.3467 L301.5625,69.5029 L299.0938,69.5029 L299.0938,77.5811 L301.5625,77.5811 L301.5625,79.7373 L294.1719,79.7373 L294.1719,77.5811 L296.6406,77.5811 L296.6406,69.5029 L294.1719,69.5029 Z " fill="#000000"/><text fill="#000000" font-family="Verdana" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="37" x="310.75" y="79.3052">State</text><line style="stroke:#000000;stroke-width:1.0;" x1="284" x2="352" y1="87.7373" y2="87.7373"/><line style="stroke:#000000;stroke-width:1.0;" x1="284" x2="352" y1="95.7373" y2="95.7373"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="58" x="289" y="113.8125">handle()</text></g><!--MD5=[8ce8754eae416e99ceeb172ff1b4777a]
+class ConcreteStateA--><g id="elem_ConcreteStateA"><rect codeLine="12" fill="#FFFFFF" height="61.0146" id="ConcreteStateA" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="139" x="161.5" y="180.7373"/><ellipse cx="174.5" cy="194.7373" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1.0;"/><path d="M177.4688,200.3779 Q176.8906,200.6748 176.25,200.8154 Q175.6094,200.9717 174.9063,200.9717 Q172.4063,200.9717 171.0781,199.3311 Q169.7656,197.6748 169.7656,194.5498 Q169.7656,191.4248 171.0781,189.7686 Q172.4063,188.1123 174.9063,188.1123 Q175.6094,188.1123 176.25,188.2686 Q176.9063,188.4248 177.4688,188.7217 L177.4688,191.4404 Q176.8438,190.8623 176.25,190.5967 Q175.6563,190.3154 175.0313,190.3154 Q173.6875,190.3154 173,191.3936 Q172.3125,192.4561 172.3125,194.5498 Q172.3125,196.6436 173,197.7217 Q173.6875,198.7842 175.0313,198.7842 Q175.6563,198.7842 176.25,198.5186 Q176.8438,198.2373 177.4688,197.6592 L177.4688,200.3779 Z " fill="#000000"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="111" x="186.5" y="200.3052">ConcreteStateA</text><line style="stroke:#000000;stroke-width:1.0;" x1="162.5" x2="299.5" y1="208.7373" y2="208.7373"/><line style="stroke:#000000;stroke-width:1.0;" x1="162.5" x2="299.5" y1="216.7373" y2="216.7373"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="58" x="167.5" y="234.8125">handle()</text></g><!--MD5=[2a56818668b9fdbbaba8565da0ccac7d]
+class ConcreteStateB--><g id="elem_ConcreteStateB"><rect codeLine="16" fill="#FFFFFF" height="61.0146" id="ConcreteStateB" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="139" x="335.5" y="180.7373"/><ellipse cx="348.5" cy="194.7373" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1.0;"/><path d="M351.4688,200.3779 Q350.8906,200.6748 350.25,200.8154 Q349.6094,200.9717 348.9063,200.9717 Q346.4063,200.9717 345.0781,199.3311 Q343.7656,197.6748 343.7656,194.5498 Q343.7656,191.4248 345.0781,189.7686 Q346.4063,188.1123 348.9063,188.1123 Q349.6094,188.1123 350.25,188.2686 Q350.9063,188.4248 351.4688,188.7217 L351.4688,191.4404 Q350.8438,190.8623 350.25,190.5967 Q349.6563,190.3154 349.0313,190.3154 Q347.6875,190.3154 347,191.3936 Q346.3125,192.4561 346.3125,194.5498 Q346.3125,196.6436 347,197.7217 Q347.6875,198.7842 349.0313,198.7842 Q349.6563,198.7842 350.25,198.5186 Q350.8438,198.2373 351.4688,197.6592 L351.4688,200.3779 Z " fill="#000000"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="111" x="360.5" y="200.3052">ConcreteStateB</text><line style="stroke:#000000;stroke-width:1.0;" x1="336.5" x2="473.5" y1="208.7373" y2="208.7373"/><line style="stroke:#000000;stroke-width:1.0;" x1="336.5" x2="473.5" y1="216.7373" y2="216.7373"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="58" x="341.5" y="234.8125">handle()</text></g><path d="M11,72.2373 L11,98.0366 A0,0 0 0 0 11,98.0366 L127,98.0366 A0,0 0 0 0 127,98.0366 L127,90.2373 L166.5,108.2446 L127,82.2373 L127,82.2373 L117,72.2373 L11,72.2373 A0,0 0 0 0 11,72.2373 " fill="#FFFFFF" style="stroke:#000000;stroke-width:1.0;"/><path d="M117,72.2373 L117,82.2373 L127,82.2373 L117,72.2373 " fill="#FFFFFF" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="13" lengthAdjust="spacing" textLength="95" x="17" y="90.3071">state.handle()</text><!--MD5=[84aa1ab688926a3061fa5ce935c50cce]
+reverse link State to ConcreteStateA--><g id="link_State_ConcreteStateA"><path codeLine="20" d="M283.66,138.2073 C273.25,152.4473 262.1,167.6973 252.75,180.4773 " fill="none" id="State-backto-ConcreteStateA" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="none" points="277.92,134.1973,295.38,122.1773,289.22,142.4573,277.92,134.1973" style="stroke:#000000;stroke-width:1.0;"/></g><!--MD5=[6c5de783058e39e318d63f080b303e10]
+reverse link State to ConcreteStateB--><g id="link_State_ConcreteStateB"><path codeLine="21" d="M352.34,138.2073 C362.75,152.4473 373.9,167.6973 383.25,180.4773 " fill="none" id="State-backto-ConcreteStateB" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="none" points="346.78,142.4573,340.62,122.1773,358.08,134.1973,346.78,142.4573" style="stroke:#000000;stroke-width:1.0;"/></g><!--MD5=[64495b8fbf9e79a080f449d41e5a6213]
+link Context to State--><g id="link_Context_State"><path codeLine="23" d="M247.82,90.2373 C257.34,90.2373 266.86,90.2373 276.38,90.2373 " fill="none" id="Context-to-State" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="#000000" points="281.12,90.2373,272.12,86.2373,276.12,90.2373,272.12,94.2373,281.12,90.2373" style="stroke:#000000;stroke-width:1.0;"/></g><!--MD5=[8570a14bf373d2b426ffa189656ccb37]
+@startuml
+!theme plain
+title 状态模式类图
+
+class Context {
+  request()
+}
+
+interface State {
+  handle()
+}
+
+class ConcreteStateA {
+  handle()
+}
+
+class ConcreteStateB {
+  handle()
+}
+
+State <|- - ConcreteStateA
+State <|- - ConcreteStateB
+
+Context -R-> State
+
+note left of Context::request
+  state.handle()
+end note
+
+@enduml
+
+@startuml
+
+
+
+
+
+
+
+<style>
+  root {
+    BackgroundColor white
+    FontColor black
+    FontName Verdana
+    HyperLinkColor blue
+    LineColor black
+    LineThickness 1
+    Margin 5
+  }
+  caption {
+    LineThickness 0
+  }
+  footer {
+    LineThickness 0
+  }
+  header {
+    LineThickness 0
+  }
+  node {
+    MaximumWidth 300
+  }
+  title {
+    FontSize 22
+    LineThickness 0
+  }
+</style>
+
+skinparam ArrowLollipopColor black
+skinparam BackgroundColor white
+skinparam DefaultFontName Verdana
+skinparam DefaultMonospacedFontName Courier
+skinparam LifelineStrategy nosolid
+skinparam ParticipantPadding 10
+skinparam SequenceLifeLineBorderColor black
+skinparam Shadowing false
+skinparam UseBetaStyle true
+
+skinparam Activity {
+  BackgroundColor white
+  BarColor black
+  BorderColor black
+  FontColor black
+  FontName Verdana
+}
+skinparam Boundary {
+  FontColor black
+}
+skinparam Box {
+  Padding 5
+}
+skinparam CircledCharacter {
+  FontColor black
+  FontName Courier
+  Radius 9
+}
+skinparam Class {
+  BackgroundColor white
+  BorderColor black
+  FontColor black
+  FontName Verdana
+}
+skinparam ClassAttribute {
+  FontColor black
+  FontName Verdana
+}
+skinparam ClassStereotype {
+  FontColor black
+  FontName Verdana
+}
+skinparam Footer {
+  FontColor black
+  FontName Verdana
+}
+skinparam Header {
+  FontColor black
+  FontName Verdana
+}
+skinparam Hyperlink {
+  Color blue
+}
+skinparam IconPackage {
+  Color black
+  BackgroundColor white
+}
+skinparam IconPrivate {
+  Color black
+  BackgroundColor white
+}
+skinparam IconProtected {
+  Color black
+  BackgroundColor white
+}
+skinparam IconPublic {
+  Color black
+  BackgroundColor white
+}
+skinparam Note {
+  FontColor black
+  FontName Verdana
+}
+skinparam Object {
+  BorderColor black
+}
+skinparam Package {
+  BorderColor black
+  FontColor black
+  FontName Verdana
+}
+skinparam State {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam StereotypeA {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam StereotypeC {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam StereotypeE {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam StereotypeI {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam StereotypeN {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam UseCaseStereoType {
+  FontColor black
+  FontName Verdana
+}
+title 状态模式类图
+
+class Context {
+  request()
+}
+
+interface State {
+  handle()
+}
+
+class ConcreteStateA {
+  handle()
+}
+
+class ConcreteStateB {
+  handle()
+}
+
+State <|- - ConcreteStateA
+State <|- - ConcreteStateB
+
+Context -R-> State
+
+note left of Context::request
+  state.handle()
+end note
+
+@enduml
+
+PlantUML version 1.2022.7(Tue Aug 23 01:01:30 CST 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

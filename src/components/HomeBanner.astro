@@ -1,0 +1,17 @@
+---
+import GitHubActivityCalendar from '~/components/GitHubActivityCalendar.astro'
+
+interface Props {
+  githubCalendar?: string
+}
+const { githubCalendar } = Astro.props
+---
+
+<div class="md:mx-2">
+  <div class="max-w-full mb-6">
+    <div class:list={['m-4 max-w-full prose']}>
+      <slot />
+    </div>
+  </div>
+  {githubCalendar && <GitHubActivityCalendar username={githubCalendar} />}
+</div>

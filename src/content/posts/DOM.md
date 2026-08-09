@@ -1,0 +1,150 @@
+---
+title: "DOM"
+published: 2017-11-13
+tags: ["javascript"]
+---
+DOM(Document Object Model) 文档对象模型。每个 Windows 对象有一个 document 属性引用了 Document 对象。Document 对象表示窗口的内容。
+
+## Node 对象
+
+Node 对象是一个抽象的基类，其他的 DOM API 对象都是基于这个基类。作为一个抽象类，不存在一个普通的 Node 对象。常见的子类有Document、Element、Text 和 DocumentFragment。
+
+### Node 对象的属性
+
+- Node.childNodes(只读)
+
+  返回一个实时的节点的子节点 NodeList 对象，包含了 element, text 和 comments对象。实时性意味着当文档变化时它们所包含的元素列表能随之改变。
+
+- Node.firstChild(只读)
+
+  返回节点的第一个子节点，如果节点没有子节点返回 `null`。
+
+- Node.lastChild(只读)
+
+  返回子节点的最后一个节点，如果没有子节点返回 `null`。
+
+- Node.nextSibling(只读)
+
+  返回节点的兄弟节点的后一个，如果没有返回 `null`。
+
+- Node.previousSibling(只读)
+
+  返回节点的兄弟节点的前一个，如果没有返回 `null`。
+
+- Node.parentNode(只读)
+
+  返回节点的父节点，若是顶层节点，没有父节点则返回 `null`。
+
+- Node.nodeName(只读)
+
+  返回节点的元素标签名
+
+- Node.nodeValue
+
+  返回/设置当前节点的值
+
+- Node.nodeType(只读)
+
+  返回节点的类型，常见的 Node 类型有
+
+  | 名称 | 值 |
+  | Element_NODE | 1 |
+  | TEXT_NODE | 3 |
+  | COMMENT_NODE | 8 |
+  | DOCUMENT_NODE | 9 |
+  | DOCUMENT_FRAGMENT_NODE | 11 |
+
+### Node 对象的方法
+
+- Node.appendChild(childNode)
+
+  在当前节点的子节点末尾添加指定的节点。
+
+- Node.cloneNode([deep])
+
+  克隆节点，`true` 表示深复制，`false` 为浅复制。
+
+- Node.hasChildNodes()
+
+  返回一个 `boolean` 表示当前节点是否含有子节点。
+
+- Node.insertBefore(newNode, referenceNode)
+
+   在指定节点前插入新节点，作为指定的父节点的子节点。
+
+- Node.removeChild(child)
+
+  从当前节点删除一个子节点，该子节点必须是当前节点的一个子节点。
+
+- Node.replaceChild(newChild, oldChild)
+
+  用新子节点代替旧的子节点。
+
+## Document 类型
+
+Document 类型最常见的是作为 HTMLDocument 实例的 document 对象。
+
+### HTMLDocument属性
+
+| --- | --- |
+| Document.body | 返回当前文档的 `<body>` 元素 |
+| Document.body | 取得/设置当前文档的cookies属性 |
+| Document.domain | 取得/设置当前文档的域名 |
+| Document.location(read only) | 返回一个 Location 对象，包含当前文档的url以及提供方法修改url |
+| Document.referrer (read only) | 返回页面的 URI |
+| Document.title | 取得/设置文档的标题 |
+| Document.URL(read only) | 返回文档的 URL 字符串 |
+
+### Document常见方法
+
+| --- | --- |
+| Document.createElement(tagName) | 创建指定的 HTML 元素，返回新创建的元素 |
+| Document.createTextNode(data) | 创建文本节点，data 是新建的文本节点字符串，返回新建文本节点 |
+| Document.getElementsByClassName(name) | 返回一个指定类名的所有元素的 NodeList |
+| Document.getElementsByTagName | 返回一个指定标签名的所有元素的 NodeList |
+| Document.getElementById(id) | 返回一个Element对象，若没有则返回 null |
+| Document.querySelector(selectors) | 接受一个 CSS 选择符，返回与该模式匹配的第一个元素，如果没有则返回 null |
+| Document.querySelectorAll(selectors) | 接受一个 CSS 选择符，返回一个静态的 NodeList 类数组对象，如果没有返回空 |
+
+### 继承HTMLDocument方法
+
+| --- | --- |
+| Document.getElementsByName(name) | 返回一个指定 Name 属性的所有元素的 NodeList |
+| Document.hasFocus() | 文档中有任何元素处于焦点，则返回true，否则返回false |
+| Document.write() | 向文档中写入字符串文本 |
+
+## Element类型
+
+使用更多的是HTMLElement
+
+### Element常见属性
+
+| Element.attributes(read only) | 返回元素的所有属性集合的 NamedNodeMap 对象，可以使用 getNamedItem(name) 来获取 nodeName 属性 |
+| Element.classList(read only) | 返回元素的类属性集合的 DOMTokenList 对象 |
+| Element.className | 取得/设置元素的类属性的值 |
+| Element.id | 元素在文档中的唯一标识符 |
+| Element.innerHTML | 取得/设置元素的子元素的内容(仅限子元素) |
+| Element.outerHTML | 取得/设置元素的内容(包括元素自身) |
+| Element.tagName(read only) | 返回元素标签名的字符串 |
+
+### Element类型的方法
+
+| --- | --- |
+| EventTarget.addEventListener() | 在元素上注册一个事件处理程序 |
+| Element.getAttribute(attributeName) | 返回元素上指定的属性的值 |
+| Element.getElementsByClassName(name) | 返回一个指定类名的所有元素的 NodeList |
+| Element.getElementsByTagName(name) | 返回一个指定标签名的所有元素的 NodeList |
+| Element.hasAttribute(name) | 如果元素上有该属性，返回 true，否则返回 false |
+| Element.hasAttribute() | 如果元素上有属性，返回 true，否则返回 false |
+| Element.querySelector(selectors) | 接受一个 CSS 选择符，返回与该模式匹配的第一个元素，如果没有则返回 null |
+| Element.querySelectorAll(selectors) | 接受一个 CSS选择符，返回一个静态的 NodeList 类数组对象，如果没有返回空 |
+| Element.removeAttribute(attrName) | 从元素中移除指定的属性 |
+| EventTarget.removeEventListener() | 从元素上移除一个事件监听器 |
+| Element.setAttribute(name, value) | 在元素上设置一个属性，指定属性名和属性值，如果属性名存在，则更新属性值 |
+
+## 参考资料
+
+- [Introduction to the DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction)
+- [MDN web docs](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)
+- 《JavaScript高级程序设计(第3版)》
+- 《JavaScript权威指南(第6版)》

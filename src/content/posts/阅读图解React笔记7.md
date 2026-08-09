@@ -1,0 +1,143 @@
+---
+title: "阅读图解React笔记7"
+published: 2022-12-19
+tags: ["react"]
+---
+
+本文仅仅是阅读 [图解 React 原理系列](https://7kms.github.io/react-illustration-series/) 的笔记，了解更多内容请查看原文链接。
+
+<!-- vim-markdown-toc GFM -->
+
+- [概览](#概览)
+- [CommitRoot](#commitroot)
+- [参考链接](#参考链接)
+
+<!-- vim-markdown-toc -->
+
+## 概览
+
+Fiber 树渲染阶段被称为 commit 阶段。fiberNode 阶段流程可能被打断，而 commit 阶段一旦开始就会同步执行直到完成。
+
+整个阶段可以分为三个子阶段：
+
+- BeforeMutation 阶段
+- Mutation 阶段
+- Layout 阶段
+
+![](/images/react-commit-root-impl.webp)
+
+## CommitRoot
+
+整个渲染逻辑都在 CommitRootImpl 函数上，其源码位置 _ReactFiberWorkLoop.new.js_
+
+在 commitRoot 中同时使用到了渲染优先级和调度优先级，最后的实现是通过 commitRootImpl 函数：
+
+```js
+function commitRootImpl(root, recoverableErrors, transitions, renderPriorityLevel) {
+  // ============
+  // 渲染前准备
+  // ============
+  const finishedWork = root.finishedWork;
+  const lanes = root.finishedLanes;
+
+  // 清空 FiberRoot 对象上的属性
+  root.finishedWork = null;
+  root.finishedLanes = NoLanes;
+  root.callbackNode = null;
+
+  if (root === workInProgressRoot) {
+    workInProgressRoot = null;
+    workInProgress = null;
+    workInProgressRootRenderLanes = NoLanes;
+  }
+
+  // ========
+  // 渲染
+  // ========
+  // 检查是否有副作用在整个树
+  const subtreeHasEffect =
+    (finishedWork.subtreeFlags & (BeforeMutationMask | MutationMask | LayoutMask | PassiveMask)) !==
+    NoFlags;
+  const rootHasEffect =
+    (finishedWork.flags & (BeforeMutationMask | MutationMask | LayoutMask | PassiveMask)) !==
+    NoFlags;
+
+  if (subtreeHasEffect || rootHasEffect) {
+    const prevExecutionContext = executionContext;
+    executionContext |= CommitContext;
+    const prevInteractions = pushInteractions(root);
+
+    // 调用生命周期前，重置为null
+    ReactCurrentOwner.current = null;
+
+    // 第一个阶段
+    commitBeforeMutationEffects(finishedWork);
+
+    // 第二个阶段
+    commitMutationEffects(finishedWork, root, renderPriorityLevel);
+
+    // fiber 树的切换
+    root.current = finishedWork;
+
+    // 第三个阶段
+    commitLayoutEffects(finishedWork, root, lanes);
+
+    // 如果有被动的副作用，调度一个回调处理它。
+    if (
+      (finishedWork.subtreeFlags & PassiveMask) !== NoFlags ||
+      (finishedWork.flags & PassiveMask) !== NoFlags
+    ) {
+      if (!rootDoesHavePassiveEffects) {
+        rootDoesHavePassiveEffects = true;
+        scheduleCallback(NormalSchedulerPriority, () => {
+          flushPassiveEffecs();
+          return null;
+        });
+      }
+    }
+
+    // 告知调度器在帧的末尾产生，所以浏览器能有机会绘制。
+    requestPaint();
+
+    // =========
+    // 渲染后
+    // =========
+    const rootDidHavePassiveEffects = rootDoesHavePassiveEffects;
+
+    if (rootDoesHavePassiveEffects) {
+      // 这次 commit 有被动副作用，保存对它们的引用。
+      rootDoesHavePassiveEffects = false;
+      rootWithPendingPassiveEffects = root;
+      pendingPassiveEffectsLanes = lanes;
+    } else {
+      releaseRootPooledCache(root, remainingLanes);
+    }
+
+    // 结束之前总是要调用该函数，确保当前 root 所有额外的工作的被调度。
+    ensureRootIsScheduled(root, now());
+
+    // 如果布局被调度了，刷新它
+    flushSyncCallbackQueue();
+
+    return null;
+  }
+}
+```
+
+大致可以将 commitRootImpl 划分为渲染前，渲染，渲染后。
+
+渲染前主要是设置一些全局变量和重置一些全局状态。
+
+渲染被划分为 3 个阶段处理实现：
+
+- commitBeforeMutationEffects
+- commitMutationEffects
+- recursivelyCommitLayoutEffects
+
+渲染后主要做一些重置和清理工作。
+
+## 参考链接
+
+- [github: react-illustration-series](https://github.com/7kms/react-illustration-series)
+- [github: react](https://github.com/facebook/react)
+- [图解 React: Fiber 树渲染](https://7kms.github.io/react-illustration-series/main/fibertree-commit/)

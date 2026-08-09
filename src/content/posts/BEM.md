@@ -1,0 +1,67 @@
+---
+title: "BEM"
+published: 2021-12-07
+tags: ["css"]
+---
+
+BEM 是 CSS 一种命名规范，BEM 是由 Block, Element, Modifier 组合成的缩写。
+
+BEM 其实是由 Yandex 公司出品的，但是却产生了两份规范，一份是由 Yandex 的规范 [bem.info](https://en.bem.info/)，一个是由 getbem 规范的 [getbem](http://getbem.com/introduction/)，产生的原因可以参考 [getbem: Project goals](https://github.com/getbem/getbem.com/issues/8)
+
+Yandex 的命名规范：block-name\_\_element-name_modifier-name
+
+getbem 的命名规则：block-name\_\_element-name\-\-modifier-name
+
+## Block
+
+块可以内嵌，为了保证复用块的时候：
+
+- 块描述的是目的，而不是状态。如 menu，button 而不是 red，big。
+- 块不应该受环境影响，意味着你不应该设置额外的 margin 或者指定位置。
+- 使用 BEM 时不应该使用 CSS 标签或者 ID 选择器。
+
+```html
+<header class="header">
+  <div class="logo"></div>
+  <form class="search-for"></form>
+</header>
+```
+
+## Element
+
+元素不可单独使用的块的复合部分，元素可以相互内嵌。元素应该也是描述的是目的，而不是状态。
+
+元素总是属于块的一部分，所以我们不能定义类似 block\_\_elem1\_\_elem2 的元素名称。
+
+```html
+<form class="search-form">
+  <div class="search-form__content">
+    <input class="search-form__input" />
+
+    <button class="search-form__button">Search</button>
+  </div>
+</form>
+```
+
+## Modifier
+
+由于两份规范的不同，我们采用了应用更广的 getbem 的规范.
+
+修饰符定义了元素或块的外观，状态或者行为，如 size--s，disabled，focused 或者 derections--left-top.
+
+修饰符有两种命名模式：
+
+- block-name--modifier-name
+- block-name\_\_element-name--modifier-name
+
+```html
+<form class="search-form search-form--focused">
+  <button class="search-form__button search-form--disabled">Search</button>
+  <form></form>
+</form>
+```
+
+## 参考链接
+
+- [bem.info](https://en.bem.info/)
+- [getbem](http://getbem.com/introduction/)

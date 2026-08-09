@@ -1,0 +1,183 @@
+---
+title: "Sass的基础用法"
+published: 2022-06-09
+tags: ["css"]
+---
+
+Sass is an extension of CSS, adding nested rules, variables, mixins, selector inheritance, and more.
+
+<!-- vim-markdown-toc GFM -->
+
+- [安装](#安装)
+- [webpack 全局使用 sass](#webpack-全局使用-sass)
+- [变量](#变量)
+- [@规则](#规则)
+  - [@mixin 与 @include](#mixin-与-include)
+  - [@import](#import)
+  - [@use](#use)
+  - [@extend](#extend)
+  - [@function](#function)
+- [参考链接](#参考链接)
+
+<!-- vim-markdown-toc -->
+
+## 安装
+
+1. 直接编译成 css
+
+   使用命令行的方式安装 `npm i -g sass`
+
+   运行编译命令 `sass input.scss outpu.css`，生成编译的文件
+
+2. 在 webpack 中使用
+
+   webpack 中需要安装 sass-loader，需要安装 Dart Sass，Node Sass 或者 Sass Embedded 其中之一。
+
+   推荐使用 Dart Sass，因为 Node Sass 不支持 @use 规则，Sass Embedded 还在实验中，部分功能暂不完善。
+
+   具体配置方式：[webpack: sass-loader](https://webpack.js.org/loaders/sass-loader)
+
+## webpack 全局使用 sass
+
+一些基础配置的 sass 文件，如: `_base.scss` 或 `_variables.scss` 经常会在其他文件引用，那么就需要全局使用 sass 文件。
+
+全局使用 sass 文件，主要是修改 webpack 中的 sass-loader 的配置中的 additionalData 配置。
+
+假设我们有一个 sass 文件 `sass/_variables.scss`
+
+```js
+const themeColor = path.resolve(__dirname, 'sass', '_variables.scss');
+
+// 使用 @import
+{
+  loader: 'sass-loader',
+  options: {
+    additionalData: `additionalData: @import "../src/sass/_variables.scss";`,
+  }
+}
+
+// 使用 @use，并可以直接使用
+{
+  loader: 'sass-loader',
+  options: {
+    additionalData: `additionalData: @use "../src/sass/_variables.scss"; as *`,
+  }
+}
+
+// 使用 @use，并作为变量 variables
+{
+  loader: 'sass-loader',
+  options: {
+    `additionalData: @use "${themeColor}"; as variables`,
+  }
+}
+```
+
+## 变量
+
+Sass 定义变量使用 `$` 符合开头。
+
+```scss
+$base-color: #c6538c;
+$border-dark: rgba($base-color, 0.88);
+
+.alert {
+  border: 1px solid $border-dark;
+}
+```
+
+## @规则
+
+### @mixin 与 @include
+
+@mixin 用于声明一个混合器，而 @include 调用声明的混合器。
+
+@mixin 可以传参，且可以自带默认参数，传递的参数可以作为值使用，也可以作为属性使用。
+
+```scss
+@mixin <name> { ... }
+@mixin name(<arguments...>) { ... }
+@include <name>
+@include <name>(<arguments...>)
+```
+
+### @import
+
+@import 可以同时引入多个文件，`@import 'foundation/code', 'foundation/list'`
+
+Sass 团队不鼓励继续使用 @import，更倾向于使用 @use 替代。主要是 @import 存在以下问题：
+
+- @import 让所有的变量、混合器和函数都可以全局访问。这让人们很难知道是在哪里定义的。
+- 因为所有的东西都是全局的，所以库必须给所有成员加上前缀，以避免命名冲突。
+- 每次 @import 时，每个样式表都会被执行，增加编译时间，产生臃肿的输出。
+- 没有办法定义私有成员或占位符选择器。
+
+### @use
+
+@use 是从其他模块载入 mixin，function，变量等，将其组合一起。通过 @use 加载进来的样式被称为模块，sass 有内置的模块。
+通过 @use 加载的样式最终只会输出一份。
+
+默认情况下，use 的命名空间就是最后的 URL，也可以通过 `as name` 或者 `as *` 来重命名。
+
+```scss
+// 调用方式加上对应的 <namespace>
+// <namespace>.<variable>
+// <namespace>.<function>()
+// @include <namespace>.<mixin>()`
+
+@use 'theme';
+@use 'src/corners';
+
+.div {
+  color: theme.$textColor;
+  @include corners.rounded;
+}
+```
+
+私有变量
+
+- 通过命名以 `-` 或 `_` 开头的变量，通过 @use 导入的时候，其他文件无法访问使用。
+
+默认值
+
+- 通过 `!default` 定义一个有默认值的可配置变量，可通过 @use 重新赋值
+
+  ```scss
+  // 通过 with 重复赋值
+  @use <url> with (
+    <variable>: <value>
+  );
+
+  // 直接重新赋值
+  @use 'theme';
+  theme.$color: red;
+  ```
+
+局部文件
+
+- 局部文件以下划线 `_` 开头，引入的时候可以忽略下划线。局部文件默认不编译。
+
+@use 企图替换掉 @import，主要的区别：
+
+- @use 只让变量，函数与混合器在当前文件的范围内可用，不会把它们添加到全局范围。
+- @use 对每个文件只加载一次，这可以确保不会意外重复依赖相同的 CSS。
+- @use 必须出现在文件的开头，且不能嵌套在样式规则中。
+- 每个 @use 规则只能有一个 URL。
+- @use 需要在其 URL 周围加上引号。
+
+### @extend
+
+不同于 @mixin 的复制样式至当前的样式规则里，@extend 则是将当前的选择器更新至样式规则里。
+
+@extend 用在 BEM 修饰器的类的复用挺方便的。
+
+### @function
+
+函数允许你定义更加复杂的 Sass 脚本，使得你更加方便重用。
+
+`@function <name>(<arguments...> {...})`
+
+## 参考链接
+
+- [Sass: Syntactically Awesome Style Sheets](https://sass-lang.com)
+- [sass-loader \| webpack](https://webpack.js.org/loaders/sass-loader/)

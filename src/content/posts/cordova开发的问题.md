@@ -1,0 +1,36 @@
+---
+title: "Cordova 开发的问题"
+published: 2024-02-21
+tags: ["app"]
+---
+
+Cordova 开发中遇到的问题与解决方案。
+
+<!-- vim-markdown-toc GFM -->
+
+- [gradle 下载](#gradle-下载)
+- [Debug Webview](#debug-webview)
+
+<!-- vim-markdown-toc -->
+
+## gradle 下载
+
+在构建 android 项目的时候，需要下载 gradle 速度特别慢的问题。
+
+可以去 `https://services.gradle.org/distributions/` 使用浏览器等方式下载。
+
+然后解压到 `C:\Users\<youruser>\.gradle\wrapper\dists\gradle-x.y-bin` 目录下。
+
+## Debug Webview
+
+前置条件：打开 `USB调试` 功能
+
+1. Chrome
+
+   使用 Chrome，打开 `chrome://inspect/#devices`
+
+2. Edge
+
+   使用 Edge，打开 `edge://inspect/#devices`
+
+使用了 chrome 可能会遇到网络的问题，只需要科学上网即可。

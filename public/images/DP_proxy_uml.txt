@@ -1,0 +1,20 @@
+@startuml
+!theme plain
+title 代理模式
+
+interface Subject {
+  request()
+}
+Class Proxy {
+  request()
+}
+Class RealSubject {
+  request()
+}
+
+Subject <|.. Proxy
+Subject <|.. RealSubject
+RealSubject <-R- Proxy : subject
+
+@enduml
+

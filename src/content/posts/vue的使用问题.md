@@ -1,0 +1,48 @@
+---
+title: "Vue 的使用问题"
+published: 2024-01-14
+tags: ["vue"]
+---
+
+在使用 Vue 遇到的部分问题。
+
+<!-- vim-markdown-toc GFM -->
+
+- [Prettier](#prettier)
+- [Debug in VS Code](#debug-in-vs-code)
+
+<!-- vim-markdown-toc -->
+
+## Prettier
+
+在使用 Prettier 格式化文件，会遇到结束标签 `>` 跑到下一行的问题。
+
+通过修改 .prettier 的配置项：
+
+`htmlWhitespaceSensitivity: ignore`
+
+参考链接：
+
+- [HTML Whitespace Sensitivity](https://prettier.io/docs/en/options#html-whitespace-sensitivity)
+- [Prettier 1.15: HTML, Vue, Angular and MDX Support · Prettier](https://prettier.io/blog/2018/11/07/1.15.0#whitespace-sensitive-formatting)
+
+## Debug in VS Code
+
+先阅读官方文档 [Debugging in VS Code](https://v2.vuejs.org/v2/cookbook/debugging-in-vscode)
+
+大致有以下几个点：
+
+1. 如果是 Firefox，需要安装对应的插件，Chrome 已经内置对应插件，无需安装。
+2. 需要修改 `vue.config.js`，内容如下：
+
+   ```js
+   module.exports = {
+     configureWebpack: {
+       devtool: 'source-map',
+     },
+   };
+   ```
+
+参考文档：
+
+- [VSCode Vue 调试 - J.晒太阳的猫 - 博客园](https://www.cnblogs.com/jasongrass/p/16438571.html)

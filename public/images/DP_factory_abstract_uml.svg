@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="459px" preserveAspectRatio="none" style="width:955px;height:459px;background:#FFFFFF;" version="1.1" viewBox="0 0 955 459" width="955px" zoomAndPan="magnify"><defs/><g><g id="cluster_##2"><path d="M579.5,204 L667.25,204 A3.75,3.75 0 0 1 669.75,206.5 L676.75,214 L945.5,214 A2.5,2.5 0 0 1 948,216.5 L948,449.5 A2.5,2.5 0 0 1 945.5,452 L579.5,452 A2.5,2.5 0 0 1 577,449.5 L577,206.5 A2.5,2.5 0 0 1 579.5,204 " fill="#FFFFFF" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:1.0;" x1="577" x2="676.75" y1="214" y2="214"/></g><g id="cluster_##7"><path d="M13.5,100 L144,100 A3.75,3.75 0 0 1 146.5,102.5 L153.5,110 L550.5,110 A2.5,2.5 0 0 1 553,112.5 L553,294.5 A2.5,2.5 0 0 1 550.5,297 L13.5,297 A2.5,2.5 0 0 1 11,294.5 L11,102.5 A2.5,2.5 0 0 1 13.5,100 " fill="#FFFFFF" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:1.0;" x1="11" x2="153.5" y1="110" y2="110"/></g><!--MD5=[536fe7577e8cf19597ee85886b82cd6a]
+class AbstractFactory--><g id="elem_AbstractFactory"><rect codeLine="5" fill="#FFFFFF" height="78.0293" id="AbstractFactory" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="141" x="598.5" y="220"/><ellipse cx="611.5" cy="234" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1.0;"/><path d="M607.4219,229.7656 L607.4219,227.6094 L614.8125,227.6094 L614.8125,229.7656 L612.3438,229.7656 L612.3438,237.8438 L614.8125,237.8438 L614.8125,240 L607.4219,240 L607.4219,237.8438 L609.8906,237.8438 L609.8906,229.7656 L607.4219,229.7656 Z " fill="#000000"/><text fill="#000000" font-family="Verdana" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="113" x="623.5" y="239.5679">AbstractFactory</text><line style="stroke:#000000;stroke-width:1.0;" x1="599.5" x2="738.5" y1="248" y2="248"/><line style="stroke:#000000;stroke-width:1.0;" x1="599.5" x2="738.5" y1="256" y2="256"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="122" x="604.5" y="274.0752">CreateProductA()</text><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="119" x="604.5" y="291.0898">createProductB()</text></g><!--MD5=[40032afdf3b7ba11206d848f1b965299]
+class ConcreteFactory1--><g id="elem_ConcreteFactory1"><rect codeLine="10" fill="#FFFFFF" height="78.0293" id="ConcreteFactory1" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="152" x="593" y="358"/><ellipse cx="606" cy="372" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1.0;"/><path d="M608.9688,377.6406 Q608.3906,377.9375 607.75,378.0781 Q607.1094,378.2344 606.4063,378.2344 Q603.9063,378.2344 602.5781,376.5938 Q601.2656,374.9375 601.2656,371.8125 Q601.2656,368.6875 602.5781,367.0313 Q603.9063,365.375 606.4063,365.375 Q607.1094,365.375 607.75,365.5313 Q608.4063,365.6875 608.9688,365.9844 L608.9688,368.7031 Q608.3438,368.125 607.75,367.8594 Q607.1563,367.5781 606.5313,367.5781 Q605.1875,367.5781 604.5,368.6563 Q603.8125,369.7188 603.8125,371.8125 Q603.8125,373.9063 604.5,374.9844 Q605.1875,376.0469 606.5313,376.0469 Q607.1563,376.0469 607.75,375.7813 Q608.3438,375.5 608.9688,374.9219 L608.9688,377.6406 Z " fill="#000000"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="124" x="618" y="377.5679">ConcreteFactory1</text><line style="stroke:#000000;stroke-width:1.0;" x1="594" x2="744" y1="386" y2="386"/><line style="stroke:#000000;stroke-width:1.0;" x1="594" x2="744" y1="394" y2="394"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="122" x="599" y="412.0752">CreateProductA()</text><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="119" x="599" y="429.0898">createProductB()</text></g><!--MD5=[e7b84ce2505fe77d924ba186871d0b8b]
+class ConcreteFactory2--><g id="elem_ConcreteFactory2"><rect codeLine="15" fill="#FFFFFF" height="78.0293" id="ConcreteFactory2" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="152" x="780" y="358"/><ellipse cx="793" cy="372" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1.0;"/><path d="M795.9688,377.6406 Q795.3906,377.9375 794.75,378.0781 Q794.1094,378.2344 793.4063,378.2344 Q790.9063,378.2344 789.5781,376.5938 Q788.2656,374.9375 788.2656,371.8125 Q788.2656,368.6875 789.5781,367.0313 Q790.9063,365.375 793.4063,365.375 Q794.1094,365.375 794.75,365.5313 Q795.4063,365.6875 795.9688,365.9844 L795.9688,368.7031 Q795.3438,368.125 794.75,367.8594 Q794.1563,367.5781 793.5313,367.5781 Q792.1875,367.5781 791.5,368.6563 Q790.8125,369.7188 790.8125,371.8125 Q790.8125,373.9063 791.5,374.9844 Q792.1875,376.0469 793.5313,376.0469 Q794.1563,376.0469 794.75,375.7813 Q795.3438,375.5 795.9688,374.9219 L795.9688,377.6406 Z " fill="#000000"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="124" x="805" y="377.5679">ConcreteFactory2</text><line style="stroke:#000000;stroke-width:1.0;" x1="781" x2="931" y1="386" y2="386"/><line style="stroke:#000000;stroke-width:1.0;" x1="781" x2="931" y1="394" y2="394"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="122" x="786" y="412.0752">CreateProductA()</text><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="119" x="786" y="429.0898">createProductB()</text></g><!--MD5=[06b8f8cffd7975d9bab77ad64b593d4b]
+class AbstractProductA--><g id="elem_AbstractProductA"><rect codeLine="22" fill="#FFFFFF" height="44" id="AbstractProductA" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="153" x="352.5" y="116"/><ellipse cx="365.5" cy="130" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1.0;"/><path d="M361.4219,125.7656 L361.4219,123.6094 L368.8125,123.6094 L368.8125,125.7656 L366.3438,125.7656 L366.3438,133.8438 L368.8125,133.8438 L368.8125,136 L361.4219,136 L361.4219,133.8438 L363.8906,133.8438 L363.8906,125.7656 L361.4219,125.7656 Z " fill="#000000"/><text fill="#000000" font-family="Verdana" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="125" x="377.5" y="135.5679">AbstractProductA</text><line style="stroke:#000000;stroke-width:1.0;" x1="353.5" x2="504.5" y1="144" y2="144"/><line style="stroke:#000000;stroke-width:1.0;" x1="353.5" x2="504.5" y1="152" y2="152"/></g><!--MD5=[fec2a37aa0b7b2849bc60ada13af5351]
+class AbstractProductB--><g id="elem_AbstractProductB"><rect codeLine="23" fill="#FFFFFF" height="44" id="AbstractProductB" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="153" x="137.5" y="116"/><ellipse cx="150.5" cy="130" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1.0;"/><path d="M146.4219,125.7656 L146.4219,123.6094 L153.8125,123.6094 L153.8125,125.7656 L151.3438,125.7656 L151.3438,133.8438 L153.8125,133.8438 L153.8125,136 L146.4219,136 L146.4219,133.8438 L148.8906,133.8438 L148.8906,125.7656 L146.4219,125.7656 Z " fill="#000000"/><text fill="#000000" font-family="Verdana" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="125" x="162.5" y="135.5679">AbstractProductB</text><line style="stroke:#000000;stroke-width:1.0;" x1="138.5" x2="289.5" y1="144" y2="144"/><line style="stroke:#000000;stroke-width:1.0;" x1="138.5" x2="289.5" y1="152" y2="152"/></g><!--MD5=[952c1fea402f6b50a4c54e0291c56458]
+class ProductA1--><g id="elem_ProductA1"><rect codeLine="25" fill="#FFFFFF" height="44" id="ProductA1" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="101" x="435.5" y="237"/><ellipse cx="448.5" cy="251" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1.0;"/><path d="M451.4688,256.6406 Q450.8906,256.9375 450.25,257.0781 Q449.6094,257.2344 448.9063,257.2344 Q446.4063,257.2344 445.0781,255.5938 Q443.7656,253.9375 443.7656,250.8125 Q443.7656,247.6875 445.0781,246.0313 Q446.4063,244.375 448.9063,244.375 Q449.6094,244.375 450.25,244.5313 Q450.9063,244.6875 451.4688,244.9844 L451.4688,247.7031 Q450.8438,247.125 450.25,246.8594 Q449.6563,246.5781 449.0313,246.5781 Q447.6875,246.5781 447,247.6563 Q446.3125,248.7188 446.3125,250.8125 Q446.3125,252.9063 447,253.9844 Q447.6875,255.0469 449.0313,255.0469 Q449.6563,255.0469 450.25,254.7813 Q450.8438,254.5 451.4688,253.9219 L451.4688,256.6406 Z " fill="#000000"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="73" x="460.5" y="256.5679">ProductA1</text><line style="stroke:#000000;stroke-width:1.0;" x1="436.5" x2="535.5" y1="265" y2="265"/><line style="stroke:#000000;stroke-width:1.0;" x1="436.5" x2="535.5" y1="273" y2="273"/></g><!--MD5=[d02fbda5c00f42faa83a3f4f3c54dea3]
+class ProductA2--><g id="elem_ProductA2"><rect codeLine="26" fill="#FFFFFF" height="44" id="ProductA2" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="101" x="299.5" y="237"/><ellipse cx="312.5" cy="251" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1.0;"/><path d="M315.4688,256.6406 Q314.8906,256.9375 314.25,257.0781 Q313.6094,257.2344 312.9063,257.2344 Q310.4063,257.2344 309.0781,255.5938 Q307.7656,253.9375 307.7656,250.8125 Q307.7656,247.6875 309.0781,246.0313 Q310.4063,244.375 312.9063,244.375 Q313.6094,244.375 314.25,244.5313 Q314.9063,244.6875 315.4688,244.9844 L315.4688,247.7031 Q314.8438,247.125 314.25,246.8594 Q313.6563,246.5781 313.0313,246.5781 Q311.6875,246.5781 311,247.6563 Q310.3125,248.7188 310.3125,250.8125 Q310.3125,252.9063 311,253.9844 Q311.6875,255.0469 313.0313,255.0469 Q313.6563,255.0469 314.25,254.7813 Q314.8438,254.5 315.4688,253.9219 L315.4688,256.6406 Z " fill="#000000"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="73" x="324.5" y="256.5679">ProductA2</text><line style="stroke:#000000;stroke-width:1.0;" x1="300.5" x2="399.5" y1="265" y2="265"/><line style="stroke:#000000;stroke-width:1.0;" x1="300.5" x2="399.5" y1="273" y2="273"/></g><!--MD5=[3d6774be045978391276b67de9a52718]
+class ProductB1--><g id="elem_ProductB1"><rect codeLine="27" fill="#FFFFFF" height="44" id="ProductB1" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="101" x="163.5" y="237"/><ellipse cx="176.5" cy="251" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1.0;"/><path d="M179.4688,256.6406 Q178.8906,256.9375 178.25,257.0781 Q177.6094,257.2344 176.9063,257.2344 Q174.4063,257.2344 173.0781,255.5938 Q171.7656,253.9375 171.7656,250.8125 Q171.7656,247.6875 173.0781,246.0313 Q174.4063,244.375 176.9063,244.375 Q177.6094,244.375 178.25,244.5313 Q178.9063,244.6875 179.4688,244.9844 L179.4688,247.7031 Q178.8438,247.125 178.25,246.8594 Q177.6563,246.5781 177.0313,246.5781 Q175.6875,246.5781 175,247.6563 Q174.3125,248.7188 174.3125,250.8125 Q174.3125,252.9063 175,253.9844 Q175.6875,255.0469 177.0313,255.0469 Q177.6563,255.0469 178.25,254.7813 Q178.8438,254.5 179.4688,253.9219 L179.4688,256.6406 Z " fill="#000000"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="73" x="188.5" y="256.5679">ProductB1</text><line style="stroke:#000000;stroke-width:1.0;" x1="164.5" x2="263.5" y1="265" y2="265"/><line style="stroke:#000000;stroke-width:1.0;" x1="164.5" x2="263.5" y1="273" y2="273"/></g><!--MD5=[6f7affc41e460a17bc7196ebc3c86ad3]
+class ProductB2--><g id="elem_ProductB2"><rect codeLine="28" fill="#FFFFFF" height="44" id="ProductB2" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="101" x="27.5" y="237"/><ellipse cx="40.5" cy="251" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1.0;"/><path d="M43.4688,256.6406 Q42.8906,256.9375 42.25,257.0781 Q41.6094,257.2344 40.9063,257.2344 Q38.4063,257.2344 37.0781,255.5938 Q35.7656,253.9375 35.7656,250.8125 Q35.7656,247.6875 37.0781,246.0313 Q38.4063,244.375 40.9063,244.375 Q41.6094,244.375 42.25,244.5313 Q42.9063,244.6875 43.4688,244.9844 L43.4688,247.7031 Q42.8438,247.125 42.25,246.8594 Q41.6563,246.5781 41.0313,246.5781 Q39.6875,246.5781 39,247.6563 Q38.3125,248.7188 38.3125,250.8125 Q38.3125,252.9063 39,253.9844 Q39.6875,255.0469 41.0313,255.0469 Q41.6563,255.0469 42.25,254.7813 Q42.8438,254.5 43.4688,253.9219 L43.4688,256.6406 Z " fill="#000000"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="73" x="52.5" y="256.5679">ProductB2</text><line style="stroke:#000000;stroke-width:1.0;" x1="28.5" x2="127.5" y1="265" y2="265"/><line style="stroke:#000000;stroke-width:1.0;" x1="28.5" x2="127.5" y1="273" y2="273"/></g><!--MD5=[ed6624c6556d5e7b1bd23032162d20b7]
+class Client--><g id="elem_Client"><rect codeLine="32" fill="#FFFFFF" height="44" id="Client" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="67" x="395.5" y="12"/><ellipse cx="408.5" cy="26" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1.0;"/><path d="M411.4688,31.6406 Q410.8906,31.9375 410.25,32.0781 Q409.6094,32.2344 408.9063,32.2344 Q406.4063,32.2344 405.0781,30.5938 Q403.7656,28.9375 403.7656,25.8125 Q403.7656,22.6875 405.0781,21.0313 Q406.4063,19.375 408.9063,19.375 Q409.6094,19.375 410.25,19.5313 Q410.9063,19.6875 411.4688,19.9844 L411.4688,22.7031 Q410.8438,22.125 410.25,21.8594 Q409.6563,21.5781 409.0313,21.5781 Q407.6875,21.5781 407,22.6563 Q406.3125,23.7188 406.3125,25.8125 Q406.3125,27.9063 407,28.9844 Q407.6875,30.0469 409.0313,30.0469 Q409.6563,30.0469 410.25,29.7813 Q410.8438,29.5 411.4688,28.9219 L411.4688,31.6406 Z " fill="#000000"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="39" x="420.5" y="31.5679">Client</text><line style="stroke:#000000;stroke-width:1.0;" x1="396.5" x2="461.5" y1="40" y2="40"/><line style="stroke:#000000;stroke-width:1.0;" x1="396.5" x2="461.5" y1="48" y2="48"/></g><!--MD5=[9018e0955d38dbd9e62dbfca1665ce89]
+reverse link AbstractFactory to ConcreteFactory1--><g id="link_AbstractFactory_ConcreteFactory1"><path codeLine="35" d="M669,318.37 C669,331.63 669,345.39 669,357.57 " fill="none" id="AbstractFactory-backto-ConcreteFactory1" style="stroke:#000000;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="662,318.25,669,298.25,676,318.25,662,318.25" style="stroke:#000000;stroke-width:1.0;"/></g><!--MD5=[aab0ea147590dfe62c7baf5a65e399fb]
+reverse link AbstractFactory to ConcreteFactory2--><g id="link_AbstractFactory_ConcreteFactory2"><path codeLine="36" d="M738.05,310.22 C759.68,325.95 783.19,343.05 803.48,357.81 " fill="none" id="AbstractFactory-backto-ConcreteFactory2" style="stroke:#000000;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="733.65,315.67,721.59,298.25,741.88,304.35,733.65,315.67" style="stroke:#000000;stroke-width:1.0;"/></g><!--MD5=[af780e08b463ad9773c277fcb8f6ccdd]
+reverse link AbstractFactory to Client--><g id="link_AbstractFactory_Client"><path codeLine="38" d="M647.74,215.6 C627.56,178.9 594.23,126.44 553,92 C526.27,69.67 489.35,54.19 462.76,45.06 " fill="none" id="AbstractFactory-backto-Client" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="#000000" points="650.14,220,649.3531,210.1826,647.7508,215.6078,642.3256,214.0054,650.14,220" style="stroke:#000000;stroke-width:1.0;"/></g><!--MD5=[c9571c80b66b5193675f6e163ba79106]
+link Client to AbstractProductA--><g id="link_Client_AbstractProductA"><path codeLine="39" d="M429,56.13 C429,72 429,93.82 429,110.79 " fill="none" id="Client-to-AbstractProductA" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="#000000" points="429,115.89,433,106.89,429,110.89,425,106.89,429,115.89" style="stroke:#000000;stroke-width:1.0;"/></g><!--MD5=[2444ae5daa09210d7f8a5398c3451718]
+link Client to AbstractProductB--><g id="link_Client_AbstractProductB"><path codeLine="40" d="M395.41,50.94 C360,67.74 303.85,94.37 263.4,113.56 " fill="none" id="Client-to-AbstractProductB" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="#000000" points="258.55,115.87,268.3958,115.6241,263.0669,113.7259,264.9652,108.397,258.55,115.87" style="stroke:#000000;stroke-width:1.0;"/></g><!--MD5=[e5fc12cd6e7528e08a50215739ebae4c]
+reverse link AbstractProductA to ProductA2--><g id="link_AbstractProductA_ProductA2"><path codeLine="42" d="M403.87,176.85 C390.71,196.67 375.09,220.2 364.07,236.81 " fill="none" id="AbstractProductA-backto-ProductA2" style="stroke:#000000;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="398.16,172.79,415.06,160,409.83,180.54,398.16,172.79" style="stroke:#000000;stroke-width:1.0;"/></g><!--MD5=[c3c2540b488509ab8e0d6ab09f1abe09]
+reverse link AbstractProductA to ProductA1--><g id="link_AbstractProductA_ProductA1"><path codeLine="43" d="M447.72,178.07 C457.08,197.63 468.06,220.54 475.85,236.81 " fill="none" id="AbstractProductA-backto-ProductA1" style="stroke:#000000;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="441.39,181.06,439.06,160,454.01,175.01,441.39,181.06" style="stroke:#000000;stroke-width:1.0;"/></g><!--MD5=[10e3fa745641e9e59c00134de4859829]
+reverse link AbstractProductB to ProductB1--><g id="link_AbstractProductB_ProductB1"><path codeLine="44" d="M214,180.22 C214,199.29 214,221.14 214,236.81 " fill="none" id="AbstractProductB-backto-ProductB1" style="stroke:#000000;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="207,180,214,160,221,180,207,180" style="stroke:#000000;stroke-width:1.0;"/></g><!--MD5=[d4dc0ea127da74d4c39b4d76d008b587]
+reverse link AbstractProductB to ProductB2--><g id="link_AbstractProductB_ProductB2"><path codeLine="45" d="M172.91,172.97 C163.98,180.49 154.63,188.46 146,196 C130.73,209.35 113.87,224.72 100.76,236.81 " fill="none" id="AbstractProductB-backto-ProductB2" style="stroke:#000000;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="168.44,167.59,188.28,160.13,177.42,178.33,168.44,167.59" style="stroke:#000000;stroke-width:1.0;"/></g><!--MD5=[5c7fd08f13f0d8c6c276c15bd1ddf8bb]
+reverse link ProductA2 to ConcreteFactory1--><g id="link_ProductA2_ConcreteFactory1"><path codeLine="47" d="M382.79,283.96 C393.67,291.29 406.05,298.99 418,305 C474.52,333.44 542.13,357.42 592.93,373.62 " fill="none" id="ProductA2-backto-ConcreteFactory1" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="#000000" points="378.54,281.07,383.7236,289.4444,382.6714,283.8862,388.2296,282.8341,378.54,281.07" style="stroke:#000000;stroke-width:1.0;"/></g><!--MD5=[bf01212423a59bf3ccc08f81b71810ae]
+reverse link ProductB2 to ConcreteFactory1--><g id="link_ProductB2_ConcreteFactory1"><path codeLine="48" d="M108.7,284.2 C119.89,291.94 132.99,299.83 146,305 C297.16,365.1 488.49,385.58 592.75,392.51 " fill="none" id="ProductB2-backto-ConcreteFactory1" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="#000000" points="104.36,281.14,109.4037,289.5994,108.444,284.0245,114.0189,283.0649,104.36,281.14" style="stroke:#000000;stroke-width:1.0;"/></g><!--MD5=[9d285427e2949a7aae058fe5077877a6]
+reverse link ProductA1 to ConcreteFactory2--><g id="link_ProductA1_ConcreteFactory2"><path codeLine="50" d="M529.26,283.4 C544.13,290.9 561.06,298.85 577,305 C657.19,335.96 681.76,329.92 763,358 C768.52,359.91 774.19,361.97 779.88,364.11 " fill="none" id="ProductA1-backto-ConcreteFactory2" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="#000000" points="524.72,281.09,530.9226,288.7404,529.1749,283.3603,534.555,281.6126,524.72,281.09" style="stroke:#000000;stroke-width:1.0;"/></g><!--MD5=[6616cb6d5d3e6f3170592d167bbf1a8e]
+reverse link ProductB1 to ConcreteFactory2--><g id="link_ProductB1_ConcreteFactory2"><path codeLine="51" d="M243.63,284.04 C254.99,292.02 268.48,300.11 282,305 C484.24,378.18 554.55,305.04 763,358 C768.58,359.42 774.26,361.1 779.94,362.96 " fill="none" id="ProductB1-backto-ConcreteFactory2" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="#000000" points="239.55,281.11,244.5261,289.6093,243.6109,284.027,249.1933,283.1119,239.55,281.11" style="stroke:#000000;stroke-width:1.0;"/></g><!--MD5=[a27fd679bb8b13d22d8138c2c149cdbe]
+@startuml
+!theme plain
+
+package {
+
+interface AbstractFactory {
+  CreateProductA()
+  createProductB()
+}
+
+class ConcreteFactory1 {
+  CreateProductA()
+  createProductB()
+}
+
+class ConcreteFactory2 {
+  CreateProductA()
+  createProductB()
+}
+}
+
+package {
+interface AbstractProductA
+interface AbstractProductB
+
+class ProductA1
+class ProductA2
+class ProductB1
+class ProductB2
+
+}
+
+class Client {}
+
+
+AbstractFactory <|.. ConcreteFactory1
+AbstractFactory <|.. ConcreteFactory2
+
+AbstractFactory <- - Client
+Client - -> AbstractProductA
+Client - -> AbstractProductB
+
+AbstractProductA <|.. ProductA2
+AbstractProductA <|.. ProductA1
+AbstractProductB <|.. ProductB1
+AbstractProductB <|.. ProductB2
+
+ProductA2 <- - ConcreteFactory1
+ProductB2 <- - ConcreteFactory1
+
+ProductA1 <- - ConcreteFactory2
+ProductB1 <- - ConcreteFactory2
+
+@enduml
+
+@startuml
+
+
+
+
+
+
+
+<style>
+  root {
+    BackgroundColor white
+    FontColor black
+    FontName Verdana
+    HyperLinkColor blue
+    LineColor black
+    LineThickness 1
+    Margin 5
+  }
+  caption {
+    LineThickness 0
+  }
+  footer {
+    LineThickness 0
+  }
+  header {
+    LineThickness 0
+  }
+  node {
+    MaximumWidth 300
+  }
+  title {
+    FontSize 22
+    LineThickness 0
+  }
+</style>
+
+skinparam ArrowLollipopColor black
+skinparam BackgroundColor white
+skinparam DefaultFontName Verdana
+skinparam DefaultMonospacedFontName Courier
+skinparam LifelineStrategy nosolid
+skinparam ParticipantPadding 10
+skinparam SequenceLifeLineBorderColor black
+skinparam Shadowing false
+skinparam UseBetaStyle true
+
+skinparam Activity {
+  BackgroundColor white
+  BarColor black
+  BorderColor black
+  FontColor black
+  FontName Verdana
+}
+skinparam Boundary {
+  FontColor black
+}
+skinparam Box {
+  Padding 5
+}
+skinparam CircledCharacter {
+  FontColor black
+  FontName Courier
+  Radius 9
+}
+skinparam Class {
+  BackgroundColor white
+  BorderColor black
+  FontColor black
+  FontName Verdana
+}
+skinparam ClassAttribute {
+  FontColor black
+  FontName Verdana
+}
+skinparam ClassStereotype {
+  FontColor black
+  FontName Verdana
+}
+skinparam Footer {
+  FontColor black
+  FontName Verdana
+}
+skinparam Header {
+  FontColor black
+  FontName Verdana
+}
+skinparam Hyperlink {
+  Color blue
+}
+skinparam IconPackage {
+  Color black
+  BackgroundColor white
+}
+skinparam IconPrivate {
+  Color black
+  BackgroundColor white
+}
+skinparam IconProtected {
+  Color black
+  BackgroundColor white
+}
+skinparam IconPublic {
+  Color black
+  BackgroundColor white
+}
+skinparam Note {
+  FontColor black
+  FontName Verdana
+}
+skinparam Object {
+  BorderColor black
+}
+skinparam Package {
+  BorderColor black
+  FontColor black
+  FontName Verdana
+}
+skinparam State {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam StereotypeA {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam StereotypeC {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam StereotypeE {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam StereotypeI {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam StereotypeN {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam UseCaseStereoType {
+  FontColor black
+  FontName Verdana
+}
+
+package {
+
+interface AbstractFactory {
+  CreateProductA()
+  createProductB()
+}
+
+class ConcreteFactory1 {
+  CreateProductA()
+  createProductB()
+}
+
+class ConcreteFactory2 {
+  CreateProductA()
+  createProductB()
+}
+}
+
+package {
+interface AbstractProductA
+interface AbstractProductB
+
+class ProductA1
+class ProductA2
+class ProductB1
+class ProductB2
+
+}
+
+class Client {}
+
+
+AbstractFactory <|.. ConcreteFactory1
+AbstractFactory <|.. ConcreteFactory2
+
+AbstractFactory <- - Client
+Client - -> AbstractProductA
+Client - -> AbstractProductB
+
+AbstractProductA <|.. ProductA2
+AbstractProductA <|.. ProductA1
+AbstractProductB <|.. ProductB1
+AbstractProductB <|.. ProductB2
+
+ProductA2 <- - ConcreteFactory1
+ProductB2 <- - ConcreteFactory1
+
+ProductA1 <- - ConcreteFactory2
+ProductB1 <- - ConcreteFactory2
+
+@enduml
+
+PlantUML version 1.2022.7(Tue Aug 23 01:01:30 CST 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

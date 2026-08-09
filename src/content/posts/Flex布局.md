@@ -1,0 +1,123 @@
+---
+title: "Flex 布局"
+published: 2019-02-27
+tags: ["css"]
+---
+
+Flex 布局，即为弹性布局。
+
+## Flex 容器
+
+要使用 Flex 布局，首先需要定义一个父容器 container。[示例：Flex](https://codepen.io/chesterchenn/pen/JzrBwO)
+
+```html
+<div class="container">
+  <div>flex item</div>
+  <div>flex item</div>
+</div>
+```
+
+```css
+.container {
+  display: flex;
+}
+```
+
+## Flex 容器属性
+
+```plain
+- flex-direction: row^ | row-reverse | column | column-reverse;
+- flex-wrap: nowrap^ | wrap | wrap-reverse;
+- flex-flow: <flex-direction> || <flex-wrap>; (^: row nowrap)
+- justify-content: flex-start^ | flex-end | center | space-between | space-around | space-evenly;
+- align-items: stretch^ | flex-start | flex-end | center | baseline;
+- align-content: stretch^ | flex-start | flex-end | center | space-between | space-around;
+```
+
+备注: _^: default(默认值)_
+
+### flex-direction
+
+该属性定义了 flex 项在容器朝哪个方向上堆叠。主要是水平方向或垂直方向上。[示例](https://codepen.io/chesterchenn/pen/GeMYrr)
+
+### flex-wrap
+
+该属性定义了 flex 项在容器上是否换行。[示例](https://codepen.io/chesterchenn/pen/XGexBv)
+
+### flex-flow
+
+该属性是`flex-direction`和`flex-items`的简写。
+
+### justify-content
+
+该属性定义了 flex 项在容器水平方向上的对齐方式。[示例](https://codepen.io/chesterchenn/pen/EMwdMj)
+
+### align-items
+
+该属性定义了 flex 项在容器垂直方向上的对齐方式。[示例](https://codepen.io/chesterchenn/pen/zbEMwB)
+
+### align-content
+
+该属性定义了 flex 项在容器上多行的垂直方向对齐方向, 要求`flex-wrap: wrap`属性。[示例](https://codepen.io/chesterchenn/pen/BbJzdV)
+
+PS: 该属性在 flex 项只有一行没有效果。
+
+## Flex 项
+
+Flex 容器下的直接子元素就是 flex 项。
+
+## Flex 项属性
+
+```plain
+- order: <integer>; (^: 0)
+- flex-grow: <number>; (^: 0)
+- flex-shrink: <number>; (^: 1)
+- flex-basis: <length> | auto^;
+- flex: none | [ <flex-grow> <flex-shrink>? || <flex-basis> ]; (^: 0 1 auto)
+- align-self: auto^ | flex-start | flex-end | center | baseline | stretch;
+```
+
+### order
+
+该属性指定了 flex 项的排列顺序，必须是整数。[示例](https://codepen.io/chesterchenn/pen/vPpXGa)
+
+### flex-grow
+
+该属性指定了 flex 项相对于其他的 flex 项的增长量，按比例划分，负数无效。[示例](https://codepen.io/chesterchenn/pen/qvpqWQ)， 默认值为 0,表示该元素不索取父元素的剩余空间。
+
+### flex-shrink
+
+该属性指定了 flex 项相对于其他的 flex 项的收缩量，按比例划分，负数无效。[示例](https://codepen.io/chesterchenn/pen/qvpqNg)
+
+### flex-basis
+
+该属性指定了 flex 项的初始长度。例如 20%, 4rem, 250px...[示例](https://codepen.io/chesterchenn/pen/jJYVzY)
+
+### flex
+
+该属性是`flex-grow`, `flex-shrink`和`flex-basis`等属性的缩写。
+
+### align-self
+
+该属性定义了 flex 项在容器内的垂直方向的对齐方向，该属性会覆盖容器的`align-items`属性设置的对齐方式。[示例](https://codepen.io/chesterchenn/pen/rRpWPP)
+
+## Flex 相关问题
+
+### flex 项中 flex 的值
+
+flex 是 flex-grow, flex-shrink 和 flex-basis 的简写
+
+flex 可以设置 `flex: auto(1 1 auto)` 和 `flex: none(0 0 auto)` 两个快捷值之外，还可以设置以下方式：
+
+- flex 取值非负整数，则 flex-grow 取该值，flex-shrink 取值为 1，flex-basis 取值 0%。
+- flex 取值为长度或者百分比，则 flex-basis 取该值，flex-grow 取值为 1，flex-shrink 取值为 1。
+- flex 取值为两个非负整数，则分别 flex-grow 和 flex-shrink 的值，flex-basis 取值 0%。
+- flex 取值为非负数字和一个长度或者百分比，则分别视为 flex-grow 和 flex-basis 的值，flex-shrink 取值 1。
+
+由上面规律可得知，有非负整数先赋值给 flex-grow，长度/百分比赋值给 flex-basis，三项的默认值为：`flex: 1 1 0%;`
+
+## 参考链接
+
+- [css-tricks: A Complete Guide to Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox)
+- [w3schools: Flexbox](https://www.w3schools.com/css/css3_flexbox.asp)
+- [CSS 中的 “flex:1;” 是什么意思？](https://fe.ecool.fun/topic/286f67d3-4e8d-48f5-962a-ed9cccc46335?orderBy=updateTime&order=desc&tagId=11)

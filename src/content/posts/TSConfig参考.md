@@ -1,0 +1,147 @@
+---
+title: "TSConfig参考"
+published: 2020-11-07
+tags: ["typescript"]
+---
+
+TSConfig 文件位于项目的根目录下，TSConfig 文件可以是 `tsconfig.json` 或 `jsconfig.json`。
+
+在安装好 `typescript` 后，输入指令 `tsc --init` 会自动生成一份 `tsconfig.json`。
+
+```json
+/* 默认生成的选项 2022-02 */
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true
+    "strict": true,
+    "skipLibCheck": true,
+  }
+}
+```
+
+## 分类及常见的选项
+
+Top Level
+
+- [exclude](#exclude)
+- [files](#files)
+- [include](#include)
+
+Type Checking
+
+- [noImplicitAny](#noimplicitany)
+- [noImplicitThis](#noimlicitthis)
+- [noUnusedLocals](#nounusedlocal)
+- [noUnusedParameters](#nounsedparameters)
+- [strict](#strict)
+
+Modules
+
+- [module](#module)
+
+JavaScript Support
+
+- [allowJs](#allowjs)
+
+Interop Constraints
+
+- [esModuleInterop](#esmoduleinterop)
+
+Language and Environment
+
+- [target](#target)
+
+## Top Level
+
+### exclude
+
+指定要跳过解析的文件或者正则表达式 。默认：`["node_modules", "bower_components", "jspm_packages"]`
+
+### files
+
+指定允许包含在程序中的文件列表。如果找不到任何文件，就会报错。
+
+```json
+{
+  "compilerOptions": {},
+  "files": [
+    "core.ts",
+    "sys.ts",
+    "types.ts",
+    "scanner.ts",
+    "parser.ts",
+    "utilities.ts",
+    "binder.ts",
+    "checker.ts",
+    "tsc.ts"
+  ]
+}
+```
+
+### include
+
+指定要包含在项目中的文件或正则匹配的数组，目录路径相对于 tsconfig.json 文件。默认: `[]`
+
+## Type Checking
+
+### noImplicitAny
+
+指定当源文件中存在隐式的 any 的时候是否报错。默认：true(strict), false(其他)
+
+### noImplicitThis
+
+指定当源文件中存在隐式的 this 的时候是否报错。默认：true(strict), false(其他)
+
+### noUnusedLocals
+
+报告未使用局部变量的错误。默认: false
+
+### noUnusedParameters
+
+报告函数内未使用参数的错误。默认：false
+
+### strict
+
+是否启用所有严格的类型检查选项。默认：false
+
+## Modules
+
+### module
+
+设置项目的模块系统。
+
+commonjs (target 为 ES3 或 ES5 默认), es6/es2015(target 为 ES6 默认), none, amd, system, umd, es2020 或 ESNext,
+
+## JavaScript Support
+
+### allowJS
+
+是否允许 JavaScript 文件导入到项目，否则只允许 .ts 和 .tsx 文件。默认：false
+
+## Interop Constraints
+
+### esModuleInterop
+
+默认情况下（esModuleInterop 为 false 或未设置）TypeScript 将 CommonJS/AMD/UMD 模块视为类似于 ES6 模块，这会导致两个错误：
+
+- 像 `import * as moment from "moment"` 的命名空间导入与 `const moment = require("moment")` 的作用相同
+- 像 `import moment from "moment"` 的默认导入与 `const moment = require("moment").default` 相同
+
+开启 esModuleInterop，TypeScript 会在转译的时候修复这两个问题
+
+开启此选项会开启 `allowSyntheticDefaultImports`。
+
+## Language and Environment
+
+### target
+
+指定 ECMAScript 目标版本，现代浏览器支持所有 ES6 特性，所以 ES6 是一个不错的选择。
+
+es3(默认), es5, es6/es2015, es2016, es2017, es2018, es2019, es2020 或 esnext。
+
+## 参考链接
+
+- [TypeScript: TSConfig Reference](https://www.typescriptlang.org/tsconfig)

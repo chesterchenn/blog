@@ -1,0 +1,97 @@
+---
+title: "SSH端口转发"
+published: 2022-04-07
+tags: ["network", "linux"]
+---
+
+SSH 端口转发也被称为 SSH 隧道。
+
+加密的 SSH 隧道作为一个容器，传输各种数据将其安全地送到远程系统。这种方法经常被用来规避标准的防火墙安全协议。
+
+这里主要是了解 OpenSSH 在 Linux，Putty 在 Windows 上启用本地(Local)，远程(Remote)和动态(Dynamic)的端口转发。
+
+## 本地转发
+
+语法：`ssh -L <local_port>:<desination_server>:<remote_port> <user>@<host>`
+
+- local_port: 本地端口
+- desination_server: 远程服务器
+- remote_port: 远程服务器端口
+- user: ssh 服务器用户名
+- host: ssh 服务器
+
+本地转发就是将应用对于本地主机端口的访问请求转发给 SSH 服务器上，由 SSH 服务器对远程服务器的端口发起访问请求。
+
+远程服务器可也可以是 SSH 服务器本身，此时 desination_server 为 localhost。
+
+使用场景：远程服务器不接受远程访问，SSH 服务器能够访问，我们可以通过本地转发的方式来实现远程访问。具体实现有：跳板机的实现、远程实现代理，本地进行转发，实现科学上网。
+
+## 远程转发
+
+语法：`ssh -R <remote_port>:localhost:<local_port> <user>@<host>`
+
+远程转发的目的是允许远程服务器通过访问 SSH 服务器访问本地机器上的资源。
+
+使用场景：本地机器不接受远程访问，SSH 服务器能够访问，我们可以通过远程转发的方式来实现远程服务器访问本地。
+
+## 动态转发
+
+语法：`ssh -D <local_port> <user>@<host>`
+
+动态转发是一种特别的本地转发，可以通过本地转发实现类似的效果。
+
+动态转发是 SSH 服务器转变成一个 SOCKS5 代理服务器，不需要预先定义远程端口和服务器。所以使用动态端口转发时，需要为程序配置 SOCKS5 代理设置。
+
+当我们配置好动态转发后，通过指定的本地资源（如浏览器）访问指定的端口，那么所有来自本地资源的流量会转发到 SSH 服务器，由其帮我们进行请求访问。
+
+## Windows 的使用
+
+Windows 下也可以通过 PowerShell，WSL 等工具来实现 SSH 的端口转发。
+
+也可以处通过 Putty 等图形化工具来实现：
+
+1. 填写 Session 填写 SSH 服务器
+2. 点击 Connection > SSH > Tunnels
+3. 填写本地端口和目标服务器和端口，并勾选对应的转发类型，即可
+
+## AutoSSH
+
+在网络不稳定的情况下，可以使用 autossh 进行守护监控。可以让 ssh 网络断开之后重启服务。
+
+```sh
+# 实例
+autossh -M 7777 -D 7891 <user>@<host> -N -f
+```
+
+## Linux 自启动
+
+在 Linux 环境下设置自启动脚本，创建编辑文件 /etc/systemd/system/xxx.service
+
+```sh
+[Unit]
+Description=proxy daemon
+After=network.target
+
+[Service]
+User=chen # 最好设置对应的用户
+Type=simple
+Restart=on-failure
+RestartSec=5
+ExecStart=/usr/bin/ssh -D 7891 $user@$host -N
+
+[Install]
+WantedBy=multi-user.target
+```
+
+开启脚本 `sudo systemctl start xxx`
+
+设置开机自动 `sudo systemctl enable xxx`
+
+## 其他
+
+`-Nf` 参数可以让远程转发在保持在后台。
+
+## 参考链接
+
+- [https://phoenixnap.com/kb/ssh-port-forwarding](https://phoenixnap.com/kb/ssh-port-forwarding)
+- [zhihu: 彻底搞懂 SSH 端口转发命令](https://zhuanlan.zhihu.com/p/148825449)

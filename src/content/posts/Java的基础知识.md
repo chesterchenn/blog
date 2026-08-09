@@ -1,0 +1,105 @@
+---
+title: "Java的基础知识"
+published: 2022-02-13
+tags: ["java"]
+---
+
+学习 Java 过程中的部分基础知识。
+
+## 基本数据类型
+
+Java 定义了八种基础数据类型
+
+- 整数类型：byte, shot, int, long
+- 浮点数类型：float, double
+- 字符类型：char
+- 布尔类型：boolean
+
+float 是单精度浮点数，double 是双精度浮点数。
+
+在 Java 中，整型值和布尔值之间不能相互转换。
+
+### 常量
+
+在 Java 中，利用关键字 final 指示常量。
+
+```java
+final double PI = 3.14;
+```
+
+在一个类中的多个方法使用某个常量，可以设置类常量。类常量位于 main 方法的外部。
+
+```java
+public class Foo {
+  public static final double PI = 3.14;
+
+  public static void main(String[] args) {}
+}
+```
+
+## 常用的对象类
+
+### String
+
+String 类的声明方式
+
+```java
+String greeting = "Hello World";
+String greeting = new String("Hello World");
+```
+
+String 声明数组 Array 对象的时候，跟 JavaScript 有区别的。Java 使用花括号包裹，且要用双引号，JavaScript 使用中括号，使用单/双引号。
+
+```js
+var str = ['A', 'B', 'C'];
+var str: String[] = ['A', 'B', 'C']; // typescript
+```
+
+```java
+String[] str = {"A", "B", "C"};
+```
+
+### ArrayList
+
+java 中的 Array 与 ArrayList 类型也是有区别的。引入 ArrayList 类型 `import java.util.ArrayList`
+
+ArrayList 使用泛型定义参数类型，所以不能使用基础类型进行声明。使用 `<Double>` 和 `<Char>` 来声明 `double` 和 `char`。
+
+```java
+// 这段代码不会编译成功
+ArrayList<int> ages;
+
+// 这段代码可以编译成功
+ArrayList<Integer> ages;
+ages = new ArrayList<Integer>();
+```
+
+## 一些操作
+
+### 访问数组
+
+在 java 访问数组的方式跟 javascript 中有区别的，javascript 中可以直接方法变量名，java 中访问变量名是引用地址。
+
+```javascript
+const n = [];
+console.log(n); // []
+```
+
+```java
+int[] n = new int[10];
+System.out.println(n); // [I@75a1cd57
+```
+
+可以通过数组的遍历依次获取数组
+
+```java
+int[] n = {1, 2, ...};
+
+for (int i = 0; i < n.length; i++) {
+  System.out.print(n[i]);
+}
+
+for (int x: n) {
+  System.out.print(n[i]);
+}
+```

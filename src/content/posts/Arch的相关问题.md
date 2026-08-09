@@ -1,0 +1,117 @@
+---
+title: "Arch的相关问题"
+published: 2022-11-13
+tags: ["linux", "others"]
+---
+
+关于 Arch Linux 一些相关问题及笔记。
+
+<!-- vim-markdown-toc GFM -->
+
+- [字体管理](#字体管理)
+- [AUR 编译安装](#aur-编译安装)
+- [yay](#yay)
+  - [代理问题](#代理问题)
+  - [升级](#升级)
+- [输入法](#输入法)
+  - [Fcitx 符号输入](#fcitx-符号输入)
+- [清除缓存](#清除缓存)
+  - [清除 pacman 缓存](#清除-pacman-缓存)
+  - [清除 yay 缓存](#清除-yay-缓存)
+- [unable to lock database](#unable-to-lock-database)
+- [flatpak 国内镜像](#flatpak-国内镜像)
+
+<!-- vim-markdown-toc -->
+
+## 字体管理
+
+查看已安装的字体
+
+```shell
+fc-list
+```
+
+搜索库可用字体
+
+```shell
+pacman -Ss ttf
+```
+
+手动安装，将 ttf 文件复制到 /usr/share/fonts/TTF 目录下，更新字体库。
+
+```shell
+fc-cache -vf
+```
+
+## AUR 编译安装
+
+```sh
+# 如果已经安装则不用执行
+pacman -S --needed git base-devl
+
+git clone https://aur.archlinux.org/<pkg-name>.git
+cd <pkg-name>
+makepkg -si
+```
+
+## yay
+
+### 代理问题
+
+1. 无法使用 proxychains 代理，使用 gcc-go 代替 go
+2. 编辑 proxychains.conf 文件，注释 proxy_dns
+
+- [Does yay support proxy?](https://github.com/Jguer/yay/issues/951)
+- [yay 指南: 2. 代理问题](https://suiahae.me/yay-s-guide-No-2-proxy-issues/)
+
+### 升级
+
+yay 的直接升级需要下载安装 go，会遇到网络上的错误，通过 proxychains 的代理 yay 的则会导致 gcc-go 与 go 的冲突。
+
+yay-bin 是通过 GitHub Action 构建的，无需下载安装 go。
+
+通过 yay 的官方包 [https://github.com/Jguer/yay](https://github.com/Jguer/yay) 来进行安装 yay-bin。
+
+```sh
+git clone https://aur.archlinux.org/yay-bin.git
+cd yay-bin
+makepkg -si
+```
+
+## 输入法
+
+### Fcitx 符号输入
+
+使用快捷键 `Ctrl+.` 可以设置 Full Width Punc Mode，就可以在输入中文符号变成英文符号。同理可以取消。
+
+## 清除缓存
+
+清除缓存实际上就是删除缓存目录的文件内容，所以找到对应缓存目录，直接执行 `rm -rf <缓存目录>` 即可。
+
+[Arch Linux 中自动清理 pacman 和 yay 缓存](https://devpress.csdn.net/linux/62ed056f89d9027116a11c5c.html)
+
+### 清除 pacman 缓存
+
+包缓存是为了防止我们重新安装时不必重复下载，但是，包缓存不会自动清除，随着时间的推移，占用的空间会越来越大。
+
+pacman 包缓存会被存储在 /var/cache/pacman/pkg 目录下，pacman 具有清理已卸载的缓存命令 `pacman -Sc`，以及清理每个包缓存命令 `pacman -Scc`。
+
+### 清除 yay 缓存
+
+yay 的缓存位于 `$HOME/.cache/yay` 目录下，yay 具有清理 pacman 和 yay 的缓存命令 `yay -Sc`。
+
+## unable to lock database
+
+在安装包的时候，可能会遇到 `unable to lock database` 的错误，可以通过下面的命令解决。
+
+```sh
+sudo rm /var/lib/pacman/db.lck
+```
+
+## flatpak 国内镜像
+
+flatpak 在国内下载的速度很慢，可以通过国内的镜像来解决。
+
+修改镜像地址：`flatpak remote-modify flathub --url=https://mirror.sjtu.edu.cn/flathub`
+
+查看镜像地址：`flatpak remotes --show-details`

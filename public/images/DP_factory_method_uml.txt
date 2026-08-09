@@ -1,0 +1,19 @@
+@startuml
+!theme plain
+
+abstract class Creator {
+  abstract factory()
+  anOperation()
+}
+
+abstract class Product {}
+
+class ConcreteProduct {}
+
+class ConcreteCreator {}
+
+Product <|-- ConcreteProduct
+Creator <|-- ConcreteCreator
+ConcreteProduct <--r- ConcreteCreator
+
+@enduml

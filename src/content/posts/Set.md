@@ -1,0 +1,88 @@
+---
+title: "Set"
+published: 2020-09-22
+tags: ["javascript"]
+---
+
+Map 和 Set 是 ES6 中新增的数据结构，Set 类似于数组，但是其中的值是唯一的。我们一般将 Set 跟 Array 进行类比。
+
+<!-- vim-markdown-toc GFM -->
+
+- [Set](#set)
+  - [属性](#属性)
+  - [方法](#方法)
+  - [转换成数组](#转换成数组)
+- [WeakSet](#weakset)
+- [参考链接](#参考链接)
+
+<!-- vim-markdown-toc -->
+
+## Set
+
+set 是一个值的集合，其中的值是唯一。
+
+set 的 API 跟 map 类似，add(..) 方法代替了 set(..) 方法，没有 get(..) 方法。
+
+```js
+var s = new Set();
+var x = { id: 1 },
+  y = { id: 2 };
+
+s.add(x);
+s.add(y);
+s.add(x);
+
+s.size; // 2
+s.has(y); // true
+s.delete(y);
+s.clear();
+```
+
+Set 的唯一性可以用作于数组去重，不同的类型，如字符串和数字类型是不一样的。
+
+```js
+var arr = [1, 2, 3, 4, '1', 2, 4, '5'];
+var uniques = [...new Set(arr)]; // [ 1, 2, 3, 4, "1", "5" ]
+```
+
+在 Set 里面，value 与 key 总是相等。
+
+### 属性
+
+- `Set.prototype.size` size 属性获取 Set 对象的元素数量。
+
+### 方法
+
+- `Set.prototype.add()` 将一个新元素添加到 Set 对象尾部。如果内部对象有重复的基础类型，则会忽略。引用类型的引用地址不同则会被添加。
+- `Set.prototype.clear()` 将 Set 对象内所有的元素移除。
+- `Set.prototype.delete()` 移除指定的元素。若没有则返回 `false`。
+- `Set.prototype.entries()` 返回一个 `[value, value]` 数组的遍历对象。每个实体的值都是一样的。
+- `Set.prototype.forEach()` 遍历执行 Set 对象内的元素，参数依次为 `value, key, set`。
+- `Set.prototype.has()` 返回指定的元素是否存在于 set 对象。
+- `Set.prototype.values()` 返回每个元素的值的遍历对象。也可以用别名 `Set.prototype.keys()`。
+
+### 转换成数组
+
+- `Array.from(set.values())` 利用 Array.from 方法
+- `[...set.values()]` 利用扩展运算符
+
+## WeakSet
+
+WeakSet 的值必须是对象，而不是像 set 一样可以是原生类型值。
+
+```js
+var s = new WeakSet();
+var x = { id: 1 },
+  y = { id: 2 };
+s.add(x);
+s.add(y);
+
+x = null; // x 可 GC
+y = null; // y 可 GC
+```
+
+## 参考链接
+
+- 《你不知道的 JavaScript》(下)
+- [MDN: Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set)
+- [MDN: WeakSet](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet)

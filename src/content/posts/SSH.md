@@ -1,0 +1,83 @@
+---
+title: "SSH"
+published: 2018-12-11
+tags: ["network", "linux"]
+---
+
+Secure Shell（简称 SSH, 安全外壳协议）是一种加密的网络传输协议，可以通过不安全的网络实现安全的系统管理和文件传输。典型的应用就是远程命令的登录和执行。SSH 通常用于类 Unix 系统上，但也可以用于 Windows 上。
+
+<!-- vim-markdown-toc GFM -->
+
+- [SSH 的实现](#ssh-的实现)
+- [SSH 的用法](#ssh-的用法)
+- [SSH 公钥认证](#ssh-公钥认证)
+- [常见的参数](#常见的参数)
+- [疑难杂症](#疑难杂症)
+- [参考链接](#参考链接)
+
+<!-- vim-markdown-toc -->
+
+## SSH 的实现
+
+SSH 可以通过很多方式实现，其中 OpenSSH 是应用最广泛的开源实现。Windows 10 用 OpenSSH 作为其默认的 SSH 客户端，Windows 上也可以使用 PuTTY 连接 SSH。
+
+一些常见的 SSH 实现：
+
+- Tectia SSH - 适用于 Windows，Unix，Linux 的客户端和服务端。
+- Tectia SSH for IBM z/OS - 适用于 IBM z/OS 大型机的客户端和服务端。
+- PuTTY - 适用于 Windows 和 Linux 的客户端。
+- WinSCP - 适用于 Windows 的客户端。
+- CyberDuck - 适用于 Mac 的客户端
+- OpenSSH - 适用于 Unix，Linux 的服务端。
+
+## SSH 的用法
+
+基本用法: `$ ssh user@host`
+
+SSH 默认的端口是 22，通过`-p`可以修改端口: `$ ssh -p XXXX user@host`
+
+## SSH 公钥认证
+
+我们可以通过配置公钥认证免去登录密码，不过需要创建 SSH 密钥并配置授权密钥文件。我们以 OpenSSH 为例：
+
+- ssh-keygen 生成密钥
+
+  直接通过运行 `ssh-keygen` 生成密钥对，默认生成的私钥在 `~/.ssh/id_rsa`，生成的公钥 `~/.ssh/id_rsa.pub`
+
+- ssh-copy-id 复制公钥到服务端
+
+  我们可以通过运行 `ssh-copy-id -i ~/.ssh/id_rsa.pub user@host` 把公钥复制到服务端。常见的参数配置:
+
+  ```plain
+  -i 指定要复制的私钥文件（默认为~/.ssh/id_rsa）
+  -p 连接服务端指定的端口代替默认端口22
+  ```
+
+- 使用指定文件进行登陆
+
+  `ssh -i file user@host`
+
+## 常见的参数
+
+- -D 动态转发
+- -f 执行命令之前将 SSH 服务放入后台，在保持后台运行下很有用
+- -L 本地转发
+- -N 不执行远程命令，在端口转发的情况下很有用
+- -R 远程转发
+
+## 疑难杂症
+
+1. 无法访问 GitHub，出现提示：`ssh: Could not resolve hostname github.com: Name or service not known`
+
+   更新 SSH 配置文件 `~/.ssh/config`，添加以下代码：
+
+   ```ssh-config
+   Host github.com
+     Hostname ssh.github.com
+     Port 443
+   ```
+
+## 参考链接
+
+- [维基百科 - Secure Shell](https://en.wikipedia.org/wiki/Secure_Shell)
+- [SSH.com](https://www.ssh.com/ssh/)

@@ -1,0 +1,62 @@
+---
+title: "ranger"
+published: 2021-05-01
+tags: ["linux"]
+---
+ranger 是 linux 下的一个文件管理器。
+
+## 配置
+
+首次运行时，ranger 会创建一个目录 `~/.config/ranger/`。使用以下命令复制默认配置文件到目录里
+
+```sh
+ranger --copy-config=file  file: all, commands, commands_full, rc, rifle, scope
+```
+
+常见的配置文件：
+
+- rc.conf    用于设置选项和绑定快捷键
+- scope.sh   用于设置文件的预览方式
+- rifle.conf 用于设置文件的打开方式
+
+## 快捷键
+
+| 快捷键 | 命令 |
+| ? | 打开帮手册、列出快捷键以及设置选项 |
+| h, j, k, l | 目录移动 |
+| s | 等同 :shell，输入 shell 命令 |
+| / | 搜索 |
+| f | 查找，运行满足条件的文件或者打开满足条件的文件夹 |
+| gn 或者 ^n | 新建标签页 |
+| gc 或者 ^c | 关闭当前标签页，最后一个则不关闭 |
+| gt 或者 Tab | 切换到下一个标签页 |
+| gT 或者 Shift + Tab | 切换到上一个标签页 |
+| dd | 剪切 |
+| dD 或者 :delete | 删除 |
+| cw | 重命名（含后缀名）|
+| I | 重命名，光标在开头 |
+| A | 重命名，光标在结尾（含后缀名）|
+| a | 重命名，光标在结尾（不含后缀名）|
+| :mkdir 或者 F7 | 新建文件夹 |
+| :touch 或者 INSERT | 新建文件 |
+
+## 排序
+
+- `os` 按大小排序
+- `ob` 按名称排序
+- `ot` 按文件类型排序
+- `or` 反向排序
+
+## 遇到的问题
+
+1. 更改默认的打开方式？
+
+   如果更改本次的打开方式，按下 `r`，然后选择对应的启动方式。
+
+   如果要长期更改，运行 `ranger --copy-config=rifle`，生成一份指定不同类型的文件的默认打开方式配置文件。配置位于 `~/.config/ranger/rifle.conf`。若配置文件存在则不用生成。更新该文件即可修改默认打开方式。
+
+## 参考链接
+
+- [Github: ranger](https://github.com/ranger/ranger)
+- [Blog: Ranger 用法总结](http://www.huangpan.net/posts/ji-ke/2019-08-21-ranger.html)
+- [arhclinux: ranger](https://man.archlinux.org/man/ranger.1)

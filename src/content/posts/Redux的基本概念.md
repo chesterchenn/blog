@@ -1,0 +1,179 @@
+---
+title: "Redux 的基本概念"
+published: 2023-03-26
+tags: ["react"]
+---
+
+Redux 中的基本概念。
+
+<!-- vim-markdown-toc GFM -->
+
+- [Store](#store)
+  - [创建 Store](#创建-store)
+  - [Store 方法](#store-方法)
+    - [getState](#getstate)
+    - [dispatch](#dispatch)
+    - [subscribe](#subscribe)
+  - [Store 应用](#store-应用)
+- [Action](#action)
+- [Reduer](#reduer)
+  - [combineReducer](#combinereducer)
+- [原则描述](#原则描述)
+- [Mobx 与 Redux 的区别](#mobx-与-redux-的区别)
+  - [存储数据形式的区别](#存储数据形式的区别)
+  - [操作对象方式的区别](#操作对象方式的区别)
+  - [Store 的区别](#store-的区别)
+- [参考链接](#参考链接)
+
+<!-- vim-markdown-toc -->
+
+## Store
+
+store 保存了装个应用的状态树，整个应用中只存在一个 store。而 store 不是一个类，只是一个带有方法的对象。
+
+唯一修改 store 状态的方式在是 dispatch 一个 action。
+
+### 创建 Store
+
+主要用 `createStore` API 来创建 Store。
+
+`createStore(reducer, [initialState], [enhancer])`
+
+- createStore 只接受一个 reducer，当有很多 reducer 时使用 `combineReducer` 融合成一个根 reducer
+- Redux 唯一自带的增强器是 `applyMiddleWare()`
+- 当有多个增强器的时候，使用 `compose()` 连接
+
+### Store 方法
+
+Store 主要有四个方法
+
+#### getState
+
+`getState()` 返回应用中的状态树。
+
+#### dispatch
+
+`dispatch(action)` 派遣一个动作，这时唯一修改 store 内部状态的方法。
+
+#### subscribe
+
+`subscribe(listener)` 增加一个监听器，当有任何动作被派遣时，都会被调用。
+
+1. 如果在监听器中又调用 dispatch 时需要终止条件，否则会导致无限循环。
+2. 在 dispatch 多次更新状态时，监听器只会检测最后一次的状态更新。
+3. 如果需要取消订阅，则执行调用 subscribe 的返回结果。
+
+```js
+let i = 0;
+function handleChange() {
+  i++;
+}
+const unsubscribe = store.subscribe(handleChange);
+unsubscribe();
+```
+
+### Store 应用
+
+以 React 中的应用为例：
+
+首先，使用 `react-redux` 库进行 store 初始化。使用 `react-redux` 提供的 Provider 组件。
+
+```js
+import store from './store';
+import { Provider } from 'redux';
+
+<Provider store={store}>
+  <App />
+</Provider>;
+```
+
+使用 `react-redux` 在别的组件访问 store。
+
+```js
+import store from './store';
+import { connect } from 'react-redux';
+
+const App = () => ();
+
+connect(mapStateToProps?, mapDispatchToProps?, mergeProps?, option?)(App)
+```
+
+也可以直接使用 redux 提供的 getState 和 dispatch 方法
+
+```js
+import store from './store';
+
+const App = () => {
+  store.getState();
+  store.dispatch({ type: 'ADD_TODO', text: '123' });
+};
+```
+
+可以发现，getState 与 `react-redux` 中的 mapStateToProps 都是可以访问 store 的状态树。同样的还有 dispatch 和 mapDispatchToProps。
+
+Stack Overflow 有一个相应的回答：[store.getState or mapStateToProps in Component](https://stackoverflow.com/questions/52074622/store-getstate-or-mapstatetoprops-in-component)。总结就是提高代码的可阅读性以及更好管理组件，组件内所有的值来自 props 和 state 而不是直接来自 store。
+
+## Action
+
+Action 是一个对象，`{ type: string; [extraProps: string]: any }`
+
+Action 主要包含了 type, payload 的值，Action 用来描述发生了什么事，type 描述的事件类型名称，payload 描述了事件的内容变化。
+
+## Reduer
+
+reducer 是将状态 state 和行为 action 联系在一起的函数，主要是描述了 store 通过派遣不同的 action 类型去更新 state 的过程函数。
+
+```ts
+type Reducer<S = any, A extends Action = AnyAction> = (
+  state: S | undefined, action: A
+) => S
+
+function somereducer = (state, action) {}
+```
+
+### combineReducer
+
+`combineReducer(reducers)` 用来组合 reducers 并返回一个 rootReducer。
+
+当我们的应用程序越来越大，越来复杂时，需要将很多 reducer 分开管理。而 createStore 的入口参数只接受一个 reducer。可以通过使用 combineReducer 来将其组合。
+
+```js
+import { combineReducer } from 'redux';
+const rootReducer = combineReducer({ reducer1, reducer2 });
+```
+
+![reducer](/images/reducer.svg)
+
+## 原则描述
+
+- 单一数据源：整个应用的全局 state 会被存储在一颗 object tree 中，且该对象树只存在唯一一个 store 中
+- State 是只读的：唯一改变 State 的方法就是触发 action
+- 使用纯函数来执行修改：为了描述 action 如何修改 state tree，需要编写纯函数 reducer
+
+## Mobx 与 Redux 的区别
+
+作为面试上一道高频题，面试官经常会问 mobx 与 redux 两者的区别？其实主要区别就是两者的原则。
+
+![Mobx Flow](/images/mobx-flow.png)
+
+![Redux Flow](/images/redux-flow.gif)
+
+首先，redux 面向的是函数式编程，mobx 面向的是对象式编程。
+
+### 存储数据形式的区别
+
+Redux 默认以原生 JavaScript 对象 Object 形式存储数据，而 Mobx 使用可观察对象 Observable
+
+### 操作对象方式的区别
+
+Redux 对象通常是不可变的（immutable），而是要在原有的状态树对象基础上返回一个新的状态数，而 mobx 是可以直接使用新值更新状态对象
+
+Redux 需要手动跟踪所有状态树对象的变更，而 Mobx 中可以监听可观察对象，当其变更时将自动触发监听
+
+### Store 的区别
+
+Redux 默认一个 Store，而 Mobx 通常按模块划分，储存多个 Store
+
+## 参考链接
+
+- [Redux: API Reference](https://redux.js.org/api/api-reference)

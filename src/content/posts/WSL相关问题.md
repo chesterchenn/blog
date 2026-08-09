@@ -1,0 +1,103 @@
+---
+title: "WSL相关的问题"
+published: 2021-09-18
+tags: ["windows"]
+---
+
+记录在执行 WSL 遇到的一些相关的问题。
+
+<!-- vim-markdown-toc GFM -->
+
+- [vim 字体变化](#vim-字体变化)
+- [内存占用过高](#内存占用过高)
+- [命令相关](#命令相关)
+- [主题](#主题)
+- [git 中文乱码](#git-中文乱码)
+- [无法解析 github 域名](#无法解析-github-域名)
+
+<!-- vim-markdown-toc -->
+
+## vim 字体变化
+
+在注册表中：`HKEY_CURRENT_USER\Console\{YOUR_WSL}` 添加：`CodePage`(DWORD 类型，值 0x01b5)
+
+## 内存占用过高
+
+该问题只针对 WSL2 版本，在 WSL2 里面会遇到 Vmmem 进程占用内存过高，实质上是 linux kernel 把内存当 cache 了，用完未释放。
+
+限制内存的使用，进入 `C:\Users\{Your_Name}` 或者在地址栏输入 `%UserProfile%`，创建 `.wslconfig`
+
+```plain
+[wsl2]
+memory=3GB
+```
+
+## 命令相关
+
+以下命令均在 PowerShell 运行
+
+- `PS > wsl --shutdown` 终止 wsl 命令
+- `PS > wsl -l -v` 查看 wsl 版本
+
+## 主题
+
+Windows 默认终端的 Color Theme 不方便修改，可以使用微软官方的 ColorTool 修改终端配色工具。
+
+最新下载版本是 19 年 4 月份版本：[Color Tool April 2019](https://github.com/microsoft/terminal/releases/tag/1904.29002)
+
+ColorTool 文档说明：[ColorTool](https://github.com/microsoft/terminal/blob/main/src/tools/ColorTool/README.md)
+
+执行命令 `ColorTool.exe -d *.itermcolors`
+
+主题下载可以使用 [iTerm2-Color-Schemes](https://github.com/mbadolato/iTerm2-Color-Schemes)
+
+Konsole 切换方式请参考 [iTerm2-Color-Schemes: Konsole color schemes](https://github.com/mbadolato/iTerm2-Color-Schemes#konsole-color-schemes)
+
+Windows Terminal 切换方式请参考 [iTerm2-Color-Schemes: Windows Terminal color schemes](https://github.com/mbadolato/iTerm2-Color-Schemes#windows-terminal-color-schemes)
+
+## git 中文乱码
+
+由于 Windows 默认编码不是 utf-8，所以 git 在 Windows 下经常会乱码，需要设置 git 的编码。
+
+```shell
+git config --global core.quotepath false          # 显示 status 编码
+git config --global gui.encoding utf-8            # 图形界面编码
+git config --global i18n.commitencoding utf-8     # commit 编码
+git config --global i18n.logoutputencoding utf-8  # 输出 log 编码
+export LESSCHARSET=utf-8 # log 默认采用 less 命令，设置 less 命令的编码
+```
+
+以上命令等同于在 .gitconfig 中设置:
+
+```ini
+[core]
+    quotepath = false
+[gui]
+    encoding = utf-8
+[i18n]
+    commitencoding = utf-8
+    logoutputencoding = utf-8
+```
+
+在 wsl 下设置了 core 和 LESSCHARSET 的值解决了大部分 git 场景乱码的问题
+
+- [解决 git 在 Windows/Ubuntu 下中文乱码问题](https://blog.csdn.net/bingyu9875/article/details/88196929)
+
+## 无法解析 github 域名
+
+WSL 无法解析域名：`Could not resolve hostname github.com: Temporary failure in name resolution`
+
+1. 编辑 `/etc/wsl.conf`
+
+   ```plain
+   [network]
+   generateResolvConf = false
+   ```
+
+2. 重启 `wsl --shutdown`
+
+3. 编辑 `/etc/resolv.conf`
+  
+   ```plain
+   nameserver 8.8.8.8
+   ```

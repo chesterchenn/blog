@@ -1,0 +1,261 @@
+---
+title: "网格布局Grid"
+published: 2022-01-27
+tags: ["css"]
+---
+
+网格布局，Grid 布局，也叫栅格布局，是一种二维网格布局。
+
+Grid 布局有三个重要的属性：行(row)，列(column)，沟槽(gutter，行列间隙)。
+
+## 术语
+
+### 网格容器 Grid Container
+
+通过声明元素 `display: grid` 或者 `display: inline-grid` 创建了网格容器（grid container）。
+
+### 网格项 Grid Item
+
+网格容器内的直接子元素均为网格项（grid item），但是孙元素不属于。
+
+### 网格线 Grid Line
+
+构成网格结构的分割线,位于行或者列的任意一端。
+
+### 网格单元 Grid Cell
+
+两个相邻行和两个相邻列网格线之间的区域。
+
+## fr
+
+新单位 fr 表示网格容器中可用空间的一部分。
+
+- `grid-template-columns: 1fr 1fr 1fr;` 表示划分成三列，每列占三分之一。
+- `grid-template-columns: 500px 1fr 2fr;` 表示划分成三列，首列占 500px，第二列占剩余部分的三分之一，最后一列占剩余部分的三分之二。
+
+当网格中有大量的轨迹时，我们可以使用 repeat() 符号
+
+- `grid-template-columns: repeat(3, 1fr); => grid-template-columns: 1fr 1fr 1fr;`
+- `grid-template-columns: repeat(2, 1fr 2fr); => grid-template-columns: 1fr 2fr 1fr 2fr;`
+
+## 网格属性
+
+| 网格容器属性          | 网格元素属性      |
+| :-------------------- | :---------------- |
+| display               | grid-column-start |
+| grid-template-columns | grid-column-end   |
+| grid-template-rows    | grid-row-start    |
+| grid-template-areas   | grid-row-end      |
+| grid-template         | grid-column       |
+| grid-column-gap       | grid-row          |
+| grid-row-gap          | grid-area         |
+| grid-gap              | justify-self      |
+| justify-items         | align-self        |
+| align-items           | place-self        |
+| place-items           |                   |
+| justify-content       |                   |
+| align-content         |                   |
+| place-content         |                   |
+| grid-auto-columns     |                   |
+| grid-auto-rows        |                   |
+| grid-auto-flow        |                   |
+| grid                  |                   |
+
+<style>
+.container {
+  display: grid;
+  border: 2px solid #11a4ff;
+}
+.item {
+  background-color: #ffe411;
+  border: 2px solid #fff8bf;
+  padding: 0 10px;
+  color: #122b3a;
+}
+</style>
+
+## grid-template-columns
+
+`grid-template-columns` 它决定了网格中最多存在多少列以及每列的宽度大小。
+
+`grid-auto-columns` 显示的定义每列的列宽。
+
+其值：
+
+- none: 表示没有显式的网格列，根据 `grid-auto-columns` 自动生成。
+- <length>: 指定列宽。如 700px。
+- <precentage>: 百分比。如 10%。
+- <flex>: 自适应布局。使用单位 fr。
+- minmax(min, max): 指定最小值和最大值。auto 表示自适应。
+- repeat: 重复列表。
+
+```css
+.container--grid-template-columns {
+  grid-template-columns: 120px 80px;
+}
+```
+
+<div class="container container--grid-template-columns">
+  <div class="item">120px</div>
+  <div class="item">80px</div>
+  <div class="item">120px</div>
+  <div class="item">80px</div>
+</div>
+
+<style>
+.container--grid-template-columns {
+  grid-template-columns: 120px 80px;
+}
+</style>
+
+## grid-template-rows
+
+`grid-template-rows` 规定 grid 的高度。
+
+`grid-auto-rows` 显式的定义每行的高度。
+
+其值：
+
+- none: 没有显式的网格高度，根据 `grid-auto-rows` 自动生成。
+- <length>: 指定高度数值。如 700px。
+- <precentage>: 百分比。如 10%。
+- <flex>: 自适应布局。使用单位 fr。
+- minmax(min, max): 指定最小值和最大值。auto 表示自适应。
+- repeat: 重复列表。
+
+```css
+.container--grid-template-rows {
+  grid-template-rows: 40px 2rem 60px;
+}
+```
+
+<div class="container container--grid-template-rows">
+  <div class="item">40px</div>
+  <div class="item">2rem</div>
+  <div class="item">60px</div>
+</div>
+
+<style>
+.container--grid-template-rows {
+  grid-template-rows: 40px 2rem 60px;
+}
+.container--grid-template-rows > .item {
+  height: auto;
+}
+</style>
+
+## gap
+
+gap 表示行列之间的间隙。gap 是 row-gap 和 columns-gap 的简写。row-gap 表示行间隙，columns 表示列间隙。
+
+## justify-items
+
+沿行轴对其网格对齐网格项目。应用于容器内的所有网格项目。
+
+其值：`justify-items: start | end | center | stretch(default);`
+
+示例：
+
+<div class="container container__justify-items container__justify-items--start">
+  <div class="item">start</div>
+  <div class="item">start</div>
+  <div class="item">start</div>
+</div>
+
+<div class="container container__justify-items container__justify-items--end">
+  <div class="item">end</div>
+  <div class="item">end</div>
+  <div class="item">end</div>
+</div>
+
+<div class="container container__justify-items container__justify-items--center">
+  <div class="item">center</div>
+  <div class="item">center</div>
+  <div class="item">center</div>
+</div>
+
+<div class="container container__justify-items container__justify-items--stretch">
+  <div class="item">stretch</div>
+  <div class="item">stretch</div>
+  <div class="item">stretch</div>
+</div>
+
+<style>
+.container__justify-items {
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-bottom: 8px;
+}
+.container__justify-items > .item {
+  text-align: center;
+}
+.container__justify-items--start {
+  justify-items: start;
+}
+.container__justify-items--end {
+  justify-items: end;
+}
+.container__justify-items--center {
+  justify-items: center;
+}
+.container__justify-items--stretch {
+  justify-items: stretch;
+}
+</style>
+
+## align-items
+
+沿列轴对其网格对其网格项目。应用于容器内的所有网格项目。
+
+其值：`align-items: start | end | center | stretch(default);`
+
+<div class="container container__align-items container__align-items--start">
+  <div class="item">start</div>
+  <div class="item">start</div>
+  <div class="item">start</div>
+</div>
+
+<div class="container container__align-items container__align-items--end">
+  <div class="item">end</div>
+  <div class="item">end</div>
+  <div class="item">end</div>
+</div>
+
+<div class="container container__align-items container__align-items--center">
+  <div class="item">center</div>
+  <div class="item">center</div>
+  <div class="item">center</div>
+</div>
+
+<div class="container container__align-items container__align-items--stretch">
+  <div class="item">stretch</div>
+  <div class="item">stretch</div>
+  <div class="item">stretch</div>
+</div>
+
+<style>
+.container__align-items {
+  grid-template-columns: 1fr 1fr 1fr;
+  height: 50px;
+  margin-bottom: 8px;
+}
+.container__align-items > .item {
+  text-align: center;
+}
+.container__align-items--start {
+  align-items: start;
+}
+.container__align-items--end {
+  align-items: end;
+}
+.container__align-items--center {
+  align-items: center;
+}
+.container__align-items--stretch {
+  align-items: stretch;
+}
+</style>
+
+## 参考链接
+
+- [MDN: Basic Concepts of grid layout](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Basic_Concepts_of_Grid_Layout)
+- [CSS Tricks: A Complete Guide to Grid](https://css-tricks.com/snippets/css/complete-guide-grid/)

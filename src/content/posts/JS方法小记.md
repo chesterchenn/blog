@@ -1,0 +1,234 @@
+---
+title: "JS方法小记"
+published: 2018-07-27
+tags: ["javascript"]
+---
+
+关于 JS 的一些方法
+
+<!-- vim-markdown-toc GFM -->
+
+- [自定义排序](#自定义排序)
+- [Array.includes 处理多重条件](#arrayincludes-处理多重条件)
+- [Array.every 和 Array.some 处理条件](#arrayevery-和-arraysome-处理条件)
+- [接收参数的方式](#接收参数的方式)
+- [对象转数组](#对象转数组)
+- [数组的判断](#数组的判断)
+- [检查是否为工作日](#检查是否为工作日)
+- [concat 和 push](#concat-和-push)
+- [返回从 0 开始的数组](#返回从-0-开始的数组)
+- [中断 forEach](#中断-foreach)
+- [中断 for 循环](#中断-for-循环)
+- [千分位分隔符](#千分位分隔符)
+- [for...in 与 for...of](#forin-与-forof)
+- [JS 中常用的按位运算应用](#js-中常用的按位运算应用)
+- [在 Array.map 使用 async/await](#在-arraymap-使用-asyncawait)
+
+<!-- vim-markdown-toc -->
+
+## 自定义排序
+
+```ts
+function customSort<T>(
+  group: { [key: string]: T }[],
+  arr: T[],
+  key: string,
+): { [key: string]: T }[] {
+  return group.sort((a, b) => {
+    return arr.indexOf(a[key]) - arr.indexOf(b[key]);
+  });
+}
+```
+
+示例如下：
+
+```js
+const arr = ['foo', 'bar', 'baz'];
+const group = [
+  {
+    key: 'bar',
+    value: 1,
+  },
+  {
+    key: 'foo',
+    value: 2,
+  },
+  {
+    key: 'baz',
+    value: 3,
+  },
+  {
+    key: 'foo',
+    vlaue: 4,
+  },
+];
+
+const sortGroup = customSort(group, arr, 'key');
+// [{value: 2, key: 'foo'}, {value: 4, key: 'foo'},
+//  {value: 1, key: 'bar'}, {value: 3, key: 'baz'}]
+```
+
+## Array.includes 处理多重条件
+
+```js
+function func(arg) {
+  if (arg === 'A' || arg === 'B' || arg === 'C') {
+    /* do something */
+  }
+}
+
+function func(arg) {
+  const arr = ['A', 'B', 'C'];
+  if (arr.includes(arg)) {
+    /* do something */
+  }
+}
+```
+
+## Array.every 和 Array.some 处理条件
+
+```js
+const arr = [
+  { name: 'AA', age: 10 },
+  { name: 'BB', age: 20 },
+  { name: 'CC', age: 30 },
+];
+
+// 满足全部条件
+const bool = arr.every((item) => item.name === 'AA');
+
+// 满足部分条件
+const bool = arr.some((item) => item.age < 35);
+```
+
+## 接收参数的方式
+
+```js
+function func(url, res, search, page, limit) {} // 需要记住参数顺序
+function func({ url, res, search, page, limit }) {} // 不需要记住参数顺序，记参数名称
+```
+
+## 对象转数组
+
+```js
+const nubmers = {
+  one: 1,
+  two: 2,
+};
+const key = Object.keys(numbers); // ['one', 'two']
+const value = Object.values(numbers); // [1, 2]
+const entry = Object.entries(numbers); // [['one': 1], ['two', 2]]
+```
+
+## 数组的判断
+
+- 判断是否为数组：`Array.isArray()`
+- 类数组转化数组：`Array.from()`
+
+## 检查是否为工作日
+
+```js
+const isWeekday = (date) => date.getDay() % 6 !== 0;
+```
+
+## concat 和 push
+
+push 修改源数组，concat 返回新数组，concat 可以连接数组。
+
+```js
+var arr = [1, 2];
+arr.push(3); // arr: [1, 2, 3]
+arr.push([4, 5]); // arr: [1, 2, 3, [4, 5]]
+```
+
+```js
+var arr = [1, 2];
+var arrA = arr.concat(3); // arr: [1, 2]; arrA: [1, 2, 3];
+var arrB = arr.concat([4, 5]); // arr: [1, 2]; arrB: [1, 2, 4, 5];
+```
+
+## 返回从 0 开始的数组
+
+```js
+Array.from(Array(5).keys()); //[0, 1, 2, 3, 4]
+```
+
+## 中断 forEach
+
+使用 splice 删除剩余项，中断 forEach 的循环。⛔**该方法会改变原数组，请慎用**
+
+```js
+const arr = [1, 2, 3, 4, 5];
+arr.forEach((item, idx) => {
+  if (item === 3) {
+    arr.splice(idx + 1, arr.length - idx);
+    // arr.length = 0; // 甚至可以直接清空数组
+  }
+  console.log(item);
+});
+// 1, 2, 3
+console.log(arr); // [1, 2, 3]
+```
+
+## 中断 for 循环
+
+使用 break 打断 for 循环
+
+```js
+const arr = [1, 2, 3, 4, 5];
+for (k in arr) {
+  console.log(arr[k]);
+  if (arr[k] === 3) {
+    break;
+  }
+}
+// 1, 2, 3
+```
+
+## 千分位分隔符
+
+```js
+function _comma(number) {
+  return number.toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,');
+}
+```
+
+[题解 \| 实现数字按每隔 3 位用,区隔开](https://blog.nowcoder.net/n/633bded80a164c5e946dfcce9df20327?f=comment)
+
+## for...in 与 for...of
+
+for...in 迭代对象的**可枚举字符串属性**，包括原型链上可枚举的属性。
+
+```js
+for (variable in object) statement;
+```
+
+for...of 语句是为了方便迭代迭代器。对象 `object` 是不可迭代的，迭代 `object` 会报错 `Error: object is no iterable`
+
+```js
+for (variable of iterable) statement;
+```
+
+- [for...in](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in)
+- [for...of](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of)
+
+## JS 中常用的按位运算应用
+
+[JS 中常用的按位运算应用](https://wxxcarl.github.io/note/js/%E6%8C%89%E4%BD%8D%E8%BF%90%E7%AE%97.html)
+
+## 在 Array.map 使用 async/await
+
+在使用 forEach 或者 map 等数组遍历的方式，遇到异步调用的函数，直接使用 async/await 的话，会得到一个 `Promise<T>[]` 的结果。
+
+通过使用 `Promise.all` 可以得到异步返回的结果
+
+```ts
+var arr = [1, 2, 3, 4, 5];
+
+var results: number[] = await Promise.all(arr.map(async (item): Promise<number> => {
+    await callAsynchronousOperation(item);
+    return item + 1;
+}));
+```
+
+- [Use async await with Array.map](https://stackoverflow.com/questions/40140149/use-async-await-with-array-map)

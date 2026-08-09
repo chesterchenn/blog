@@ -1,0 +1,155 @@
+---
+title: "JS的事件循环"
+published: 2020-09-09
+tags: ["javascript"]
+---
+
+在一个页面内，可能存在各种各样的操作，事件，用户交互，脚本，渲染还有网络请求等等，这些操作可能同时发生。而 JS 是单线程，那么如何协调、处理这些操作，我们就需要用到事件循环(Event Loop)。
+
+## 浏览器异步执行
+
+浏览器是多线程的，当 JS 需要执行异步任务时，浏览器会另外启动一个线程去执行该任务。也就是说，“JS 是单线程的”指的是执行 JS 代码的线程只有一个，是浏览器提供的 JS 引擎线程（主线程）。浏览器中还有定时器线程和 HTTP 请求线程等，这些线程主要不是来跑 JS 代码的。
+
+浏览器详细的进程，线程可以查看：[浏览器的渲染](//2022/01/11/浏览器的渲染.html)
+
+## 概念
+
+![](/images/the_javascript_runtime_environment_example.svg)
+
+在 JS 代码执行时，会将对象存在堆（Heap）中，在栈（Stack） 存放基础类型的变量和对象指针。JS 在解析一段代码时，会将同步代码按顺序排在某个地方，即【执行栈】。
+
+JS 按顺序执行【执行栈】中的方法，每次执行一个方法时，会为这个方法生成独有的执行环境（上下文 context)，涉及到异步任务时，将会对应的任务放到事件队列中。待这个方法执行完成后，销毁当前的执行环境，并从栈中弹出此方法（即消费完成），然后继续下一个方法。
+
+## 事件循环
+
+于是便有了事件循环（event loop）的产生，JavaScript 将一些异步操作或有 I/O 阻塞的操作全部放到一个事件队列，先执行同步 CPU 代码，等到 JavaScript 引擎没有同步代码，CPU 空闲下来再读取事件队列的异步事件来一次执行。
+
+事件循环的大致过程：
+
+1. 执行一个宏任务（若没有可选的宏任务，则直接处理微任务）
+2. 执行中遇到微任务，就将其添加到微任务队列中
+3. 执行中遇到宏任务，就将其添加到宏任务队列中
+4. 执行完当前的宏任务后，去查询当前是否有需要执行的微任务
+5. 检查渲染，若需要渲染，浏览器执行渲染任务
+6. 渲染完毕后，JS 线程执行下一个宏任务（如此循环）
+
+## 宏任务
+
+| 事件名称     | 浏览器 | Node |
+| :----------- | :----- | :--- |
+| I/O          | ✅     | ✅   |
+| setTimeout   | ✅     | ✅   |
+| setInterval  | ✅     | ✅   |
+| DOM 操作     | ✅     | ❌   |
+| setImmediate | ❌     | ✅   |
+
+### setTimeout
+
+`setTimeout(..)` 不会把回调函数挂在事件循环队列中。它所做的是设一个定时器，定时器到时后，环境会把你的回调函数放在事件循环中，这样，在到了指定的时刻，tick 会摘下并执行这个回调。
+
+当 `setTimeout(..)` 指定的时间到达，若此时事件循环队列还在运行，`setTimeout(..)` 只能等待其运行结束才会调用，这也解释了为什么 `setTimeout(..)` 定时器的精度可能不高。一个简单的例子：
+
+```js
+const start = Date.now();
+setTimeout(function () {
+  console.log('timer', Date.now() - start);
+}, 100);
+
+while (true) {
+  if (Date.now() - start >= 1000) {
+    break;
+  }
+}
+// timer 1008
+```
+
+## 微任务
+
+| 事件名称                   | 浏览器 | Node |
+| :------------------------- | :----- | :--- |
+| process.nextTick           | ❌     | ✅   |
+| MutationObserver           | ✅     | ❌   |
+| Promise.then catch finally | ✅     | ✅   |
+
+微任务的无限调用也会造成页面的阻塞。
+
+## 视图更新渲染
+
+微任务队列执行完成后，也就是一次事件循环结束后，浏览器会执行视图渲染，当然这里会有浏览器的优化，可能会合并多次循环的结果做一次视图重绘，因此视图更新是在事件循环之后，所以并不是每一次操作 Dom 都一定会立马刷新视图。视图重绘之前会先执行 requestAnimationFrame 回调。
+
+## 问题
+
+```js
+async function async1() {
+  console.log('async1 start');
+  await async2();
+  console.log('async1 end');
+}
+
+async function async2() {
+  console.log('async2');
+}
+
+console.log('script start');
+
+setTimeout(function () {
+  console.log('setTimeout');
+}, 0);
+
+async1();
+
+new Promise(function (resolve) {
+  console.log('promise1');
+  resolve();
+}).then(function () {
+  console.log('promise2');
+});
+
+console.log('script end');
+```
+
+正确答案应该是
+
+```plain
+script start
+async1 start
+async2
+promise1
+script end
+async1 end
+promise2
+setTimeout
+```
+
+```js
+let ps = document.querySelectorAll('p');
+for (let i = 0; i < ps.length; i++) {
+  ps[i].style.backgroundColor = 'red';
+  ps[i].onclick = function () {
+    this.style.backgroundColor = 'blue';
+    alert(i); // 这里的i是什么，还有p标签为什么背景色
+    this.style.backgroundColor = 'black';
+  };
+}
+```
+
+这里的 i 为当前序列，p 标签的颜色为红色。主要原因是：
+
+1. 页面渲染是 DOM 操作，会被 JavaScript 引擎放入事件队列；
+2. alert 是 window 的内置函数，被认为是同步 CPU 代码；
+3. JavaScript 引擎会优先执行同步代码，alert 弹窗出现；
+4. alert 有阻塞的效果，JavaScript 引擎的执行被阻塞；
+5. 点击 alert 下的确定，JavaScript 执行完同步代码，读取事件队列的 DOM 操作，页面渲染完成。
+
+## 参考链接
+
+- 《你不知道的 JavaScript（中卷）》
+- [MDN: 并发模型与事件循环](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/EventLoop)
+- [Event loops in the HTML standard](https://html.spec.whatwg.org/multipage/webappapis.html#event-loops)
+- [Jake Archibald: 在循环 - JSConf.Asia](https://www.youtube.com/watch?v=cCOL7MC4Pl0&t=1592s)
+- [MDN: requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame)
+- [当事件循环遇到更新渲染](https://zhuanlan.zhihu.com/p/267273074)
+- [MDN: In depth: Microtasks and the JavaScript runtime environment](https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide/In_depth)
+- [JavaScript Alert 函数执行顺序问题](https://www.cnblogs.com/zhenbianshu/p/8686681.html)
+- [微任务、宏任务与 Event-Loop](https://juejin.cn/post/6844903657264136200)
+- [面试必问之 JS 事件循环(Event Loop)，看这一篇足够](https://juejin.cn/post/7164224261752619016)

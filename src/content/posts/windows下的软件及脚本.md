@@ -1,0 +1,90 @@
+---
+title: "Windows 下的软件及脚本"
+published: 2024-01-13
+tags: ["windows"]
+---
+
+记录在使用 Windows 下的一些优化软件以及脚本。
+
+<!-- vim-markdown-toc GFM -->
+
+- [PowerToys](#powertoys)
+- [小鹤双拼](#小鹤双拼)
+- [微软拼音禁用英文](#微软拼音禁用英文)
+
+<!-- vim-markdown-toc -->
+
+## PowerToys
+
+首先是微软官方出品的系统工具软件 - PowerToys。
+
+很好用的功能包括颜色选取器 `Win + Shift + C`，以及最常用的快速搜索 PowerToys Run `Alt + Space`
+
+可以通过微软商店，[GitHub](https://github.com/microsoft/PowerToys) 等方式下载。
+
+## 小鹤双拼
+
+最微软自带的微软拼音软件里面虽包含了双拼的输入法，但是缺少了常用的小鹤双拼。
+
+运行以下注册表的脚本就可以添加到微软拼音里面
+
+```reg
+Windows Registry Editor Version 5.00
+
+; 为微软拼音输入法添加小鹤双拼
+[HKEY_CURRENT_USER\Software\Microsoft\InputMethod\Settings\CHS]
+"UserDefinedDoublePinyinScheme0"="小鹤双拼*2*^*iuvdjhcwfg^xmlnpbksqszxkrltvyovt"
+```
+
+## 微软拼音禁用英文
+
+出于部分需求，现有的语言安装了英语，所以需要关闭微软拼音的英文输入模式。
+
+在网上找到一些相关的办法: 使用 [AutoHotKey](https://www.autohotkey.com/v2/) 脚本实现切换检测到切换的英文模式就帮忙切换到中文模式。
+
+1. 首先进行 AHK 软件的安装，并将之后要运行的脚本放入 Windows 开机自启目录 `C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp`。
+
+2. 找到别人写的脚本。[AutoHotKey-Switch-IME](https://gist.github.com/maokwen/4d99f5c0aa2e7c0c114c708b03fb73ae)
+
+   ```ahk
+   #Include %A_ScriptDir%
+
+   timeInterval := 500
+
+   InChs() {
+     ime_status := DllCall("GetKeyboardLayout", "int", 0, "UInt")
+     return (ime_status & 0xffff) = 0x804 ; LANGID(Chinese) = 0x804
+   }
+
+   SwitchImeState(id) {
+       SendMessage(0x283, ; WM_IME_CONTROL
+                   0x002, ; wParam IMC_SETCONVERSIONMODE
+                   1025,  ; lParam (Chinese)
+                   ,      ; Control (Window)
+                   id)
+   }
+
+   DetectHiddenWindows True
+
+   outer:
+   Loop {
+     try {
+       hWnd := WinGetID("A")
+       id := DllCall("imm32\ImmGetDefaultIMEWnd", "Uint", hWnd, "Uint")
+
+       if (InChs()) {
+         SwitchImeState(id)
+       }
+
+   } catch as e {
+     ; ^Esc 开始菜单弹窗，会卡死在找不到当前窗口
+     continue("outer")
+   }
+
+   Sleep(500)
+   }
+   ```
+
+3. 快捷键的切换。默认是 `Win + Space`，使用很不习惯，修改称常用的 `Ctrl + Space`。
+   1. 使用 PowerToys 的快捷键映射。（最好开启管理员权限）
+   2. 使用 AHK 脚本，可以合并到上面的脚本。 `^Space::#Space`

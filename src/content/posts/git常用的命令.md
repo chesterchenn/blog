@@ -1,0 +1,151 @@
+---
+title: "git常用的命令"
+published: 2020-10-22
+tags: ["others"]
+---
+
+记录一些常用的 git 命令
+
+<!-- vim-markdown-toc GFM -->
+
+- [配置](#配置)
+- [克隆](#克隆)
+- [分支](#分支)
+- [删除分支](#删除分支)
+- [远程仓库](#远程仓库)
+- [中途保存](#中途保存)
+- [日志](#日志)
+- [重置](#重置)
+- [标签](#标签)
+- [变基](#变基)
+- [.gitignore](#gitignore)
+- [多个账号](#多个账号)
+- [搭建](#搭建)
+- [参考链接](#参考链接)
+
+<!-- vim-markdown-toc -->
+
+如果终端是 zsh, 那么使用 oh-my-zsh 的 git 插件时，包含一套它们标准的 git 命令缩写 - [https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/git/git.plugin.zsh](https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/git/git.plugin.zsh)
+
+## 配置
+
+用户信息全局配置，配置当前项目去掉参数 --globale 即可。
+
+`git config --global user.name 'username'` 配置全局用户名称
+
+`git config --global user.email 'email@example.com'` 配置全局用户邮箱
+
+`git config --global core.editor vim` 修改 git 默认编辑器
+
+## 克隆
+
+`git clone --depth=1` 浅克隆当前的仓库，不拉取历史的提交记录
+`git clone -b <name>, --branch <name>` 克隆指定的分支
+
+## 分支
+
+`git checkout -b <branch> <remote>/<branch>` 从 remote/branch 切出分支，省略代表当前分支
+
+`git branch -m <branch>` 重命名分支
+
+## 删除分支
+
+`git branch -d <branch>` 删除本地分支
+
+`git branch -D <branch>` 强制删除本地分支
+
+`git push <remote> :<branch>` 或 `git push origin --delete branch` 删除远程分支
+
+`git remote prune origin` 若追踪的远程分支已经删除，则删除本地分支
+
+## 远程仓库
+
+`git remote -v` 查看远程仓库地址
+
+`git remote set-url origin <URL>` 修改远程仓库的 url
+
+## 中途保存
+
+```shell
+git stash     # 将本地代码放在暂存区
+git pull      # 从远程拉取新代码
+git stash pop # 将暂存区代码放回本地
+```
+
+## 日志
+
+`git log <branch> <branch>` 指定分支的日志
+
+`git log --all --oneline --graph` 展示所有分支的提交记录，以单线图形展示
+
+`git log --author='name'` 指定指定作者的记录
+
+`git log --grep="msg"` 匹配 msg 的记录
+
+`git log --after="2022-01-01" --before="2022-04-01"` 统计 2022-01-01 之后，2022-04-01 之前的记录
+
+`git log --pretty=format:"%an %ad: %s"` 格式化统计
+
+`git reflog` 显示本地更新过的 HEAD 的 git 命令记录
+
+`git log --abbrev-commit` 使用较短的 SHA 值展示日志记录
+
+## 重置
+
+`git reset <commit-id>` 回退到指定的提交，保留修改文件
+
+`git reset --hard <commit-id>` 回退到指定的提交，不保留修改文件
+
+`git reset HEAD^` 回退到最近的提交
+
+## 标签
+
+`git tag` 查看标签
+
+`git tag <version>` 创建标签
+
+`git tag -a <version> -m 'description' <commit-id>` 更加详细的描述
+
+`git push origin <version>` 推送本地标签到远程
+
+`git tag -d <version>` 删除本地标签
+
+## 变基
+
+请不要在主分支上执行变基操作
+
+`git rebase <branch>` 将当前分支基于某分支进行变基操作
+
+`git rebase -i HEAD~2` 将最近两次的提交进行合并变基
+
+## .gitignore
+
+当一个文件被追踪之后，再添加到 .gitignore 文件会无效，解决办法：
+
+```shell
+git rm -r --cached <文件名>
+git add <文件名>
+git commit -m 'untracked file'
+```
+
+## 多个账号
+
+```shell
+[includeIf "gitdir:~/Code/"]
+  path = .gitconfig-person
+[includeIf "gitdir:~/Work/"]
+  path = .gitconfig-work
+[includeIf "gitdir:~/GitHub/"]
+  path = ~/GitHub/.gitconfig
+[includeIf "gitdir/i:D:/WorkSpace/"]
+  path = D:/WorkSpace/.gitconfig
+```
+
+## 搭建
+
+- [在 WSL Ubuntu 下搭建 Git 远程仓库](https://toyobayashi.github.io/2019/12/23/RemoteGit/)
+
+## 参考链接
+
+- [git-scm](https://git-scm.com/docs)
+- [521xueweihan: git-tips](https://github.com/521xueweihan/git-tips)

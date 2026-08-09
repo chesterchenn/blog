@@ -1,0 +1,143 @@
+---
+title: "React 文档笔记"
+published: 2023-05-24
+tags: ["react"]
+---
+
+阅读 React 官方文档的部分笔记。
+
+<!-- vim-markdown-toc GFM -->
+
+- [Suspense](#suspense)
+  - [Props](#props)
+  - [注意事项](#注意事项)
+- [内嵌组件的函数定义](#内嵌组件的函数定义)
+- [重置状态在相同的位置](#重置状态在相同的位置)
+- [参考链接](#参考链接)
+
+<!-- vim-markdown-toc -->
+
+## Suspense
+
+`<Suspense>` 展示一个备用组件（一般是 Loading），直到子组件完成加载。
+
+```jsx
+<Suspense fallback={<Loading />}>
+  <SomeComponent />
+</Suspense>
+```
+
+### Props
+
+- `children`：实际要渲染的 UI，如果 `children` 正在渲染，那么 Suspense 就会渲染 `fallback`。
+- `fallback`：如果实际上要渲染的 UI 还没完全加载，则渲染一个替代的 UI 来代替它。
+
+### 注意事项
+
+- React 不会为那些在首次加载前被暂停的渲染保留任何状态。当组件加载完毕后，React 会重新尝试从头开始渲染被暂停的树。
+- 如果 Suspense 正在显示内容，但又被暂停了，那么它会重新显示成 fallback。除非由 `startTransition` 或 `useDeferredValue` 引发的更新。
+- Suspense 的再次隐藏复现，会触发布局副作用。
+
+## 内嵌组件的函数定义
+
+在组件内部定义另一个函数组件，这是一个不正确的做法，因为每次组件重新渲染的时候，内部定义的组件会重新初始化。
+
+```jsx
+import { useState } from 'react';
+
+export default function MyComponent() {
+  const [counter, setCounter] = useState(0);
+
+  function MyTextField() {
+    const [text, setText] = useState('');
+
+    return <input value={text} onChange={(e) => setText(e.target.value)} />;
+  }
+
+  return (
+    <>
+      <MyTextField />
+      <button
+        onClick={() => {
+          setCounter(counter + 1);
+        }}
+      >
+        Clicked {counter} times
+      </button>
+    </>
+  );
+}
+```
+
+上面是来自官方的例子：[xenodochial-colden-957ggf](https://codesandbox.io/s/957ggf?file=%2FApp.js&utm_medium=sandpack)
+
+当我们点击按钮时，组件重新渲染更新，`MyTextField` 函数会被重新创建一次，只是每次在相同的位置创建了不同的实例组件。
+
+为避免该问题，总是在顶层定义函数，切勿在函数内部嵌定义函数。
+
+## 重置状态在相同的位置
+
+在读取文档的时候还发现了一件有意思的事情。
+
+在默认情况下，当一个组件出现在相同的位置时，React 保持组件原有的状态。但有时会出现一些意外情况。
+
+```jsx
+import { useState } from 'react';
+
+export default function Scoreboard() {
+  const [isPlayerA, setIsPlayerA] = useState(true);
+  return (
+    <div>
+      {isPlayerA ? <Counter person="Taylor" /> : <Counter person="Sarah" />}
+      <button
+        onClick={() => {
+          setIsPlayerA(!isPlayerA);
+        }}
+      >
+        Next player!
+      </button>
+    </div>
+  );
+}
+
+function Counter({ person }) {
+  const [score, setScore] = useState(0);
+  const [hover, setHover] = useState(false);
+
+  let className = 'counter';
+  if (hover) {
+    className += ' hover';
+  }
+
+  return (
+    <div
+      className={className}
+      onPointerEnter={() => setHover(true)}
+      onPointerLeave={() => setHover(false)}
+    >
+      <h1>
+        {person}'s score: {score}
+      </h1>
+      <button onClick={() => setScore(score + 1)}>Add one</button>
+    </div>
+  );
+}
+```
+
+以上是官方例子：[reverent-surf-ly5h9z](https://codesandbox.io/s/ly5h9z?file=/App.js&utm_medium=sandpack)
+
+该问题主要是当我们切换玩家的时候，分数还会保持原有的状态。因为 React 会将相同位置的 `Counter` 组件视为同一个，仅仅是 `person` 的 prop 进行了变动。
+
+有两个方法可以解决以上问题：
+
+- 在不同的位置渲染组件。
+- 给每个组件加上显式的 `key`。
+
+第一种方法就是 `{isPlayerA && <Counter person="Taylor" /> } {!isPlayerA && <Counter person="Sarah" /> }`
+
+第二种方法就是 `{isPlayerA ? <Counter key="Taylor" person="Taylor" /> : <Counter key="Sarah" person="Sarah" />}`
+
+## 参考链接
+
+- [\<Suspense\>](https://react.dev/reference/react/Suspense)
+- [Preserving and Resetting State - React](https://react.dev/learn/preserving-and-resetting-state#different-components-at-the-same-position-reset-state)

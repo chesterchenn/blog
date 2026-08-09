@@ -1,0 +1,234 @@
+---
+title: "Promise"
+published: 2020-09-15
+tags: ["javascript"]
+---
+
+Promise 对象表示异步操作的最终完成（或失败）及其结果值。
+
+<!-- vim-markdown-toc GFM -->
+
+- [三种状态](#三种状态)
+- [实例方法](#实例方法)
+  - [then](#then)
+  - [catch](#catch)
+  - [finally](#finally)
+- [链式调用](#链式调用)
+- [静态方法](#静态方法)
+  - [Promise.all](#promiseall)
+  - [Promise.allSettled](#promiseallsettled)
+  - [Promise.race](#promiserace)
+  - [Promise.any](#promiseany)
+  - [Promise.resolve](#promiseresolve)
+  - [Promise.reject](#promisereject)
+- [参考链接](#参考链接)
+
+<!-- vim-markdown-toc -->
+
+Promise 在创建的时候并不知道最终的值，这使得异步方法像同步方法一样返回值，异步方法没有立即返回最终值，而是返回一个在未来使用的 promise 值。
+
+## 三种状态
+
+Promise 有三种状态：pending(待定)，fulfilled(完成)，rejected(拒绝)。
+
+1. 当 pending 时，promise 可能切换到 fulfilled 或者 rejected 状态的值。
+2. 当 fulfilled 时，promise 无法切换到其他状态，且必须有一个不变的 value。
+3. 当 rejected 时，promise 无法切换到其他状态，且必须有一个不变的 reason。
+
+![promise](/images/promises.png)
+
+## 实例方法
+
+### then
+
+Promise 最重要的方式就是 then 方法，该方法注册了回调，用以接受 Promise 的最终值或 Promise 拒绝的原因。
+
+`Promise.prototype.then` 方法返回一个新的 Promise 实例，并接收两个参数 onFulfilled（可选），onRejected（可选）。
+
+```js
+p.then(onFulfilled[, onRejected]);
+
+p.then(value => {
+  // fulfillment
+}, reason => {
+  // rejection
+});
+```
+
+### catch
+
+`Promise.prototype.catch` 方法返回一个新的 Promise 实例。catch 方法等同于 then 方法的 onRejected。
+
+```js
+p.catch(onRejected);
+
+p.catch(function (reason) {
+  // rejection
+});
+```
+
+### finally
+
+`Promise.prototype.finally` 方法不管 Promise 状态如何都会执行，该方法的回调函数不接受任何参数。
+
+```js
+p.finally(function () {
+  // settled (fulfilled or rejected)
+});
+```
+
+## 链式调用
+
+在多个 Promise 调用的时候，可以通过扁平化的链式调用代替嵌套式的调用，这样可以更加简洁，清晰，易于理解。
+
+```js
+// 嵌套式调用
+promise1()
+  .then(function (result) {
+    promise2(result)
+      .then(function (newResult) {
+        promise3(newResult)
+          .then(function (finalResult) {
+            console.log(`Got the final result: ${finalResult}`);
+          })
+          .catch(failureCallback);
+      })
+      .catch(failureCallback);
+  })
+  .catch(failureCallback);
+```
+
+在嵌套式调用的时候，每个 Promise 写在一个 .then() 里，类似于递归的回调地狱。而在扁平化的链式调用中，每个 Promise 写在一个连续的 then() 里，每个 then() 方法接受返回下个 Promise 函数。
+
+```js
+// 扁平化的链式调用，与上面的嵌套式调用等价
+promise1()
+  .then(function (result) {
+    return promise2(result);
+  })
+  .then(function (newResult) {
+    return promise3(newResult);
+  })
+  .then(function (finalResult) {
+    console.log(`Got the final result: ${finalResult}`);
+  })
+  .catch(failureCallback);
+
+// 使用箭头函数省略 return
+promise1()
+  .then((result) => promise2(result))
+  .then((newResult) => promise3(newResult))
+  .then((finalResult) => console.log(`Got the final result: ${finalResult}`))
+  .catch(failureCallback);
+```
+
+## 静态方法
+
+### Promise.all
+
+Promise.all([..]) 方法接受一个 Promise 对象数组作为参数。当数组内全部的 Promise 对象成功才会返回一个数组，而失败的时候则返回最先被 reject 状态的值。
+
+```js
+Promise.all(iterable);
+```
+
+一个例子：
+
+```js
+const p1 = new Promise((resolve, reject) => {
+  setTimeout(resolve, 100, 'foo');
+});
+const p2 = Promise.resolve(3);
+const p3 = 42;
+const p4 = Promise.reject('bar');
+
+Promise.all([p1, p2, p3]).then((values) => {
+  console.log(values);
+}); // => ["foo", 3, 42]
+
+Promise.all([p1, p2, p3, p4]).catch((reject) => {
+  console.log(reject);
+}); // => bar
+```
+
+### Promise.allSettled
+
+Promise.allSettled([..]) 方法接受一个 Promise 对象数组作为参数。当数组内全部的 Promise 对象完成或失败才会返回一个数组，每个数组项的状态和值都是一个对象。
+
+Promise.allSettled 是为了解决 Promise.all 的缺陷，Promise.all 的缺陷是只有全部的 Promise 对象都成功了才会返回结果。如果有任意一个 Promise 对象失败了，那么都会进入 catch 异常。
+
+```js
+const p1 = new Promise((resolve, reject) => {
+  setTimeout(resolve, 100, 'foo');
+});
+const p2 = Promise.resolve(3);
+const p3 = 42;
+const p4 = Promise.reject('bar');
+
+Promise.allSettled([p1, p2, p3, p4]).then((values) => {
+  console.log(values);
+});
+
+// [
+//   { status: 'fulfilled', value: 'foo' },
+//   { status: 'fulfilled', value: 3 },
+//   { status: 'fulfilled', value: 42 },
+//   { status: 'rejected', reason: 'bar' },
+// ];
+```
+
+### Promise.race
+
+Promise.race([..]) 参数中的实例最先改变状态，就会立即将该实例的返回值作为 Promise.race([..]) 方法的返回值。
+
+```js
+const promise1 = new Promise((resolve, reject) => {
+  setTimeout(resolve, 500, 'one');
+});
+
+const promise2 = new Promise((resolve, reject) => {
+  setTimeout(resolve, 100, 'two');
+});
+
+Promise.race([promise1, promise2]).then((value) => {
+  console.log(value); // two, 都是完成状态，但是第二个会更快
+});
+```
+
+### Promise.any
+
+Promise.any([..]) 返回输入中最先成功的 Promise，如果所有的 Promise 都失败，则返回一个 AggregateError 对象。
+
+Promise.any([..]) 跟 Promise.race([..]) 类似，只不过只会接受第一个成功的返回值，而不像 Promise.race([..]) 那样，会接受 reject 状态的返回值。
+
+```js
+const promise1 = Promise.reject(0);
+const promise2 = new Promise((resolve) => setTimeout(resolve, 100, 'quick'));
+const promise3 = new Promise((resolve) => setTimeout(resolve, 500, 'slow'));
+
+const promises = [promise1, promise2, promise3];
+
+Promise.any(promises).then((value) => console.log(value)); // quick，0 会被忽略
+```
+
+### Promise.resolve
+
+Promise.resolve() 将现有对象转为 Promise 对象。
+
+如果该方法的参数为一个 Promise 对象，则直接返回；如果参数 thenable 对象(即具有 then 方法)，Promise.resolve() 将该对象转为 Promise 对象并立即执行 then 方法；如果参数是一个原始值，或者是一个不具有 then 方法的对象，则 Promise.resolve 方法返回一个新的 Promise 对象，状态为 fulfilled，其参数将会作为 then 方法中 onResolved 回调函数的参数，如果 Promise.resolve 方法不带参数，会直接返回一个 fulfilled 状态的 Promise 对象。
+
+需要注意的是，立即 resolve() 的 Promise 对象，是在本轮“事件循环”（event loop）的结束时执行，而不是在下一轮“事件循环”的开始时。
+
+### Promise.reject
+
+Promise.reject() 同样返回一个新的 Promise 对象，状态为 rejected，无论传入任何参数都将作为 reject() 的参数
+
+## 参考链接
+
+- 《你不知道的 JavaScriopt（中卷）》
+- [MDN: Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
+- [MDN: Using promises - JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises)
+- [Promise/A+](https://promisesaplus.com/)
+- [tc39: Promise Objects](https://tc39.es/ecma262/#sec-promise-objects)
+- [then/promise](https://github.com/then/promise)
+- [介绍下 promise 的特性、优缺点，内部是如何实现的，动手实现 Promise #29](https://github.com/lgwebdream/FE-Interview/issues/29)

@@ -1,0 +1,286 @@
+---
+title: "BFC"
+published: 2020-09-17
+tags: ["css"]
+---
+
+BFC(Block Formatting Context) 块级格式化上下文。它是块级布局发生的区域，也是浮动与其他元素交互的区域。
+
+具有 BFC 特性的元素可以看作是隔离了的独立容器，容器里面的元素不会在布局上影响到外面的元素，并且 BFC 具有普通容器所没有的一些特性。即 BFC 为一个独立的区域，内部元素不管怎么变化，都不影响外部元素。
+
+## 渲染规则
+
+BFC 有一套属于自己的渲染规则：
+
+- 内部的盒子会在垂直方向上一个接一个地放置
+- 同一个 BFC 的两个相邻的盒子 margin 会发生重叠
+- 每个元素的左边距会与包含块的左边距相接触
+- BFC 的区域不会与 float 元素区域重叠
+- 计算 BFC 的高度时，浮动子元素也参与计算
+- BFC 就是页面上一个隔离的独立容器，里面子元素不会影响到外面的元素
+
+## 触发 BFC
+
+只要元素满足任一条件就可以触发 BFC
+
+- 文档根元素 `<html>`
+- 浮动（除 `float: none` 以外）
+- 绝对定位元素（postion 是 `absolute` 或 `fixed`）
+- 行内块元素（display 为 `inline-block`）
+- overflow （除 `visible` 和 `clip` 以外）
+- `display: flow-root`
+- Flex 项（display 为 `flex` 或 `inline-flex`）
+- 栅格项（display 为 `grid` 或 `inline-grid`）
+
+## 主要作用
+
+通常情况下，会为布局和清除浮动创建一个新的 BFC，而非改变布局，因为创建一个新的 BFC 的元素会：
+
+- 包含内部浮动
+- 排除外部浮动
+- 防止边距叠加
+
+### 包含内部浮动
+
+让浮动内容和旁边的内容高度相同。在下面例子中，浮动元素脱离文档流，所以容器不能撑起浮动元素的高度。
+
+<section>
+  <div class="box">
+    <div class="float">浮动元素</div>
+    <div>容器内的文段</div>
+  </div>
+</section>
+
+```html
+<section>
+  <div class="box">
+    <div class="float">浮动元素</div>
+    <div>容器内的文段</div>
+  </div>
+</section>
+```
+
+```css
+section {
+  height: 150px;
+}
+.box {
+  background-color: rgb(224, 206, 247);
+  border: 5px solid rebeccapurple;
+}
+.box[style] {
+  background-color: aliceblue;
+  border: 5px solid steelblue;
+}
+.float {
+  float: left;
+  width: 200px;
+  height: 100px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 1px solid black;
+  padding: 10px;
+}
+```
+
+<style>
+section {
+  height:150px;
+}
+.box {
+  background-color: rgb(224, 206, 247);
+  border: 5px solid rebeccapurple;
+}
+.box[style] {
+  background-color: aliceblue;
+  border: 5px solid steelblue;
+}
+.float {
+  float: left;
+  width: 200px;
+  height: 100px;
+  background-color: rgba(255, 255, 255, .5);
+  border:1px solid black;
+  padding: 10px;
+}
+</style>
+
+根据上面设置 BFC 的方式，选择两种方式：
+
+- 设置 `overflow: auto` 新建一个包含浮动 BFC 的容器。
+- 设置 `display: flow-root` 创建一个新的 BFC 且没有副作用。
+
+<section>
+  <div class="box" style="overflow:auto">
+    <div class="float">浮动元素</div>
+    <div>容器设置了<code>overflow:auto</code>的文段</div>
+  </div>
+</section>
+
+```html
+<section>
+  <div class="box" style="overflow:auto">
+    <div class="float">浮动元素</div>
+    <div>容器设置了<code>overflow:auto</code>的文段</div>
+  </div>
+</section>
+
+<section>
+  <div class="box" style="display:flow-root">
+    <div class="float">浮动元素</div>
+    <div>容器设置了<code>display:flow-root</code>的文段</div>
+  </div>
+</section>
+```
+
+### 排除外部浮动
+
+我们可以一个实例
+
+<section>
+  <div>
+    <div class="float">浮动元素</div>
+    <div class="box">文本</div>
+  </div>
+</section>
+
+```html
+<section>
+  <div>
+    <div class="float">浮动元素</div>
+    <div class="box">文本</div>
+  </div>
+</section>
+```
+
+给需要排除外部浮动的元素设置 `display: flow-root`，使其成为一个 BFC。
+
+<section>
+  <div>
+    <div class="float">浮动元素</div>
+    <div class="box" style="display: flow-root;">盒子设置了 display: flow-root</div>
+  </div>
+</section>
+
+```html
+<section>
+  <div>
+    <div class="float">浮动元素</div>
+    <div class="box" style="display: flow-root;">盒子设置了 display: flow-root</div>
+  </div>
+</section>
+```
+
+### 边距重叠
+
+同一个 BFC 下外边距会发生折叠，创建一个新的 BFC 以避免两个相邻 div 之间的边距崩溃。下面例子中，创建一个新的 div，并设置 `overflow: auto;` 使其成为一个新的 BFC。
+
+```html
+<div style="border: 1px solid #888">
+  <div style="height: 50px; margin: 10px; background: #DDA0DD;"></div>
+  <div style="height: 50px; margin: 10px; background: #14CC8D;"></div>
+</div>
+```
+
+<div style="border: 1px solid #888">
+  <div style="height: 50px; margin: 10px; background: #DDA0DD;"></div>
+  <div style="height: 50px; margin: 10px; background: #14CC8D;"></div>
+</div>
+
+```html
+<div style="border: 1px solid #888">
+  <div style="height: 50px; margin: 10px; background: #DDA0DD;"></div>
+  <div style="overflow: auto;">
+    <div style="height: 50px; margin: 10px; background: #14CC8D;"></div>
+  </div>
+</div>
+```
+
+<div style="border: 1px solid #888">
+  <div style="height: 50px; margin: 10px; background: #DDA0DD;"></div>
+  <div style="overflow: auto;">
+    <div style="height: 50px; margin: 10px; background: #14CC8D;"></div>
+  </div>
+</div>
+
+## 相关的问题
+
+### 1. wrap 的高度
+
+```html
+<style type="text/css">
+  .a,
+  .b,
+  .c {
+    box-sizing: border-box;
+    border: 1px solid;
+    width: 100px;
+  }
+  .wrap {
+    width: 250px;
+    background: #ccddee;
+  }
+  .a {
+    height: 100px;
+    float: left;
+    background: rebeccapurple;
+  }
+  .b {
+    height: 50px;
+    float: left;
+    background: aliceblue;
+  }
+  .c {
+    height: 100px;
+    display: inline-block;
+    background: #3388ee;
+  }
+</style>
+
+<div class="wrap">
+  <div class="a">a</div>
+  <div class="b">b</div>
+  <div class="c">c</div>
+</div>
+```
+
+<style type="text/css">
+  .a, .b, .c {
+    box-sizing: border-box;
+    border: 1px solid;
+    width: 100px;
+  }
+  .wrap {
+    width: 250px;
+    background: #ccddee;
+  }
+  .a {
+    height: 100px;
+    float: left;
+    background: rebeccapurple;
+  }
+  .b {
+    height: 50px;
+    float: left;
+    background: aliceblue;
+  }
+  .c {
+    height: 100px;
+    display: inline-block;
+    background: #3388ee;
+  }
+</style>
+
+如果 c 没有 `display: inline-block;`，那么 a 将和 c 重叠，虽然文本让出位置，也就是 c 会出现在 a 的下边界下方，但是容器的高度就是 c 的高度 100px。
+
+设置了 `display: inline-block;` 使得 c 内部形成了 BFC，BFC 不与 float 元素重叠，即 BFC 排除外部浮动。同时 wrap 的宽度限制 250px。所以 c 出现在紧贴着 a 的右边界以及 b 的下边界的位置出现。
+
+<div class="wrap">
+  <div class="a">a</div>
+  <div class="b">b</div>
+  <div class="c">c</div>
+</div>
+
+## 参考链接
+
+- [MDN: Block formatting context](https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Block_formatting_context)
+- [wrap 的高度是多少](https://m.nowcoder.com/questions?uuid=cdaa9b301f1c46e686c5a87650d79525)

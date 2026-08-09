@@ -1,0 +1,209 @@
+---
+title: "HTTP缓存"
+published: 2020-08-21
+tags: ["http"]
+---
+
+HTTP 缓存可以很好优化 Web 性能，不仅能减少数据传输，缓解网络瓶颈，降低服务器的要求，降低距离时延。
+
+一般只有 get 请求才会被缓存，这里一般是指 get 资源情况。
+
+![缓存机制流程](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a5fe072c8dd3464f8de15709b22f743f~tplv-k3u1fbpfcp-watermark.image)
+
+图片来源：<https://juejin.cn/post/6844904163172679688>
+
+通常浏览器缓存策略分为两种：强缓存和协商缓存
+
+- [强缓存](#强缓存)
+  - [Expires](#expires)
+  - [Cache-Control](#cache-control)
+  - [Pragma](#pragma)
+- [协商缓存](#协商缓存)
+  - [ETag](#etag)
+  - [Last-Modified](#last-modified)
+
+## 浏览器策略
+
+在测试的过程中发现强缓存跟浏览器缓存策略有关的一些有意思的东西。
+
+下面是 nodejs 简单实现一个 get 请求并返回一个字符串，同时实现强缓存。
+
+```js
+const http = require('http');
+
+const server = http.createServer((req, res) => {
+  res.writeHead(200, {
+    'Content-Type': 'text/plain',
+    'Cache-Control': 'max-age=3600', // 设置强缓存
+  });
+  res.end('hello world');
+});
+
+server.listen(8000);
+```
+
+首先访问一次，让浏览器产生缓存。
+
+由于浏览器的缓存策略，当我们使用 F5 刷新的时候，每次都会从服务器获取数据。以下分别是在 firefox 与 chromium 中的表现。
+
+![http_firefox](/images/http_firefox.png)
+![http_chromium](/images/http_chromium.png)
+
+但是当我们通过 url 直接进入页面的时候，我们可以发现都是从强缓存中获取数据。以下分别是在 firefox 与 chromium 中的表现。
+
+![http_firefox_2](/images/http_firefox_2.png)
+![http_chromium_2](/images/http_chromium_2.png)
+
+更有意思的是，firefox 中从在当前窗口输入 url，无论如何都是从强缓存中获取数据。
+
+而 chromium 中首次进入的时候是从强缓存中获取数据，但是在当前窗口输入 url 会直接从服务器获取数据，类似 F5 刷新。但是如果你跳转到其他页面，再此输入 url，又是从强缓存中获取数据。
+
+从网上查询到的部分资料如下：
+
+1. 打开网页，地址栏输入地址： 查找强制缓存中是否有匹配。如有则使用；如没有则发送网络请求。
+2. 普通刷新 (F5)：跳过强缓存， 协商缓存是可用的。
+3. 强制刷新 (Ctrl + F5)：跳过强制缓存和协商缓存，发送的请求头部均带有 Cache-control:no-cache(为了兼容，还带了 Pragma:no-cache)。
+
+## 强缓存
+
+强缓存即本地缓存，在缓存期间不需要请求，状态码直接返回 200。
+
+实现强缓存可以通过两种响应头实现：Expires 和 Cache-Control （都用于设置资源过期时间）
+
+需要注意几个首部的优先级：Pragma > Cache-Control > Expires
+
+## Expires
+
+Expires 响应头包含日期/时间。Expires 的值返回一个 GMT（格林尼治时间）, 来告诉浏览器资源缓存过期时间。
+
+```plain
+Expires: <http-date>
+Expires: Mon, 24 Aug 2020 11:12:01 GMT
+```
+
+Expires 首部和 Cache-Control: max-age 首部所做的事情本质是一样的，但由于 Cache-Control 首部使用的是相对时间而不是绝对时间，所以我们更倾向于使用比较新的 Cache-Control 首部。
+
+## Cache-Control
+
+缓存请求指令
+
+```plain
+Cache-Control: max-age=<seconds>
+Cache-Control: max-stale[=<seconds>]
+Cache-Control: min-fresh=<seconds>
+Cache-control: no-cache
+Cache-control: no-store
+Cache-control: no-transform
+Cache-control: only-if-cached
+```
+
+缓存响应指令
+
+```plain
+Cache-control: must-revalidate
+Cache-control: no-cache
+Cache-control: no-store
+Cache-control: no-transform
+Cache-control: public
+Cache-control: private
+Cache-control: proxy-revalidate
+Cache-Control: max-age=<seconds>
+Cache-control: s-maxage=<seconds>
+```
+
+## Pragma
+
+Pragma 是一个在 HTTP/1.0 中规定的通用首部。设置 `Pragma: no-cache` 当客户端请求带有此字段时，会表示客户端禁用缓存，与 `Cache-Control: no-cache` 效果一致。
+
+当浏览器设置禁用缓存时，会同时启动 `Pragma: no-cache` 和 `Cache-Control: no-cache`，兼容 HTTP/1.0。
+
+## 协商缓存
+
+协商缓存，如果本地缓存过期了，我们就可以使用协商缓存来解决问题。协商缓存需要向服务器发送请求，如果缓存有效会返回 304。
+
+## ETag
+
+ETag，entity tag 也叫实体标签。如果资源给定的 URL 标签变化了，一定会生成新的 Etag 标签。
+
+```plain
+ETag: W/"<etag_value>"
+ETag: "<etag_value>"
+```
+
+`W/`（区分大小写）表示使用弱验证器。弱验证更加容易生成，比较的作用更小，强验证更加理想，但是比较难生成。
+
+`<etag_value>` 代表所请求的资源的唯一实体标签，是用双引号包括的字符串。通常情况下，ETag 的值可能是内容的哈希值，也可以是最后修改的时间戳，或者是一个修订号。
+
+跟 ETag 相关的条件首部是 If-Match 和 If-No-Match。
+
+### 避免半空碰撞
+
+是用 ETag 和 If-Match 可以避免半空中碰撞。
+
+例如，当我们编辑一篇文档时，当前内容包含了一个 `ETag: "7938fa78ac98cafee889"` 的响应头部，当我们需要保存的时候时候，我们发起一个包含 `If-Match: "7938fa78ac98cafee889"` 的头部去检查新鲜度。如果该哈希值未匹配，这说明我们该文档在我们编辑的过程中被修改过，我们会得到一个 `412 Precondition Failed` 的错误。
+
+### 缓存未修改的资源
+
+另一个典型的应用场景就是使用 ETag 和 If-None-Match 缓存未修改的资源。当用户重新访问一个 URL 或者需要更新时，客户端会发送`If-None-Match: "7938fa78ac98cafee889"` 的请求头部，当服务器的 ETag 与 该值相同，则会发送一个没有实体（body） `304 Not Modified` 的状态响应。
+
+以下是一个简单的 nodejs 实现的 ETag 缓存响应。
+
+```js
+const http = require('http');
+const crypto = require('crypto');
+const fs = require('fs');
+
+const server = http.createServer((req, res) => {
+  const buf = fs.readFileSync('./index.html');
+  const ETag = '"' + crypto.createHash('md5').update(buf).digest('hex') + '"';
+  const clientETag = req.headers['if-none-match'];
+
+  if (clientETag === ETag) {
+    res.statusCode = 304;
+    return res.end();
+  }
+
+  res.writeHead(200, {
+    'Content-Type': 'text/plain',
+    ETag: ETag,
+  });
+  res.end();
+});
+
+server.listen(8000);
+```
+
+## Last-Modified
+
+Last-Modified/If-Modified-Since 匹配成对出现。
+
+```plain
+Last-Modified: <day-name>, <day> <month> <year> <hour>:<minute>:<second> GMT
+```
+
+Last-Modified 响应 HTTP 报头包含在其原始服务器认为该资源的最后修改日期和时间。跟 Last-Modified 相关的条件首部 If-Modified-Since 和 If-Unmodified-Since。
+
+### ETag 与 Last-Modified 比较
+
+- ETag 比 Last-Modified 优先度更高。
+
+- 因为如果资源发生变化，Etag 就会发生变化。而 Last-Modified 无法识别秒单位里的修改，Last-Modified 不会进行更新。
+
+- ETag 服务器需要根据资源计算，有轻微的性能损耗。
+
+- Last-Modified 无法保证客户端和服务端时间一致性。
+
+## 其他
+
+上述的首部字段均能让客户端决定是否向服务器发送请求，比如设置的缓存时间未过期，那么自然直接从本地缓存取数据即可（在 chrome 下表现为 200 from cache），若缓存时间过期了或资源不该直接走缓存，则会发请求到服务器去。但是仅仅是已缓存文档过期了并不意味着它和原始服务器上目前处于活跃的文档有实际的区别。这只是意味着到了要进行核对的时间，这种情况被称为“服务器再验证”
+
+## 参考链接
+
+- 《HTTP 权威指南》
+- [MDN:HTTP 缓存](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Caching_FAQ)
+- [MDN:Expires](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Expires)
+- [MDN:Cache-Control](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control)
+- [MDN:Pragma](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Pragma)
+- [MDN:ETag](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/ETag)
+- [MDN:Last-Modified](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Last-Modified)
+- [离线化/长缓存方案探究与实践](https://juejin.cn/post/7008369315749560333)

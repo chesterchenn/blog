@@ -1,0 +1,105 @@
+---
+title: "JS的类型检测"
+published: 2020-07-24
+tags: ["javascript"]
+---
+
+类型是值的内部特征，它定义了值的行为，以使其区别于其他值。
+
+JavaScript 的数据类型分为两类：原始类型（primitive type）和对象类型（object type）。一共有七种内置类型：
+
+- 数字(number)
+- 字符串(string)
+- 布尔值(boolean)
+- 空值(null)
+- 未定义(undefined)
+- 符号(symbol)
+- 对象(object)
+
+检测基本类型的值使用 typeof 操作符会比较合适，检测引用类型的值 instanceof 操作符会比较好用。
+
+## typeof
+
+语法：`typeof operand` 或者 `typeof(operand)`
+
+typeof 返回的结果是字符串，有以下：
+
+- "undefined"
+- "boolean"
+- "string"
+- "number"
+- "object"
+- "symbol"
+- "function"
+
+### 两种特殊情况
+
+1. `typeof null` 会返回 "object"，因为特殊值 null 被认为是一个空的对象引用。
+
+   使用复合条件检测 null 类型:
+
+   ```js
+   var a = null;
+   !a && typeof a === 'object'; // true
+   ```
+
+2. `typeof <function>` 会返回 "function"
+
+   函数 function 在 ECMAScript 中不是一种数据类型，实际上是 object 中的一个“子类型”。
+
+## undeclared
+
+已在作用域中声明但未赋值的变量，是 undefined 的。还没有在作用域中声明过的变量，是 undeclared 的。
+
+```js
+var a;
+a; // undefined
+b; // ReferenceError: b is not defined
+```
+
+"undefined" 和 "is not defined" 不是同一回事。
+
+注意：但是 typeof 处理 undeclared 变量又很特别
+
+```js
+var a;
+typeof a; // "undefined"
+typeof b; // "undefined"
+```
+
+## instanceof
+
+语法：`object instanceof constructor`，返回的是 boolean 值
+
+注意：
+
+1. 所有的引用类型的值都是 Object 的实例。因此，在检测一个引用类型值和 Object 构造函数时，instanceof 操作符始终返回 true。
+2. 如果使用 instanceof 操作符检测基本类型的值，则该操作符始终返回 false，因为基本类型不是对象。
+
+## constructor
+
+每个对象实例可以通过 constructor 对象访问其构造函数。可以以此来判断一些内置构造函数：Object、Array、Function、Date、RegExp、Map、Set、String 等。
+
+```js
+const date = new Date();
+const set = new Set();
+const map = new Map();
+const reg = /\w/;
+const arr = [];
+const obj = {};
+
+date.constructor === Date; // true
+set.constructor === Set; // true
+map.constructor === Map; // true
+reg.constructor === RegExp; // true
+arr.constructor === Array; // true
+obj.constructor === Object; // true
+```
+
+## 参考链接
+
+- 《JavaScript 高级程序设计（第 3 版）》
+- [MDN: typeof](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof)
+- [MDN: instanceof](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/instanceof)
+- 《你不知道的 JavaScript（中）》第一章
+- [JS数据类型判断的几种常用方法](https://www.jb51.net/article/190286.htm)

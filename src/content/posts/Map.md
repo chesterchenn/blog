@@ -1,0 +1,172 @@
+---
+title: "Map"
+published: 2020-09-21
+tags: ["javascript"]
+---
+
+Map 和 Set 是 ES6 中新增的数据结构，Map 类似于对象，但可以使用对象或者 map 值作为键值。我们一般将 Map 跟 Object 进行比较。
+
+<!-- vim-markdown-toc GFM -->
+
+- [Map](#map)
+  - [Map 的属性](#map-的属性)
+  - [Map 的方法](#map-的方法)
+  - [Map 转换为数组](#map-转换为数组)
+- [Map 与 Object 的比较](#map-与-object-的比较)
+  - [创建](#创建)
+  - [读取元素](#读取元素)
+  - [新增移除元素](#新增移除元素)
+  - [长度](#长度)
+  - [使用场景](#使用场景)
+- [WeakMap](#weakmap)
+- [参考链接](#参考链接)
+
+<!-- vim-markdown-toc -->
+
+## Map
+
+在 JavaScript 中，对象是创建无序键/值对数据结构[也称映射（map）]的主要机制。但是，对象作为映射的主要缺点是不能使用非字符串值作为键。如下：
+
+```js
+var m = {};
+var x = { id: 1 },
+  y = { id: 2 };
+m[x] = 'foo';
+m[y] = 'bar';
+
+m[x]; // "bar"
+m[y]; // "bar"
+m; // "[object Object]": "bar"
+```
+
+因为 x 和 y 两个对象作为键值（属性值）的时候，都被转化成字符串“[object Object]”，实际上在 m 中只设置了一个键值。
+
+```js
+var m = new Map();
+var x = { id: 1 },
+  y = { id: 2 };
+m.set(x, 'foo');
+m.set(y, 'bar');
+
+m.get(x); // "foo"
+m.get(y); // "bar"
+m.delete(y);
+m.size; // 1
+m.clear();
+```
+
+### Map 的属性
+
+- `Map.prototype.size` 返回 Map 对象内的元素个数。
+
+### Map 的方法
+
+- `Map.prototype.clear()` 清空 Map 对象。
+- `Map.prototype.delete(key)` 删除 Map 对象内的 key 元素。
+- `Map.prototype.entries()` 返回一个 `[key, value]` 数组的遍历对象。
+- `Map.prototype.forEach(callbackFn([value, [key, [map]]]), [thisArg])` 按照插入 Map 的顺序进行遍历。
+- `Map.prototype.get(key)` 获取 Map 对象内的 key 的值，不存在则返回 `undefined`。
+- `Map.prototype.has(key)` 判断 Map 对象内是否存在 key，返回 boolean。
+- `Map.prototype.keys()` 返回 Map 对象内键值的遍历。
+- `Map.prototype.set(key, value)` 添加或者更新 Map 对象的值。
+- `Map.prototype.values()` 返回 Map 对象内值的遍历.
+
+### Map 转换为数组
+
+- `Array.from(map.values())` 利用 Array.from 方法
+- `[...map.values()]` 利用扩展运算符
+- `map.values().toArray()` 实验性特性，尽量不要使用
+
+转换键的方法与转换值的方法类似，只需要将 values() 替换为 keys() 即可。
+
+## Map 与 Object 的比较
+
+- Map 和 Object 都是键值对，且都是惟一性，但是 Object 只能使用基本类型作为键值（integer, string, symbol），而 Map 可以使用任意类型作为键值。
+
+- Map 会保持插入元素的顺序，而 Object 则不会。
+
+### 创建
+
+Object 直接声明，Map 构造器接受数组，数组用逗号进行分割，`new Map([iterable])`。
+
+```js
+var obj = {};
+var obj = { id: 1, name: 'o' };
+
+var map = new Map();
+var map = new Map([
+  [1, 2],
+  ['n', 3],
+]); // map = { 1=>2, 'n'=>3 }
+```
+
+### 读取元素
+
+对于 Map，我们可以通过 `Map.prototype.get(key)` 可以读取值，而 Object 通过 `Object.<key>` 或者 `Object['key']` 读取值。
+
+```js
+map.get(1); // 2
+
+obj.id; // 1
+obj['id']; // 1
+```
+
+对于 Map, 我们还可以通过 `has()` 的方法进行判断是否有该键值。对于 Object 则需要一些特别的技巧。
+
+```js
+map.has(1); // true
+
+obj.id === undefined; // 通过未定义来判断
+'id' in obj; // 通过继承判断
+```
+
+### 新增移除元素
+
+Map 通过 `Map.prototype.set(<key>, <value>)` 进行新增元素，Object 则直接进行新增。
+
+```js
+map.set(4, 5); // { 1=>2, 'n'=>3, 4=>5 }
+
+obj.age = 10;
+obj['gender'] = 'male';
+```
+
+Map 通过 `detele(key)` 进行删除，使用 `clear()` 可以清除所有元素。而对象通过 `delete` 操作符进行删除属性
+
+```js
+map.delete(4); // { 1=>2, 'n'=>3 }
+map.clear(); // {}
+
+delete obj.age;
+```
+
+### 长度
+
+```js
+map.size();
+
+Object.keys(obj).length;
+```
+
+### 使用场景
+
+对于数据量不大，建议使用 Object，因为 Object 对象的创建更平滑，对于数据量更大或者频繁进行新增，删除操作的建议使用 Map，因为 Map 本身的遍历性，搜索更快。
+
+## WeakMap
+
+WeakMap 是 map 的变体，区别在于内部内存分配（特别是垃圾回收）的工作方式。
+
+在 map 中如果使用对象作为映射的键，这个对象后来被丢弃（所有的引用解除），试图让垃圾回收（GC）回收其内存，那么 map 本身仍会保持其项目。你需要从 map 中移除这个项目来支持 GC。
+
+WeakMap 只接受对象作为键。这些对象是被弱持有，也就是说如果对象本身被垃圾回收的话，在 WeakMap 中的这个项目也会被移除。
+
+WeakMap 没有 size 属性或 clear() 方法。
+
+## 参考链接
+
+- 《你不知道的 JavaScript》(下)
+- [MDN: Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)
+- [MDN: WeakMap](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap)
+- [NDN: Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)
+- [知乎：JS 项目中究竟应该使用 Object 还是 Map？](https://zhuanlan.zhihu.com/p/358378689)
+- [Medium: ES6 - Map vs Object- What and when?](https://medium.com/front-end-weekly/es6-map-vs-object-what-and-when-b80621932373)

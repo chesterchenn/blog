@@ -1,0 +1,314 @@
+---
+title: "阅读图解React笔记6"
+published: 2022-12-05
+tags: ["react"]
+---
+
+本文仅仅是阅读 [图解 React 原理系列](https://7kms.github.io/react-illustration-series/) 的笔记，了解更多内容请查看原文链接。
+
+<!-- vim-markdown-toc GFM -->
+
+- [Fiber 架构](#fiber-架构)
+  - [FiberNode](#fibernode)
+- [全局变量](#全局变量)
+- [执行上下文](#执行上下文)
+- [双缓冲技术](#双缓冲技术)
+- [优先级](#优先级)
+  - [Update 优先级](#update-优先级)
+  - [渲染优先级](#渲染优先级)
+  - [fiber 优先级](#fiber-优先级)
+- [挂载](#挂载)
+- [构建过程](#构建过程)
+  - [beginWork](#beginwork)
+  - [completeWork](#completework)
+- [参考链接](#参考链接)
+
+<!-- vim-markdown-toc -->
+
+## Fiber 架构
+
+React 中有三种节点类型：
+
+- React Element（React 元素），即 createElement 方法的返回值。
+- React Component（React 组件），开发者在 React 中定义的函数、类两种组件。
+- FiberNode，组成 Fiber 架构的节点类型。
+
+### FiberNode
+
+作为一个构造函数，FiberNode 包含很多属性。
+
+```js
+// FiberNode 构造函数
+function FiberNode(tag, pendingProps, key, mode) {
+  this.tag = tag;
+  this.key = key;
+  this.elementType = null;
+  this.type = null;
+  this.stateNode = null;
+
+  // 省略
+
+  // Fiber 架构是由多个 FiberNode 组成的树状结构。
+  // FiberNode 之间的关系是由如下属性连接。
+  // 指向父 FiberNode
+  this.return = null;
+  // 指向第一个子节点
+  this.child = null;
+  // 指向右边的兄弟节点
+  this.sibling = null;
+}
+```
+
+> 指向父节点的字段采用 return，主要是因为 FiberNode 是一个工作单元，return 是指 FiberNode 执行完后返回下一个 FiberNode。
+
+开发人员通过编程只能控制 ReactElement 树的结构，ReactElement 树驱动 Fiber 树，Fiber 树再驱动 DOM 树，最后展现到页面上。
+所以 Fiber 树的构造过程，实际上就是 ReactElement 对象到 Fiber 对象的转换过程。
+
+![](/images/react-fiber-dom.svg)
+
+## 全局变量
+
+Fiber 树构造循环过程在 _ReactFiberWorkLoop.js_ 中。
+
+在 React 运行中，ReactFiberWorkLoop 闭包中的全局变量会随着 fiber 树构造循环进行变化。
+
+```js
+// 当前 React 的执行栈
+let executionContext: ExecutionContext = NoContext;
+
+// 当前 root 节点
+let workInProgressRoot: FiberRoot | null = null;
+// 当前 fiber 节点
+let workInProgress: Fiber | null = null;
+// 当前渲染的车道
+let workInProgressRootRenderLanes: Lanes = NoLanes;
+
+// 防止无限循环和嵌套更新
+const NESTED_UPDATE_LIMIT = 50;
+let nestedUpdateCount: number = 0;
+let rootWithNestedUpdates: FiberRoot | null = null;
+
+const NESTED_PASSIVE_UPDATE_LIMIT = 50;
+let nestedPassiveUpdateCount: number = 0;
+
+let currentEventTime: number = NoTimestamp;
+let currentEventWipLanes: Lanes = NoLanes;
+let currentEventPendingLanes: Lanes = NoLanes;
+```
+
+## 执行上下文
+
+在全局变量有 executionContext，代表渲染期间的执行栈/执行上下文，它也是一个二进制表示的变量，通过位运算进行操作，在源码中一共定义了 8 种执行栈：
+
+```js
+type ExecutionContext = number;
+
+export const NoContext = /*             */ 0b0000000;
+const BatchedContext = /*               */ 0b0000001;
+const EventContext = /*                 */ 0b0000010;
+const DiscreteEventContext = /*         */ 0b0000100;
+const LegacyUnbatchedContext = /*       */ 0b0001000;
+const RenderContext = /*                */ 0b0010000;
+const CommitContext = /*                */ 0b0100000;
+export const RetryAfterError = /*       */ 0b1000000;
+```
+
+## 双缓冲技术
+
+React 中双缓冲技术（double buffering）是指 Fiber 架构同时存在两棵 fiber 树，一棵是真实 UI 对应的 Fiber 树 current，一棵是内存中正在构建的 Fiber 树 workInProgress。
+
+如果没有双缓存技术，那么对于复杂、费时的 Fiber 构造，用户会看到闪烁，不完整的图像。双缓存技术在 workInProgress Fiber 树构建完成，立刻重新渲染页面，切换 current = workInProgress。
+
+```js
+// alternate 属性指向缓冲区的对应 FiberNode
+current.alternate === workInProgress;
+workInProgress.alternate === current;
+```
+
+## 优先级
+
+React 对应优先级可以分为 3 种类型：
+
+1. fiber 优先级（LanePriority），管理 Fiber 的优先级
+2. 调度优先级（SchedulerPriority），管理调度的优先级
+3. 优先级等级（ReactPriorityLevel），负责上述 2 套优先级体系的转换
+
+而在 fiber 优先级，又可以分为 3 个方面：
+
+1. Update 优先级
+2. 渲染优先级
+3. fiber 优先级
+
+### Update 优先级
+
+正常情况下, 根据当前的调度优先级来生成一个 lane，特殊情况下(处于 suspense 过程中), 会优先选择 TransitionLanes 通道中的空闲通道
+
+这里包含了一个热点问题（setState 到底是同步还是异步）的标准答案：
+
+- 如果逻辑进入 flushSyncCallbackQueue（executionContext === NoContext）,则会主动取消调度，并刷新回调，立即进入 fiber 树构造过程，当执行 setState 下一行代码时，fiber 树已经重新渲染了，故 setState 体现为同步。
+
+- 正常情况下，不会取消 schedule 调度，由于 schedule 调度是通过 MessageChannel 触发宏任务，故体现为异位。
+
+### 渲染优先级
+
+在正式 render 之前，都会调用 getNextLanes 获取一个优先级。
+
+```js
+export function getNextLanes(root: FiberRoot, wipLanes: Lanes): Lanes {
+  // 如果没有待处理的工作，提前进行救助
+  const pendingLanes = root.pendingLanes;
+  if (pendingLanes === NoLanes) {
+    return_highestLanePriority = NoLanePriority;
+    return NoLanes;
+  }
+
+  let nextLanes = NoLanes;
+  let nextLanePriority = NoLanePriority;
+
+  const expiredLanes = root.expiredLanes;
+  const suspenseLanes = root.suspenseLanes;
+  const pingedLanes = root.pingedLanes;
+
+  // 检查是否有工作过期
+  if (expiredLanes) {
+    nextLanes = expiredLanes;
+    nextLanePriority = return_highestLanePriority = SyncLanePriority;
+  } else {
+    // 在所有非空闲的工作完成之前，不进行任何空闲的工作
+    const nonIdlePendingLanes = pendingLanes & NonIdleLanes;
+
+    if (nonIdlePendingLanes !== NoLanes) {
+      // 非空闲任务...
+    } else {
+      // 空闲任务...
+    }
+  }
+
+  if (nextLanes === NoLanes) {
+    return NoLanes;
+  }
+
+  // 省略其他代码...
+
+  return nextLanes;
+}
+```
+
+getNextLanes 会根据 fiberRoot 对象上的属性（expiredLanes，suspenseLanes，pingedLanes 等），确定出当前最紧急的 lanes。
+
+### fiber 优先级
+
+基本概念中介绍过 fiber 对象的数据结构，其中有 2 个属性与优先级相关：
+
+1. fiber.lanes：代表本节点的优先级
+2. fiber.childLanes: 代表子节点的优先级
+
+从 FiberNode 的构造函数中可以看出，fiber.lanes 和 fiber.childLanes 的初始值都为 NoLanes，在 fiber 树构造过程中，使用全局的渲染优先度（renderLanes）和 fiber.lanes 判断 fiber 节点是否更新。
+
+- 如果全局的渲染优先级 renderLanes 不包括 fiber.lanes，证明该 fiber 节点没有更新，可以复用。
+- 如果不能复用，进入创建阶段。
+
+## 挂载
+
+Fiber 树构建主要有两个过程：
+
+1. 创建，在首次启动时，界面还没有渲染，直接构造一棵全新的树。
+2. 更新，发生更新后，创建新的 Fiber 树与之前的 Fiber 树对比。
+
+mount 时 Fiber Tree 的构建过程如下：
+
+1. 创建 FiberRootNode。
+2. 创建 FiberNode，代表 HostRoot，称为 HostRootFiber。
+3. 从 HostRootFiber 开始，以 DFS（Depth-First-Search，深度优先搜索）的顺序生成 FiberNode。
+4. 在遍历过程中，为 FiberNode 标记 “代表不同副作用的 flags”，以便后续在 Renderer 中使用。
+
+FiberRootNode 负责管理该应用的全局事务，如：
+
+- Current Fiber 树与 workInProgress Fiber 树之间的切换。
+- 应用中任务的过期时间。
+- 应用的任务调度信息。
+
+![](/images/react-fiber-update.png)
+
+## 构建过程
+
+![](/images/react-fiber-workloop.webp)
+
+从上图可以看出，根据 Scheduler 调度的结果不同，Fiber 构建开始与 performSyncWorkOnRoot（同步更新流程）或 performConcurrentWorkOnRoot（并发更新流程）方法。
+
+最终都会进入到不同 workloop 流程，而两个 workloop 唯一的区别是否调用 shouldYield（是否可中断）。而最终都会进入 performUnitOfWork 的函数。
+
+```js
+// unitOfWork 就是被传入 workInProgress
+function performUnitOfWork(unitOfWork: Fiber): void {
+  const current = unitOfWork.alternate;
+  let next;
+
+  next = beginWork(current, unitOfWork, subtreeRenderLanes);
+  unitOfWork.memoizedProps = unitOfWork.pendingProps;
+
+  if (next === null) {
+    // 如果没有新的 FiberNode, 就完成当前的作业
+    completeUnitOfWork(unitOfWork);
+  } else {
+    workInProgress = next;
+  }
+}
+```
+
+从 performUnitOfWork 函数的实现可以看出，fiber 树的构建是一个深度优先遍历，因此 performUnitOfWork 可以看成两部分：
+
+1. beginWork，递的探寻过程
+2. completeWork，归的回溯过程
+
+### beginWork
+
+![](/images/react-fiber-beginwork.webp)
+
+```js
+function beginWork(current, workInProgress, renderLanes) {
+  if (current !== null) {
+    // 判断是否为 update, 省略代码
+  } else {
+    // mount，省略代码
+  }
+
+  // 最高优先级
+  workInProgress.lanes = NoLanes;
+
+  // 根据 tag 不同，进入不同的处理逻辑
+  switch (workInProgress.tag) {
+    case FunctionComponent:
+    // 省略代码
+    case ClassComponent:
+    // 省略代码
+    case HostRoot:
+    // 省略代码
+    case HostComponent:
+    // 省略代码
+    case HostText:
+    // 省略代码
+    //...
+  }
+}
+```
+
+- HostComponent 代表原生 Element 类型（div, span 等）
+- HostText 代表文本类型元素
+- mountChildFibers 与 reconcileChildFibers 是调用 reconcileChild 的不同返回值
+
+### completeWork
+
+completeWork 流程大致包括两个步骤：
+
+1. 创建或标记元素更新
+2. flags 冒泡
+
+## 参考链接
+
+- [github: react-illustration-series](https://github.com/7kms/react-illustration-series)
+- [github: react](https://github.com/facebook/react)
+- [图解 React: Fiber 树构建（基础准备）](https://7kms.github.io/react-illustration-series/main/fibertree-prepare/)
+- [React 设计原理](https://book.douban.com/subject/36171032/)
+- [图解 React: Fiber 树构建（初次创建）](https://7km.top/main/fibertree-create/)
+- [图解 React: Fiber 树构建（对比更新）](https://7km.top/main/fibertree-update/)

@@ -1,0 +1,187 @@
+---
+title: "MarkDown语法"
+published: 2017-09-28
+tags: ["others"]
+---
+
+此文用于收集平时使用的 markdown 语法。
+
+<!-- vim-markdown-toc GFM -->
+
+- [标题](#标题)
+- [列表](#列表)
+- [链接](#链接)
+- [图片](#图片)
+- [文字引用,强调](#文字引用强调)
+- [代码块](#代码块)
+- [线条](#线条)
+- [表格](#表格)
+- [注释](#注释)
+- [常见的代码块类型](#常见的代码块类型)
+
+<!-- vim-markdown-toc -->
+
+## 标题
+
+```md
+# H1
+
+## H2
+
+### H3
+
+#### H4
+
+##### H5
+```
+
+## 列表
+
+```md
+- 无序列表
+- 无序列表
+- 无序列表
+
+1. 有序列表
+2. 有序列表
+3. 有序列表
+```
+
+- 无序列表
+- 无序列表
+- 无序列表
+
+1. 有序列表
+2. 有序列表
+3. 有序列表
+
+## 链接
+
+```md
+<!-- 链接引入方式一 -->
+
+[This is a Link](http://www.example.com)
+
+<!-- 链接引入方式二 -->
+
+[链接到标题][url]
+[url]: /#标题
+```
+
+[This is a Link](http://www.example.com)
+
+[链接到标题][url]
+
+[url]: #标题
+
+## 图片
+
+```md
+![Image](/images/github.ico)
+
+![Image][imgurl]
+[imgUrl]: /images/github.ico
+
+<!-- 部分markdown支持图片属性，如 kramdown -->
+![Image](/images/github.ico)
+```
+
+![Image](/images/github.ico)
+
+![Image][imgurl]
+
+[imgurl]: /images/github.ico
+
+![Image](/images/github.ico)
+
+## 文字引用,强调
+
+```md
+> 文字引用
+
+*斜体强调*
+
+**加粗强调**
+
+`行内代码`
+```
+
+> 文字引用
+
+*斜体强调*
+
+**加粗强调**
+
+`行内代码`
+
+## 代码块
+
+\`\`\`plain<br />
+代码块<br />
+\`\`\`
+
+## 线条
+
+```md
+---
+
+~~删除线~~
+```
+
+---
+
+~~删除线~~
+
+## 表格
+
+```md
+| left-align | center-align | right-align |
+| ---------- | :----------: | ----------: |
+| left       |    center    |       right |
+```
+
+| left-align | center-align | right-align |
+| ---------- | :----------: | ----------: |
+| left       |    center    |       right |
+
+## 注释
+
+```md
+<!-- 这是一段被注释的文字 -->
+
+[//]: (这一段被注释的文字2)
+
+这是一段没有被注释的文字
+```
+
+<!-- 这是一段被注释的文字 -->
+
+[//]: (这一段被注释的文字2)
+
+这是一段没有被注释的文字
+
+## 常见的代码块类型
+
+| 名称        | 关键字         |
+| ----------- | -------------- |
+| C           | cpp, c         |
+| CSS         | css            |
+| Go          | go, golang     |
+| Java        | java           |
+| JavaScript  | js, javascript |
+| JSX Element | jsx            |
+| JSON        | json           |
+| MarkDown    | markdown, md   |
+| PHP         | php            |
+| Python      | py, python     |
+| Ruby        | ruby, rb       |
+| Shell       | bash, shell    |
+| SQL         | sql            |
+| Text        | text, plain    |
+| TSX Element | tsx            |
+| TypeScript  | ts, typescript |
+| VimScript   | vim            |
+
+更多代码块类型请参考：
+
+- [Markdown 代码块编程语言清单 - CODING 帮助中心](https://coding.net/help/docs/ci/lint/markdown-code-lang.html)

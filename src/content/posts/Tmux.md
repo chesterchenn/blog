@@ -1,0 +1,156 @@
+---
+title: "Tmux"
+published: 2023-08-27
+tags: ["linux"]
+---
+
+在终端经常会遇到需要开启多窗口的需求，发现已经有成熟解决方案了 - Tmux。
+
+<!-- vim-markdown-toc GFM -->
+
+- [基本概念](#基本概念)
+- [会话](#会话)
+- [窗口](#窗口)
+- [窗格](#窗格)
+- [配置](#配置)
+- [插件](#插件)
+- [复制](#复制)
+- [问题](#问题)
+  - [编码错误](#编码错误)
+- [参考链接](#参考链接)
+
+<!-- vim-markdown-toc -->
+
+## 基本概念
+
+- Sessions：会话，开启 Tmux 会开启一个会话，会话可以划分成多个窗口。
+- Windows：窗口，开启会话会开启一个窗口，窗口可以划分多个窗格。
+- Panes：窗格，开启窗口会开启一个窗格，窗格是 Tmux 的基本单元。
+
+![](/images/tmux-concept.png "RR")
+_图片来源：[优雅地使用命令行：Tmux 终端复用](https://harttle.land/2015/11/06/tmux-startup.html)_
+
+在有关的会话的操作上基本上以 `tmux` 命令为主，而有关窗口，窗格则以 prefix 快捷键位为主。
+
+Tmux 默认的 prefix 快捷键 `<C-b>` 按起来太反人类了，一般情况都会修改 perfix 的快捷键。在下面的快捷键例子依旧采用 `C-b` 作为演示。
+
+## 会话
+
+开始一个新的会话
+
+```shell
+tmux
+tmux new
+tmux new -s [name]
+```
+
+列出所有的会话
+
+```shell
+tmux ls
+tmux list-sessions
+```
+
+重新连接到会话，未指定会话名称默认为最后的会话
+
+```shell
+tmux a -t [name]
+tmux at -t [name]
+tmux attach -t [name]
+tmux attach-session -t [name]
+```
+
+关闭会话
+
+```shell
+tmux kill-session -t [name]
+tmux kill-ses -t [name]
+
+# 关闭所有会话
+tmux kill-session -a
+# 关闭指定窗口之外所有窗口
+tmux kill-session -a -t [name]
+```
+
+## 窗口
+
+| 功能               | 快捷键           |
+| :----------------- | :--------------- |
+| 创建新窗口         | `<C-b>` + `c`    |
+| 关闭当前窗口       | `<C-b>` + `&`    |
+| 列出窗口           | `<C-b>` + `w`    |
+| 上一个窗口         | `<C-b>` + `p`    |
+| 下一个窗口         | `<C-b>` + `n`    |
+| 切换最后活动窗口   | `<C-b>` + `l`    |
+| 切换到指定数字窗口 | `<C-b>` + `0..9` |
+
+## 窗格
+
+窗格的操作是最经常使用的操作。
+
+| 功能               | 快捷键              |
+| :----------------- | :------------------ |
+| 切换最后的活动窗格 | `C-b` + `;`         |
+| 水平切割窗格       | `C-b` + `%`         |
+| 垂直切割窗格       | `C-b` + `"`         |
+| 将当前窗格移至左边 | `C-b` + `{`         |
+| 将当前窗格移至右边 | `C-b` + `}`         |
+| 切换上边的窗格     | `C-b` + ⬆️          |
+| 切换下边的窗格     | `C-b` + ⬇️          |
+| 切换左边的窗格     | `C-b` + ⬅️          |
+| 切换右边的窗格     | `C-b` + ➡️          |
+| 切换窗格布局       | `C-b` + `<space>`   |
+| 切换到下一个窗格   | `C-b` + `o`         |
+| 切换到上一个窗格   | `C-b` + `q`         |
+| 切换到指定数字窗格 | `C-b` + `q`+ `0..9` |
+| 切换窗格的缩放     | `C-b` + `z`         |
+| 关闭当前窗格       | `C-b` + `x`         |
+
+## 配置
+
+默认配置文件：`~/.tmux.conf`
+
+其他生效的配置目录：`$XDG_CONFIG_HOME/tmux/tmux.conf`，一般为 `~/.config/tmux/tmux.conf`
+
+1. `bind <x>` 相当于 `<prefix> + <x>`
+2. `bind -n <x>` 相当于取消 `<prefix>`
+
+## 插件
+
+插件可以使用 [Tmux Plugin Manager(tpm)](https://github.com/tmux-plugins/tpm) 进行管理
+
+推荐的插件有：
+
+- [tmux-powerline](https://github.com/erikw/tmux-powerline)
+
+## 复制
+
+Tmux 的复制模式感觉不是很好用。
+
+1. 可以使用 `C-b` + `[` 进入复制模式，配合 vi 模式进行复制。
+2. 鼠标复制
+   1. 前提开启鼠标支持 `set -g mouse on`
+   2. 按住 shift，鼠标左键选择文本
+   3. 右键选择复制到剪切板
+
+## 问题
+
+### 编码错误
+
+在部分环境下运行 tmux 可以会遇到中文或 emoji 等编码错误。
+
+可以运行 `locale charmap` 查询默认的 locale，通常默认情况下是 `ANSI_X3.4-1968`，需要修改成 `UTF-8`。
+
+```sh
+sudo locale-gen "en_US.UTF-8"
+sudo dpkg-reconfigure locales
+选择 en_US.UTF-8 UTF-8
+```
+
+## 参考链接
+
+- [终端神器 tmux：多任务管理大师](https://www.bilibili.com/video/BV1ML411h7tF/)
+- [Tmux Cheat Sheet & Quick Reference](https://tmuxcheatsheet.com/)
+- [https://github.com/theniceboy/.config/blob/master/.tmux.conf](https://github.com/theniceboy/.config/blob/master/.tmux.conf)
+- [优雅地使用命令行：Tmux 终端复用](https://harttle.land/2015/11/06/tmux-startup.html)
+- [Oh My Zsh/NeoVim/Tmux 打造终端 IDE](https://abelsu7.top/2019/05/21/terminal-ide-using-zsh-nvim-tmux/)

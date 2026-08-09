@@ -1,0 +1,54 @@
+---
+title: "Linux查看磁盘空间"
+published: 2022-02-23
+tags: ["linux"]
+---
+
+在 Linux 系统下查看磁盘空间命令以及 Arch 下清理缓存建议。
+
+## df
+
+df 命令的英文是 Disk Free，用于查看磁盘剩余空间的大小。df 命令查看的是磁盘分区的剩余空间，默认单位为 KB，使用 `df -h` 便于阅读。
+
+用法：`df [OPTION]... [FILE]...`
+
+| 参数      | 说明                 |
+| :-------- | :------------------- |
+| -a, --all | 显示所有系统文件     |
+| -h        | 以易读的方式显示     |
+| -k        | 等同 --block-size=1K |
+| -m        | 等同 --block-size=1M |
+
+## du
+
+du 命令的英文是 Disk Usage，用于查看磁盘占用空间的大小。dh 命令查看的是文件和目录的使用空间。
+
+用法: `du [OPTION]... [FILE]...`
+
+| 参数            | 说明                           |
+| :-------------- | :----------------------------- |
+| -a, --all       | 所有的文件的计数，不仅仅是目录 |
+| -h              | 以易读的方式显示               |
+| -k              | 等同 --block-size=1K           |
+| -m              | 等同 --block-size=1M           |
+| -s, --summarize | 仅显示总计                     |
+
+一些用法：
+
+- 查看单个文件的大小：`du -h debug.log`
+- 查看占用空间最大的文件排名：`du -a . | sort -rh | head -n 10`
+
+## 清除 Arch 包缓存
+
+Arch 的包缓存占用了极大的空间。Arch 的包在 /var/cache/pacman/pkg/ 目录下。
+
+- `pacman -Sc` 删除缓存中当前所有未安装的包
+- `pacman -Scc` 删除所有缓存的包
+
+也可以使用 [pacman-contrib](https://archlinux.org/packages/community/x86_64/pacman-contrib/) 中的paccache 来进行管理。
+
+PS: 需要安装 pacam-contrib 才可以使用 paccache 的命令。
+
+## 参考链接
+
+- [如何清理 Arch Linux 中的包缓存](https://zhongguo.eskere.club/%E5%A6%82%E4%BD%95%E6%B8%85%E7%90%86-arch-linux-%E4%B8%AD%E7%9A%84%E5%8C%85%E7%BC%93%E5%AD%98/2021-09-03/)

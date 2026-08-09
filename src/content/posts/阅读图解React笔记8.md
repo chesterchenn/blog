@@ -1,0 +1,339 @@
+---
+title: "阅读图解React笔记8"
+published: 2022-12-21
+tags: ["react"]
+---
+
+本文仅仅是阅读 [图解 React 原理系列](https://7kms.github.io/react-illustration-series/) 的笔记，了解更多内容请查看原文链接。
+
+Hook 原理
+
+## Hook 与 Fiber
+
+Hook 最终也是为了控制 fiber 节点的状态和副作用，从 fiber 视角，状态和副作用的相关属性如下：
+
+```js
+export type Fiber = {
+  // 省略其他。。。
+
+  // fiber 节点自身状态相关
+  pendingProps: any,
+  memoizedProps: any,
+  updateQueue: any,
+  memoizedState: any,
+
+  // fiber 节点副作用相关
+  flags: Flags,
+  nextEffect: Fiber | null,
+  firstEffect: Fiber | null,
+  lastEffect: Fiber | null,
+};
+```
+
+使用 Hook 的任意一个 API，最后都是为了控制上述这几个 fiber 属性。
+
+## Hook 数据结构
+
+在 _react-reconciler/src/ReactFiberHooks.new.js_，定义了 Hook 的数据结构：
+
+```js
+type Update<S, A> = {
+  lane: Lane,
+  action: A,
+  eagerReducer: ((S, A) => S) | null,
+  eagerState: S | null,
+  next: Update<S, A>
+  priority?: ReactPriorityLevel,
+}
+
+type UpdateQueue<S, A> = {
+  pending: Update<S, A> | null,
+  dispatch: (A => mixed) | null,
+  lastRenderedReducer: ((S, A) => S) | null,
+  lastRenderedState: S | null,
+}
+
+export type Hook = {
+  memoizedState: any,
+  baseState: any,
+  baseQueue: Update<any, any> | null,
+  queue: UpdateQueue<any, any> | null,
+  next: Hook | null,
+}
+```
+
+从定义上看，Hook 对象共有 5 个属性：
+
+1. hook.memoizedState: 保持在内存中的局部状态。
+2. hook.baseState: hook.baseQueue 中所有 update 对象合并之后的状态。
+3. hook.baseQueue: 存储 update 对象的环形链表，只包括高于本次渲染优先级的 update 对象。
+4. hook.queue: 存储 update 对象的环形链表，包括所有优先级的 update 对象。
+5. hook.next: next 指针，指向链表中的下一个 hook。
+
+所以 Hook 是一个链表，单个 Hook 拥有自己的状态 hook.memoizedState 和 自己的更新队列 hook.queue。
+
+![](/images/hook-linkedlist.png)
+
+注意：其中 hook.queue 与 fiber.updateQueue 虽然都是 update 环形链表，尽管 update 对象的数据结构与处理方式都是高度相似，但是这两个队列中的 update 对象是独立的。hook.queue 只作用于 hook 对象的状态维护。
+
+## Hook 分类
+
+在 18.2.0 中，共定义了 17 种 Hook 类型：
+
+```js
+export type HookType =
+  | 'useState'
+  | 'useReducer'
+  | 'useContext'
+  | 'useRef'
+  | 'useEffect'
+  | 'useInsertionEffect'
+  | 'useLayoutEffect'
+  | 'useCallback'
+  | 'useMemo'
+  | 'useImperativeHandle'
+  | 'useDebugValue'
+  | 'useDeferredValue'
+  | 'useTransition'
+  | 'useMutableSource'
+  | 'useSyncExternalStore'
+  | 'useId'
+  | 'useCacheRefresh';
+```
+
+官网上将其分为两个类别，状态 Hook（State Hook）和副作用 Hook（Effect Hook）。
+
+## 调用函数前
+
+在调用函数前，react 内部还需要做一些准备工作。
+
+### 处理函数
+
+从 fiber 树构造的视角来看，不同的 fiber 类型，只需要调用不同的处理函数返回 fiber 子节点。所以在 performUnitOfWork -> beginWork 函数中，调用了多种处理函数。
+
+本节讨论 Hook，所以列出其中的 updateFunctionComponent 函数，其源码位置：_ReactFiberBeginWork.new.js_
+
+```js
+// 只保留 FunctionComponent 相关的代码
+function beginWork(current: Fiber | null, workInProgress: Fiber, renderLanes: Lanes): Fiber | null {
+  const updateLanes = workInProgress.lanes;
+  // 省略其他代码。。。
+  switch (workInProgress.tag) {
+    // 省略其他代码。。。
+    case FunctionComponent: {
+      const Component = workInProgress.type;
+      const unresolvedProps = workInProgress.pendingProps;
+      const resolvedProps =
+        workInProgress.elementType === Component
+          ? unresolvedProps
+          : resolveDefaultProps(Component, unresolvedProps);
+      return updateFunctionComponent(
+        current,
+        workInProgress,
+        Component,
+        resolvedProps,
+        renderLanes,
+      );
+    }
+  }
+}
+
+function updateFunctionComponent(current, workInProgress, Component, nextProps, renderLanes) {
+  // 省略其他代码
+
+  // 进入 Hook 相关代码，返回下级 ReactElement 对象
+  nextChildren = renderWithHooks(
+    current,
+    workInProgress,
+    Component,
+    nextProps,
+    context,
+    renderLanes,
+  );
+
+  reconcileChildren(current, workInProgress, nextChildren, renderLanes);
+  return workInProgress.child;
+}
+```
+
+在 updateFunctionComponent 函数中调用了 renderWithHooks，至此 Fiber 与 Hook 产生了关联。
+
+### renderWithHooks 函数
+
+renderWithHooks 源码位于 _ReactFiberHooks.new.js_
+
+```js
+export function renderWithHooks<Props, SecondArg>(
+  current: Fiber | null,
+  workInProgress: Fiber,
+  Component: (p: Props, arg: SecondArg) => any,
+  props: Props,
+  secondArg: SecondArg,
+  nextRenderLanes: Lanes,
+) {
+  // 1. 设置全局变量
+  renderLanes = nextRenderLanes;
+  currentlyRenderingFiber = workInProgress;
+
+  // 清除当前 fiber 的遗留状态
+  workInProgress.memoizedState = null;
+  workInProgress.updateQueue = null;
+  workInProgress.lanes = NoLanes;
+
+  // 2. 调用函数，生成子级 ReactElement 对象
+  // 指定 dispatcher, 区分 mount 和 update
+  ReactCurrentDispatcher.current =
+    current === null || current.memoizedState === null
+      ? HooksDispatcherOnMount
+      : HooksDispatcherOnUpdate;
+  // 执行函数，其中进行分析 hooks 的使用
+  let children = Component(props, secondArg);
+
+  // 3. 重置全局变量，返回 children
+  renderLanes = NoLanes;
+  currentlyRenderingFiber = (null: any);
+
+  currentHook = null;
+  workInProgressHook = null;
+  didScheduleRenderPahseUpdate = false;
+
+  return children;
+}
+```
+
+1. 调用函数前：设置全局变量，标记渲染优先级和当前 fiber，清除当前 fiber 的遗留状态。
+2. 调用函数：构造出 hooks 链表，最后生成子级 ReactElement 对象（children）。
+3. 调用函数后：重置全局变量，返回 children。
+
+## 调用函数
+
+### Hooks 执行流程
+
+所有的 hook 执行流程大体一致：
+
+1. FC 进入 render 流程前，确定 ReactCurrentDispatcher.current 指向。
+2. 进入 mount 流程时，执行 mount 对应逻辑，方法名一般为 mountXXX。
+
+   ```js
+   function mountXXX() {
+     // 获取对应的 hook
+     const hook = mountWorkInProgressHook();
+     // 省略，执行 hook 自身的操作
+   }
+
+   // 常见的 useState 对应的 mount
+   function mountState<S>(initialState: (() => S) | S): [S, Dispatch<BasicStateAction<S>>] {
+     const hook = mountWorkInProgressHook();
+     // 省略其他代码。。。
+     return [hook.memoizedState, dispatch];
+   }
+
+   // 常见的 useEffect 对应的 mount
+   function mountEffectImpl(fiberFlags, hookFlag, create, deps): void {
+     const hook = mountWorkInProgressHook();
+     // 省略其他代码。。。
+   }
+   ```
+
+3. update 时，执行 update 对应逻辑，方法名一般为 updateXXX。
+
+   ```js
+   function updateXXX() {
+     // 获取对应的 hook
+     const hook = updateWorkInProgressHook();
+     // 省略，执行 hook 自身的操作
+   }
+   ```
+
+4. 其他情况 hook 执行，依据 ReactCurrentDispatcher.current 指向做不同的处理。
+
+### 链式存储
+
+查看 _ReactFiberHooks.new.js_ 文件中的 mountWorkInProgressHook
+
+```js
+function mountWorkInProgressHook(): Hook {
+  const hook: Hook = {
+    memoizedState: null,
+    baseState: null,
+    baseQueue: null,
+    queue: null,
+    next: null,
+  };
+
+  if (workInProgressHook === null) {
+    // 链表中首个 hook
+    currentlyRenderingFiber.memoizedState = workInProgress = hook;
+  } else {
+    // 将hook添加到链表末尾
+    workInProgressHook = workInProgressHook.next = hook;
+  }
+
+  return workInProgressHook;
+}
+```
+
+逻辑是创建 Hook 并挂载到 fiber.memoizedState 上，多个 Hook 以链表结构保存。
+
+![](/images/mount-fiber-memoizedstate.png)
+
+### 顺序克隆
+
+fiber 树构造（对比更新）阶段，执行 updateFunctionComponent -> renderWithHooks 时，执行 useState 和 useEffect 在 fiber 对比更新分别对应 updateState -> updateReducer 和 updateEffect -> updateEffectImpl。
+
+```js
+function updateWorkInProgressHook(): Hook {
+  // 移动 currentHook 指针
+  let nextCurrentHook: null | Hook;
+  if (currentHook === null) {
+    const current = currentlyRenderingFiber.alternate;
+    if (current !== null) {
+      nextCurrentHook = current.memoizedState;
+    } else {
+      nextCurrentHook = null;
+    }
+  } else {
+    nextCurrentHook = currentHook.next;
+  }
+
+  // 移动 workInProgressHook 指针
+  let nextWorkInProgressHook: null | Hook;
+  if (workInProgressHook === null) {
+    nextWorkInProgressHook = currentlyRenderingFiber.memoizedState;
+  } else {
+    nextWorkInProgressHook = workInProgressHook.next;
+  }
+
+  if (nextWorkInProgressHook !== null) {
+    workInProgressHook = nextWorkInProgressHook;
+    nextWorkInProgressHook = workInProgressHook.next;
+
+    currentHook = nextCurrentHook;
+  } else {
+    currentHook = nextCurrentHook;
+
+    const newHook: Hook = {
+      memoizedState: currentHook.memoizedState,
+      baseState: currentHook.baseState,
+      baseQueue: currentHook.baseQueue,
+      next: null,
+    };
+
+    if (workInProgressHook === null) {
+      currentlyRenderingFiber.memoizedState = workInProgressHook = newHook;
+    } else {
+      workInProgressHook = workInProgressHook.next = newHook;
+    }
+  }
+  return workInProgressHook;
+}
+```
+
+updateWorkInProgressHook 函数的逻辑目的是为了让 currentHook 和 workInProgressHook 两个指针同时向后移动。
+
+## 参考链接
+
+- [github: react-illustration-series](https://github.com/7kms/react-illustration-series)
+- [github: react](https://github.com/facebook/react)
+- [图解 React: Hook 原理](https://7kms.github.io/react-illustration-series/main/hook-summary/)
+- [React 设计原理](https://book.douban.com/subject/36171032/)

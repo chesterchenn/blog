@@ -1,0 +1,30 @@
+@startuml
+!theme plain
+title 状态模式类图
+
+class Context {
+  request()
+}
+
+interface State {
+  handle()
+}
+
+class ConcreteStateA {
+  handle()
+}
+
+class ConcreteStateB {
+  handle()
+}
+
+State <|-- ConcreteStateA
+State <|-- ConcreteStateB
+
+Context -R-> State
+
+note left of Context::request
+  state.handle()
+end note
+
+@enduml

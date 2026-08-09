@@ -1,0 +1,95 @@
+---
+title: "虚拟DOM"
+published: 2021-06-20
+tags: ["javascript", "react"]
+---
+
+Virtual DOM，虚拟 DOM 是 React 创建的一个树型自定义对象来代表真实 DOM。使得 React 可以快速操作这些对象，而不需实际接触到真实的 DOM 或者通过使用 DOM API。最后，当需要渲染的时候，可以使用这个虚拟 DOM 计算得出真实的 DOM，并把它渲染到浏览器上。
+
+## VNode
+
+与真实的 DOM 结构类似，Vitrual DOM 也是由节点构成的，对应的节点被称为 VNode。VNode 的并非有标准，各个框架和库实现的实现会有些差别的差别。以下是来自 Preact 的 VNode 大致模型。
+
+```js
+VNode<P = {}> {
+  type: ComponentType<P> | string;
+  props: P & { children: ComponentChildren };
+  key: Key;
+  ref?: Ref<any> | null;
+  startTime?: number;
+  endTime?: number;
+}
+```
+
+[GitHub: preact/src/index.d.ts](https://github.com/preactjs/preact/blob/master/src/index.d.ts)
+
+在 props 里面，我们会将所有的属性放在这里，children 是一个很特殊的子节点
+
+### VNode 实例
+
+`const element = <h1 title="foo">Hello</h1>`
+
+通过实现的 createElement 转换之后的 VDOM 后如下：
+
+```js
+const element = {
+  type: 'h1',
+  props: {
+    title: 'foo',
+    children: 'Hello',
+  }
+}
+```
+
+通过 React 实现的 VDOM 如下
+
+```js
+const element = {
+  "$$typeof": Symbol("react.element"),
+  key: null,
+  props: {
+    children: "Hello",
+    title: "foo",
+  },
+  ref: null,
+  type: "h1",
+}
+```
+
+而通过 Preact 实现的 VDOM 如下
+
+```js
+const element = {
+  constructor: undefined,
+  key: undefined,
+  props: {
+    title: "foo",
+    children: "Hello",
+  },
+  ref: undefined,
+  type: "h1",
+}
+```
+
+## createElement
+
+createElement 的作用就是将 jsx 转换成 js。
+
+```jsx
+function createElement(type, props, children) {
+  return {
+    type,
+    props: {
+      ...props,
+      children: arguments.length > 3 ? [].slice.call(arguments, 2) : children,
+    }
+  }
+}
+```
+
+- 对 props 使用扩展运算符，当参数大于 3 个时，将其解析成数组，否则直接使用 children 参数。
+
+## 参考链接
+
+- [GitHub: osiris/VDOM](https://github.com/chesterchenn/osiris/tree/master/VDOM)
+- [GitHub: Preact](https://github.com/preactjs/preact)

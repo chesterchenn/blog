@@ -1,0 +1,98 @@
+---
+title: "Windows 下的命令与操作"
+published: 2021-11-12
+tags: ["windows"]
+---
+
+Windows 下的一些命令与操作脚本。
+
+<!-- vim-markdown-toc GFM -->
+
+- [注册表](#注册表)
+  - [其他](#其他)
+- [环境变量](#环境变量)
+- [格式化 U 盘启动盘](#格式化-u-盘启动盘)
+- [开机启动目录](#开机启动目录)
+- [Route](#route)
+
+<!-- vim-markdown-toc -->
+
+## 注册表
+
+.Reg 脚本具有以下语法
+
+```reg
+[registry editor version]
+
+[registry path]
+"DataItemName"="DataType:DataValue"
+```
+
+1. `[registry editor version]` 宣告登陆编辑程序版本，通常 Windows 10 都是 5.0，所以第一行写 `Windows Registry Editor Version 5.00`
+
+   如果没有声明，则会报错 `无法导入，指定文件不是注册脚本。你的注册表编辑器只能导入2进位注册文件`。
+
+2. 使用空行代表切换目录
+
+3. `[registry path]` 声明下个要操作的登陆路径，需要加上中括号表示。如果写的路径不存在，则会依照你指定的路径建立新的子键。
+
+4. `"DataItemName"` 指定注册表项的名称，需要用双括号括住，如果不存在，则新建一项。
+
+5. `DataType:DataValue` 指定注册表项值的类型和值。中间需要用冒号间隔，字符串类型不需要表明数据类型。
+
+   - 字符串："Foo"="bar"
+   - 二进制："Foo"=hex:
+   - DWORD(32)："Foo"=dword:000000000
+   - DWORD(64): "Foo"=hex(b):00,00,00,00,00,00,00,00
+
+### 其他
+
+如果要删除子键，直接在 DataItemName 的中括号内开头补上(-)，如 `[-HKEY_CURRENT_USER\Control Panel\Desktop\Some]`
+
+注册表脚本注释标识符为`;`
+
+## 环境变量
+
+对于需要频繁的切换环境变量值，我们可以创建文件 \*.bat
+
+- 设置环境变量 `setx <ENV> <value>`
+- 删除环境变量 `wmic ENVIRONMENT where "name='<ENV>'" delete`
+- 查询环境变量 `set <ENV>`，使用 `pause` 暂停执行完毕不退出
+
+## 格式化 U 盘启动盘
+
+在将 U 盘做启动盘之后，可能需要将 U 盘启动盘格式化成普通 U 盘。
+
+注意：以下操作基于 Windows
+
+1. 插入 U 盘 -> 右键“此电脑” -> 管理 -> 存储下的 “磁盘管理” -> 找到对应的 U 盘索引，即“磁盘 X”
+
+2. 打开 DOS 命令终端，输入 `diskpart`，回车进入 diskpart.exe
+
+3. 输入 `select disk X` (X 对应 U 盘索引)，可以输入 `list disk` 确认当前选中的磁盘
+
+4. 输入 `clean`，清除 U 盘
+
+5. 回到磁盘管理，右键“建立简单卷”，一直确认即可
+
+按理来说，使用 diskpart 建立简单卷也是可以的，但是产生了一些奇怪的错误，等下次有机会再测试。
+
+同理，使用 DiskGenius 等图形工具也是很轻松完成的。
+
+## 开机启动目录
+
+在 Windows 下可能需要开机启动部分脚本，放在开机启动的目录下。
+
+对应的目录：`C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp`
+
+## Route
+
+Route 命令可以帮我们实现多网关配置，在部分场景下可以实现内外网共连。
+
+常见的命令有 `route print`, `route print -4`, `route add`, `route delete`。
+
+先进行网关查询，记录内网 IP 网关，可以通过使用 `ipconfig` 查询网关，非 IP 地址。
+
+使用 `route add 172.0.0.0 mask 255.0.0.0 <内网网关地址> -p` 永久记录到网关表。
+
+使用 `route delete 172.0.0.0` 删除刚刚记录的网关地址。
