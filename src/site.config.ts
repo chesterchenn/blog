@@ -11,7 +11,7 @@ const config: SiteConfig = {
   description:
     'A coder-ready Astro blog theme with 59 of your favorite color schemes to choose from',
   // The author of the site, used in the footer, SEO, and RSS feed.
-  author: 'Katy Kookaburra',
+  author: 'Chen',
   // Keywords for SEO, used in the meta tags.
   tags: ['Astro', 'Terminal', 'Theme', 'MultiTerm', 'stelcodes'],
   // Font imported from @fontsource or elsewhere, used for the entire site.
@@ -19,7 +19,7 @@ const config: SiteConfig = {
   font: 'JetBrains Mono Variable',
   // For pagination, the number of posts to display per page.
   // The homepage will display half this number in the "Latest Posts" section.
-  pageSize: 10,
+  pageSize: 15,
   // Whether Astro should resolve trailing slashes in URLs or not.
   // This value is used in the astro.config.mjs file and in the "Search" component to make sure pagefind links match this setting.
   // It is not recommended to change this, since most links existing in the site currently do not have trailing slashes.
@@ -40,7 +40,7 @@ const config: SiteConfig = {
     },
     {
       name: 'GitHub',
-      url: 'https://github.com/stelcodes/multiterm-astro',
+      url: 'https://github.com/chesterchenn/blog',
       external: true,
     },
   ],
@@ -146,12 +146,6 @@ const config: SiteConfig = {
       //   link: 'list',
       // },
     },
-  },
-  // Social links to display in the footer.
-  socialLinks: {
-    github: 'https://github.com/stelcodes/multiterm-astro',
-    email: 'https://github.com/stelcodes/multiterm-astro',
-    rss: true, // Set to true to include an RSS feed link in the footer
   },
   // These are characters available for the character chat feature.
   // To add your own character, add an image file to the top-level `/public` directory

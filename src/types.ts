@@ -137,12 +137,6 @@ export interface ThemesConfig {
   overrides?: ThemeOverrides
 }
 
-export type SocialLinks = {
-  github?: string
-  email?: string
-  rss?: boolean
-}
-
 export interface SiteConfig {
   site: string
   base: string
@@ -154,7 +148,6 @@ export interface SiteConfig {
   pageSize: number
   trailingSlashes: 'always' | 'never' | 'ignore'
   themes: ThemesConfig
-  socialLinks: SocialLinks
   navLinks: NavLink[]
   characters: Record<string, string>
 }
