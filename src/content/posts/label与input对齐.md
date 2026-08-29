@@ -47,7 +47,7 @@ label 的长度不一致的时候，input 会出现不对齐的情况，显得�
   }
 </style>
 
-```
+```html
 <div>
   <div class="align-inline-block">
     <label>Label</label><input type="text" />
@@ -93,7 +93,7 @@ Flex 布局，label 和 input 可以灵活调整。以下是一个样例：
 }
 </style>
 
-```
+```html
 <div>
   <div class="flex">
     <label>Label</label><input type="text" />
@@ -140,7 +140,7 @@ Flex 布局，label 和 input 可以灵活调整。以下是一个样例：
   text-align: right;
 }
 </style>
-```
+```html
 <div>
   <div class="grid">
     <label>Label</label><input type="text" />

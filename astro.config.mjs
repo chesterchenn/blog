@@ -60,7 +60,7 @@ export default defineConfig({
     }),
     shikiConfig: {
       wrap: true,
-    }
+    },
   },
   image: {
     responsiveStyles: true,

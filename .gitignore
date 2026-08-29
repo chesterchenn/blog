@@ -23,4 +23,7 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 .vscode/
+
+# AI
 .qwen/
+AGENTS.md
