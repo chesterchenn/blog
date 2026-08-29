@@ -1,7 +1,7 @@
 ---
-title: "阅读图解React笔记3"
+title: '阅读图解React笔记3'
 published: 2022-11-23
-tags: ["react"]
+tags: ['react']
 ---
 
 本文仅仅是阅读 [图解 React 原理系列](https://7kms.github.io/react-illustration-series/) 的笔记，了解更多内容请查看原文链接。
@@ -29,23 +29,23 @@ React 的启动过程。
 1. legacy 模式：当前 React App 使用的方式。可能不支持新功能（concurrent 支持的所有功能）
 
    ```js
-   ReactDOM.render(<App />, document.getElementById('root'), (dom) => {});
+   ReactDOM.render(<App />, document.getElementById('root'), (dom) => {})
    ```
 
 2. Blocking 模式：它仅提供了 concurrent 模式的小部分功能，作为迁移到 concurrent 模式的第一个步骤。
 
    ```js
    // 创建 ReactDOMRoot 对象
-   const reactDOMBlockingRoot = ReactDOM.createBlockingRoot(document.getElementById('id'));
-   reactDOMBlockingRoot.render(<App />);
+   const reactDOMBlockingRoot = ReactDOM.createBlockingRoot(document.getElementById('id'))
+   reactDOMBlockingRoot.render(<App />)
    ```
 
 3. Concurrent 模式：目前实验中，未来稳定之后，打算作为 React 的模式开发模式，这个模式开启所有新功能。
 
    ```js
    // 创建 ReactDOMRoot 对象
-   const ReactDOMRoot = ReactDOMRoot.createRoot(document.getElementById('id'));
-   ReactDOMRoot.render(<App />);
+   const ReactDOMRoot = ReactDOMRoot.createRoot(document.getElementById('id'))
+   ReactDOMRoot.render(<App />)
    ```
 
 ## 启动流程

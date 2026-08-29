@@ -1,7 +1,7 @@
 ---
-title: "自定义 Hooks"
+title: '自定义 Hooks'
 published: 2023-11-01
-tags: ["react"]
+tags: ['react']
 ---
 
 自定义 Hooks 是一个函数，其名称以 use 开头，函数内部可以调用其他 Hooks。通过自定义 Hooks，可以将组件逻辑提取到可重用的函数中。
@@ -24,10 +24,10 @@ tags: ["react"]
 `useLocalStorage` 里面封装一系列操作，包括对异常处理，读取，更新以及删除等操作。而我们在使用的过程中就可以不用重复编码。
 
 ```jsx
-import { useLocalStorage } from 'react-use';
+import { useLocalStorage } from 'react-use'
 
 const Demo = () => {
-  const [value, setValue, remove] = useLocalStorage('my-key', 'foo');
+  const [value, setValue, remove] = useLocalStorage('my-key', 'foo')
 
   return (
     <div>
@@ -36,8 +36,8 @@ const Demo = () => {
       <button onClick={() => setValue('baz')}>baz</button>
       <button onClick={() => remove()}>Remove</button>
     </div>
-  );
-};
+  )
+}
 ```
 
 ## 何时自定义 Hooks
@@ -51,12 +51,12 @@ hook 本身也是一个函数，对于常用的组件会经常遇到一个问题
 ```js
 // 🔴 Avoid: A Hook that doesn't use Hooks
 function useSorted(items) {
-  return items.slice().sort();
+  return items.slice().sort()
 }
 
 // ✅ Good: A regular function that doesn't use Hooks
 function getSorted(items) {
-  return items.slice().sort();
+  return items.slice().sort()
 }
 ```
 
@@ -65,7 +65,7 @@ function getSorted(items) {
 ```js
 // ✅ Good: A Hook that uses other Hooks
 function useAuth() {
-  return useContext(Auth);
+  return useContext(Auth)
 }
 ```
 

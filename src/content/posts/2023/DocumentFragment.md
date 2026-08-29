@@ -1,7 +1,7 @@
 ---
-title: "DocumentFragment"
+title: 'DocumentFragment'
 published: 2023-05-25
-tags: ["javascript"]
+tags: ['javascript']
 ---
 
 DocumentFragment 接口表示一个没有父结点的最小文档对象。
@@ -23,18 +23,18 @@ DocumentFragment 接口表示一个没有父结点的最小文档对象。
 ```
 
 ```javascript
-const ul = document.querySelector('ul');
-const fruits = ['Apple', 'Orange', 'Banana', 'Melon'];
+const ul = document.querySelector('ul')
+const fruits = ['Apple', 'Orange', 'Banana', 'Melon']
 
-const fragment = new DocumentFragment();
+const fragment = new DocumentFragment()
 
 for (const fruit of fruits) {
-  const li = document.createElement('li');
-  li.textContent = fruit;
-  fragment.append(li);
+  const li = document.createElement('li')
+  li.textContent = fruit
+  fragment.append(li)
 }
 
-ul.append(fragment);
+ul.append(fragment)
 ```
 
 ## React.Fragment

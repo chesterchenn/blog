@@ -1,7 +1,7 @@
 ---
-title: "JavaScript题目"
+title: 'JavaScript题目'
 published: 2020-06-23
-tags: ["javascript"]
+tags: ['javascript']
 ---
 
 一些遇到的 JavaScript 的题目。
@@ -20,11 +20,11 @@ tags: ["javascript"]
 ### 逗号表达式
 
 ```js
-var count = 0;
+var count = 0
 for (var i = 0; i < 5, i < 10; i++) {
-  count++;
+  count++
 }
-console.log(count);
+console.log(count)
 ```
 
 [答案：逗号表达式](#答逗号表达式)
@@ -32,12 +32,12 @@ console.log(count);
 ### 形参的长度
 
 ```js
-(() => {}).length;
+;(() => {}).length
 
 function func(a, b) {
-  return a + b;
+  return a + b
 }
-func.length;
+func.length
 ```
 
 [答案：形参的长度](#答形参的长度)
@@ -45,14 +45,14 @@ func.length;
 ### 变量提升
 
 ```js
-console.log(foo);
-foo();
-var foo = 'foo';
+console.log(foo)
+foo()
+var foo = 'foo'
 function foo() {
-  console.log('hello foo');
+  console.log('hello foo')
 }
-console.log(foo);
-foo();
+console.log(foo)
+foo()
 ```
 
 [答案：变量提升](#答变量提升)
@@ -60,11 +60,11 @@ foo();
 ### 数组 forEach
 
 ```js
-var i = 0;
+var i = 0
 new Array(10).forEach(() => {
-  i++;
-});
-console.log(i);
+  i++
+})
+console.log(i)
 ```
 
 [答案：数组 forEach](#答数组-foreach)
@@ -72,9 +72,9 @@ console.log(i);
 ### 数组 sort
 
 ```js
-[3, 1, 4, 2].sort(function (a, b) {
-  return a - b;
-});
+;[3, 1, 4, 2].sort(function (a, b) {
+  return a - b
+})
 ```
 
 [答案：数组 sort](#答数组-sort)
@@ -82,13 +82,13 @@ console.log(i);
 ### 变量声明
 
 ```js
-(function () {
-  var a = (b = 5);
-  console.log(b);
-  console.log(a);
-})();
-console.log(b);
-console.log(a);
+;(function () {
+  var a = (b = 5)
+  console.log(b)
+  console.log(a)
+})()
+console.log(b)
+console.log(a)
 ```
 
 [答案：变量声明](#答变量声明)
@@ -96,12 +96,12 @@ console.log(a);
 ### 对象键名
 
 ```js
-var a = {};
-b = { key: 'b' };
-c = { key: 'c' };
-a[b] = 123;
-a[c] = 456;
-console.log(a[b]);
+var a = {}
+b = { key: 'b' }
+c = { key: 'c' }
+a[b] = 123
+a[c] = 456
+console.log(a[b])
 ```
 
 [答案：对象键名](#答对象键名)
@@ -109,16 +109,16 @@ console.log(a[b]);
 ### setTimeout
 
 ```js
-console.log(1);
+console.log(1)
 let a = setTimeout(() => {
-  console.log(2);
-}, 0);
-console.log(3);
+  console.log(2)
+}, 0)
+console.log(3)
 Promise.resolve(4).then((b) => {
-  console.log(b);
-  clearTimeout(a);
-});
-console.log(5);
+  console.log(b)
+  clearTimeout(a)
+})
+console.log(5)
 ```
 
 [答案：setTimeout](#答settimeout)
@@ -134,8 +134,8 @@ count = 10，逗号表达式只有最后一项是有效的
 ### 答：形参的长度
 
 ```js
-(() => {}).length; // 0
-func.length; // 2
+;(() => {}).length // 0
+func.length // 2
 ```
 
 `length` 会返回函数的形参 `arguments` 变量的的长度，同时 `arguments` 还有 `index` 属性
@@ -155,15 +155,15 @@ func.length; // 2
 ```js
 function foo() {
   // 函数提升
-  console.log('hello foo');
+  console.log('hello foo')
 }
-var foo; // 变量提升
+var foo // 变量提升
 
-console.log(foo); // => foo函数，foo只是声明变量，没有被赋值，foo还是原来的值，参考三
-foo(); // => 'hello foo'
-foo = 'foo'; // 赋值不会提升,赋值后 foo就不再是函数类型了，而是字符类型
-console.log(foo); // 'foo'
-foo(); // 报错，foo已经不再是一个函数了
+console.log(foo) // => foo函数，foo只是声明变量，没有被赋值，foo还是原来的值，参考三
+foo() // => 'hello foo'
+foo = 'foo' // 赋值不会提升,赋值后 foo就不再是函数类型了，而是字符类型
+console.log(foo) // 'foo'
+foo() // 报错，foo已经不再是一个函数了
 ```
 
 [变量提升](#变量提升)
@@ -177,9 +177,9 @@ foo(); // 报错，foo已经不再是一个函数了
 ### 答：数组 sort
 
 ```js
-[3, 1, 4, 2].sort(function (a, b) {
-  return a - b;
-}); // => [1, 2, 3, 4]
+;[3, 1, 4, 2].sort(function (a, b) {
+  return a - b
+}) // => [1, 2, 3, 4]
 ```
 
 sort 默认会按照诸个字符的 Unicode 位点进行排序，对于 a < b 的情况，return a - b，返回小于 0（false），ab 不用调换位置，则是升序。而 return b - a，返回大于 0（true），ab 调换位置，则是降序。反之同理
@@ -191,14 +191,14 @@ sort 默认会按照诸个字符的 Unicode 位点进行排序，对于 a < b �
 原式等价于：
 
 ```js
-(function () {
-  b = 5; // b声明成全局变量
-  var a = b; // 赋值从右往左
-  console.log(b);
-  console.log(a);
-})();
-console.log(b);
-console.log(a);
+;(function () {
+  b = 5 // b声明成全局变量
+  var a = b // 赋值从右往左
+  console.log(b)
+  console.log(a)
+})()
+console.log(b)
+console.log(a)
 // 5 5 5 ReferenceError: a is not defined
 ```
 

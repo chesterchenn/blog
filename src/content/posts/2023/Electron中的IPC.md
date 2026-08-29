@@ -1,7 +1,7 @@
 ---
-title: "Electron 中的 IPC 模块"
+title: 'Electron 中的 IPC 模块'
 published: 2023-06-24
-tags: ["electron"]
+tags: ['electron']
 ---
 
 Inter-Process Communication (IPC)，进程间通信，主要负责 Electron 中渲染进程跟主进程之间的通信。
@@ -37,25 +37,25 @@ Inter-Process Communication (IPC)，进程间通信，主要负责 Electron 中�
    ```js
    // main.js
    function handleSetTitle(event, title) {
-     const webContents = event.sender;
-     const win = BrowserWindow.fromWebContents(webContents);
-     win.setTitle(title);
+     const webContents = event.sender
+     const win = BrowserWindow.fromWebContents(webContents)
+     win.setTitle(title)
    }
 
    app.whenReady().then(() => {
-     ipcMain.on('set-title', handleSetTitle);
-     createWindow();
-   });
+     ipcMain.on('set-title', handleSetTitle)
+     createWindow()
+   })
    ```
 
 2. 通过预加载暴露 `ipcRenderer.send` 。
 
    ```js
    // preload.js
-   const { contextBridge, ipcRenderer } = require('electron');
+   const { contextBridge, ipcRenderer } = require('electron')
    contextBridge.exposeInMainWorld('electronAPI', {
      sendTitle: (title) => ipcRenderer.send('set-title', title),
-   });
+   })
    ```
 
    默认情况下，渲染进程没有 Node.js 或 Electron 模块的访问权，需要通过 `contextBridge.exposeInMainWorld` 来选择暴露的 API。在预加载脚本中暴露一个全局的 `window.electronAPI` 供渲染进程调用。
@@ -65,8 +65,8 @@ Inter-Process Communication (IPC)，进程间通信，主要负责 Electron 中�
    ```js
    // renderer.js
    btn.addEventListener('click', () => {
-     window.electronAPI.sendTitle('Hello World!');
-   });
+     window.electronAPI.sendTitle('Hello World!')
+   })
    ```
 
 如果需要主进程回复消息，则需要使用 `event.replay`。
@@ -87,26 +87,26 @@ Inter-Process Communication (IPC)，进程间通信，主要负责 Electron 中�
    // main.js
 
    async function handleFileOpen() {
-     const { canceled, filePath } = await dialog.showOpenDialog({});
+     const { canceled, filePath } = await dialog.showOpenDialog({})
      if (!canceled) {
-       return filePath[0];
+       return filePath[0]
      }
    }
 
    app.whenReady().then(() => {
-     ipcMain.handle('dialog:openFile', handleFileOpen);
-     createWindow();
-   });
+     ipcMain.handle('dialog:openFile', handleFileOpen)
+     createWindow()
+   })
    ```
 
 2. 通过预加载暴露 `ipcRenderer.invoke` 。
 
    ```js
    // preload.js
-   const { contextBridge, ipcRenderer } = require('electron');
+   const { contextBridge, ipcRenderer } = require('electron')
    contextBridge.exposeInMainWorld('electronAPI', {
      openFile: () => ipcRenderer.invoke('dialog:openFile'),
-   });
+   })
    ```
 
 3. 渲染进程调用
@@ -114,8 +114,8 @@ Inter-Process Communication (IPC)，进程间通信，主要负责 Electron 中�
    ```js
    //renderer.js
    btn.addEventListener('click', async () => {
-     const filePath = await window.electronAPI.openFile();
-   });
+     const filePath = await window.electronAPI.openFile()
+   })
    ```
 
 如果需要主进程回复消息，则直接在 `ipcMain.handle` 里面 return 回去就可以了。而 `ipcRenderer.invoke` 会接收到一个异步的 `Promise<pending>` 的值。
@@ -150,7 +150,7 @@ Inter-Process Communication (IPC)，进程间通信，主要负责 Electron 中�
            },
          ],
        },
-     ]);
+     ])
    }
    ```
 
@@ -158,11 +158,11 @@ Inter-Process Communication (IPC)，进程间通信，主要负责 Electron 中�
 
    ```js
    // preload.js
-   const { contextBridge, ipcRenderer } = require('electron');
+   const { contextBridge, ipcRenderer } = require('electron')
 
    contextBridge.exposeInMainWorld('electronAPI', {
      onUpdateCounter: (callback) => ipcRenderer.on('update-counter', callback),
-   });
+   })
    ```
 
    当加载预加载脚本之后，渲染进程可以监听 `window.electronAPI.onUpdateCounter` 事件函数。
@@ -172,7 +172,7 @@ Inter-Process Communication (IPC)，进程间通信，主要负责 Electron 中�
    ```js
    window.electronAPI.onUpdateCounter((event, arg) => {
      //...
-   });
+   })
    ```
 
 ![](/images/ipc-main-renderer.png)
@@ -186,19 +186,19 @@ Inter-Process Communication (IPC)，进程间通信，主要负责 Electron 中�
 可以使用 Map 对象记录不同窗口的 webContents 对象。
 
 ```js
-const map = new Map();
+const map = new Map()
 
 const createWindow = () => {
   const mainWindow = new BrowserWindow({
     //...
-  });
+  })
   const otherWindow = new BrowserWindow({
     //...
-  });
+  })
 
-  map.set('main', mainWindow.webContents);
-  map.set('other', otherWindow.webContents);
-};
+  map.set('main', mainWindow.webContents)
+  map.set('other', otherWindow.webContents)
+}
 ```
 
 ## 渲染进程到渲染进程（二）

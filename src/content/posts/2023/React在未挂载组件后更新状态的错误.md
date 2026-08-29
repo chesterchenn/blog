@@ -1,7 +1,7 @@
 ---
-title: "React在未挂载组件后更新状态的错误"
+title: 'React在未挂载组件后更新状态的错误'
 published: 2023-02-28
-tags: ["react"]
+tags: ['react']
 ---
 
 React 组件在卸载后，如果组件内有正在处理的异步函数。那么在函数处理后，需要更新组件的状态，会得到一个警告。
@@ -23,50 +23,50 @@ React 组件在卸载后，如果组件内有正在处理的异步函数。那�
 
 ```tsx
 // Posts.tsx
-import { useEffect, useState } from 'react';
-type Post = { id: number | string; title: string };
+import { useEffect, useState } from 'react'
+type Post = { id: number | string; title: string }
 
 const Posts = () => {
-  const [posts, setPosts] = useState<Post[]>([]);
+  const [posts, setPosts] = useState<Post[]>([])
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-        const data = await response.json();
-        setPosts(data);
+        const response = await fetch('https://jsonplaceholder.typicode.com/posts')
+        const data = await response.json()
+        setPosts(data)
       } catch (e) {
-        console.log(e);
+        console.log(e)
       }
-    };
+    }
 
-    fetchData();
-  }, []);
+    fetchData()
+  }, [])
   return (
     <ul>
       {posts.map((post) => {
-        return <li key={post.id}>{post.title}</li>;
+        return <li key={post.id}>{post.title}</li>
       })}
     </ul>
-  );
-};
+  )
+}
 
-export default Posts;
+export default Posts
 ```
 
 ```tsx
 // App.tsx
-import { useState } from 'react';
-import Posts from './Posts';
+import { useState } from 'react'
+import Posts from './Posts'
 
 export default function App() {
-  const [showPost, setShowPost] = useState(false);
+  const [showPost, setShowPost] = useState(false)
   return (
     <div>
       <button onClick={() => setShowPost(true)}>Show Post</button>
       <button onClick={() => setShowPost(false)}>Hide Post</button>
       {showPost && <Posts />}
     </div>
-  );
+  )
 }
 ```
 
@@ -82,20 +82,20 @@ export default function App() {
 
 ```tsx
 // Timeout.tsx
-import { useState } from 'react';
+import { useState } from 'react'
 
 const Timeout = () => {
-  const [counter, setCounter] = useState(0);
-  setTimeout(() => setCounter(counter + 1), 5000);
+  const [counter, setCounter] = useState(0)
+  setTimeout(() => setCounter(counter + 1), 5000)
   return (
     <>
       <div>Counter: {counter}</div>
       <div>The Timeout will add after 5 seconds.</div>
     </>
-  );
-};
+  )
+}
 
-export default Timeout;
+export default Timeout
 ```
 
 [https://codesandbox.io/s/settimeout-0c5ro1](https://codesandbox.io/s/settimeout-0c5ro1)
@@ -130,31 +130,31 @@ if (isMounted.current) {
 可以将上面的 useRef 代码封装成自定义的 hook，也可以直接使用第三方封装的，如 react-use 的 useAsync
 
 ```tsx
-import { useAsync } from 'react-use';
-type Post = { id: number | string; title: string };
+import { useAsync } from 'react-use'
+type Post = { id: number | string; title: string }
 
 const Posts = () => {
   const state = useAsync(async () => {
     try {
-      const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-      const data = await response.json();
-      return data;
+      const response = await fetch('https://jsonplaceholder.typicode.com/posts')
+      const data = await response.json()
+      return data
     } catch (e) {
-      console.log(e);
+      console.log(e)
     }
-  }, []);
+  }, [])
 
   return (
     <ul>
       {state.value &&
         state.value.map((post: Post) => {
-          return <li key={post.id}>{post.title}</li>;
+          return <li key={post.id}>{post.title}</li>
         })}
     </ul>
-  );
-};
+  )
+}
 
-export default Posts;
+export default Posts
 ```
 
 [https://codesandbox.io/s/fetch-call-useasync-evtz0n](https://codesandbox.io/s/fetch-call-useasync-evtz0n)
@@ -167,41 +167,41 @@ export default Posts;
 
 ```tsx
 // Posts.tsx
-import { useEffect, useState } from 'react';
-type Post = { id: number | string; title: string };
+import { useEffect, useState } from 'react'
+type Post = { id: number | string; title: string }
 
 const Posts = () => {
-  const [posts, setPosts] = useState<Post[]>([]);
+  const [posts, setPosts] = useState<Post[]>([])
   useEffect(() => {
-    const controller = new AbortController();
-    const signal = controller.signal;
+    const controller = new AbortController()
+    const signal = controller.signal
     const fetchData = async () => {
       try {
         const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
           signal: signal,
-        });
-        const data = await response.json();
-        setPosts(data);
+        })
+        const data = await response.json()
+        setPosts(data)
       } catch (e) {
-        console.log(e);
+        console.log(e)
       }
-    };
+    }
 
-    fetchData();
+    fetchData()
     return () => {
-      controller.abort();
-    };
-  }, []);
+      controller.abort()
+    }
+  }, [])
   return (
     <ul>
       {posts.map((post) => {
-        return <li key={post.id}>{post.title}</li>;
+        return <li key={post.id}>{post.title}</li>
       })}
     </ul>
-  );
-};
+  )
+}
 
-export default Posts;
+export default Posts
 ```
 
 [https://codesandbox.io/s/fetch-call-abortcontroller-x0c5ro](https://codesandbox.io/s/fetch-call-abortcontroller-x0c5ro)
@@ -211,23 +211,23 @@ export default Posts;
 对于定时器的取消，则是调用 `clearTimeout` 和 `clearInterval` 来取消定时器。
 
 ```tsx
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'
 
 const Timeout = () => {
-  const [counter, setCounter] = useState(0);
+  const [counter, setCounter] = useState(0)
   useEffect(() => {
-    const timerID = setTimeout(() => setCounter((counter) => counter + 1), 5000);
-    return () => clearTimeout(timerID);
-  }, []);
+    const timerID = setTimeout(() => setCounter((counter) => counter + 1), 5000)
+    return () => clearTimeout(timerID)
+  }, [])
   return (
     <>
       <div>Counter: {counter}</div>
       <div>The Counter will add after 5 seconds.</div>
     </>
-  );
-};
+  )
+}
 
-export default Timeout;
+export default Timeout
 ```
 
 [https://codesandbox.io/s/settimeout-cleartimeout-yhup3u](https://codesandbox.io/s/settimeout-cleartimeout-yhup3u)

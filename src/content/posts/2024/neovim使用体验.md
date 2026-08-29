@@ -1,7 +1,7 @@
 ---
-title: "NeoVim 使用体验"
+title: 'NeoVim 使用体验'
 published: 2024-02-22
-tags: ["linux"]
+tags: ['linux']
 ---
 
 在使用 vim 的一段时间时候，接触到 neovim，刚开始并没有打算切换过去，但是随着慢慢的深入使用。发现 neovim 的一些优势：

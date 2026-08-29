@@ -1,13 +1,14 @@
 ---
-title: "TypeScript中的React Children"
+title: 'TypeScript中的React Children'
 published: 2021-10-14
-tags: ["typescript", "react"]
+tags: ['typescript', 'react']
 ---
-原文出自：[*React Children with TypeScript*](https://www.carlrippon.com/react-children-with-typescript/)
+
+原文出自：[_React Children with TypeScript_](https://www.carlrippon.com/react-children-with-typescript/)
 
 这里主要介绍了在 TypeScript 中使用 React Children 属性的不同情况。
 
-## 使用  FC 类型
+## 使用 FC 类型
 
 我们可以在函数组件上使用一个标准的 React 类型，`FC`。`FC` 就是函数组件，是在 TypeScript 使用的一个泛型。`React.FC` 也可以写作 `React.FunctionComponent`。
 
@@ -45,8 +46,8 @@ type PropsWithChildren<P> = P & { children?: ReactNode | undefined };
 
 ```ts
 type Props = {
-  title: string;
-  children?: JSX.Element | JSX.Element[];
+  title: string
+  children?: JSX.Element | JSX.Element[]
 }
 ```
 
@@ -56,8 +57,8 @@ type Props = {
 
 ```ts
 type Props = {
-  title: string;
-  children: JSX.Element | JSX.Element[] | string | string[];
+  title: string
+  children: JSX.Element | JSX.Element[] | string | string[]
 }
 ```
 
@@ -67,8 +68,8 @@ type Props = {
 
 ```ts
 type Props = {
-  title: string;
-  children?: React.ReactChild | ReactChild[];
+  title: string
+  children?: React.ReactChild | ReactChild[]
 }
 ```
 
@@ -78,8 +79,8 @@ type Props = {
 
 ```ts
 type Props = {
-  title: string;
-  children?: React.ReactNode;
+  title: string
+  children?: React.ReactNode
 }
 ```
 
@@ -91,8 +92,8 @@ type Props = {
 
 ```tsx
 type Props = {
-  title: string;
-};
+  title: string
+}
 
 class Page extends React.Component<Props> {
   render() {
@@ -101,10 +102,9 @@ class Page extends React.Component<Props> {
         <h1>{this.props.title}</h1>
         {this.props.children}
       </div>
-    );
+    )
   }
 }
-
 ```
 
 我们可以查看到 children 的类型声明也是 ReacNode。

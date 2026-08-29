@@ -1,7 +1,7 @@
 ---
-title: "Linux 下使用 Clash"
+title: 'Linux 下使用 Clash'
 published: 2022-06-28
-tags: ["linux"]
+tags: ['linux']
 ---
 
 在 Windows 或者手机端很容易找到 clash 的应用，但在 Linux 下一般比较难找到对应的软件。使用在后台运行的命令反而称为一个更加稳定的选择。

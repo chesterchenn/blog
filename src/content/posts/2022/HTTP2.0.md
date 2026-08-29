@@ -1,7 +1,7 @@
 ---
-title: "HTTP2.0"
+title: 'HTTP2.0'
 published: 2022-10-30
-tags: ["http"]
+tags: ['http']
 ---
 
 HTTP2.0 新增的特性主要有二进制分帧，多路复用，首部压缩，服务端推送，请求优先级等。

@@ -1,7 +1,7 @@
 ---
-title: "理解 offsetWidth, clientWidth, scrollWidth 和 高度"
+title: '理解 offsetWidth, clientWidth, scrollWidth 和 高度'
 published: 2023-05-10
-tags: ["javascript"]
+tags: ['javascript']
 ---
 
 CSS 的盒子模型相当复杂，尤其是涉及到滚动内容的时候。虽然浏览器使用 CSS 的值来绘制方框，但使用 JS 来确定所有的尺寸会更加方便。

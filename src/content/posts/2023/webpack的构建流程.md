@@ -1,7 +1,7 @@
 ---
-title: "webpack 的构建流程"
+title: 'webpack 的构建流程'
 published: 2023-06-03
-tags: ["javascript"]
+tags: ['javascript']
 ---
 
 webpack 的主要就是根据配置，识别入口文件，然后逐级识别模块依赖，进行分析代码，转换代码，编译代码，最后输出打包后的代码。
@@ -32,60 +32,60 @@ webpack 的主要就是根据配置，识别入口文件，然后逐级识别模
 
 ```js
 const createCompiler = (rawOptions) => {
-  const compiler = new Compiler(options.context, options);
+  const compiler = new Compiler(options.context, options)
   // ...
   if (Array.isArray(options.plugins)) {
     for (const plugin of options.plugins) {
       if (typeof plugin === 'function') {
-        plugin.call(compiler, compiler);
+        plugin.call(compiler, compiler)
       } else if (plugin) {
-        plugin.apply(compiler);
+        plugin.apply(compiler)
       }
     }
   }
   // ...
-  return compiler;
-};
+  return compiler
+}
 
 const webpack = (options, callback) => {
   // 创建 compiler 对象
   const create = () => {
-    let compiler;
-    let watch = false;
-    let watchOptions;
+    let compiler
+    let watch = false
+    let watchOptions
     if (Array.isArray(options)) {
-      compiler = createMultiCompiler(options, options);
-      watch = options.some((options) => options.watch);
-      watchOptions = options.map((options) => options.watchOptions || {});
+      compiler = createMultiCompiler(options, options)
+      watch = options.some((options) => options.watch)
+      watchOptions = options.map((options) => options.watchOptions || {})
     } else {
-      const webpackOptions = options;
-      compiler = createCompiler(webpackOptions);
-      watch = webpackOptions.watch;
-      watchOptions = webpackOptions.watchOptions || {};
+      const webpackOptions = options
+      compiler = createCompiler(webpackOptions)
+      watch = webpackOptions.watch
+      watchOptions = webpackOptions.watchOptions || {}
     }
-    return { compiler, watch, watchOptions };
-  };
+    return { compiler, watch, watchOptions }
+  }
 
   if (callback) {
     try {
-      const { compiler, watch, watchOptions } = create();
+      const { compiler, watch, watchOptions } = create()
       if (watch) {
-        compiler.watch(watchOptions, callback);
+        compiler.watch(watchOptions, callback)
       } else {
         compiler.run((err, stats) => {
           compiler.close((err2) => {
-            callback(err || err2, stats);
-          });
-        });
+            callback(err || err2, stats)
+          })
+        })
       }
-      return compiler;
+      return compiler
     } catch (err) {
       // ...
     }
   } else {
     // ...
   }
-};
+}
 ```
 
 webpack 进来进行创建 compiler 对象，随后调用 run 方法。
@@ -99,34 +99,34 @@ class Compiler {
   run(callback) {
     const onCompiled = (err, compilation) => {
       if (this.hooks.shouldEmit.call(compilation) === false) {
-        compilation.startTime = startTime;
-        compiler.endTime = Date.now();
-        const stats = new Stats(compilation);
+        compilation.startTime = startTime
+        compiler.endTime = Date.now()
+        const stats = new Stats(compilation)
         this.hooks.done.callAsync(stats, (err) => {
           // ...
-        });
-        return;
+        })
+        return
       }
-    };
+    }
 
     const run = () => {
       this.hooks.beforeRun.callAsync(this, (err) => {
         this.hooks.run.callAsync(this, (err) => {
           this.readRecords((err) => {
-            this.compile(onCompiled);
-          });
-        });
-      });
-    };
+            this.compile(onCompiled)
+          })
+        })
+      })
+    }
 
-    run();
+    run()
   }
 
   compile(callback) {
-    const params = this.newCompilationParams();
+    const params = this.newCompilationParams()
     this.hooks.beforeCompile.callAsync(params, (err) => {
-      this.hooks.compile.call(params);
-      const compilation = this.newCompilation(params);
+      this.hooks.compile.call(params)
+      const compilation = this.newCompilation(params)
 
       this.hooks.make.callAsync(compilation, (err) => {
         this.hooks.finishMake.callAsync(compilation, (err) => {
@@ -134,14 +134,14 @@ class Compiler {
             compilation.finish((err) => {
               compilation.seal((err) => {
                 this.hooks.afterCompile.callAsync(compilation, (err) => {
-                  return callback(null, compilation);
-                });
-              });
-            });
-          });
-        });
-      });
-    });
+                  return callback(null, compilation)
+                })
+              })
+            })
+          })
+        })
+      })
+    })
   }
 }
 ```

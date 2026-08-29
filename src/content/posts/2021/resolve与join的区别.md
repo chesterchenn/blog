@@ -1,7 +1,7 @@
 ---
-title: "resolve与join的区别"
+title: 'resolve与join的区别'
 published: 2021-04-15
-tags: ["nodejs"]
+tags: ['nodejs']
 ---
 
 在 nodejs 里面，resolve 与 join 都是常用的路径方法。
@@ -11,10 +11,10 @@ tags: ["nodejs"]
 `path.join()` 将所有给定的路径段连接在一起，然后对结果路径进行规范化。
 
 ```js
-path.join('/foo', 'bar', 'baz/asdf', 'quux', '..');
+path.join('/foo', 'bar', 'baz/asdf', 'quux', '..')
 // Returns: '/foo/bar/bza/asdf'
 
-path.join('foo/bar', 'baz');
+path.join('foo/bar', 'baz')
 // Returns: 'foo/bar/baz'
 ```
 
@@ -25,19 +25,19 @@ path.join('foo/bar', 'baz');
 假设当前目录：/home/myself/node
 
 ```js
-path.resolve('/foo/bar', './baz');
+path.resolve('/foo/bar', './baz')
 // Returns: '/foo/bar/baz'
 
-path.resolve('/foo/bar', '/tmp/file');
+path.resolve('/foo/bar', '/tmp/file')
 // Returns: 'tmp/file'
 
-path.resolve('wwwroot', 'static_file/png', '../gif/image.gif');
+path.resolve('wwwroot', 'static_file/png', '../gif/image.gif')
 // Returns: '/home/myself/node/wwwroot/static_file/gif/image.gif'
 
-path.resolve();
+path.resolve()
 // Returns: '/home/myself/node'
 
-path.resolve(__dirname);
+path.resolve(__dirname)
 // Returns: '/home/myself/node'
 ```
 
@@ -46,9 +46,9 @@ path.resolve(__dirname);
 \_\_dirname 当前模块的目录名，与 `path.dirname(__filename)` 相同。
 
 ```js
-console.log(__dirname);
+console.log(__dirname)
 // /Users/mjr
-console.log(path.dirname(__filename));
+console.log(path.dirname(__filename))
 // /Users/mjr
 ```
 
@@ -57,7 +57,7 @@ console.log(path.dirname(__filename));
 对于主程序而言，这不一定与命令中使用的文件名相同。
 
 ```js
-console.log(__filename);
+console.log(__filename)
 // /Users/mjr/example.js
 ```
 
@@ -66,10 +66,10 @@ console.log(__filename);
 不过我们可以通过 `import.meta.url` 实现类似的功能。
 
 ```js
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+import { fileURLToPath } from 'url'
+import { dirname } from 'path'
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 ```
 
 ## process.cwd
@@ -82,4 +82,3 @@ process.cwd() 方法返回当前 nodejs 进程的工作目录
 - [nodejs: path.resolve](https://nodejs.org/dist/latest-v16.x/docs/api/path.html#path_path_resolve_paths)
 - [nodejs: \_\_dirname](https://nodejs.org/dist/latest-v16.x/docs/api/modules.html#__dirname)
 - [nodejs: import.meta](https://nodejs.org/dist/latest-v16.x/docs/api/esm.html#importmeta)
-

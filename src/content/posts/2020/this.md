@@ -1,7 +1,7 @@
 ---
-title: "this"
+title: 'this'
 published: 2020-07-25
-tags: ["javascript"]
+tags: ['javascript']
 ---
 
 当一个函数被调用时，会创建一个执行上下文。这个上下文会包含函数的调用栈，函数的调用方式，传入参数等信息。this 就是这个上下文的一个属性，会在函数的执行过程中用到。
@@ -14,14 +14,14 @@ tags: ["javascript"]
 
 ```javascript
 function foo(num) {
-  this.count++;
+  this.count++
 }
-foo.count = 0;
+foo.count = 0
 for (var i = 0; i < 5; i++) {
-  foo(i);
+  foo(i)
 }
-foo.count; // 0
-count; // NaN
+foo.count // 0
+count // NaN
 ```
 
 执行 foo.count = 0 时，函数对象 foo 添加了一个属性 count。但是函数内部代码 this.count 中的 this 并不是指向那个函数对象，虽然属性名相同，根对象并不相同，代码中无意中创建了一个全局变量 count，他的值为 NaN。
@@ -34,13 +34,13 @@ this 在任何情况下都不指向函数的词法作用域。
 
 ```javascript
 function foo() {
-  var a = 2;
-  this.bar();
+  var a = 2
+  this.bar()
 }
 function bar() {
-  console.log(this.a);
+  console.log(this.a)
 }
-foo(); // ReferenceError: a is not defined
+foo() // ReferenceError: a is not defined
 ```
 
 代码试图通过 this.bar() 来引用 bar() 函数，这样调用成功纯属意外，调用 bar() 最自然的办法是省略前面的 this，直接使用词法引用标识符。这段代码还试图使用 this 联通 foo() 和 bar() 的词法作用域，从而让 bar() 可以访问 foo() 作用域里的变量 a，这是不可能的。
@@ -55,10 +55,10 @@ foo(); // ReferenceError: a is not defined
 
 ```javascript
 function foo() {
-  console.log(this.a);
+  console.log(this.a)
 }
-var a = 2;
-foo(); // 2
+var a = 2
+foo() // 2
 ```
 
 ### 2. 隐式绑定
@@ -67,13 +67,13 @@ foo(); // 2
 
 ```javascript
 function foo() {
-  console.log(this.a);
+  console.log(this.a)
 }
 var obj = {
   a: 2,
   foo: foo,
-};
-obj.foo(); // 2
+}
+obj.foo() // 2
 ```
 
 我们必须在一个对象内部包含一个指向函数的属性，并通过这个属性间接引用函数，从而把 this 间接（隐式）绑定到这个对象上。
@@ -95,10 +95,10 @@ obj.foo(); // 2
 
 ```javascript
 function foo(a) {
-  this.a = a;
+  this.a = a
 }
-var bar = new foo(2);
-bar.a; // 2
+var bar = new foo(2)
+bar.a // 2
 ```
 
 ## 优先级
@@ -110,14 +110,14 @@ new 绑定 > 显式绑定 > 隐式绑定 > 默认绑定
 箭头函数不会创建自己的 this ,它只会从自己的作用域链的上一层继承 this。所以箭头函数中的 this 是在定义函数的时候绑定，而不是在执行函数的时候绑定。
 
 ```javascript
-var foo = 'foo';
+var foo = 'foo'
 var bar = {
   foo: 'bar',
   log: () => {
-    console.log(this.foo);
+    console.log(this.foo)
   },
-};
-bar.log(); // 'foo'
+}
+bar.log() // 'foo'
 ```
 
 通过 [https://babeljs.io/repl](https://babeljs.io/repl) 编译过程，我们发现箭头函数会被转成 `console.log((void 0).foo)`
@@ -143,37 +143,37 @@ obj.getMsg();
 obj.getMsg() 是一个方法调用，调用该方法的上下文是 obj，所有 this 是指 obj。 答案是`foo`，可以参考误解 1。
 
 ```javascript
-var length = 4;
+var length = 4
 function cb() {
-  console.log(this.length);
+  console.log(this.length)
 }
 
 const obj = {
   length: 5,
   method(cb) {
-    cb();
+    cb()
   },
-};
+}
 
-obj.method(cb, 1, 2);
+obj.method(cb, 1, 2)
 ```
 
 cb() 是在 method() 内部使用常规函数调用来调用的。由于在常规函数调用期间的 this 值等于 window。答案是 `4`。
 
 ```javascript
-var length = 4;
+var length = 4
 function cb() {
-  console.log(this.length);
+  console.log(this.length)
 }
 
 const obj = {
   length: 5,
   method() {
-    arguments[0]();
+    arguments[0]()
   },
-};
+}
 
-obj.method(cb, 1, 2);
+obj.method(cb, 1, 2)
 ```
 
 obj.method(cb, 1, 2) 被调用时有 3 个参数。`arguments[0]()` 是 arguments 对象上的回调的方法调用，所以回调内部的参数等于 arguments。所以 callback() 中的 this.length 与 arguments.length 相同，答案是 `3`。

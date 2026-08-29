@@ -1,7 +1,7 @@
 ---
-title: "阅读图解React笔记2"
+title: '阅读图解React笔记2'
 published: 2022-11-22
-tags: ["react"]
+tags: ['react']
 ---
 
 本文仅仅是阅读 [图解 React 原理系列](https://7kms.github.io/react-illustration-series/) 的笔记，了解更多内容请查看原文链接。
@@ -288,15 +288,12 @@ function commitRootImpl(
 核心逻辑分为 3 个步骤：
 
 1. commitBeforeMutationEffects
-
    - dom 变更之前，主要处理副作用队列中带有 Snapshot, Passive 标记的 fiber 节点。
 
 2. commitMutationEffects
-
    - dom 变更，界面得到更新，主要处理副作用队列中带有 Placement, Update, Deletion, Hydrating 标记的 fiber 节点。
 
 3. commitLayoutEffects
-
    - dom 变更后，主要处理副作用队列中带有 Update, Callback 标记的 fiber 节点。
 
 ## 参考链接

@@ -1,16 +1,12 @@
 ---
-title: "HTTP缓存"
+title: 'HTTP缓存'
 published: 2020-08-21
-tags: ["http"]
+tags: ['http']
 ---
 
 HTTP 缓存可以很好优化 Web 性能，不仅能减少数据传输，缓解网络瓶颈，降低服务器的要求，降低距离时延。
 
 一般只有 get 请求才会被缓存，这里一般是指 get 资源情况。
-
-![缓存机制流程](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a5fe072c8dd3464f8de15709b22f743f~tplv-k3u1fbpfcp-watermark.image)
-
-图片来源：<https://juejin.cn/post/6844904163172679688>
 
 通常浏览器缓存策略分为两种：强缓存和协商缓存
 
@@ -29,17 +25,17 @@ HTTP 缓存可以很好优化 Web 性能，不仅能减少数据传输，缓解�
 下面是 nodejs 简单实现一个 get 请求并返回一个字符串，同时实现强缓存。
 
 ```js
-const http = require('http');
+const http = require('http')
 
 const server = http.createServer((req, res) => {
   res.writeHead(200, {
     'Content-Type': 'text/plain',
     'Cache-Control': 'max-age=3600', // 设置强缓存
-  });
-  res.end('hello world');
-});
+  })
+  res.end('hello world')
+})
 
-server.listen(8000);
+server.listen(8000)
 ```
 
 首先访问一次，让浏览器产生缓存。
@@ -149,28 +145,28 @@ ETag: "<etag_value>"
 以下是一个简单的 nodejs 实现的 ETag 缓存响应。
 
 ```js
-const http = require('http');
-const crypto = require('crypto');
-const fs = require('fs');
+const http = require('http')
+const crypto = require('crypto')
+const fs = require('fs')
 
 const server = http.createServer((req, res) => {
-  const buf = fs.readFileSync('./index.html');
-  const ETag = '"' + crypto.createHash('md5').update(buf).digest('hex') + '"';
-  const clientETag = req.headers['if-none-match'];
+  const buf = fs.readFileSync('./index.html')
+  const ETag = '"' + crypto.createHash('md5').update(buf).digest('hex') + '"'
+  const clientETag = req.headers['if-none-match']
 
   if (clientETag === ETag) {
-    res.statusCode = 304;
-    return res.end();
+    res.statusCode = 304
+    return res.end()
   }
 
   res.writeHead(200, {
     'Content-Type': 'text/plain',
     ETag: ETag,
-  });
-  res.end();
-});
+  })
+  res.end()
+})
 
-server.listen(8000);
+server.listen(8000)
 ```
 
 ## Last-Modified

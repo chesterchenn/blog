@@ -1,7 +1,7 @@
 ---
-title: "React 自定义 Hook 在 TypeScript 中的返回类型"
+title: 'React 自定义 Hook 在 TypeScript 中的返回类型'
 published: 2023-03-05
-tags: ["react"]
+tags: ['react']
 ---
 
 当我们在创建自定义的钩子，通常返回一个数组解构。
@@ -9,8 +9,8 @@ tags: ["react"]
 使用数组的原因是因为数组没有名称属性，你可以自定义自己的名称。类似于：
 
 ```js
-const [state, setState] = useState(false);
-const [count, setCount] = useCount(0);
+const [state, setState] = useState(false)
+const [count, setCount] = useCount(0)
 ```
 
 ## 钩子中的返回类型
@@ -22,10 +22,10 @@ const [count, setCount] = useCount(0);
 ```ts
 // useToggle.ts
 export const useToggle = (initialValue: boolean) => {
-  const [value, setValue] = useState(initialValue);
-  const toggleValue = () => setValue(!value);
-  return [value, toggleValue];
-};
+  const [value, setValue] = useState(initialValue)
+  const toggleValue = () => setValue(!value)
+  return [value, toggleValue]
+}
 ```
 
 我们只定义了输入的参数类型，除此之外没有什么特殊，让我们试着使用它。
@@ -33,15 +33,15 @@ export const useToggle = (initialValue: boolean) => {
 ```tsx
 // App.tsx
 export const App = () => {
-  const [isVisible, toggleVisible] = useToggle(false);
+  const [isVisible, toggleVisible] = useToggle(false)
 
   return (
     <>
       <button onClick={toggleVisible}>Click Me</button>
       {isVisible && <div>Hello World</div>}
     </>
-  );
-};
+  )
+}
 ```
 
 [https://codesandbox.io/s/hook-return-types-wrong-670zy5](https://codesandbox.io/s/hook-return-types-wrong-670zy5)
@@ -59,15 +59,15 @@ export const App = () => {
 Tuple 类型就是一个固定顺序，固定大小的数组。用 Tuple 指定自定义 hook 的返回类型。
 
 ```ts
-import { useState } from 'react';
+import { useState } from 'react'
 
-type ToggleValue = [boolean, () => void];
+type ToggleValue = [boolean, () => void]
 
 export const useToggle = (initialValue: boolean): ToggleValue => {
-  const [value, setValue] = useState(initialValue);
-  const toggleValue = () => setValue(!value);
-  return [value, toggleValue];
-};
+  const [value, setValue] = useState(initialValue)
+  const toggleValue = () => setValue(!value)
+  return [value, toggleValue]
+}
 ```
 
 - [https://codesandbox.io/s/hook-return-types-tuple-yz5nyc](https://codesandbox.io/s/hook-return-types-tuple-yz5nyc)
@@ -77,13 +77,13 @@ export const useToggle = (initialValue: boolean): ToggleValue => {
 使用 tuple，我们必须清楚返回数组的大小以及类型才能声明，而使用 const 断言则可以直接冻结类型。
 
 ```ts
-import { useState } from 'react';
+import { useState } from 'react'
 
 export const useToggle = (initialValue: boolean) => {
-  const [value, setValue] = useState(initialValue);
-  const toggleValue = () => setValue(!value);
-  return [value, toggleValue] as const;
-};
+  const [value, setValue] = useState(initialValue)
+  const toggleValue = () => setValue(!value)
+  return [value, toggleValue] as const
+}
 ```
 
 [https://codesandbox.io/s/hook-return-types-as-const-9r88e6](https://codesandbox.io/s/hook-return-types-as-const-9r88e6)

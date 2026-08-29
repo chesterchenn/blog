@@ -1,7 +1,7 @@
 ---
-title: "Windows 下的命令与操作"
+title: 'Windows 下的命令与操作'
 published: 2021-11-12
-tags: ["windows"]
+tags: ['windows']
 ---
 
 Windows 下的一些命令与操作脚本。
@@ -39,7 +39,6 @@ Windows 下的一些命令与操作脚本。
 4. `"DataItemName"` 指定注册表项的名称，需要用双括号括住，如果不存在，则新建一项。
 
 5. `DataType:DataValue` 指定注册表项值的类型和值。中间需要用冒号间隔，字符串类型不需要表明数据类型。
-
    - 字符串："Foo"="bar"
    - 二进制："Foo"=hex:
    - DWORD(32)："Foo"=dword:000000000

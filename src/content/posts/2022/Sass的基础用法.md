@@ -1,7 +1,7 @@
 ---
-title: "Sass的基础用法"
+title: 'Sass的基础用法'
 published: 2022-06-09
-tags: ["css"]
+tags: ['css']
 ---
 
 Sass is an extension of CSS, adding nested rules, variables, mixins, selector inheritance, and more.

@@ -1,13 +1,13 @@
 ---
-title: "高阶组件HOC"
+title: '高阶组件HOC'
 published: 2021-06-23
-tags: ["react"]
+tags: ['react']
 ---
 
 高阶组件 HOC 是一个函数，它接受一个组件并返回一个新组件。普通组件是将 props 转换成 UI，而高阶组件将组件转换成另一个组件。
 
 ```jsx
-const EnhancedComponent = higherOrderComponent(WrappedComponent);
+const EnhancedComponent = higherOrderComponent(WrappedComponent)
 ```
 
 <!-- vim-markdown-toc GFM -->
@@ -44,18 +44,18 @@ const EnhancedComponent = higherOrderComponent(WrappedComponent);
 ```jsx
 // 返回一个函数组件
 function hoc(WrappedComponent) {
-  const newProps = { type: 'HOC' };
-  return (props) => <WrappedComponent {...props} {...newProps} />;
+  const newProps = { type: 'HOC' }
+  return (props) => <WrappedComponent {...props} {...newProps} />
 }
 
 // 返回一个类组件
 function hoc(WrappedComponent) {
   return class extends React.Component {
     render() {
-      const newProps = { type: 'HOC' };
-      return <WrappedComponent {...this.props} {...newProps} />;
+      const newProps = { type: 'HOC' }
+      return <WrappedComponent {...this.props} {...newProps} />
     }
-  };
+  }
 }
 ```
 
@@ -72,34 +72,34 @@ function hoc(WrappedComponent) {
 第一个参数是被包装的组件。第二个参数通过 DataSource 和当前的 props 返回我们需要的数据。
 
 ```jsx
-import DataSource from '..';
+import DataSource from '..'
 // hoc
 function withSubscription(WrappedComponent, selectData) {
   return (props) => {
-    const [data, setData] = useState(selectData(DataSource, props));
+    const [data, setData] = useState(selectData(DataSource, props))
 
     function handlechange() {
-      setData(selectdata(Datasource, props));
+      setData(selectdata(Datasource, props))
     }
 
     useEffect(() => {
-      Datasource.addchangelistener(handlechange);
+      Datasource.addchangelistener(handlechange)
       return () => {
-        Datasource.removechangelistener(handlechange);
-      };
-    }, []);
+        Datasource.removechangelistener(handlechange)
+      }
+    }, [])
 
-    return <wrappedcomponent data={data} {...props} />;
-  };
+    return <wrappedcomponent data={data} {...props} />
+  }
 }
 
 const Commentlistwithsubscription = withsubscription(Commentlist, (datasource) =>
   Datasource.getcomments(),
-);
+)
 
 const BlogPostWithSubscrption = withSubscription(BlogPost, (DataSource, props) =>
   DataSource.getBlogPost(props.id),
-);
+)
 ```
 
 ## 实例应用 - 权限控制
@@ -109,9 +109,9 @@ const BlogPostWithSubscrption = withSubscription(BlogPost, (DataSource, props) =
 ```jsx
 function authWrapper(WrappedComponent) {
   // 通过其他方法路径获取权限
-  const isAuth = getAuth();
-  if (!isAuth) return null;
-  return (props) => <WrappedComponent {...props} />;
+  const isAuth = getAuth()
+  if (!isAuth) return null
+  return (props) => <WrappedComponent {...props} />
 }
 ```
 
@@ -121,7 +121,7 @@ function authWrapper(WrappedComponent) {
 
 ```tsx
 // App.tsx
-import useName from './useName';
+import useName from './useName'
 
 class Greeting extends React.Component<{ name: string }> {
   render() {
@@ -129,37 +129,37 @@ class Greeting extends React.Component<{ name: string }> {
       <h1>
         Hello <span>{this.props.name}</span>
       </h1>
-    );
+    )
   }
 }
 
 const WrapperGreeting = () => {
-  const [name] = useName('chen');
-  return <Greeting name={name} />;
-};
+  const [name] = useName('chen')
+  return <Greeting name={name} />
+}
 
 export default function App() {
   return (
     <div className="App">
       <WrapperGreeting />
     </div>
-  );
+  )
 }
 ```
 
 ```ts
 // useName.ts
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'
 
 const useName = (n: string) => {
-  const [name, setName] = useState('');
+  const [name, setName] = useState('')
   useEffect(() => {
-    setName(n);
-  }, [n]);
-  return [name];
-};
+    setName(n)
+  }, [n])
+  return [name]
+}
 
-export default useName;
+export default useName
 ```
 
 [https://codesandbox.io/s/class-component-use-hooks-cgmoo1](https://codesandbox.io/s/class-component-use-hooks-cgmoo1)
@@ -172,15 +172,15 @@ export default useName;
 // 错误的使用方式
 function logPrpos(InputComponent) {
   InputComponent.prototype.componentDidUpdate = function (prevProps) {
-    console.log('Current props: ', this.props);
-    console.log('Previous props: ', prevProps);
-  };
+    console.log('Current props: ', this.props)
+    console.log('Previous props: ', prevProps)
+  }
   // 返回原始的 input 组件，暗示它已经被修改。
-  return InputComponent;
+  return InputComponent
 }
 
 // 每次调用 logPrpos 时，增强组件都会有 log 输出
-const EnhancedComponent = logPrpos(InputComponent);
+const EnhancedComponent = logPrpos(InputComponent)
 ```
 
 ```jsx
@@ -188,14 +188,14 @@ const EnhancedComponent = logPrpos(InputComponent);
 function logProps(WrappedComponent) {
   return class extends React.Component {
     componentDidUpdate(prevProps) {
-      console.log('Current props: ', this.props);
-      console.log('Previous props: ', prevProps);
+      console.log('Current props: ', this.props)
+      console.log('Previous props: ', prevProps)
     }
     render() {
       // 将 input 组件包装在容器中，而不对其进行修改
-      return <WrappedComponent {...this.props} />;
+      return <WrappedComponent {...this.props} />
     }
-  };
+  }
 }
 ```
 

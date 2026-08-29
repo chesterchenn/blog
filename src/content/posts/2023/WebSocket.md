@@ -1,7 +1,7 @@
 ---
-title: "WebSocket"
+title: 'WebSocket'
 published: 2023-09-26
-tags: ["javascript"]
+tags: ['javascript']
 ---
 
 WebSocket 是一个持久化的协议，允许服务端主动向客户端推送消息。
@@ -28,8 +28,8 @@ WebSocket 是一个持久化的协议，允许服务端主动向客户端推送�
 ## 构造函数
 
 ```js
-new WebSocket(url);
-new WebSocket(url, portocols);
+new WebSocket(url)
+new WebSocket(url, portocols)
 ```
 
 ## 属性
@@ -56,8 +56,8 @@ new WebSocket(url, portocols);
 实例对象的 send() 方法用于向服务器发送数据。
 
 ```js
-const ws = new WebSocket(url);
-ws.send(data);
+const ws = new WebSocket(url)
+ws.send(data)
 ```
 
 ### close
@@ -65,10 +65,10 @@ ws.send(data);
 实例对象的 close() 方法用于关闭连接，如果已经关闭了，则不会做任何事。
 
 ```js
-const ws = new WebSocket(url);
-ws.close();
-ws.close(code);
-ws.close(code, reason);
+const ws = new WebSocket(url)
+ws.close()
+ws.close(code)
+ws.close(code, reason)
 ```
 
 ## 事件
@@ -78,9 +78,9 @@ ws.close(code, reason);
 当一个 WebSocket 连接关闭时，触发该事件。
 
 ```js
-addEventListener('close', (event) => {});
+addEventListener('close', (event) => {})
 
-onclose = (event) => {};
+onclose = (event) => {}
 ```
 
 ### error
@@ -88,9 +88,9 @@ onclose = (event) => {};
 当一个 WebSocket 连接因为错误而导致关闭时，触发该事件。
 
 ```js
-addEventListener('error', (event) => {});
+addEventListener('error', (event) => {})
 
-onerror = (event) => {};
+onerror = (event) => {}
 ```
 
 ### message
@@ -98,9 +98,9 @@ onerror = (event) => {};
 当通过 WebSocket 收到数据时，触发该事件。
 
 ```js
-addEventListener('message', (event) => {});
+addEventListener('message', (event) => {})
 
-onmessage = (event) => {};
+onmessage = (event) => {}
 ```
 
 ### open
@@ -108,9 +108,9 @@ onmessage = (event) => {};
 当一个 WebSocket 连接打开时，触发该事件。
 
 ```js
-addEventListener('open', (event) => {});
+addEventListener('open', (event) => {})
 
-onopen = (event) => {};
+onopen = (event) => {}
 ```
 
 ## 心跳检测
@@ -124,66 +124,66 @@ onopen = (event) => {};
  * 服务端，
  * WebSocket 安装了 ws 库
  */
-import { WebSocketServer } from 'ws';
+import { WebSocketServer } from 'ws'
 
 const wss = new WebSocketServer({
   port: 8080,
-});
+})
 
 wss.on('connection', (ws) => {
   ws.on('message', (data) => {
-    console.log('received: %s', data);
+    console.log('received: %s', data)
     if (data.toString() === 'heartbeat') {
-      ws.send('heartbeat');
+      ws.send('heartbeat')
     }
-  });
-});
+  })
+})
 ```
 
 ```js
 /**
  * 客户端，收到信息后，隔 5s 发送信息，5s 未收到响应则关闭链接
  */
-const ws = new WebSocket('ws://localhost:8080');
+const ws = new WebSocket('ws://localhost:8080')
 
-const PING_TIEMOUT = 5 * 1000;
-const PONG_TIMEOUT = 5 * 1000;
+const PING_TIEMOUT = 5 * 1000
+const PONG_TIMEOUT = 5 * 1000
 // 发送和接受定时器超时
-let pingTimeoutId;
-let pongTimeoutId;
+let pingTimeoutId
+let pongTimeoutId
 
 ws.addEventListener('open', () => {
-  console.log('open');
-  heartbeat();
-});
+  console.log('open')
+  heartbeat()
+})
 
 ws.addEventListener('close', () => {
-  console.log('close');
-  reset();
-});
+  console.log('close')
+  reset()
+})
 
 ws.addEventListener('message', (event) => {
-  console.log('message::', event.data);
-  heartbeat();
-});
+  console.log('message::', event.data)
+  heartbeat()
+})
 
 function heartbeat() {
-  reset();
-  start();
+  reset()
+  start()
 }
 
 function start() {
   pingTimeoutId = setTimeout(() => {
-    ws.send('heartbeat');
+    ws.send('heartbeat')
     pongTimeoutId = setTimeout(() => {
-      ws.close();
-    }, PONG_TIMEOUT);
-  }, PING_TIEMOUT);
+      ws.close()
+    }, PONG_TIMEOUT)
+  }, PING_TIEMOUT)
 }
 
 function reset() {
-  clearTimeout(pingTimeoutId);
-  clearTimeout(pongTimeoutId);
+  clearTimeout(pingTimeoutId)
+  clearTimeout(pongTimeoutId)
 }
 ```
 

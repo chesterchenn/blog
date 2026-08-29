@@ -1,7 +1,7 @@
 ---
-title: "dante 安装与使用"
+title: 'dante 安装与使用'
 published: 2024-11-04
-tags: ["linux"]
+tags: ['linux']
 ---
 
 Dante 是一个提供 SOCKS 服务的网络代理软件。

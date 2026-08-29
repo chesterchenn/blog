@@ -1,8 +1,9 @@
 ---
-title: "Docker的基本知识"
+title: 'Docker的基本知识'
 published: 2021-04-24
-tags: ["others", "linux"]
+tags: ['others', 'linux']
 ---
+
 Docker 的一些基本知识和命令行。
 
 官方链接:

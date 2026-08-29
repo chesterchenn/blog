@@ -1,7 +1,7 @@
 ---
-title: "React组件生命周期"
+title: 'React组件生命周期'
 published: 2019-03-19
-tags: ["react"]
+tags: ['react']
 ---
 
 React 定义类的组件时会提供的更多功能，如生命周期。
@@ -184,20 +184,20 @@ useEffect 通过不同的参数设置可以模拟 `componentDidMount`, `componen
 ```tsx
 // componentDidMount
 useEffect(() => {
-  console.log('componentDidMount');
-}, []);
+  console.log('componentDidMount')
+}, [])
 
 // componentDidUpdate
 useEffect(() => {
-  console.log('componentDidUpdate');
-});
+  console.log('componentDidUpdate')
+})
 
 // componentWillUnmount
 useEffect(() => {
   return () => {
-    console.log('componentWillUnmount');
-  };
-}, []);
+    console.log('componentWillUnmount')
+  }
+}, [])
 ```
 
 注意：
@@ -216,27 +216,27 @@ useEffect(() => {
 ```jsx
 function Super() {
   useEffect(() => {
-    console.log('Super Mounted.');
+    console.log('Super Mounted.')
     return () => {
-      console.log('Super UnMounted.');
-    };
-  }, []);
+      console.log('Super UnMounted.')
+    }
+  }, [])
   return (
     <>
       <div>Super</div>
       <Sub />
     </>
-  );
+  )
 }
 
 function Sub() {
   useEffect(() => {
-    console.log('Sub Mounted.');
+    console.log('Sub Mounted.')
     return () => {
-      console.log('Sub UnMounted.');
-    };
-  }, []);
-  return <div>Sub</div>;
+      console.log('Sub UnMounted.')
+    }
+  }, [])
+  return <div>Sub</div>
 }
 ```
 

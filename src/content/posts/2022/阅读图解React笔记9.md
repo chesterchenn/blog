@@ -1,7 +1,7 @@
 ---
-title: "阅读图解React笔记9"
+title: '阅读图解React笔记9'
 published: 2022-12-23
-tags: ["react"]
+tags: ['react']
 ---
 
 本文仅仅是阅读 [图解 React 原理系列](https://7kms.github.io/react-illustration-series/) 的笔记，了解更多内容请查看原文链接。
@@ -97,19 +97,19 @@ mountState 和 mountReducer 逻辑简单，主要负责创建 hook，初始化 h
 有如下示例代码：
 
 ```js
-import { useState } from 'react';
+import { useState } from 'react'
 
 export default function App() {
-  const [count, dispatch] = useState(0);
+  const [count, dispatch] = useState(0)
   return (
     <button
       onClick={() => {
-        dispatch(1);
+        dispatch(1)
       }}
     >
       {count}
     </button>
-  );
+  )
 }
 ```
 

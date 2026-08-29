@@ -1,7 +1,7 @@
 ---
-title: "JS的类模块"
+title: 'JS的类模块'
 published: 2021-05-16
-tags: ["javascript"]
+tags: ['javascript']
 ---
 
 在 es5 中主要是通过构造函数方式和原型方式来定义一个类，在 es6 中我们可以通过 class 来定义一个类。
@@ -20,15 +20,15 @@ ES6 中的类模块转换成 ES5。以下是根据 TSC 转换情况，
 ```javascript
 class Log {
   constructor(height, width) {
-    this.height = height;
-    this.width = width;
+    this.height = height
+    this.width = width
   }
 
-  static displayName = 'Point';
+  static displayName = 'Point'
 
   run(value) {
-    console.log(value);
-    return value;
+    console.log(value)
+    return value
   }
 }
 ```
@@ -38,16 +38,16 @@ TS 编译之后的结果
 ```js
 var Log = /** @class */ (function () {
   function Log(height, width) {
-    this.height = height;
-    this.width = width;
+    this.height = height
+    this.width = width
   }
   Log.prototype.run = function (value) {
-    console.log(value);
-    return value;
-  };
-  Log.displayName = 'Point';
-  return Log;
-})();
+    console.log(value)
+    return value
+  }
+  Log.displayName = 'Point'
+  return Log
+})()
 ```
 
 ## ES6
@@ -57,8 +57,8 @@ var Log = /** @class */ (function () {
 ```js
 class Rectangle {
   constructor(height, width) {
-    this.height = height;
-    this.width = width;
+    this.height = height
+    this.width = width
   }
 }
 ```
@@ -86,29 +86,29 @@ constructor(...args) {
 ```javascript
 class Point {
   constructor(x, y) {
-    this.x = x;
-    this.y = y;
+    this.x = x
+    this.y = y
   }
 
   // 静态域
-  static Name = 'Point';
+  static Name = 'Point'
 
   // 静态方法
   static getName() {
-    return this.Name;
+    return this.Name
   }
   static position(p) {
-    return `(${p.x}, ${p.y})`;
+    return `(${p.x}, ${p.y})`
   }
 }
 
 // 实例化 p1
-const p1 = new Point(2, 5);
+const p1 = new Point(2, 5)
 
 // 访问静态域和静态方法
-console.log(Point.Name); // "Point"
-console.log(Point.getName()); // "Point"
-console.log(Point.position(p1)); // (2, 5)
+console.log(Point.Name) // "Point"
+console.log(Point.getName()) // "Point"
+console.log(Point.position(p1)) // (2, 5)
 ```
 
 ### extends
@@ -118,32 +118,32 @@ console.log(Point.position(p1)); // (2, 5)
 ```javascript
 class Foo {
   constructor(a, b) {
-    this.x = a;
-    this.y = b;
+    this.x = a
+    this.y = b
   }
 
   gimmeXY() {
-    return this.x * this.y;
+    return this.x * this.y
   }
 }
 
 class Bar extends Foo {
   constructor(a, b, c) {
-    super(a, b);
-    this.z = c;
+    super(a, b)
+    this.z = c
   }
 
   gimmeXYZ() {
-    return super.gimmeXY() * this.z;
+    return super.gimmeXY() * this.z
   }
 }
 
-var b = new Bar(5, 15, 25);
+var b = new Bar(5, 15, 25)
 
-b.x; // 5
-b.y; // 15
-b.z; // 25
-b.gimmeXYZ(); // 1875
+b.x // 5
+b.y // 15
+b.z // 25
+b.gimmeXYZ() // 1875
 ```
 
 在 extends 经常会使用 super，那是因为子类中经常会调用父类的的属性或者方法。

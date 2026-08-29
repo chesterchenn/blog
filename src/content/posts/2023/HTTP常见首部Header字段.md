@@ -1,7 +1,7 @@
 ---
-title: "HTTP常见的首部Header字段"
+title: 'HTTP常见的首部Header字段'
 published: 2023-05-15
-tags: ["http"]
+tags: ['http']
 ---
 
 HTTP 首部 Header 用于 HTTP 请求或响应的字段。

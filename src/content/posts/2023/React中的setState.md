@@ -1,7 +1,7 @@
 ---
-title: "React 中的 setState"
+title: 'React 中的 setState'
 published: 2023-05-26
-tags: ["react"]
+tags: ['react']
 ---
 
 在 React 中，setState 是同步，还是异步在不同的版本有不同的表现。
@@ -32,17 +32,17 @@ setState 在不同的情况下可以表现为异步或同步。
 
 ```js
 // ReactFiberScheduler.js
-let isBatchingUpdates = false;
+let isBatchingUpdates = false
 
 function batchedUpdates(fn, a) {
-  const previousIsBatchingUpdates = isBatchingUpdates;
-  isBatchingUpdates = true;
+  const previousIsBatchingUpdates = isBatchingUpdates
+  isBatchingUpdates = true
   try {
-    return fn(a);
+    return fn(a)
   } finally {
-    isBatchingUpdates = previousIsBatchingUpdates;
+    isBatchingUpdates = previousIsBatchingUpdates
     if (!isBatchingUpdates && !isRendering) {
-      performSyncWork();
+      performSyncWork()
     }
   }
 }
@@ -59,25 +59,25 @@ setState 都会表现成异步（即批处理）
 在 react 里面一个典型的例子就是连续设置 state：
 
 ```jsx
-import { useState } from 'react';
+import { useState } from 'react'
 
 export default function Counter() {
-  const [number, setNumber] = useState(0);
+  const [number, setNumber] = useState(0)
 
   return (
     <>
       <h1>{number}</h1>
       <button
         onClick={() => {
-          setNumber(number + 1);
-          setNumber(number + 1);
-          setNumber(number + 1);
+          setNumber(number + 1)
+          setNumber(number + 1)
+          setNumber(number + 1)
         }}
       >
         +3
       </button>
     </>
-  );
+  )
 }
 ```
 

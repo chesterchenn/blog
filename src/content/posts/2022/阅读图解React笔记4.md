@@ -1,7 +1,7 @@
 ---
-title: "阅读图解React笔记4"
+title: '阅读图解React笔记4'
 published: 2022-11-29
-tags: ["react"]
+tags: ['react']
 ---
 
 本文仅仅是阅读 [图解 React 原理系列](https://7kms.github.io/react-illustration-series/) 的笔记，了解更多内容请查看原文链接。
@@ -23,22 +23,21 @@ Lane 的解释 [https://github.com/facebook/react/pull/18796](https://github.com
 1. Lane 类型被定义为二进制变量，利用了位掩码的特性，在频繁运算的时候占用内存少，计算速度快。
 2. Lane 是对于 expirationTime 的重构，使用 expirationTime 表示的字段修改成 lane。
 3. 使用 Lane 模型相比 expirationTime 的优势：
-
    1. Lane 的任务优先级从批量任务中分离出来，可以更方便判断单个任务与批量任务的优先级是否重叠。
 
       ```js
       // 判断单个 task 与 batchOfTasks 的优先级是否重叠
       // 1. 通过 expirationTime 判断
-      const isTaskIncludedInBatch = priorityOfTask >= priorityOfBatch;
+      const isTaskIncludedInBatch = priorityOfTask >= priorityOfBatch
       // 2. 通过 Lanes 判断
-      const isTaskIncludedInBatch = (task & batchOfTasks) !== 0;
+      const isTaskIncludedInBatch = (task & batchOfTasks) !== 0
 
       // 当同时处理一组任务，该组内有多个任务，且每个任务的优先级不一致
       // 1. 通过 expirationTime 判断，需要维护一个范围
       const isTaskIncludedInBatch =
-        taskPriority <= highestPriorityInRage && taskPriority >= lowestPriorityInRange;
+        taskPriority <= highestPriorityInRage && taskPriority >= lowestPriorityInRange
       // 2. 通过 Lane 判断
-      const isTaskIncludedInBatch = (task & batchOfTasks) !== 0;
+      const isTaskIncludedInBatch = (task & batchOfTasks) !== 0
       ```
 
    2. Lane 使用单个 32 位二进制变量即可代表多个不同的任务，也就是说一个变量即可代表一个组（group），如果要在一个 group 中分离单个 task，非常容易。

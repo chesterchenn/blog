@@ -168,7 +168,9 @@ let data: Awaited<ReturnType<typeof fetchData>> | null = null
 try {
   data = await fetchData(username, year)
 } catch (e) {
-  console.warn(`[GitHubActivityCalendar] Could not fetch contribution data for "${username}": ${(e as Error).message}`)
+  console.warn(
+    `[GitHubActivityCalendar] Could not fetch contribution data for "${username}": ${(e as Error).message}`,
+  )
 }
 
 const maxLevel = 4
@@ -205,103 +207,112 @@ if (data) {
 }
 
 const labels = {
-  months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+  months: [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+  ],
   totalCount: `{{count}} contributions in ${year === 'last' ? 'the last year' : '{{year}}'}`,
   legend: { less: 'Less', more: 'More' },
 }
 ---
 
-{data && (
-<article
-  id="github-activity-calendar"
-  class="w-max max-w-full flex flex-col gap-2 text-sm"
->
-  <div
-    class="max-w-full overflow-x-auto pt-0.5"
-    style={{
-      // Don't cover the calendar with the scrollbar.
-      scrollbarGutter: 'stable',
-    }}
-  >
-    <svg
-      class="block visible"
-      width={width}
-      height={height}
-      viewBox={`0 0 ${width} ${height}`}
+{
+  data && (
+    <article
+      id="github-activity-calendar"
+      class="w-max max-w-full flex flex-col gap-2 text-sm"
     >
-      {
-        !hideMonthLabels && (
-          <g>
-            {getMonthLabels(weeks, labels.months).map(({ label, weekIndex }) => (
-              <text
-                x={(blockSize + blockMargin) * weekIndex}
-                y={0}
-                dominant-baseline="hanging"
-                fill="currentColor"
-              >
-                {label}
-              </text>
-            ))}
-          </g>
-        )
-      }
-      {
-        weeks.map((week, weekIndex) => (
-          <g transform={`translate(${(blockSize + blockMargin) * weekIndex}, 0)`}>
-            {week.map((activity, dayIndex) => {
-              if (!activity) return null
-              return (
-                <rect
-                  class="stroke-foreground/10"
-                  x={0}
-                  y={labelHeight + (blockSize + blockMargin) * dayIndex}
-                  width={blockSize}
-                  height={blockSize}
-                  rx={blockRadius}
-                  ry={blockRadius}
-                  fill={colorScale[activity.level]}
-                  data-date={activity.date}
-                  data-level={activity.level}
-                />
-              )
-            })}
-          </g>
-        ))
-      }
-    </svg>
-  </div>
-  {
-    !(hideTotalCount && hideColorLegend) && (
-      <footer class="flex flex-col sm:flex-row sm:justify-between gap-x-1 gap-y-2">
-        {!hideTotalCount && (
-          <div>
-            {labels.totalCount
-              ? labels.totalCount
-                  .replace('{{count}}', String(totalCount))
-                  .replace('{{year}}', String(activityYear))
-              : `${totalCount} activities in ${activityYear}`}
-          </div>
-        )}
-        {!hideColorLegend && (
-          <div class="flex items-center gap-[3px]">
-            <span class="mr-1.5">{labels.legend.less}</span>
-            {range(maxLevel + 1).map((level) => (
-              <svg width={blockSize} height={blockSize}>
-                <rect
-                  class="stroke-foreground/10"
-                  width={blockSize}
-                  height={blockSize}
-                  fill={colorScale[level]}
-                  rx={blockRadius}
-                  ry={blockRadius}
-                />
-              </svg>
-            ))}
-            <span class="ml-1.5">{labels.legend.more}</span>
-          </div>
-        )}
-      </footer>
-    )
-  }
-</article>
-)}
+      <div
+        class="max-w-full overflow-x-auto pt-0.5"
+        style={{
+          // Don't cover the calendar with the scrollbar.
+          scrollbarGutter: 'stable',
+        }}
+      >
+        <svg
+          class="block visible"
+          width={width}
+          height={height}
+          viewBox={`0 0 ${width} ${height}`}
+        >
+          {!hideMonthLabels && (
+            <g>
+              {getMonthLabels(weeks, labels.months).map(({ label, weekIndex }) => (
+                <text
+                  x={(blockSize + blockMargin) * weekIndex}
+                  y={0}
+                  dominant-baseline="hanging"
+                  fill="currentColor"
+                >
+                  {label}
+                </text>
+              ))}
+            </g>
+          )}
+          {weeks.map((week, weekIndex) => (
+            <g transform={`translate(${(blockSize + blockMargin) * weekIndex}, 0)`}>
+              {week.map((activity, dayIndex) => {
+                if (!activity) return null
+                return (
+                  <rect
+                    class="stroke-foreground/10"
+                    x={0}
+                    y={labelHeight + (blockSize + blockMargin) * dayIndex}
+                    width={blockSize}
+                    height={blockSize}
+                    rx={blockRadius}
+                    ry={blockRadius}
+                    fill={colorScale[activity.level]}
+                    data-date={activity.date}
+                    data-level={activity.level}
+                  />
+                )
+              })}
+            </g>
+          ))}
+        </svg>
+      </div>
+      {!(hideTotalCount && hideColorLegend) && (
+        <footer class="flex flex-col sm:flex-row sm:justify-between gap-x-1 gap-y-2">
+          {!hideTotalCount && (
+            <div>
+              {labels.totalCount
+                ? labels.totalCount
+                    .replace('{{count}}', String(totalCount))
+                    .replace('{{year}}', String(activityYear))
+                : `${totalCount} activities in ${activityYear}`}
+            </div>
+          )}
+          {!hideColorLegend && (
+            <div class="flex items-center gap-[3px]">
+              <span class="mr-1.5">{labels.legend.less}</span>
+              {range(maxLevel + 1).map((level) => (
+                <svg width={blockSize} height={blockSize}>
+                  <rect
+                    class="stroke-foreground/10"
+                    width={blockSize}
+                    height={blockSize}
+                    fill={colorScale[level]}
+                    rx={blockRadius}
+                    ry={blockRadius}
+                  />
+                </svg>
+              ))}
+              <span class="ml-1.5">{labels.legend.more}</span>
+            </div>
+          )}
+        </footer>
+      )}
+    </article>
+  )
+}

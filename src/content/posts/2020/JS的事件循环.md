@@ -1,7 +1,7 @@
 ---
-title: "JS的事件循环"
+title: 'JS的事件循环'
 published: 2020-09-09
-tags: ["javascript"]
+tags: ['javascript']
 ---
 
 在一个页面内，可能存在各种各样的操作，事件，用户交互，脚本，渲染还有网络请求等等，这些操作可能同时发生。而 JS 是单线程，那么如何协调、处理这些操作，我们就需要用到事件循环(Event Loop)。
@@ -50,14 +50,14 @@ JS 按顺序执行【执行栈】中的方法，每次执行一个方法时，�
 当 `setTimeout(..)` 指定的时间到达，若此时事件循环队列还在运行，`setTimeout(..)` 只能等待其运行结束才会调用，这也解释了为什么 `setTimeout(..)` 定时器的精度可能不高。一个简单的例子：
 
 ```js
-const start = Date.now();
+const start = Date.now()
 setTimeout(function () {
-  console.log('timer', Date.now() - start);
-}, 100);
+  console.log('timer', Date.now() - start)
+}, 100)
 
 while (true) {
   if (Date.now() - start >= 1000) {
-    break;
+    break
   }
 }
 // timer 1008
@@ -81,31 +81,31 @@ while (true) {
 
 ```js
 async function async1() {
-  console.log('async1 start');
-  await async2();
-  console.log('async1 end');
+  console.log('async1 start')
+  await async2()
+  console.log('async1 end')
 }
 
 async function async2() {
-  console.log('async2');
+  console.log('async2')
 }
 
-console.log('script start');
+console.log('script start')
 
 setTimeout(function () {
-  console.log('setTimeout');
-}, 0);
+  console.log('setTimeout')
+}, 0)
 
-async1();
+async1()
 
 new Promise(function (resolve) {
-  console.log('promise1');
-  resolve();
+  console.log('promise1')
+  resolve()
 }).then(function () {
-  console.log('promise2');
-});
+  console.log('promise2')
+})
 
-console.log('script end');
+console.log('script end')
 ```
 
 正确答案应该是
@@ -122,14 +122,14 @@ setTimeout
 ```
 
 ```js
-let ps = document.querySelectorAll('p');
+let ps = document.querySelectorAll('p')
 for (let i = 0; i < ps.length; i++) {
-  ps[i].style.backgroundColor = 'red';
+  ps[i].style.backgroundColor = 'red'
   ps[i].onclick = function () {
-    this.style.backgroundColor = 'blue';
-    alert(i); // 这里的i是什么，还有p标签为什么背景色
-    this.style.backgroundColor = 'black';
-  };
+    this.style.backgroundColor = 'blue'
+    alert(i) // 这里的i是什么，还有p标签为什么背景色
+    this.style.backgroundColor = 'black'
+  }
 }
 ```
 

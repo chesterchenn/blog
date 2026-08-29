@@ -1,7 +1,7 @@
 ---
-title: "useMemo 和 useCallback"
+title: 'useMemo 和 useCallback'
 published: 2021-11-14
-tags: ["react"]
+tags: ['react']
 ---
 
 useCallback 和 useMemo 是 react 里面 Hook 的一部分，通常被作为性能优化使用。它们可以用来缓存函数、组件、变量，以减少两次渲染的重复计算。
@@ -11,11 +11,11 @@ useCallback 和 useMemo 是 react 里面 Hook 的一部分，通常被作为性�
 useMemo 将函数和数组作为参数，返回一个 memoized 值，仅当数组的某项改变时才会更新。
 
 ```jsx
-const memoizedValue = useMemo(() => computedExpensiveValue(a, b), [a, b]);
+const memoizedValue = useMemo(() => computedExpensiveValue(a, b), [a, b])
 const [m, n] = useMemo(() => {
   // doSomething
-  return [m, n];
-}, [a]);
+  return [m, n]
+}, [a])
 ```
 
 传入的函数会在渲染期间执行，如果没有提供依赖数组，useMemo 在每次渲染时都会计算新的值。useMemo 与 useCallback 相比，useCallback 缓存是函数，useMemo 缓存是函数返回值，所以可以在函数内计算一些复杂的操作。
@@ -30,8 +30,8 @@ useCallback(fn, deps) 相当于 useMemo(() => fn, deps)
 
 ```jsx
 const memoizedCallback = useCallback(() => {
-  doSomething(a, b);
-}, [a, b]);
+  doSomething(a, b)
+}, [a, b])
 ```
 
 ## useMemo 和 useCallback 的作用
@@ -51,29 +51,29 @@ const memoizedCallback = useCallback(() => {
 我们必须缓存回调函数和组件本身才可以实现不重复渲染，使用 useCallback 缓存回调函数，使用 React.memo 缓存组件。可以参考如下代码
 
 ```tsx
-import React, { useCallback, useState, memo } from 'react';
+import React, { useCallback, useState, memo } from 'react'
 
 interface IProps {
-  field: string;
-  foo?: () => void;
+  field: string
+  foo?: () => void
 }
 
 // 使用 React.memo 缓存组件
 const Child = memo(function (props: IProps) {
-  console.log(`${props.field} render`);
-  return <button onClick={props.foo}>ChildWithMemo</button>;
-});
+  console.log(`${props.field} render`)
+  return <button onClick={props.foo}>ChildWithMemo</button>
+})
 
 export default function App() {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(0)
   const foo = () => {
-    console.log('foo');
-  };
+    console.log('foo')
+  }
 
   // 使用 useCallback 缓存回调函数
   const fooCallback = useCallback(() => {
-    console.log('foo');
-  }, []);
+    console.log('foo')
+  }, [])
 
   return (
     <>
@@ -87,7 +87,7 @@ export default function App() {
         <Child field="childNoRef" />
       </div>
     </>
-  );
+  )
 }
 ```
 
@@ -104,10 +104,10 @@ export default function App() {
 在重新渲染之间缓存一个需要大量计算的值。
 
 ```jsx
-import { useMemo } from 'react';
+import { useMemo } from 'react'
 
 function TodoList({ todos, tab, theme }) {
-  const visibleTodos = useMemo(() => filterTodos(todos, tab), [todos, tab]);
+  const visibleTodos = useMemo(() => filterTodos(todos, tab), [todos, tab])
   // ...
 }
 ```
@@ -119,12 +119,12 @@ function TodoList({ todos, tab, theme }) {
 ```jsx
 function Dropdown({ allItems, text }) {
   const searchOptions = useMemo(() => {
-    return { matchMode: 'whole-word', text };
-  }, [text]); // ✅ Only changes when text changes
+    return { matchMode: 'whole-word', text }
+  }, [text]) // ✅ Only changes when text changes
 
   const visibleItems = useMemo(() => {
-    return searchItems(allItems, searchOptions);
-  }, [allItems, searchOptions]);
+    return searchItems(allItems, searchOptions)
+  }, [allItems, searchOptions])
 
   // ...
 }

@@ -1,7 +1,7 @@
 ---
-title: "前端面试CSS篇"
+title: '前端面试CSS篇'
 published: 2020-09-05
-tags: ["css"]
+tags: ['css']
 ---
 
 面试过程中遇到的 CSS 问题。
@@ -82,4 +82,3 @@ visible（默认）, hidden, scroll, auto
 
 - 伪类的开头为单冒号`:`。常见的伪类有 `:active`, `:hover`，`:nth-child` 等。
 - 伪元素开头为双冒号`::`。常见的伪元素有 `::after`，`::before` 等。
-

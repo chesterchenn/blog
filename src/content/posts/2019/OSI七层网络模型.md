@@ -1,7 +1,7 @@
 ---
-title: "OSI七层网络模型"
+title: 'OSI七层网络模型'
 published: 2019-05-08
-tags: ["network", "os"]
+tags: ['network', 'os']
 ---
 
 开放式系统互联通信参考模型（Open Systems Interconnection model, OSI model）。OSI 模型是电信通信和计算机系统的概念模型，目的是为了实现各种通信系统之间的标准协议。该模型将通信系统划分成 7 层抽象层。

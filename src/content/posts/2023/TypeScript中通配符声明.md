@@ -1,7 +1,7 @@
 ---
-title: "TypeScript 中的通配符声明"
+title: 'TypeScript 中的通配符声明'
 published: 2023-08-24
-tags: ["typescript"]
+tags: ['typescript']
 ---
 
 一些模块允许导入非 JavaScript 的内容，它们通常使用前缀或后缀来表示。通用符模块声明可用于涵盖这些情况。
@@ -10,13 +10,13 @@ tags: ["typescript"]
 
 ```ts
 declare module '*!text' {
-  const content: string;
-  export default content;
+  const content: string
+  export default content
 }
 
 declare module '*!json' {
-  const value: any;
-  export default value;
+  const value: any
+  export default value
 }
 ```
 
@@ -32,8 +32,8 @@ declare module '*!json' {
 
    ```ts
    declare module '*.png' {
-     const value: string;
-     export default value;
+     const value: string
+     export default value
    }
    ```
 

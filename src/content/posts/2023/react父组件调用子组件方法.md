@@ -1,7 +1,7 @@
 ---
-title: "React 父组件调用子组件的方法"
+title: 'React 父组件调用子组件的方法'
 published: 2023-10-25
-tags: ["react"]
+tags: ['react']
 ---
 
 在 React 中，父组件调用父组件的方法，一般用 props 回调即可。但是如果需要在父组件中调用子组件的方法？
@@ -24,28 +24,28 @@ tags: ["react"]
 ```jsx
 class Sub extends React.Component {
   func = () => {
-    console.log('sub function');
-  };
+    console.log('sub function')
+  }
   render() {
-    return <div>Hello from Sub</div>;
+    return <div>Hello from Sub</div>
   }
 }
 
 class App extends React.Component {
   constructor(props) {
-    super(props);
-    this.ref = React.createRef();
+    super(props)
+    this.ref = React.createRef()
   }
   handleBtnClick = () => {
-    this.ref.current.func();
-  };
+    this.ref.current.func()
+  }
   render() {
     return (
       <div className="App">
         <Sub ref={this.ref} />
         <button onClick={this.handleBtnClick}>Click Me</button>
       </div>
-    );
+    )
   }
 }
 ```
@@ -57,17 +57,17 @@ class App extends React.Component {
 函数组件对于 ref 的处理，需要使用 `forwardRef` 来进行 ref 的转发。使用 forwardRef 需要指定 ref 的指向。
 
 ```jsx
-import { forwardRef } from 'react';
+import { forwardRef } from 'react'
 
 const MyInput = forwardRef(function MyInput(props, ref) {
-  const { label, ...otherProps } = props;
+  const { label, ...otherProps } = props
   return (
     <label>
       {label}
       <input {...otherProps} ref={ref} />
     </label>
-  );
-});
+  )
+})
 ```
 
 上面是最常用的 ref 使用方式，指向一个 DOM 节点，可以获取 DOM 实例。但是这样子无法获取子组件的方法。
@@ -76,31 +76,27 @@ const MyInput = forwardRef(function MyInput(props, ref) {
 
 ```jsx
 const MyInput = forwardRef(function MyInput(props, ref) {
-  const inputRef = useRef(null);
+  const inputRef = useRef(null)
 
-  useImperativeHandle(
-    ref,
-    () => {
-      return {
-        focus() {
-          inputRef.current.focus();
-        },
-        scrollIntoView() {
-          inputRef.current.scrollIntoView();
-        },
-      };
-    },
-    [],
-  );
+  useImperativeHandle(ref, () => {
+    return {
+      focus() {
+        inputRef.current.focus()
+      },
+      scrollIntoView() {
+        inputRef.current.scrollIntoView()
+      },
+    }
+  }, [])
 
-  return <input {...props} ref={inputRef} />;
-});
+  return <input {...props} ref={inputRef} />
+})
 
 export default function Form() {
-  const ref = useRef(null);
+  const ref = useRef(null)
 
   function handleClick() {
-    ref.current.focus();
+    ref.current.focus()
   }
 
   return (
@@ -110,7 +106,7 @@ export default function Form() {
         Edit
       </button>
     </form>
-  );
+  )
 }
 ```
 

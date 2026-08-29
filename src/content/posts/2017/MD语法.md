@@ -1,7 +1,7 @@
 ---
-title: "MarkDown语法"
+title: 'MarkDown语法'
 published: 2017-09-28
-tags: ["others"]
+tags: ['others']
 ---
 
 此文用于收集平时使用的 markdown 语法。
@@ -83,6 +83,7 @@ tags: ["others"]
 [imgUrl]: /images/github.ico
 
 <!-- 部分markdown支持图片属性，如 kramdown -->
+
 ![Image](/images/github.ico)
 ```
 
@@ -99,7 +100,7 @@ tags: ["others"]
 ```md
 > 文字引用
 
-*斜体强调*
+_斜体强调_
 
 **加粗强调**
 
@@ -108,7 +109,7 @@ tags: ["others"]
 
 > 文字引用
 
-*斜体强调*
+_斜体强调_
 
 **加粗强调**
 

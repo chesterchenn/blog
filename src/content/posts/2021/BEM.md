@@ -1,7 +1,7 @@
 ---
-title: "BEM"
+title: 'BEM'
 published: 2021-12-07
-tags: ["css"]
+tags: ['css']
 ---
 
 BEM 是 CSS 一种命名规范，BEM 是由 Block, Element, Modifier 组合成的缩写。

@@ -1,7 +1,7 @@
 ---
-title: "Set"
+title: 'Set'
 published: 2020-09-22
-tags: ["javascript"]
+tags: ['javascript']
 ---
 
 Map 和 Set 是 ES6 中新增的数据结构，Set 类似于数组，但是其中的值是唯一的。我们一般将 Set 跟 Array 进行类比。
@@ -24,25 +24,25 @@ set 是一个值的集合，其中的值是唯一。
 set 的 API 跟 map 类似，add(..) 方法代替了 set(..) 方法，没有 get(..) 方法。
 
 ```js
-var s = new Set();
+var s = new Set()
 var x = { id: 1 },
-  y = { id: 2 };
+  y = { id: 2 }
 
-s.add(x);
-s.add(y);
-s.add(x);
+s.add(x)
+s.add(y)
+s.add(x)
 
-s.size; // 2
-s.has(y); // true
-s.delete(y);
-s.clear();
+s.size // 2
+s.has(y) // true
+s.delete(y)
+s.clear()
 ```
 
 Set 的唯一性可以用作于数组去重，不同的类型，如字符串和数字类型是不一样的。
 
 ```js
-var arr = [1, 2, 3, 4, '1', 2, 4, '5'];
-var uniques = [...new Set(arr)]; // [ 1, 2, 3, 4, "1", "5" ]
+var arr = [1, 2, 3, 4, '1', 2, 4, '5']
+var uniques = [...new Set(arr)] // [ 1, 2, 3, 4, "1", "5" ]
 ```
 
 在 Set 里面，value 与 key 总是相等。
@@ -71,14 +71,14 @@ var uniques = [...new Set(arr)]; // [ 1, 2, 3, 4, "1", "5" ]
 WeakSet 的值必须是对象，而不是像 set 一样可以是原生类型值。
 
 ```js
-var s = new WeakSet();
+var s = new WeakSet()
 var x = { id: 1 },
-  y = { id: 2 };
-s.add(x);
-s.add(y);
+  y = { id: 2 }
+s.add(x)
+s.add(y)
 
-x = null; // x 可 GC
-y = null; // y 可 GC
+x = null // x 可 GC
+y = null // y 可 GC
 ```
 
 ## 参考链接

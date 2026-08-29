@@ -1,7 +1,7 @@
 ---
-title: "Promise"
+title: 'Promise'
 published: 2020-09-15
-tags: ["javascript"]
+tags: ['javascript']
 ---
 
 Promise 对象表示异步操作的最终完成（或失败）及其结果值。
@@ -60,11 +60,11 @@ p.then(value => {
 `Promise.prototype.catch` 方法返回一个新的 Promise 实例。catch 方法等同于 then 方法的 onRejected。
 
 ```js
-p.catch(onRejected);
+p.catch(onRejected)
 
 p.catch(function (reason) {
   // rejection
-});
+})
 ```
 
 ### finally
@@ -74,7 +74,7 @@ p.catch(function (reason) {
 ```js
 p.finally(function () {
   // settled (fulfilled or rejected)
-});
+})
 ```
 
 ## 链式调用
@@ -89,13 +89,13 @@ promise1()
       .then(function (newResult) {
         promise3(newResult)
           .then(function (finalResult) {
-            console.log(`Got the final result: ${finalResult}`);
+            console.log(`Got the final result: ${finalResult}`)
           })
-          .catch(failureCallback);
+          .catch(failureCallback)
       })
-      .catch(failureCallback);
+      .catch(failureCallback)
   })
-  .catch(failureCallback);
+  .catch(failureCallback)
 ```
 
 在嵌套式调用的时候，每个 Promise 写在一个 .then() 里，类似于递归的回调地狱。而在扁平化的链式调用中，每个 Promise 写在一个连续的 then() 里，每个 then() 方法接受返回下个 Promise 函数。
@@ -104,22 +104,22 @@ promise1()
 // 扁平化的链式调用，与上面的嵌套式调用等价
 promise1()
   .then(function (result) {
-    return promise2(result);
+    return promise2(result)
   })
   .then(function (newResult) {
-    return promise3(newResult);
+    return promise3(newResult)
   })
   .then(function (finalResult) {
-    console.log(`Got the final result: ${finalResult}`);
+    console.log(`Got the final result: ${finalResult}`)
   })
-  .catch(failureCallback);
+  .catch(failureCallback)
 
 // 使用箭头函数省略 return
 promise1()
   .then((result) => promise2(result))
   .then((newResult) => promise3(newResult))
   .then((finalResult) => console.log(`Got the final result: ${finalResult}`))
-  .catch(failureCallback);
+  .catch(failureCallback)
 ```
 
 ## 静态方法
@@ -129,26 +129,26 @@ promise1()
 Promise.all([..]) 方法接受一个 Promise 对象数组作为参数。当数组内全部的 Promise 对象成功才会返回一个数组，而失败的时候则返回最先被 reject 状态的值。
 
 ```js
-Promise.all(iterable);
+Promise.all(iterable)
 ```
 
 一个例子：
 
 ```js
 const p1 = new Promise((resolve, reject) => {
-  setTimeout(resolve, 100, 'foo');
-});
-const p2 = Promise.resolve(3);
-const p3 = 42;
-const p4 = Promise.reject('bar');
+  setTimeout(resolve, 100, 'foo')
+})
+const p2 = Promise.resolve(3)
+const p3 = 42
+const p4 = Promise.reject('bar')
 
 Promise.all([p1, p2, p3]).then((values) => {
-  console.log(values);
-}); // => ["foo", 3, 42]
+  console.log(values)
+}) // => ["foo", 3, 42]
 
 Promise.all([p1, p2, p3, p4]).catch((reject) => {
-  console.log(reject);
-}); // => bar
+  console.log(reject)
+}) // => bar
 ```
 
 ### Promise.allSettled
@@ -159,15 +159,15 @@ Promise.allSettled 是为了解决 Promise.all 的缺陷，Promise.all 的缺陷
 
 ```js
 const p1 = new Promise((resolve, reject) => {
-  setTimeout(resolve, 100, 'foo');
-});
-const p2 = Promise.resolve(3);
-const p3 = 42;
-const p4 = Promise.reject('bar');
+  setTimeout(resolve, 100, 'foo')
+})
+const p2 = Promise.resolve(3)
+const p3 = 42
+const p4 = Promise.reject('bar')
 
 Promise.allSettled([p1, p2, p3, p4]).then((values) => {
-  console.log(values);
-});
+  console.log(values)
+})
 
 // [
 //   { status: 'fulfilled', value: 'foo' },
@@ -183,16 +183,16 @@ Promise.race([..]) 参数中的实例最先改变状态，就会立即将该实�
 
 ```js
 const promise1 = new Promise((resolve, reject) => {
-  setTimeout(resolve, 500, 'one');
-});
+  setTimeout(resolve, 500, 'one')
+})
 
 const promise2 = new Promise((resolve, reject) => {
-  setTimeout(resolve, 100, 'two');
-});
+  setTimeout(resolve, 100, 'two')
+})
 
 Promise.race([promise1, promise2]).then((value) => {
-  console.log(value); // two, 都是完成状态，但是第二个会更快
-});
+  console.log(value) // two, 都是完成状态，但是第二个会更快
+})
 ```
 
 ### Promise.any
@@ -202,13 +202,13 @@ Promise.any([..]) 返回输入中最先成功的 Promise，如果所有的 Promi
 Promise.any([..]) 跟 Promise.race([..]) 类似，只不过只会接受第一个成功的返回值，而不像 Promise.race([..]) 那样，会接受 reject 状态的返回值。
 
 ```js
-const promise1 = Promise.reject(0);
-const promise2 = new Promise((resolve) => setTimeout(resolve, 100, 'quick'));
-const promise3 = new Promise((resolve) => setTimeout(resolve, 500, 'slow'));
+const promise1 = Promise.reject(0)
+const promise2 = new Promise((resolve) => setTimeout(resolve, 100, 'quick'))
+const promise3 = new Promise((resolve) => setTimeout(resolve, 500, 'slow'))
 
-const promises = [promise1, promise2, promise3];
+const promises = [promise1, promise2, promise3]
 
-Promise.any(promises).then((value) => console.log(value)); // quick，0 会被忽略
+Promise.any(promises).then((value) => console.log(value)) // quick，0 会被忽略
 ```
 
 ### Promise.resolve

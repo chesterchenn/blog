@@ -1,7 +1,7 @@
 ---
-title: "Call Apply Bind"
+title: 'Call Apply Bind'
 published: 2019-10-17
-tags: ["javascript"]
+tags: ['javascript']
 ---
 
 call, apply 和 bind 都是 JavaScript 中用于函数绑定的方法。
@@ -28,21 +28,21 @@ call, apply 和 bind 都是 JavaScript 中用于函数绑定的方法。
 关于 this，你可以调用现有的函数，然后分配给不同的对象。通过 `apply` 或 `call` 你可以继承别的对象的方法。
 
 ```javascript
-var array = ['a', 'b'];
-var elements = [0, 1, 2];
+var array = ['a', 'b']
+var elements = [0, 1, 2]
 
 // 等价于 array.push(elements)，相当于 array 继承了 [].push 方法
-[].push.apply(array, elements); // array: ['a', 'b', 0, 1, 2]
+;[].push.apply(array, elements) // array: ['a', 'b', 0, 1, 2]
 ```
 
 ```javascript
 var person = {
   intro: function (name, company) {
-    console.log(`I am ${name}, use ${company}`);
+    console.log(`I am ${name}, use ${company}`)
   },
-};
-var another = {};
-person.intro.call(another, 'ABC', 'javascript'); // I am ABC, use javascript
+}
+var another = {}
+person.intro.call(another, 'ABC', 'javascript') // I am ABC, use javascript
 // anthoer 本来没有 intro 方法，通过 call 继承了 person 的 intro 中的方法
 ```
 
@@ -54,21 +54,21 @@ person.intro.call(another, 'ABC', 'javascript'); // I am ABC, use javascript
 Function.prototype._call = function (context, ...args) {
   // 判断调用者是否为函数，this 就是调用的函数
   if (typeof this !== 'function') {
-    throw new Error('need function');
+    throw new Error('need function')
   }
 
   // 生成唯一值用于挂载，后续删除
-  const fnKey = Symbol();
+  const fnKey = Symbol()
 
   if (!context) {
-    context = window;
+    context = window
   }
 
-  context[fnKey] = this;
-  const res = context[fnKey](...args);
-  delete context[fnKey];
-  return res;
-};
+  context[fnKey] = this
+  const res = context[fnKey](...args)
+  delete context[fnKey]
+  return res
+}
 ```
 
 ## Bind

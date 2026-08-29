@@ -1,7 +1,7 @@
 ---
-title: "JS方法小记"
+title: 'JS方法小记'
 published: 2018-07-27
-tags: ["javascript"]
+tags: ['javascript']
 ---
 
 关于 JS 的一些方法
@@ -35,15 +35,15 @@ function customSort<T>(
   key: string,
 ): { [key: string]: T }[] {
   return group.sort((a, b) => {
-    return arr.indexOf(a[key]) - arr.indexOf(b[key]);
-  });
+    return arr.indexOf(a[key]) - arr.indexOf(b[key])
+  })
 }
 ```
 
 示例如下：
 
 ```js
-const arr = ['foo', 'bar', 'baz'];
+const arr = ['foo', 'bar', 'baz']
 const group = [
   {
     key: 'bar',
@@ -61,9 +61,9 @@ const group = [
     key: 'foo',
     vlaue: 4,
   },
-];
+]
 
-const sortGroup = customSort(group, arr, 'key');
+const sortGroup = customSort(group, arr, 'key')
 // [{value: 2, key: 'foo'}, {value: 4, key: 'foo'},
 //  {value: 1, key: 'bar'}, {value: 3, key: 'baz'}]
 ```
@@ -78,7 +78,7 @@ function func(arg) {
 }
 
 function func(arg) {
-  const arr = ['A', 'B', 'C'];
+  const arr = ['A', 'B', 'C']
   if (arr.includes(arg)) {
     /* do something */
   }
@@ -92,13 +92,13 @@ const arr = [
   { name: 'AA', age: 10 },
   { name: 'BB', age: 20 },
   { name: 'CC', age: 30 },
-];
+]
 
 // 满足全部条件
-const bool = arr.every((item) => item.name === 'AA');
+const bool = arr.every((item) => item.name === 'AA')
 
 // 满足部分条件
-const bool = arr.some((item) => item.age < 35);
+const bool = arr.some((item) => item.age < 35)
 ```
 
 ## 接收参数的方式
@@ -114,10 +114,10 @@ function func({ url, res, search, page, limit }) {} // 不需要记住参数顺�
 const nubmers = {
   one: 1,
   two: 2,
-};
-const key = Object.keys(numbers); // ['one', 'two']
-const value = Object.values(numbers); // [1, 2]
-const entry = Object.entries(numbers); // [['one': 1], ['two', 2]]
+}
+const key = Object.keys(numbers) // ['one', 'two']
+const value = Object.values(numbers) // [1, 2]
+const entry = Object.entries(numbers) // [['one': 1], ['two', 2]]
 ```
 
 ## 数组的判断
@@ -128,7 +128,7 @@ const entry = Object.entries(numbers); // [['one': 1], ['two', 2]]
 ## 检查是否为工作日
 
 ```js
-const isWeekday = (date) => date.getDay() % 6 !== 0;
+const isWeekday = (date) => date.getDay() % 6 !== 0
 ```
 
 ## concat 和 push
@@ -136,21 +136,21 @@ const isWeekday = (date) => date.getDay() % 6 !== 0;
 push 修改源数组，concat 返回新数组，concat 可以连接数组。
 
 ```js
-var arr = [1, 2];
-arr.push(3); // arr: [1, 2, 3]
-arr.push([4, 5]); // arr: [1, 2, 3, [4, 5]]
+var arr = [1, 2]
+arr.push(3) // arr: [1, 2, 3]
+arr.push([4, 5]) // arr: [1, 2, 3, [4, 5]]
 ```
 
 ```js
-var arr = [1, 2];
-var arrA = arr.concat(3); // arr: [1, 2]; arrA: [1, 2, 3];
-var arrB = arr.concat([4, 5]); // arr: [1, 2]; arrB: [1, 2, 4, 5];
+var arr = [1, 2]
+var arrA = arr.concat(3) // arr: [1, 2]; arrA: [1, 2, 3];
+var arrB = arr.concat([4, 5]) // arr: [1, 2]; arrB: [1, 2, 4, 5];
 ```
 
 ## 返回从 0 开始的数组
 
 ```js
-Array.from(Array(5).keys()); //[0, 1, 2, 3, 4]
+Array.from(Array(5).keys()) //[0, 1, 2, 3, 4]
 ```
 
 ## 中断 forEach
@@ -158,16 +158,16 @@ Array.from(Array(5).keys()); //[0, 1, 2, 3, 4]
 使用 splice 删除剩余项，中断 forEach 的循环。⛔**该方法会改变原数组，请慎用**
 
 ```js
-const arr = [1, 2, 3, 4, 5];
+const arr = [1, 2, 3, 4, 5]
 arr.forEach((item, idx) => {
   if (item === 3) {
-    arr.splice(idx + 1, arr.length - idx);
+    arr.splice(idx + 1, arr.length - idx)
     // arr.length = 0; // 甚至可以直接清空数组
   }
-  console.log(item);
-});
+  console.log(item)
+})
 // 1, 2, 3
-console.log(arr); // [1, 2, 3]
+console.log(arr) // [1, 2, 3]
 ```
 
 ## 中断 for 循环
@@ -175,11 +175,11 @@ console.log(arr); // [1, 2, 3]
 使用 break 打断 for 循环
 
 ```js
-const arr = [1, 2, 3, 4, 5];
+const arr = [1, 2, 3, 4, 5]
 for (k in arr) {
-  console.log(arr[k]);
+  console.log(arr[k])
   if (arr[k] === 3) {
-    break;
+    break
   }
 }
 // 1, 2, 3
@@ -189,7 +189,7 @@ for (k in arr) {
 
 ```js
 function _comma(number) {
-  return number.toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,');
+  return number.toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,')
 }
 ```
 
@@ -200,13 +200,13 @@ function _comma(number) {
 for...in 迭代对象的**可枚举字符串属性**，包括原型链上可枚举的属性。
 
 ```js
-for (variable in object) statement;
+for (variable in object) statement
 ```
 
 for...of 语句是为了方便迭代迭代器。对象 `object` 是不可迭代的，迭代 `object` 会报错 `Error: object is no iterable`
 
 ```js
-for (variable of iterable) statement;
+for (variable of iterable) statement
 ```
 
 - [for...in](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in)
@@ -223,12 +223,14 @@ for (variable of iterable) statement;
 通过使用 `Promise.all` 可以得到异步返回的结果
 
 ```ts
-var arr = [1, 2, 3, 4, 5];
+var arr = [1, 2, 3, 4, 5]
 
-var results: number[] = await Promise.all(arr.map(async (item): Promise<number> => {
-    await callAsynchronousOperation(item);
-    return item + 1;
-}));
+var results: number[] = await Promise.all(
+  arr.map(async (item): Promise<number> => {
+    await callAsynchronousOperation(item)
+    return item + 1
+  }),
+)
 ```
 
 - [Use async await with Array.map](https://stackoverflow.com/questions/40140149/use-async-await-with-array-map)

@@ -1,7 +1,7 @@
 ---
-title: "阅读图解React笔记7"
+title: '阅读图解React笔记7'
 published: 2022-12-19
-tags: ["react"]
+tags: ['react']
 ---
 
 本文仅仅是阅读 [图解 React 原理系列](https://7kms.github.io/react-illustration-series/) 的笔记，了解更多内容请查看原文链接。
@@ -37,18 +37,18 @@ function commitRootImpl(root, recoverableErrors, transitions, renderPriorityLeve
   // ============
   // 渲染前准备
   // ============
-  const finishedWork = root.finishedWork;
-  const lanes = root.finishedLanes;
+  const finishedWork = root.finishedWork
+  const lanes = root.finishedLanes
 
   // 清空 FiberRoot 对象上的属性
-  root.finishedWork = null;
-  root.finishedLanes = NoLanes;
-  root.callbackNode = null;
+  root.finishedWork = null
+  root.finishedLanes = NoLanes
+  root.callbackNode = null
 
   if (root === workInProgressRoot) {
-    workInProgressRoot = null;
-    workInProgress = null;
-    workInProgressRootRenderLanes = NoLanes;
+    workInProgressRoot = null
+    workInProgress = null
+    workInProgressRootRenderLanes = NoLanes
   }
 
   // ========
@@ -56,31 +56,33 @@ function commitRootImpl(root, recoverableErrors, transitions, renderPriorityLeve
   // ========
   // 检查是否有副作用在整个树
   const subtreeHasEffect =
-    (finishedWork.subtreeFlags & (BeforeMutationMask | MutationMask | LayoutMask | PassiveMask)) !==
-    NoFlags;
+    (finishedWork.subtreeFlags &
+      (BeforeMutationMask | MutationMask | LayoutMask | PassiveMask)) !==
+    NoFlags
   const rootHasEffect =
-    (finishedWork.flags & (BeforeMutationMask | MutationMask | LayoutMask | PassiveMask)) !==
-    NoFlags;
+    (finishedWork.flags &
+      (BeforeMutationMask | MutationMask | LayoutMask | PassiveMask)) !==
+    NoFlags
 
   if (subtreeHasEffect || rootHasEffect) {
-    const prevExecutionContext = executionContext;
-    executionContext |= CommitContext;
-    const prevInteractions = pushInteractions(root);
+    const prevExecutionContext = executionContext
+    executionContext |= CommitContext
+    const prevInteractions = pushInteractions(root)
 
     // 调用生命周期前，重置为null
-    ReactCurrentOwner.current = null;
+    ReactCurrentOwner.current = null
 
     // 第一个阶段
-    commitBeforeMutationEffects(finishedWork);
+    commitBeforeMutationEffects(finishedWork)
 
     // 第二个阶段
-    commitMutationEffects(finishedWork, root, renderPriorityLevel);
+    commitMutationEffects(finishedWork, root, renderPriorityLevel)
 
     // fiber 树的切换
-    root.current = finishedWork;
+    root.current = finishedWork
 
     // 第三个阶段
-    commitLayoutEffects(finishedWork, root, lanes);
+    commitLayoutEffects(finishedWork, root, lanes)
 
     // 如果有被动的副作用，调度一个回调处理它。
     if (
@@ -88,38 +90,38 @@ function commitRootImpl(root, recoverableErrors, transitions, renderPriorityLeve
       (finishedWork.flags & PassiveMask) !== NoFlags
     ) {
       if (!rootDoesHavePassiveEffects) {
-        rootDoesHavePassiveEffects = true;
+        rootDoesHavePassiveEffects = true
         scheduleCallback(NormalSchedulerPriority, () => {
-          flushPassiveEffecs();
-          return null;
-        });
+          flushPassiveEffecs()
+          return null
+        })
       }
     }
 
     // 告知调度器在帧的末尾产生，所以浏览器能有机会绘制。
-    requestPaint();
+    requestPaint()
 
     // =========
     // 渲染后
     // =========
-    const rootDidHavePassiveEffects = rootDoesHavePassiveEffects;
+    const rootDidHavePassiveEffects = rootDoesHavePassiveEffects
 
     if (rootDoesHavePassiveEffects) {
       // 这次 commit 有被动副作用，保存对它们的引用。
-      rootDoesHavePassiveEffects = false;
-      rootWithPendingPassiveEffects = root;
-      pendingPassiveEffectsLanes = lanes;
+      rootDoesHavePassiveEffects = false
+      rootWithPendingPassiveEffects = root
+      pendingPassiveEffectsLanes = lanes
     } else {
-      releaseRootPooledCache(root, remainingLanes);
+      releaseRootPooledCache(root, remainingLanes)
     }
 
     // 结束之前总是要调用该函数，确保当前 root 所有额外的工作的被调度。
-    ensureRootIsScheduled(root, now());
+    ensureRootIsScheduled(root, now())
 
     // 如果布局被调度了，刷新它
-    flushSyncCallbackQueue();
+    flushSyncCallbackQueue()
 
-    return null;
+    return null
   }
 }
 ```

@@ -1,7 +1,7 @@
 ---
-title: "New 操作符"
+title: 'New 操作符'
 published: 2020-07-02
-tags: ["javascript"]
+tags: ['javascript']
 ---
 
 关于 New 操作符的一些东西
@@ -28,21 +28,21 @@ new 关键字会进行如下的操作：
 function _new(fn, ...args) {
   // 创建空对象，并将原型链绑定到构造对象
   // 相当于 obj.__proto__ = fn.prototype
-  let obj = Object.create(fn.prototype);
+  let obj = Object.create(fn.prototype)
 
   // 执行构造函数方法，绑定 this
-  let res = fn.apply(obj, args);
+  let res = fn.apply(obj, args)
 
   // 如果构造函数返回对象，返回该对象，否则返回创建的新对象。
-  return res instanceof Object ? res : obj;
+  return res instanceof Object ? res : obj
 }
 
 function Person(name, age) {
-  this.name = name;
-  this.age = age;
+  this.name = name
+  this.age = age
 }
 
-const p = _new(Person, 'chen', 18);
+const p = _new(Person, 'chen', 18)
 ```
 
 ## 注意
@@ -54,26 +54,26 @@ const p = _new(Person, 'chen', 18);
 
 ```js
 function T(name) {
-  this.name = name;
+  this.name = name
 }
 
-var t1 = T('t1');
-var t2 = new T('t2');
-console.log(t1); // => "undefined"
-console.log(t2); // => { name: "t2" }
+var t1 = T('t1')
+var t2 = new T('t2')
+console.log(t1) // => "undefined"
+console.log(t2) // => { name: "t2" }
 ```
 
 实际上， T 和其他函数没有任何区别。函数本身并不是构造函数，然而，当你在普通的函数调用前面加上 new 关键字之后，就会把这个函数调用变成一个“构造函数调用”。实际上，new 会劫持所有普通函数并用构造对象的形式来调用它。
 
 ```js
 function NothingSpecial() {
-  console.log('Hello, World.');
+  console.log('Hello, World.')
 }
 
-var a = new NothingSpecial();
+var a = new NothingSpecial()
 // Hello, World.
 
-a; // {}
+a // {}
 ```
 
 NothingSpecial 只是一个普通的函数，但是使用 new 调用时，它就会构造一个对象并赋值 a。
@@ -86,23 +86,23 @@ NothingSpecial 只是一个普通的函数，但是使用 new 调用时，它就
 
 ```js
 function T(name) {
-  this.name = name;
+  this.name = name
   return {
     foo: 'foo',
-  };
+  }
 }
-var t1 = new T('bar');
-console.log(t1); // { foo: "foo" }
+var t1 = new T('bar')
+console.log(t1) // { foo: "foo" }
 ```
 
 如果返回的类型不是 object，那么构造函数返回的是 this
 
 ```js
 function T(name) {
-  this.name = name;
+  this.name = name
 }
-var t2 = new T('bar');
-console.log(t2); // { name: 'bar' }
+var t2 = new T('bar')
+console.log(t2) // { name: 'bar' }
 ```
 
 ## 构造函数
@@ -110,17 +110,17 @@ console.log(t2); // { name: 'bar' }
 ### String 构造函数
 
 ```js
-typeof String('Hello world'); // string
-typeof new String('Hello world'); // object
+typeof String('Hello world') // string
+typeof new String('Hello world') // object
 ```
 
 ### Number 构造函数
 
 ```js
-const a = new Number('123'); // a === 123 is false
-const b = Number('123'); // b === 123 is true
-a instanceof Number; // is true
-b instanceof Number; // is false
+const a = new Number('123') // a === 123 is false
+const b = Number('123') // b === 123 is true
+a instanceof Number // is true
+b instanceof Number // is false
 ```
 
 ### Boolean 构造函数
@@ -128,12 +128,12 @@ b instanceof Number; // is false
 创建的 Boolean 对象默认值为 `false`
 
 ```js
-var bNoParam = new Boolean();
-var bZero = new Boolean(0);
-var bNull = new Boolean(null);
-var bEmptyString = new Boolean('');
-var bfalse = new Boolean(false);
-var bNaN = new Boolean(NaN);
+var bNoParam = new Boolean()
+var bZero = new Boolean(0)
+var bNull = new Boolean(null)
+var bEmptyString = new Boolean('')
+var bfalse = new Boolean(false)
+var bNaN = new Boolean(NaN)
 ```
 
 在 JavaScript 中，false、null、0、""、undefined 和 NaN 被称为假值。
@@ -141,12 +141,12 @@ var bNaN = new Boolean(NaN);
 创建的 Boolean 对象默认值为 `true`
 
 ```js
-var btrue = new Boolean(true);
-var btrueString = new Boolean('true');
-var bfalseString = new Boolean('false');
-var bSuLin = new Boolean('Su Lin');
-var bArrayProto = new Boolean([]);
-var bObjProto = new Boolean({});
+var btrue = new Boolean(true)
+var btrueString = new Boolean('true')
+var bfalseString = new Boolean('false')
+var bSuLin = new Boolean('Su Lin')
+var bArrayProto = new Boolean([])
+var bObjProto = new Boolean({})
 ```
 
 ## 题目
@@ -154,31 +154,31 @@ var bObjProto = new Boolean({});
 ```js
 function Foo() {
   getName = function () {
-    console.log(1);
-  };
-  return this;
+    console.log(1)
+  }
+  return this
 }
 Foo.getName = function () {
-  console.log(2);
-};
+  console.log(2)
+}
 Foo.prototype.getName = function () {
-  console.log(3);
-};
+  console.log(3)
+}
 var getName = function () {
-  console.log(4);
-};
+  console.log(4)
+}
 function getName() {
-  console.log(5);
+  console.log(5)
 }
 
 //请写出以下输出结果：
-Foo.getName();
-getName();
-Foo().getName();
-getName();
-new Foo.getName();
-new Foo().getName();
-new new Foo().getName();
+Foo.getName()
+getName()
+Foo().getName()
+getName()
+new Foo.getName()
+new Foo().getName()
+new new Foo().getName()
 ```
 
 1. `Foo.getName()` 访问的是 Foo 函数对象储存的静态属性，结果为 2。
@@ -186,13 +186,13 @@ new new Foo().getName();
 2. 直接调用 `getName()`，直接调用就是访问当前上下文作用内的 `getName` 函数。由于题目中会有变量提升，所以输出不是 5。题目中最后两行代码的执行顺序如下，所以最终结果输出结果为 4。
 
    ```js
-   var getName; // 函数表达式会拆成两行代码执行
+   var getName // 函数表达式会拆成两行代码执行
    function getName() {
-     console.log(5);
+     console.log(5)
    } // 函数声明被提升，覆盖getName值
    getName = function () {
-     console.log(4);
-   }; // 函数表达式的赋值，再次覆盖函数声明的值。
+     console.log(4)
+   } // 函数表达式的赋值，再次覆盖函数声明的值。
    ```
 
 3. `Foo().getName()` 先执行了 Foo 函数，然后调用 Foo 函数的返回值对象的 getName 属性函数。Foo 函数返回了 this，这个 this 是函数调用，默认会绑定到全局对象 window，所以 Foo().getName() 相当于执行 window.getName() 方法。但是 Foo 函数内部的 getName 并没有 var 声明，所以 Foo 函数内部的 getName 函数赋值会重新赋值覆盖全局变量，所以输出 1。

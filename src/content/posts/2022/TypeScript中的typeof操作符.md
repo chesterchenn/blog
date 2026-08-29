@@ -1,7 +1,7 @@
 ---
-title: "TypeScript中的typeof操作符"
+title: 'TypeScript中的typeof操作符'
 published: 2022-04-06
-tags: ["typescript"]
+tags: ['typescript']
 ---
 
 typeof 可以引用一个变量或属性的类型。
@@ -11,8 +11,8 @@ typeof 可以引用一个变量或属性的类型。
 typeof 可以从基础类型取得类型，虽然作用不是很大。
 
 ```typescript
-let s = 'hello';
-let n = typeof s;
+let s = 'hello'
+let n = typeof s
 // let n: string
 ```
 
@@ -21,8 +21,8 @@ let n = typeof s;
 当我们已经声明过一个变量类型，其他变量需要相同的类型时，我们可以使用 typeof 操作符
 
 ```typescript
-const value = { name: '', age: 0 };
-let data: typeof value;
+const value = { name: '', age: 0 }
+let data: typeof value
 // let data = {
 //     name: string;
 //     age: number;
@@ -35,9 +35,9 @@ let data: typeof value;
 
 ```typescript
 function f() {
-  return { x: 10, y: 3 };
+  return { x: 10, y: 3 }
 }
-type P = ReturnType<typeof f>;
+type P = ReturnType<typeof f>
 // type P = {
 //     x: number;
 //     y: number;
@@ -51,18 +51,18 @@ function addPerson(personName: string) {
   return {
     type: 'AddPerson',
     payload: personName,
-  } as const;
+  } as const
 }
 
 function removePerson(id: number) {
   return {
     type: 'RemovePerson',
     payload: id,
-  } as const;
+  } as const
 }
 
 // 我们创建一个联合类型
-type Actions = ReturnType<typeof addPerson> | ReturnType<typeof removePerson>;
+type Actions = ReturnType<typeof addPerson> | ReturnType<typeof removePerson>
 
 // type Actions = {
 //     readonly type: "AddPerson";

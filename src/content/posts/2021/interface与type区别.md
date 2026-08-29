@@ -1,7 +1,7 @@
 ---
-title: "interface与type的区别"
+title: 'interface与type的区别'
 published: 2021-11-22
-tags: ["typescript"]
+tags: ['typescript']
 ---
 
 类型别名与接口在 TypeScript 中有着相似的功能。
@@ -13,7 +13,7 @@ tags: ["typescript"]
 类型别名可以表示原始类型，接口不可以。一般不使用，直接使用原始类型会更加简单。
 
 ```typescript
-type Name = string;
+type Name = string
 ```
 
 ## 表示数组
@@ -21,10 +21,10 @@ type Name = string;
 类型别名和接口都可以表示数组。一般也不使用，直接使用数组会更加简单。
 
 ```typescript
-type Names = string[];
+type Names = string[]
 
 interface Names {
-  [index: number]: string;
+  [index: number]: string
 }
 ```
 
@@ -33,7 +33,7 @@ interface Names {
 类型别名可以表示元组，接口不可以。
 
 ```typescript
-type Point = [number, number];
+type Point = [number, number]
 ```
 
 ## 表示函数
@@ -41,10 +41,10 @@ type Point = [number, number];
 类型别名和接口都可以表示函数。
 
 ```typescript
-type Log = (message: string) => void;
+type Log = (message: string) => void
 
 interface Log {
-  (message: string): void;
+  (message: string): void
 }
 ```
 
@@ -53,7 +53,7 @@ interface Log {
 类型别名可以表示联合类型，接口不可以。
 
 ```typescript
-type Status = 'pending' | 'working' | 'complete';
+type Status = 'pending' | 'working' | 'complete'
 ```
 
 ## 表示对象
@@ -62,13 +62,13 @@ type Status = 'pending' | 'working' | 'complete';
 
 ```typescript
 type Person = {
-  name: string;
-  age: number;
-};
+  name: string
+  age: number
+}
 
 interface Person {
-  name: string;
-  age: number;
+  name: string
+  age: number
 }
 ```
 
@@ -78,25 +78,25 @@ interface Person {
 
 ```typescript
 type Name = {
-  firstName: string;
-  lastName: string;
-};
+  firstName: string
+  lastName: string
+}
 
 type Phone = {
-  landline: string;
-  mobile: string;
-};
+  landline: string
+  mobile: string
+}
 
-type Contact = Name & Phone;
+type Contact = Name & Phone
 
 interface Name {
-  firstName: string;
-  lastName: string;
+  firstName: string
+  lastName: string
 }
 
 interface Phone {
-  landline: string;
-  mobile: string;
+  landline: string
+  mobile: string
 }
 
 interface Contact extends Name, Phone {}
@@ -108,11 +108,11 @@ interface Contact extends Name, Phone {}
 
 ```typescript
 interface ButtonProps {
-  text: string;
-  onClick: () => void;
+  text: string
+  onClick: () => void
 }
 interface ButtonProps {
-  id: string;
+  id: string
 }
 ```
 

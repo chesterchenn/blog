@@ -1,7 +1,7 @@
 ---
-title: "BFC"
+title: 'BFC'
 published: 2020-09-17
-tags: ["css"]
+tags: ['css']
 ---
 
 BFC(Block Formatting Context) 块级格式化上下文。它是块级布局发生的区域，也是浮动与其他元素交互的区域。
@@ -131,6 +131,94 @@ section {
   </div>
 </section>
 ```
+
+除创建 BFC 外，还有一种经典的清除浮动方式：使用 `:after` 伪元素在容器末尾添加一个不可见的块，通过 `clear: both` 将浮动元素包围在容器内。
+
+```css
+.container:after {
+  content: '';
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+```
+
+下面左边是未清除浮动的容器（高度塌陷、浮动元素溢出），右边是应用了 `:after` 清除浮动的容器（容器包裹浮动元素）：
+
+```html
+<style>
+  .cf-demo {
+    border: 1px solid black;
+    margin-bottom: 16px;
+  }
+  .cf-demo .cf-float {
+    float: left;
+    width: 70px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    color: #fff;
+  }
+  .cf-clearfix:after {
+    content: '';
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+  }
+</style>
+
+<!-- 未清除浮动：浮动元素溢出容器 -->
+<div class="cf-demo">
+  <span class="cf-float" style="background: #FFBE19">浮动元素</span>
+  <span class="cf-float" style="background: #14CC8D">浮动元素</span>
+  普通文本
+</div>
+
+<!-- 已清除浮动：容器包裹浮动元素 -->
+<div class="cf-demo cf-clearfix">
+  <span class="cf-float" style="background: #FFBE19">浮动元素</span>
+  <span class="cf-float" style="background: #14CC8D">浮动元素</span>
+  普通文本
+</div>
+```
+
+<style>
+  .cf-demo {
+    border: 1px solid black;
+    margin-bottom: 16px;
+  }
+  .cf-demo .cf-float {
+    float: left;
+    width: 70px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    color: #fff;
+  }
+  .cf-clearfix:after {
+    content: '';
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+  }
+</style>
+
+<div class="cf-demo">
+  <span class="cf-float" style="background: #FFBE19">浮动元素</span>
+  <span class="cf-float" style="background: #14CC8D">浮动元素</span>
+  普通文本
+</div>
+
+<div class="cf-demo cf-clearfix">
+  <span class="cf-float" style="background: #FFBE19">浮动元素</span>
+  <span class="cf-float" style="background: #14CC8D">浮动元素</span>
+  普通文本
+</div>
+
+上面的 `.cf-clearfix:after` 会在容器内容末尾插入一个不可见块状元素，其 `clear: both` 将两侧浮动元素包围在内，从而撑起容器高度。
 
 ### 排除外部浮动
 

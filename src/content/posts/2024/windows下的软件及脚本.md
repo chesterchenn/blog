@@ -1,7 +1,7 @@
 ---
-title: "Windows 下的软件及脚本"
+title: 'Windows 下的软件及脚本'
 published: 2024-01-13
-tags: ["windows"]
+tags: ['windows']
 ---
 
 记录在使用 Windows 下的一些优化软件以及脚本。

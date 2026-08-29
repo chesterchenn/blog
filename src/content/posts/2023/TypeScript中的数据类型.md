@@ -1,7 +1,7 @@
 ---
-title: "TypeScript中的数据类型"
+title: 'TypeScript中的数据类型'
 published: 2023-05-30
-tags: ["typescript"]
+tags: ['typescript']
 ---
 
 typescript 拥有 javascript 相同的数据类型，还提供了更多其他的实用的类型使用。如常见的 tuple（元组），enum（枚举），any（任意值），unknow（未知），void（空值）和 never（从不）。
@@ -39,7 +39,7 @@ function func(name: { first: string; last?: string }) {}
 元组 Tuple 是一个指定长度和每个位置的数据类型的数组。
 
 ```ts
-type StringNumberParis = [string, number];
+type StringNumberParis = [string, number]
 ```
 
 ### Enum
@@ -62,11 +62,11 @@ enum Direction {
 any 可以将任何类型的值赋值给它，也可以将它赋值给任何类型的值。它能让你避开类型检查。
 
 ```ts
-let val: any;
+let val: any
 
-val = 10;
-val = 'str';
-val = false;
+val = 10
+val = 'str'
+val = false
 ```
 
 `noImplicitAny` 可以设置禁用 any
@@ -77,11 +77,11 @@ unknown 类型是代替 any，它比 any 更加安全因为 unknown 不允许做
 
 ```ts
 function f1(a: any) {
-  a.b(); // OK
+  a.b() // OK
 }
 
 function f2(a: unknown) {
-  a.b(); // 'a' is of type 'unknown'.
+  a.b() // 'a' is of type 'unknown'.
 }
 ```
 
@@ -91,7 +91,7 @@ function f2(a: unknown) {
 
 ```ts
 function noop() {
-  return;
+  return
 }
 ```
 
@@ -103,7 +103,7 @@ never 表示永远不会被监测到的值。在返回的类型中，表示抛�
 
 ```ts
 function fail(msg: string): never {
-  throw new Error(msg);
+  throw new Error(msg)
 }
 ```
 

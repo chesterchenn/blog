@@ -1,7 +1,7 @@
 ---
-title: "WSL相关的问题"
+title: 'WSL相关的问题'
 published: 2021-09-18
-tags: ["windows"]
+tags: ['windows']
 ---
 
 记录在执行 WSL 遇到的一些相关的问题。
@@ -97,7 +97,7 @@ WSL 无法解析域名：`Could not resolve hostname github.com: Temporary failu
 2. 重启 `wsl --shutdown`
 
 3. 编辑 `/etc/resolv.conf`
-  
+
    ```plain
    nameserver 8.8.8.8
    ```

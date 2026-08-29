@@ -1,7 +1,7 @@
 ---
-title: "NeoVim 中英文输入法切换的问题"
+title: 'NeoVim 中英文输入法切换的问题'
 published: 2023-06-02
-tags: ["linux", "others"]
+tags: ['linux', 'others']
 ---
 
 在使用 Vim/NeoVim 编辑器，特别是由 Insert 切换到 Normal 模式，如果使用到中文输入法，很容易在 Normal 模式下输入中文，就会造成了很多不必要的麻烦。

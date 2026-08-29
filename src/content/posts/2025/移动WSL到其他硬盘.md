@@ -1,7 +1,7 @@
 ---
-title: "移动 WSL 到其他硬盘"
+title: '移动 WSL 到其他硬盘'
 published: 2025-02-18
-tags: ["linux", "windows"]
+tags: ['linux', 'windows']
 ---
 
 在使用 WSL 的时候往往会占用 C 盘的空间，可以将 WSL 移动到其他硬盘，这样可以节省 C 盘的空间。

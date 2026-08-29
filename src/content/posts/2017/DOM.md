@@ -1,8 +1,9 @@
 ---
-title: "DOM"
+title: 'DOM'
 published: 2017-11-13
-tags: ["javascript"]
+tags: ['javascript']
 ---
+
 DOM(Document Object Model) 文档对象模型。每个 Windows 对象有一个 document 属性引用了 Document 对象。Document 对象表示窗口的内容。
 
 ## Node 对象
@@ -70,7 +71,7 @@ Node 对象是一个抽象的基类，其他的 DOM API 对象都是基于这个
 
 - Node.insertBefore(newNode, referenceNode)
 
-   在指定节点前插入新节点，作为指定的父节点的子节点。
+  在指定节点前插入新节点，作为指定的父节点的子节点。
 
 - Node.removeChild(child)
 

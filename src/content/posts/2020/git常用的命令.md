@@ -1,7 +1,7 @@
 ---
-title: "git常用的命令"
+title: 'git常用的命令'
 published: 2020-10-22
-tags: ["others"]
+tags: ['others']
 ---
 
 记录一些常用的 git 命令

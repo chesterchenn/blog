@@ -1,7 +1,7 @@
 ---
-title: "HTTP的请求方法"
+title: 'HTTP的请求方法'
 published: 2022-10-28
-tags: ["http", "network"]
+tags: ['http', 'network']
 ---
 
 HTTP 定义了一组请求方法，包括：GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH。

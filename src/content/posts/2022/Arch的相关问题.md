@@ -1,7 +1,7 @@
 ---
-title: "Arch的相关问题"
+title: 'Arch的相关问题'
 published: 2022-11-13
-tags: ["linux", "others"]
+tags: ['linux', 'others']
 ---
 
 关于 Arch Linux 一些相关问题及笔记。

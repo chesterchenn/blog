@@ -1,7 +1,7 @@
 ---
-title: "JS的原型链和继承"
+title: 'JS的原型链和继承'
 published: 2017-11-09
-tags: ["javascript"]
+tags: ['javascript']
 ---
 
 JavaScript 的原型链和相关继承方式。
@@ -18,29 +18,29 @@ constructor 属性始终指向创建当前对象的构建函数。在默认情�
 
 ```js
 function Foo(name) {
-  this.name = name;
+  this.name = name
 }
 
-const f1 = new Foo('bar');
-const f2 = Object.create(f1);
+const f1 = new Foo('bar')
+const f2 = Object.create(f1)
 
-console.log(Object.getPrototypeOf(f1));
+console.log(Object.getPrototypeOf(f1))
 // { constructor: function Foo(name) }
 
-console.log(Object.getPrototypeOf(f2));
+console.log(Object.getPrototypeOf(f2))
 // { name: 'bar' }
 
-console.log(f1.constructor, f2.constructor);
+console.log(f1.constructor, f2.constructor)
 // function Foo(name), function Foo(name)
 ```
 
 可以看出 f2.prototype 原型指向 f1。f2 的 constructor 指向的是构造函数。将构建函数的 prototype 进行扩展
 
 ```js
-Foo.prototype.age = 11;
+Foo.prototype.age = 11
 Foo.prototype.dosomething = function () {
   // ...
-};
+}
 ```
 
 ```plain
@@ -91,16 +91,16 @@ JavaScript 主要有如下几种继承方式：
 
 ```js
 function Person() {
-  this.name = 'human';
+  this.name = 'human'
 }
 
 function Student() {}
 
 // 重写 Student 的原型，继承 Person 实例
-Student.prototype = new Person();
+Student.prototype = new Person()
 
-var instance = new Student();
-console.log(instance.name);
+var instance = new Student()
+console.log(instance.name)
 ```
 
 重写原型对象的时候，默认自带的 constructor 会被覆盖，这个实例的 constructor 会指向构造函数 Person。
@@ -123,29 +123,29 @@ console.log(instance.name);
 
 ```js
 function Person() {
-  this.name = 'human';
+  this.name = 'human'
 }
 
 function Student() {
-  Person.call(this);
+  Person.call(this)
 }
 
-var instance = new Student();
-console.log(instance.name);
+var instance = new Student()
+console.log(instance.name)
 ```
 
 #### 传递参数
 
 ```js
 function Sup(name) {
-  this.name = name;
+  this.name = name
 }
 function Sub() {
-  Sup.call(this, 'foo');
-  this.age = 18;
+  Sup.call(this, 'foo')
+  this.age = 18
 }
-var instance = new Sub();
-console.log(instance.name); // foo
+var instance = new Sub()
+console.log(instance.name) // foo
 ```
 
 方法在构造函数中定义，函数的复用无法实现。
@@ -196,8 +196,8 @@ instance2.sayName(); // 'bar'
 ```js
 function object(o) {
   function F() {}
-  F.prototype = o;
-  return new F();
+  F.prototype = o
+  return new F()
 }
 ```
 
@@ -211,11 +211,11 @@ ES5 通过 [Object.create()](https://developer.mozilla.org/en-US/docs/Web/JavaSc
 
 ```js
 function createAnother(original) {
-  var clone = object(original); // 创建一个新对象，其他方式返回新对象也可
-  clone.say = function() {
+  var clone = object(original) // 创建一个新对象，其他方式返回新对象也可
+  clone.say = function () {
     // ...
   }
-  return clone;
+  return clone
 }
 ```
 
@@ -223,9 +223,9 @@ function createAnother(original) {
 
 ```js
 function inheritPrototype(sub, sup) {
-  var prototype = Object(sup.prototype); // 创建对象
-  prototype.constructor = sub;
-  sub.prototype = prototype;
+  var prototype = Object(sup.prototype) // 创建对象
+  prototype.constructor = sub
+  sub.prototype = prototype
 }
 ```
 

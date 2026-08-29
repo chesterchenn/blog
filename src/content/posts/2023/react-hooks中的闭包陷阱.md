@@ -1,7 +1,7 @@
 ---
-title: "React Hooks 中的闭包陷阱"
+title: 'React Hooks 中的闭包陷阱'
 published: 2023-05-16
-tags: ["react"]
+tags: ['react']
 ---
 
 React Hooks 中的闭包，指函数式组件每次 render 都会产生一个新的函数，这个函数会产生一个在当前阶段的闭包。
@@ -25,24 +25,24 @@ React Hooks 中的闭包，指函数式组件每次 render 都会产生一个新
 
 ```tsx
 const App = (): React.ReactElement | null => {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(0)
   const [handleCount, setHanleCount] = useState({
     action: () => {},
-  });
+  })
 
   useEffect(() => {
     setHanleCount({
       action: () => setCount(count + 1),
-    });
-  }, []);
+    })
+  }, [])
 
   return (
     <div>
       <button onClick={handleCount.action}>Click</button>
       <div>{count}</div>
     </div>
-  );
-};
+  )
+}
 ```
 
 [https://codesandbox.io/s/capture-2l2vq5](https://codesandbox.io/s/capture-2l2vq5)
@@ -61,8 +61,8 @@ const App = (): React.ReactElement | null => {
 useEffect(() => {
   setHanleCount({
     action: () => setCount(count + 1),
-  });
-}, [count]);
+  })
+}, [count])
 ```
 
 ## 原因
@@ -71,12 +71,12 @@ useEffect(() => {
 
 ```ts
 type Hook = {
-  memoizedState: any;
-  baseState: any;
-  baseUpdate: Update<any, any> | null;
-  queue: Update<any, any> | null;
-  next: Hook | null;
-};
+  memoizedState: any
+  baseState: any
+  baseUpdate: Update<any, any> | null
+  queue: Update<any, any> | null
+  next: Hook | null
+}
 ```
 
 memoizedState 用来存放组件的 state，next 指向 Hook 对象。由于不知道开发者会使用多少个 Hook，所以 Hook 都是链表存储的来保证调用的顺序。
@@ -85,13 +85,13 @@ memoizedState 用来存放组件的 state，next 指向 Hook 对象。由于不�
 
 ```tsx
 function App() {
-  const [] = useState();
-  const [] = useState();
-  useEffect(() => {}, []);
-  useMemo(() => {}, []);
-  const [] = useState();
+  const [] = useState()
+  const [] = useState()
+  useEffect(() => {}, [])
+  useMemo(() => {}, [])
+  const [] = useState()
 
-  return <></>;
+  return <></>
 }
 ```
 
@@ -109,13 +109,13 @@ function App() {
 
 ```jsx
 const FunctionComponent = () => {
-  const [value, setValue] = useState(1);
+  const [value, setValue] = useState(1)
 
   const log = () => {
     setTimeout(() => {
-      alert(value);
-    }, 3000);
-  };
+      alert(value)
+    }, 3000)
+  }
 
   return (
     <div>
@@ -123,8 +123,8 @@ const FunctionComponent = () => {
       <button onClick={log}>alert</button>
       <button onClick={() => setValue(value + 1)}>add</button>
     </div>
-  );
-};
+  )
+}
 ```
 
 答案是：弹出的值是 1，页面的值是 2
@@ -142,19 +142,19 @@ const FunctionComponent = () => {
 
 ```jsx
 const FunctionComponent = () => {
-  const [value, setValue] = useState(1);
+  const [value, setValue] = useState(1)
 
-  const countRef = useRef(value);
+  const countRef = useRef(value)
 
   const log = () => {
     setTimeout(() => {
-      alert(countRef.current);
-    }, 3000);
-  };
+      alert(countRef.current)
+    }, 3000)
+  }
 
   useEffect(() => {
-    countRef.current = value;
-  }, [value]);
+    countRef.current = value
+  }, [value])
 
   return (
     <div>
@@ -162,8 +162,8 @@ const FunctionComponent = () => {
       <button onClick={log}>alert</button>
       <button onClick={() => setValue(value + 1)}>add</button>
     </div>
-  );
-};
+  )
+}
 ```
 
 ## 参考链接

@@ -1,7 +1,7 @@
 ---
-title: "Map"
+title: 'Map'
 published: 2020-09-21
-tags: ["javascript"]
+tags: ['javascript']
 ---
 
 Map 和 Set 是 ES6 中新增的数据结构，Map 类似于对象，但可以使用对象或者 map 值作为键值。我们一般将 Map 跟 Object 进行比较。
@@ -28,31 +28,31 @@ Map 和 Set 是 ES6 中新增的数据结构，Map 类似于对象，但可以�
 在 JavaScript 中，对象是创建无序键/值对数据结构[也称映射（map）]的主要机制。但是，对象作为映射的主要缺点是不能使用非字符串值作为键。如下：
 
 ```js
-var m = {};
+var m = {}
 var x = { id: 1 },
-  y = { id: 2 };
-m[x] = 'foo';
-m[y] = 'bar';
+  y = { id: 2 }
+m[x] = 'foo'
+m[y] = 'bar'
 
-m[x]; // "bar"
-m[y]; // "bar"
-m; // "[object Object]": "bar"
+m[x] // "bar"
+m[y] // "bar"
+m // "[object Object]": "bar"
 ```
 
 因为 x 和 y 两个对象作为键值（属性值）的时候，都被转化成字符串“[object Object]”，实际上在 m 中只设置了一个键值。
 
 ```js
-var m = new Map();
+var m = new Map()
 var x = { id: 1 },
-  y = { id: 2 };
-m.set(x, 'foo');
-m.set(y, 'bar');
+  y = { id: 2 }
+m.set(x, 'foo')
+m.set(y, 'bar')
 
-m.get(x); // "foo"
-m.get(y); // "bar"
-m.delete(y);
-m.size; // 1
-m.clear();
+m.get(x) // "foo"
+m.get(y) // "bar"
+m.delete(y)
+m.size // 1
+m.clear()
 ```
 
 ### Map 的属性
@@ -90,14 +90,14 @@ m.clear();
 Object 直接声明，Map 构造器接受数组，数组用逗号进行分割，`new Map([iterable])`。
 
 ```js
-var obj = {};
-var obj = { id: 1, name: 'o' };
+var obj = {}
+var obj = { id: 1, name: 'o' }
 
-var map = new Map();
+var map = new Map()
 var map = new Map([
   [1, 2],
   ['n', 3],
-]); // map = { 1=>2, 'n'=>3 }
+]) // map = { 1=>2, 'n'=>3 }
 ```
 
 ### 读取元素
@@ -105,19 +105,19 @@ var map = new Map([
 对于 Map，我们可以通过 `Map.prototype.get(key)` 可以读取值，而 Object 通过 `Object.<key>` 或者 `Object['key']` 读取值。
 
 ```js
-map.get(1); // 2
+map.get(1) // 2
 
-obj.id; // 1
-obj['id']; // 1
+obj.id // 1
+obj['id'] // 1
 ```
 
 对于 Map, 我们还可以通过 `has()` 的方法进行判断是否有该键值。对于 Object 则需要一些特别的技巧。
 
 ```js
-map.has(1); // true
+map.has(1) // true
 
-obj.id === undefined; // 通过未定义来判断
-'id' in obj; // 通过继承判断
+obj.id === undefined // 通过未定义来判断
+'id' in obj // 通过继承判断
 ```
 
 ### 新增移除元素
@@ -125,27 +125,27 @@ obj.id === undefined; // 通过未定义来判断
 Map 通过 `Map.prototype.set(<key>, <value>)` 进行新增元素，Object 则直接进行新增。
 
 ```js
-map.set(4, 5); // { 1=>2, 'n'=>3, 4=>5 }
+map.set(4, 5) // { 1=>2, 'n'=>3, 4=>5 }
 
-obj.age = 10;
-obj['gender'] = 'male';
+obj.age = 10
+obj['gender'] = 'male'
 ```
 
 Map 通过 `detele(key)` 进行删除，使用 `clear()` 可以清除所有元素。而对象通过 `delete` 操作符进行删除属性
 
 ```js
-map.delete(4); // { 1=>2, 'n'=>3 }
-map.clear(); // {}
+map.delete(4) // { 1=>2, 'n'=>3 }
+map.clear() // {}
 
-delete obj.age;
+delete obj.age
 ```
 
 ### 长度
 
 ```js
-map.size();
+map.size()
 
-Object.keys(obj).length;
+Object.keys(obj).length
 ```
 
 ### 使用场景

@@ -1,7 +1,7 @@
 ---
-title: "WebWorker"
+title: 'WebWorker'
 published: 2023-05-12
-tags: ["javascript"]
+tags: ['javascript']
 ---
 
 在 Web Worker 标准中，定义了解决客户端 JS 无法多线程的问题。不过，Web Worker 处在一个自包含的执行环境中，无法访问 Window 对象和 Document 对象，和主线程之间的通信也只能通过异步消息传递机制来实现。
@@ -36,7 +36,7 @@ Web Worker 可以分为 Dedicated Worker 和 Shared Worker 两种，一个专有
 要创建一个新的 Worker，只需调用 `Worker()` 构造函数，并且指定要运行的脚本 URL。
 
 ```js
-const myWorker = new Worker('worker.js');
+const myWorker = new Worker('worker.js')
 ```
 
 ### 传递/接收信息
@@ -45,29 +45,29 @@ const myWorker = new Worker('worker.js');
 
 ```js
 first.onchange = () => {
-  myWorker.postMessage([first.value, second.value]);
-  console.log('Message posted to worker');
-};
+  myWorker.postMessage([first.value, second.value])
+  console.log('Message posted to worker')
+}
 ```
 
 在 Worker 里面通过 `onmessage` 事件的 data 属性接收响应信息。并且通过 postMessage 传递回给主线程。
 
 ```js
 onmessage = (e) => {
-  console.log('Message received from main script');
-  const workerResult = `Result: ${e.data[0]} * ${e.data[1]}`;
-  console.log('Posting message back to main script');
-  postMessage(workerResult);
-};
+  console.log('Message received from main script')
+  const workerResult = `Result: ${e.data[0]} * ${e.data[1]}`
+  console.log('Posting message back to main script')
+  postMessage(workerResult)
+}
 ```
 
 回到主线程，我们使用 `onmessage` 来接收响应信息。
 
 ```js
 myWorker.onmessage = (e) => {
-  result.textContent = e.data;
-  console.log('Message received from worker');
-};
+  result.textContent = e.data
+  console.log('Message received from worker')
+}
 ```
 
 ### 终止 Worker
@@ -75,7 +75,7 @@ myWorker.onmessage = (e) => {
 需要终止一个 worker，只需调用 `terminate` 方法。
 
 ```js
-myWorker.terminate();
+myWorker.terminate()
 ```
 
 ### 错误处理
@@ -84,8 +84,8 @@ myWorker.terminate();
 
 ```js
 myWorker.onerror = (e) => {
-  console.log(e.filename + ': ' + e.lineno + ':' + e.message);
-};
+  console.log(e.filename + ': ' + e.lineno + ':' + e.message)
+}
 ```
 
 ## Shared Workers
@@ -95,7 +95,7 @@ myWorker.onerror = (e) => {
 ### 创建共享 worker
 
 ```js
-const myShareWorker = new SharedWorker("worker.js");
+const myShareWorker = new SharedWorker('worker.js')
 ```
 
 ## 推荐阅读

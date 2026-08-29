@@ -1,7 +1,7 @@
 ---
-title: "Redux 的基本概念"
+title: 'Redux 的基本概念'
 published: 2023-03-26
-tags: ["react"]
+tags: ['react']
 ---
 
 Redux 中的基本概念。
@@ -64,12 +64,12 @@ Store 主要有四个方法
 3. 如果需要取消订阅，则执行调用 subscribe 的返回结果。
 
 ```js
-let i = 0;
+let i = 0
 function handleChange() {
-  i++;
+  i++
 }
-const unsubscribe = store.subscribe(handleChange);
-unsubscribe();
+const unsubscribe = store.subscribe(handleChange)
+unsubscribe()
 ```
 
 ### Store 应用
@@ -79,12 +79,12 @@ unsubscribe();
 首先，使用 `react-redux` 库进行 store 初始化。使用 `react-redux` 提供的 Provider 组件。
 
 ```js
-import store from './store';
-import { Provider } from 'redux';
+import store from './store'
+import { Provider } from 'redux'
 
-<Provider store={store}>
+;<Provider store={store}>
   <App />
-</Provider>;
+</Provider>
 ```
 
 使用 `react-redux` 在别的组件访问 store。
@@ -101,12 +101,12 @@ connect(mapStateToProps?, mapDispatchToProps?, mergeProps?, option?)(App)
 也可以直接使用 redux 提供的 getState 和 dispatch 方法
 
 ```js
-import store from './store';
+import store from './store'
 
 const App = () => {
-  store.getState();
-  store.dispatch({ type: 'ADD_TODO', text: '123' });
-};
+  store.getState()
+  store.dispatch({ type: 'ADD_TODO', text: '123' })
+}
 ```
 
 可以发现，getState 与 `react-redux` 中的 mapStateToProps 都是可以访问 store 的状态树。同样的还有 dispatch 和 mapDispatchToProps。
@@ -138,8 +138,8 @@ function somereducer = (state, action) {}
 当我们的应用程序越来越大，越来复杂时，需要将很多 reducer 分开管理。而 createStore 的入口参数只接受一个 reducer。可以通过使用 combineReducer 来将其组合。
 
 ```js
-import { combineReducer } from 'redux';
-const rootReducer = combineReducer({ reducer1, reducer2 });
+import { combineReducer } from 'redux'
+const rootReducer = combineReducer({ reducer1, reducer2 })
 ```
 
 ![reducer](/images/reducer.svg)

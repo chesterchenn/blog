@@ -1,7 +1,7 @@
 ---
-title: "JSX 只能有一个父元素"
+title: 'JSX 只能有一个父元素'
 published: 2023-10-20
-tags: ["react"]
+tags: ['react']
 ---
 
 在 JSX 里有且只能有一个父元素，当存在多个父元素会报错。
@@ -44,70 +44,62 @@ JSX 虽然看起来很像 HTML，但是底层其实是经过转换的 JavaScript
 
 ```js
 export function createElement(type, config, children) {
-  let propName;
+  let propName
 
   // 提取保留的属性
-  const props = {};
+  const props = {}
 
-  let key = null;
-  let ref = null;
-  let self = null;
-  let source = null;
+  let key = null
+  let ref = null
+  let self = null
+  let source = null
 
   // 进行属性的提取，包括 key, ref 及其他属性。
   if (config != null) {
     // 提取 ref 关键字
     if (hasValidRef(config)) {
-      ref = config.ref;
+      ref = config.ref
     }
     // 提取 key 关键字
     if (hasValidKey(config)) {
-      key = '' + config.key;
+      key = '' + config.key
     }
 
-    self = config.__self === undefined ? null : config.__self;
-    source = config.__source === undefined ? null : config.__source;
+    self = config.__self === undefined ? null : config.__self
+    source = config.__source === undefined ? null : config.__source
     // 将剩余的属性值放入 props 对象
     for (propName in config) {
       if (
         hasOwnProperty.call(config, propName) &&
         !RESERVED_PROPS.hasOwnProperty(propName)
       ) {
-        props[propName] = config[propName];
+        props[propName] = config[propName]
       }
     }
   }
 
   // children 可能有多个参数
-  const childrenLength = arguments.length - 2;
+  const childrenLength = arguments.length - 2
   if (childrenLength === 1) {
-    props.children = children;
+    props.children = children
   } else if (childrenLength > 1) {
-    const childArray = Array(childrenLength);
+    const childArray = Array(childrenLength)
     for (let i = 0; i < childrenLength; i++) {
-      childArray[i] = arguments[i + 2];
+      childArray[i] = arguments[i + 2]
     }
-    props.children = childArray;
+    props.children = childArray
   }
 
   if (type && type.defaultProps) {
-    const defaultProps = type.defaultProps;
+    const defaultProps = type.defaultProps
     for (propName in defaultProps) {
       if (props[propName] === undefined) {
-        props[propName] = defaultProps[propName];
+        props[propName] = defaultProps[propName]
       }
     }
   }
 
-  return ReactElement(
-    type,
-    key,
-    ref,
-    self,
-    source,
-    ReactCurrentOwner.current,
-    props,
-  );
+  return ReactElement(type, key, ref, self, source, ReactCurrentOwner.current, props)
 }
 ```
 

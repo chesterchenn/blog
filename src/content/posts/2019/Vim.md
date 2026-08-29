@@ -1,7 +1,7 @@
 ---
-title: "Vim"
+title: 'Vim'
 published: 2019-04-22
-tags: ["linux"]
+tags: ['linux']
 ---
 
 Vim 中的一些快捷键。

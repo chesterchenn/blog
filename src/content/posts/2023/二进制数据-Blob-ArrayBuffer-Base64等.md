@@ -1,7 +1,7 @@
 ---
-title: "JavaScript中的二进制数据：Blob ArrayBuffer Base64"
+title: 'JavaScript中的二进制数据：Blob ArrayBuffer Base64'
 published: 2023-09-17
-tags: ["javascript"]
+tags: ['javascript']
 ---
 
 JavaScript 提供了一些 API 来处理文件或原始文件数据。如 Blob, File, ArrayBuffer, Base64 等。
@@ -31,8 +31,8 @@ File 对象是继承于 blob 对象的。
 ### 构造器
 
 ```js
-new Blob(array);
-new Blob(array, options);
+new Blob(array)
+new Blob(array, options)
 ```
 
 - `array`: 任何可以遍历的对象，像 `Array`, `ArrayBuffer`, `TypedArray`, `DataView`, `Blob`, `String` 都可以放入 Blob 构造对象。
@@ -40,8 +40,8 @@ new Blob(array, options);
   - `type`: 存储的媒体类型 MIME type。默认是空字符串(`""`)
 
 ```js
-const arr = ['1234'];
-const blob = new Blob(array);
+const arr = ['1234']
+const blob = new Blob(array)
 // Blob { size: 4, type: "" }
 ```
 
@@ -56,8 +56,8 @@ ArrayBuffer 对象用来表示通用的、固定长度的原始二进制数据�
 ### 构造器
 
 ```js
-new ArrayBuffer(length);
-new ArrayBuffer(length, options);
+new ArrayBuffer(length)
+new ArrayBuffer(length, options)
 ```
 
 ArrayBuffer() 构造函数创建一个以字节为单位的给定长度的新 ArrayBuffer。你也可以从现有的数据获取数组缓冲区。
@@ -78,9 +78,9 @@ Base64 编码普遍应用于需要通过被设计为处理文本数据的媒介�
 1. 其实多数场景就是基于 Data URL 的。比如，使用 toDataURL()方法把 canvas 画布内容生成 base64 编码格式的图片
 
    ```js
-   const canvas = document.getElementById('canvas');
-   const ctx = canvas.getContext('2d');
-   const dataUrl = canvas.toDataURL();
+   const canvas = document.getElementById('canvas')
+   const ctx = canvas.getContext('2d')
+   const dataUrl = canvas.toDataURL()
    ```
 
 2. 使用 readAsDataURL()方法把上传的文件转为 base64 格式的 data URI，比如上传头像展示或者编辑

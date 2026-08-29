@@ -1,7 +1,7 @@
 ---
-title: "不能在循环、条件或嵌套中调用Hooks"
+title: '不能在循环、条件或嵌套中调用Hooks'
 published: 2023-05-16
-tags: ["react"]
+tags: ['react']
 ---
 
 开发过程中，如果在条件语句中调用 hooks，React 会抛出错误。因为 hooks 的底层设计数据结构是链表，React 使用链表来保证 hooks 的顺序。
@@ -11,11 +11,11 @@ tags: ["react"]
 一个典型的 useState 使用场景
 
 ```js
-const [name, setName] = useState('');
+const [name, setName] = useState('')
 
 //...
 
-setName('AB');
+setName('AB')
 ```
 
 Hooks 的调用链路在“首次渲染”和“更新阶段”是不同的。
@@ -29,12 +29,12 @@ Hooks 的调用链路在“首次渲染”和“更新阶段”是不同的。
 ```js
 function mountStateImpl(initialState) {
   // 将新的 hook 对象追加到链表尾部
-  const hook = mountWorkInProgressHook();
+  const hook = mountWorkInProgressHook()
 
   if (typeof initialState === 'function') {
-    initialState = initialState();
+    initialState = initialState()
   }
-  hook.memoizedState = hook.baseState = initialState;
+  hook.memoizedState = hook.baseState = initialState
 
   // 创建当前 hook 对象的更新队列，主要是为了能够一次保留 dispatch
   const queue = {
@@ -43,17 +43,17 @@ function mountStateImpl(initialState) {
     dispatch: null,
     lastRenderedReducer: basicStateReducer,
     lastRenderedState: initialState,
-  };
-  hook.queue = queue;
-  return hook;
+  }
+  hook.queue = queue
+  return hook
 }
 
 function mountState(initialState) {
-  const hook = mountStateImpl(initialState);
-  const queue = hook.queue;
-  const dispatch = dispatchSetState.bind(null, currentlyRenderingFiber, queue);
-  queue.dispatch = dispatch;
-  return [hook.memoizedState, dispatch];
+  const hook = mountStateImpl(initialState)
+  const queue = hook.queue
+  const dispatch = dispatchSetState.bind(null, currentlyRenderingFiber, queue)
+  queue.dispatch = dispatch
+  return [hook.memoizedState, dispatch]
 }
 ```
 
@@ -69,17 +69,17 @@ function mountWorkInProgressHook() {
     queue: null,
 
     next: null,
-  };
+  }
 
   if (workInProgressHook === null) {
     // 链表中首个 hook
-    currentlyRenderingFiber.memoizedState = workInProgressHook = hook;
+    currentlyRenderingFiber.memoizedState = workInProgressHook = hook
   } else {
     // 将 hook 插入到链表尾部
-    workInProgressHook = workInProgressHook.next = hook;
+    workInProgressHook = workInProgressHook.next = hook
   }
 
-  return workInProgressHook;
+  return workInProgressHook
 }
 ```
 

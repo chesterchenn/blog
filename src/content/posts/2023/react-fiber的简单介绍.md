@@ -1,7 +1,7 @@
 ---
-title: "React Fiber 的简单介绍"
+title: 'React Fiber 的简单介绍'
 published: 2023-05-11
-tags: ["react"]
+tags: ['react']
 ---
 
 Fiber 就是 React 16 实现的一套新的更新机制，让 React 的更新过程变得可控，避免了之前采用循环递归无法中断影响性能的做法。

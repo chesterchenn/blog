@@ -1,7 +1,7 @@
 ---
-title: "JS的传递类型"
+title: 'JS的传递类型'
 published: 2022-06-05
-tags: ["javascript"]
+tags: ['javascript']
 ---
 
 JavaScript 变量有两种不同数据类型：基本类型和引用类型。
@@ -23,56 +23,56 @@ JavaScript 变量有两种不同数据类型：基本类型和引用类型。
 
 ```js
 function change(o) {
-  o.a = 'a';
+  o.a = 'a'
 }
 
 var oo = {
   a: 'b',
-};
+}
 
-change(oo);
-console.log(oo); // { a: 'a' }
+change(oo)
+console.log(oo) // { a: 'a' }
 ```
 
 传递基本类型的时候，不会改变值。
 
 ```js
 function change(v) {
-  v = 'v';
+  v = 'v'
 }
 
-var val = 'val';
+var val = 'val'
 
-change(val);
-console.log(val); // val
+change(val)
+console.log(val) // val
 ```
 
 ## 相关问题
 
 ```js
-var foo = { n: 1 };
-(function (foo) {
-  console.log(foo.n);
-  foo.n = 3;
-  var foo = { n: 2 };
-  console.log(foo.n);
-})(foo);
-console.log(foo.n);
+var foo = { n: 1 }
+;(function (foo) {
+  console.log(foo.n)
+  foo.n = 3
+  var foo = { n: 2 }
+  console.log(foo.n)
+})(foo)
+console.log(foo.n)
 ```
 
 解答：
 
 ```js
-var foo = { n: 1 }; //全局变量，此值为对象，属于引用类型
-(function (foo) {
+var foo = { n: 1 } //全局变量，此值为对象，属于引用类型
+;(function (foo) {
   //形参foo同实参foo一样指向同一片内存空间
-  var foo;
-  console.log(foo.n); //输出1
-  foo.n = 3; //形参与实参foo指向的内存空间里的n的值被改为3
-  foo = { n: 2 }; //形参foo指向了新的内存空间，里面n的值为2.
-  console.log(foo.n); //输出新的内存空间的n的值
-})(foo);
-console.log(foo.n); //实参foo的指向还是原来的内存空间，里面的n的值为3.
+  var foo
+  console.log(foo.n) //输出1
+  foo.n = 3 //形参与实参foo指向的内存空间里的n的值被改为3
+  foo = { n: 2 } //形参foo指向了新的内存空间，里面n的值为2.
+  console.log(foo.n) //输出新的内存空间的n的值
+})(foo)
+console.log(foo.n) //实参foo的指向还是原来的内存空间，里面的n的值为3.
 
 // 最终结果：1, 2, 3
 ```

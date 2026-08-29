@@ -1,7 +1,7 @@
 ---
-title: "React 中的 Ref"
+title: 'React 中的 Ref'
 published: 2023-05-26
-tags: ["react"]
+tags: ['react']
 ---
 
 组件被调用时会新建一个实例，ref 可以指向该实例，如果是原生 DOM 组件，我们可以得到 DOM 节点。
@@ -30,10 +30,10 @@ tags: ["react"]
 使用 useRef 可以添加一个新的 ref。
 
 ```jsx
-import { useRef } from 'react';
+import { useRef } from 'react'
 
 function App() {
-  const ref = useRef(0);
+  const ref = useRef(0)
   //...
 }
 ```
@@ -42,7 +42,7 @@ useRef 会返回一个对象, 使用 ref.current 可以获取当前的值。
 
 ```js
 {
-  current: 0; // 使用 useRef 传递的值
+  current: 0 // 使用 useRef 传递的值
 }
 ```
 
@@ -60,17 +60,17 @@ useRef 会返回一个对象, 使用 ref.current 可以获取当前的值。
 一直强调修改 ref 不会触发渲染，以下是来自官方的一个例子 [codesandbox](https://codesandbox.io/s/t8jjlm?file=%2FApp.js&utm_medium=sandpack)
 
 ```jsx
-import { useRef } from 'react';
+import { useRef } from 'react'
 
 export default function Counter() {
-  let countRef = useRef(0);
+  let countRef = useRef(0)
 
   function handleClick() {
     // This doesn't re-render the component!
-    countRef.current = countRef.current + 1;
+    countRef.current = countRef.current + 1
   }
 
-  return <button onClick={handleClick}>You clicked {countRef.current} times</button>;
+  return <button onClick={handleClick}>You clicked {countRef.current} times</button>
 }
 ```
 
@@ -80,8 +80,8 @@ export default function Counter() {
 
 ```jsx
 function useRef(initialValue) {
-  const [ref, unsed] = useState({ current: initialValue });
-  return ref;
+  const [ref, unsed] = useState({ current: initialValue })
+  return ref
 }
 ```
 
@@ -100,12 +100,12 @@ Ref 可以引用值，但是我们更多是的使用是引用 DOM 元素。
 有时候我们需要访问 React 下面的 DOM 元素，如给 input 聚焦/失焦，滚动，或者测量位置，我们就需要使用 ref 引用到对应的 DOM 元素。
 
 ```jsx
-import { useRef } from 'react';
+import { useRef } from 'react'
 
 function App() {
-  const myRef = useRef(null);
+  const myRef = useRef(null)
 
-  return <div ref={myRef}></div>;
+  return <div ref={myRef}></div>
 }
 ```
 
@@ -118,17 +118,17 @@ function App() {
 当我们直接使用 Ref 给子组件的时候，经常会收到一个错误提示。以下是来自官方的例子 [codesandbox](https://codesandbox.io/s/jkc8ol?file=%2FApp.js&utm_medium=sandpack)
 
 ```jsx
-import { useRef } from 'react';
+import { useRef } from 'react'
 
 function MyInput(props) {
-  return <input {...props} />;
+  return <input {...props} />
 }
 
 export default function MyForm() {
-  const inputRef = useRef(null);
+  const inputRef = useRef(null)
 
   function handleClick() {
-    inputRef.current.focus();
+    inputRef.current.focus()
   }
 
   return (
@@ -136,7 +136,7 @@ export default function MyForm() {
       <MyInput ref={inputRef} />
       <button onClick={handleClick}>Focus the input</button>
     </>
-  );
+  )
 }
 ```
 
@@ -151,8 +151,8 @@ Did you mean to use React.forwardRef()?
 
 ```jsx
 const MyInput = forwardRef((props, ref) => {
-  return <input {...props} ref={ref} />;
-});
+  return <input {...props} ref={ref} />
+})
 ```
 
 ### ref 列表
@@ -163,8 +163,8 @@ const MyInput = forwardRef((props, ref) => {
 <ul>
   {items.map((item) => {
     // Doesn't work!
-    const ref = useRef(null);
-    return <li ref={ref} />;
+    const ref = useRef(null)
+    return <li ref={ref} />
   })}
 </ul>
 ```
@@ -173,24 +173,24 @@ const MyInput = forwardRef((props, ref) => {
 
 ```jsx
 export default function CatFriends() {
-  const itemsRef = useRef(null);
+  const itemsRef = useRef(null)
 
   function scrollToId(itemId) {
-    const map = getMap();
-    const node = map.get(itemId);
+    const map = getMap()
+    const node = map.get(itemId)
     node.scrollIntoView({
       behavior: 'smooth',
       block: 'nearest',
       inline: 'center',
-    });
+    })
   }
 
   function getMap() {
     if (!itemsRef.current) {
       // Initialize the Map on first usage.
-      itemsRef.current = new Map();
+      itemsRef.current = new Map()
     }
-    return itemsRef.current;
+    return itemsRef.current
   }
 
   return (
@@ -201,11 +201,11 @@ export default function CatFriends() {
             <li
               key={cat.id}
               ref={(node) => {
-                const map = getMap();
+                const map = getMap()
                 if (node) {
-                  map.set(cat.id, node);
+                  map.set(cat.id, node)
                 } else {
-                  map.delete(cat.id);
+                  map.delete(cat.id)
                 }
               }}
             >
@@ -215,7 +215,7 @@ export default function CatFriends() {
         </ul>
       </div>
     </>
-  );
+  )
 }
 ```
 

@@ -1,7 +1,7 @@
 ---
-title: "Tmux"
+title: 'Tmux'
 published: 2023-08-27
-tags: ["linux"]
+tags: ['linux']
 ---
 
 在终端经常会遇到需要开启多窗口的需求，发现已经有成熟解决方案了 - Tmux。
@@ -27,7 +27,7 @@ tags: ["linux"]
 - Windows：窗口，开启会话会开启一个窗口，窗口可以划分多个窗格。
 - Panes：窗格，开启窗口会开启一个窗格，窗格是 Tmux 的基本单元。
 
-![](/images/tmux-concept.png "RR")
+![](/images/tmux-concept.png 'RR')
 _图片来源：[优雅地使用命令行：Tmux 终端复用](https://harttle.land/2015/11/06/tmux-startup.html)_
 
 在有关的会话的操作上基本上以 `tmux` 命令为主，而有关窗口，窗格则以 prefix 快捷键位为主。

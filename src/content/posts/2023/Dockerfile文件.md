@@ -1,7 +1,7 @@
 ---
-title: "Dockerfile文件"
+title: 'Dockerfile文件'
 published: 2023-10-03
-tags: ["others"]
+tags: ['others']
 ---
 
 Dockerfile 是 Docker 构建自己的镜像使用的配置文件。

@@ -1,7 +1,7 @@
 ---
-title: "TSConfig参考"
+title: 'TSConfig参考'
 published: 2020-11-07
-tags: ["typescript"]
+tags: ['typescript']
 ---
 
 TSConfig 文件位于项目的根目录下，TSConfig 文件可以是 `tsconfig.json` 或 `jsconfig.json`。

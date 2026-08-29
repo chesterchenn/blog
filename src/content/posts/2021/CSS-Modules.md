@@ -1,7 +1,7 @@
 ---
-title: "CSS modules"
+title: 'CSS modules'
 published: 2021-02-09
-tags: ["css"]
+tags: ['css']
 ---
 
 A CSS Module is a CSS file in which all class names and animation names are scoped locally by default.
@@ -16,9 +16,9 @@ A CSS Module is a CSS file in which all class names and animation names are scop
 CSS 模块将我们编写的 CSS 编译成 [ICSS](https://github.com/css-modules/icss) 低层交换格式。
 
 ```jsx
-import styles from './index.module.css';
+import styles from './index.module.css'
 
-const App = () => <div className={styles.text}>Hello, CSS Modules.</div>;
+const App = () => <div className={styles.text}>Hello, CSS Modules.</div>
 ```
 
 ```css
@@ -68,7 +68,7 @@ module.exports = {
       },
     ],
   },
-};
+}
 ```
 
 这样子我们 css 文件不必以 `*.module.css` 文件结尾也可以使用 CSS Module。如果我们在 webpack 中未开启 `modules: true` 的选项，则会报错。

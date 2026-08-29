@@ -1,7 +1,7 @@
 ---
-title: "阅读图解React笔记10"
+title: '阅读图解React笔记10'
 published: 2022-12-25
-tags: ["react"]
+tags: ['react']
 ---
 
 本文仅仅是阅读 [图解 React 原理系列](https://7kms.github.io/react-illustration-series/) 的笔记，了解更多内容请查看原文链接。

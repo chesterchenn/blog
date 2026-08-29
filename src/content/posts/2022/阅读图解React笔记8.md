@@ -1,7 +1,7 @@
 ---
-title: "阅读图解React笔记8"
+title: '阅读图解React笔记8'
 published: 2022-12-21
-tags: ["react"]
+tags: ['react']
 ---
 
 本文仅仅是阅读 [图解 React 原理系列](https://7kms.github.io/react-illustration-series/) 的笔记，了解更多内容请查看原文链接。
@@ -240,7 +240,7 @@ export function renderWithHooks<Props, SecondArg>(
    ```js
    function updateXXX() {
      // 获取对应的 hook
-     const hook = updateWorkInProgressHook();
+     const hook = updateWorkInProgressHook()
      // 省略，执行 hook 自身的操作
    }
    ```

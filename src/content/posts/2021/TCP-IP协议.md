@@ -1,7 +1,7 @@
 ---
-title: "TCP/IP协议"
+title: 'TCP/IP协议'
 published: 2021-08-17
-tags: ["network"]
+tags: ['network']
 ---
 
 TCP/IP 协议包含两个核心协议：TCP（传输控制协议）和 IP（网际协议）。TCP 包含了逻辑编址，路由选择，域名解析，错误检测和流量控制等重要特征。

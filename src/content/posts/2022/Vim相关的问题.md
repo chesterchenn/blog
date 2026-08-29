@@ -1,7 +1,7 @@
 ---
-title: "Vim相关的问题"
+title: 'Vim相关的问题'
 published: 2022-09-03
-tags: ["linux"]
+tags: ['linux']
 ---
 
 一些 Vim 相关的问题。

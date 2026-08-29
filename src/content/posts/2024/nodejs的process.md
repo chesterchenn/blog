@@ -1,14 +1,14 @@
 ---
-title: "Nodejs 的 Process"
+title: 'Nodejs 的 Process'
 published: 2024-01-17
-tags: ["nodejs"]
+tags: ['nodejs']
 ---
 
 在 nodejs 开发中经常会遇到 process 变量，process 是一个全局变量，负责提供信息，以及控制当前 nodejs 进程。
 
 ```js
-const process = require('node:process');
-import process from 'node:process';
+const process = require('node:process')
+import process from 'node:process'
 ```
 
 <!-- vim-markdown-toc GFM -->

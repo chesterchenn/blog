@@ -1,7 +1,7 @@
 ---
-title: "虚拟DOM"
+title: '虚拟DOM'
 published: 2021-06-20
-tags: ["javascript", "react"]
+tags: ['javascript', 'react']
 ---
 
 Virtual DOM，虚拟 DOM 是 React 创建的一个树型自定义对象来代表真实 DOM。使得 React 可以快速操作这些对象，而不需实际接触到真实的 DOM 或者通过使用 DOM API。最后，当需要渲染的时候，可以使用这个虚拟 DOM 计算得出真实的 DOM，并把它渲染到浏览器上。
@@ -37,7 +37,7 @@ const element = {
   props: {
     title: 'foo',
     children: 'Hello',
-  }
+  },
 }
 ```
 
@@ -45,14 +45,14 @@ const element = {
 
 ```js
 const element = {
-  "$$typeof": Symbol("react.element"),
+  $$typeof: Symbol('react.element'),
   key: null,
   props: {
-    children: "Hello",
-    title: "foo",
+    children: 'Hello',
+    title: 'foo',
   },
   ref: null,
-  type: "h1",
+  type: 'h1',
 }
 ```
 
@@ -63,11 +63,11 @@ const element = {
   constructor: undefined,
   key: undefined,
   props: {
-    title: "foo",
-    children: "Hello",
+    title: 'foo',
+    children: 'Hello',
   },
   ref: undefined,
-  type: "h1",
+  type: 'h1',
 }
 ```
 
@@ -82,7 +82,7 @@ function createElement(type, props, children) {
     props: {
       ...props,
       children: arguments.length > 3 ? [].slice.call(arguments, 2) : children,
-    }
+    },
   }
 }
 ```

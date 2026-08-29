@@ -57,7 +57,9 @@ export const remarkGithubCard: Plugin<[], Root> = () => async (tree) => {
           if (!res.ok) throw new Error(`HTTP ${res.status}`)
           data = await res.json()
         } catch (e) {
-          console.warn(`[remark-github-card] Could not fetch repo "${repoName}": ${(e as Error).message}`)
+          console.warn(
+            `[remark-github-card] Could not fetch repo "${repoName}": ${(e as Error).message}`,
+          )
           return h('div', { class: 'github-card' }, [
             h('div', { class: 'gh-title' }, [
               h('a', { class: 'gh-text', href: realUrl }, [
@@ -125,7 +127,9 @@ export const remarkGithubCard: Plugin<[], Root> = () => async (tree) => {
           if (!res.ok) throw new Error(`HTTP ${res.status}`)
           data = await res.json()
         } catch (e) {
-          console.warn(`[remark-github-card] Could not fetch user "${repoName}": ${(e as Error).message}`)
+          console.warn(
+            `[remark-github-card] Could not fetch user "${repoName}": ${(e as Error).message}`,
+          )
           return h('div', { class: 'github-card' }, [
             h('div', { class: 'gh-title' }, [
               h('a', { class: 'gh-text', href: realUrl }, [

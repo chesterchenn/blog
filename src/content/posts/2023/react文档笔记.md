@@ -1,7 +1,7 @@
 ---
-title: "React 文档笔记"
+title: 'React 文档笔记'
 published: 2023-05-24
-tags: ["react"]
+tags: ['react']
 ---
 
 阅读 React 官方文档的部分笔记。
@@ -43,15 +43,15 @@ tags: ["react"]
 在组件内部定义另一个函数组件，这是一个不正确的做法，因为每次组件重新渲染的时候，内部定义的组件会重新初始化。
 
 ```jsx
-import { useState } from 'react';
+import { useState } from 'react'
 
 export default function MyComponent() {
-  const [counter, setCounter] = useState(0);
+  const [counter, setCounter] = useState(0)
 
   function MyTextField() {
-    const [text, setText] = useState('');
+    const [text, setText] = useState('')
 
-    return <input value={text} onChange={(e) => setText(e.target.value)} />;
+    return <input value={text} onChange={(e) => setText(e.target.value)} />
   }
 
   return (
@@ -59,13 +59,13 @@ export default function MyComponent() {
       <MyTextField />
       <button
         onClick={() => {
-          setCounter(counter + 1);
+          setCounter(counter + 1)
         }}
       >
         Clicked {counter} times
       </button>
     </>
-  );
+  )
 }
 ```
 
@@ -82,31 +82,31 @@ export default function MyComponent() {
 在默认情况下，当一个组件出现在相同的位置时，React 保持组件原有的状态。但有时会出现一些意外情况。
 
 ```jsx
-import { useState } from 'react';
+import { useState } from 'react'
 
 export default function Scoreboard() {
-  const [isPlayerA, setIsPlayerA] = useState(true);
+  const [isPlayerA, setIsPlayerA] = useState(true)
   return (
     <div>
       {isPlayerA ? <Counter person="Taylor" /> : <Counter person="Sarah" />}
       <button
         onClick={() => {
-          setIsPlayerA(!isPlayerA);
+          setIsPlayerA(!isPlayerA)
         }}
       >
         Next player!
       </button>
     </div>
-  );
+  )
 }
 
 function Counter({ person }) {
-  const [score, setScore] = useState(0);
-  const [hover, setHover] = useState(false);
+  const [score, setScore] = useState(0)
+  const [hover, setHover] = useState(false)
 
-  let className = 'counter';
+  let className = 'counter'
   if (hover) {
-    className += ' hover';
+    className += ' hover'
   }
 
   return (
@@ -120,7 +120,7 @@ function Counter({ person }) {
       </h1>
       <button onClick={() => setScore(score + 1)}>Add one</button>
     </div>
-  );
+  )
 }
 ```
 

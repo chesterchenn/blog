@@ -1,7 +1,7 @@
 ---
-title: "安装 Electron 相关的问题"
+title: '安装 Electron 相关的问题'
 published: 2023-06-10
-tags: ["electron"]
+tags: ['electron']
 ---
 
 在安装 Electron 依赖的时候经常会安装失败，是因为安装需要从 GitHub 下载，出现的网络无法连接，不稳定的原因。

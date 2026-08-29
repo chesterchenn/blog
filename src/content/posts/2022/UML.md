@@ -1,7 +1,7 @@
 ---
-title: "UML"
+title: 'UML'
 published: 2022-05-02
-tags: ["os"]
+tags: ['os']
 ---
 
 UML(Unified Modeling Language) 统一建模语言，是面向对象软件的标准化建模语言。

@@ -1,7 +1,7 @@
 ---
-title: "JS的类型转换"
+title: 'JS的类型转换'
 published: 2020-09-21
-tags: ["javascript"]
+tags: ['javascript']
 ---
 
 将值从一种类型转换为另一种类型通常称为*类型转换*（type casting）,这是显式的情况；隐式的情况称为*强制类型转换*（coercion）。 -- 《你不知道的 JavaScript》
@@ -62,8 +62,8 @@ object 转换成数字先转字符串，再转数字，否则抛出类型错误�
 - 只要 `||` 前面为 `true`，返回 `||` 前面的值，否则返回 `||` 后面的值
 
 ```js
-console.log(1 && 2); // 2
-console.log(1 || 0); // 1
+console.log(1 && 2) // 2
+console.log(1 || 0) // 1
 ```
 
 由上面可得知，我们只会对 `&&` 和 `||` 前面的操作数进行类型转换，根据类型转换结果返回操作数
@@ -71,11 +71,11 @@ console.log(1 || 0); // 1
 ```js
 // 默认值
 function func(a) {
-  a = a || 1000;
+  a = a || 1000
 }
 
 // 短路判断
-bool && done();
+bool && done()
 ```
 
 ## 隐式转换的规则
@@ -88,13 +88,13 @@ bool && done();
 - 对象和数字类型相等比较时，把对象转换成数字
 
 ```js
-NaN == NaN; /*  */ // false
-'' == 0; /*     */ // true
-'' == false; /* */ // true
-'' == []; /*    */ // true
-'' == {}; /*    */ // false {}转成字符串 [object Object]
-null == undefined; // true
-[] == ![]; /*   */ // true 操作符!优先级更高，![] 会被转换成 false，所以题目 [] == false
+NaN == NaN /*  */ // false
+'' == 0 /*     */ // true
+'' == false /* */ // true
+'' == [] /*    */ // true
+'' == {} /*    */ // false {}转成字符串 [object Object]
+null == undefined // true
+;[] == ![] /*   */ // true 操作符!优先级更高，![] 会被转换成 false，所以题目 [] == false
 ```
 
 ## + 和 -
@@ -104,25 +104,25 @@ null == undefined; // true
 `-` 是数字减法运算符，只用于数字，因此会将字符串类型转换为数字。
 
 ```js
-'a' + 1; // "a1"
-'2' + 1; // "21"
-'a' - 1; // NaN
-'3' - 1; // 2
-'b' - 'a'; // NaN
-'3' + 2 - 1; // 31
-5 + +'3.14'; // 8.14
+'a' + 1 // "a1"
+'2' + 1 // "21"
+'a' - 1 // NaN
+'3' - 1 // 2
+'b' - 'a' // NaN
+'3' + 2 - 1 // 31
+5 + +'3.14' // 8.14
 ```
 
 ## 位运算
 
 ```js
-const PI = '3.14';
-'' + PI; /* */ // '3.14' to String
-~~PI; /*    */ // 3 to integer
-+PI; /*     */ // 3.14
-1 * PI; /*  */ // 3.14 to float
-!!PI; /*    */ // true to boolean
-[PI]; /*    */ // ['3.14'] to array
+const PI = '3.14'
+'' + PI /* */ // '3.14' to String
+~~PI /*    */ // 3 to integer
+;+PI /*     */ // 3.14
+1 * PI /*  */ // 3.14 to float
+!!PI /*    */ // true to boolean
+;[PI] /*    */ // ['3.14'] to array
 ```
 
 ## 参考链接

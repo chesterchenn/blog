@@ -1,7 +1,7 @@
 ---
-title: "ES6 Features"
+title: 'ES6 Features'
 published: 2018-07-24
-tags: ["javascript"]
+tags: ['javascript']
 ---
 
 ECMAScript 6，也称为 ECMAScript 2015，是 ECMAScript 最新版本(注: 已经不是最新版本)。ES6 对于这门语言来说是一个很重要的更新，而且这是 2009 年后的 ES5 标准之后的第一次更新。现在主流的 JavaScript 引擎都已经实现这些功能——[查看详情](http://kangax.github.io/compat-table/es6/)。
@@ -44,23 +44,23 @@ ES6 包含以下新功能：
 
 ```js
 // 表达式体
-var odds = evens.map((v) => v + 1);
-var nums = evens.map((v, i) => v + i);
-var pairs = evens.map((v) => ({ even: v, odd: v + 1 }));
+var odds = evens.map((v) => v + 1)
+var nums = evens.map((v, i) => v + i)
+var pairs = evens.map((v) => ({ even: v, odd: v + 1 }))
 
 // 语句式体
 nums.forEach((v) => {
-  if (v % 5 === 0) fives.push(v);
-});
+  if (v % 5 === 0) fives.push(v)
+})
 
 // 词法this
 var bob = {
   _name: 'Bob',
   _friends: [],
   printFriends() {
-    this._friend.forEach((f) => console.log(_this.name + ' knows ' + f));
+    this._friend.forEach((f) => console.log(_this.name + ' knows ' + f))
   },
-};
+}
 ```
 
 更多信息: [MDN Arrow Functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
@@ -72,25 +72,25 @@ ES6 的类是基于原型继承的面向对象简易语法糖，这使得有一�
 ```js
 class SkinnedMesh extends THREE.Mesh {
   constructor(geometry, materials) {
-    super(geometry, materials);
+    super(geometry, materials)
 
-    this.idMatrix = SkinnedMesh.defaultMatrix();
-    this.bones = [];
-    this.boneMatrices = [];
+    this.idMatrix = SkinnedMesh.defaultMatrix()
+    this.bones = []
+    this.boneMatrices = []
     //...
   }
   update(camera) {
     //...
-    super.update();
+    super.update()
   }
   get boneCount() {
-    return this.bones.length;
+    return this.bones.length
   }
   set matrixType(matrixType) {
-    this.idMatrix = SkinnedMesh[matrixType]();
+    this.idMatrix = SkinnedMesh[matrixType]()
   }
   static defaultMatrix() {
-    return new THREE.Matrix4();
+    return new THREE.Matrix4()
   }
 }
 ```
@@ -110,11 +110,11 @@ var obj = {
   // 方法
   toString() {
     // Super调用
-    return 'd ' + super.toString();
+    return 'd ' + super.toString()
   },
   // （动态）计算属性名称
   ['prop_' + (() => 42)()]: 42,
-};
+}
 ```
 
 更多信息: [MDN Grammar and types: Enhanced Object literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#Enhanced_Object_literals)
@@ -125,21 +125,21 @@ var obj = {
 
 ```js
 // 创建基本字符串面量
-`In JavaScript '\n' is a line-feed.` // 多行字符串
+;`In JavaScript '\n' is a line-feed.` // 多行字符串
 `In JavaScript this is
- not legal.`;
+ not legal.`
 
 // 字符串插值
 var name = 'Bob',
-  time = 'today';
-`Hello ${name}, how are you ${time}?`;
+  time = 'today'
+;`Hello ${name}, how are you ${time}?`
 
 // 构建一个HTTP请求前缀使用插值的替换和构造
 POST`http://foo.org/bar?a=${a}&b=${b}
      Content-Type: application/json
      X-Credentials: ${credentials}
      { "foo": ${foo},
-       "bar": ${bar}}`(myOnReadyStateChangeHandler);
+       "bar": ${bar}}`(myOnReadyStateChangeHandler)
 ```
 
 更多信息: [MDN Template Strings](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/template_strings)
@@ -150,31 +150,31 @@ POST`http://foo.org/bar?a=${a}&b=${b}
 
 ```js
 // 匹配数组
-var [a, , b] = [1, 2, 3];
+var [a, , b] = [1, 2, 3]
 
 // 匹配对象
 var {
   op: a,
   lhs: { op: b },
   rhs: c,
-} = getASTNode();
+} = getASTNode()
 
 // 匹配对象作用域的'op', 'lhs', 'rhs'
-var { op, lhs, rhs } = getASTNode();
+var { op, lhs, rhs } = getASTNode()
 
 // 作为参数
 function g({ name: x }) {
-  console.log(x);
+  console.log(x)
 }
-g({ name: 5 });
+g({ name: 5 })
 
 // 解构故障弱化
-var [a] = [];
-a === undefined;
+var [a] = []
+a === undefined
 
 // 带默认值的的解构赋值故障弱化
-var [a = 1] = [];
-a === 1;
+var [a = 1] = []
+a === 1
 ```
 
 更多信息：[MDN Destructuring assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
@@ -186,25 +186,25 @@ a === 1;
 ```js
 function f(x, y = 12) {
   // 如果y没有传值或者被传入undefined，那么y的值为12
-  return x + y;
+  return x + y
 }
-f(3) == 15;
+f(3) == 15
 ```
 
 ```js
 function f(x, ...y) {
   // y是一个数组
-  return x * y.length;
+  return x * y.length
 }
-f(3, 'hello', true) == 6;
+f(3, 'hello', true) == 6
 ```
 
 ```js
 function f(x, y, z) {
-  return x + y + z;
+  return x + y + z
 }
 // 传递数组里的每一个元素作为参数
-f(...[1, 2, 3]) == 6;
+f(...[1, 2, 3]) == 6
 ```
 
 更多信息：[Default parameters][default], [Rest parameters][rest], [Spread Operator][spread]
@@ -220,15 +220,15 @@ f(...[1, 2, 3]) == 6;
 ```js
 function f() {
   {
-    let x;
+    let x
     {
       // 正常，块作用域里的名称
-      const x = 'sneaky';
+      const x = 'sneaky'
       // 错误，x是常量
-      x = 'foo';
+      x = 'foo'
     }
     // 错误，在块里面已经被声明
-    let x = 'inner';
+    let x = 'inner'
   }
 }
 ```
@@ -244,20 +244,20 @@ function f() {
 let fibonacci = {
   [Symbol.iterator]() {
     let pre = 0,
-      cur = 1;
+      cur = 1
     return {
       next() {
-        [pre, cur] = [cur, pre + cur];
-        return { done: false, value: cur };
+        ;[pre, cur] = [cur, pre + cur]
+        return { done: false, value: cur }
       },
-    };
+    }
   },
-};
+}
 
 for (var n of fibonacci) {
   // 缩减数列到1000
-  if (n > 1000) break;
-  console.log(n);
+  if (n > 1000) break
+  console.log(n)
 }
 ```
 
@@ -265,14 +265,14 @@ for (var n of fibonacci) {
 
 ```ts
 interface IteratorResult {
-  done: boolean;
-  value: any;
+  done: boolean
+  value: any
 }
 interface Iterator {
-  next(): IteratorResult;
+  next(): IteratorResult
 }
 interface Iterable {
-  [Symbol.iterator](): Iterator;
+  [Symbol.iterator](): Iterator
 }
 ```
 
@@ -288,20 +288,20 @@ interface Iterable {
 var fibonacci = {
   [Symbol.iterator]: function* () {
     var pre = 0,
-      cur = 1;
+      cur = 1
     for (;;) {
-      var temp = pre;
-      pre = cur;
-      cur += temp;
-      yield cur;
+      var temp = pre
+      pre = cur
+      cur += temp
+      yield cur
     }
   },
-};
+}
 
 for (var n of fibonacci) {
   // 缩减数列到1000
-  if (n > 1000) break;
-  console.log(n);
+  if (n > 1000) break
+  console.log(n)
 }
 ```
 
@@ -309,8 +309,8 @@ for (var n of fibonacci) {
 
 ```ts
 interface Generator extends Iterator {
-  next(value?: any): IteratorResult;
-  throw(exception: any);
+  next(value?: any): IteratorResult
+  throw(exception: any)
 }
 ```
 
@@ -322,20 +322,20 @@ interface Generator extends Iterator {
 
 ```js
 // 等同于ES5.1
-'𠮷'.length == 2;
+'𠮷'.length == 2
 
 // 新的正则表达式, 内置‘u’
-'𠮷'.match(/./u)[0].length == 2;
+'𠮷'.match(/./u)[0].length == 2
 
 // 新形式
-('\u{20BB7}' == '𠮷') == '\uD842\uDFB7';
+;('\u{20BB7}' == '𠮷') == '\uD842\uDFB7'
 
 // 新的字符串操作
-'𠮷'.codePointAt(0) == 0x20bb7;
+'𠮷'.codePointAt(0) == 0x20bb7
 
 // for-of迭代位码
 for (var c of '𠮷') {
-  console.log(c);
+  console.log(c)
 }
 ```
 
@@ -348,38 +348,38 @@ for (var c of '𠮷') {
 ```js
 // lib/math.js
 export function sum(x, y) {
-  return x + y;
+  return x + y
 }
-export var pi = 3.141593;
+export var pi = 3.141593
 ```
 
 ```js
 // app.js
-import * as math from 'lib/math';
-alert('2π = ' + math.sum(math.pi, math.pi));
+import * as math from 'lib/math'
+alert('2π = ' + math.sum(math.pi, math.pi))
 ```
 
 ```js
 // otherApp.js
-import { sum, pi } from 'lib/math';
-alert('2π = ' + sum(pi, pi));
+import { sum, pi } from 'lib/math'
+alert('2π = ' + sum(pi, pi))
 ```
 
 一些额外的新增功能，包括`export default`以及`export *`
 
 ```js
 // lib/mathplusplus.js
-export * from 'lib/math';
-export var e = 2.71828182846;
+export * from 'lib/math'
+export var e = 2.71828182846
 export default function (x) {
-  return Math.log(x);
+  return Math.log(x)
 }
 ```
 
 ```js
 // app.js
-import ln, { pi, e } from 'lib/mathplusplus';
-alert('2π = ' + ln(e) * pi * 2);
+import ln, { pi, e } from 'lib/mathplusplus'
+alert('2π = ' + ln(e) * pi * 2)
 ```
 
 更多信息: [import statement](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import), [export statement](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export)
@@ -399,18 +399,18 @@ alert('2π = ' + ln(e) * pi * 2);
 ```js
 // 动态加载 – ‘System’ 是默认的加载器
 System.import('lib/math').then(function (m) {
-  alert('2π = ' + m.sum(m.pi, m.pi));
-});
+  alert('2π = ' + m.sum(m.pi, m.pi))
+})
 
 // 创建一个执行沙盒 - 新的加载器
 var loader = new Loader({
   global: fixup(window), // replace ‘console.log’
-});
-loader.eval("console.log('hello world!');");
+})
+loader.eval("console.log('hello world!');")
 
 // 直接操作模块缓存
-System.get('jquery');
-System.set('jquery', Module({ $: $ })); // 警告: 尚未最终确定
+System.get('jquery')
+System.set('jquery', Module({ $: $ })) // 警告: 尚未最终确定
 ```
 
 ### Map + Set + Weakmap + Weakset
@@ -419,31 +419,31 @@ System.set('jquery', Module({ $: $ })); // 警告: 尚未最终确定
 
 ```js
 // Sets
-var s = new Set();
-s.add('hello').add('goodbye').add('hello');
-s.size === 2;
-s.has('hello') === true;
+var s = new Set()
+s.add('hello').add('goodbye').add('hello')
+s.size === 2
+s.has('hello') === true
 ```
 
 ```js
 // Maps
-var m = new Map();
-m.set('hello', 42);
-m.set(s, 34);
-m.get(s) == 34;
+var m = new Map()
+m.set('hello', 42)
+m.set(s, 34)
+m.get(s) == 34
 ```
 
 ```js
 // Weak Maps
-var wm = new WeakMap();
-wm.set(s, { extra: 42 });
-wm.size === undefined;
+var wm = new WeakMap()
+wm.set(s, { extra: 42 })
+wm.size === undefined
 ```
 
 ```js
 // Weak Sets
-var ws = new WeakSet();
-ws.add({ data: 42 });
+var ws = new WeakSet()
+ws.add({ data: 42 })
 // 因为增加的对象没有其他的参值，所以在set不会被持有
 ```
 
@@ -460,30 +460,30 @@ ws.add({ data: 42 });
 
 ```js
 // 代理一个普通的对象
-var target = {};
+var target = {}
 var handler = {
   get: function (receiver, name) {
-    return `Hello, ${name}!`;
+    return `Hello, ${name}!`
   },
-};
+}
 
-var p = new Proxy(target, handler);
-p.world === 'Hello, world!';
+var p = new Proxy(target, handler)
+p.world === 'Hello, world!'
 ```
 
 ```js
 // 代理一个函数对象
 var target = function () {
-  return 'I am the target';
-};
+  return 'I am the target'
+}
 var handler = {
   apply: function (receiver, ...args) {
-    return 'I am the proxy';
+    return 'I am the proxy'
   },
-};
+}
 
-var p = new Proxy(target, handler);
-p() === 'I am the proxy';
+var p = new Proxy(target, handler)
+p() === 'I am the proxy'
 ```
 
 这里是所有在运行级别的元操作的`trap`(`trap`: 提供属性访问的方法)
@@ -564,16 +564,16 @@ class Array {
 // 数组子类的用户代码
 class MyArray extends Array {
   constructor(...args) {
-    super(...args);
+    super(...args)
   }
 }
 
 // Two-phase 'new':
 // 1) 调用 @@create 申请对象
 // 2) 在新实例上调用构造函数
-var arr = new MyArray();
-arr[1] = 12;
-arr.length == 2;
+var arr = new MyArray()
+arr[1] = 12
+arr.length == 2
 ```
 
 ### Promises
@@ -583,20 +583,20 @@ Promise 是一个异步编程的库，Promise 是将来可能提供的值的最�
 ```js
 function timeout(duration = 0) {
   return new Promise((resolve, reject) => {
-    setTimeout(resolve, duration);
-  });
+    setTimeout(resolve, duration)
+  })
 }
 
 var p = timeout(1000)
   .then(() => {
-    return timeout(2000);
+    return timeout(2000)
   })
   .then(() => {
-    throw new Error('hmm');
+    throw new Error('hmm')
   })
   .catch((err) => {
-    return Promise.all([timeout(100), timeout(200)]);
-  });
+    return Promise.all([timeout(100), timeout(200)])
+  })
 ```
 
 更多信息：[MDN Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
@@ -606,18 +606,18 @@ var p = timeout(1000)
 许多新的库被增加，包括核心的数学库，数组转换，字符串和用来拷贝的`Object.assign`方法
 
 ```js
-Number.EPSILON;
-Number.isInteger(Infinity); // false
-Number.isNaN('NaN'); // false
+Number.EPSILON
+Number.isInteger(Infinity) // false
+Number.isNaN('NaN') // false
 
-Math.acosh(3); // 1.762747174039086
-Math.hypot(3, 4); // 5
-Math.imul(Math.pow(2, 32) - 1, Math.pow(2, 32) - 2); // 2
+Math.acosh(3) // 1.762747174039086
+Math.hypot(3, 4) // 5
+Math.imul(Math.pow(2, 32) - 1, Math.pow(2, 32) - 2) // 2
 
-'abcde'.includes('cd'); // true
-'abc'.repeat(3); // "abcabcabc"
+'abcde'.includes('cd') // true
+'abc'.repeat(3) // "abcabcabc"
 
-Array.from(document.querySelectorAll('*')); // 返回一个数组
+Array.from(document.querySelectorAll('*')) // 返回一个数组
 Array.of(1, 2, 3) // 类似new Array(...), 但不用指明第一个参数
   [(0, 0, 0)].fill(7, 1) // [0,7,7]
   [(1, 2, 3)].find((x) => x == 3) // 3
@@ -625,9 +625,9 @@ Array.of(1, 2, 3) // 类似new Array(...), 但不用指明第一个参数
   [(1, 2, 3, 4, 5)].copyWithin(3, 0) // [1, 2, 3, 1, 2]
   [('a', 'b', 'c')].entries() // iterator [0, "a"], [1,"b"], [2,"c"]
   [('a', 'b', 'c')].keys() // iterator 0, 1, 2
-  [('a', 'b', 'c')].values(); // iterator "a", "b", "c"
+  [('a', 'b', 'c')].values() // iterator "a", "b", "c"
 
-Object.assign(Point, { origin: new Point(0, 0) });
+Object.assign(Point, { origin: new Point(0, 0) })
 ```
 
 更多信息: [Number][number], [Math][math], [Array.from][arrayf], [Array.of][arrayo], [Array.prototype.copyWithin][arraypc], [Object.assign][objectAssign]
@@ -644,8 +644,8 @@ Object.assign(Point, { origin: new Point(0, 0) });
 两个新的数字字面量被增加的，二进制(b)和八进制(o)
 
 ```js
-0b111110111 === 503; // true
-0o767 === 503; // true
+0b111110111 === 503 // true
+0o767 === 503 // true
 ```
 
 ### Reflect Api

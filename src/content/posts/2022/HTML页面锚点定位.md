@@ -1,7 +1,7 @@
 ---
-title: "HTML页面锚点定位"
+title: 'HTML页面锚点定位'
 published: 2022-03-07
-tags: ["javascript"]
+tags: ['javascript']
 ---
 
 在 HTML 页面内实现锚点定位和跳转。
@@ -45,17 +45,17 @@ tags: ["javascript"]
 ```
 
 ```js
-const A = document.getElementById('btnA');
-const B = document.getElementById('btnB');
-const C = document.getElementById('btnC');
+const A = document.getElementById('btnA')
+const B = document.getElementById('btnB')
+const C = document.getElementById('btnC')
 
 function handleClick(id) {
-  document.getElementById(id).scrollIntoView();
+  document.getElementById(id).scrollIntoView()
 }
 
-A.addEventListener('click', () => handleClick('A'));
-B.addEventListener('click', () => handleClick('B'));
-C.addEventListener('click', () => handleClick('C'));
+A.addEventListener('click', () => handleClick('A'))
+B.addEventListener('click', () => handleClick('B'))
+C.addEventListener('click', () => handleClick('C'))
 ```
 
 实例代码：[锚点跳转-scrollIntoView](https://codesandbox.io/s/mao-dian-tiao-zhuan-scrollintoview-gmwgm2)

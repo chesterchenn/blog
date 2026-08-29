@@ -1,7 +1,7 @@
 ---
-title: "阅读图解React笔记6"
+title: '阅读图解React笔记6'
 published: 2022-12-05
-tags: ["react"]
+tags: ['react']
 ---
 
 本文仅仅是阅读 [图解 React 原理系列](https://7kms.github.io/react-illustration-series/) 的笔记，了解更多内容请查看原文链接。
@@ -40,22 +40,22 @@ React 中有三种节点类型：
 ```js
 // FiberNode 构造函数
 function FiberNode(tag, pendingProps, key, mode) {
-  this.tag = tag;
-  this.key = key;
-  this.elementType = null;
-  this.type = null;
-  this.stateNode = null;
+  this.tag = tag
+  this.key = key
+  this.elementType = null
+  this.type = null
+  this.stateNode = null
 
   // 省略
 
   // Fiber 架构是由多个 FiberNode 组成的树状结构。
   // FiberNode 之间的关系是由如下属性连接。
   // 指向父 FiberNode
-  this.return = null;
+  this.return = null
   // 指向第一个子节点
-  this.child = null;
+  this.child = null
   // 指向右边的兄弟节点
-  this.sibling = null;
+  this.sibling = null
 }
 ```
 
@@ -121,8 +121,8 @@ React 中双缓冲技术（double buffering）是指 Fiber 架构同时存在两
 
 ```js
 // alternate 属性指向缓冲区的对应 FiberNode
-current.alternate === workInProgress;
-workInProgress.alternate === current;
+current.alternate === workInProgress
+workInProgress.alternate === current
 ```
 
 ## 优先级
@@ -274,7 +274,7 @@ function beginWork(current, workInProgress, renderLanes) {
   }
 
   // 最高优先级
-  workInProgress.lanes = NoLanes;
+  workInProgress.lanes = NoLanes
 
   // 根据 tag 不同，进入不同的处理逻辑
   switch (workInProgress.tag) {

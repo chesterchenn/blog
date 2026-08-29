@@ -1,7 +1,7 @@
 ---
-title: "React 中的 diff 算法"
+title: 'React 中的 diff 算法'
 published: 2023-05-16
-tags: ["react"]
+tags: ['react']
 ---
 
 React diff 算法就是发生在 reconcile 阶段

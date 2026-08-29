@@ -1,7 +1,7 @@
 ---
-title: "NodeJS 的使用"
+title: 'NodeJS 的使用'
 published: 2020-11-02
-tags: ["nodejs"]
+tags: ['nodejs']
 ---
 
 遇到的 NodeJS 的使用情况，如全局全文，清除缓存，指定缓存目录等。

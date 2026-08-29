@@ -1,7 +1,7 @@
 ---
-title: "阅读图解React笔记1"
+title: '阅读图解React笔记1'
 published: 2022-11-21
-tags: ["react"]
+tags: ['react']
 ---
 
 本文仅仅是阅读 [图解 React 原理系列](https://7kms.github.io/react-illustration-series/) 的笔记，了解更多内容请查看原文链接。
@@ -37,14 +37,12 @@ React 下有 34 个包，Web 相关的核心包有 4 各，分别是 react，rea
 2. react-dom
 
    react 渲染器之一，将 react-reconciler 的运行结果输出到 web 上。
-
    - 引导 react 应用的启动（通过 ReactDOM.render）
    - 实现 HostConfig 协议（ReactDOMHostConfig.js），能够将 react-reconciler 包构造出来的 fiber 树表现出来，生成 DOM 节点。
 
 3. react-reconciler
 
    react 调和机制，接受输入（shceduleUpdateOnFiber），将 fiber 树生成逻辑封装到一个回调函数（涉及 fiber 树形结构，fiber.updateQueue 队列，调和算法等）中。将此回调函数送入 scheduler 进行调度。
-
    - 装载渲染器，保证在需要的时候，能够正确调用渲染器的 API，生成实际节点。
    - 接收 react-dom 包 和 react 包发起的更新请求。
    - 将 fiber 树的构造过程包装在一个回调函数中，将其传给 scheduler 等待调度。
@@ -52,7 +50,6 @@ React 下有 34 个包，Web 相关的核心包有 4 各，分别是 react，rea
 4. scheduler
 
    调度机制的实现，控制由 react-reconciler 送入的回调函数执行时机。
-
    - 将 react-reconciler 提供的回调函数，包装到一个任务对象中。
    - 在内部维护一个任务队列，优先级高的排在最前面。
    - 循环消费任务队列，直到任务队列清空。
@@ -124,7 +121,6 @@ export type ReactElement = {
 1. key 属性在`reconciler`阶段会用到, 目前只需要知道所有的`ReactElement`对象都有 key 属性，默认值为 null。
 
 2. type 属性决定了类型的种类：
-
    1. 它有三种类型的值：字符串（div, span 等 dom 节点），函数(function, class 等节点)，react 内部定义的节点类型（portal, context, fragment 等）。它有 21 种（v18.2.0）内部定义的节点，可以在 shared/ReactSymbols.js 中查看。
 
    2. 在 reconciler 阶段，会根据 type 执行不同的逻辑：
@@ -353,7 +349,7 @@ var newTask = {
   priorityLevel,
   expirationTime,
   sortIndex: -1,
-};
+}
 ```
 
 相关说明：

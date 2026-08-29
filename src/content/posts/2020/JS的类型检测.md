@@ -1,7 +1,7 @@
 ---
-title: "JS的类型检测"
+title: 'JS的类型检测'
 published: 2020-07-24
-tags: ["javascript"]
+tags: ['javascript']
 ---
 
 类型是值的内部特征，它定义了值的行为，以使其区别于其他值。
@@ -39,8 +39,8 @@ typeof 返回的结果是字符串，有以下：
    使用复合条件检测 null 类型:
 
    ```js
-   var a = null;
-   !a && typeof a === 'object'; // true
+   var a = null
+   !a && typeof a === 'object' // true
    ```
 
 2. `typeof <function>` 会返回 "function"
@@ -52,9 +52,9 @@ typeof 返回的结果是字符串，有以下：
 已在作用域中声明但未赋值的变量，是 undefined 的。还没有在作用域中声明过的变量，是 undeclared 的。
 
 ```js
-var a;
-a; // undefined
-b; // ReferenceError: b is not defined
+var a
+a // undefined
+b // ReferenceError: b is not defined
 ```
 
 "undefined" 和 "is not defined" 不是同一回事。
@@ -62,9 +62,9 @@ b; // ReferenceError: b is not defined
 注意：但是 typeof 处理 undeclared 变量又很特别
 
 ```js
-var a;
-typeof a; // "undefined"
-typeof b; // "undefined"
+var a
+typeof a // "undefined"
+typeof b // "undefined"
 ```
 
 ## instanceof
@@ -81,19 +81,19 @@ typeof b; // "undefined"
 每个对象实例可以通过 constructor 对象访问其构造函数。可以以此来判断一些内置构造函数：Object、Array、Function、Date、RegExp、Map、Set、String 等。
 
 ```js
-const date = new Date();
-const set = new Set();
-const map = new Map();
-const reg = /\w/;
-const arr = [];
-const obj = {};
+const date = new Date()
+const set = new Set()
+const map = new Map()
+const reg = /\w/
+const arr = []
+const obj = {}
 
-date.constructor === Date; // true
-set.constructor === Set; // true
-map.constructor === Map; // true
-reg.constructor === RegExp; // true
-arr.constructor === Array; // true
-obj.constructor === Object; // true
+date.constructor === Date // true
+set.constructor === Set // true
+map.constructor === Map // true
+reg.constructor === RegExp // true
+arr.constructor === Array // true
+obj.constructor === Object // true
 ```
 
 ## 参考链接

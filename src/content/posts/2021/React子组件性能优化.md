@@ -1,7 +1,7 @@
 ---
-title: "React子组件性能优化"
+title: 'React子组件性能优化'
 published: 2021-11-16
-tags: ["react"]
+tags: ['react']
 ---
 
 在 React 中，父组件的重新 render 会引发子组件的重新 render。
@@ -11,24 +11,24 @@ tags: ["react"]
 类组件
 
 ```tsx
-import React from 'react';
+import React from 'react'
 
 class Child extends React.Component {
   render() {
-    console.log('child render');
-    return <>This is Child Component</>;
+    console.log('child render')
+    return <>This is Child Component</>
   }
 }
 
 export default class App extends React.Component {
   state = {
     count: 0,
-  };
+  }
   handleClick = () => {
     this.setState({
       count: this.state.count + 1,
-    });
-  };
+    })
+  }
   render() {
     return (
       <>
@@ -38,7 +38,7 @@ export default class App extends React.Component {
         </div>
         <Child />
       </>
-    );
+    )
   }
 }
 ```
@@ -46,15 +46,15 @@ export default class App extends React.Component {
 函数组件
 
 ```tsx
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 
 function Child() {
-  console.log('child render');
-  return <>This is Child Component</>;
+  console.log('child render')
+  return <>This is Child Component</>
 }
 
 export default function App() {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(0)
   return (
     <>
       <div>
@@ -63,7 +63,7 @@ export default function App() {
       </div>
       <Child />
     </>
-  );
+  )
 }
 ```
 
@@ -82,8 +82,8 @@ export default function App() {
 ```tsx
 class Child extends React.PureComponent {
   render() {
-    console.log('child render');
-    return <>This is Child Component</>;
+    console.log('child render')
+    return <>This is Child Component</>
   }
 }
 ```
@@ -99,11 +99,11 @@ PureComponent 中的 shouldComponentUpdate() 仅作对象的浅层比较。如�
 ```jsx
 class Child extends React.Component {
   shouldComponentUpdate() {
-    return false;
+    return false
   }
   render() {
-    console.log('child render');
-    return <>This is Child Component</>;
+    console.log('child render')
+    return <>This is Child Component</>
   }
 }
 ```
@@ -123,17 +123,17 @@ React.memo 是一个高阶组件，所以它的语法如下：
 ```jsx
 const MyComponent = React.memo(function MyComponent(props) {
   /* render using props */
-});
+})
 ```
 
 ```tsx
 const Child = React.memo(function Child() {
-  console.log('child render');
-  return <>This is Child Component</>;
-});
+  console.log('child render')
+  return <>This is Child Component</>
+})
 ```
 
-如果组件在相同的 props 的情况下渲染相同的结果，那么可以通过包装在 React.memo 中调用，以此通过记忆组件渲染结果来提高组件的性能。React.memo  仅检查 props 变更，如果实现中拥有 useState、useReducer或useContext 的 Hook，当 state 或 context 发生变化时，它仍会重新渲染。
+如果组件在相同的 props 的情况下渲染相同的结果，那么可以通过包装在 React.memo 中调用，以此通过记忆组件渲染结果来提高组件的性能。React.memo 仅检查 props 变更，如果实现中拥有 useState、useReducer或useContext 的 Hook，当 state 或 context 发生变化时，它仍会重新渲染。
 
 ## 参考链接
 

@@ -1,7 +1,7 @@
 ---
-title: "SSH端口转发"
+title: 'SSH端口转发'
 published: 2022-04-07
-tags: ["network", "linux"]
+tags: ['network', 'linux']
 ---
 
 SSH 端口转发也被称为 SSH 隧道。

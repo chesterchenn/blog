@@ -1,7 +1,7 @@
 ---
-title: "React Router的模式及原理"
+title: 'React Router的模式及原理'
 published: 2023-05-17
-tags: ["react"]
+tags: ['react']
 ---
 
 React Router 主要有两种模式：Hash 模式和 History 模式。

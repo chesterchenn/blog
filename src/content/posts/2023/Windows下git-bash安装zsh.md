@@ -1,7 +1,7 @@
 ---
-title: "Windows 下 git-bash 安装 zsh"
+title: 'Windows 下 git-bash 安装 zsh'
 published: 2023-06-30
-tags: ["windows"]
+tags: ['windows']
 ---
 
 在习惯使用了 oh-my-zsh 的 git 插件之后，切换到 Windows 下的 git-bash 使用时，会经常敲出 `gst`，`gcam` 等快捷缩写命令，从而引起 git-bash 报错，提示命令不存在，很不方便。

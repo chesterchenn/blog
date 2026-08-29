@@ -1,7 +1,7 @@
 ---
-title: "VSCode插件与主题"
+title: 'VSCode插件与主题'
 published: 2020-12-21
-tags: ["others"]
+tags: ['others']
 ---
 
 VSCode 的插件，主题以及设置等。
@@ -58,16 +58,6 @@ VSCode 的插件，主题以及设置等。
 
 一个基础的代码和文档拼写检查工具。
 
-### Codeium
-
-智能 AI 补全工具。需要从 GitHub 下载语言服务包。由于容易下载失败，所以可以手动下载。
-
-1. 从 GitHub 下载 `language_server_windows_x64.exe.gz`，替换链接中的版本号，选择对应的文件下载即可。
-
-   [https://github.com/Exafunction/codeium/releases/tag/language-server-v1.10.8](https://github.com/Exafunction/codeium/releases/tag/language-server-v1.10.8)
-
-2. 解压到 `%USERPROFILE%\.vscode\extensions\codeium.codeium-<version>\dist\<uuid>` 目录里即可。
-
 ## 主题
 
 主题类的合集。
@@ -75,19 +65,17 @@ VSCode 的插件，主题以及设置等。
 ### Catppuccin
 
 <div style="text-align: center">Latte</div>
+
 ![Latte](https://raw.githubusercontent.com/catppuccin/vscode/main/assets/latte.webp)
 
 <div style="text-align: center; margin-top: 20px">Frappé</div>
+
 ![Frappé](https://github.com/catppuccin/vscode/raw/main/assets/frappe.webp)
 
 <div style="text-align: center; margin-top: 20px">Macchiato</div>
+
 ![Macchiato](https://github.com/catppuccin/vscode/raw/main/assets/macchiato.webp)
 
 <div style="text-align: center; margin-top: 20px">Mocha</div>
+
 ![Mocha](https://github.com/catppuccin/vscode/raw/main/assets/mocha.webp)
-
-### Dracula Official
-
-吸血鬼主题，仓库链接：[https://github.com/dracula/visual-studio-code](https://github.com/dracula/visual-studio-code)
-
-![screenshot](https://raw.githubusercontent.com/dracula/visual-studio-code/master/screenshot.png)

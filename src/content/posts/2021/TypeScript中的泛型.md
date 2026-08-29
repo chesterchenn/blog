@@ -1,7 +1,7 @@
 ---
-title: "TypeScript中的泛型"
+title: 'TypeScript中的泛型'
 published: 2021-11-18
-tags: ["typescript"]
+tags: ['typescript']
 ---
 
 泛型（generics），在 C# 和 Java 这样的语言中，可以使用泛型来创建可重用的组件，一个组件可以支持多种类型的组件。
@@ -10,7 +10,7 @@ tags: ["typescript"]
 
 ```typescript
 function identity<T>(arg: T): T {
-  return arg;
+  return arg
 }
 ```
 
@@ -21,10 +21,10 @@ function identity<T>(arg: T): T {
 ```typescript
 // 函数实现
 function identity<Type>(arg: Type): Type {
-  return arg;
+  return arg
 }
 
-let myIdentity: <Type>(arg: Type) => Type = identity;
+let myIdentity: <Type>(arg: Type) => Type = identity
 ```
 
 使用类型别名声明泛型函数类型
@@ -32,13 +32,13 @@ let myIdentity: <Type>(arg: Type) => Type = identity;
 ```typescript
 // 函数实现
 function identity<T>(arg: T): T {
-  return arg;
+  return arg
 }
 
 // 类型别名
-type Identity = <T>(arg: T) => T;
+type Identity = <T>(arg: T) => T
 
-let myIdentity: Identity = identity;
+let myIdentity: Identity = identity
 ```
 
 泛型接口
@@ -46,15 +46,15 @@ let myIdentity: Identity = identity;
 ```typescript
 // 泛型接口
 interface GenericsIdentityFn {
-  <Type>(arg: Type): Type;
+  <Type>(arg: Type): Type
 }
 
 // 函数实现
 function identity<Type>(arg: Type): Type {
-  return arg;
+  return arg
 }
 
-let myIdentity: GenericsIdentityFn = identity;
+let myIdentity: GenericsIdentityFn = identity
 ```
 
 ## 泛型类
@@ -80,8 +80,8 @@ myNumber.add = function (x, y) {
 
 ```typescript
 function logging<T>(arg: T): T {
-  console.log(arg.length); // 报错：Property 'length' does not exist on type 'T'.
-  return arg;
+  console.log(arg.length) // 报错：Property 'length' does not exist on type 'T'.
+  return arg
 }
 ```
 
@@ -89,12 +89,12 @@ function logging<T>(arg: T): T {
 
 ```typescript
 interface Length {
-  length: number;
+  length: number
 }
 
 function logging<T extends Length>(arg: T): T {
-  console.log(arg.length);
-  return arg;
+  console.log(arg.length)
+  return arg
 }
 ```
 
