@@ -1,9 +1,15 @@
 import { defineCollection } from 'astro:content'
 import { glob } from 'astro/loaders'
 import { z } from 'astro/zod'
+import { slug as githubSlug } from 'github-slugger'
 
 const postsCollection = defineCollection({
-  loader: glob({ pattern: ['**/*.md', '**/*.mdx'], base: './src/content/posts' }),
+  loader: glob({
+    pattern: ['**/*.md', '**/*.mdx'],
+    base: './src/content/posts',
+    generateId: ({ entry }) =>
+      githubSlug((entry.split('/').pop() || entry).replace(/\.(md|mdx)$/, '')),
+  }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
