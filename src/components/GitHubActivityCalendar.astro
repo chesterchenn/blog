@@ -234,6 +234,7 @@ const labels = {
     >
       <div
         class="max-w-full overflow-x-auto pt-0.5"
+        data-activity-calendar-scroll
         style={{
           // Don't cover the calendar with the scrollbar.
           scrollbarGutter: 'stable',
@@ -316,3 +317,12 @@ const labels = {
     </article>
   )
 }
+
+<script>
+  // Show the most recent contributions by default instead of the oldest ones.
+  document
+    .querySelectorAll<HTMLElement>('[data-activity-calendar-scroll]')
+    .forEach((el) => {
+      el.scrollLeft = el.scrollWidth
+    })
+</script>
